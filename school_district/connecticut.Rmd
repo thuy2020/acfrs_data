@@ -1,0 +1,197 @@
+---
+title: "connecticut"
+output: html_document
+date: "2023-08-18"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(rio)
+```
+
+# 2020
+
+```{r}
+connecticut_sd_acfrs20 <- readRDS("data/data_from_dbsite_2020.RDS") %>% 
+  filter(category == "School District", 
+         state == "CT") %>% 
+  
+  rename(ncesID = nces_district_id) %>% 
+  # for sd collected ID that has only 6 digits, adding a leading 0
+  mutate(ncesID = ifelse(str_length(ncesID) == 6, paste0("0", ncesID), ncesID)) %>% 
+  select(-c(census_id, 6:11, has_unconfirmed, component_unit_of_id, category, ncesID)) %>% arrange(name) %>% 
+  mutate(id = as.character(id)) %>% 
+  
+  #join with dictionary
+  left_join(dictionary12345, by = c("state", "id")) %>% 
+  
+  #
+  rename(name = name.x) %>% 
+  select(-c(name.y)) %>% 
+  mutate(students = ifelse(ncesID == "903720", 907, students), 
+         nces_original_name = case_when(ncesID == "903720" ~ "Regional School District 07", 
+                                     ncesID == "900700" ~ "Capitol Region Education Council",
+                                     
+                                     TRUE ~ nces_original_name)
+         ) %>% 
+  select(-id) %>% filter(!is.na(ncesID)) 
+
+# leave out: 
+# Regional Supervision District Board of Education --> this is Regional School District No. 4
+#Scarborough Public Schools
+```
+
+
+```{r}
+# Take the municipality government form General Purpose
+CT_acfrs_entity_20 <- readRDS("data/data_from_dbsite_2020.RDS") %>% 
+  filter(category == "General Purpose", 
+         state == "CT") %>% 
+  filter(name %in% c("New Haven", "Waterbury", "Hartford", "Stamford", "Trumbull",
+                     "Norwalk", "New Britain", "Fairfield", "West Hartford", "Greenwich", 
+                     "Bristol", "Stratford", "East Hartford", "Southington", "Manchester")) %>% 
+  select(state, name, id, year, total_liabilities, bonds_outstanding, current_liabilities, leases, loans_outstanding, notes_outstanding, net_pension_liability, net_pension_assets, net_opeb_liability, net_opeb_assets, compensated_absences, charges_for_services, operating_grants, capital_grants, general_revenue, change_in_net_position, expenses, total_operating_revenues, non_operating_revenues, capital_contributions, revenues
+         ) %>% arrange(name)
+	
+```
+
+# Apportioned from municipal government ACFrs
+```{r}
+# read the file manually input employee data: 
+CT_sd_apportioned_20 <- rio::import("data/connecticut_175sd.xls", sheet = "connecticut_175sd_2020") %>% 
+  clean_names() %>% 
+  filter(!is.na(education_employee_20)) %>% 
+  select(component_unit_of, nces_id, nces_original_name, students, education_employee_20, total_employee_20) %>% 
+  arrange(nces_original_name) %>% 
+
+# Join school district as part of municipal gov: 
+ 
+  left_join(CT_acfrs_entity_20, by = c("component_unit_of" = "id")) %>% 
+  mutate(education_employee_20 = round(education_employee_20), # some has employee FTE 1468.85	
+          employee_share_20 = education_employee_20/total_employee_20) %>% 
+
+  mutate(across(c(10:30), function(x) x*employee_share_20)) %>% 
+  select(state, everything())
+```
+
+```{r}
+# combined both
+
+ CT_sd_reported_apportioned_2020 <- CT_sd_apportioned_20 %>% 
+  select(-c(education_employee_20, total_employee_20, employee_share_20, component_unit_of)) %>% 
+  rename(ncesID = nces_id,) %>% 
+  rbind(connecticut_sd_acfrs20) %>% 
+   select(state, everything()) %>% 
+   
+   rename(acfrs_name = name) %>% 
+  select(state, everything())
+ 
+ 
+ data_list <- list("CT_sd_apportioned_20" = CT_sd_apportioned_20,
+                   "CT_sd_reported_20" = connecticut_sd_acfrs20,
+                  "CT_sd_reported_apportioned_2020" = CT_sd_reported_apportioned_2020)
+
+  
+export(data_list, "output/CT_sd_reported_apportioned_2020.xlsx")
+```
+
+# 2021
+
+# Note to fix - Ron
+In acfrs portal - these should be the same --> need to delete 68357
+id 68349: Regional School District No 4
+id 68357: Regional Supervision District Board of Education
+
+
+```{r}
+connecticut_sd_acfrs21 <- readRDS("data/data_from_dbsite_2021.RDS") %>% 
+  filter(category == "School District", 
+         state == "CT") %>% 
+  
+  rename(ncesID = nces_district_id) %>% 
+  # for sd collected ID that has only 6 digits, adding a leading 0
+  mutate(ncesID = ifelse(str_length(ncesID) == 6, paste0("0", ncesID), ncesID)) %>% 
+  select(-c(census_id, 6:11, has_unconfirmed, component_unit_of_id, category, ncesID)) %>% arrange(name) %>% 
+  mutate(id = as.character(id)) %>% 
+  
+  
+  #join with dictionary
+  left_join(dictionary12345, by = c("state", "id")) %>% 
+  
+  
+  rename(name = name.x) %>% 
+  
+  select(-c(name.y)) %>% 
+  mutate(students = ifelse(ncesID == "903720", 907, students), 
+        
+         nces_original_name = case_when(ncesID == "903720" ~ "Regional School District 07", 
+                                     ncesID == "900700" ~ "Capitol Region Education Council",
+                                     ncesID ==
+                                     
+                                     TRUE ~ nces_original_name)
+         ) %>% 
+  select(-id) %>%  filter(!is.na(ncesID)) 
+
+# leave out: 
+#Scarborough Public Schools
+```
+
+
+```{r}
+# Take the municipality government form General Purpose
+CT_acfrs_entity_21 <- readRDS("data/data_from_dbsite_2021.RDS") %>% 
+  filter(category == "General Purpose", 
+         state == "CT") %>% 
+  filter(name %in% c("New Haven", "Waterbury", "Hartford", "Stamford", "Trumbull",
+                     "Norwalk", "New Britain", "Fairfield", "West Hartford", "Greenwich", 
+                     "Bristol", "Stratford", "East Hartford", "Southington", "Manchester")) %>% 
+  select(state, name, id, year, total_liabilities, bonds_outstanding, current_liabilities, leases, loans_outstanding, notes_outstanding, net_pension_liability, net_pension_assets, net_opeb_liability, net_opeb_assets, compensated_absences, charges_for_services, operating_grants, capital_grants, general_revenue, change_in_net_position, expenses, total_operating_revenues, non_operating_revenues, capital_contributions, revenues
+         ) %>% arrange(name)
+```
+
+# Apportioned from municipal government ACFrs
+```{r}
+# read the file manually input employee data: 
+CT_sd_apportioned_21 <- rio::import("data/connecticut_175sd.xls", sheet = "connecticut_175sd_2020") %>% 
+  clean_names() %>% 
+  filter(!is.na(education_employee_20)) %>% 
+  select(component_unit_of, nces_id, nces_original_name, students, education_employee_21, total_employee_21) %>% 
+  arrange(nces_original_name) %>% 
+
+# Join school district as part of municipal gov: 
+ 
+  left_join(CT_acfrs_entity_21, by = c("component_unit_of" = "id")) %>% 
+  mutate(education_employee_21 = round(education_employee_21), # some has employee FTE 1468.85	
+          employee_share_21 = education_employee_21/total_employee_21) %>% 
+
+  mutate(across(c(10:30), function(x) x*employee_share_21)) %>% 
+  select(state, everything()) %>% 
+  
+  filter(total_liabilities != 0)
+```
+
+```{r}
+# combined both
+
+ CT_sd_reported_apportioned_2021 <- CT_sd_apportioned_21 %>% 
+  select(-c(education_employee_21, total_employee_21, employee_share_21, component_unit_of)) %>% 
+  rename(ncesID = nces_id,) %>% 
+  rbind(connecticut_sd_acfrs21) %>% 
+   select(state, everything()) %>% 
+   
+   rename(acfrs_name = name) %>% 
+  select(state, everything())
+ 
+ 
+ data_list <- list("CT_sd_apportioned_20" = CT_sd_apportioned_20,
+                   "CT_sd_reported_20" = connecticut_sd_acfrs20,
+                  "CT_sd_reported_apportioned_2020" = CT_sd_reported_apportioned_2020, 
+                  
+                  "CT_sd_apportioned_21" = CT_sd_apportioned_21,
+                   "CT_sd_reported_21" = connecticut_sd_acfrs21,
+                  "CT_sd_reported_apportioned_2021" = CT_sd_reported_apportioned_2021
+                  )
+
+  
+export(data_list, "output/CT_sd_reported_apportioned_2020_2021.xlsx")
+```

@@ -1,0 +1,890 @@
+---
+title: "Top100 School Districts"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE, warning=FALSE, message=FALSE, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+library(dplyr)
+library(stringr)
+library(ggplot2)
+library(tidyr)
+library(janitor)
+library(plotly)
+library(forcats)
+library(DT)
+library(jsonlite)
+options(scipen = 999)
+source("nces.R")
+df <- data_frame(state.abb, state.name)
+```
+
+
+# Top School Districts in NCES
+
+```{r echo = FALSE}
+top_sd_nces <- nces %>% 
+  arrange(desc(students)) %>% 
+  select(c(state, ncesID, nces_original_name, students, county_name, city, locale)) %>% 
+  slice(1:100) 
+```
+
+# School districts from Acfrs database 2020, 2021
+
+```{r echo = FALSE}
+db2020 <- readRDS("../data/data_from_dbsite_2020.RDS") 
+db2021 <- readRDS("../data/data_from_dbsite_2021.RDS")
+db2022 <- readRDS("../data/data_from_dbsite_2022.RDS")
+
+sd_20_21_22 <- db2020 %>% 
+  rbind(db2021) %>% 
+  rbind(db2022) %>% filter(id == "107431")
+  #filter(category == "School District") %>% 
+  mutate(id = as.character(id)) %>% 
+  select(state, name,id, year, total_liabilities, net_pension_liability, net_opeb_liability, expenses, revenues)
+
+```
+
+## Top School Districts in ACFRs
+
+```{r echo = FALSE}
+# Dictionary created in this project, file "dictionary_name_ncesID_acfrsID.qmd"
+dictionary <- readRDS("../data/_dictionary.RDS") %>% filter(!id == "88888") 
+
+# #Fixing wrong ncesID
+# 
+# mutate(ncesID = case_when(id == "58299" ~ "2600170", #Detroit Community Schools
+#                           TRUE ~ as.character(id))
+#       # remove some 
+#       id == "107431"
+#       
+ # # mutate(id = case_when(ncesID == "5101260" ~ "1250807", # Fairfax County Public Schools
+ #                   ncesID == "5102250" ~ "1250804", #Loudoun County Public Schools	
+ #                   ncesID == "5103130"~	"1250808",# Prince William County Public Schools		VA
+ #                   ncesID == "0803360" ~ "1237862", #City and County of Denver School District No. 1
+ #                   ncesID == "0102370" ~ "1017229",#Mobile County Board of School Commissioners	
+ #                   ncesID == "5103840" ~ "1265776", #School Board of the City of Virginia Beach	
+ #                   ncesID == "5100840" ~ "1267422", #VA	Chesterfield County Public Schools	1267422
+ #                   ncesID == "5101890" ~ "1267423", #VA	Henrico County Public Schools	1267423
+ #                   ncesID == "2502790" ~ "1267424", #MA	Boston Public Schools	
+ #                   ncesID == "3174820" ~ "35480", #NE Omaha City School District 1 = 	Douglas County School District No. 0001	35480
+ #                   ncesID == "4703180" ~ "1267426", #Davidson County Board of Education
+ #         TRUE ~ as.character(id))) %>% select(-students)
+
+dict_top100 <- dictionary %>% 
+  filter(ncesID %in% top_sd_nces$ncesID) %>% 
+  add_count(ncesID) %>% 
+  filter(n>1)
+
+# remain 5 cases of NYC not yet in dictionary: 3600103" "3600077" "3600098" "3600087" "3600151"
+setdiff(top_sd_nces$ncesID, dict_top100$ncesID)
+# these will be treated separately below
+top_sd_nces %>% filter(ncesID %in% c("3600103", "3600077", "3600098", "3600087", "3600151"))
+
+```
+
+## New York City
+
+NYC DOE reports total numbers of 32 school districts. https://infohub.nyced.org/docs/default-source/default-document-library/2021-annual-financial-statements.pdf Page 26, 33
+
+FY FY2FY0FY2FY2FY: https://infohub.nyced.org/docs/default-source/default-document-library/2022-annual-financial-statements.pdf
+
+Method: Apportion Acfrs data for School Districts
+- Calculate the students share of each school district. 
+- Multiply this share to the DOE total.
+
+Note: previously, Geoff suggested to apportion liabilities based on employee count (email "NYC School districts",Feb 1). However, since we have the number of students above, there's no need to take into account employee count. 
+
+```{r, echo=TRUE}
+# input number from DOE report 
+nyc_2020 <- nces %>% filter(str_detect(nces_original_name, "(?i)NEW YORK CITY GEOGRAPHIC DISTRICT")) %>% 
+#year 2020 - Department of Education NYC
+  mutate(year = 2020, 
+         doe_total_liabilities = 59391179000, #page 33
+         doe_net_opeb = 35457858000, #page 33
+         doe_net_pension = 0, #(Geoff checked, no net pension)
+         doe_expenses = 30782114000,# page 26
+         doe_total_asset = 66355469000, #page 33
+      
+         doe_charges_services = 103098000,
+        doe_operating_grant = 13505234000,
+        doe_general_rev =  14444455000 + 51432000) # page 26, report FY 2021
+  
+nyc_2021 <- nces %>% filter(str_detect(nces_original_name, "(?i)NEW YORK CITY GEOGRAPHIC DISTRICT")) %>% 
+#year 2021 - Department of Education NYC
+  mutate(year = 2021,
+         doe_total_liabilities = 48619741000, #page 33
+         doe_net_opeb = 38982221000,#page 33
+         doe_net_pension = -1137314000, # page 33 (Geoff: adding - due to over funding, other than this, prob only state Wisconsin) 
+         doe_expenses = 29278093000,# page 24
+         doe_total_asset = 66152289000, #page 22
+         
+         doe_charges_services = 41776000,
+        doe_operating_grant = 13458922000,
+        doe_general_rev = 15412901000 + 62773000) # page 26
+
+
+nyc_2022 <- nces %>% filter(str_detect(nces_original_name, "(?i)NEW YORK CITY GEOGRAPHIC DISTRICT")) %>% 
+#year 2021 - Department of Education NYC
+  mutate(year = 2022,
+         doe_total_liabilities = 56398529000, #page 33
+         doe_net_opeb = 29427659000,#page 33
+         doe_net_pension = 14166295000, # page 
+         doe_expenses = 33529494000,# page 24
+         doe_total_asset = 66678975000, #page 22
+# from report 2022
+doe_charges_services = 66519000,
+doe_operating_grant = 17238018000,
+doe_general_rev = 16144530000 + 80427000) # page 24
+
+
+nyc_20_21_22 <- rbind(nyc_2020, nyc_2021, nyc_2022) 
+ 
+# apportion
+  nyc_each_schooldistrict <- nyc_20_21_22 %>% 
+    # students share
+  mutate(
+  id = NA, 
+  share_student = students/sum(students),
+  
+  # apportion financial data for all 32 sd
+  total_liabilities = doe_total_liabilities*share_student,
+  net_opeb_liability = doe_net_opeb*share_student,
+  net_pension_liability = doe_net_pension*share_student,
+  expenses = doe_expenses*share_student,
+  charges_services = doe_charges_services*share_student ,
+operating_grant = doe_operating_grant*share_student ,
+ general_rev = doe_general_rev*share_student) 
+
+# only get 5 of those who are in top100 largest
+nyc_top5_20_21_22 <- nyc_each_schooldistrict %>% select(-c(8:15, share_student)) %>% 
+  mutate(revenues = charges_services + operating_grant + general_rev) %>% 
+  select(state, nces_original_name, id, year, total_liabilities, net_opeb_liability, net_pension_liability, expenses,revenues, ncesID) %>% 
+  rename(name = nces_original_name) %>% 
+filter(ncesID %in% top_sd_nces$ncesID)  
+```
+
+```{r}
+top100_sd_3years <- sd_20_21_22 %>% 
+  filter(id %in% dict_top100$id) %>% select(-name) %>% 
+  left_join(dict_top100, by = c("id", "state")) %>% 
+  
+  #bind with NYC
+  rbind(nyc_top5_20_21_22) %>% 
+  rename(state.abb = state) %>% 
+  left_join(df) %>% 
+  
+  select(state.abb, state.name, ncesID, year, name, total_liabilities, net_pension_liability, net_opeb_liability, expenses, revenues) %>% drop_na(ncesID) %>% 
+  
+  #join with nces to get county, city info
+  left_join(nces, by = "ncesID") %>% select(-c(state, id))
+ 
+exportJSON <- toJSON(top100_sd_3years)
+write(exportJSON, "output/top100_sd_3years.json")
+
+# <- fromJSON("top100_sd_3years.json")
+
+```
+
+
+# Exceptions
+
+The following parts deal with exceptions of school districts. Except for New York, results for other entities were entered manually to the database. 
+
+## Boston
+
+- It looks like Boston Public Schools finances are consolidated with the city. They city's FY21 ACFR is here: ACFR_01.31.22_FINAL.pdf (boston.gov). It does not provide discreet reporting for schools, so we'll have to make some assumptions. 
+
+- Total FY21 expenses were $2,083,935,000 and program revenues total to $568,994,000 (p. 20). It lists FTE employees at 10,149 (9,528+621) in FY21 (p. 150). That's 53.82% of total city FTEs. 
+
+- Citywide pension liability is $1,406,402,000 and OPEB is $2,196,724,000. If we apply that ratio, the calculated pension liability is $756,926,000 and OPEB is $1,182,277,000. We can't calculate anything else.
+
+### Boston 2021
+```{r}
+fte_employee_share = .5382 #FTE employees at 10,149 (9,528+621) in FY21 (p. 150)
+
+boston_city_2021 <- readRDS("data/data_from_dbsite_2021.RDS") %>% 
+  filter(category == "General Purpose" & name == "Boston" & state == "MA") %>% 
+  mutate(id = as.character(id)) %>% 
+  select(state, name,id, year, total_liabilities, net_pension_liability, net_opeb_liability, expenses, revenues)
+
+boston_2021 <- nces %>% filter(nces_original_name == "Boston" & state == "MA") %>% 
+mutate(
+  id = NA, 
+  year = 2021,
+  
+    # apportion sd from city
+  total_liabilities = 0, # can't do this city_total_liability * fte_employee_share
+  net_opeb_liability = boston_city_2021$net_opeb_liability*fte_employee_share,
+  net_pension_liability =  boston_city_2021$net_pension_liability*fte_employee_share,
+  
+  # manual insert
+  expenses = 2083935000, #schools line, page 20
+  revenues = 539271000 + 18727000 + 10996000) %>% # sum of 3 cols program revenues, school line, p20, school district run by the city
+  # 
+  select(ncesID, nces_original_name, county_name, city, state, id, students, year, total_liabilities, net_opeb_liability, net_pension_liability, expenses, revenues)
+```
+
+### Boston 2020
+```{r}
+##### 2020
+fte_employee_share = .5382 #10149
+
+boston_city_2020 <- readRDS("data/data_from_dbsite_2020.RDS") %>% 
+  filter(category == "General Purpose" & name == "Boston" & state == "MA") %>% 
+  mutate(id = as.character(id)) %>% 
+  select(state, name,id, year, total_liabilities, net_pension_liability, net_opeb_liability, expenses, revenues)
+
+boston_2020 <- nces %>% filter(nces_original_name == "Boston" & state == "MA") %>% 
+mutate(
+  id = NA, 
+  year = 2020,
+  
+   # apportion sd from city
+  total_liabilities = 0, # can't do this: city_total_liability * fte_employee_share
+  net_opeb_liability = boston_city_2020$net_opeb_liability*fte_employee_share,
+  net_pension_liability =  boston_city_2020$net_pension_liability*fte_employee_share,
+  
+  # manual insert
+  expenses = 1874077000, #schools line, page A-17, school line
+  revenues = 9444000 + 60527000 + 10200000) %>% ## sum of 3 cols program revenues, school line, page A-17
+  # 
+  select(ncesID, nces_original_name, county_name, city, state, id, students, year, total_liabilities, net_opeb_liability, net_pension_liability, expenses, revenues)
+```
+
+## Chesterfield
+Chesterfield County schools are consolidated with the county, but reported as a component unit: 762 (chesterfield.gov). 
+- Expenses and revenues can be found on p. 227. 
+- Balance sheet items are on p. 224. 
+- Net pension liability is broken out on p. 169.
+
+```{r}
+chesterfield_2021 <- nces %>% filter(nces_original_name == "CHESTERFIELD CO PBLC SCHS" & state == "VA") %>%
+mutate(
+  id = NA, 
+  total_assets = 122955915, #page 224
+  year = 2021,
+  total_liabilities = 62869374,#page 224
+  net_opeb_liability = 0,## How about page 179, Schedule of changes in Net OPEB?? -> have both 2020, 2021
+  net_pension_liability = 4167372, #Geoff: should use the net pension liability on p. 169. That seems to focus on teachers. File Chesterfield ACFRS 2022
+  
+  expenses = 709920047, # #Geoff: For revenues and expenses, use the values on p. 225; those on p. 227 are just a subcomponent.  
+  revenues = 704737890) %>% 
+  # 
+  select(ncesID, nces_original_name, county_name, city, state, id, students, year, total_liabilities, net_opeb_liability, net_pension_liability, expenses, revenues)
+
+#######
+
+chesterfield_2020 <- nces %>% filter(nces_original_name == "CHESTERFIELD CO PBLC SCHS" & state == "VA") %>%
+mutate(
+  id = NA, 
+  total_assets = 121514512, # page 224, Schedule C-1, Discretely presented Component Unit- School board
+  year = 2020,
+  total_liabilities = 63252560, # page 224,Schedule C-1, Discretely presented Component Unit- School board
+  net_opeb_liability = 0, # page
+  
+  net_pension_liability = 20311386, #page 169, school board component unit, column 2020, file Chesterfield ACFRS 2021 
+  
+  expenses = 659875816, # page 225, column School operating, Schedule C-2, Discretely presented Component Unit- School board - Statement of Revenues, Expenditure and changes in Fund Balance
+  revenues = 658178834) %>% # page 225,
+  # 
+  select(ncesID, nces_original_name, county_name, city, state, id, students, year, total_liabilities, net_opeb_liability, net_pension_liability, expenses, revenues)
+
+#
+
+```
+
+## Nashville
+
+Nashville schools are consolidated with Davidson County: ACFRFY21_01_21_2022_Upload.pdf (nashville.gov). Balance sheet items are on p. B-6 and should be the sum of columns called "General Purpose School," "Education Services," and "GSD School Purposes Debt Service."  Revenues and expenditures are on p. B-10 and includes the same columns.
+
+- We can apportion OPEB as we did for Boston. On p. H-35, the employee headcounts show 9,055 out of 18,548 are in education. That's 48.8%. Total liabilities are listed on p. B-142. 
+ 
+ --> Page B-143 shows "school professional employees' 
+ 
+- For pensions, they're showing a net asset (it's overfunded) on p. B-140. It looks like there are two plans, so we should add those together: $56,699,625 + $5,853,778 = $62,553,403.
+
+```{r}
+employee_share = .4848
+county_opep_liabilities_2021 = 3240451063 # p. B-142.
+county_opep_liabilities_2020 = 3064106607 # p. B-142.
+
+davidson_county_2021 <- nces %>% filter(nces_original_name == "Davidson County" & state == "TN") %>%
+mutate(
+  id = NA, 
+  total_assets = 649639619 + 118474605 + 124590923, # sum of columns called "General Purpose School," "Education Services," and "GSD School Purposes Debt Service."
+  year = 2021,
+  total_liabilities = 44660790 + 89820946 + 212989, # sum of above 3 columns 
+  net_opeb_liability = county_opep_liabilities_2021*employee_share,
+  
+  #OR use page B-143 school professional employees
+  #net_opeb_liability = 1061732808,
+  
+  net_pension_liability = 0, 
+  expenses = 758516604 + 363357551 + 108450334, #B-10
+  revenues = 982397940 + 213091395 + 138244239) %>% # page B-10
+  # 
+  select(ncesID, nces_original_name, county_name, city, state, id, students, year, total_liabilities, net_opeb_liability, net_pension_liability, expenses, revenues)
+
+##### year 2020
+
+davidson_county_2020 <- nces %>% filter(nces_original_name == "Davidson County" & state == "TN") %>%
+mutate(
+  id = NA, 
+  total_assets = 56699625 + 5853778, #For pensions, they're showing a net asset (it's overfunded) on p. B-140. It looks like there are two plans, so we should add those together: 
+  year = 2020,
+  total_liabilities = 44660790 + 89820946 + 212989, # sum of above 3 columns 
+  net_opeb_liability = county_opep_liabilities_2020*employee_share,
+  
+  #OR use page B-143 school professional employees
+  #net_opeb_liability = 1196937989,
+  
+  net_pension_liability = -(56699625 + 5853778), #?? 
+  expenses = NA, 
+  revenues = NA) %>% 
+  # 
+  select(ncesID, nces_original_name, county_name, city, state, id, students, year, total_liabilities, net_opeb_liability, net_pension_liability, expenses, revenues)
+
+
+```
+
+## Henrico
+Henrico County schools are a component unit of Henrico County: Henrico-County-VA-FY21-ACFR-Final.pdf. page 25 - 26
+```{r}
+henrico_2021 <- nces %>% filter(nces_original_name == "HENRICO CO PBLC SCHS" & state == "VA") %>%
+mutate(
+  id = NA, 
+  total_assets = 384459131, 
+  year = 2021,
+  total_liabilities = 650708572,
+  net_opeb_liability = 76925442,
+  net_pension_liability = 520851160,
+  expenses = 614221032, 
+  revenues = 157,496 + 389,076,269) %>% # page 26
+  # 
+  select(ncesID, nces_original_name, county_name, city, state, id, students, year, total_liabilities, net_opeb_liability, net_pension_liability, expenses, revenues)
+
+######
+
+henrico_2020 <- nces %>% filter(nces_original_name == "HENRICO CO PBLC SCHS" & state == "VA") %>%
+mutate(
+  id = NA, 
+  total_assets = 393231084,
+  year = 2020,
+  total_liabilities = 602815832,
+  net_opeb_liability = 81756137,
+  net_pension_liability = 462836320,
+  expenses = 574231130, 
+  revenues = 5,030,669 + 336,336,784) %>% #page 26, line total general revenues
+  # 
+  select(ncesID, nces_original_name, county_name, city, state, id, students, year, total_liabilities, net_opeb_liability, net_pension_liability, expenses, revenues)
+
+```
+
+## Delaware
+Delaware has school district info in the state ACFR: FY 2021 ACFR (delaware.gov). Balance sheet info is on p. 166-167 and activities are on p. 168-169.
+--> manually inserted these numbers to excel file. 
+--> Where to find net pension, net OPEB for K12? (State of Delaware in page 20)
+--> Don't do this yet. Let me figure out why school districts are only listed in the statistical section--I'm not sure whether the liabilities are consolidated with the state's.
+
+```{r}
+# readRDS("data/data_from_dbsite_2021.RDS") %>% 
+#   filter(str_detect(name, "State of Delaware")) %>% 
+#   filter(category == "General Purpose")
+
+```
+
+## Davidson County TN & Portland SD 1J OR
+
+```{r warning=FALSE, message=FALSE}
+sd_96_2020 <- top_sd_nces %>% 
+  left_join(top_sd_acfrs) %>% # to get id
+  left_join(sd2020_db, by = "id") %>% # need to specify join by=id, if not, some rows in sd2020_db loose values (eg. id == 196828) 
+  
+  select(-c(name.y, name.x, state.y)) %>% 
+  rename(state = state.x) %>% 
+
+  # take out sd whose acfrs are not known to date
+  filter(!nces_original_name %in% c("Boston", "CHESTERFIELD CO PBLC SCHS", "HENRICO CO PBLC SCHS", "OMAHA PUBLIC SCHOOLS")) %>% 
+  
+  # take out 5 sd of NYC to later rbind with nyc_20_21_5sd
+  filter(state != "NY") %>% 
+  
+  # Collect data for some sd manually 
+  mutate(year = 2020,
+  total_liabilities = case_when(nces_original_name == "Davidson County"& state == "TN" ~ 0,
+                                nces_original_name == "Portland SD 1J"& state == "OR" ~ 1882236000, 
+                                TRUE ~ total_liabilities), #page 34
+  
+  net_pension_liability = case_when(nces_original_name == "Davidson County" & state == "TN" ~ 0,
+                                    nces_original_name == "Portland SD 1J"& state == "OR" ~ 306140000, 
+                                    TRUE ~ net_pension_liability), # page 34, Net pension liability-PERS
+  
+  net_opeb_liability = case_when(nces_original_name == "Davidson County" & state == "TN" ~ 0,
+                                 nces_original_name == "Portland SD 1J"& state == "OR" ~ 81319999,
+                                 TRUE ~ net_opeb_liability), # page 34, TOTAL OPEB liability-RHIS
+  
+  expenses = case_when(nces_original_name == "Davidson County" & state == "TN" ~ 0,
+                       nces_original_name == "Portland SD 1J"& state == "OR" ~ 824384000, 
+                       TRUE ~ expenses),#page 35
+                       
+  
+  revenues = case_when(nces_original_name == "Davidson County" & state == "TN" ~ 0,
+                       nces_original_name == "Portland SD 1J"& state == "OR" ~ (8271000 + 90072000 + 11368000 + 823400000), #page 35 (charges + operating + grant + Total general revenues)
+                       TRUE ~ revenues))
+```
+
+```{r}
+sd_96_2021 <- top_sd_nces %>% 
+  left_join(top_sd_acfrs) %>% # to get id
+  left_join(sd2021_db, by = "id") %>% # NOTE: filter(is.na(total_liabilities)) -> some have id carried from 2020, but no values for 2021
+  select(-c(name.y, name.x, state.y)) %>% 
+  rename(state = state.x) %>%  
+  
+  # take out sd whose acfrs are not known to date
+  filter(!nces_original_name %in% c("Boston", "CHESTERFIELD CO PBLC SCHS", "HENRICO CO PBLC SCHS", "OMAHA PUBLIC SCHOOLS")) %>% 
+  
+  # take out 5 sd of NYC to later rbind with nyc_20_21_5sd
+  filter(state != "NY") %>% 
+  
+  mutate(year = 2021,
+  total_liabilities = case_when(nces_original_name == "Davidson County"& state == "TN" ~ 0,
+                                nces_original_name == "Portland SD 1J"& state == "OR" ~ 2380580000,
+                                TRUE ~ total_liabilities),
+  
+  net_pension_liability = case_when(nces_original_name == "Davidson County" & state == "TN" ~ 84041613,
+                                    nces_original_name == "Portland SD 1J"& state == "OR" ~ 521329000,
+                                    TRUE ~ net_pension_liability), # page 32, Net pension liability-PERS
+  
+  net_opeb_liability = case_when(nces_original_name == "Davidson County" & state == "TN" ~ 1061732808, # page B-93, column School professional employee
+                                 nces_original_name == "Portland SD 1J"& state == "OR" ~ 78581000,
+                                 TRUE ~ net_opeb_liability), # page 32, TOTAL OPEB liability-RHIS
+  
+  expenses = case_when(nces_original_name == "Davidson County" & state == "TN" ~ 1195361854,
+                       nces_original_name == "Portland SD 1J"& state == "OR" ~ 931870000,
+                       TRUE ~ expenses), #page 33
+  
+  revenues = case_when(nces_original_name == "Davidson County" & state == "TN" ~ 488401680,
+                       nces_original_name == "Portland SD 1J"& state == "OR" ~ (1914000 + 113835000 + 1319000 + 822868000), # Geoff: need to take sum 4 of these: charges, operating, capital grant and general revenues)
+                       TRUE ~ revenues) #page 33
+)
+
+```
+
+
+## VA Fairfax 2021
+```{r}
+fairfax_2021 <- nces %>% 
+  filter(nces_original_name == "FAIRFAX CO PBLC SCHS" & state == "VA") %>%
+mutate(
+  id = 200059, 
+  total_assets = 3446600000, #p 10, Summary of Net position
+  year = 2021,
+  total_liabilities = 4923543994, #p 21, Statement of Net position
+  net_opeb_liability = 387461319, #p 21,  
+  net_pension_liability = 4115292996, #p 21
+  expenses = 3320812299, #p22 Statement of activities
+  revenues = 76892323 + 411859293 + 194679133 + 2718687903) %>% #p22, 
+  # 
+  select(ncesID, nces_original_name, county_name, city, state, id, students, year, total_liabilities, net_opeb_liability, net_pension_liability, expenses, revenues)
+
+```
+## VA Loudoun 2021
+```{r}
+loudoun_2021 <- nces %>% 
+  filter(nces_original_name == "LOUDOUN CO PBLC SCHS" & state == "VA") %>%
+mutate(
+  id = 197654, 
+  total_assets = 2608200000, #p 11, Summary of Net position
+  year = 2021,
+  total_liabilities = 1810600000, #p 11, Summary of Net position
+  net_opeb_liability = 334800000, #p 17, Outstanding long-term liabilities 
+  net_pension_liability = 1185300000, #p 17, Outstanding long-term liabilities
+  expenses = 1541300000, 
+  revenues = 1611300000) %>% #p 11, Summary of changes in net position
+  # 
+  select(ncesID, nces_original_name, county_name, city, state, id, students, year, total_liabilities, net_opeb_liability, net_pension_liability, expenses, revenues)
+
+```
+
+## VA Prince William 2021
+```{r}
+princewilliam_2021 <- nces %>% 
+  filter(nces_original_name == "PRINCE WILLIAM CO PBLC SCHS" & state == "VA") %>%
+mutate(
+  id = 197665, 
+  total_assets = 2445510537, #p 34, Statement of Net position
+  year = 2021,
+  total_liabilities = 1376448983, #p 11, Summary of Net position
+  net_opeb_liability = 142765589, #p 38, Reconciliation of the Balance Sheet of the Gov funds
+  net_pension_liability = 1003741236, #p 38, Reconciliation of the Balance Sheet of the Gov funds
+  expenses = 1376884937, #p 35, statement of activities, line school division
+  revenues = 5561927 + 280176028 + 127346 + 1268840518) %>% #p35 statement of activities, line school division --> sum of 3 columns program revenues --> 2020 = sum of 3 cols + col total school division X line Total general revenues and transfers?
+  # 
+  select(ncesID, nces_original_name, county_name, city, state, id, students, year, total_liabilities, net_opeb_liability, net_pension_liability, expenses, revenues)
+```
+
+## VA BEACH CITY PBLC SCHS 2021
+
+```{r}
+vabeach_2021 <- nces %>% 
+  filter(nces_original_name == "VA BEACH CITY PBLC SCHS" & state == "VA") %>%
+mutate(
+  id = 197671, 
+  total_assets = 899445665, #p 234, Discretely presented school board - Statement of Net position; column Governmental activities
+  year = 2021,
+  total_liabilities = 1077086065, #p 234
+  net_opeb_liability = 147744317, #p 234
+  net_pension_liability = 748825120, #p 234
+  expenses = 881553759, #p 235, statement of activities, line total governmental activities
+  revenues = 3408114 + 201162593 + 0 + 706048089) %>% #p235, sum of program revenues + total general revenues, statement of activities, line school division --> Similar to 2020: the revenues 985726201 = sum of 4 cols + total general rev?
+  # 
+  select(ncesID, nces_original_name, county_name, city, state, id, students, year, total_liabilities, net_opeb_liability, net_pension_liability, expenses, revenues)
+
+```
+
+
+```{r echo = FALSE}
+sd_100_2020 <- sd_96_2020 %>% 
+  rbind(boston_2020) %>% 
+  rbind(chesterfield_2020) %>% 
+  rbind(davidson_county_2020) %>% 
+  rbind(henrico_2020) 
+  # filter(is.na(total_liabilities)) %>%
+  # select(-c(9:13))
+
+sd_100_2021 <- sd_96_2021 %>% 
+  rbind(boston_2021) %>%
+  rbind(chesterfield_2021) %>%
+  rbind(davidson_county_2021) %>%
+  rbind(henrico_2021) %>% 
+  
+  # take out 4 sd do not have acfrs info yet
+  filter(!ncesID %in% c("5101260", "5102250", "5103130", "5103840" )) %>% 
+  
+  # add back one by one
+  rbind(fairfax_2021) %>% 
+  rbind(loudoun_2021) %>%
+  rbind(princewilliam_2021) %>%
+  rbind(vabeach_2021) 
+```
+
+
+```{r echo = FALSE}
+sd_100_2021 %>% filter(is.na(total_liabilities)) %>% select(-c(9:13)) -> missing2021
+```
+
+# Top 100 largest school districts by enrollments 2020, 2021
+
+```{r echo = FALSE}
+top100_result <- sd_100_2020 %>% 
+           rbind(sd_100_2021) %>% 
+           rbind(nyc_20_21_5sd) %>% 
+           filter(state != "PR") %>% 
+        arrange(desc(students)) %>% 
+  
+  # FIX BROWARD - wrong entry --> already fix in database
+  # mutate(total_liabilities = ifelse(nces_original_name == "BROWARD" & year == 2021, total_liabilities*1000, total_liabilities),
+  #        net_pension_liability = ifelse(nces_original_name == "BROWARD" & year == 2021, net_pension_liability*1000, net_pension_liability),
+  #        net_opeb_liability = ifelse(nces_original_name == "BROWARD" & year == 2021, net_opeb_liability*1000, net_opeb_liability),
+  #        expenses = ifelse(nces_original_name == "BROWARD" & year == 2021, expenses*1000, expenses),
+  #        revenues = ifelse(nces_original_name == "BROWARD" & year == 2021, revenues*1000, revenues)) %>%
+  
+  # per student
+  
+        mutate(liability_per_student = total_liabilities/students, 
+         netpension_per_student = net_pension_liability/students,
+         netOPEB_per_student = net_opeb_liability/students,
+         expenses_per_student = expenses/students,
+         revenues_per_student = revenues/students,
+         liability_rev_ratio = total_liabilities/revenues
+         ) %>% 
+  
+  # take out DC 
+  filter( nces_original_name!= "District of Columbia Public Schools") %>% 
+  
+
+  # take out Clayton due to missing Clayton GA 2021
+  filter(nces_original_name!= "Clayton County")
+  
+#top100_result %>% write.csv("top100sd_result.csv")
+
+# Result: 103 sd districts for 2 years, except Clayton has 
+#datatable(top100_result)
+
+saveRDS(top100_result, "top100_sd_2020_2021.RDS")
+top100_result %>% write.csv("output/top100_sd_2020_2021.csv")
+```
+
+## Extra 50
+
+https://www.arlingtonva.us/files/sharedassets/public/budget/documents/accounting-reporting-and-control/final-fy22-acfr-12-15-2022-online-version.pdf
+#### Arlington ARLINGTON CO PBLC SCHS
+```{r}
+
+```
+
+
+## Top 100 largest school districts count by state
+
+```{r echo=FALSE }
+library(forcats)
+top100_result %>% 
+  filter(year == 2020) %>% 
+  #group_by(year) %>% # to add count of each year
+  add_count(state) %>% select(state, n, year) %>% distinct() %>% arrange(desc(n)) %>% 
+  ggplot(aes(fct_reorder(state, n), n, group = year, label = n)) +
+  geom_col(fill = "purple", alpha = .4) +
+  geom_text(color = "purple", nudge_y = 0.3) +
+  #facet_wrap(~year) +
+  coord_flip() +
+  labs(title = "Top 102 largest school districts count by state",
+       x = "",
+       y = "Number of school district") +
+  theme_minimal() 
+```
+
+# Per Student 
+## Total Liabilities per Student
+
+```{r echo=FALSE}
+top100_result %>% 
+  ggplot(aes(students, total_liabilities, label = nces_original_name, group = year))+
+  geom_point(aes(size = liability_per_student, color = year)) +
+  geom_text(data = top100_result %>% arrange(desc(liability_per_student)) %>% slice(1:4)) +
+  
+  scale_y_continuous(labels = scales::dollar_format())+
+
+labs(x = "Students (Size of circles represents size of liability per student)", y = "Total Liabilities",
+     title = "Total Liabilities per Student FY 2020 & 2021",  
+     caption = "Size of circles represents size liability per student") +
+ theme_minimal()+
+  theme(legend.position = "none",
+        plot.margin = margin(t = 20,  # Top margin
+                             r = 50,  # Right margin
+                             b = 40,  # Bottom margin
+                             l = 10)) -> p  # Left margin)
+        
+ggplotly(p)
+  
+```
+
+## Net Pension Liabilities per Student
+
+```{r echo=FALSE }
+top100_result %>% 
+  ggplot(aes(students, net_pension_liability, label = nces_original_name, group = year))+
+  geom_point(aes(size = netpension_per_student, color = year)) +
+  geom_text(data = top100_result %>% arrange(desc(netpension_per_student)) %>% slice(1:3), nudge_y = 1000000000, color = "darkgreen") +
+  
+  scale_y_continuous(labels = scales::dollar_format())+
+ 
+labs(x = "Students", y = "Net Pension Liabilities",
+     title = "Net Pension Liabilities per Student") +
+ theme_minimal()+
+  theme(
+        legend.position = "none",
+        plot.margin = margin(t = 20,  # Top margin
+                             r = 50,  # Right margin
+                             b = 40,  # Bottom margin
+                             l = 10)) -> p2 # Left margin)
+        
+ggplotly(p2)
+```
+
+## Net OPEB Liabilities per Student
+
+```{r echo = FALSE}
+top100_result %>% 
+  ggplot(aes(students, net_opeb_liability, label = nces_original_name, group = year))+
+  geom_point(aes(size = netOPEB_per_student, color = year)) +
+  geom_text(data = top100_result %>% arrange(desc(netOPEB_per_student)) %>% slice(1:3), color = "orange") +
+  
+  scale_y_continuous(labels = scales::dollar_format())+
+  #scale_x_discrete(labels = scales::comma_format())+
+ 
+labs(x = "Students", y = "Net OPEB Liabilities",
+     title = "Net OPEB Liabilities per Student") +
+ theme_minimal()+
+  theme(
+        legend.position = "none",
+        plot.margin = margin(t = 20,  # Top margin
+                             r = 50,  # Right margin
+                             b = 40,  # Bottom margin
+                             l = 10)) -> p3 # Left margin)
+        
+
+ggplotly(p3)
+```
+
+# Total Liabilities-to-Revenues Ratio
+
+## Plot 
+```{r echo = FALSE}
+top100_result %>% 
+  ggplot(aes(total_liabilities, revenues, label = nces_original_name, group = year))+
+  geom_point(aes(size = liability_rev_ratio, color = year)) +
+  #geom_text(data = top100_result %>% arrange(desc(liability_rev_ratio)) %>% slice(1:3), color = "red") +
+  
+  scale_y_continuous(labels = scales::dollar_format())+
+   scale_x_continuous(labels = scales::dollar_format())+
+  geom_abline(intercept = 0, slope = 1, 
+       col = "blue",
+       lwd = 1) +
+
+labs(x = "Total liabilities", y = "Revenues", 
+     title = "Total liabilities to Revenue ratio") +
+ theme_minimal()+
+  theme(
+        legend.position = "none",
+        plot.margin = margin(t = 20,  # Top margin
+                             r = 50,  # Right margin
+                             b = 40,  # Bottom margin
+                             l = 10)) -> p4 # Left margin)
+        
+ggplotly(p4)
+```
+
+The majority of SD has total liability to revenues ratio larger than 1 (points below the diagonal line). 
+
+## Table
+```{r}
+top100_result %>% 
+  select(1:2,5, liability_rev_ratio) %>% 
+  arrange(liability_rev_ratio) -> ratio
+
+datatable(ratio)
+```
+
+# Top 10 largest SD by enrollment 
+
+## Percentage changes 2020-2021 in each category: Table
+
+* Increases in most categories. 
+
+* Palm Beach FL has a steep decrease in net OPEB liability (66% decrease) & a large increase in net pension liability (30% increase)
+```{r echo=FALSE}
+library(hrbrthemes)
+library(viridis)
+top100_result %>% arrange(desc(students)) %>% filter(state != "PR") %>% slice(1:20) -> top10_enrollment
+
+top10_enrollment %>% 
+  pivot_longer(cols = 9:13,
+               names_to = "cat",
+               values_to = "value") %>% 
+  select(ncesID, nces_original_name, year, cat, value, state) %>% 
+  mutate(cat = paste0(cat, "_", year)) %>% select(-year) %>% 
+  pivot_wider(names_from = cat, values_from = value) %>% 
+ 
+  # change in % 2021 - 2020
+  mutate(total_liabilities_change = round((total_liabilities_2021/total_liabilities_2020 - 1)*100,2),
+         revenues_change = round((revenues_2021/revenues_2020 - 1)*100,2),
+         net_opeb_change = round((net_opeb_liability_2021/net_opeb_liability_2020 -1) *100,2),
+         net_pension_change = round((net_pension_liability_2021/net_pension_liability_2020 -1)*100,2),
+         expenses_change = round((expenses_2021/expenses_2020 -1)*100,2)
+         ) %>% 
+  select(nces_original_name, state, contains("_change")) -> d_change_2020_2021
+  
+datatable(d_change_2020_2021)
+```
+##  Percentage changes 2020-2021 in each category: Plot
+
+```{r fig.width=10, fig.height=8, echo = FALSE}
+  d_change_2020_2021 %>% 
+  pivot_longer(cols = 3:7,
+               names_to = "cat", 
+               values_to = "value") %>% 
+  ggplot(aes(x = nces_original_name, y = value, fill = cat)) +
+  geom_bar(position=position_dodge(width = 0.5), stat="identity") +
+  coord_flip() +
+  scale_fill_viridis(discrete=TRUE, name="") +
+  theme_minimal() +
+  labs(title = "Percentage changes between FY 2020- 2021 in each category\nTop 10 School Districts by Enrollment", 
+    y = "Percentage change",
+       x = "")
+
+```
+
+## Total Assets-to-Total Liabilities Ratio 
+
+```{r echo=FALSE}
+top10_enrollment %>% 
+  mutate(total_assets = c(6833017932, 7209306551,# orange 
+                          21980711000,23595338000, #Los Angeles Unified
+                          9604959000, 9811425000, # p46, p44 City of Chicago SD 299 (Chicago Board of Education)
+                          3191956305, 3446573794, #p 21 Fairfax County Public Schools
+                          2877535862, 3053351000, #year 2021 p15 
+                          7030148493, 7260377355, #CLARK COUNTY
+                          6592207393, 6718508279, #p18, HOUSTON
+                          4122013000, 4420987000, #Broward, viewing in current acfrs database has id 425808?
+                          5663054000, 5860029000, #MIAMI-DADE
+                          4514995000, 4754496000)) %>%  #PALM BEACH
+  select(nces_original_name, state, year, total_liabilities, total_assets) %>% 
+  mutate(asset_liab_ratio = round(total_assets/total_liabilities, 2)) -> d_asset_liab_ratio
+
+
+d_asset_liab_ratio %>% 
+  ggplot(aes(fct_reorder(nces_original_name, asset_liab_ratio), asset_liab_ratio, group = year )) +
+  geom_col(aes(fill = year), position = "dodge") +
+  coord_flip() +
+  theme_minimal() +
+  labs(title = "Total Assets-to-Total Liability Ratio, FY 2020-2021\nTop 10 School Districts by Enrollment", 
+       x = "", 
+       y = "Ratio") +
+  theme(legend.position = "none") -> p_asset_liab_ratio
+
+ggplotly(p_asset_liab_ratio)
+```
+
+## Total Liabilities-to-Revenues Ratio
+```{r echo = FALSE}
+top100_result %>% 
+  filter(year == 2020) %>% 
+  arrange(desc(liability_rev_ratio)) %>% slice(1:10) -> top10_ratio_2020
+
+top100_result %>% 
+  filter(year == 2021) %>% 
+  arrange(desc(liability_rev_ratio)) %>% slice(1:10) -> top10_ratio_2021
+
+top10_ratio_2020 %>% 
+  ggplot(aes(fct_reorder(nces_original_name, liability_rev_ratio), liability_rev_ratio, group = year)) +
+    geom_bar(aes(fill = year), stat="identity", position = position_dodge(width = 0.5)) +
+  coord_flip() +
+  labs(title = "Top 10 Total Liabilities-to-Revenues Ratio\nFY 2020",
+       x = "",
+       y = "Total Liabilities-to-Revenues Ratio") +
+  theme_minimal() +
+  
+  theme(legend.position = "none",
+        plot.margin = margin(t = 20,  # Top margin
+                             r = 50,  # Right margin
+                             b = 40,  # Bottom margin
+                             l = 10)) -> p_topratio20
+
+p_topratio20
+
+top10_ratio_2021 %>% 
+  ggplot(aes(fct_reorder(nces_original_name, liability_rev_ratio), liability_rev_ratio, group = year)) +
+    geom_bar(aes(fill = year), stat="identity", position = position_dodge(width = 0.5)) +
+  coord_flip() +
+  labs(title = "Top 10 Total Liabilities-to-Revenues Ratio\nFY 2021",
+       x = "", 
+       y = "Total Liabilities-to-Revenues Ratio") +
+  theme_minimal() +
+  theme(legend.position = "none",
+        plot.margin = margin(t = 20,  # Top margin
+                             r = 50,  # Right margin
+                             b = 40,  # Bottom margin
+                             l = 10)) -> p_topratio21
+
+p_topratio21
+
+```
+
+
+

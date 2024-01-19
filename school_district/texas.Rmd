@@ -1,0 +1,88 @@
+---
+title: "texas"
+output: html_document
+date: "2023-08-18"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# 2020
+
+```{r}
+texas_sd_acfrs20 <- readRDS("data/data_from_dbsite_2020.RDS") %>% 
+  filter(category == "School District", 
+         state == "TX") %>% 
+  
+  rename(ncesID = nces_district_id) %>% 
+  # for sd collected ID that has only 6 digits, adding a leading 0
+  mutate(ncesID = ifelse(str_length(ncesID) == 6, paste0("0", ncesID), ncesID)) %>% 
+  select(-c(census_id, 6:11, has_unconfirmed, component_unit_of_id, category, ncesID)) %>% arrange(name) %>% 
+  mutate(id = as.character(id)) %>% 
+  
+  #join with dictionary
+  left_join(dictionary12345, by = c("state", "id")) %>% 
+  
+  #
+  rename(name = name.x) %>% 
+  select(-c(name.y)) %>% 
+mutate(ncesID = case_when(name == "Brownsville Independent School District" ~ "4811680", 
+                          name == "Eula Independent School District" ~ "4818690", 
+                          name == "Guthrie Common School District" ~ "4822020", 
+                          name == "Petrolia Consolidated lndependent School District" ~ "4834710", 
+                          name == "Ramirez Common School District" ~ "4836420", 
+                          TRUE ~ ncesID)) %>% 
+
+mutate(students = case_when(name == "Brownsville Independent School District" ~ "43028", 
+                          name == "Eula Independent School District" ~ "426", 
+                          name == "Guthrie Common School District" ~ "136", 
+                          name == "Petrolia Consolidated lndependent School District" ~ "463", 
+                          name == "Ramirez Common School District" ~ "26",
+                          TRUE ~ students)) 
+```
+
+
+
+
+```{r}
+texas_sd_acfrs21 <- readRDS("data/data_from_dbsite_2021.RDS") %>% 
+  filter(category == "School District", 
+         state == "TX") %>% 
+  
+  rename(ncesID = nces_district_id) %>% 
+  # for sd collected ID that has only 6 digits, adding a leading 0
+  mutate(ncesID = ifelse(str_length(ncesID) == 6, paste0("0", ncesID), ncesID)) %>% 
+  select(-c(census_id, 6:11, has_unconfirmed, component_unit_of_id, category, ncesID)) %>% arrange(name) %>% 
+  mutate(id = as.character(id)) %>% 
+  
+  #join with dictionary
+  left_join(dictionary12345, by = c("state", "id")) %>% 
+  
+  #
+  rename(name = name.x) %>% 
+  select(-c(name.y)) %>% 
+mutate(ncesID = case_when(name == "Brownsville Independent School District" ~ "4811680", 
+                          name == "Eula Independent School District" ~ "4818690", 
+                          name == "Guthrie Common School District" ~ "4822020", 
+                          name == "Petrolia Consolidated lndependent School District" ~ "4834710", 
+                          name == "Ramirez Common School District" ~ "4836420",
+                          name == "Education Service Center Region VI"~ "4800173",
+                          TRUE ~ ncesID)) %>% 
+
+mutate(students = case_when(name == "Brownsville Independent School District" ~ "43028", 
+                          name == "Eula Independent School District" ~ "426", 
+                          name == "Guthrie Common School District" ~ "136", 
+                          name == "Petrolia Consolidated lndependent School District" ~ "463", 
+                          name == "Ramirez Common School District" ~ "26",
+                          TRUE ~ students)) 
+```
+
+
+```{r}
+TX_data_list <- list("TX_sd_reported_20" = texas_sd_acfrs20,
+                   "TX_sd_reported_21" = texas_sd_acfrs21)
+
+export(TX_data_list, "output/TX_sd_reported_2020_2021.xlsx")
+```
+

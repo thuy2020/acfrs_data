@@ -1,0 +1,303 @@
+---
+title: "General Purpose Government in 3 years: 2020-2021-2022"
+output: 
+  html_document:
+    toc: true
+    number_sections: true
+    toc_depth: 2
+    toc_float: true
+date: "2023-11-10"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
+options(scipen = 999)
+library(tidyverse)
+library(dplyr)
+library(DT)
+library(viridis)
+library(janitor)
+library(jsonlite)
+source("census.R")
+source("acfrs_gen_purpose_2020.R")
+source("acfrs_gen_purpose_2021.R")
+source("acfrs_gen_purpose_2022.R")
+df_state <- tibble(state.abb, state.name)
+```
+
+# Income from Census
+```{r}
+income <- rio::import(here::here("data", "Unemployment_median income.xlsx"), skip = 4)  %>% 
+  select(FIPS_Code, Median_Household_Income_2021) %>% 
+  rename(geo_id = FIPS_Code, 
+         median_hh_income_21 = Median_Household_Income_2021)
+```
+
+# State 
+```{r}
+# As of Jan 18 2024, missing only CA 2022
+# CA https://www.sco.ca.gov/ard_state_acfr.html
+#setdiff(state_gov_2021$state.abb, state_gov_2022$state.abb)
+
+state_3years <- state_gov_2020 %>% 
+  rbind(state_gov_2021) %>% 
+  rbind(state_gov_2022) %>% 
+  mutate(across(5:28, as.numeric)) %>% 
+  
+  left_join(df_state) %>% 
+  
+  #fix geo_id to join with other data later
+  mutate(geo_id = case_when((nchar(geo_id) == 1) ~ paste0("0", geo_id, "000"),
+                            (nchar(geo_id) == 2) ~ paste0(geo_id, "000"),
+                            (nchar(geo_id) == 3) ~ paste0(geo_id, "00"),
+                            (nchar(geo_id) == 4) ~ paste0(geo_id, "0"),
+                            TRUE ~ as.character(geo_id))) %>% 
+  
+  select(-c(name_midfile)) %>% 
+  
+  #join income
+  left_join(income) %>% 
+  
+  #get a set of varibale
+  select(state.abb, state.name, geo_id, year, name,
+         total_liabilities, net_pension_liability, net_opeb_liability, current_liabilities,
+         net_pension_assets, net_opeb_assets, 
+         expenses, revenues,
+         population, urban_pop, pct_urban_pop, median_hh_income_21) 
+  
+
+state_3years %>%
+write.csv("output/all_state_3years.csv")
+write(toJSON(state_3years), "output/all_state_3years.json")
+```
+
+
+# County
+## Special cases: Consolidated county-city
+
+```{r}
+ #dealing with exception: 
+#These counties are consolidated --> have some other name in acfrs list:  
+consolidated_city_county <- acfrs_general_purpose_20 %>% 
+  rbind(acfrs_general_purpose_21) %>%
+  rbind(acfrs_general_purpose_22) %>%
+   filter((name == "city and county of san francisco" & state.abb == "CA") |
+          (name == "philadelphia" & state.abb == "PA") |
+          (name == "jacksonville" & state.abb == "FL") |
+          name == "city and county of honolulu") %>% 
+  left_join(df_state) %>% 
+  
+  #Same population, but when it's identified as county, it has different geo_id. Use these geo_id to get income and urbanicity
+  mutate(geo_id = case_when(name == "city and county of san francisco"~ "06075", 
+                            name == "philadelphia" ~ "42101",
+                            name == "city and county of honolulu" ~ "15003", 
+                            name == "jacksonville" ~ "12031", # Duval county geo_id
+                            TRUE ~ as.character(geo_id))) %>% 
+  
+  #get a set of variables
+  select(state.abb, state.name, geo_id, year, name,
+         total_liabilities, net_pension_liability, net_opeb_liability, current_liabilities,
+         net_pension_assets, net_opeb_assets, 
+         expenses, revenues) 
+  
+consolidated_city_county_population <- census_all %>% filter(geo_id %in% consolidated_city_county$geo_id) %>% 
+  select(geo_id, population) 
+
+consolidated_city_county_urbanicity <- county_urb %>% filter(geo_id %in% consolidated_city_county$geo_id)
+
+consolidated_city_county_income <- income %>% filter(geo_id %in% consolidated_city_county$geo_id)
+
+consolidated_city_county <- consolidated_city_county %>% left_join(consolidated_city_county_population) %>% 
+left_join(consolidated_city_county_urbanicity) %>% 
+  left_join(consolidated_city_county_income)
+
+```
+## All counties collected in 3 years 2020, 2021, 2022
+```{r}
+#
+county_3years <- county_gov_20 %>% rbind(county_gov_21) %>% rbind(county_gov_22) %>% 
+  select(-c(geo_id.x, government_id, name_midfile)) %>% 
+  rename(geo_id = geo_id.y) %>%  
+  
+  #get income
+  left_join(income) %>% 
+  
+  #get a set of variables
+  select(state.abb, state.name, geo_id, year, name,
+         total_liabilities, net_pension_liability, net_opeb_liability, current_liabilities,
+         net_pension_assets, net_opeb_assets, 
+         expenses, revenues,
+         population, urban_pop, pct_urban_pop, median_hh_income_21) %>% 
+  
+  # bind with consolidated
+  rbind(consolidated_city_county)
+  
+  
+county_3years %>% 
+  write.csv("output/all_counties_3years.csv")
+
+write(toJSON(county_3years), "output/all_counties_3years.json")
+```
+
+
+## The 100 most populous counties in 3 years:
+
+This list of Census top 100 counties:
+
+* only includes counties categorized as "A" - active government or "C" - Active government consolidated with another government with a single set of
+officials
+
+* excludes these NY counties: "kings county", "queens county", "new york county", "bronx county"
+
+* excludes these MA counties: Middlesex, MA Massachusetts, MA essex county, MA suffolk as they are nonfunctioning legal entities.
+
+
+```{r include = FALSE}
+#top 100 counties from census
+census_county_top100
+
+##### Top 100 acfrs counties 2020
+# Find acfrs entities from the list of Top 100 county census
+top100_county_3years <- county_3years %>% 
+  filter(geo_id %in% census_county_top100$geo_id)
+
+#TODO: Checking on missing - as of Jan 18, 2024
+# PA montgomery county 2022: https://www.montgomerycountypa.gov/Archive.aspx?AMID=45
+# MA norfolk county 2022
+#OK tulsa county 2022 https://countyclerk.tulsacounty.org/Home/Reports
+
+
+top100_county_3years %>% 
+  write.csv("output/top100_county_3years.csv")
+
+write(toJSON(top100_county_3years), "output/top100_counties_3years.json")
+```
+
+
+# Incorporated Place & Minor Civil Division: 
+
+From "Understanding Place in Census.pdf", Incorporated Places are:
+
+• Legally bounded entity
+
+• Cities, boroughs, towns, or villages, depending on the state
+
+• Over 19,000 incorporated places
+
+Includes:
+– Cities
+– Towns (except in the six New England states, New York, and Wisconsin)
+– Villages
+– Boroughs (except in New York and Alaska)
+
+Does not include:
+
+– Towns/townships in the Northeast and Midwest
+
+## All Incorporated Place & Minor Civil Division
+
+There are a total of 26,771 incorporated places and minor civil divisions collected for 3 years 2020, 2021, 2021. See the full list named "place_division_3years.csv" in dropbox folder. 
+
+```{r}
+place_division_3years <- place_division_gov_22 %>% 
+  rbind(place_division_gov_21) %>% 
+  rbind(place_division_gov_20)
+
+#place_division_3years %>% write.csv("output/place_division_3years.csv")
+```
+
+
+
+## All Cities collected in 3 years 2020, 2021, 2022
+```{r}
+city_gov_3years <- city_gov_22 %>% 
+  rbind(city_gov_21) %>% 
+  rbind(city_gov_20)
+
+#city_gov_3years %>% write.csv("output/city_gov_3years.csv")
+```
+
+```{r}
+#S1903 MEDIAN INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)
+#2021: ACS 1-Year Estimates Subject Tables
+#https://data.census.gov/table/ACSST1Y2021.S1903?q=median%20household%20income%20by%20city%202021&g=010XX00US$0300000
+
+city_income <- rio::import(here::here("data/ACSST1Y2021.S1903_2023-12-29T105538/ACSST1Y2021.S1903-Data.csv"), skip = 1) %>% select(1, `Geographic Area Name`, `Estimate!!Median income (dollars)!!HOUSEHOLD INCOME BY RACE AND HISPANIC OR LATINO ORIGIN OF HOUSEHOLDER!!Households`) %>% 
+  rename(median_hh_income_21 = `Estimate!!Median income (dollars)!!HOUSEHOLD INCOME BY RACE AND HISPANIC OR LATINO ORIGIN OF HOUSEHOLDER!!Households`
+         ) %>% 
+  mutate(
+         place = substring(Geography, 12, 16),
+         state = substring(Geography, 10, 11)) %>% 
+ 
+  mutate(geo_id = paste0(state, place)) %>% 
+  select(geo_id, median_hh_income_21)
+
+#######
+
+special_cities <- acfrs_general_purpose_20 %>% 
+  rbind(acfrs_general_purpose_21) %>% 
+  rbind(acfrs_general_purpose_22) %>% 
+
+    #only filter those missing
+  filter(id %in% c("101868", "1266697", "1266289", "149470")) %>% 
+
+  mutate(geo_id = case_when(id == "101868" ~ "0668000", # san jose CA
+                          id == "1266697" ~ "2255000", # new orleans LA
+                          id == "1266289" ~ "0820000",# CO denver county, also denver city
+                          id == "149470" ~ "3611000")) %>%  # NY buffalo
+  
+  left_join(city_income) %>% 
+  
+  left_join(df_state) %>% 
+  left_join(census_all) %>% 
+  #get a set of variables
+  select(state.abb, state.name, geo_id, year, name,
+         total_liabilities, net_pension_liability, net_opeb_liability, current_liabilities,
+         net_pension_assets, net_opeb_assets, 
+         expenses, revenues, 
+         population,median_hh_income_21) 
+########
+
+city_gov_3years <- city_gov_3years %>% left_join(city_income) %>% 
+  
+  #get a set of variables
+  select(state.abb, state.name, geo_id, year, name,
+         total_liabilities, net_pension_liability, net_opeb_liability, current_liabilities,
+         net_pension_assets, net_opeb_assets, 
+         expenses, revenues,
+         population, median_hh_income_21) %>% 
+  rbind(special_cities)
+
+write(toJSON(city_gov_3years), "output/all_cities_3years.json")
+```
+
+## The 100 most populous cities in 3 years
+```{r}
+# top 100 cities census
+census_city_top100
+top100_cities_3years <- city_gov_3years %>% filter(geo_id %in% census_city_top100$geo_id)  %>% distinct()
+
+# missing: 4 as of Jan 18, 2024
+#CA bakersfield 2022
+# MN saint paul 2022
+# NJ newark 2021, 
+#NJ newark 2022
+write(toJSON(top100_cities_3years), "output/top100_cities_3years.json")
+```
+
+```{r}
+
+ #add_row(state.abb = "NY", name = "roschester", geo_id = "3663000") %>% 
+  #add_row(state.abb = "CA", name = "san jose", geo_id = "0668000") %>% 
+  # add_row(state.abb = "LA", name = "new orleans", geo_id = "2255000") %>% 
+  # add_row(state.abb = "LA", name = "new orleans", geo_id = "2255000") %>% 
+  # add_row(state.abb = "NJ", name = "newark", geo_id = "3451000") %>% 
+  # add_row(state.abb = "NY", name = "buffalo", geo_id = "3611000") %>% 
+  # add_row(state.abb = "PA", name = "philadelphia", geo_id = "4260000") %>% 
+  # add_row(state.abb = "NY", name = "buffalo", geo_id = "3611000") %>% 
+  # add_row(state.abb = "CA", name = "bakersfield", geo_id = "0603526") %>% 
+  # add_row(state.abb = "MN", name = "st paul", geo_id = "2758000") %>% 
+  # add_row(state.abb = "NJ", name = "jersey city", geo_id = "3436000") 
+```
+
+
