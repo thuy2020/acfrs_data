@@ -1,0 +1,354 @@
+---
+title: "Dictionary: Name - NCES ID - ACFRS ID"
+format: html
+editor: visual
+---
+
+```{r}
+library(dplyr)
+library(stringr)
+library(ggplot2)
+library(tidyr)
+library(janitor)
+library(plotly)
+options(scipen = 999)
+```
+
+Problem: - School districts ACFRS database have names that are slightly different from the names in NCES.
+
+Goal: construct a dictionary that links entity name, acfrs id, nces id
+
+# ACFRs school districts that have ncesID
+
+```{r}
+# data queried Nov, 2023
+sd2020_db <- readRDS("data/data_from_dbsite_2020.RDS") %>% 
+  filter(category == "School District") %>% 
+  rename(ncesID = nces_district_id) %>% 
+  # for sd collected ID that has only 6 digits, adding a leading 0
+  mutate(ncesID = ifelse(str_length(ncesID) == 6, paste0("0", ncesID), ncesID)) 
+
+```
+
+## Dictionary 1: names matching with NCES
+
+```{r}
+# First, filter school districts in ACFRs database that have NCES ID. These ncesIDs were added by Thuy using regular expression and matching names with nces (). Ron integrated it into the database. 
+dictionary1 <- sd2020_db %>% 
+  filter(!is.na(ncesID)) %>% select(id, state, name, ncesID)
+
+# the remaining that need nces ID
+acfrs_wo_ncesID <- sd2020_db %>% filter(is.na(ncesID)) %>% select(id, state, name) 
+```
+
+## Dictionary 2: Using Hgarb collected
+
+This file collected by Hgarb (extending from the file Thuy matched names), has NCES ID and acfrs entity name
+
+```{r}
+# HGarb team emailed, Hgarb added a couple thousand on Thuy's matched list. 
+sd2020_namematched_Hgarb <- rio::import("data/_K12 School District 12_01_22 - Consolidated.csv") %>% 
+  select(-c(Comments, `Employer name in GASB 68/ACFR`, `V13`)) %>% 
+  rename(ncesID = `NCES ID`, 
+         name = `School District (Portal Name)`,
+         state = State) %>% 
+  mutate(ncesID = as.character(ncesID)) %>% 
+  
+    # removing a total line at bottom
+  filter(name != "Totals") %>% 
+ # for sd collected ID that has only 6 digits, adding a leading 0
+  mutate(ncesID = ifelse(str_length(ncesID) < 7, paste0("0", ncesID), ncesID)) %>% 
+
+# special cases 
+ mutate(ncesID = ifelse(ncesID == "4833090", "4833120", ncesID)) # Hgarb attributed wrong NCES ID to this entity --> its nces ID should be 4833120
+
+# part of the list of Hgarb whose ncesIDs are not in dictionary 1
+dictionary2 <- sd2020_namematched_Hgarb %>% 
+  filter(!ncesID %in% dictionary1$ncesID) %>% 
+  
+# this list has ncesID, acfrs name, --> need to use acfrs names to join with acfrs db list
+  select(ncesID, state, name) %>% 
+  left_join(acfrs_wo_ncesID) %>% 
+  filter(!is.na(id)) %>% 
+  filter(!is.na(ncesID))
+```
+
+```{r}
+dictionary1_2 <- dictionary1 %>% rbind(dictionary2) 
+
+#Testing
+dictionary1_2 %>% 
+  filter(!is.na(ncesID)) %>% 
+  filter(!is.na(id)) %>% 
+  distinct(ncesID)
+```
+
+## Dictionary 3: join left-over of Hgarb list & acfrs db list
+
+```{r}
+# list of Hgarb whose ncesID are not in dictionary1_2
+sd2020_namematched_Hgarb %>% 
+filter(!ncesID %in% dictionary1_2$ncesID) %>% 
+  select(ncesID, state, name) %>% filter(!is.na(ncesID)) %>% arrange(state, name) %>% 
+  
+  #normalize name 
+  mutate(name = str_to_lower(name),
+         name = str_remove_all(name, "-|'"),
+         name = str_remove_all(name, "no."),
+         name = str_replace_all(name, "\\.", " "),
+         name = str_trim(name),
+         name = str_squish(name)) -> t1
+
+```
+
+```{r}
+# list of acfrs whose id are not in dictionary1_2
+sd2020_db %>% 
+filter(!id %in% dictionary1_2$id) %>% filter(!is.na(id)) %>% 
+  select(id, state, name, ncesID) %>% 
+  arrange(state, name) %>% 
+  
+mutate(name = str_to_lower(name),
+         name = str_remove_all(name, "-|'"),
+       name = str_remove_all(name, "no."),
+         name = str_replace_all(name, "/", " "),
+       name = str_squish(name),
+       name = str_trim(name)) -> t2
+
+```
+
+```{r}
+
+dictionary_3 <- t1 %>% left_join(t2, by = c("name", "state")) %>% drop_na(id) %>% 
+  rename(ncesID = ncesID.x) %>% 
+  select(-ncesID.y) %>% arrange(state, name)
+  
+dictionary123 <- dictionary1_2 %>% rbind(dictionary_3) %>% 
+  
+# fixing some duplicated values 
+mutate(ncesID = case_when(id == "87509" ~ "4222620", # get from NCES website
+                          id == "190896" ~ "4026010",
+                          TRUE ~ as.character(ncesID)
+                          )) %>% arrange(state, name) %>% drop_na()
+```
+
+## Dictionary 4: Manual tracking in excel
+
+```{r}
+# acfrs need ncesID
+sd2020_db %>% filter(!id %in% dictionary123$id) %>% select(state, name, id, ncesID) %>% 
+  arrange(state, name) #%>% write.csv("acfrs_need_add_ncesID.csv")
+
+#hgarb leftover
+sd2020_namematched_Hgarb %>% filter(!ncesID %in% dictionary123$ncesID) %>% 
+  drop_na(ncesID) %>% select(state, name, ncesID, acfrs_original_name) %>% 
+  arrange(state, name) #%>% write.csv("hgarb_leftover.csv")
+  
+# manually matching the above 2 files --> resulted in dictionary_4
+
+dictionary_4 <- read.csv("dictionary_4.csv") %>% 
+  filter(!is.na(ncesID)) %>% 
+  select(-ncesName)
+
+dictionary1234 <- dictionary123 %>% rbind(dictionary_4)
+
+dictionary1234 %>% filter(state == "ME")
+```
+
+## Dictionary 5: manual checking against NCES list
+
+# NCES list
+
+NCES data set has 13,713 school districts across 50 states and 5 US territories, accounts for 48,420,226 students. This analysis only concerns 13,707 school districts in 50 states, accounts for a total of 48,026,570 students.
+
+NOTE: This list contains all school districts that have 1 or more students. Problem: Some ACFRs entities that are categorized as school districts have 0 student.
+
+```{r}
+nces <- rio::import(here::here("data", "ncesdata_DBBFFFC.xlsx"), skip = 14) %>% 
+  clean_names() %>% 
+  select(nces_district_id, district_name, county_name, city, state,locale, students) %>% 
+  rename(nces_original_name = district_name,
+    ncesID = nces_district_id) %>% 
+    drop_na(nces_original_name) %>% 
+# take out 5 territories "AS" "DC" "GU" "PR" "VI"
+ # filter(!state %in% c("AS", "DC", "GU", "PR", "VI")) %>% 
+  
+# for NCES ID that has only 6 digits, adding a leading 0
+  mutate(ncesID = ifelse(str_length(ncesID) < 7, paste0("0", ncesID), ncesID)) %>% 
+mutate(students = as.numeric(students)) 
+
+nces %>% saveRDS("nces.RDS")
+
+```
+
+```{r}
+# checked acfrs, these are correct, despite different names
+#c("2718330", "2733330", "2723970", "2700162", "3016880", "3105630", "4013950")
+
+# NCES list does not have students for this : North Country Supervisory Union. It is a Supervisory union administrative center. NCES only has record for  North Country Junior UHSD #22 & North Country Senior UHSD #22, total 268 + 701 = 969 students 
+
+#Acfrs collected: North Country Supervisory Union
+nces %>% filter(str_detect(nces_original_name, "North Country"))
+  filter(ncesID == "5099931") 
+
+```
+
+```{r}
+# filter nces that are not in dictionary1234
+nces_NOT_in_dictionary1234 <- nces %>% filter(!ncesID %in% dictionary1234$ncesID) %>% 
+  select(state, nces_original_name, ncesID, students) %>% 
+  arrange(state, nces_original_name) #%>% write.csv("nces_NOT_in_dictionary1234.csv")
+
+
+acfrs_NOT_in_dictionary1234 <- sd2020_db %>% filter(!id %in% dictionary1234$id) %>% 
+  select(state, name, id) %>% 
+  arrange(state, name) #%>% 
+  #write.csv("acfrs_NOT_in_dictionary1234.csv")
+
+# now use above 2 lists to fill in the remaining acfrs entities manually. Copy acfrs_NOT_in_dictionary1234 into an excel --> search on NCES website to find nces ID & student. If entity not found on NCES, check ACFRs reports on portal to find number of students. 
+# Note: ncesID = 99999 indicates an existing ACFR entity without an NCES ID
+
+dictionary5 <- readxl::read_xls("data/dictionary_5_manually_created.xls") %>% # this dictionary_5.xls file is manually created in excel
+  # remove all non-standard reports (not acfrs reports)
+  mutate(type = case_when(is.na(type) ~ "regular", 
+                          TRUE ~ type)) %>% 
+  filter(type != "non-standard") %>%    
+  select(state, name, id, ncesID, nces_original_name, students)
+
+# note: file dictionary_5.xls has number of students, NCES names, and other notes about the entities
+```
+
+Manually collect acfrs data. There's no acfrs for these entities. Data are inferred or calculated from other documents. Assign id to these entities as 88888
+
+```{r}
+ny_city <- nces %>% filter(state == "NY") %>% filter(str_detect(nces_original_name, "NEW YORK CITY GEOGRAPHIC DISTRICT")) %>% 
+  mutate(id = "88888", 
+         name = nces_original_name) %>% 
+  select(state, name, id, ncesID, nces_original_name, students)
+
+delaware <- nces %>% filter(state == "DE") %>% 
+  mutate(id = "88888", 
+         name = nces_original_name) %>% 
+  select(state, name, id, ncesID, nces_original_name, students)
+```
+
+id = 77777 not on portal as of June 11, just uploaded the acfrs file to be processed
+
+adding students, nces name in dictionary1234
+
+```{r}
+dictionary12345 <- dictionary1234 %>% left_join(nces) %>% select(-c(county_name, city)) %>% 
+  rbind(dictionary5) %>% 
+  rbind(ny_city) %>% 
+  rbind(delaware) 
+
+  # amend some special cases -> check with Ron to delete 1 entry
+  # mutate(name = case_when(id == "68349" ~ "Regional Supervision District Board of Education",
+  #                          TRUE ~ name)) 
+
+saveRDS(dictionary12345, "dictionary12345.RDS")
+
+write.csv(dictionary12345, "dictionary12345.csv")
+dictionary12345 %>% filter(id == "58299")
+
+```
+
+dictionary12345 how has 9493 entities that ncesID, id (internal acfrs id), students number.
+
+# Result
+
+```         
+```
+
+```{r}
+sd2021_db <- readRDS("data/data_from_dbsite_2021.RDS") %>% 
+  filter(category == "School District") %>% 
+  rename(ncesID = nces_district_id) %>% 
+  # for sd collected ID that has only 6 digits, adding a leading 0
+  mutate(ncesID = ifelse(str_length(ncesID) == 6, paste0("0", ncesID), ncesID)) %>% 
+  select(state, name, id, year, total_liabilities, bonds_outstanding, current_liabilities, leases, loans_outstanding, notes_outstanding, net_pension_liability, net_pension_assets, net_opeb_liability, net_opeb_assets, compensated_absences, charges_for_services, operating_grants, capital_grants, general_revenue, change_in_net_position, expenses, total_operating_revenues, non_operating_revenues, capital_contributions, revenues
+         ) %>% 
+  mutate(id = as.character(id)) 
+
+
+sd2021_ncesID_students <- sd2021_db %>% 
+  left_join(dictionary12345, by = c("id", "state")) %>% 
+  filter(!is.na(ncesID)) %>% 
+  
+  left_join(nces, by = "ncesID") %>% select(-c(nces_original_name.x, nces_original_name.y, students.y, state.y, name.y)) %>% 
+  rename(students = students.x,
+         state = state.x, 
+         name = name.x)
+
+write.csv(sd2021_ncesID_students, "output/school_districts_2021.csv")
+```
+
+```{r}
+sd2022_db <- readRDS("data/data_from_dbsite_2022.RDS") %>% 
+  filter(category == "School District") %>% 
+  rename(ncesID = nces_district_id) %>% 
+  # for sd collected ID that has only 6 digits, adding a leading 0
+  mutate(ncesID = ifelse(str_length(ncesID) == 6, paste0("0", ncesID), ncesID)) %>% 
+  select(state, name, id, year, total_liabilities, bonds_outstanding, current_liabilities, leases, loans_outstanding, notes_outstanding, net_pension_liability, net_pension_assets, net_opeb_liability, net_opeb_assets, compensated_absences, charges_for_services, operating_grants, capital_grants, general_revenue, change_in_net_position, expenses, total_operating_revenues, non_operating_revenues, capital_contributions, revenues
+         ) %>% 
+  mutate(id = as.character(id)) 
+
+
+sd2022_ncesID_students <- sd2022_db %>% 
+  left_join(dictionary12345, by = c("id", "state")) %>% 
+  filter(!is.na(ncesID)) %>% 
+  
+  left_join(nces, by = "ncesID") %>% select(-c(nces_original_name.x, nces_original_name.y, students.y, state.y, name.y)) %>% 
+  rename(students = students.x,
+         state = state.x, 
+         name = name.x)
+
+write.csv(sd2022_ncesID_students, "output/school_districts_2022.csv")
+
+```
+
+```{r}
+# if we can get acfrs for all 10719 sd, how many students would be? 4,124,968
+setdiff(nces$ncesID, dictionary$ncesID) -> ncesID_leftover
+nces %>% filter(ncesID %in% ncesID_leftover) %>% mutate(tot = sum(students)) %>% select(tot) %>% slice(1)
+#--> 4,124,968 students unaccounted for. 
+
+# If left out school districts with less than 2000 students, how many left out in total? 1,141,638 students = 2 % 
+# nces %>% 
+ # mutate(tot = sum(students)) %>% select(tot) %>% slice(1)
+# --> total 48,420,226 nationwide--> acceptable
+
+nces %>% filter(ncesID %in% ncesID_leftover) %>% filter(students > 2000) %>% 
+  mutate(tot = sum(students)) %>% arrange(desc(students)) %>% 
+  filter(!nces_original_name %in% c("Portland SD 1J", "Davidson County")) %>% 
+  filter(!str_detect(nces_original_name, "NEW YORK CITY")) %>% 
+  
+  # need to collect this
+  arrange(state, nces_original_name) -> ncesleftover_list #307 left, need to find in acfrs these
+  
+write.csv("ncesID_need_acfrs_id.csv")
+# this has ncesID --> check if collected in acfrs yet? 
+
+```
+
+```{r}
+sd2020_db %>% filter(category == "School District") %>% 
+  filter(nces_district_id %in% ncesleftover_list$ncesID) -> leftoverlist_already_in_acfrs # 69 sd already included in acfrs
+  
+# now take those already in acfrs out of leftover list 307 - 69 = 238 sd --> need to manually collect
+ncesleftover_list %>% 
+  filter(!ncesID %in% leftoverlist_already_in_acfrs$nces_district_id) %>% arrange(desc(students))%>% select(-tot) %>% 
+  
+  # can get DE manually from state ACFRS
+  filter(state != "DE") %>% # mutate(tot_DE = sum(students)) 119738
+  
+  #mutate(sum_222sd = sum(students))
+write.csv("sd_more_2000students_need_acfrs.csv")
+#   mutate(tot_69sd = sum(students)) accounted for extra 487245 students --> 
+  
+# Now have 222 sd = 1,296,559
+```
+
+Mismatch of id and nces_district_id: Note on: Central Unified School District id 146007 (database how id = 376212)
+
+Del Norte County Unified nces 610770 should not be Dehesa School District, attached 43069 in database

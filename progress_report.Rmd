@@ -1,0 +1,105 @@
+---
+title: "ACFRs collection - County"
+output: html_document
+date: "2023-10-02"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(DT)
+library(dplyr)
+library(ggplot2)
+library(forcats)
+```
+
+# Missing count by state
+```{r}
+# This is a manual file, do not delete file 
+# Missing as manually tracked 
+missing_county_SEP2023 <- rio::import("data/_manuallyChecked_missing_county_SEP2023.xlsx") %>% select(-c(id, having_county_gov, acfrs_name))
+
+# counties_missing <- county_acfrs_20_21 %>% select(-c(missing_2020, missing_2021)) %>% 
+#   left_join(missing_county_SEP2023) 
+
+# missing_county_SEP2023 %>% 
+#   #filter(`2020` == "missing" & `2021` == "missing") 
+#   #filter(`2020` == "missing")
+#   filter(`2021` == "missing") 
+
+missing_2020 <- missing_county_SEP2023 %>% select(state.abb, `2020`) %>% 
+  filter(`2020` == "missing") %>% group_by(state.abb) %>% 
+  add_count() %>% distinct() %>% rename(missing_2020 = n) %>% select(-`2020`)
+
+missing_2021 <- missing_county_SEP2023 %>% select(state.abb, `2021`) %>% 
+  filter(`2021` == "missing") %>% group_by(state.abb) %>% 
+  add_count() %>% distinct() %>% 
+  rename(missing_2021 = n) %>% select(-`2021`)
+
+missing_2021 %>% left_join(missing_2020) %>% arrange(desc(missing_2021)) %>%  #write.csv("missing_county_by_state_2020_2021.csv")
+datatable()
+#missing_county_SEP2023 %>% filter(`2021` == "missing") 
+  #filter(`2020` == "missing" & `2021` == "missing")
+
+```
+
+
+# Viz missing counties
+
+```{r}
+missing_county_SEP2023 %>% 
+  filter(`2020` == "missing" & `2021` == "missing") %>% 
+  mutate(missing_pop = sum(population)) %>% 
+  add_count() %>% 
+  rename(missing_both = n) -> missingboth
+  
+Prop <- c(3144, 254)
+pie(Prop , labels = c("All counties: 3,144","254 entities,\nPopulation: 10,2M"), 
+    main = "Missing both years 2020 & 2021")
+
+```
+
+```{r}
+missing_county_SEP2023 %>% select(state.abb, population, `2020`) %>% 
+  filter(`2020` == "missing") %>% 
+mutate(missing_pop = sum(population)) %>% 
+  group_by(state.abb) -> missing20
+  
+Prop_20 <- c(3144, 312)
+pie(Prop_20 , labels = c("All counties: 3,144","312 entities\nPopulation: 11,5M"), 
+    main = "Missing county ACFRs 2020",
+    col = c("white","lightyellow"))
+```
+
+
+```{r}
+missing_county_SEP2023 %>% select(state.abb, population, `2021`) %>% 
+  filter(`2021` == "missing") %>% 
+mutate(missing_pop = sum(population)) %>% 
+  group_by(state.abb) -> missing21
+  
+Prop_21 <- c(3144, 510)
+pie(Prop_21 , labels = c("All counties: 3,144","510 entities\nPopulation: 19,1M"), 
+    main = "Missing county ACFRs 2021",
+    col = c("white","lightpink"))
+```
+
+
+# List county ACFRs with population: Missing either 2020 or 2021 
+
+```{r}
+missing_county_SEP2023 %>% select(state.abb, name, population, `2020`, `2021`) %>% 
+  filter(`2020` == "missing" | `2021` == "missing") %>% #write.csv("missing_county_2020_2021.csv")
+  datatable()
+```
+
+
+
+```{r}
+# Processing by Hgarb: either 2020 or 2021 
+# missing_county_SEP2023 %>% select(state.abb, name, population, `2020`, `2021`) %>% 
+#   filter(name == "hamden")
+#   
+#   filter(`2020` == "uploaded file to portal" | `2021` == "uploaded file to portal") %>% 
+#   datatable()
+```
+

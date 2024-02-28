@@ -1,0 +1,88 @@
+---
+title: "Untitled"
+editor: visual
+format: html
+---
+
+```{r}
+library(dplyr)
+library(stringr)
+library(ggplot2)
+library(tidyr)
+library(janitor)
+library(plotly)
+
+options(scipen = 999)
+```
+
+## Top 100 SD NCES
+
+NCES data set has 13,713 school districts across 50 states and 5 US territories, accounts for 48,420,226 students. This analysis only concerns 13,707 school districts in 50 states, accounts for a total of 48,026,570 students.
+
+## Analyze top 100 school districts 2020
+
+
+```{r}
+top100_sd2020 %>% arrange(desc(revenues)) %>% 
+  ggplot(aes(revenues, total_liabilities))+
+  geom_point(color = "darkgreen") +
+  labs(title = "Revenues vs Total Liability in top 100 school districts 2020") +
+  theme_minimal() -> b
+ggplotly(b)
+
+```
+
+```{r}
+top100_sd2020 %>% filter(!name %in% c("Los Angeles Unified School District", "Chicago Board of Education")) %>% 
+  ggplot(aes(revenues, total_liabilities))+
+  geom_point(color = "darkgreen") +
+labs(title = "Revenues vs Total Liability in top 100 school districts 2020\n Excluding 2 outliers") +
+  theme_minimal()-> c
+ggplotly(c)
+```
+
+```{r}
+top100_sd2020 %>% 
+  mutate(liability_student = total_liabilities/students,
+         revenues_student = revenues/students) %>% 
+  select(name, liability_student, revenues_student) %>% arrange(desc(liability_student)) %>% slice(1:10) %>% 
+  pivot_longer(cols = 2:3,
+               names_to = "type",
+               values_to = "value") %>% 
+  ggplot(aes(fct_reorder(name, value), value, group = type, fill = type)) +
+  geom_col(position = "dodge") + 
+  coord_flip() +
+  labs(title = "Liability and Revenue per student, year 2020") +
+  theme_minimal()
+
+```
+
+
+```{r}
+top100_sd_acfrs %>% 
+  #filter(str_detect(acfrs_original_name,"Miami-Dade County")) #The School Board of Miami-Dade County
+# must be equivalent to: 
+filter(acfrs_original_name == "The School Board Of Miami-Dade County")
+
+# only found 56, how the about other 44?
+top100_sd_acfrs %>% 
+  filter(!acfrs_original_name %in% top56_sd_2021$name) -> lacking45
+
+# list of those in 100 largest sd not collected yet in 2021
+sd2021_db %>% 
+  filter(str_detect(name, "Broward")) #"District of Columbia"))
+```
+
+```{r}
+# Enrollment, poverty, and federal funds for the 120 largest school districts, by enrollment size in 2017: 2016-17 and fiscal year 2019
+# https://nces.ed.gov/programs/digest/d20/tables/dt20_215.30.asp
+
+read.csv("data/tabn215.30.csv") %>% select(1:2,4) %>% 
+  slice(4:123) %>% 
+  rename(district_name = 1, 
+         state = 2, 
+         students = 3) %>% 
+  mutate(students = as.numeric(str_replace_all(students, ",", "")))
+         
+```
+

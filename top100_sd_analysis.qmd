@@ -1,0 +1,51 @@
+---
+title: "Untitled"
+format: html
+editor: visual
+---
+```{r setup, include=FALSE, warning=FALSE, message=FALSE, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+library(dplyr)
+library(stringr)
+library(ggplot2)
+library(tidyr)
+library(janitor)
+library(plotly)
+library(forcats)
+library(DT)
+library(jsonlite)
+options(scipen = 999)
+```
+
+Count of the top 100 school districts by state
+```{r}
+top100_sd_3years <- readRDS("top100_sd_3years.RDS")
+
+sd_new_var <- top100_sd_3years %>% left_join(nces)
+
+  sd_new_var %>% 
+    add_count(state.name) %>% 
+  select(state.name, n) %>% arrange(desc(n)) %>% distinct()
+```
+
+```{r}
+sd_new_var
+```
+
+
+
+```{r}
+sd_new_var %>% 
+  arrange(desc(net_pension_liability)) %>% 
+  mutate(locale = case_when(str_detect(locale, "City") ~ "city", 
+                            str_detect(locale, "Suburb") ~ "suburb",
+                            TRUE ~ locale)) -> d
+
+d %>% 
+  ggplot(aes(students, net_pension_liability, color = locale)) +
+  geom_point()+
+  scale_x_log10()+
+  theme_minimal()
+```
+
+

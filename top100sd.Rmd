@@ -1,0 +1,261 @@
+---
+title: "Top100 School Districts"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE, warning=FALSE, message=FALSE, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+library(dplyr)
+library(stringr)
+library(ggplot2)
+library(tidyr)
+library(janitor)
+library(plotly)
+library(forcats)
+library(DT)
+library(jsonlite)
+options(scipen = 999)
+df <- data_frame(state.abb, state.name)
+source("nces.R")
+source("nyc_school_districts.R")
+```
+
+# School districts from Acfrs database 2020, 2021
+
+```{r echo = FALSE}
+db2020 <- readRDS("data/data_from_dbsite_2020.RDS") 
+db2021 <- readRDS("data/data_from_dbsite_2021.RDS")
+db2022 <- readRDS("data/data_from_dbsite_2022.RDS")
+
+sd_20_21_22 <- db2020 %>% 
+  rbind(db2021) %>% 
+  rbind(db2022) %>% 
+  filter(category == "School District") %>% 
+  mutate(id = as.character(id)) %>% 
+  select(state, name,id, year, 
+         total_liabilities, net_pension_liability, net_opeb_liability, 
+         net_pension_assets, net_opeb_assets,
+         expenses, revenues)
+```
+
+## Top School Districts in ACFRs
+
+```{r echo = FALSE}
+# Dictionary created in this project, file "dictionary_name_ncesID_acfrsID.qmd"
+
+#TODO: 
+# those in list 101-200 nces but NOT in acfrs yet
+# dict_top101_200 
+#   dictionary %>% 
+#   filter(ncesID %in% c(setdiff(dict_top101_200$ncesID, sd101_200_3years$ncesID)))
+# setdiff(dict_top101_200$ncesID, sd101_200_3years$ncesID) -> not_matched_id
+# 
+# dictionary %>% 
+#   filter(ncesID %in% not_matched_id) %>% select(ncesID, name, state) -> ncesID_missing
+# 
+# sub_dictionary <- data.frame(
+#              ncesID = ncesID_missing$ncesID, 
+#              name = ncesID_missing$name, 
+#              state = ncesID_missing$state,
+#              id = c(NA, "1240465", "146253", "146581", "86286", "146589", "1265439", "1265761")
+#             )
+
+####
+dictionary <- readRDS("dictionary.RDS")
+sub_dictionary <- data.frame(
+                  ncesID = c("4703180"), #ncesID == "4703180" ~ "107203", # Davidson County Board of Education, previously id = 1267426
+                  name = c("Metropolitan Nashville Public Schools"),
+                  id = c("107203"),
+                  state = c("TN")
+)
+
+dict_top100 <- dictionary %>% 
+  rbind(sub_dictionary) %>% 
+  filter(ncesID %in% top_sd_nces$ncesID) %>% 
+  mutate(id = case_when(ncesID == "5101260" ~ "1267421", # why previous id = "1250807", # Fairfax County Public Schools
+                   ncesID == "5102250" ~ "1250804", #Loudoun County Public Schools	
+                   ncesID == "5103130"~	"1250808",# Prince William County Public Schools		VA
+                   ncesID == "0803360" ~ "1237862", #City and County of Denver School District No. 1
+                   ncesID == "0102370" ~ "1017229",#Mobile County Board of School Commissioners	
+                   ncesID == "5103840" ~ "1265776", #School Board of the City of Virginia Beach	
+                   ncesID == "5100840" ~ "1267422", #VA	Chesterfield County Public Schools	1267422
+                   ncesID == "5101890" ~ "1267423", #VA	Henrico County Public Schools	1267423
+                   ncesID == "2502790" ~ "1267424", #MA	Boston Public Schools	
+                   ncesID == "3174820" ~ "35480", #NE Omaha City School District 1 = 	Douglas County School District No. 0001	35480
+                   ncesID == "2601103" ~ "161679", # MI Detroit Public Schools
+         TRUE ~ as.character(id))) 
+
+# remain 5 cases of NYC not yet in dictionary: 3600103" "3600077" "3600098" "3600087" "3600151"
+# these will be treated separately below
+setdiff(top_sd_nces$ncesID, dict_top100$ncesID)
+top_sd_nces %>% filter(ncesID %in% c("3600103", "3600077", "3600098", "3600087", "3600151"))
+```
+
+```{r}
+top100_sd_3years <- sd_20_21_22 %>% 
+  filter(id %in% dict_top100$id) %>% select(-name) %>% 
+  left_join(dict_top100, by = c("id", "state"))  %>% 
+  
+  #bind with NYC
+  rbind(nyc_top5_20_21_22) %>% 
+  rename(state.abb = state) %>% 
+  left_join(df) %>% 
+  
+  select(state.abb, state.name, ncesID, year, name, 
+         total_liabilities, net_pension_liability, net_opeb_liability, 
+         net_pension_assets, net_opeb_assets,
+         expenses, revenues) %>% drop_na(ncesID) %>% 
+  #join with nces to get county, city info
+  left_join(nces, by = "ncesID") %>% select(-c(state))
+ 
+#TODO: check back missing: 
+#GA Clayton County Board of education.
+
+top100_sd_3years %>% 
+  add_count(ncesID) %>% filter(n < 3) %>% 
+  select(state.abb, ncesID, year, name, n)
+
+top_sd_nces %>% filter(ncesID %in% setdiff(top_sd_nces$ncesID, top100_sd_3years$ncesID))
+
+```
+
+```{r}
+#saveRDS(top100_sd_3years, "top100_sd_3years.RDS")
+exportJSON <- toJSON(top100_sd_3years)
+write(exportJSON, "output/top100_sd_3years.json")
+
+# <- fromJSON("top100_sd_3years.json")
+top100_sd_3years %>% write.csv("output/top100_sd_3years.csv")
+
+#TODO: ask Geoff about this revenues = expense cases
+top100_sd_3years %>% arrange(desc(students)) %>% 
+  filter(expenses == revenues) 
+```
+
+# sd101_200_3years
+```{r}
+sd101_200_3years <- sd_20_21_22 %>% 
+  filter(id %in% dict_top101_200$id) %>% select(-name) %>% 
+  left_join(dict_top101_200, by = c("id", "state")) %>% 
+  rename(state.abb = state) %>% 
+
+  left_join(df) %>% 
+  #join with nces to get county, city info
+  left_join(nces, by = "ncesID") %>% select(-c(state))
+ 
+exportJSON <- toJSON(sd101_200_3years)
+write(exportJSON, "output/sd101_200_3years.json")
+
+# <- fromJSON("top100_sd_3years.json")
+sd101_200_3years %>% write.csv("output/sd101_200_3years.csv")
+
+# check missing
+sd101_200_3years %>% add_count(ncesID) %>% select(state.abb, name, year, n) %>% 
+  filter(n ==2)
+```
+
+ 
+```{r}
+data.frame(
+all <- sd_20_21_22 %>% mutate(all_NPL = sum(total_liabilities)) %>% select(all_NPL) %>% distinct(),
+
+top100 <- top100_sd_3years %>% mutate(all_NPL = sum(total_liabilities)) %>% select(all_NPL) %>% distinct(),
+
+next100 <- sd101_200_3years %>% mutate(all_NPL = sum(total_liabilities)) %>% select(all_NPL) %>% distinct()
+) %>% format(big.mark = ",")
+
+data.frame(all, top100, next100)
+```
+
+
+## Delaware
+Delaware has school district info in the state ACFR: FY 2021 ACFR (delaware.gov). Balance sheet info is on p. 166-167 and activities are on p. 168-169.
+--> manually inserted these numbers to excel file. 
+--> Where to find net pension, net OPEB for K12? (State of Delaware in page 20)
+--> Don't do this yet. Let me figure out why school districts are only listed in the statistical section--I'm not sure whether the liabilities are consolidated with the state's.
+
+## Davidson County TN & Portland SD 1J OR
+
+```{r warning=FALSE, message=FALSE}
+sd_96_2020 <- top_sd_nces %>% 
+  left_join(top_sd_acfrs) %>% # to get id
+  left_join(sd2020_db, by = "id") %>% # need to specify join by=id, if not, some rows in sd2020_db loose values (eg. id == 196828) 
+  
+  select(-c(name.y, name.x, state.y)) %>% 
+  rename(state = state.x) %>% 
+
+  # take out sd whose acfrs are not known to date
+  filter(!nces_original_name %in% c("Boston", "CHESTERFIELD CO PBLC SCHS", "HENRICO CO PBLC SCHS", "OMAHA PUBLIC SCHOOLS")) %>% 
+  
+  # take out 5 sd of NYC to later rbind with nyc_20_21_5sd
+  filter(state != "NY") %>% 
+  
+  # Collect data for some sd manually 
+  mutate(year = 2020,
+  total_liabilities = case_when(nces_original_name == "Davidson County"& state == "TN" ~ 0,
+                                nces_original_name == "Portland SD 1J"& state == "OR" ~ 1882236000, 
+                                TRUE ~ total_liabilities), #page 34
+  
+  net_pension_liability = case_when(nces_original_name == "Davidson County" & state == "TN" ~ 0,
+                                    nces_original_name == "Portland SD 1J"& state == "OR" ~ 306140000, 
+                                    TRUE ~ net_pension_liability), # page 34, Net pension liability-PERS
+  
+  net_opeb_liability = case_when(nces_original_name == "Davidson County" & state == "TN" ~ 0,
+                                 nces_original_name == "Portland SD 1J"& state == "OR" ~ 81319999,
+                                 TRUE ~ net_opeb_liability), # page 34, TOTAL OPEB liability-RHIS
+  
+  expenses = case_when(nces_original_name == "Davidson County" & state == "TN" ~ 0,
+                       nces_original_name == "Portland SD 1J"& state == "OR" ~ 824384000, 
+                       TRUE ~ expenses),#page 35
+                       
+  
+  revenues = case_when(nces_original_name == "Davidson County" & state == "TN" ~ 0,
+                       nces_original_name == "Portland SD 1J"& state == "OR" ~ (8271000 + 90072000 + 11368000 + 823400000), #page 35 (charges + operating + grant + Total general revenues)
+                       TRUE ~ revenues))
+```
+
+```{r}
+sd_96_2021 <- top_sd_nces %>% 
+  left_join(top_sd_acfrs) %>% # to get id
+  left_join(sd2021_db, by = "id") %>% # NOTE: filter(is.na(total_liabilities)) -> some have id carried from 2020, but no values for 2021
+  select(-c(name.y, name.x, state.y)) %>% 
+  rename(state = state.x) %>%  
+  
+  # take out sd whose acfrs are not known to date
+  filter(!nces_original_name %in% c("Boston", "CHESTERFIELD CO PBLC SCHS", "HENRICO CO PBLC SCHS", "OMAHA PUBLIC SCHOOLS")) %>% 
+  
+  # take out 5 sd of NYC to later rbind with nyc_20_21_5sd
+  filter(state != "NY") %>% 
+  
+  mutate(year = 2021,
+  total_liabilities = case_when(nces_original_name == "Davidson County"& state == "TN" ~ 0,
+                                nces_original_name == "Portland SD 1J"& state == "OR" ~ 2380580000,
+                                TRUE ~ total_liabilities),
+  
+  net_pension_liability = case_when(nces_original_name == "Davidson County" & state == "TN" ~ 84041613,
+                                    nces_original_name == "Portland SD 1J"& state == "OR" ~ 521329000,
+                                    TRUE ~ net_pension_liability), # page 32, Net pension liability-PERS
+  
+  net_opeb_liability = case_when(nces_original_name == "Davidson County" & state == "TN" ~ 1061732808, # page B-93, column School professional employee
+                                 nces_original_name == "Portland SD 1J"& state == "OR" ~ 78581000,
+                                 TRUE ~ net_opeb_liability), # page 32, TOTAL OPEB liability-RHIS
+  
+  expenses = case_when(nces_original_name == "Davidson County" & state == "TN" ~ 1195361854,
+                       nces_original_name == "Portland SD 1J"& state == "OR" ~ 931870000,
+                       TRUE ~ expenses), #page 33
+  
+  revenues = case_when(nces_original_name == "Davidson County" & state == "TN" ~ 488401680,
+                       nces_original_name == "Portland SD 1J"& state == "OR" ~ (1914000 + 113835000 + 1319000 + 822868000), # Geoff: need to take sum 4 of these: charges, operating, capital grant and general revenues)
+                       TRUE ~ revenues) #page 33
+)
+
+```
+
+
+
+
