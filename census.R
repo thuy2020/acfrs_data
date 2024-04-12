@@ -114,7 +114,6 @@ census_county %>%
 census_county_top100 <- census_county %>% 
   arrange(desc(population)) %>% 
   filter(funcstat %in% c("A", "C")) %>% 
-  
   # does not count 5 counties in NY
   filter(!name_census %in% c("kings county", "queens county", "new york county", "bronx county")) %>% 
   
@@ -125,11 +124,10 @@ census_county_top100 <- census_county %>%
 census_county_top101_200 <- census_county %>% 
   arrange(desc(population)) %>% 
   filter(funcstat %in% c("A", "C")) %>% 
-  
   # does not count 5 counties in NY
   filter(!name_census %in% c("kings county", "queens county", "new york county", "bronx county")) %>% 
   
-  slice(100:200) 
+  slice(101:200) 
 
 
 #census_county_top100 %>% write_csv("output/census_county_top100.csv")

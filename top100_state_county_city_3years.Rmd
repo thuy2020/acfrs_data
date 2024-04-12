@@ -101,7 +101,7 @@ consolidated_city_county <- acfrs_general_purpose_20 %>%
   select(state.abb, state.name, geo_id, year, name,
          total_liabilities, net_pension_liability, net_opeb_liability, current_liabilities,
          net_pension_assets, net_opeb_assets, 
-         expenses, revenues) 
+         expenses, revenues, id) 
   
 # get population
 consolidated_city_county_population <- census_all %>% filter(geo_id %in% consolidated_city_county$geo_id) %>% 
@@ -134,7 +134,7 @@ county_3years <- county_gov_20 %>%
   left_join(income) %>% 
   
   #get a set of variables
-  select(state.abb, state.name, geo_id, year, name,
+  select(state.abb, state.name, id, geo_id, year, name,
          total_liabilities, net_pension_liability, net_opeb_liability, current_liabilities,
          net_pension_assets, net_opeb_assets, 
          expenses, revenues,
@@ -174,11 +174,13 @@ top100_county_3years <- county_3years %>%
 
 
 top100_county_3years %>% add_count(geo_id) %>% filter(n <3 ) %>% arrange(name)
-#TODO: Checking on 4 missing - 
+#TODO: Checking on 2 missing - as of April 12, 2024
 # PA montgomery county 2022: https://www.montgomerycountypa.gov/Archive.aspx?AMID=45
 # MA norfolk county 2022
+
+#Uploaded April 12, 2024: 
+# Ok Oklahoma county 2022: https://www.oklahomacounty.org/county-information/financials#Annual%20Financial%20Reports
 #OK tulsa county 2022 https://countyclerk.tulsacounty.org/Home/Reports
-# Ok Oklahoma county 2022: Insufficient information, only has unaudited report:https://www.oklahomacounty.org/county-information/financials#Annual%20Financial%20Reports
 
 top100_county_3years %>% 
   write.csv("output/top100_counties_3years.csv")
@@ -191,7 +193,7 @@ write(toJSON(top100_county_3years), "output/top100_counties_3years.json")
 top101_200_county_3years <- county_3years %>% 
   filter(geo_id %in% census_county_top101_200$geo_id) 
 
-top101_200_county_3years%>% add_count(geo_id) %>% filter(n == 3) %>%
+top101_200_county_3years%>% add_count(geo_id) %>% filter(n < 3) %>%
   select(state.abb, name, n) %>% distinct() 
 
 ```
@@ -278,7 +280,7 @@ special_cities <- acfrs_general_purpose_20 %>%
   left_join(df_state) %>% 
   left_join(census_all) %>% 
   #get a set of variables
-  select(state.abb, state.name, geo_id, year, name,
+  select(state.abb, state.name, geo_id, id, year, name,
          total_liabilities, net_pension_liability, net_opeb_liability, current_liabilities,
          net_pension_assets, net_opeb_assets, 
          expenses, revenues, 
@@ -288,7 +290,7 @@ special_cities <- acfrs_general_purpose_20 %>%
 city_gov_3years <- city_gov_3years %>% left_join(city_income) %>% 
   
   #get a set of variables
-  select(state.abb, state.name, geo_id, year, name,
+  select(state.abb, state.name, geo_id, id, year, name,
          total_liabilities, net_pension_liability, net_opeb_liability, current_liabilities,
          net_pension_assets, net_opeb_assets, 
          expenses, revenues,
@@ -307,11 +309,12 @@ census_city_top100
 top100_cities_3years <- city_gov_3years %>% filter(geo_id %in% census_city_top100$geo_id)  %>% distinct()
 #missing
 top100_cities_3years %>% add_count(geo_id) %>% filter(n<3) %>% arrange(name)
-# missing: 4 as of Jan 18, 2024
-#CA bakersfield 2022
+# missing: 3 as of April 12, 2024
 # MN saint paul 2022
 # NJ newark 2020, 
 #NJ newark 2022
+
+top100_cities_3years %>% filter(str_detect(name, "tulsa"))
 
 top100_cities_3years %>% write.csv("output/top100_cities_3years.csv")
 write(toJSON(top100_cities_3years), "output/top100_cities_3years.json")
@@ -321,9 +324,10 @@ write(toJSON(top100_cities_3years), "output/top100_cities_3years.json")
 top101_200_cities_3years <- city_gov_3years %>% filter(geo_id %in% census_city_top101_200$geo_id)  %>% distinct()
 
 top101_200_cities_3years %>% add_count(geo_id) %>% select(state.abb, year, name, n) %>% 
-  filter(n == 1)
+  filter(n <3)
 
-top101_200_cities_3years %>% write.csv("output/top101_200_cities_3years.csv")
+# check all these on portal. They are in the portal. Need to check the id to make sure they show up in the list top 200 here. 
+
 ```
 
 

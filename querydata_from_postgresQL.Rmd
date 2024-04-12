@@ -9,17 +9,18 @@ library(DBI)
 library(RPostgreSQL)
 library(dplyr)
 library(stringr)
+source("db_connection.R")
 ```
 
 ```{r}
 # Insert your credentials to connect with the database
-con <- dbConnect(dbDriver("PostgreSQL"), 
-                 host = "",
-                 port=5432, 
-                 dbname = "",
-                 user = "",
-                 password = ""
-                 )
+# con <- dbConnect(dbDriver("PostgreSQL"), 
+#                  host = "",
+#                  port=5432, 
+#                  dbname = "",
+#                  user = "",
+#                  password = ""
+#                  )
 
 
 statement <- c("SELECT cafrs_state.abbreviation as state,
@@ -40,22 +41,22 @@ net_opeb_liability, net_opeb_assets,
 leases, loans_outstanding, notes_outstanding,bonds_outstanding,compensated_absences,
 
 charges_for_services, operating_grants, capital_grants, general_revenue, 
-cafrs_activities.change_in_net_position, expenses, 
+cafrs_activities.activities_change_in_net_position, expenses, 
 total_operating_revenues, non_operating_revenues, capital_contributions,
 
 greatest(charges_for_services + operating_grants + capital_grants + general_revenue,
-   cafrs_activities.change_in_net_position + expenses,
+   cafrs_activities.activities_change_in_net_position + expenses,
    total_operating_revenues + non_operating_revenues) as revenues,
    
-   cafrs_cafr.has_unconfirmed,
+   cafrs_acfr.has_unconfirmed,
    component_unit_of_id
    
-FROM cafrs_cafr
-INNER JOIN cafrs_entity on (cafrs_cafr.entity_id = cafrs_entity.id)
+FROM cafrs_acfr
+INNER JOIN cafrs_entity on (cafrs_acfr.entity_id = cafrs_entity.id)
 INNER JOIN cafrs_state on (cafrs_state.id = cafrs_entity.state_id)
-INNER JOIN cafrs_netposition on (cafrs_netposition.cafr_id = cafrs_cafr.id)
-INNER JOIN cafrs_activities on (cafrs_activities.cafr_id = cafrs_cafr.id)
-INNER JOIN cafrs_proprietaryrevenues on (cafrs_proprietaryrevenues.cafr_id = cafrs_cafr.id)
+INNER JOIN cafrs_netposition on (cafrs_netposition.cafr_id = cafrs_acfr.id)
+INNER JOIN cafrs_activities on (cafrs_activities.cafr_id = cafrs_acfr.id)
+INNER JOIN cafrs_proprietaryrevenues on (cafrs_proprietaryrevenues.cafr_id = cafrs_acfr.id)
 WHERE year = 2022
 AND category != 'Non-Profit'
 AND is_valid
@@ -72,7 +73,7 @@ data_from_dbsite_2020 <- dbGetQuery(con, statement) %>%
                                 state == "WI" & name == "Madison" ~ "50201301100000",
                               TRUE ~ as.character(census_id)))
 
-saveRDS(data_from_dbsite_2020, "data_from_dbsite_2020.RDS")
+saveRDS(data_from_dbsite_2020, "data/data_from_dbsite_2020.RDS")
 
 
 # NOTE: change where year = 2021
@@ -83,7 +84,7 @@ data_from_dbsite_2021 <- dbGetQuery(con, statement) %>%
    mutate(census_id = case_when(state == "NY" & name == "Rochester" ~ "33202800800000", 
                                 state == "WI" & name == "Madison" ~ "50201301100000", # wrong: 50301301600000 = town of madison
                               TRUE ~ as.character(census_id))) 
-saveRDS(data_from_dbsite_2021, "data_from_dbsite_2021.RDS")
+saveRDS(data_from_dbsite_2021, "data/data_from_dbsite_2021.RDS")
 
 
 data_from_dbsite_2022 <- dbGetQuery(con, statement) %>% 
@@ -91,12 +92,14 @@ data_from_dbsite_2022 <- dbGetQuery(con, statement) %>%
    mutate(census_id = case_when(state == "NY" & name == "Rochester" ~ "33202800800000", 
                                 state == "WI" & name == "Madison" ~ "50201301100000",
                               TRUE ~ as.character(census_id)))
-saveRDS(data_from_dbsite_2022, "data_from_dbsite_2022.RDS")
+saveRDS(data_from_dbsite_2022, "data/data_from_dbsite_2022.RDS")
 ```
 
 
 ```{r}
-data_from_dbsite_2021 %>% filter(str_detect(name, "Mobile County")) 
+data_from_dbsite_2022 %>% 
+   filter(category == "General Purpose") %>% 
+   filter(str_detect(name, "Tulsa")) 
    select(state, name, general_revenue,
 total_operating_revenues,non_operating_revenues)
 ```

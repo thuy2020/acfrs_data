@@ -21,7 +21,6 @@ NCES data set has 13,713 school districts across 50 states and 5 US territories,
 
 ## Analyze top 100 school districts 2020
 
-
 ```{r}
 top100_sd2020 %>% arrange(desc(revenues)) %>% 
   ggplot(aes(revenues, total_liabilities))+
@@ -57,7 +56,6 @@ top100_sd2020 %>%
 
 ```
 
-
 ```{r}
 top100_sd_acfrs %>% 
   #filter(str_detect(acfrs_original_name,"Miami-Dade County")) #The School Board of Miami-Dade County
@@ -85,4 +83,3 @@ read.csv("data/tabn215.30.csv") %>% select(1:2,4) %>%
   mutate(students = as.numeric(str_replace_all(students, ",", "")))
          
 ```
-
