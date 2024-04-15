@@ -67,7 +67,7 @@ state_3years <- state_gov_2020 %>%
 
 state_3years %>% add_count(state.name) %>% filter(n<3)
 
-state_3years %>%
+state_3years %>% 
 write.csv("output/all_states_3years.csv")
 write(toJSON(state_3years), "output/all_state_3years.json")
 ```

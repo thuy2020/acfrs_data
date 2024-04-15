@@ -54,11 +54,11 @@ nces_ELSI <- nces_20 %>% left_join(nces_21) %>% left_join(nces_22) %>%
          fte_22 = `Full-Time Equivalent (FTE) Teachers [District] 2021-22`,
          
          
-         revenue_20 = `Total Revenue (TOTALREV) [District Finance] 2019-20`,
-         revenue_21 = `Total Revenue (TOTALREV) [District Finance] 2020-21`,
+         revenue_nces_20 = `Total Revenue (TOTALREV) [District Finance] 2019-20`,
+         revenue_nces_21 = `Total Revenue (TOTALREV) [District Finance] 2020-21`,
          
-         expenditure_20 = `Total Expenditures (TOTALEXP) [District Finance] 2019-20`,
-         expenditure_21 = `Total Expenditures (TOTALEXP) [District Finance] 2020-21`
+         expenditure_nces_20 = `Total Expenditures (TOTALEXP) [District Finance] 2019-20`,
+         expenditure_nces_21 = `Total Expenditures (TOTALEXP) [District Finance] 2020-21`
     
   ) %>% 
   filter(state.abb != "PR") %>% 
@@ -106,6 +106,7 @@ top100_2021 %>% filter(name %in% setdiff(top100_2021$name, top100_2022$name))
 top100_2022 %>% filter(name %in% setdiff(top100_2022$name, top100_2021$name))
 
 
+nces_enrollment_3yrs <- nces_ELSI %>% filter(ncesID %in% top_schools_by_year$ncesID) %>% select(-c(name, state.name, state.abb))
 ```
 
 

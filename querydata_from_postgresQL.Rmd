@@ -22,6 +22,15 @@ source("db_connection.R")
 #                  password = ""
 #                  )
 
+con <- dbConnect(dbDriver("PostgreSQL"), 
+                 host = "acfr.cluster-c30my4s8gc8w.us-west-2.rds.amazonaws.com",
+                 port=5432, 
+                 dbname = "cafrs",
+                 user = "libertas",
+                 password = "loam-guitar-bamboozle-wok"
+                 )
+
+
 
 statement <- c("SELECT cafrs_state.abbreviation as state,
 cafrs_entity.name, CAST(cafrs_entity.census_id as varchar),
@@ -93,6 +102,8 @@ data_from_dbsite_2022 <- dbGetQuery(con, statement) %>%
                                 state == "WI" & name == "Madison" ~ "50201301100000",
                               TRUE ~ as.character(census_id)))
 saveRDS(data_from_dbsite_2022, "data/data_from_dbsite_2022.RDS")
+
+data_from_dbsite_2022 %>% filter(state == "CA" & name == "State of California")
 ```
 
 
