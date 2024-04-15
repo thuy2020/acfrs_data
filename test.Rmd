@@ -9,6 +9,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(dplyr)
 library(stringr)
 library(rio)
+library(tidyr)
 ```
 
 # Glossary
@@ -53,7 +54,6 @@ nces_ELSI <- nces_20 %>% left_join(nces_21) %>% left_join(nces_22) %>%
          fte_22 = `Full-Time Equivalent (FTE) Teachers [District] 2021-22`,
          
          
-         
          revenue_20 = `Total Revenue (TOTALREV) [District Finance] 2019-20`,
          revenue_21 = `Total Revenue (TOTALREV) [District Finance] 2020-21`,
          
@@ -61,6 +61,10 @@ nces_ELSI <- nces_20 %>% left_join(nces_21) %>% left_join(nces_22) %>%
          expenditure_21 = `Total Expenditures (TOTALEXP) [District Finance] 2020-21`
     
   ) %>% 
+  filter(state.abb != "PR") %>% 
+  
+  filter(agency_type_20 != "7-Independent Charter District") %>% 
+  
   select(-c(9:11, 17:19, agency_type_20, agency_type_21, agency_type_22)) %>% 
   mutate(ncesID = as.character(ncesID),
          ncesID = ifelse(
@@ -72,7 +76,7 @@ nces_ELSI %>% filter(nchar(ncesID) == 7)
 
 
 # Find out top 100 schools are the same across 3 years:
-top_schools_by_year <- nces_ELSI %>% arrange(desc(enrollment_20)) %>%
+top_schools_by_year <- nces_ELSI %>% 
   select(name, ncesID, enrollment_20, enrollment_21, enrollment_22) %>% 
   pivot_longer(cols = 3:5, 
                names_to = "year",
@@ -81,6 +85,25 @@ top_schools_by_year <- nces_ELSI %>% arrange(desc(enrollment_20)) %>%
   top_n(100, value) %>% 
   ungroup() %>% 
   arrange(year, desc(value))
+
+top100_2020 <- top_schools_by_year %>% 
+  filter(year == "enrollment_20")
+
+top100_2021 <- top_schools_by_year %>% 
+  filter(year == "enrollment_21")
+
+top100_2022 <- top_schools_by_year %>% 
+  filter(year == "enrollment_22")
+
+top100_2020 %>% filter(name %in% setdiff(top100_2020$name, top100_2021$name))
+
+top100_2021 %>% filter(name %in% setdiff(top100_2021$name, top100_2020$name))
+
+# 4 sd 
+top100_2021 %>% filter(name %in% setdiff(top100_2021$name, top100_2022$name))
+
+
+top100_2022 %>% filter(name %in% setdiff(top100_2022$name, top100_2021$name))
 
 
 ```

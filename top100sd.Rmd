@@ -82,6 +82,34 @@ setdiff(top_sd_nces$ncesID, dict_top100$ncesID)
 top_sd_nces %>% filter(ncesID %in% c("3600103", "3600077", "3600098", "3600087", "3600151"))
 ```
 
+###
+Try new top 100 sd by years
+```{r}
+dict_top100_ELSI <- dictionary %>% 
+  rbind(sub_dictionary) %>% 
+  filter(ncesID %in% top_schools_by_year$ncesID) %>% 
+  mutate(id = case_when(ncesID == "5101260" ~ "1267421", # why previous id = "1250807", # Fairfax County Public Schools
+                   ncesID == "5102250" ~ "1250804", #Loudoun County Public Schools	
+                   ncesID == "5103130"~	"1250808",# Prince William County Public Schools		VA
+                   ncesID == "0803360" ~ "1237862", #City and County of Denver School District No. 1
+                   ncesID == "0102370" ~ "1017229",#Mobile County Board of School Commissioners	
+                   ncesID == "5103840" ~ "1265776", #School Board of the City of Virginia Beach	
+                   ncesID == "5100840" ~ "1267422", #VA	Chesterfield County Public Schools	1267422
+                   ncesID == "5101890" ~ "1267423", #VA	Henrico County Public Schools	1267423
+                   ncesID == "2502790" ~ "1267424", #MA	Boston Public Schools	
+                   ncesID == "3174820" ~ "35480", #NE Omaha City School District 1 = 	Douglas County School District No. 0001	35480
+                   ncesID == "2601103" ~ "161679", # MI Detroit Public Schools
+                   ncesID == "1602100" ~ "32700", #ID	JOINT SCHOOL DISTRICT NO. 2
+         TRUE ~ as.character(id))) %>% 
+  drop_na(id)
+
+# Note: new york city geographic district #10 is not in the list of top 100 by enrollment 2022
+top_schools_by_year %>% 
+  mutate(name = str_to_lower(name)) %>% 
+  filter(str_detect(name, "new york"))
+
+```
+
 
 ```{r}
 dict_top101_200 <- dictionary %>% 
@@ -102,8 +130,8 @@ anti_join(top_sd_nces_102_200, dict_top101_200,  by= "ncesID")
 
 ```{r}
 top100_sd_3years <- sd_20_21_22 %>% 
-  filter(id %in% dict_top100$id) %>% select(-name) %>% 
-  left_join(dict_top100, by = c("id", "state"))  %>% 
+  filter(id %in% dict_top100_ELSI$id) %>% select(-name) %>% 
+  left_join(dict_top100_ELSI, by = c("id", "state")) %>% 
   
   #bind with NYC
   rbind(nyc_top5_20_21_22) %>% 
@@ -114,8 +142,9 @@ top100_sd_3years <- sd_20_21_22 %>%
          total_liabilities, net_pension_liability, net_opeb_liability, 
          net_pension_assets, net_opeb_assets,
          expenses, revenues) %>% drop_na(ncesID) %>% 
+  
   #join with nces to get county, city info
-  left_join(nces, by = "ncesID") %>% select(-c(state)) 
+  left_join(nces_enrollment_3yrs, by = "ncesID")
 #%>% write.csv("output/top100_sd_3years_RON.csv")
  
 #TODO: check back missing: 
@@ -140,11 +169,9 @@ write(exportJSON, "output/top100_sd_3years.json")
 top100_sd_3years %>% write.csv("output/top100_sd_3years.csv")
 
 #TODO: ask Geoff about this revenues = expense cases
-top100_sd_3years %>% arrange(desc(students)) %>% 
+top100_sd_3years %>% 
   filter(expenses == revenues) 
 
-#
-top100_sd_3years %>% filter(name == "Prince George’S County Public Schools")
 ```
 
 # sd101_200_3years
