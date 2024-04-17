@@ -22,15 +22,6 @@ source("db_connection.R")
 #                  password = ""
 #                  )
 
-con <- dbConnect(dbDriver("PostgreSQL"), 
-                 host = "acfr.cluster-c30my4s8gc8w.us-west-2.rds.amazonaws.com",
-                 port=5432, 
-                 dbname = "cafrs",
-                 user = "libertas",
-                 password = "loam-guitar-bamboozle-wok"
-                 )
-
-
 
 statement <- c("SELECT cafrs_state.abbreviation as state,
 cafrs_entity.name, CAST(cafrs_entity.census_id as varchar),
@@ -66,7 +57,7 @@ INNER JOIN cafrs_state on (cafrs_state.id = cafrs_entity.state_id)
 INNER JOIN cafrs_netposition on (cafrs_netposition.cafr_id = cafrs_acfr.id)
 INNER JOIN cafrs_activities on (cafrs_activities.cafr_id = cafrs_acfr.id)
 INNER JOIN cafrs_proprietaryrevenues on (cafrs_proprietaryrevenues.cafr_id = cafrs_acfr.id)
-WHERE year = 2022
+WHERE year = 2021
 AND category != 'Non-Profit'
 AND is_valid
 AND reviewed_date is not null
