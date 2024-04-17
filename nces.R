@@ -14,6 +14,7 @@ library(tidyr)
 #NOTE: Enrollment data year 2022 is for school year 2021 - 2022
 #download data: https://nces.ed.gov/ccd/elsi/tableGenerator.aspx?savedTableID=649124
 
+
 nces_20 <- import(here::here("data", "ELSI_school year 2019 2020.csv"))
 nces_21 <- import(here::here("data", "ELSI_school year 2020 2021.csv"))
 nces_22 <- import(here::here("data", "ELSI_school year 2021 2022_cordinate.csv")) %>% 

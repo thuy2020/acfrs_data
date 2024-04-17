@@ -115,40 +115,25 @@ top_schools_by_year %>%
 
 
 ```{r}
-dict_top101_200 <- dictionary %>% 
-  rbind(sub_dictionary) %>% 
-  filter(ncesID %in% top_sd_nces_102_200$ncesID)
-
-#in top nces but not in dictionary: NYC 27, 28, 30, 11, 25, 21, 22, 9 are handled separately below
-
-anti_join(top_sd_nces_102_200, dict_top101_200,  by= "ncesID")
-
-# need to check: 
-#2733840	ST. PAUL PUBLIC SCHOOL DISTRICT	MN
-#4703030	Montgomery County	TN
-#1713710	SD U-46	IL
-#0802340	Aurora Joint District No. 28 of the counties of Adams and A	CO
-#4110040	Portland SD 1J	OR
-```
-
-```{r}
 top100_sd_3years <- sd_20_21_22 %>% 
   filter(id %in% dict_top100_ELSI$id) %>% select(-name) %>% 
   left_join(dict_top100_ELSI, by = c("id", "state")) %>% 
+  rename(state.abb = state) %>% 
   
   #bind with NYC
   rbind(nyc_top5_20_21_22) %>% 
-  rename(state.abb = state) %>% 
   left_join(df) %>% 
   
-  select(state.abb, state.name, ncesID, id, year, name, 
+  select(ncesID, id, year, name, 
          total_liabilities, net_pension_liability, net_opeb_liability, 
          net_pension_assets, net_opeb_assets,
          expenses, revenues) %>% drop_na(ncesID) %>% 
   
   #join with nces to get county, city info
-  left_join(nces_enrollment_3yrs, by = "ncesID")
-#%>% write.csv("output/top100_sd_3years_RON.csv")
+  left_join(nces, by = "ncesID") %>% 
+  select(-name.y) %>% 
+  rename(name = name.x)
+
  
 #TODO: check back missing: 
 #GA Clayton County Board of education.
@@ -158,11 +143,10 @@ top100_sd_3years %>%
   add_count(ncesID) %>% filter(n < 3) %>% 
   select(state.abb, ncesID, year, name, n)
 
-top_sd_nces %>% filter(ncesID %in% setdiff(top_sd_nces$ncesID, top100_sd_3years$ncesID))
 
 ```
 
-
+# Export result
 ```{r}
 #saveRDS(top100_sd_3years, "top100_sd_3years.RDS")
 exportJSON <- toJSON(top100_sd_3years)
@@ -176,45 +160,6 @@ top100_sd_3years %>%
   filter(expenses == revenues) 
 
 ```
-
-# sd101_200_3years
-
-
-```{r}
-top_sd_nces_102_200
-sd101_200_3years <- sd_20_21_22 %>% 
-  filter(id %in% dict_top101_200$id) %>% select(-name) %>% 
-  left_join(dict_top101_200, by = c("id", "state")) %>% 
-  rename(state.abb = state) %>% 
-
-  left_join(df) %>% 
-  #join with nces to get county, city info
-  left_join(nces, by = "ncesID") %>% select(-c(state))
- 
-exportJSON <- toJSON(sd101_200_3years)
-write(exportJSON, "output/sd101_200_3years.json")
-
-# <- fromJSON("top100_sd_3years.json")
-sd101_200_3years %>% write.csv("output/sd101_200_3years.csv")
-
-# check missing
-sd101_200_3years %>% add_count(ncesID) %>% select(state.abb, name, year, n) %>% 
-  filter(n ==2)
-```
-
- 
-```{r}
-data.frame(
-all <- sd_20_21_22 %>% mutate(all_NPL = sum(total_liabilities)) %>% select(all_NPL) %>% distinct(),
-
-top100 <- top100_sd_3years %>% mutate(all_NPL = sum(total_liabilities)) %>% select(all_NPL) %>% distinct(),
-
-next100 <- sd101_200_3years %>% mutate(all_NPL = sum(total_liabilities)) %>% select(all_NPL) %>% distinct()
-) %>% format(big.mark = ",")
-
-data.frame(all, top100, next100)
-```
-
 
 ## Delaware
 Delaware has school district info in the state ACFR: FY 2021 ACFR (delaware.gov). Balance sheet info is on p. 166-167 and activities are on p. 168-169.
