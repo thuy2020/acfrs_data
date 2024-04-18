@@ -22,16 +22,11 @@ source("census.R")
 source("acfrs_gen_purpose_2020.R")
 source("acfrs_gen_purpose_2021.R")
 source("acfrs_gen_purpose_2022.R")
+source("supplement_data.R")
 df_state <- tibble(state.abb, state.name)
 ```
 
-# Income from Census
-```{r}
-income <- rio::import(here::here("data", "Unemployment_median income.xlsx"), skip = 4)  %>% 
-  select(FIPS_Code, Median_Household_Income_2021) %>% 
-  rename(geo_id = FIPS_Code, 
-         median_hh_income_21 = Median_Household_Income_2021)
-```
+
 
 # State 
 ```{r}
@@ -69,7 +64,10 @@ state_3years %>% add_count(state.name) %>% filter(n<3)
 
 state_3years %>% 
 write.csv("output/all_states_3years.csv")
-write(toJSON(state_3years), "output/all_state_3years.json")
+
+saveRDS(state_3years, "state_3years.RDS") 
+
+state_3years %>% filter(state.abb == "CA")
 ```
 
 # County
@@ -185,7 +183,7 @@ top100_county_3years %>% add_count(geo_id) %>% filter(n <3 ) %>% arrange(name)
 top100_county_3years %>% 
   write.csv("output/top100_counties_3years.csv")
 
-write(toJSON(top100_county_3years), "output/top100_counties_3years.json")
+saveRDS(top100_county_3years, "top100_county_3years.RDS")
 ```
 
 ## Next 100
@@ -317,7 +315,8 @@ top100_cities_3years %>% add_count(geo_id) %>% filter(n<3) %>% arrange(name)
 top100_cities_3years %>% filter(str_detect(name, "tulsa"))
 
 top100_cities_3years %>% write.csv("output/top100_cities_3years.csv")
-write(toJSON(top100_cities_3years), "output/top100_cities_3years.json")
+
+saveRDS(top100_cities_3years, "top100_cities_3years.RDS")
 ```
 
 ```{r}

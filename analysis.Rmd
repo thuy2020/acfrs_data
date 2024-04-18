@@ -23,6 +23,28 @@ library(viridis)
 library(plotly)
 ```
 
+tot_liability_rev_ratio = (total_liabilities/revenues)*100
+
+other = total_liabilities - 
+  (net_pension_liability + loans_outstanding + bonds_outstanding + notes_outstanding + 
+     leases + compensated_absences + current_liabilities)
+
+
+##Liabilities by Type
+"Bonds and Notes","Loans", "Leases", 
+"Pensions",  "Other Post-Employment Benefits", "All Other"
+
+c("Pension\nLiabilities", 
+  "Loans", "Bonds", "Notes", "Lease", 
+  "Compensated\nAbsences", "Current\nLiabilities")
+
+## Liabilities by Government Category
+"States", "Cities and Towns", "Counties", "Special Districts", "Education", "All Other"
+
+# Revenue
+general_revenue, total_operating_revenues, 
+non_operating_revenues, capital_grants, operating_grants
+
 # States
 
 ## Net Pension Liabilities

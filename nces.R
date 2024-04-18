@@ -30,7 +30,7 @@ nces_22 <- import(here::here("data", "ELSI_school year 2021 2022_cordinate.csv")
     zip4 = `Location ZIP4 [District] 2021-22`, 
     locale = `Locale [District] 2021-22`, 
     latitude = `Latitude [District] 2021-22`,
-    longtite = `Longitude [District] 2021-22`, 
+    longitude = `Longitude [District] 2021-22`, 
     congresstional_code = `Congressional Code [District] 2021-22`,
     metro_code = `Metro Micro Area Code [District] 2021-22`)
 

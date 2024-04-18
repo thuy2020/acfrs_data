@@ -148,11 +148,8 @@ top100_sd_3years %>%
 
 # Export result
 ```{r}
-#saveRDS(top100_sd_3years, "top100_sd_3years.RDS")
-exportJSON <- toJSON(top100_sd_3years)
-write(exportJSON, "output/top100_sd_3years.json")
+saveRDS(top100_sd_3years, "top100_sd_3years.RDS")
 
-# <- fromJSON("top100_sd_3years.json")
 top100_sd_3years %>% write.csv("output/top100_sd_3years.csv")
 
 #TODO: ask Geoff about this revenues = expense cases
