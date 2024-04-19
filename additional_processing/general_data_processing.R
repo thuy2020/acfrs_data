@@ -1,4 +1,4 @@
-# load libraries
+
 library(tidyverse)
 library(scales)
 library(jsonlite)
@@ -282,8 +282,7 @@ school_data_growth <- school_data_22 |>
 #schoolCoordinates <- readRDS("schoolCoordinates.RDS")
 #schoolCoordinates <- schoolCoordinates[, 3:5]
 #school_data_growth <- school_data_growth |>
-#  left_join(schoolCoordinates, by = c("name_state" = "name_state"))
-
+# left_join(schoolCoordinates, by = c("name_state" = "name_state"))
 
 school_data_growth_json <- toJSON(school_data_growth, auto_unbox = TRUE, pretty = TRUE)
 write(school_data_growth_json, file="output/school_data_growth.json")

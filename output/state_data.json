@@ -1,6 +1,5 @@
 [
   {
-    "state.abb": "MO",
     "state.name": "Missouri",
     "geo_id": "29000",
     "year": 2020,
@@ -18,7 +17,6 @@
     "net_opeb_liability": 2966040000
   },
   {
-    "state.abb": "MN",
     "state.name": "Minnesota",
     "geo_id": "27000",
     "year": 2020,
@@ -36,7 +34,6 @@
     "net_opeb_liability": 630967000
   },
   {
-    "state.abb": "NE",
     "state.name": "Nebraska",
     "geo_id": "31000",
     "year": 2020,
@@ -54,7 +51,6 @@
     "net_opeb_liability": 14816000
   },
   {
-    "state.abb": "CO",
     "state.name": "Colorado",
     "geo_id": "08000",
     "year": 2020,
@@ -72,7 +68,6 @@
     "net_opeb_liability": 1085487000
   },
   {
-    "state.abb": "KY",
     "state.name": "Kentucky",
     "geo_id": "21000",
     "year": 2020,
@@ -90,7 +85,6 @@
     "net_opeb_liability": 3017085000
   },
   {
-    "state.abb": "AR",
     "state.name": "Arkansas",
     "geo_id": "05000",
     "year": 2020,
@@ -108,7 +102,6 @@
     "net_opeb_liability": 2914449000
   },
   {
-    "state.abb": "WA",
     "state.name": "Washington",
     "geo_id": "53000",
     "year": 2020,
@@ -126,7 +119,6 @@
     "net_opeb_liability": 5799742000
   },
   {
-    "state.abb": "MA",
     "state.name": "Massachusetts",
     "geo_id": "25000",
     "year": 2020,
@@ -144,7 +136,6 @@
     "net_opeb_liability": 17486660000
   },
   {
-    "state.abb": "IN",
     "state.name": "Indiana",
     "geo_id": "18000",
     "year": 2020,
@@ -162,7 +153,6 @@
     "net_opeb_liability": 190159000
   },
   {
-    "state.abb": "LA",
     "state.name": "Louisiana",
     "geo_id": "22000",
     "year": 2020,
@@ -180,7 +170,6 @@
     "net_opeb_liability": 5780776000
   },
   {
-    "state.abb": "UT",
     "state.name": "Utah",
     "geo_id": "49000",
     "year": 2020,
@@ -198,7 +187,6 @@
     "net_opeb_liability": 18760000
   },
   {
-    "state.abb": "HI",
     "state.name": "Hawaii",
     "geo_id": "15000",
     "year": 2020,
@@ -216,7 +204,6 @@
     "net_opeb_liability": 6977722000
   },
   {
-    "state.abb": "AL",
     "state.name": "Alabama",
     "geo_id": "01000",
     "year": 2020,
@@ -234,7 +221,6 @@
     "net_opeb_liability": 1698962000
   },
   {
-    "state.abb": "FL",
     "state.name": "Florida",
     "geo_id": "12000",
     "year": 2020,
@@ -252,7 +238,6 @@
     "net_opeb_liability": 9146494000
   },
   {
-    "state.abb": "ID",
     "state.name": "Idaho",
     "geo_id": "16000",
     "year": 2020,
@@ -270,7 +255,6 @@
     "net_opeb_liability": 117490000
   },
   {
-    "state.abb": "ME",
     "state.name": "Maine",
     "geo_id": "23000",
     "year": 2020,
@@ -288,7 +272,6 @@
     "net_opeb_liability": 2445774000
   },
   {
-    "state.abb": "NH",
     "state.name": "New Hampshire",
     "geo_id": "33000",
     "year": 2020,
@@ -306,7 +289,6 @@
     "net_opeb_liability": 1793348000
   },
   {
-    "state.abb": "OH",
     "state.name": "Ohio",
     "geo_id": "39000",
     "year": 2020,
@@ -324,7 +306,6 @@
     "net_opeb_liability": 3330409000
   },
   {
-    "state.abb": "OR",
     "state.name": "Oregon",
     "geo_id": "41000",
     "year": 2020,
@@ -342,7 +323,6 @@
     "net_opeb_liability": 83701000
   },
   {
-    "state.abb": "SD",
     "state.name": "South Dakota",
     "geo_id": "46000",
     "year": 2020,
@@ -360,7 +340,6 @@
     "net_opeb_liability": 0
   },
   {
-    "state.abb": "WY",
     "state.name": "Wyoming",
     "geo_id": "56000",
     "year": 2020,
@@ -378,7 +357,6 @@
     "net_opeb_liability": 381732888
   },
   {
-    "state.abb": "WI",
     "state.name": "Wisconsin",
     "geo_id": "55000",
     "year": 2020,
@@ -396,7 +374,6 @@
     "net_opeb_liability": 1073310646
   },
   {
-    "state.abb": "NJ",
     "state.name": "New Jersey",
     "geo_id": "34000",
     "year": 2020,
@@ -414,7 +391,6 @@
     "net_opeb_liability": 65491562252
   },
   {
-    "state.abb": "RI",
     "state.name": "Rhode Island",
     "geo_id": "44000",
     "year": 2020,
@@ -432,7 +408,6 @@
     "net_opeb_liability": 418509000
   },
   {
-    "state.abb": "AK",
     "state.name": "Alaska",
     "geo_id": "02000",
     "year": 2020,
@@ -450,7 +425,6 @@
     "net_opeb_liability": -12349000
   },
   {
-    "state.abb": "MT",
     "state.name": "Montana",
     "geo_id": "30000",
     "year": 2020,
@@ -468,7 +442,6 @@
     "net_opeb_liability": 46410000
   },
   {
-    "state.abb": "NC",
     "state.name": "North Carolina",
     "geo_id": "37000",
     "year": 2020,
@@ -486,7 +459,6 @@
     "net_opeb_liability": 6121923000
   },
   {
-    "state.abb": "ND",
     "state.name": "North Dakota",
     "geo_id": "38000",
     "year": 2020,
@@ -504,7 +476,6 @@
     "net_opeb_liability": 41406907
   },
   {
-    "state.abb": "KS",
     "state.name": "Kansas",
     "geo_id": "20000",
     "year": 2020,
@@ -522,7 +493,6 @@
     "net_opeb_liability": 49824000
   },
   {
-    "state.abb": "GA",
     "state.name": "Georgia",
     "geo_id": "13000",
     "year": 2020,
@@ -540,7 +510,6 @@
     "net_opeb_liability": 5370461000
   },
   {
-    "state.abb": "SC",
     "state.name": "South Carolina",
     "geo_id": "45000",
     "year": 2020,
@@ -558,7 +527,6 @@
     "net_opeb_liability": 3135126000
   },
   {
-    "state.abb": "TN",
     "state.name": "Tennessee",
     "geo_id": "47000",
     "year": 2020,
@@ -576,7 +544,6 @@
     "net_opeb_liability": 1272523000
   },
   {
-    "state.abb": "VA",
     "state.name": "Virginia",
     "geo_id": "51000",
     "year": 2020,
@@ -594,7 +561,6 @@
     "net_opeb_liability": 1255256000
   },
   {
-    "state.abb": "VT",
     "state.name": "Vermont",
     "geo_id": "50000",
     "year": 2020,
@@ -612,7 +578,6 @@
     "net_opeb_liability": 2237128790
   },
   {
-    "state.abb": "CA",
     "state.name": "California",
     "geo_id": "06000",
     "year": 2020,
@@ -630,7 +595,6 @@
     "net_opeb_liability": 90486960000
   },
   {
-    "state.abb": "WV",
     "state.name": "West Virginia",
     "geo_id": "54000",
     "year": 2020,
@@ -648,7 +612,6 @@
     "net_opeb_liability": 1067763000
   },
   {
-    "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "48000",
     "year": 2020,
@@ -666,7 +629,6 @@
     "net_opeb_liability": 76983152000
   },
   {
-    "state.abb": "NY",
     "state.name": "New York",
     "geo_id": "36000",
     "year": 2020,
@@ -684,7 +646,6 @@
     "net_opeb_liability": 66005000000
   },
   {
-    "state.abb": "IA",
     "state.name": "Iowa",
     "geo_id": "19000",
     "year": 2020,
@@ -702,7 +663,6 @@
     "net_opeb_liability": 456472000
   },
   {
-    "state.abb": "CT",
     "state.name": "Connecticut",
     "geo_id": "09000",
     "year": 2020,
@@ -720,7 +680,6 @@
     "net_opeb_liability": 23023169000
   },
   {
-    "state.abb": "DE",
     "state.name": "Delaware",
     "geo_id": "10000",
     "year": 2020,
@@ -738,7 +697,6 @@
     "net_opeb_liability": 7347246000
   },
   {
-    "state.abb": "PA",
     "state.name": "Pennsylvania",
     "geo_id": "42000",
     "year": 2020,
@@ -756,7 +714,6 @@
     "net_opeb_liability": 17054721000
   },
   {
-    "state.abb": "DC",
     "geo_id": "11000",
     "year": 2020,
     "name": "District Of Columbia",
@@ -773,7 +730,6 @@
     "net_opeb_liability": -19048000
   },
   {
-    "state.abb": "MS",
     "state.name": "Mississippi",
     "geo_id": "28000",
     "year": 2020,
@@ -791,7 +747,6 @@
     "net_opeb_liability": 193113000
   },
   {
-    "state.abb": "MD",
     "state.name": "Maryland",
     "geo_id": "24000",
     "year": 2020,
@@ -809,7 +764,6 @@
     "net_opeb_liability": 17257184000
   },
   {
-    "state.abb": "MI",
     "state.name": "Michigan",
     "geo_id": "26000",
     "year": 2020,
@@ -827,7 +781,6 @@
     "net_opeb_liability": 9691000000
   },
   {
-    "state.abb": "NM",
     "state.name": "New Mexico",
     "geo_id": "35000",
     "year": 2020,
@@ -845,7 +798,6 @@
     "net_opeb_liability": 1159319000
   },
   {
-    "state.abb": "AZ",
     "state.name": "Arizona",
     "geo_id": "04000",
     "year": 2020,
@@ -863,7 +815,6 @@
     "net_opeb_liability": 1245256000
   },
   {
-    "state.abb": "NV",
     "state.name": "Nevada",
     "geo_id": "32000",
     "year": 2020,
@@ -881,7 +832,6 @@
     "net_opeb_liability": 810288000
   },
   {
-    "state.abb": "IL",
     "state.name": "Illinois",
     "geo_id": "17000",
     "year": 2020,
@@ -899,7 +849,6 @@
     "net_opeb_liability": 58996493000
   },
   {
-    "state.abb": "OK",
     "state.name": "Oklahoma",
     "geo_id": "40000",
     "year": 2020,
@@ -917,7 +866,6 @@
     "net_opeb_liability": 120911000
   },
   {
-    "state.abb": "WA",
     "state.name": "Washington",
     "geo_id": "53000",
     "year": 2021,
@@ -935,7 +883,6 @@
     "net_opeb_liability": 6051091000
   },
   {
-    "state.abb": "IN",
     "state.name": "Indiana",
     "geo_id": "18000",
     "year": 2021,
@@ -953,7 +900,6 @@
     "net_opeb_liability": 98219000
   },
   {
-    "state.abb": "LA",
     "state.name": "Louisiana",
     "geo_id": "22000",
     "year": 2021,
@@ -971,7 +917,6 @@
     "net_opeb_liability": 6249082000
   },
   {
-    "state.abb": "MO",
     "state.name": "Missouri",
     "geo_id": "29000",
     "year": 2021,
@@ -989,7 +934,6 @@
     "net_opeb_liability": 3275006000
   },
   {
-    "state.abb": "MN",
     "state.name": "Minnesota",
     "geo_id": "27000",
     "year": 2021,
@@ -1007,7 +951,6 @@
     "net_opeb_liability": 687901000
   },
   {
-    "state.abb": "AL",
     "state.name": "Alabama",
     "geo_id": "01000",
     "year": 2021,
@@ -1025,7 +968,6 @@
     "net_opeb_liability": 987056000
   },
   {
-    "state.abb": "FL",
     "state.name": "Florida",
     "geo_id": "12000",
     "year": 2021,
@@ -1043,7 +985,6 @@
     "net_opeb_liability": 7142549000
   },
   {
-    "state.abb": "ID",
     "state.name": "Idaho",
     "geo_id": "16000",
     "year": 2021,
@@ -1061,7 +1002,6 @@
     "net_opeb_liability": 100958000
   },
   {
-    "state.abb": "ME",
     "state.name": "Maine",
     "geo_id": "23000",
     "year": 2021,
@@ -1079,7 +1019,6 @@
     "net_opeb_liability": 2931246000
   },
   {
-    "state.abb": "NH",
     "state.name": "New Hampshire",
     "geo_id": "33000",
     "year": 2021,
@@ -1097,7 +1036,6 @@
     "net_opeb_liability": 2197650000
   },
   {
-    "state.abb": "OH",
     "state.name": "Ohio",
     "geo_id": "39000",
     "year": 2021,
@@ -1115,7 +1053,6 @@
     "net_opeb_liability": 633413000
   },
   {
-    "state.abb": "OR",
     "state.name": "Oregon",
     "geo_id": "41000",
     "year": 2021,
@@ -1133,7 +1070,6 @@
     "net_opeb_liability": 103038000
   },
   {
-    "state.abb": "SD",
     "state.name": "South Dakota",
     "geo_id": "46000",
     "year": 2021,
@@ -1151,7 +1087,6 @@
     "net_opeb_liability": 0
   },
   {
-    "state.abb": "WY",
     "state.name": "Wyoming",
     "geo_id": "56000",
     "year": 2021,
@@ -1169,7 +1104,6 @@
     "net_opeb_liability": 527492619
   },
   {
-    "state.abb": "WI",
     "state.name": "Wisconsin",
     "geo_id": "55000",
     "year": 2021,
@@ -1187,7 +1121,6 @@
     "net_opeb_liability": 1078642000
   },
   {
-    "state.abb": "NJ",
     "state.name": "New Jersey",
     "geo_id": "34000",
     "year": 2021,
@@ -1205,7 +1138,6 @@
     "net_opeb_liability": 101605641478
   },
   {
-    "state.abb": "NE",
     "state.name": "Nebraska",
     "geo_id": "31000",
     "year": 2021,
@@ -1223,7 +1155,6 @@
     "net_opeb_liability": 22304000
   },
   {
-    "state.abb": "AK",
     "state.name": "Alaska",
     "geo_id": "02000",
     "year": 2021,
@@ -1241,7 +1172,6 @@
     "net_opeb_liability": -545176000
   },
   {
-    "state.abb": "CO",
     "state.name": "Colorado",
     "geo_id": "08000",
     "year": 2021,
@@ -1259,7 +1189,6 @@
     "net_opeb_liability": 1260020000
   },
   {
-    "state.abb": "KY",
     "state.name": "Kentucky",
     "geo_id": "21000",
     "year": 2021,
@@ -1277,7 +1206,6 @@
     "net_opeb_liability": 3195447000
   },
   {
-    "state.abb": "AR",
     "state.name": "Arkansas",
     "geo_id": "05000",
     "year": 2021,
@@ -1295,7 +1223,6 @@
     "net_opeb_liability": 2944665000
   },
   {
-    "state.abb": "MA",
     "state.name": "Massachusetts",
     "geo_id": "25000",
     "year": 2021,
@@ -1313,7 +1240,6 @@
     "net_opeb_liability": 19694477000
   },
   {
-    "state.abb": "UT",
     "state.name": "Utah",
     "geo_id": "49000",
     "year": 2021,
@@ -1331,7 +1257,6 @@
     "net_opeb_liability": 608000
   },
   {
-    "state.abb": "MT",
     "state.name": "Montana",
     "geo_id": "30000",
     "year": 2021,
@@ -1349,7 +1274,6 @@
     "net_opeb_liability": 143844000
   },
   {
-    "state.abb": "HI",
     "state.name": "Hawaii",
     "geo_id": "15000",
     "year": 2021,
@@ -1367,7 +1291,6 @@
     "net_opeb_liability": 6516876000
   },
   {
-    "state.abb": "NC",
     "state.name": "North Carolina",
     "geo_id": "37000",
     "year": 2021,
@@ -1385,7 +1308,6 @@
     "net_opeb_liability": 5420507000
   },
   {
-    "state.abb": "ND",
     "state.name": "North Dakota",
     "geo_id": "38000",
     "year": 2021,
@@ -1403,7 +1325,6 @@
     "net_opeb_liability": 42116000
   },
   {
-    "state.abb": "KS",
     "state.name": "Kansas",
     "geo_id": "20000",
     "year": 2021,
@@ -1421,7 +1342,6 @@
     "net_opeb_liability": 51241000
   },
   {
-    "state.abb": "GA",
     "state.name": "Georgia",
     "geo_id": "13000",
     "year": 2021,
@@ -1439,7 +1359,6 @@
     "net_opeb_liability": 6115969000
   },
   {
-    "state.abb": "SC",
     "state.name": "South Carolina",
     "geo_id": "45000",
     "year": 2021,
@@ -1457,7 +1376,6 @@
     "net_opeb_liability": 3665935000
   },
   {
-    "state.abb": "TN",
     "state.name": "Tennessee",
     "geo_id": "47000",
     "year": 2021,
@@ -1475,7 +1393,6 @@
     "net_opeb_liability": 561603000
   },
   {
-    "state.abb": "VA",
     "state.name": "Virginia",
     "geo_id": "51000",
     "year": 2021,
@@ -1493,7 +1410,6 @@
     "net_opeb_liability": 1230725000
   },
   {
-    "state.abb": "VT",
     "state.name": "Vermont",
     "geo_id": "50000",
     "year": 2021,
@@ -1511,7 +1427,6 @@
     "net_opeb_liability": 2660856831
   },
   {
-    "state.abb": "CA",
     "state.name": "California",
     "geo_id": "06000",
     "year": 2021,
@@ -1529,7 +1444,6 @@
     "net_opeb_liability": 93951696000
   },
   {
-    "state.abb": "WV",
     "state.name": "West Virginia",
     "geo_id": "54000",
     "year": 2021,
@@ -1547,7 +1461,6 @@
     "net_opeb_liability": 285156000
   },
   {
-    "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "48000",
     "year": 2021,
@@ -1565,7 +1478,6 @@
     "net_opeb_liability": 73972610000
   },
   {
-    "state.abb": "NY",
     "state.name": "New York",
     "geo_id": "36000",
     "year": 2021,
@@ -1583,7 +1495,6 @@
     "net_opeb_liability": 77858000000
   },
   {
-    "state.abb": "CT",
     "state.name": "Connecticut",
     "geo_id": "09000",
     "year": 2021,
@@ -1601,7 +1512,6 @@
     "net_opeb_liability": 26040226000
   },
   {
-    "state.abb": "DE",
     "state.name": "Delaware",
     "geo_id": "10000",
     "year": 2021,
@@ -1619,7 +1529,6 @@
     "net_opeb_liability": 9564690000
   },
   {
-    "state.abb": "PA",
     "state.name": "Pennsylvania",
     "geo_id": "42000",
     "year": 2021,
@@ -1637,7 +1546,6 @@
     "net_opeb_liability": 20243943000
   },
   {
-    "state.abb": "RI",
     "state.name": "Rhode Island",
     "geo_id": "44000",
     "year": 2021,
@@ -1655,7 +1563,6 @@
     "net_opeb_liability": 334124000
   },
   {
-    "state.abb": "DC",
     "geo_id": "11000",
     "year": 2021,
     "name": "District Of Columbia",
@@ -1672,7 +1579,6 @@
     "net_opeb_liability": -313355000
   },
   {
-    "state.abb": "MS",
     "state.name": "Mississippi",
     "geo_id": "28000",
     "year": 2021,
@@ -1690,7 +1596,6 @@
     "net_opeb_liability": 176455000
   },
   {
-    "state.abb": "MD",
     "state.name": "Maryland",
     "geo_id": "24000",
     "year": 2021,
@@ -1708,7 +1613,6 @@
     "net_opeb_liability": 15681628000
   },
   {
-    "state.abb": "MI",
     "state.name": "Michigan",
     "geo_id": "26000",
     "year": 2021,
@@ -1726,7 +1630,6 @@
     "net_opeb_liability": 7778200000
   },
   {
-    "state.abb": "NM",
     "state.name": "New Mexico",
     "geo_id": "35000",
     "year": 2021,
@@ -1744,7 +1647,6 @@
     "net_opeb_liability": 1419224000
   },
   {
-    "state.abb": "AZ",
     "state.name": "Arizona",
     "geo_id": "04000",
     "year": 2021,
@@ -1762,7 +1664,6 @@
     "net_opeb_liability": 1548477000
   },
   {
-    "state.abb": "NV",
     "state.name": "Nevada",
     "geo_id": "32000",
     "year": 2021,
@@ -1780,7 +1681,6 @@
     "net_opeb_liability": 882306000
   },
   {
-    "state.abb": "IL",
     "state.name": "Illinois",
     "geo_id": "17000",
     "year": 2021,
@@ -1798,7 +1698,6 @@
     "net_opeb_liability": 56669748000
   },
   {
-    "state.abb": "OK",
     "state.name": "Oklahoma",
     "geo_id": "40000",
     "year": 2021,
@@ -1816,7 +1715,6 @@
     "net_opeb_liability": 114313000
   },
   {
-    "state.abb": "IA",
     "state.name": "Iowa",
     "geo_id": "19000",
     "year": 2021,
@@ -1834,7 +1732,6 @@
     "net_opeb_liability": 468779000
   },
   {
-    "state.abb": "MO",
     "state.name": "Missouri",
     "geo_id": "29000",
     "year": 2022,
@@ -1852,25 +1749,6 @@
     "net_opeb_liability": 3177080000
   },
   {
-    "state.abb": "WA",
-    "state.name": "Washington",
-    "geo_id": "53000",
-    "year": 2022,
-    "name": "Washington",
-    "total_liabilities": 94852592000,
-    "current_liabilities": 12559167000,
-    "expenses": 80919363000,
-    "revenues": 82670407000,
-    "population": 7705247,
-    "urban_pop": 6424035,
-    "pct_urban_pop": 83.3718,
-    "median_hh_income_21": 84155,
-    "modified_revenues": -10808123000,
-    "net_pension_liability": -9922650000,
-    "net_opeb_liability": 6467340000
-  },
-  {
-    "state.abb": "MN",
     "state.name": "Minnesota",
     "geo_id": "27000",
     "year": 2022,
@@ -1888,7 +1766,6 @@
     "net_opeb_liability": 721365000
   },
   {
-    "state.abb": "UT",
     "state.name": "Utah",
     "geo_id": "49000",
     "year": 2022,
@@ -1906,43 +1783,6 @@
     "net_opeb_liability": 1659000
   },
   {
-    "state.abb": "IN",
-    "state.name": "Indiana",
-    "geo_id": "18000",
-    "year": 2022,
-    "name": "Indiana",
-    "total_liabilities": 18375927000,
-    "current_liabilities": 7430648000,
-    "expenses": 46841886000,
-    "revenues": 51798359000,
-    "population": 6785668,
-    "urban_pop": 4829686,
-    "pct_urban_pop": 71.1763,
-    "median_hh_income_21": 62723,
-    "modified_revenues": -2474175000,
-    "net_pension_liability": 9730464000,
-    "net_opeb_liability": 60843000
-  },
-  {
-    "state.abb": "LA",
-    "state.name": "Louisiana",
-    "geo_id": "22000",
-    "year": 2022,
-    "name": "Louisiana",
-    "total_liabilities": 37973068000,
-    "current_liabilities": 14376799000,
-    "expenses": 40152271000,
-    "revenues": 43813677000,
-    "population": 4657749,
-    "urban_pop": 3332237,
-    "pct_urban_pop": 71.5417,
-    "median_hh_income_21": 52090,
-    "modified_revenues": -10715393000,
-    "net_pension_liability": 4890631000,
-    "net_opeb_liability": 6858087000
-  },
-  {
-    "state.abb": "AL",
     "state.name": "Alabama",
     "geo_id": "01000",
     "year": 2022,
@@ -1960,7 +1800,6 @@
     "net_opeb_liability": 847193000
   },
   {
-    "state.abb": "FL",
     "state.name": "Florida",
     "geo_id": "12000",
     "year": 2022,
@@ -1978,7 +1817,6 @@
     "net_opeb_liability": 7283350000
   },
   {
-    "state.abb": "ID",
     "state.name": "Idaho",
     "geo_id": "16000",
     "year": 2022,
@@ -1996,7 +1834,23 @@
     "net_opeb_liability": 108492000
   },
   {
-    "state.abb": "ME",
+    "state.name": "Washington",
+    "geo_id": "53000",
+    "year": 2022,
+    "name": "Washington",
+    "total_liabilities": 94852592000,
+    "current_liabilities": 12559167000,
+    "expenses": 80919363000,
+    "revenues": 82670407000,
+    "population": 7705247,
+    "urban_pop": 6424035,
+    "pct_urban_pop": 83.3718,
+    "median_hh_income_21": 84155,
+    "modified_revenues": -10808123000,
+    "net_pension_liability": -9922650000,
+    "net_opeb_liability": 6467340000
+  },
+  {
     "state.name": "Maine",
     "geo_id": "23000",
     "year": 2022,
@@ -2014,7 +1868,6 @@
     "net_opeb_liability": 2577091000
   },
   {
-    "state.abb": "NH",
     "state.name": "New Hampshire",
     "geo_id": "33000",
     "year": 2022,
@@ -2032,7 +1885,6 @@
     "net_opeb_liability": 2022441000
   },
   {
-    "state.abb": "OH",
     "state.name": "Ohio",
     "geo_id": "39000",
     "year": 2022,
@@ -2050,7 +1902,6 @@
     "net_opeb_liability": 380714000
   },
   {
-    "state.abb": "OR",
     "state.name": "Oregon",
     "geo_id": "41000",
     "year": 2022,
@@ -2068,7 +1919,6 @@
     "net_opeb_liability": -32251000
   },
   {
-    "state.abb": "SD",
     "state.name": "South Dakota",
     "geo_id": "46000",
     "year": 2022,
@@ -2086,115 +1936,23 @@
     "net_opeb_liability": 0
   },
   {
-    "state.abb": "WY",
-    "state.name": "Wyoming",
-    "geo_id": "56000",
+    "state.name": "Indiana",
+    "geo_id": "18000",
     "year": 2022,
-    "name": "Wyoming",
-    "total_liabilities": 10722590497,
-    "current_liabilities": 7412305944,
-    "expenses": 4931335715,
-    "revenues": 4565888495,
-    "population": 576837,
-    "urban_pop": 357750,
-    "pct_urban_pop": 62.0177,
-    "median_hh_income_21": 66508,
-    "modified_revenues": -7777753164,
-    "net_pension_liability": 343209946,
-    "net_opeb_liability": 513331130
+    "name": "Indiana",
+    "total_liabilities": 18375927000,
+    "current_liabilities": 7430648000,
+    "expenses": 46841886000,
+    "revenues": 51798359000,
+    "population": 6785668,
+    "urban_pop": 4829686,
+    "pct_urban_pop": 71.1763,
+    "median_hh_income_21": 62723,
+    "modified_revenues": -2474175000,
+    "net_pension_liability": 9730464000,
+    "net_opeb_liability": 60843000
   },
   {
-    "state.abb": "WI",
-    "state.name": "Wisconsin",
-    "geo_id": "55000",
-    "year": 2022,
-    "name": "Wisconsin",
-    "total_liabilities": 28179045000,
-    "current_liabilities": 9503899000,
-    "expenses": 46518632000,
-    "revenues": 52248197000,
-    "population": 5893725,
-    "urban_pop": 3953691,
-    "pct_urban_pop": 67.0831,
-    "median_hh_income_21": 67150,
-    "modified_revenues": -3774334000,
-    "net_pension_liability": -2293688000,
-    "net_opeb_liability": 1181238000
-  },
-  {
-    "state.abb": "NJ",
-    "state.name": "New Jersey",
-    "geo_id": "34000",
-    "year": 2022,
-    "name": "New Jersey",
-    "total_liabilities": 224574201619,
-    "current_liabilities": 12009053193,
-    "expenses": 82409829204,
-    "revenues": 97350659517,
-    "population": 9289031,
-    "urban_pop": 8708779,
-    "pct_urban_pop": 93.7537,
-    "median_hh_income_21": 89227,
-    "modified_revenues": 2931777120,
-    "net_pension_liability": 75073670300,
-    "net_opeb_liability": 88854449562
-  },
-  {
-    "state.abb": "MA",
-    "state.name": "Massachusetts",
-    "geo_id": "25000",
-    "year": 2022,
-    "name": "Massachusetts",
-    "total_liabilities": 119941152000,
-    "current_liabilities": 5731466000,
-    "expenses": 83357551000,
-    "revenues": 91731184000,
-    "population": 7029949,
-    "urban_pop": 6416895,
-    "pct_urban_pop": 91.2798,
-    "median_hh_income_21": 89577,
-    "modified_revenues": 2642167000,
-    "net_pension_liability": 34806645000,
-    "net_opeb_liability": 15217822000
-  },
-  {
-    "state.abb": "RI",
-    "state.name": "Rhode Island",
-    "geo_id": "44000",
-    "year": 2022,
-    "name": "Rhode Island",
-    "total_liabilities": 8946041000,
-    "current_liabilities": 2535018000,
-    "expenses": 11750228000,
-    "revenues": 12991181000,
-    "population": 1097371,
-    "urban_pop": 999191,
-    "pct_urban_pop": 91.0525,
-    "median_hh_income_21": 73324,
-    "modified_revenues": -1294065000,
-    "net_pension_liability": 2830352000,
-    "net_opeb_liability": 192974000
-  },
-  {
-    "state.abb": "AK",
-    "state.name": "Alaska",
-    "geo_id": "02000",
-    "year": 2022,
-    "name": "Alaska",
-    "total_liabilities": 12992621000,
-    "current_liabilities": 7970975000,
-    "expenses": 9850996000,
-    "revenues": 7917502000,
-    "population": 733378,
-    "urban_pop": 475967,
-    "pct_urban_pop": 64.8995,
-    "median_hh_income_21": 78437,
-    "modified_revenues": -9904469000,
-    "net_pension_liability": 2334810000,
-    "net_opeb_liability": -1978984000
-  },
-  {
-    "state.abb": "NE",
     "state.name": "Nebraska",
     "geo_id": "31000",
     "year": 2022,
@@ -2212,7 +1970,6 @@
     "net_opeb_liability": 24606000
   },
   {
-    "state.abb": "CO",
     "state.name": "Colorado",
     "geo_id": "08000",
     "year": 2022,
@@ -2230,25 +1987,74 @@
     "net_opeb_liability": 1567351000
   },
   {
-    "state.abb": "HI",
-    "state.name": "Hawaii",
-    "geo_id": "15000",
+    "state.name": "Louisiana",
+    "geo_id": "22000",
     "year": 2022,
-    "name": "Hawaii",
-    "total_liabilities": 28246474000,
-    "current_liabilities": 2752439000,
-    "expenses": 16304638000,
-    "revenues": 18691011000,
-    "population": 1455273,
-    "urban_pop": 1252450,
-    "pct_urban_pop": 86.063,
-    "median_hh_income_21": 85547,
-    "modified_revenues": -366066000,
-    "net_pension_liability": 6323283000,
-    "net_opeb_liability": 5415988000
+    "name": "Louisiana",
+    "total_liabilities": 37973068000,
+    "current_liabilities": 14376799000,
+    "expenses": 40152271000,
+    "revenues": 43813677000,
+    "population": 4657749,
+    "urban_pop": 3332237,
+    "pct_urban_pop": 71.5417,
+    "median_hh_income_21": 52090,
+    "modified_revenues": -10715393000,
+    "net_pension_liability": 4890631000,
+    "net_opeb_liability": 6858087000
   },
   {
-    "state.abb": "KY",
+    "state.name": "Wyoming",
+    "geo_id": "56000",
+    "year": 2022,
+    "name": "Wyoming",
+    "total_liabilities": 10722590497,
+    "current_liabilities": 7412305944,
+    "expenses": 4931335715,
+    "revenues": 4565888495,
+    "population": 576837,
+    "urban_pop": 357750,
+    "pct_urban_pop": 62.0177,
+    "median_hh_income_21": 66508,
+    "modified_revenues": -7777753164,
+    "net_pension_liability": 343209946,
+    "net_opeb_liability": 513331130
+  },
+  {
+    "state.name": "Wisconsin",
+    "geo_id": "55000",
+    "year": 2022,
+    "name": "Wisconsin",
+    "total_liabilities": 28179045000,
+    "current_liabilities": 9503899000,
+    "expenses": 46518632000,
+    "revenues": 52248197000,
+    "population": 5893725,
+    "urban_pop": 3953691,
+    "pct_urban_pop": 67.0831,
+    "median_hh_income_21": 67150,
+    "modified_revenues": -3774334000,
+    "net_pension_liability": -2293688000,
+    "net_opeb_liability": 1181238000
+  },
+  {
+    "state.name": "New Jersey",
+    "geo_id": "34000",
+    "year": 2022,
+    "name": "New Jersey",
+    "total_liabilities": 224574201619,
+    "current_liabilities": 12009053193,
+    "expenses": 82409829204,
+    "revenues": 97350659517,
+    "population": 9289031,
+    "urban_pop": 8708779,
+    "pct_urban_pop": 93.7537,
+    "median_hh_income_21": 89227,
+    "modified_revenues": 2931777120,
+    "net_pension_liability": 75073670300,
+    "net_opeb_liability": 88854449562
+  },
+  {
     "state.name": "Kentucky",
     "geo_id": "21000",
     "year": 2022,
@@ -2266,7 +2072,6 @@
     "net_opeb_liability": 2761751000
   },
   {
-    "state.abb": "AR",
     "state.name": "Arkansas",
     "geo_id": "05000",
     "year": 2022,
@@ -2284,25 +2089,57 @@
     "net_opeb_liability": 1556019000
   },
   {
-    "state.abb": "IA",
-    "state.name": "Iowa",
-    "geo_id": "19000",
+    "state.name": "Alaska",
+    "geo_id": "02000",
     "year": 2022,
-    "name": "Iowa",
-    "total_liabilities": 9689205000,
-    "current_liabilities": 59175000,
-    "expenses": 27434877000,
-    "revenues": 31029959000,
-    "population": 3190372,
-    "urban_pop": 2014831,
-    "pct_urban_pop": 63.1535,
-    "median_hh_income_21": 65645,
-    "modified_revenues": 3535907000,
-    "net_pension_liability": 158854000,
-    "net_opeb_liability": 453731000
+    "name": "Alaska",
+    "total_liabilities": 12992621000,
+    "current_liabilities": 7970975000,
+    "expenses": 9850996000,
+    "revenues": 7917502000,
+    "population": 733378,
+    "urban_pop": 475967,
+    "pct_urban_pop": 64.8995,
+    "median_hh_income_21": 78437,
+    "modified_revenues": -9904469000,
+    "net_pension_liability": 2334810000,
+    "net_opeb_liability": -1978984000
   },
   {
-    "state.abb": "MT",
+    "state.name": "Massachusetts",
+    "geo_id": "25000",
+    "year": 2022,
+    "name": "Massachusetts",
+    "total_liabilities": 119941152000,
+    "current_liabilities": 5731466000,
+    "expenses": 83357551000,
+    "revenues": 91731184000,
+    "population": 7029949,
+    "urban_pop": 6416895,
+    "pct_urban_pop": 91.2798,
+    "median_hh_income_21": 89577,
+    "modified_revenues": 2642167000,
+    "net_pension_liability": 34806645000,
+    "net_opeb_liability": 15217822000
+  },
+  {
+    "state.name": "Hawaii",
+    "geo_id": "15000",
+    "year": 2022,
+    "name": "Hawaii",
+    "total_liabilities": 28246474000,
+    "current_liabilities": 2752439000,
+    "expenses": 16304638000,
+    "revenues": 18691011000,
+    "population": 1455273,
+    "urban_pop": 1252450,
+    "pct_urban_pop": 86.063,
+    "median_hh_income_21": 85547,
+    "modified_revenues": -366066000,
+    "net_pension_liability": 6323283000,
+    "net_opeb_liability": 5415988000
+  },
+  {
     "state.name": "Montana",
     "geo_id": "30000",
     "year": 2022,
@@ -2320,7 +2157,23 @@
     "net_opeb_liability": 120548000
   },
   {
-    "state.abb": "NC",
+    "state.name": "Rhode Island",
+    "geo_id": "44000",
+    "year": 2022,
+    "name": "Rhode Island",
+    "total_liabilities": 8946041000,
+    "current_liabilities": 2535018000,
+    "expenses": 11750228000,
+    "revenues": 12991181000,
+    "population": 1097371,
+    "urban_pop": 999191,
+    "pct_urban_pop": 91.0525,
+    "median_hh_income_21": 73324,
+    "modified_revenues": -1294065000,
+    "net_pension_liability": 2830352000,
+    "net_opeb_liability": 192974000
+  },
+  {
     "state.name": "North Carolina",
     "geo_id": "37000",
     "year": 2022,
@@ -2338,7 +2191,6 @@
     "net_opeb_liability": 6394259000
   },
   {
-    "state.abb": "ND",
     "state.name": "North Dakota",
     "geo_id": "38000",
     "year": 2022,
@@ -2356,7 +2208,6 @@
     "net_opeb_liability": 28401715
   },
   {
-    "state.abb": "KS",
     "state.name": "Kansas",
     "geo_id": "20000",
     "year": 2022,
@@ -2374,7 +2225,6 @@
     "net_opeb_liability": 51820000
   },
   {
-    "state.abb": "GA",
     "state.name": "Georgia",
     "geo_id": "13000",
     "year": 2022,
@@ -2392,7 +2242,6 @@
     "net_opeb_liability": 4732067000
   },
   {
-    "state.abb": "SC",
     "state.name": "South Carolina",
     "geo_id": "45000",
     "year": 2022,
@@ -2410,7 +2259,6 @@
     "net_opeb_liability": 4178946000
   },
   {
-    "state.abb": "TN",
     "state.name": "Tennessee",
     "geo_id": "47000",
     "year": 2022,
@@ -2428,7 +2276,6 @@
     "net_opeb_liability": 1176636000
   },
   {
-    "state.abb": "VA",
     "state.name": "Virginia",
     "geo_id": "51000",
     "year": 2022,
@@ -2446,7 +2293,23 @@
     "net_opeb_liability": 1063130000
   },
   {
-    "state.abb": "VT",
+    "state.name": "Iowa",
+    "geo_id": "19000",
+    "year": 2022,
+    "name": "Iowa",
+    "total_liabilities": 9689205000,
+    "current_liabilities": 59175000,
+    "expenses": 27434877000,
+    "revenues": 31029959000,
+    "population": 3190372,
+    "urban_pop": 2014831,
+    "pct_urban_pop": 63.1535,
+    "median_hh_income_21": 65645,
+    "modified_revenues": 3535907000,
+    "net_pension_liability": 158854000,
+    "net_opeb_liability": 453731000
+  },
+  {
     "state.name": "Vermont",
     "geo_id": "50000",
     "year": 2022,
@@ -2464,7 +2327,6 @@
     "net_opeb_liability": 2738757616
   },
   {
-    "state.abb": "CA",
     "state.name": "California",
     "geo_id": "06000",
     "year": 2022,
@@ -2472,15 +2334,12 @@
     "total_liabilities": 498154488000,
     "current_liabilities": 225501569000,
     "expenses": 455306389000,
-    "revenues": 477412465000,
     "population": 39538245,
     "urban_pop": 37259490,
     "pct_urban_pop": 94.2366,
-    "median_hh_income_21": 84831,
-    "modified_revenues": -203395493000
+    "median_hh_income_21": 84831
   },
   {
-    "state.abb": "WV",
     "state.name": "West Virginia",
     "geo_id": "54000",
     "year": 2022,
@@ -2498,7 +2357,6 @@
     "net_opeb_liability": -18945000
   },
   {
-    "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "48000",
     "year": 2022,
@@ -2516,7 +2374,6 @@
     "net_opeb_liability": 77666435000
   },
   {
-    "state.abb": "NY",
     "state.name": "New York",
     "geo_id": "36000",
     "year": 2022,
@@ -2534,7 +2391,6 @@
     "net_opeb_liability": 67712000000
   },
   {
-    "state.abb": "CT",
     "state.name": "Connecticut",
     "geo_id": "09000",
     "year": 2022,
@@ -2552,7 +2408,6 @@
     "net_opeb_liability": 20916477000
   },
   {
-    "state.abb": "DE",
     "state.name": "Delaware",
     "geo_id": "10000",
     "year": 2022,
@@ -2570,7 +2425,6 @@
     "net_opeb_liability": 9319243000
   },
   {
-    "state.abb": "PA",
     "state.name": "Pennsylvania",
     "geo_id": "42000",
     "year": 2022,
@@ -2588,7 +2442,6 @@
     "net_opeb_liability": 19492810000
   },
   {
-    "state.abb": "DC",
     "geo_id": "11000",
     "year": 2022,
     "name": "District Of Columbia",
@@ -2605,7 +2458,6 @@
     "net_opeb_liability": 173193000
   },
   {
-    "state.abb": "MS",
     "state.name": "Mississippi",
     "geo_id": "28000",
     "year": 2022,
@@ -2623,7 +2475,6 @@
     "net_opeb_liability": 143450000
   },
   {
-    "state.abb": "MD",
     "state.name": "Maryland",
     "geo_id": "24000",
     "year": 2022,
@@ -2641,7 +2492,6 @@
     "net_opeb_liability": 13434828000
   },
   {
-    "state.abb": "MI",
     "state.name": "Michigan",
     "geo_id": "26000",
     "year": 2022,
@@ -2659,7 +2509,6 @@
     "net_opeb_liability": 5539800000
   },
   {
-    "state.abb": "NM",
     "state.name": "New Mexico",
     "geo_id": "35000",
     "year": 2022,
@@ -2677,7 +2526,6 @@
     "net_opeb_liability": 1179892000
   },
   {
-    "state.abb": "AZ",
     "state.name": "Arizona",
     "geo_id": "04000",
     "year": 2022,
@@ -2695,7 +2543,6 @@
     "net_opeb_liability": 1034461000
   },
   {
-    "state.abb": "NV",
     "state.name": "Nevada",
     "geo_id": "32000",
     "year": 2022,
@@ -2713,7 +2560,6 @@
     "net_opeb_liability": 912584000
   },
   {
-    "state.abb": "IL",
     "state.name": "Illinois",
     "geo_id": "17000",
     "year": 2022,
@@ -2731,7 +2577,6 @@
     "net_opeb_liability": 46611408000
   },
   {
-    "state.abb": "OK",
     "state.name": "Oklahoma",
     "geo_id": "40000",
     "year": 2022,

@@ -37,6 +37,12 @@ other = total_liabilities -
 c("Pension\nLiabilities", 
   "Loans", "Bonds", "Notes", "Lease", 
   "Compensated\nAbsences", "Current\nLiabilities")
+# Data checking
+```{r}
+
+```
+
+
 
 ## Liabilities by Government Category
 "States", "Cities and Towns", "Counties", "Special Districts", "Education", "All Other"
