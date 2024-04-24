@@ -30,10 +30,6 @@ df_state <- tibble(state.abb, state.name)
 
 # State 
 ```{r}
-# As of Jan 18 2024, missing only CA 2022
-# CA https://www.sco.ca.gov/ard_state_acfr.html
-#setdiff(state_gov_2021$state.abb, state_gov_2022$state.abb)
-
 state_3years <- state_gov_2020 %>% 
   rbind(state_gov_2021) %>% 
   rbind(state_gov_2022) %>% 
@@ -64,10 +60,8 @@ state_3years %>% add_count(state.name) %>% filter(n<3)
 
 state_3years %>% 
 write.csv("output/all_states_3years.csv")
-
 saveRDS(state_3years, "state_3years.RDS") 
 
-state_3years %>% filter(state.abb == "CA")
 ```
 
 # County
@@ -184,16 +178,6 @@ top100_county_3years %>%
   write.csv("output/top100_counties_3years.csv")
 
 saveRDS(top100_county_3years, "top100_county_3years.RDS")
-```
-
-## Next 100
-```{r}
-top101_200_county_3years <- county_3years %>% 
-  filter(geo_id %in% census_county_top101_200$geo_id) 
-
-top101_200_county_3years%>% add_count(geo_id) %>% filter(n < 3) %>%
-  select(state.abb, name, n) %>% distinct() 
-
 ```
 
 
@@ -319,15 +303,6 @@ top100_cities_3years %>% write.csv("output/top100_cities_3years.csv")
 saveRDS(top100_cities_3years, "top100_cities_3years.RDS")
 ```
 
-```{r}
-top101_200_cities_3years <- city_gov_3years %>% filter(geo_id %in% census_city_top101_200$geo_id)  %>% distinct()
-
-top101_200_cities_3years %>% add_count(geo_id) %>% select(state.abb, year, name, n) %>% 
-  filter(n <3)
-
-# check all these on portal. They are in the portal. Need to check the id to make sure they show up in the list top 200 here. 
-
-```
 
 
 ```{r}

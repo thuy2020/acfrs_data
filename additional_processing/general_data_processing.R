@@ -17,7 +17,7 @@ school_data_temp <- readRDS("top100_sd_3years.RDS")
 
 # clean up data
 state_data <- state_data_temp |>
-  select(-1) |>
+  #select(-1) |>
   mutate(name = str_to_title(name)) |>
   mutate(
     modified_revenues = revenues - (expenses + current_liabilities),
@@ -32,6 +32,7 @@ state_data <- state_data_temp |>
 
 # Filter 2022 data 
 state_data_22 <- state_data |>
+  filter(year == 2022) |>
   rename_with(~ paste0(., "_22"))
 
 

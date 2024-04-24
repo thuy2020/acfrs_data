@@ -57,7 +57,7 @@ INNER JOIN cafrs_state on (cafrs_state.id = cafrs_entity.state_id)
 INNER JOIN cafrs_netposition on (cafrs_netposition.cafr_id = cafrs_acfr.id)
 INNER JOIN cafrs_activities on (cafrs_activities.cafr_id = cafrs_acfr.id)
 INNER JOIN cafrs_proprietaryrevenues on (cafrs_proprietaryrevenues.cafr_id = cafrs_acfr.id)
-WHERE year = 2021
+WHERE year = 2022
 AND category != 'Non-Profit'
 AND is_valid
 AND reviewed_date is not null
@@ -99,7 +99,7 @@ data_from_dbsite_2022 %>% filter(state == "CA" & name == "State of California")
 
 
 ```{r}
-data_from_dbsite_2022 %>% 
+data_from_dbsite_2020 %>% 
    filter(category == "General Purpose") %>% 
    filter(str_detect(name, "Tulsa")) 
    select(state, name, general_revenue,
