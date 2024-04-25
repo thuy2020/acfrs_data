@@ -18,42 +18,31 @@ library(janitor)
 library(plotly)
 library(forcats)
 library(DT)
-library(jsonlite)
+source("nces.R")
+source("general_purpose.R")
+source("nyc_school_districts.R")
 options(scipen = 999)
 df <- data_frame(state.abb, state.name)
-source("nces.R")
-source("nyc_school_districts.R")
 ```
 
 # School districts from Acfrs database 2020, 2021
 
 ```{r echo = FALSE}
-db2020 <- readRDS("data/data_from_dbsite_2020.RDS") 
-db2021 <- readRDS("data/data_from_dbsite_2021.RDS")
-db2022 <- readRDS("data/data_from_dbsite_2022.RDS")
-
-sd_20_21_22 <- db2020 %>% 
-  rbind(db2021) %>% 
-  rbind(db2022) %>% 
+school_districts <- readRDS("data/acfrs_data.RDS") %>% 
   filter(category == "School District") %>% 
   mutate(id = as.character(id)) %>% 
   select(state, name,id, year, 
          total_liabilities, net_pension_liability, net_opeb_liability, 
-         net_pension_assets, net_opeb_assets,
+         net_pension_assets, net_opeb_assets, total_assets, 
          expenses, revenues)
 
-sd_20_21_22 %>% filter(state == "TN") %>% 
-  filter(str_detect(name, "Rutherford"))
+school_districts %>% filter(state == "TN") %>% 
+  filter(str_detect(name, "Rutherford")) 
 ```
 
 ## Top School Districts in ACFRs
 
 ```{r echo = FALSE}
-# Dictionary created in this project, file "dictionary_name_ncesID_acfrsID.qmd"
-#TODO: 
-# those in list 101-200 nces but NOT in acfrs yet
-
-####
 dictionary <- readRDS("dictionary.RDS")
 sub_dictionary <- data.frame(
                   ncesID = c("4703180"), #ncesID == "4703180" ~ "107203", # Davidson County Board of Education, previously id = 1267426
@@ -62,32 +51,6 @@ sub_dictionary <- data.frame(
                   state = c("TN")
 )
 
-dict_top100 <- dictionary %>% 
-  rbind(sub_dictionary) %>% 
-  filter(ncesID %in% top_sd_nces$ncesID) %>% 
-  mutate(id = case_when(ncesID == "5101260" ~ "1267421", # why previous id = "1250807", # Fairfax County Public Schools
-                   ncesID == "5102250" ~ "1250804", #Loudoun County Public Schools	
-                   ncesID == "5103130"~	"1250808",# Prince William County Public Schools		VA
-                   ncesID == "0803360" ~ "1237862", #City and County of Denver School District No. 1
-                   ncesID == "0102370" ~ "1017229",#Mobile County Board of School Commissioners	
-                   ncesID == "5103840" ~ "1265776", #School Board of the City of Virginia Beach	
-                   ncesID == "5100840" ~ "1267422", #VA	Chesterfield County Public Schools	1267422
-                   ncesID == "5101890" ~ "1267423", #VA	Henrico County Public Schools	1267423
-                   ncesID == "2502790" ~ "1267424", #MA	Boston Public Schools	
-                   ncesID == "3174820" ~ "35480", #NE Omaha City School District 1 = 	Douglas County School District No. 0001	35480
-                   ncesID == "2601103" ~ "161679", # MI Detroit Public Schools
-                   ncesID == "1602100" ~ "32700", #ID	JOINT SCHOOL DISTRICT NO. 2
-         TRUE ~ as.character(id))) 
-
-# remain 5 cases of NYC not yet in dictionary: 3600103" "3600077" "3600098" "3600087" "3600151"
-# these will be treated separately below
-setdiff(top_sd_nces$ncesID, dict_top100$ncesID)
-top_sd_nces %>% filter(ncesID %in% c("3600103", "3600077", "3600098", "3600087", "3600151"))
-```
-
-###
-Try new top 100 sd by years
-```{r}
 dict_top100_ELSI <- dictionary %>% 
   rbind(sub_dictionary) %>% 
   filter(ncesID %in% top_schools_by_year$ncesID) %>% 
@@ -115,7 +78,7 @@ top_schools_by_year %>%
 
 
 ```{r}
-top100_sd_3years <- sd_20_21_22 %>% 
+top100_school_districts <- school_districts %>% 
   filter(id %in% dict_top100_ELSI$id) %>% select(-name) %>% 
   left_join(dict_top100_ELSI, by = c("id", "state")) %>% 
   rename(state.abb = state) %>% 
@@ -123,23 +86,18 @@ top100_sd_3years <- sd_20_21_22 %>%
   #bind with NYC
   rbind(nyc_top5_20_21_22) %>% 
   left_join(df) %>% 
-  
-  select(ncesID, id, year, name, 
-         total_liabilities, net_pension_liability, net_opeb_liability, 
-         net_pension_assets, net_opeb_assets,
-         expenses, revenues) %>% drop_na(ncesID) %>% 
-  
+
   #join with nces to get county, city info
-  left_join(nces, by = "ncesID") %>% 
-  select(-name.y) %>% 
-  rename(name = name.x)
+  left_join(nces, by = c("ncesID", "state.abb", "state.name")) %>% 
+  rename(name = name.x) %>% 
+  select(-name.y)
 
  
 #TODO: check back missing: 
 #GA Clayton County Board of education.
 #https://www.clayton.k12.ga.us/departments/business-services/financial-reports
 
-top100_sd_3years %>% 
+top100_school_districts %>% 
   add_count(ncesID) %>% filter(n < 3) %>% 
   select(state.abb, ncesID, year, name, n)
 
@@ -148,12 +106,12 @@ top100_sd_3years %>%
 
 # Export result
 ```{r}
-saveRDS(top100_sd_3years, "top100_sd_3years.RDS")
+saveRDS(top100_school_districts, "top100_sd.RDS")
 
-top100_sd_3years %>% write.csv("output/top100_sd_3years.csv")
+top100_school_districts %>% write.csv("output/top100_sd.csv")
 
 #TODO: ask Geoff about this revenues = expense cases
-top100_sd_3years %>% 
+top100_school_districts %>% 
   filter(expenses == revenues) 
 
 ```

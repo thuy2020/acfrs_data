@@ -213,7 +213,7 @@ city_data_growth <- city_data_22 |>
   ) |>
   select(-geo_id_20)
 
-cityCoordinates <- readRDS("additional_processing/cityCoordinates.RDS")
+cityCoordinates <- readRDS("cityCoordinates.RDS")
 
 cityCoordinates <- cityCoordinates[, (3:5)]
 

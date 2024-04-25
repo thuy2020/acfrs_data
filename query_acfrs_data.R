@@ -32,7 +32,7 @@ fetch_data <- function(years, con){
                          
                          total_liabilities, current_liabilities, 
                          net_pension_liability, net_pension_assets, 
-                         net_opeb_liability, net_opeb_assets, 
+                         net_opeb_liability, net_opeb_assets, total_assets,
                          
                          leases, loans_outstanding, notes_outstanding,bonds_outstanding,compensated_absences,
                          
@@ -85,5 +85,4 @@ fetch_data <- function(years, con){
 
 ########Call function###########
 fetch_data(c(2020, 2021, 2022), con)
-
 
