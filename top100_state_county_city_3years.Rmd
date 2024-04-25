@@ -18,38 +18,24 @@ library(DT)
 library(viridis)
 library(janitor)
 library(jsonlite)
+library(stringr)
 source("census.R")
-source("acfrs_gen_purpose_2020.R")
-source("acfrs_gen_purpose_2021.R")
-source("acfrs_gen_purpose_2022.R")
+source("general_purpose.R")
 source("supplement_data.R")
 df_state <- tibble(state.abb, state.name)
 ```
 
 
-
 # State 
 ```{r}
-state_3years <- state_gov_2020 %>% 
-  rbind(state_gov_2021) %>% 
-  rbind(state_gov_2022) %>% 
-  mutate(across(5:28, as.numeric)) %>% 
+state_3years <- state_gov %>% 
+  #mutate(across(5:28, as.numeric)) %>% 
   
   left_join(df_state) %>% 
-  
-  #fix geo_id to join with other data later
-  mutate(geo_id = case_when((nchar(geo_id) == 1) ~ paste0("0", geo_id, "000"),
-                            (nchar(geo_id) == 2) ~ paste0(geo_id, "000"),
-                            (nchar(geo_id) == 3) ~ paste0(geo_id, "00"),
-                            (nchar(geo_id) == 4) ~ paste0(geo_id, "0"),
-                            TRUE ~ as.character(geo_id))) %>% 
-  
-  select(-c(name_midfile)) %>% 
-  
   #join income
   left_join(income) %>% 
   
-  #get a set of varibale
+  #get a set of variables
   select(state.abb, state.name, geo_id, year, name,
          total_liabilities, net_pension_liability, net_opeb_liability, current_liabilities,
          net_pension_assets, net_opeb_assets, 
@@ -58,8 +44,8 @@ state_3years <- state_gov_2020 %>%
 
 state_3years %>% add_count(state.name) %>% filter(n<3)
 
-state_3years %>% 
-write.csv("output/all_states_3years.csv")
+state_3years %>% write.csv("output/all_states_3years.csv")
+
 saveRDS(state_3years, "state_3years.RDS") 
 
 ```
@@ -70,9 +56,7 @@ saveRDS(state_3years, "state_3years.RDS")
 ```{r}
  #dealing with exception: 
 #These counties are consolidated --> have some other name in acfrs list:  
-consolidated_city_county <- acfrs_general_purpose_20 %>% 
-  rbind(acfrs_general_purpose_21) %>% 
-  rbind(acfrs_general_purpose_22) %>% 
+consolidated_city_county <- acfrs_general_purpose %>% 
    filter((name == "city and county of san francisco" & state.abb == "CA") |
           (name == "philadelphia" & state.abb == "PA") |
           (name == "jacksonville" & state.abb == "FL") |
@@ -113,13 +97,11 @@ left_join(consolidated_city_county_urbanicity) %>%
 
 ```
 
-## All counties collected in 3 years 2020, 2021, 2022
+## All counties 
 ```{r}
 #
-county_3years <- county_gov_20 %>% 
-  rbind(county_gov_21) %>% 
-  rbind(county_gov_22) %>% 
-  select(-c(geo_id.x, government_id, name_midfile)) %>% 
+county_all <- county_gov %>% 
+  #select(-c(geo_id.x, government_id, name_midfile)) %>% 
   rename(geo_id = geo_id.y) %>%  
   
   #get income
@@ -161,23 +143,19 @@ officials
 
 ##### Top 100 acfrs counties 2020
 # Find acfrs entities from the list of Top 100 county census
-top100_county_3years <- county_3years %>% 
+top100_county_3years <- county_all %>% 
   filter(geo_id %in% census_county_top100$geo_id)
 
 
 top100_county_3years %>% add_count(geo_id) %>% filter(n <3 ) %>% arrange(name)
-#TODO: Checking on 2 missing - as of April 12, 2024
+#TODO: Checking on 2 missing - as of April 25, 2024
 # PA montgomery county 2022: https://www.montgomerycountypa.gov/Archive.aspx?AMID=45
-# MA norfolk county 2022
+# MA norfolk county 2022: https://www.norfolkcounty.org/county_commission/about_norfolk_county/annual_reports.php#outer-31
 
-#Uploaded April 12, 2024: 
-# Ok Oklahoma county 2022: https://www.oklahomacounty.org/county-information/financials#Annual%20Financial%20Reports
-#OK tulsa county 2022 https://countyclerk.tulsacounty.org/Home/Reports
+top100_county_3years %>%
+  write.csv("output/top100_counties.csv")
 
-top100_county_3years %>% 
-  write.csv("output/top100_counties_3years.csv")
-
-saveRDS(top100_county_3years, "top100_county_3years.RDS")
+saveRDS(top100_county_3years, "top100_county.RDS")
 ```
 
 
@@ -214,44 +192,13 @@ place_division_3years <- place_division_gov_22 %>%
 ```
 
 
-
 ## All Cities collected in 3 years 2020, 2021, 2022
-```{r}
-city_gov_3years <- city_gov_22 %>% 
-  rbind(city_gov_21) %>% 
-  rbind(city_gov_20) 
-
-#city_gov_3years %>% write.csv("output/city_gov_3years.csv")
-```
-
-```{r}
-#S1903 MEDIAN INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)
-#2021: ACS 1-Year Estimates Subject Tables
-#https://data.census.gov/table/ACSST1Y2021.S1903?q=median%20household%20income%20by%20city%202021&g=010XX00US$0300000
-
-city_income <- rio::import(here::here("data/ACSST1Y2021.S1903_2023-12-29T105538/ACSST1Y2021.S1903-Data.csv"), skip = 1) %>% select(1, `Geographic Area Name`, `Estimate!!Median income (dollars)!!HOUSEHOLD INCOME BY RACE AND HISPANIC OR LATINO ORIGIN OF HOUSEHOLDER!!Households`) %>% 
-  rename(median_hh_income_21 = `Estimate!!Median income (dollars)!!HOUSEHOLD INCOME BY RACE AND HISPANIC OR LATINO ORIGIN OF HOUSEHOLDER!!Households`
-         ) %>% 
-  mutate(
-         place = substring(Geography, 12, 16),
-         state = substring(Geography, 10, 11)) %>% 
- 
-  mutate(geo_id = paste0(state, place)) %>% 
-  select(geo_id, median_hh_income_21)
-
-
-
-```
 
 ```{r}
 #######
-special_cities <- acfrs_general_purpose_20 %>% 
-  rbind(acfrs_general_purpose_21) %>% 
-  rbind(acfrs_general_purpose_22) %>% 
-
+special_cities <- acfrs_general_purpose %>% 
     #only filter those missing
   filter(id %in% c("101868", "1266697", "1266289", "149470")) %>% 
-
   mutate(geo_id = case_when(id == "101868" ~ "0668000", # san jose CA
                           id == "1266697" ~ "2255000", # new orleans LA
                           id == "1266289" ~ "0820000",# CO denver county, also denver city
@@ -269,7 +216,7 @@ special_cities <- acfrs_general_purpose_20 %>%
          population,median_hh_income_21) 
 ########
 
-city_gov_3years <- city_gov_3years %>% left_join(city_income) %>% 
+city_gov <- city_gov %>% left_join(city_income) %>% 
   
   #get a set of variables
   select(state.abb, state.name, geo_id, id, year, name,
@@ -279,8 +226,7 @@ city_gov_3years <- city_gov_3years %>% left_join(city_income) %>%
          population, median_hh_income_21) %>% 
   rbind(special_cities)
 
-
-write(toJSON(city_gov_3years), "output/all_cities_3years.json")
+write(toJSON(city_gov), "output/all_cities_3years.json")
 ```
 
 ## The 100 most populous cities in 3 years
@@ -288,19 +234,21 @@ write(toJSON(city_gov_3years), "output/all_cities_3years.json")
 # top 100 cities census
 census_city_top100
 
-top100_cities_3years <- city_gov_3years %>% filter(geo_id %in% census_city_top100$geo_id)  %>% distinct()
+top100_cities <- city_gov %>% 
+  filter(geo_id %in% census_city_top100$geo_id) %>% distinct()
+
 #missing
-top100_cities_3years %>% add_count(geo_id) %>% filter(n<3) %>% arrange(name)
-# missing: 3 as of April 12, 2024
+top100_cities %>% add_count(geo_id) %>% filter(n<3) %>% arrange(name)
+# missing: 3 as of April 25, 2024
 # MN saint paul 2022
 # NJ newark 2020, 
 #NJ newark 2022
 
-top100_cities_3years %>% filter(str_detect(name, "tulsa"))
+top100_cities %>% filter(str_detect(name, "tulsa"))
 
-top100_cities_3years %>% write.csv("output/top100_cities_3years.csv")
+top100_cities %>% write.csv("output/top100_cities.csv")
 
-saveRDS(top100_cities_3years, "top100_cities_3years.RDS")
+saveRDS(top100_cities, "top100_cities.RDS")
 ```
 
 
