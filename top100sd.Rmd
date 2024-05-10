@@ -40,20 +40,16 @@ school_districts %>% filter(state == "TN") %>%
   filter(str_detect(name, "Rutherford")) 
 ```
 
-## Top School Districts in ACFRs
+## Dictionary ACFRs ID ~ NCES ID
 
 ```{r echo = FALSE}
-dictionary <- readRDS("dictionary.RDS")
-sub_dictionary <- data.frame(
-                  ncesID = c("4703180"), #ncesID == "4703180" ~ "107203", # Davidson County Board of Education, previously id = 1267426
+dictionary <- readRDS("dictionary.RDS") %>% 
+  add_row(ncesID = c("4703180"), #ncesID == "4703180" ~ "107203", # Davidson County Board of Education, previously id = 1267426
                   name = c("Metropolitan Nashville Public Schools"),
                   id = c("107203"),
-                  state = c("TN")
-)
-
-dict_top100_ELSI <- dictionary %>% 
-  rbind(sub_dictionary) %>% 
-  filter(ncesID %in% top_schools_by_year$ncesID) %>% 
+                  state = c("TN")) %>% 
+  
+#fixing id (old dictionary reflects old acfrs id --> update these new acfrs id currently showing on database)
   mutate(id = case_when(ncesID == "5101260" ~ "1267421", # why previous id = "1250807", # Fairfax County Public Schools
                    ncesID == "5102250" ~ "1250804", #Loudoun County Public Schools	
                    ncesID == "5103130"~	"1250808",# Prince William County Public Schools		VA
@@ -66,18 +62,28 @@ dict_top100_ELSI <- dictionary %>%
                    ncesID == "3174820" ~ "35480", #NE Omaha City School District 1 = 	Douglas County School District No. 0001	35480
                    ncesID == "2601103" ~ "161679", # MI Detroit Public Schools
                    ncesID == "1602100" ~ "32700", #ID	JOINT SCHOOL DISTRICT NO. 2
-         TRUE ~ as.character(id))) %>% 
-  drop_na(id)
-
-# Note: new york city geographic district #10 is not in the list of top 100 by enrollment 2022
-top_schools_by_year %>% 
-  mutate(name = str_to_lower(name)) %>% 
-  filter(str_detect(name, "new york"))
+         TRUE ~ as.character(id))) 
 
 ```
 
 
 ```{r}
+nces %>% select(state.abb, ncesID, enrollment_20, enrollment_21, enrollment_22) -> nces_enrollment
+
+school_districts %>% select(state, name, id) %>% distinct() %>% 
+  left_join(dictionary) %>% 
+  left_join(nces_enrollment) %>% 
+  filter(!is.na(ncesID)) %>% 
+  mutate(government_level = "school district") %>% 
+  write.csv("output/school district_enrollment_20_21_22.csv")
+```
+
+# Top 100 SD
+```{r}
+# filter only top 100
+dict_top100_ELSI <- dictionary %>% 
+  filter(ncesID %in% top_schools_by_year$ncesID) %>% 
+  drop_na(id)
 top100_school_districts <- school_districts %>% 
   filter(id %in% dict_top100_ELSI$id) %>% select(-name) %>% 
   left_join(dict_top100_ELSI, by = c("id", "state")) %>% 
@@ -92,6 +98,10 @@ top100_school_districts <- school_districts %>%
   rename(name = name.x) %>% 
   select(-name.y)
 
+# Note: new york city geographic district #10 is not in the list of top 100 by enrollment 2022
+top_schools_by_year %>% 
+  mutate(name = str_to_lower(name)) %>% 
+  filter(str_detect(name, "new york"))
  
 #TODO: check back missing: 
 #GA Clayton County Board of education.
@@ -100,7 +110,6 @@ top100_school_districts <- school_districts %>%
 top100_school_districts %>% 
   add_count(ncesID) %>% filter(n < 3) %>% 
   select(state.abb, ncesID, year, name, n)
-
 
 ```
 

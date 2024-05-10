@@ -71,7 +71,6 @@ acfrs_state <- acfrs_general_purpose %>%
   mutate(name = str_remove_all(name, "(state of)|(commonwealth of)"),
          name = str_trim(name))
 
-
 # state from census
 # census_state <- census_all %>% filter(sumlev == 40) %>% 
 #   select(state.abb, geo_id, population)
@@ -91,15 +90,10 @@ state_gov <- acfrs_state %>% select(-geo_id) %>%
 # create id list to recognize state entities in later years. 
 #state_acfrs_id <- state_gov_2020 %>% select(state.abb, name, id)
 
+####### Counties########
 
-####### Counties
-
-acfrs_county <- acfrs_general_purpose %>% 
-  filter(grepl("county|municipality|parish", name)) %>% #In Louisiana, counties are called Parishes.
-  filter(!str_detect(name, "\\(")) # not county. Eg: waverly township (van buren county)
-
-
-# Alaska counties in census
+# Special case: Alaska
+#Alaska counties in census
 alaska_county_census <- census_county %>% filter(state.abb == "AK")
 
 # Alaska counties in Acfrs:
@@ -107,16 +101,19 @@ alaska_county_acfrs <- acfrs_general_purpose %>%
   filter(state.abb == "AK") %>% 
   filter(str_detect(name, "(borough)|(municipality)$"))
 
+acfrs_county <- acfrs_general_purpose %>% 
+  filter(grepl("county|municipality|parish", name)) %>% #In Louisiana, counties are called Parishes.
+  filter(!str_detect(name, "\\(")) # not county. Eg: waverly township (van buren county)
+  rbind(alaska_county_acfrs) 
+
 # join acfrs with census population 
 county_gov <- acfrs_county %>% 
-  rbind(alaska_county_acfrs) %>% 
-  
   # most acfrs_county do not have geo_id --> must join by state.abb and name
   left_join(census_county, by = c("state.abb", "name" = "name_census")) %>% 
   
   # drop non-county entities
   arrange(desc(population)) %>% 
-  drop_na(population) 
+  drop_na(population) %>% select(-geo_id.x) %>% rename(geo_id = geo_id.y)
 
 
 # Save county ID to filter in later years
@@ -125,28 +122,40 @@ county_gov <- acfrs_county %>%
 ########## Incorporated Place & Minor Civil Division#########
 
 # ACFRs:
-acfrs_place_division <- acfrs_general_purpose %>% 
+place_division_gov <- acfrs_general_purpose %>% 
   # exclude state and county
   filter(!id %in% acfrs_state$id) %>% 
-  filter(!id %in% county_gov$id) %>% distinct()
+  filter(!id %in% county_gov$id) %>% distinct() %>% 
 
 # Join Incorporated Place in ACFRs to Census  
-
-place_division_gov <- acfrs_place_division %>% 
-  left_join(census_place_division, by= c("geo_id", "state.abb")) %>% 
-  drop_na(population)
-
+  left_join(census_place_division, by= c("geo_id", "state.abb")) 
 
 #### City #########
-
 city_gov <- place_division_gov %>% 
   filter(geo_id %in% census_city$geo_id)
 
+#write.csv(acfrs_county, "output/acfrs_county.csv")
+write.csv(county_gov, "output/county_gov.csv")
+#write.csv(place_division_gov, "output/place_division_gov.csv")
+write.csv(city_gov, "output/city_gov.csv")
 
 
 
+#####Population##########
+# export population to load in database
+state_gov %>% select(state.abb, name, id, geo_id, population) %>% 
+  mutate(government_level = "state") -> temp1
+  
+county_gov %>% select(state.abb, name, id, geo_id, population) %>% 
+  mutate(government_level = "county") -> temp2
+  
+place_division_gov %>% select(state.abb, name, id, geo_id, population) %>% 
+  mutate(government_level = "municipal_township") -> temp3
 
-
+rbind(temp1, temp2, temp3) %>% 
+  rename(population_2020 = population) %>% distinct() %>% 
+write.csv("output/general_purpose_population_2020.csv")
+  
 
 
 

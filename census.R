@@ -141,10 +141,10 @@ census_place_division <- census_all %>%
 #### City
 
 census_city <- census_all %>% filter(sumlev == 162) %>% 
-  filter(str_detect(name_census, "city$")) 
+  filter(str_detect(name_census, "city$")) %>% 
+  filter(funcstat %in% c("A", "C")) 
 
 census_city_top100 <- census_city %>% 
-  filter(funcstat %in% c("A", "C")) %>% 
   arrange(desc(population)) %>% slice(1:100) %>% 
   mutate(#name_census = str_remove_all(name_census, " city$"),
          name_census = str_trim(name_census)) %>% 
@@ -152,7 +152,6 @@ census_city_top100 <- census_city %>%
 
 
 census_city_top101_200 <- census_city %>% 
-  filter(funcstat %in% c("A", "C")) %>% 
   arrange(desc(population)) %>% slice(101:200) %>% 
   mutate(#name_census = str_remove_all(name_census, " city$"),
     name_census = str_trim(name_census)) %>% 

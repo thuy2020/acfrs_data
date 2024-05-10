@@ -15,9 +15,15 @@ library(tidyr)
 #download data: https://nces.ed.gov/ccd/elsi/tableGenerator.aspx?savedTableID=649124
 
 
-nces_20 <- import(here::here("data", "ELSI_school year 2019 2020.csv"))
-nces_21 <- import(here::here("data", "ELSI_school year 2020 2021.csv"))
+nces_20 <- import(here::here("data", "ELSI_school year 2019 2020.csv")) 
+#%>% 
+  #filter(str_detect(`Agency Type [District] 2019-20`, "Regular local school district"))
+nces_21 <- import(here::here("data", "ELSI_school year 2020 2021.csv")) 
+#%>% 
+ # filter(str_detect(`Agency Type [District] 2020-21`, "Regular local school district"))
 nces_22 <- import(here::here("data", "ELSI_school year 2021 2022_cordinate.csv")) %>% 
+ # filter(str_detect(`Agency Type [District] 2021-22`, "Regular local school district"))
+  
   select(-c(`State Name [District] 2021-22`, 
             `Location State Abbr [District] 2021-22`,
             `Agency Name [District] 2021-22`, 

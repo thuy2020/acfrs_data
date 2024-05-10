@@ -38,7 +38,7 @@ state_3years <- state_gov %>%
   #get a set of variables
   select(state.abb, state.name, geo_id, year, name,
          total_liabilities, net_pension_liability, net_opeb_liability, current_liabilities,
-         net_pension_assets, net_opeb_assets, 
+         net_pension_assets, net_opeb_assets, total_assets,
          expenses, revenues,
          population, urban_pop, pct_urban_pop, median_hh_income_21) 
 
@@ -76,7 +76,7 @@ consolidated_city_county <- acfrs_general_purpose %>%
   #get a set of variables
   select(state.abb, state.name, geo_id, year, name,
          total_liabilities, net_pension_liability, net_opeb_liability, current_liabilities,
-         net_pension_assets, net_opeb_assets, 
+         net_pension_assets, net_opeb_assets, total_assets,
          expenses, revenues, id) 
   
 # get population
@@ -102,7 +102,7 @@ left_join(consolidated_city_county_urbanicity) %>%
 #
 county_all <- county_gov %>% 
   #select(-c(geo_id.x, government_id, name_midfile)) %>% 
-  rename(geo_id = geo_id.y) %>%  
+  #rename(geo_id = geo_id.y) %>%  
   
   #get income
   left_join(income) %>% 
@@ -110,7 +110,7 @@ county_all <- county_gov %>%
   #get a set of variables
   select(state.abb, state.name, id, geo_id, year, name,
          total_liabilities, net_pension_liability, net_opeb_liability, current_liabilities,
-         net_pension_assets, net_opeb_assets, 
+         net_pension_assets, net_opeb_assets, total_assets,
          expenses, revenues,
          population, urban_pop, pct_urban_pop, median_hh_income_21) %>% 
   
@@ -118,10 +118,6 @@ county_all <- county_gov %>%
   rbind(consolidated_city_county_all)
   
   
-#county_3years %>% 
-#  write.csv("output/all_counties_3years.csv")
-
-#write(toJSON(county_3years), "output/all_counties_3years.json")
 ```
 
 
@@ -152,8 +148,8 @@ top100_county_3years %>% add_count(geo_id) %>% filter(n <3 ) %>% arrange(name)
 # PA montgomery county 2022: https://www.montgomerycountypa.gov/Archive.aspx?AMID=45
 # MA norfolk county 2022: https://www.norfolkcounty.org/county_commission/about_norfolk_county/annual_reports.php#outer-31
 
-top100_county_3years %>%
-  write.csv("output/top100_counties.csv")
+
+write.csv(top100_county_3years, "output/top100_counties.csv")
 
 saveRDS(top100_county_3years, "top100_county.RDS")
 ```
@@ -184,9 +180,9 @@ Does not include:
 There are a total of 26,771 incorporated places and minor civil divisions collected for 3 years 2020, 2021, 2021. See the full list named "place_division_3years.csv" in dropbox folder. 
 
 ```{r}
-place_division_3years <- place_division_gov_22 %>% 
-  rbind(place_division_gov_21) %>% 
-  rbind(place_division_gov_20)
+# place_division_3years <- place_division_gov_22 %>% 
+#   rbind(place_division_gov_21) %>% 
+#   rbind(place_division_gov_20)
 
 #place_division_3years %>% write.csv("output/place_division_3years.csv")
 ```
@@ -211,7 +207,7 @@ special_cities <- acfrs_general_purpose %>%
   #get a set of variables
   select(state.abb, state.name, geo_id, id, year, name,
          total_liabilities, net_pension_liability, net_opeb_liability, current_liabilities,
-         net_pension_assets, net_opeb_assets, 
+         net_pension_assets, net_opeb_assets, total_assets,
          expenses, revenues, 
          population,median_hh_income_21) 
 ########
@@ -221,7 +217,7 @@ city_gov <- city_gov %>% left_join(city_income) %>%
   #get a set of variables
   select(state.abb, state.name, geo_id, id, year, name,
          total_liabilities, net_pension_liability, net_opeb_liability, current_liabilities,
-         net_pension_assets, net_opeb_assets, 
+         net_pension_assets, net_opeb_assets, total_assets,
          expenses, revenues,
          population, median_hh_income_21) %>% 
   rbind(special_cities)

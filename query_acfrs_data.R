@@ -13,6 +13,8 @@ source("db_connection.R")
 #                  user = "",
 #                  password = ""
 #                  )
+#cafrs_acfrvalue.reason_value,
+#INNER JOIN cafrs_acfrvalue on (cafrs_acfrvalue.acfr_id = cafrs_acfr.id)
 
 #######Function to fetch data from database############
 fetch_data <- function(years, con){
@@ -21,6 +23,7 @@ fetch_data <- function(years, con){
   for (year in years){
     statement <- sprintf("SELECT cafrs_state.abbreviation as state,
                          cafrs_entity.name, CAST(cafrs_entity.census_id as varchar),
+                    
                          cafrs_entity.id, cafrs_entity.nces_district_id,
                          cafrs_entity.is_city, 
                          cafrs_entity.is_county, 
@@ -52,6 +55,7 @@ fetch_data <- function(years, con){
                          INNER JOIN cafrs_netposition on (cafrs_netposition.cafr_id = cafrs_acfr.id)
                          INNER JOIN cafrs_activities on (cafrs_activities.cafr_id = cafrs_acfr.id)
                          INNER JOIN cafrs_proprietaryrevenues on (cafrs_proprietaryrevenues.cafr_id = cafrs_acfr.id)
+                         
                          WHERE year = %d
                          AND category != 'Non-Profit'
                          AND is_valid
@@ -76,6 +80,7 @@ fetch_data <- function(years, con){
                                  TRUE ~ as.character(census_id)))
   
   saveRDS(acfrs_data, "data/acfrs_data.RDS")
+  write.csv(acfrs_data, "output/acfrs_data.csv")
   
   # return the combined data frame
   return(acfrs_data)
@@ -85,4 +90,6 @@ fetch_data <- function(years, con){
 
 ########Call function###########
 fetch_data(c(2020, 2021, 2022), con)
+#fetch_data(2022, con) -> temp
 
+#temp %>% filter(name == "Cleveland") %>% distinct() %>% write.csv("testing_reasonvalue_cleveland.csv")
