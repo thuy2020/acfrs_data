@@ -222,7 +222,6 @@ city_gov <- city_gov %>% left_join(city_income) %>%
          population, median_hh_income_21) %>% 
   rbind(special_cities)
 
-write(toJSON(city_gov), "output/all_cities_3years.json")
 ```
 
 ## The 100 most populous cities in 3 years
@@ -239,8 +238,6 @@ top100_cities %>% add_count(geo_id) %>% filter(n<3) %>% arrange(name)
 # MN saint paul 2022
 # NJ newark 2020, 
 #NJ newark 2022
-
-top100_cities %>% filter(str_detect(name, "tulsa"))
 
 top100_cities %>% write.csv("output/top100_cities.csv")
 
