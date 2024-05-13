@@ -7,7 +7,7 @@ source("supplement_data.R")
 # read in data
 state_data_temp <- readRDS("state_3years.RDS")
 county_data_temp <- readRDS("top100_county.RDS")
-city_data_temp <- readRDS("top100_cities.RDS")
+city_data_temp <- read_csv("output/top100_cities.csv")
 school_data_temp <- readRDS("top100_sd.RDS")
 
 
@@ -21,14 +21,18 @@ state_data <- state_data_temp |>
   mutate(name = str_to_title(name)) |>
   mutate(
     modified_revenues = revenues - (expenses + current_liabilities),
-    net_pension_liab =  abs(net_pension_liability) - abs(net_pension_assets),
+    net_pension_liab =  net_pension_liability - net_pension_assets,
     net_opeb_liab = net_opeb_liability - net_opeb_assets
   ) |>
   select(-net_pension_liability, -net_opeb_liability, -net_pension_assets, -net_opeb_assets) |>
   rename(
     net_pension_liability = net_pension_liab,
     net_opeb_liability = net_opeb_liab
-  )
+  ) |>
+  mutate(
+    assets_liab_ratio = total_assets / total_liabilities
+  ) |>
+  arrange(year, state.name)
 
 # Filter 2022 data 
 state_data_22 <- state_data |>
@@ -50,6 +54,8 @@ state_data_growth <- state_data_22 |>
     net_opeb_liability_growth = net_opeb_liability_22 / net_opeb_liability_20 - 1,
     net_pension_liability_growth = net_pension_liability_22 / net_pension_liability_20 - 1,
     revenues_growth = revenues_22 / revenues_20 - 1,
+    total_assets_growth = total_assets_22 / total_assets_20 - 1,
+    assets_liab_ratio_growth = assets_liab_ratio_22 / assets_liab_ratio_20 - 1
   ) |>
   mutate(
     modified_revenues_20 = revenues_20 - (expenses_20 + current_liabilities_20),
@@ -102,14 +108,18 @@ county_data <- county_data_temp |>
   mutate(name = paste(name, `state.abb`, sep = ", ")) |>
   mutate(
     modified_revenues = revenues - (expenses + current_liabilities),
-    net_pension_liab = net_pension_assets - net_pension_liability,
+    net_pension_liab =  net_pension_liability - net_pension_assets,
     net_opeb_liab = net_opeb_liability - net_opeb_assets
   ) |>
   select(-net_pension_liability, -net_opeb_liability, -net_pension_assets, -net_opeb_assets) |>
   rename(
     net_pension_liability = net_pension_liab,
     net_opeb_liability = net_opeb_liab
-  )
+  ) |>
+  mutate(
+    assets_liab_ratio = total_assets / total_liabilities
+  ) |>
+  arrange(year, state.name)
 
 county_data_22 <- county_data |>
   filter(year == 2022) |>
@@ -129,6 +139,8 @@ county_data_growth <- county_data_22 |>
     net_opeb_liability_growth = net_opeb_liability_22 / net_opeb_liability_20 - 1,
     net_pension_liability_growth = net_pension_liability_22 / net_pension_liability_20 - 1,
     revenues_growth = revenues_22 / revenues_20 - 1,
+    total_assets_growth = total_assets_22 / total_assets_20 - 1,
+    assets_liab_ratio_growth = assets_liab_ratio_22 / assets_liab_ratio_20 - 1
   ) |>
   mutate(
     modified_revenues_20 = revenues_20 - (expenses_20 + current_liabilities_20),
@@ -167,7 +179,7 @@ city_data <- city_data_temp |>
   mutate(name = paste(name, `state.abb`, sep = ", ")) |>
   mutate(
     modified_revenues = revenues - (expenses + current_liabilities),
-    net_pension_liab = net_pension_assets - net_pension_liability,
+    net_pension_liab =  net_pension_liability - net_pension_assets,
     net_opeb_liab = net_opeb_liability - net_opeb_assets
   ) |>
   select(-net_pension_liability, -net_opeb_liability, -net_pension_assets, -net_opeb_assets) |>
@@ -175,7 +187,10 @@ city_data <- city_data_temp |>
     net_pension_liability = net_pension_liab,
     net_opeb_liability = net_opeb_liab
   ) |>
-  arrange(year)
+  mutate(
+    assets_liab_ratio = total_assets / total_liabilities
+  ) |>
+  arrange(year, state.name)
 
 
 city_data_22 <- city_data |>
@@ -196,6 +211,8 @@ city_data_growth <- city_data_22 |>
     net_opeb_liability_growth = net_opeb_liability_22 / net_opeb_liability_20 - 1,
     net_pension_liability_growth = net_pension_liability_22 / net_pension_liability_20 - 1,
     revenues_growth = revenues_22 / revenues_20 - 1,
+    total_assets_growth = total_assets_22 / total_assets_20 - 1,
+    assets_liab_ratio_growth = assets_liab_ratio_22 / assets_liab_ratio_20 - 1
   ) |>
   mutate(
     modified_revenues_20 = revenues_20 - (expenses_20 + current_liabilities_20),
@@ -244,14 +261,18 @@ school_data <- school_data_temp |>
   mutate(city = str_to_title(tolower(city))) |>
   mutate(name_state = paste(city, `state.abb`, sep = ", ")) |>
   mutate(
-    net_pension_liab = net_pension_assets - net_pension_liability,
+    net_pension_liab = net_pension_liability - net_pension_assets,
     net_opeb_liab = net_opeb_liability - net_opeb_assets
   ) |>
   select(-net_pension_liability, -net_opeb_liability, -net_pension_assets, -net_opeb_assets) |>
   rename(
     net_pension_liability = net_pension_liab,
     net_opeb_liability = net_opeb_liab
-  )
+  ) |>
+  mutate(
+    assets_liab_ratio = total_assets / total_liabilities
+  ) |>
+  arrange(year, state.name)
 
 school_data_22 <- school_data |>
   filter(year == 2022) |>
@@ -270,6 +291,8 @@ school_data_growth <- school_data_22 |>
     net_opeb_liability_growth = net_opeb_liability_22 / net_opeb_liability_20 - 1,
     net_pension_liability_growth = net_pension_liability_22 / net_pension_liability_20 - 1,
     revenues_growth = revenues_22 / revenues_20 - 1,
+    total_assets_growth = total_assets_22 / total_assets_20 - 1,
+    assets_liab_ratio_growth = assets_liab_ratio_22 / assets_liab_ratio_20 - 1
   ) |>
   rename(
     name = name_22,
