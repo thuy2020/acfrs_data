@@ -1,4 +1,4 @@
-# Processing of ACFRs data
+# Processing ACFRs data
 
 * Identify & Categorize acfrs entity
 * Joining with external data from census, nces
@@ -20,6 +20,8 @@ top100_state_county_city.Rmd
 top100sd.Rmd
 
 # External data
+
+These files are sourced to the above files. No need to run separately. 
 
 supplement_data.R
 
