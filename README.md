@@ -1,4 +1,10 @@
-# acfrs_data
+# Processing of ACFRs data
+
+* Identify & Categorize acfrs entity
+* Joining with external data from census, nces
+* Exporting result for other purposes: analysis, data tool, update database
+
+Run the following main files for replication. 
  
 # Query data from database
 query_acfrs_data.R
@@ -6,6 +12,7 @@ query_acfrs_data.R
 # Genereal purpose entity
 
 general_purpose.R
+
 top100_state_county_city.Rmd
 
 # School District
@@ -25,5 +32,3 @@ census.R
 # Result
 
 processing_for_data_tool.R
-
-Output data for different usage: analysis, data tool, data base modification (Ron)
