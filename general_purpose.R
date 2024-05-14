@@ -1,9 +1,7 @@
 options(scipen = 999)
 library(tidyverse)
 library(dplyr)
-library(DT)
 library(janitor)
-
 source("census.R")
 
 #####NOTE###########
@@ -27,7 +25,6 @@ source("census.R")
 # step 1: get all general purpose entities in acfrs, most contains governmentID
 acfrs_general_purpose <- readRDS("data/acfrs_data.RDS") %>% 
   filter(category == "General Purpose") %>% 
-  #select(-c(5:11, category, component_unit_of_id)) %>% 
   
   rename(government_id = census_id, # census_id in Acfrs database is actually government_id
          state.abb = state) %>% 
@@ -87,9 +84,6 @@ state_gov <- acfrs_state %>% select(-geo_id) %>%
                             (nchar(geo_id) == 4) ~ paste0(geo_id, "0"),
                             TRUE ~ as.character(geo_id)))
 
-# create id list to recognize state entities in later years. 
-#state_acfrs_id <- state_gov_2020 %>% select(state.abb, name, id)
-
 ####### Counties########
 
 # Special case: Alaska
@@ -116,11 +110,7 @@ county_gov <- acfrs_county %>%
   drop_na(population) %>% select(-geo_id.x) %>% rename(geo_id = geo_id.y)
 
 
-# Save county ID to filter in later years
-#county_acfrs_id_20 <- county_gov_20 %>% select(state.abb, name, id) 
-
 ########## Incorporated Place & Minor Civil Division#########
-
 # ACFRs:
 place_division_gov <- acfrs_general_purpose %>% 
   # exclude state and county
@@ -133,12 +123,6 @@ place_division_gov <- acfrs_general_purpose %>%
 #### City #########
 city_gov <- place_division_gov %>% 
   filter(geo_id %in% census_city$geo_id)
-
-#write.csv(acfrs_county, "output/acfrs_county.csv")
-write.csv(county_gov, "output/county_gov.csv")
-#write.csv(place_division_gov, "output/place_division_gov.csv")
-write.csv(city_gov, "output/city_gov.csv")
-
 
 
 #####Population##########
@@ -153,12 +137,19 @@ place_division_gov %>% select(state.abb, name, id, geo_id, population) %>%
   mutate(government_level = "municipal_township") -> temp3
 
 rbind(temp1, temp2, temp3) %>% 
-  rename(population_2020 = population) %>% distinct() %>% 
-write.csv("output/general_purpose_population_2020.csv")
+  rename(population_2020 = population) %>% distinct() 
+#write.csv("output/general_purpose_population_2020.csv")
   
 
 
-
+fields_to_select <- c("state.abb", "state.name", "id", "geo_id", "year", "name",
+                      "total_liabilities", "current_liabilities",
+                      "net_pension_liability", "net_pension_assets",
+                      "net_opeb_liability", "net_opeb_assets", 
+                      "total_assets", "current_assets", 
+                      "unrestricted",
+                      "expenses", "revenues",
+                      "population", "urban_pop", "pct_urban_pop", "median_hh_income_21")
 
 
 

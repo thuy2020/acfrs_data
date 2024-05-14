@@ -24,20 +24,15 @@ fetch_data <- function(years, con){
     statement <- sprintf("SELECT cafrs_state.abbreviation as state,
                          cafrs_entity.name, CAST(cafrs_entity.census_id as varchar),
                     
-                         cafrs_entity.id, cafrs_entity.nces_district_id,
-                         cafrs_entity.is_city, 
-                         cafrs_entity.is_county, 
-                         cafrs_entity.is_intergovernmental, 
-                         cafrs_entity.is_special_district, 
-                         cafrs_entity.is_state, 
-                         cafrs_entity.is_tribal,
+                         cafrs_entity.id, 
                          year, category,
                          
                          total_liabilities, current_liabilities, 
                          net_pension_liability, net_pension_assets, 
-                         net_opeb_liability, net_opeb_assets, total_assets,
+                         net_opeb_liability, net_opeb_assets, total_assets, current_assets,
+                         unrestricted,
                          
-                         leases, loans_outstanding, notes_outstanding,bonds_outstanding,compensated_absences,
+                         loans_outstanding, notes_outstanding,bonds_outstanding,compensated_absences, leases, 
                          
                          charges_for_services, operating_grants, capital_grants, general_revenue, 
                          cafrs_activities.activities_change_in_net_position, expenses, 
@@ -45,9 +40,8 @@ fetch_data <- function(years, con){
                          
                          greatest(charges_for_services + operating_grants + capital_grants + general_revenue,
                                   cafrs_activities.activities_change_in_net_position + expenses,
-                                  total_operating_revenues + non_operating_revenues) as revenues,
+                                  total_operating_revenues + non_operating_revenues) as revenues
                          
-                         component_unit_of_id
                          
                          FROM cafrs_acfr
                          INNER JOIN cafrs_entity on (cafrs_acfr.entity_id = cafrs_entity.id)

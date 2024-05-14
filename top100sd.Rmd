@@ -12,12 +12,9 @@ output:
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 library(dplyr)
 library(stringr)
-library(ggplot2)
 library(tidyr)
 library(janitor)
-library(plotly)
 library(forcats)
-library(DT)
 source("nces.R")
 source("general_purpose.R")
 source("nyc_school_districts.R")
@@ -31,13 +28,7 @@ df <- data_frame(state.abb, state.name)
 school_districts <- readRDS("data/acfrs_data.RDS") %>% 
   filter(category == "School District") %>% 
   mutate(id = as.character(id)) %>% 
-  select(state, name,id, year, 
-         total_liabilities, net_pension_liability, net_opeb_liability, 
-         net_pension_assets, net_opeb_assets, total_assets, 
-         expenses, revenues)
-
-school_districts %>% filter(state == "TN") %>% 
-  filter(str_detect(name, "Rutherford")) 
+  select(state, any_of(fields_to_select))
 ```
 
 ## Dictionary ACFRs ID ~ NCES ID
@@ -84,6 +75,7 @@ school_districts %>% select(state, name, id) %>% distinct() %>%
 dict_top100_ELSI <- dictionary %>% 
   filter(ncesID %in% top_schools_by_year$ncesID) %>% 
   drop_na(id)
+
 top100_school_districts <- school_districts %>% 
   filter(id %in% dict_top100_ELSI$id) %>% select(-name) %>% 
   left_join(dict_top100_ELSI, by = c("id", "state")) %>% 
@@ -111,6 +103,7 @@ top100_school_districts %>%
   add_count(ncesID) %>% filter(n < 3) %>% 
   select(state.abb, ncesID, year, name, n)
 
+
 ```
 
 # Export result
@@ -118,11 +111,13 @@ top100_school_districts %>%
 saveRDS(top100_school_districts, "top100_sd.RDS")
 
 top100_school_districts %>% write.csv("output/top100_sd.csv")
-
+school_districts %>% write.csv("output/all_schooldistricts_3years.csv")
 #TODO: ask Geoff about this revenues = expense cases
 top100_school_districts %>% 
   filter(expenses == revenues) 
 
+
+school_districts
 ```
 
 ## Delaware
