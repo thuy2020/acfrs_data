@@ -126,7 +126,6 @@ nyc_20_21_22 <- rbind(nyc_2020, nyc_2021, nyc_2022) %>%
   mutate(id = NA,
          total_assets = NA,
          current_liabilities = NA, 
-         unrestricted = NA, 
          current_assets = NA,
          revenues = charges_services + operating_grant + general_rev) %>% 
   select(state.abb, name, id, year, 

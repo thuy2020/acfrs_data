@@ -12,11 +12,14 @@ top100_state_county_city.Rmd
 
 top100sd.Rmd
 
-# Supplements data
+# External data
 
 supplement_data.R
+
 nyc_school_districts.R
+
 nces.R
+
 census.R
 
 # Result
