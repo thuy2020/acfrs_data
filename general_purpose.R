@@ -147,7 +147,6 @@ fields_to_select <- c("state.abb", "state.name", "id", "geo_id", "year", "name",
                       "net_pension_liability", "net_pension_assets",
                       "net_opeb_liability", "net_opeb_assets", 
                       "total_assets", "current_assets", 
-                      "unrestricted",
                       "expenses", "revenues",
                       "population", "urban_pop", "pct_urban_pop", "median_hh_income_21")
 
