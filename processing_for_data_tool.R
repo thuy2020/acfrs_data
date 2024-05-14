@@ -5,10 +5,10 @@ library(jsonlite)
 source("supplement_data.R")
 
 # read in data
-state_data_temp <- readRDS("state_3years.RDS")
-county_data_temp <- readRDS("top100_county.RDS")
+state_data_temp <- read_csv("output/all_states_3years.csv")
+county_data_temp <- read_csv("output/top100_counties.csv")
 city_data_temp <- read_csv("output/top100_cities.csv")
-school_data_temp <- readRDS("top100_sd.RDS")
+school_data_temp <- read_csv("output/top100_sd.csv")
 
 
 ############################
@@ -30,9 +30,10 @@ state_data <- state_data_temp |>
     net_opeb_liability = net_opeb_liab
   ) |>
   mutate(
-    assets_liab_ratio = total_assets / total_liabilities
+    assets_liab_ratio = total_liabilities / total_assets
   ) |>
-  arrange(year, state.name)
+  arrange(year, state.name) |>
+  select(-`...1`)
 
 # Filter 2022 data 
 state_data_22 <- state_data |>
@@ -117,9 +118,10 @@ county_data <- county_data_temp |>
     net_opeb_liability = net_opeb_liab
   ) |>
   mutate(
-    assets_liab_ratio = total_assets / total_liabilities
+    assets_liab_ratio = total_liabilities / total_assets
   ) |>
-  arrange(year, state.name)
+  arrange(year, state.name) |>
+  select(-`...1`)
 
 county_data_22 <- county_data |>
   filter(year == 2022) |>
@@ -188,9 +190,10 @@ city_data <- city_data_temp |>
     net_opeb_liability = net_opeb_liab
   ) |>
   mutate(
-    assets_liab_ratio = total_assets / total_liabilities
+    assets_liab_ratio = total_liabilities / total_assets
   ) |>
-  arrange(year, state.name)
+  arrange(year, state.name) |>
+  select(-`...1`)
 
 
 city_data_22 <- city_data |>
@@ -270,9 +273,10 @@ school_data <- school_data_temp |>
     net_opeb_liability = net_opeb_liab
   ) |>
   mutate(
-    assets_liab_ratio = total_assets / total_liabilities
+    assets_liab_ratio = total_liabilities / total_assets
   ) |>
-  arrange(year, state.name)
+  arrange(year, state.name) |>
+  select(-`...1`)
 
 school_data_22 <- school_data |>
   filter(year == 2022) |>

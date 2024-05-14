@@ -1,6 +1,5 @@
 [
   {
-    "...1": 1,
     "state.abb": "AL",
     "state.name": "Alabama",
     "geo_id": "0137000",
@@ -18,10 +17,9 @@
     "modified_revenues": -59953546,
     "net_pension_liability": 211600490,
     "net_opeb_liability": 66108743,
-    "assets_liab_ratio": 1.5901
+    "assets_liab_ratio": 0.6289
   },
   {
-    "...1": 31,
     "state.abb": "AZ",
     "state.name": "Arizona",
     "geo_id": "0465000",
@@ -39,10 +37,9 @@
     "modified_revenues": 50397000,
     "net_pension_liability": 352019000,
     "net_opeb_liability": 2177000,
-    "assets_liab_ratio": 4.1947
+    "assets_liab_ratio": 0.2384
   },
   {
-    "...1": 66,
     "state.abb": "AZ",
     "state.name": "Arizona",
     "geo_id": "0427820",
@@ -60,10 +57,9 @@
     "modified_revenues": 10909000,
     "net_pension_liability": 379276000,
     "net_opeb_liability": 1415000,
-    "assets_liab_ratio": 1.5916
+    "assets_liab_ratio": 0.6283
   },
   {
-    "...1": 72,
     "state.abb": "AZ",
     "state.name": "Arizona",
     "geo_id": "0455000",
@@ -81,10 +77,9 @@
     "modified_revenues": -668842000,
     "net_pension_liability": 4963845000,
     "net_opeb_liability": 144820000,
-    "assets_liab_ratio": 1.3748
+    "assets_liab_ratio": 0.7274
   },
   {
-    "...1": 77,
     "state.abb": "AZ",
     "state.name": "Arizona",
     "geo_id": "0477000",
@@ -102,10 +97,9 @@
     "modified_revenues": -31008124,
     "net_pension_liability": 1365520009,
     "net_opeb_liability": 202517172,
-    "assets_liab_ratio": 1.7005
+    "assets_liab_ratio": 0.5881
   },
   {
-    "...1": 85,
     "state.abb": "AZ",
     "state.name": "Arizona",
     "geo_id": "0446000",
@@ -123,10 +117,9 @@
     "modified_revenues": -278029000,
     "net_pension_liability": 908215779,
     "net_opeb_liability": 907417000,
-    "assets_liab_ratio": 1.1573
+    "assets_liab_ratio": 0.8641
   },
   {
-    "...1": 95,
     "state.abb": "AZ",
     "state.name": "Arizona",
     "geo_id": "0412000",
@@ -144,10 +137,9 @@
     "modified_revenues": 30635430,
     "net_pension_liability": 293895280,
     "net_opeb_liability": 53112727,
-    "assets_liab_ratio": 2.447
+    "assets_liab_ratio": 0.4087
   },
   {
-    "...1": 3,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0648354",
@@ -165,10 +157,9 @@
     "modified_revenues": -93710884,
     "net_pension_liability": 341835012,
     "net_opeb_liability": 26459988,
-    "assets_liab_ratio": 2.0948
+    "assets_liab_ratio": 0.4774
   },
   {
-    "...1": 5,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0603526",
@@ -186,10 +177,9 @@
     "modified_revenues": -31508017,
     "net_pension_liability": 441885448,
     "net_opeb_liability": 56993372,
-    "assets_liab_ratio": 3.4169
+    "assets_liab_ratio": 0.2927
   },
   {
-    "...1": 16,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0665000",
@@ -207,10 +197,9 @@
     "modified_revenues": -47985780,
     "net_pension_liability": 443384956,
     "net_opeb_liability": 13557801,
-    "assets_liab_ratio": 1.4508
+    "assets_liab_ratio": 0.6893
   },
   {
-    "...1": 25,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0664000",
@@ -228,10 +217,9 @@
     "modified_revenues": -90456000,
     "net_pension_liability": 1046941000,
     "net_opeb_liability": 248904000,
-    "assets_liab_ratio": 1.6846
+    "assets_liab_ratio": 0.5936
   },
   {
-    "...1": 32,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0662000",
@@ -249,10 +237,9 @@
     "modified_revenues": -109855000,
     "net_pension_liability": 599576000,
     "net_opeb_liability": 50004000,
-    "assets_liab_ratio": 1.4657
+    "assets_liab_ratio": 0.6823
   },
   {
-    "...1": 33,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0669000",
@@ -270,10 +257,9 @@
     "modified_revenues": -108451235,
     "net_pension_liability": 666536096,
     "net_opeb_liability": 52935451,
-    "assets_liab_ratio": 1.6395
+    "assets_liab_ratio": 0.6099
   },
   {
-    "...1": 34,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0643000",
@@ -291,10 +277,9 @@
     "modified_revenues": -244006000,
     "net_pension_liability": 1205496000,
     "net_opeb_liability": 9655000,
-    "assets_liab_ratio": 2.2055
+    "assets_liab_ratio": 0.4534
   },
   {
-    "...1": 47,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0613392",
@@ -312,10 +297,9 @@
     "modified_revenues": 52576363,
     "net_pension_liability": 334945720,
     "net_opeb_liability": 25079014,
-    "assets_liab_ratio": 3.4511
+    "assets_liab_ratio": 0.2898
   },
   {
-    "...1": 55,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0626000",
@@ -333,10 +317,9 @@
     "modified_revenues": 8498016,
     "net_pension_liability": 390302773,
     "net_opeb_liability": 82735272,
-    "assets_liab_ratio": 2.1005
+    "assets_liab_ratio": 0.4761
   },
   {
-    "...1": 67,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0602000",
@@ -354,10 +337,9 @@
     "modified_revenues": -195121000,
     "net_pension_liability": 790303000,
     "net_opeb_liability": 161507000,
-    "assets_liab_ratio": 1.6099
+    "assets_liab_ratio": 0.6212
   },
   {
-    "...1": 68,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0653000",
@@ -375,10 +357,9 @@
     "modified_revenues": -105610000,
     "net_pension_liability": 1717434000,
     "net_opeb_liability": 598569000,
-    "assets_liab_ratio": 0.9732
+    "assets_liab_ratio": 1.0276
   },
   {
-    "...1": 71,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0636770",
@@ -396,10 +377,9 @@
     "modified_revenues": -75149000,
     "net_pension_liability": 146569000,
     "net_opeb_liability": 8219000,
-    "assets_liab_ratio": 13.1555
+    "assets_liab_ratio": 0.076
   },
   {
-    "...1": 73,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0669088",
@@ -417,10 +397,9 @@
     "modified_revenues": 7490336,
     "net_pension_liability": 38909366,
     "net_opeb_liability": 16669651,
-    "assets_liab_ratio": 6.8238
+    "assets_liab_ratio": 0.1465
   },
   {
-    "...1": 74,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0649270",
@@ -438,10 +417,9 @@
     "modified_revenues": -29003231,
     "net_pension_liability": 72896273,
     "net_opeb_liability": 8175011,
-    "assets_liab_ratio": 5.6907
+    "assets_liab_ratio": 0.1757
   },
   {
-    "...1": 79,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0666000",
@@ -459,10 +437,9 @@
     "modified_revenues": -729301000,
     "net_pension_liability": 2671000000,
     "net_opeb_liability": 462516000,
-    "assets_liab_ratio": 2.1064
+    "assets_liab_ratio": 0.4747
   },
   {
-    "...1": 82,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0627000",
@@ -480,10 +457,9 @@
     "modified_revenues": -137066000,
     "net_pension_liability": -244990000,
     "net_opeb_liability": 148672000,
-    "assets_liab_ratio": 2.6179
+    "assets_liab_ratio": 0.382
   },
   {
-    "...1": 83,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0644000",
@@ -501,10 +477,9 @@
     "modified_revenues": -2827891000,
     "net_pension_liability": 8541000000,
     "net_opeb_liability": 2674034000,
-    "assets_liab_ratio": 1.4327
+    "assets_liab_ratio": 0.698
   },
   {
-    "...1": 86,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0675000",
@@ -522,10 +497,9 @@
     "modified_revenues": 19416393,
     "net_pension_liability": 536028393,
     "net_opeb_liability": 67397341,
-    "assets_liab_ratio": 2.1772
+    "assets_liab_ratio": 0.4593
   },
   {
-    "...1": 90,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0667000",
@@ -543,10 +517,9 @@
     "modified_revenues": -5113674000,
     "net_pension_liability": 4655538000,
     "net_opeb_liability": 3903016000,
-    "assets_liab_ratio": 1.263
+    "assets_liab_ratio": 0.7917
   },
   {
-    "...1": 287,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0668000",
@@ -564,10 +537,9 @@
     "modified_revenues": -542175000,
     "net_pension_liability": 3383225000,
     "net_opeb_liability": 975830000,
-    "assets_liab_ratio": 1.4239
+    "assets_liab_ratio": 0.7023
   },
   {
-    "...1": 35,
     "state.abb": "CO",
     "state.name": "Colorado",
     "geo_id": "0816000",
@@ -585,10 +557,9 @@
     "modified_revenues": -286491526,
     "net_pension_liability": 420420899,
     "net_opeb_liability": 84007000,
-    "assets_liab_ratio": 1.9062
+    "assets_liab_ratio": 0.5246
   },
   {
-    "...1": 56,
     "state.abb": "CO",
     "state.name": "Colorado",
     "geo_id": "0804000",
@@ -606,10 +577,9 @@
     "modified_revenues": 315637230,
     "net_pension_liability": 133663291,
     "net_opeb_liability": 19443717,
-    "assets_liab_ratio": 6.4633
+    "assets_liab_ratio": 0.1547
   },
   {
-    "...1": 288,
     "state.abb": "CO",
     "state.name": "Colorado",
     "geo_id": "0820000",
@@ -627,10 +597,9 @@
     "modified_revenues": -677897000,
     "net_pension_liability": 1682238000,
     "net_opeb_liability": 249680000,
-    "assets_liab_ratio": 1.3751
+    "assets_liab_ratio": 0.7272
   },
   {
-    "...1": 13,
     "state.abb": "FL",
     "state.name": "Florida",
     "geo_id": "1230000",
@@ -648,10 +617,9 @@
     "modified_revenues": -90904888,
     "net_pension_liability": 299598953,
     "net_opeb_liability": 441473906,
-    "assets_liab_ratio": 0.6389
+    "assets_liab_ratio": 1.5652
   },
   {
-    "...1": 30,
     "state.abb": "FL",
     "state.name": "Florida",
     "geo_id": "1245000",
@@ -669,10 +637,9 @@
     "modified_revenues": -199305579,
     "net_pension_liability": 994144647,
     "net_opeb_liability": 867949431,
-    "assets_liab_ratio": 0.6363
+    "assets_liab_ratio": 1.5717
   },
   {
-    "...1": 36,
     "state.abb": "FL",
     "state.name": "Florida",
     "geo_id": "1271000",
@@ -690,10 +657,9 @@
     "modified_revenues": -40374135,
     "net_pension_liability": 201706974,
     "net_opeb_liability": 135123704,
-    "assets_liab_ratio": 2.4899
+    "assets_liab_ratio": 0.4016
   },
   {
-    "...1": 54,
     "state.abb": "FL",
     "state.name": "Florida",
     "geo_id": "1253000",
@@ -711,10 +677,9 @@
     "modified_revenues": -145228492,
     "net_pension_liability": 289467567,
     "net_opeb_liability": 350601860,
-    "assets_liab_ratio": 1.9547
+    "assets_liab_ratio": 0.5116
   },
   {
-    "...1": 76,
     "state.abb": "FL",
     "state.name": "Florida",
     "geo_id": "1263000",
@@ -732,10 +697,9 @@
     "modified_revenues": -18883448,
     "net_pension_liability": 85462307,
     "net_opeb_liability": 224027878,
-    "assets_liab_ratio": 1.8686
+    "assets_liab_ratio": 0.5352
   },
   {
-    "...1": 93,
     "state.abb": "FL",
     "state.name": "Florida",
     "geo_id": "1235000",
@@ -753,10 +717,9 @@
     "modified_revenues": -254566000,
     "net_pension_liability": 2985785000,
     "net_opeb_liability": 261160000,
-    "assets_liab_ratio": 0.8109
+    "assets_liab_ratio": 1.2333
   },
   {
-    "...1": 80,
     "state.abb": "GA",
     "state.name": "Georgia",
     "geo_id": "1304000",
@@ -774,10 +737,9 @@
     "modified_revenues": 66710000,
     "net_pension_liability": 1114364000,
     "net_opeb_liability": 992098000,
-    "assets_liab_ratio": 1.7235
+    "assets_liab_ratio": 0.5802
   },
   {
-    "...1": 65,
     "state.abb": "ID",
     "state.name": "Idaho",
     "geo_id": "1608830",
@@ -795,10 +757,9 @@
     "modified_revenues": 33726000,
     "net_pension_liability": 28591000,
     "net_opeb_liability": 15136000,
-    "assets_liab_ratio": 6.3742
+    "assets_liab_ratio": 0.1569
   },
   {
-    "...1": 38,
     "state.abb": "IL",
     "state.name": "Illinois",
     "geo_id": "1714000",
@@ -816,10 +777,9 @@
     "modified_revenues": -3797994000,
     "net_pension_liability": 32958251000,
     "net_opeb_liability": 1963340000,
-    "assets_liab_ratio": 0.6135
+    "assets_liab_ratio": 1.63
   },
   {
-    "...1": 88,
     "state.abb": "IN",
     "state.name": "Indiana",
     "geo_id": "1825000",
@@ -837,10 +797,9 @@
     "modified_revenues": 12986887,
     "net_pension_liability": 237996172,
     "net_opeb_liability": 167460423,
-    "assets_liab_ratio": 1.9319
+    "assets_liab_ratio": 0.5176
   },
   {
-    "...1": 64,
     "state.abb": "IA",
     "state.name": "Iowa",
     "geo_id": "1921000",
@@ -858,10 +817,9 @@
     "modified_revenues": 29842287,
     "net_pension_liability": 177894533,
     "net_opeb_liability": 22869853,
-    "assets_liab_ratio": 2.4064
+    "assets_liab_ratio": 0.4156
   },
   {
-    "...1": 4,
     "state.abb": "KS",
     "state.name": "Kansas",
     "geo_id": "2079000",
@@ -879,10 +837,9 @@
     "modified_revenues": 9804434,
     "net_pension_liability": 99941000,
     "net_opeb_liability": 42211000,
-    "assets_liab_ratio": 2.7274
+    "assets_liab_ratio": 0.3666
   },
   {
-    "...1": 289,
     "state.abb": "LA",
     "state.name": "Louisiana",
     "geo_id": "2255000",
@@ -900,10 +857,9 @@
     "modified_revenues": -66363000,
     "net_pension_liability": 968753000,
     "net_opeb_liability": 173245000,
-    "assets_liab_ratio": 1.0046
+    "assets_liab_ratio": 0.9954
   },
   {
-    "...1": 53,
     "state.abb": "MD",
     "state.name": "Maryland",
     "geo_id": "2404000",
@@ -921,10 +877,9 @@
     "modified_revenues": -936621000,
     "net_pension_liability": 1866590000,
     "net_opeb_liability": 1245666000,
-    "assets_liab_ratio": 1.3062
+    "assets_liab_ratio": 0.7656
   },
   {
-    "...1": 63,
     "state.abb": "MA",
     "state.name": "Massachusetts",
     "geo_id": "2507000",
@@ -942,10 +897,9 @@
     "modified_revenues": 22719000,
     "net_pension_liability": 1754871000,
     "net_opeb_liability": 2273281000,
-    "assets_liab_ratio": 0.7387
+    "assets_liab_ratio": 1.3537
   },
   {
-    "...1": 94,
     "state.abb": "MI",
     "state.name": "Michigan",
     "geo_id": "2622000",
@@ -963,10 +917,9 @@
     "modified_revenues": -493447032,
     "net_pension_liability": 1755415391,
     "net_opeb_liability": 445447,
-    "assets_liab_ratio": 1.1287
+    "assets_liab_ratio": 0.886
   },
   {
-    "...1": 57,
     "state.abb": "MN",
     "state.name": "Minnesota",
     "geo_id": "2743000",
@@ -984,10 +937,9 @@
     "modified_revenues": -36201000,
     "net_pension_liability": 528974000,
     "net_opeb_liability": 41281000,
-    "assets_liab_ratio": 2.4755
+    "assets_liab_ratio": 0.404
   },
   {
-    "...1": 62,
     "state.abb": "MN",
     "state.name": "Minnesota",
     "geo_id": "2758000",
@@ -1005,10 +957,9 @@
     "modified_revenues": -4629953,
     "net_pension_liability": 214764491,
     "net_opeb_liability": 267232002,
-    "assets_liab_ratio": 2.0628
+    "assets_liab_ratio": 0.4848
   },
   {
-    "...1": 18,
     "state.abb": "MO",
     "state.name": "Missouri",
     "geo_id": "2938000",
@@ -1026,10 +977,9 @@
     "modified_revenues": -471749000,
     "net_pension_liability": 870059000,
     "net_opeb_liability": 115354000,
-    "assets_liab_ratio": 1.8747
+    "assets_liab_ratio": 0.5334
   },
   {
-    "...1": 19,
     "state.abb": "MO",
     "state.name": "Missouri",
     "geo_id": "2965000",
@@ -1047,10 +997,9 @@
     "modified_revenues": -269052000,
     "net_pension_liability": 572126000,
     "net_opeb_liability": 629014000,
-    "assets_liab_ratio": 1.0944
+    "assets_liab_ratio": 0.9138
   },
   {
-    "...1": 39,
     "state.abb": "NE",
     "state.name": "Nebraska",
     "geo_id": "3137000",
@@ -1068,10 +1017,9 @@
     "modified_revenues": 81658251,
     "net_pension_liability": 967110658,
     "net_opeb_liability": 491560909,
-    "assets_liab_ratio": 1.0939
+    "assets_liab_ratio": 0.9142
   },
   {
-    "...1": 70,
     "state.abb": "NE",
     "state.name": "Nebraska",
     "geo_id": "3128000",
@@ -1089,10 +1037,9 @@
     "modified_revenues": -58741539,
     "net_pension_liability": 75894676,
     "net_opeb_liability": 20079000,
-    "assets_liab_ratio": 2.36
+    "assets_liab_ratio": 0.4237
   },
   {
-    "...1": 27,
     "state.abb": "NV",
     "state.name": "Nevada",
     "geo_id": "3251800",
@@ -1110,10 +1057,9 @@
     "modified_revenues": 66717867,
     "net_pension_liability": 218565388,
     "net_opeb_liability": 43455396,
-    "assets_liab_ratio": 3.1372
+    "assets_liab_ratio": 0.3188
   },
   {
-    "...1": 40,
     "state.abb": "NV",
     "state.name": "Nevada",
     "geo_id": "3240000",
@@ -1131,10 +1077,9 @@
     "modified_revenues": 169233802,
     "net_pension_liability": 878316585,
     "net_opeb_liability": 55107913,
-    "assets_liab_ratio": 3.2581
+    "assets_liab_ratio": 0.3069
   },
   {
-    "...1": 41,
     "state.abb": "NV",
     "state.name": "Nevada",
     "geo_id": "3231900",
@@ -1152,10 +1097,9 @@
     "modified_revenues": -54577376,
     "net_pension_liability": 411959319,
     "net_opeb_liability": 85625605,
-    "assets_liab_ratio": 3.4185
+    "assets_liab_ratio": 0.2925
   },
   {
-    "...1": 58,
     "state.abb": "NV",
     "state.name": "Nevada",
     "geo_id": "3260600",
@@ -1173,10 +1117,9 @@
     "modified_revenues": 71629669,
     "net_pension_liability": 249852734,
     "net_opeb_liability": 168272737,
-    "assets_liab_ratio": 1.745
+    "assets_liab_ratio": 0.5731
   },
   {
-    "...1": 89,
     "state.abb": "NJ",
     "state.name": "New Jersey",
     "geo_id": "3436000",
@@ -1194,10 +1137,9 @@
     "modified_revenues": -48720600,
     "net_pension_liability": 1081996047,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 3.4604
+    "assets_liab_ratio": 0.289
   },
   {
-    "...1": 81,
     "state.abb": "NM",
     "state.name": "New Mexico",
     "geo_id": "3502000",
@@ -1215,10 +1157,9 @@
     "modified_revenues": -164147540,
     "net_pension_liability": 773785015,
     "net_opeb_liability": 256989344,
-    "assets_liab_ratio": 2.4331
+    "assets_liab_ratio": 0.411
   },
   {
-    "...1": 43,
     "state.abb": "NY",
     "state.name": "New York",
     "geo_id": "3684000",
@@ -1236,10 +1177,9 @@
     "modified_revenues": -485043341,
     "net_pension_liability": 389825681,
     "net_opeb_liability": 3452182595,
-    "assets_liab_ratio": 0.263
+    "assets_liab_ratio": 3.8026
   },
   {
-    "...1": 75,
     "state.abb": "NY",
     "state.name": "New York",
     "geo_id": "3663000",
@@ -1257,10 +1197,9 @@
     "modified_revenues": -309636000,
     "net_pension_liability": 254732000,
     "net_opeb_liability": 1477364000,
-    "assets_liab_ratio": 0.6574
+    "assets_liab_ratio": 1.5211
   },
   {
-    "...1": 87,
     "state.abb": "NY",
     "state.name": "New York",
     "geo_id": "3651000",
@@ -1278,10 +1217,9 @@
     "modified_revenues": -34592430000,
     "net_pension_liability": 46376874000,
     "net_opeb_liability": 109456918000,
-    "assets_liab_ratio": 0.3794
+    "assets_liab_ratio": 2.636
   },
   {
-    "...1": 286,
     "state.abb": "NY",
     "state.name": "New York",
     "geo_id": "3611000",
@@ -1299,10 +1237,9 @@
     "modified_revenues": -358568072,
     "net_pension_liability": 254162180,
     "net_opeb_liability": 1228417474,
-    "assets_liab_ratio": 0.5822
+    "assets_liab_ratio": 1.7177
   },
   {
-    "...1": 10,
     "state.abb": "NC",
     "state.name": "North Carolina",
     "geo_id": "3728000",
@@ -1320,10 +1257,9 @@
     "modified_revenues": -27192220,
     "net_pension_liability": 90709688,
     "net_opeb_liability": 131940179,
-    "assets_liab_ratio": 1.9403
+    "assets_liab_ratio": 0.5154
   },
   {
-    "...1": 21,
     "state.abb": "NC",
     "state.name": "North Carolina",
     "geo_id": "3712000",
@@ -1341,10 +1277,9 @@
     "modified_revenues": -316869000,
     "net_pension_liability": 618604000,
     "net_opeb_liability": 531962000,
-    "assets_liab_ratio": 2.668
+    "assets_liab_ratio": 0.3748
   },
   {
-    "...1": 26,
     "state.abb": "NC",
     "state.name": "North Carolina",
     "geo_id": "3775000",
@@ -1362,10 +1297,9 @@
     "modified_revenues": 23628733,
     "net_pension_liability": 108050925,
     "net_opeb_liability": 7852505,
-    "assets_liab_ratio": 1.9578
+    "assets_liab_ratio": 0.5108
   },
   {
-    "...1": 42,
     "state.abb": "NC",
     "state.name": "North Carolina",
     "geo_id": "3719000",
@@ -1383,10 +1317,9 @@
     "modified_revenues": 8850623,
     "net_pension_liability": 84911103,
     "net_opeb_liability": 155600034,
-    "assets_liab_ratio": 0.9393
+    "assets_liab_ratio": 1.0646
   },
   {
-    "...1": 91,
     "state.abb": "NC",
     "state.name": "North Carolina",
     "geo_id": "3755000",
@@ -1404,10 +1337,9 @@
     "modified_revenues": -14345127,
     "net_pension_liability": 157437366,
     "net_opeb_liability": 190900860,
-    "assets_liab_ratio": 2.1521
+    "assets_liab_ratio": 0.4647
   },
   {
-    "...1": 9,
     "state.abb": "OH",
     "state.name": "Ohio",
     "geo_id": "3918000",
@@ -1425,10 +1357,9 @@
     "modified_revenues": 32689000,
     "net_pension_liability": 1466875000,
     "net_opeb_liability": 471418000,
-    "assets_liab_ratio": 1.3944
+    "assets_liab_ratio": 0.7172
   },
   {
-    "...1": 15,
     "state.abb": "OH",
     "state.name": "Ohio",
     "geo_id": "3977000",
@@ -1446,10 +1377,9 @@
     "modified_revenues": 33661000,
     "net_pension_liability": 367616000,
     "net_opeb_liability": 113536000,
-    "assets_liab_ratio": 1.5054
+    "assets_liab_ratio": 0.6643
   },
   {
-    "...1": 37,
     "state.abb": "OH",
     "state.name": "Ohio",
     "geo_id": "3915000",
@@ -1467,10 +1397,9 @@
     "modified_revenues": -456779000,
     "net_pension_liability": 1498856000,
     "net_opeb_liability": 211704000,
-    "assets_liab_ratio": 1.2255
+    "assets_liab_ratio": 0.816
   },
   {
-    "...1": 44,
     "state.abb": "OH",
     "state.name": "Ohio",
     "geo_id": "3916000",
@@ -1488,10 +1417,9 @@
     "modified_revenues": -386583000,
     "net_pension_liability": 893120000,
     "net_opeb_liability": 344486000,
-    "assets_liab_ratio": 1.6203
+    "assets_liab_ratio": 0.6172
   },
   {
-    "...1": 2,
     "state.abb": "OK",
     "state.name": "Oklahoma",
     "geo_id": "4075000",
@@ -1509,10 +1437,9 @@
     "modified_revenues": 17356000,
     "net_pension_liability": 292959000,
     "net_opeb_liability": 4648000,
-    "assets_liab_ratio": 2.8203
+    "assets_liab_ratio": 0.3546
   },
   {
-    "...1": 29,
     "state.abb": "OK",
     "state.name": "Oklahoma",
     "geo_id": "4055000",
@@ -1530,10 +1457,9 @@
     "modified_revenues": -58416000,
     "net_pension_liability": 277034000,
     "net_opeb_liability": 425090000,
-    "assets_liab_ratio": 2.1029
+    "assets_liab_ratio": 0.4755
   },
   {
-    "...1": 45,
     "state.abb": "OR",
     "state.name": "Oregon",
     "geo_id": "4159000",
@@ -1551,10 +1477,9 @@
     "modified_revenues": -251416613,
     "net_pension_liability": 5078795811,
     "net_opeb_liability": 76618578,
-    "assets_liab_ratio": 1.0522
+    "assets_liab_ratio": 0.9504
   },
   {
-    "...1": 8,
     "state.abb": "PA",
     "state.name": "Pennsylvania",
     "geo_id": "4261000",
@@ -1572,10 +1497,9 @@
     "modified_revenues": -37638459,
     "net_pension_liability": 776368485,
     "net_opeb_liability": 402893514,
-    "assets_liab_ratio": 0.2942
+    "assets_liab_ratio": 3.3986
   },
   {
-    "...1": 78,
     "state.abb": "PA",
     "state.name": "Pennsylvania",
     "geo_id": "4260000",
@@ -1593,10 +1517,9 @@
     "modified_revenues": -1971915000,
     "net_pension_liability": 6095885000,
     "net_opeb_liability": 1935327000,
-    "assets_liab_ratio": 0.6905
+    "assets_liab_ratio": 1.4483
   },
   {
-    "...1": 28,
     "state.abb": "TN",
     "state.name": "Tennessee",
     "geo_id": "4748000",
@@ -1614,10 +1537,9 @@
     "modified_revenues": -661163000,
     "net_pension_liability": 578293000,
     "net_opeb_liability": 933940000,
-    "assets_liab_ratio": 1.5138
+    "assets_liab_ratio": 0.6606
   },
   {
-    "...1": 6,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4835000",
@@ -1635,10 +1557,9 @@
     "modified_revenues": -816818000,
     "net_pension_liability": 4944343000,
     "net_opeb_liability": 2233624000,
-    "assets_liab_ratio": 1.0228
+    "assets_liab_ratio": 0.9777
   },
   {
-    "...1": 7,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4829000",
@@ -1656,10 +1577,9 @@
     "modified_revenues": -31570801,
     "net_pension_liability": 15972628,
     "net_opeb_liability": 85640582,
-    "assets_liab_ratio": 1.7072
+    "assets_liab_ratio": 0.5858
   },
   {
-    "...1": 11,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4845000",
@@ -1677,10 +1597,9 @@
     "modified_revenues": 12751904,
     "net_pension_liability": 167632275,
     "net_opeb_liability": 150930890,
-    "assets_liab_ratio": 1.5946
+    "assets_liab_ratio": 0.6271
   },
   {
-    "...1": 17,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4817000",
@@ -1698,10 +1617,9 @@
     "modified_revenues": 94175097,
     "net_pension_liability": 227467000,
     "net_opeb_liability": 9212565,
-    "assets_liab_ratio": 1.837
+    "assets_liab_ratio": 0.5444
   },
   {
-    "...1": 46,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4819000",
@@ -1719,10 +1637,9 @@
     "modified_revenues": -57334000,
     "net_pension_liability": 4693271000,
     "net_opeb_liability": 530989000,
-    "assets_liab_ratio": 0.1795
+    "assets_liab_ratio": 5.5723
   },
   {
-    "...1": 48,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4827000",
@@ -1740,10 +1657,9 @@
     "modified_revenues": 1695859000,
     "net_pension_liability": 2259058000,
     "net_opeb_liability": 970878000,
-    "assets_liab_ratio": 1.4358
+    "assets_liab_ratio": 0.6965
   },
   {
-    "...1": 49,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4858016",
@@ -1761,10 +1677,9 @@
     "modified_revenues": -16129995,
     "net_pension_liability": 74014899,
     "net_opeb_liability": 12327491,
-    "assets_liab_ratio": 3.1608
+    "assets_liab_ratio": 0.3164
   },
   {
-    "...1": 50,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4805000",
@@ -1782,10 +1697,9 @@
     "modified_revenues": -870020000,
     "net_pension_liability": 3003314000,
     "net_opeb_liability": 3504494000,
-    "assets_liab_ratio": 1.1855
+    "assets_liab_ratio": 0.8435
   },
   {
-    "...1": 51,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4841464",
@@ -1803,10 +1717,9 @@
     "modified_revenues": -70044365,
     "net_pension_liability": 250329436,
     "net_opeb_liability": 265995373,
-    "assets_liab_ratio": 1.4365
+    "assets_liab_ratio": 0.6961
   },
   {
-    "...1": 59,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4837000",
@@ -1824,10 +1737,9 @@
     "modified_revenues": -11992328,
     "net_pension_liability": 164966856,
     "net_opeb_liability": 16706512,
-    "assets_liab_ratio": 1.945
+    "assets_liab_ratio": 0.5141
   },
   {
-    "...1": 60,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4865000",
@@ -1845,10 +1757,9 @@
     "modified_revenues": -454209000,
     "net_pension_liability": 993046000,
     "net_opeb_liability": 1170748000,
-    "assets_liab_ratio": 1.3241
+    "assets_liab_ratio": 0.7552
   },
   {
-    "...1": 61,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4804000",
@@ -1866,10 +1777,9 @@
     "modified_revenues": 334756000,
     "net_pension_liability": 140315000,
     "net_opeb_liability": 125696000,
-    "assets_liab_ratio": 2.3038
+    "assets_liab_ratio": 0.4341
   },
   {
-    "...1": 69,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4824000",
@@ -1887,10 +1797,9 @@
     "modified_revenues": -86827660,
     "net_pension_liability": 590743738,
     "net_opeb_liability": 156786139,
-    "assets_liab_ratio": 1.0244
+    "assets_liab_ratio": 0.9762
   },
   {
-    "...1": 20,
     "state.abb": "VA",
     "state.name": "Virginia",
     "geo_id": "5157000",
@@ -1908,10 +1817,9 @@
     "modified_revenues": -163642378,
     "net_pension_liability": 319781825,
     "net_opeb_liability": 75620871,
-    "assets_liab_ratio": 1.3156
+    "assets_liab_ratio": 0.7601
   },
   {
-    "...1": 22,
     "state.abb": "VA",
     "state.name": "Virginia",
     "geo_id": "5116000",
@@ -1929,10 +1837,9 @@
     "modified_revenues": -44563467,
     "net_pension_liability": 162210178,
     "net_opeb_liability": 41676036,
-    "assets_liab_ratio": 2.7338
+    "assets_liab_ratio": 0.3658
   },
   {
-    "...1": 23,
     "state.abb": "VA",
     "state.name": "Virginia",
     "geo_id": "5167000",
@@ -1950,10 +1857,9 @@
     "modified_revenues": -125802374,
     "net_pension_liability": 370679024,
     "net_opeb_liability": 116933633,
-    "assets_liab_ratio": 1.3679
+    "assets_liab_ratio": 0.731
   },
   {
-    "...1": 24,
     "state.abb": "VA",
     "state.name": "Virginia",
     "geo_id": "5182000",
@@ -1971,10 +1877,9 @@
     "modified_revenues": -17598770,
     "net_pension_liability": 417692180,
     "net_opeb_liability": 103615930,
-    "assets_liab_ratio": 2.7422
+    "assets_liab_ratio": 0.3647
   },
   {
-    "...1": 12,
     "state.abb": "WA",
     "state.name": "Washington",
     "geo_id": "5363000",
@@ -1992,10 +1897,9 @@
     "modified_revenues": -446442000,
     "net_pension_liability": 1195375000,
     "net_opeb_liability": 673085000,
-    "assets_liab_ratio": 1.7296
+    "assets_liab_ratio": 0.5782
   },
   {
-    "...1": 84,
     "state.abb": "WA",
     "state.name": "Washington",
     "geo_id": "5370000",
@@ -2013,10 +1917,9 @@
     "modified_revenues": -119645000,
     "net_pension_liability": -45317000,
     "net_opeb_liability": 208422000,
-    "assets_liab_ratio": 2.5076
+    "assets_liab_ratio": 0.3988
   },
   {
-    "...1": 92,
     "state.abb": "WA",
     "state.name": "Washington",
     "geo_id": "5367000",
@@ -2034,10 +1937,9 @@
     "modified_revenues": 15846556,
     "net_pension_liability": -61452699,
     "net_opeb_liability": -97392855,
-    "assets_liab_ratio": 3.5684
+    "assets_liab_ratio": 0.2802
   },
   {
-    "...1": 14,
     "state.abb": "WI",
     "state.name": "Wisconsin",
     "geo_id": "5548000",
@@ -2055,10 +1957,9 @@
     "modified_revenues": -56770240,
     "net_pension_liability": -57455784,
     "net_opeb_liability": 82355761,
-    "assets_liab_ratio": 2.6037
+    "assets_liab_ratio": 0.3841
   },
   {
-    "...1": 52,
     "state.abb": "WI",
     "state.name": "Wisconsin",
     "geo_id": "5553000",
@@ -2076,10 +1977,9 @@
     "modified_revenues": -485328000,
     "net_pension_liability": 850751000,
     "net_opeb_liability": 1690355000,
-    "assets_liab_ratio": 0.8361
+    "assets_liab_ratio": 1.1961
   },
   {
-    "...1": 96,
     "state.abb": "AL",
     "state.name": "Alabama",
     "geo_id": "0137000",
@@ -2097,10 +1997,9 @@
     "modified_revenues": 49869474,
     "net_pension_liability": 222331632,
     "net_opeb_liability": 72487230,
-    "assets_liab_ratio": 1.6784
+    "assets_liab_ratio": 0.5958
   },
   {
-    "...1": 106,
     "state.abb": "AZ",
     "state.name": "Arizona",
     "geo_id": "0465000",
@@ -2118,10 +2017,9 @@
     "modified_revenues": 337561000,
     "net_pension_liability": 421583000,
     "net_opeb_liability": 1923000,
-    "assets_liab_ratio": 4.3284
+    "assets_liab_ratio": 0.231
   },
   {
-    "...1": 152,
     "state.abb": "AZ",
     "state.name": "Arizona",
     "geo_id": "0446000",
@@ -2139,10 +2037,9 @@
     "modified_revenues": -293492000,
     "net_pension_liability": 1014811000,
     "net_opeb_liability": 953762000,
-    "assets_liab_ratio": 1.1442
+    "assets_liab_ratio": 0.874
   },
   {
-    "...1": 153,
     "state.abb": "AZ",
     "state.name": "Arizona",
     "geo_id": "0412000",
@@ -2160,10 +2057,9 @@
     "modified_revenues": -37826574,
     "net_pension_liability": 316219876,
     "net_opeb_liability": 63003983,
-    "assets_liab_ratio": 2.4024
+    "assets_liab_ratio": 0.4162
   },
   {
-    "...1": 162,
     "state.abb": "AZ",
     "state.name": "Arizona",
     "geo_id": "0427820",
@@ -2181,10 +2077,9 @@
     "modified_revenues": 1760000,
     "net_pension_liability": 429332000,
     "net_opeb_liability": -1303000,
-    "assets_liab_ratio": 1.6155
+    "assets_liab_ratio": 0.619
   },
   {
-    "...1": 176,
     "state.abb": "AZ",
     "state.name": "Arizona",
     "geo_id": "0455000",
@@ -2202,10 +2097,9 @@
     "modified_revenues": -223458000,
     "net_pension_liability": 4652055000,
     "net_opeb_liability": 62551000,
-    "assets_liab_ratio": 1.4437
+    "assets_liab_ratio": 0.6927
   },
   {
-    "...1": 188,
     "state.abb": "AZ",
     "state.name": "Arizona",
     "geo_id": "0477000",
@@ -2223,10 +2117,9 @@
     "modified_revenues": 35354476,
     "net_pension_liability": 1291047640,
     "net_opeb_liability": 212813304,
-    "assets_liab_ratio": 1.6806
+    "assets_liab_ratio": 0.595
   },
   {
-    "...1": 97,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0664000",
@@ -2244,10 +2137,9 @@
     "modified_revenues": -57746000,
     "net_pension_liability": 1069704000,
     "net_opeb_liability": 244249000,
-    "assets_liab_ratio": 1.7193
+    "assets_liab_ratio": 0.5816
   },
   {
-    "...1": 107,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0662000",
@@ -2265,10 +2157,9 @@
     "modified_revenues": -149068000,
     "net_pension_liability": 229566000,
     "net_opeb_liability": 52276000,
-    "assets_liab_ratio": 1.7236
+    "assets_liab_ratio": 0.5802
   },
   {
-    "...1": 108,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0669000",
@@ -2286,10 +2177,9 @@
     "modified_revenues": -136374660,
     "net_pension_liability": 702444738,
     "net_opeb_liability": 55210904,
-    "assets_liab_ratio": 1.6029
+    "assets_liab_ratio": 0.6239
   },
   {
-    "...1": 109,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0643000",
@@ -2307,10 +2197,9 @@
     "modified_revenues": -42383000,
     "net_pension_liability": 527875000,
     "net_opeb_liability": 8785000,
-    "assets_liab_ratio": 2.5432
+    "assets_liab_ratio": 0.3932
   },
   {
-    "...1": 121,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0613392",
@@ -2328,10 +2217,9 @@
     "modified_revenues": 7420470,
     "net_pension_liability": 351965194,
     "net_opeb_liability": 26787344,
-    "assets_liab_ratio": 2.1731
+    "assets_liab_ratio": 0.4602
   },
   {
-    "...1": 127,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0603526",
@@ -2349,10 +2237,9 @@
     "modified_revenues": 80425487,
     "net_pension_liability": 461426874,
     "net_opeb_liability": 36512308,
-    "assets_liab_ratio": 3.6206
+    "assets_liab_ratio": 0.2762
   },
   {
-    "...1": 134,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0665000",
@@ -2370,10 +2257,9 @@
     "modified_revenues": -44973834,
     "net_pension_liability": 473069693,
     "net_opeb_liability": 4870958,
-    "assets_liab_ratio": 1.4541
+    "assets_liab_ratio": 0.6877
   },
   {
-    "...1": 144,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0648354",
@@ -2391,10 +2277,9 @@
     "modified_revenues": -14134261,
     "net_pension_liability": 364250642,
     "net_opeb_liability": 30427400,
-    "assets_liab_ratio": 2.2112
+    "assets_liab_ratio": 0.4522
   },
   {
-    "...1": 154,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0626000",
@@ -2412,10 +2297,9 @@
     "modified_revenues": 8210501,
     "net_pension_liability": 409107867,
     "net_opeb_liability": 81415258,
-    "assets_liab_ratio": 2.1421
+    "assets_liab_ratio": 0.4668
   },
   {
-    "...1": 163,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0602000",
@@ -2433,10 +2317,9 @@
     "modified_revenues": -250633000,
     "net_pension_liability": 834846000,
     "net_opeb_liability": 160100000,
-    "assets_liab_ratio": 1.56
+    "assets_liab_ratio": 0.641
   },
   {
-    "...1": 166,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0653000",
@@ -2454,10 +2337,9 @@
     "modified_revenues": -311360000,
     "net_pension_liability": 1801374000,
     "net_opeb_liability": 842836000,
-    "assets_liab_ratio": 0.9374
+    "assets_liab_ratio": 1.0667
   },
   {
-    "...1": 169,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0636770",
@@ -2475,10 +2357,9 @@
     "modified_revenues": -114805000,
     "net_pension_liability": 153978000,
     "net_opeb_liability": 9488000,
-    "assets_liab_ratio": 11.3232
+    "assets_liab_ratio": 0.0883
   },
   {
-    "...1": 170,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0649270",
@@ -2496,10 +2377,9 @@
     "modified_revenues": -20509340,
     "net_pension_liability": 77591423,
     "net_opeb_liability": 9047518,
-    "assets_liab_ratio": 5.0818
+    "assets_liab_ratio": 0.1968
   },
   {
-    "...1": 173,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0627000",
@@ -2517,10 +2397,9 @@
     "modified_revenues": -276228000,
     "net_pension_liability": -93198000,
     "net_opeb_liability": 152604000,
-    "assets_liab_ratio": 2.4768
+    "assets_liab_ratio": 0.4037
   },
   {
-    "...1": 174,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0644000",
@@ -2538,10 +2417,9 @@
     "modified_revenues": -2921940000,
     "net_pension_liability": 11279212000,
     "net_opeb_liability": 2484602000,
-    "assets_liab_ratio": 1.3728
+    "assets_liab_ratio": 0.7285
   },
   {
-    "...1": 177,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0669088",
@@ -2559,10 +2437,9 @@
     "modified_revenues": 69053123,
     "net_pension_liability": 34737777,
     "net_opeb_liability": -12575778,
-    "assets_liab_ratio": 7.3489
+    "assets_liab_ratio": 0.1361
   },
   {
-    "...1": 178,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0675000",
@@ -2580,10 +2457,9 @@
     "modified_revenues": -9353155,
     "net_pension_liability": 549631640,
     "net_opeb_liability": 66315626,
-    "assets_liab_ratio": 2.2056
+    "assets_liab_ratio": 0.4534
   },
   {
-    "...1": 182,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0667000",
@@ -2601,10 +2477,9 @@
     "modified_revenues": -5006912000,
     "net_pension_liability": 5614021000,
     "net_opeb_liability": 3811347000,
-    "assets_liab_ratio": 1.2474
+    "assets_liab_ratio": 0.8016
   },
   {
-    "...1": 189,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0666000",
@@ -2622,10 +2497,9 @@
     "modified_revenues": -768533000,
     "net_pension_liability": 3513674000,
     "net_opeb_liability": 469975000,
-    "assets_liab_ratio": 1.9002
+    "assets_liab_ratio": 0.5263
   },
   {
-    "...1": 290,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0668000",
@@ -2643,10 +2517,9 @@
     "modified_revenues": -824073000,
     "net_pension_liability": 3591797000,
     "net_opeb_liability": 863812000,
-    "assets_liab_ratio": 1.3749
+    "assets_liab_ratio": 0.7274
   },
   {
-    "...1": 110,
     "state.abb": "CO",
     "state.name": "Colorado",
     "geo_id": "0816000",
@@ -2664,10 +2537,9 @@
     "modified_revenues": -86692102,
     "net_pension_liability": 294357679,
     "net_opeb_liability": 66775000,
-    "assets_liab_ratio": 2.005
+    "assets_liab_ratio": 0.4987
   },
   {
-    "...1": 142,
     "state.abb": "CO",
     "state.name": "Colorado",
     "geo_id": "0804000",
@@ -2685,10 +2557,9 @@
     "modified_revenues": 234102833,
     "net_pension_liability": 90518751,
     "net_opeb_liability": 21037880,
-    "assets_liab_ratio": 5.8414
+    "assets_liab_ratio": 0.1712
   },
   {
-    "...1": 292,
     "state.abb": "CO",
     "state.name": "Colorado",
     "geo_id": "0820000",
@@ -2706,10 +2577,9 @@
     "modified_revenues": -506427000,
     "net_pension_liability": 1698513000,
     "net_opeb_liability": 253829000,
-    "assets_liab_ratio": 1.3927
+    "assets_liab_ratio": 0.7181
   },
   {
-    "...1": 111,
     "state.abb": "FL",
     "state.name": "Florida",
     "geo_id": "1271000",
@@ -2727,10 +2597,9 @@
     "modified_revenues": 100492879,
     "net_pension_liability": 209150745,
     "net_opeb_liability": 75519951,
-    "assets_liab_ratio": 2.5976
+    "assets_liab_ratio": 0.385
   },
   {
-    "...1": 132,
     "state.abb": "FL",
     "state.name": "Florida",
     "geo_id": "1230000",
@@ -2748,10 +2617,9 @@
     "modified_revenues": -146117408,
     "net_pension_liability": 297909379,
     "net_opeb_liability": 471720312,
-    "assets_liab_ratio": 0.6241
+    "assets_liab_ratio": 1.6024
   },
   {
-    "...1": 137,
     "state.abb": "FL",
     "state.name": "Florida",
     "geo_id": "1245000",
@@ -2769,10 +2637,9 @@
     "modified_revenues": -342754004,
     "net_pension_liability": 1034749059,
     "net_opeb_liability": 958411935,
-    "assets_liab_ratio": 0.6395
+    "assets_liab_ratio": 1.5637
   },
   {
-    "...1": 141,
     "state.abb": "FL",
     "state.name": "Florida",
     "geo_id": "1253000",
@@ -2790,10 +2657,9 @@
     "modified_revenues": -281312161,
     "net_pension_liability": 290159850,
     "net_opeb_liability": 353133200,
-    "assets_liab_ratio": 1.9928
+    "assets_liab_ratio": 0.5018
   },
   {
-    "...1": 185,
     "state.abb": "FL",
     "state.name": "Florida",
     "geo_id": "1235000",
@@ -2811,10 +2677,9 @@
     "modified_revenues": -452008000,
     "net_pension_liability": 3107155000,
     "net_opeb_liability": 416420000,
-    "assets_liab_ratio": 0.804
+    "assets_liab_ratio": 1.2438
   },
   {
-    "...1": 187,
     "state.abb": "FL",
     "state.name": "Florida",
     "geo_id": "1263000",
@@ -2832,10 +2697,9 @@
     "modified_revenues": -18334939,
     "net_pension_liability": 99318650,
     "net_opeb_liability": 256867376,
-    "assets_liab_ratio": 1.8337
+    "assets_liab_ratio": 0.5453
   },
   {
-    "...1": 190,
     "state.abb": "GA",
     "state.name": "Georgia",
     "geo_id": "1304000",
@@ -2853,10 +2717,9 @@
     "modified_revenues": -248297000,
     "net_pension_liability": 1251025000,
     "net_opeb_liability": 888700000,
-    "assets_liab_ratio": 1.7409
+    "assets_liab_ratio": 0.5744
   },
   {
-    "...1": 161,
     "state.abb": "ID",
     "state.name": "Idaho",
     "geo_id": "1608830",
@@ -2874,10 +2737,9 @@
     "modified_revenues": 14961000,
     "net_pension_liability": -101251000,
     "net_opeb_liability": 15036000,
-    "assets_liab_ratio": 7.3851
+    "assets_liab_ratio": 0.1354
   },
   {
-    "...1": 112,
     "state.abb": "IL",
     "state.name": "Illinois",
     "geo_id": "1714000",
@@ -2895,10 +2757,9 @@
     "modified_revenues": -4290471000,
     "net_pension_liability": 33696585000,
     "net_opeb_liability": 2000017000,
-    "assets_liab_ratio": 0.6223
+    "assets_liab_ratio": 1.6069
   },
   {
-    "...1": 180,
     "state.abb": "IN",
     "state.name": "Indiana",
     "geo_id": "1825000",
@@ -2916,10 +2777,9 @@
     "modified_revenues": 54719887,
     "net_pension_liability": 167092565,
     "net_opeb_liability": 171220196,
-    "assets_liab_ratio": 1.9547
+    "assets_liab_ratio": 0.5116
   },
   {
-    "...1": 160,
     "state.abb": "IA",
     "state.name": "Iowa",
     "geo_id": "1921000",
@@ -2937,10 +2797,9 @@
     "modified_revenues": -19648215,
     "net_pension_liability": 213409053,
     "net_opeb_liability": 22792325,
-    "assets_liab_ratio": 2.209
+    "assets_liab_ratio": 0.4527
   },
   {
-    "...1": 145,
     "state.abb": "KS",
     "state.name": "Kansas",
     "geo_id": "2079000",
@@ -2958,10 +2817,9 @@
     "modified_revenues": -121294226,
     "net_pension_liability": 15602000,
     "net_opeb_liability": 44218000,
-    "assets_liab_ratio": 2.814
+    "assets_liab_ratio": 0.3554
   },
   {
-    "...1": 293,
     "state.abb": "LA",
     "state.name": "Louisiana",
     "geo_id": "2255000",
@@ -2979,10 +2837,9 @@
     "modified_revenues": 94439000,
     "net_pension_liability": 862741000,
     "net_opeb_liability": 172847000,
-    "assets_liab_ratio": 1.1653
+    "assets_liab_ratio": 0.8582
   },
   {
-    "...1": 140,
     "state.abb": "MD",
     "state.name": "Maryland",
     "geo_id": "2404000",
@@ -3000,10 +2857,9 @@
     "modified_revenues": -743417000,
     "net_pension_liability": 2164643000,
     "net_opeb_liability": 527869000,
-    "assets_liab_ratio": 1.3317
+    "assets_liab_ratio": 0.7509
   },
   {
-    "...1": 159,
     "state.abb": "MA",
     "state.name": "Massachusetts",
     "geo_id": "2507000",
@@ -3021,10 +2877,9 @@
     "modified_revenues": -730123000,
     "net_pension_liability": 1406402000,
     "net_opeb_liability": 2196724000,
-    "assets_liab_ratio": 0.805
+    "assets_liab_ratio": 1.2422
   },
   {
-    "...1": 186,
     "state.abb": "MI",
     "state.name": "Michigan",
     "geo_id": "2622000",
@@ -3042,10 +2897,9 @@
     "modified_revenues": -940397226,
     "net_pension_liability": 2131550735,
     "net_opeb_liability": 377348,
-    "assets_liab_ratio": 1.0776
+    "assets_liab_ratio": 0.928
   },
   {
-    "...1": 155,
     "state.abb": "MN",
     "state.name": "Minnesota",
     "geo_id": "2743000",
@@ -3063,10 +2917,9 @@
     "modified_revenues": -143379000,
     "net_pension_liability": 389858000,
     "net_opeb_liability": 47213000,
-    "assets_liab_ratio": 2.5152
+    "assets_liab_ratio": 0.3976
   },
   {
-    "...1": 165,
     "state.abb": "MN",
     "state.name": "Minnesota",
     "geo_id": "2758000",
@@ -3084,10 +2937,9 @@
     "modified_revenues": -87111192,
     "net_pension_liability": 133080944,
     "net_opeb_liability": 202134571,
-    "assets_liab_ratio": 2.2607
+    "assets_liab_ratio": 0.4423
   },
   {
-    "...1": 150,
     "state.abb": "MO",
     "state.name": "Missouri",
     "geo_id": "2938000",
@@ -3105,10 +2957,9 @@
     "modified_revenues": -541133000,
     "net_pension_liability": 1093020000,
     "net_opeb_liability": 93377000,
-    "assets_liab_ratio": 1.7223
+    "assets_liab_ratio": 0.5806
   },
   {
-    "...1": 151,
     "state.abb": "MO",
     "state.name": "Missouri",
     "geo_id": "2965000",
@@ -3126,10 +2977,9 @@
     "modified_revenues": -593219000,
     "net_pension_liability": 616351000,
     "net_opeb_liability": 654613000,
-    "assets_liab_ratio": 1.0544
+    "assets_liab_ratio": 0.9484
   },
   {
-    "...1": 113,
     "state.abb": "NE",
     "state.name": "Nebraska",
     "geo_id": "3137000",
@@ -3147,10 +2997,9 @@
     "modified_revenues": 38356112,
     "net_pension_liability": 814257649,
     "net_opeb_liability": 512272582,
-    "assets_liab_ratio": 1.1878
+    "assets_liab_ratio": 0.8419
   },
   {
-    "...1": 168,
     "state.abb": "NE",
     "state.name": "Nebraska",
     "geo_id": "3128000",
@@ -3168,10 +3017,9 @@
     "modified_revenues": 28072692,
     "net_pension_liability": 39668000,
     "net_opeb_liability": 26979000,
-    "assets_liab_ratio": 2.4861
+    "assets_liab_ratio": 0.4022
   },
   {
-    "...1": 103,
     "state.abb": "NV",
     "state.name": "Nevada",
     "geo_id": "3251800",
@@ -3189,10 +3037,9 @@
     "modified_revenues": 85355475,
     "net_pension_liability": 219150533,
     "net_opeb_liability": 109107152,
-    "assets_liab_ratio": 2.999
+    "assets_liab_ratio": 0.3334
   },
   {
-    "...1": 114,
     "state.abb": "NV",
     "state.name": "Nevada",
     "geo_id": "3240000",
@@ -3210,10 +3057,9 @@
     "modified_revenues": 42608234,
     "net_pension_liability": 873504531,
     "net_opeb_liability": 55725322,
-    "assets_liab_ratio": 3.3521
+    "assets_liab_ratio": 0.2983
   },
   {
-    "...1": 115,
     "state.abb": "NV",
     "state.name": "Nevada",
     "geo_id": "3231900",
@@ -3231,10 +3077,9 @@
     "modified_revenues": 9817565,
     "net_pension_liability": 416549579,
     "net_opeb_liability": 89339854,
-    "assets_liab_ratio": 3.4454
+    "assets_liab_ratio": 0.2902
   },
   {
-    "...1": 156,
     "state.abb": "NV",
     "state.name": "Nevada",
     "geo_id": "3260600",
@@ -3252,10 +3097,9 @@
     "modified_revenues": 42236023,
     "net_pension_liability": 252369268,
     "net_opeb_liability": 147020971,
-    "assets_liab_ratio": 1.8667
+    "assets_liab_ratio": 0.5357
   },
   {
-    "...1": 146,
     "state.abb": "NJ",
     "state.name": "New Jersey",
     "geo_id": "3451000",
@@ -3272,11 +3116,9 @@
     "name_state": "Newark, New Jersey",
     "modified_revenues": 27877369,
     "net_pension_liability": 0,
-    "net_opeb_liability": 0,
-    "assets_liab_ratio": 0
+    "net_opeb_liability": 0
   },
   {
-    "...1": 181,
     "state.abb": "NJ",
     "state.name": "New Jersey",
     "geo_id": "3436000",
@@ -3294,10 +3136,9 @@
     "modified_revenues": -306875974,
     "net_pension_liability": 113755178,
     "net_opeb_liability": 1208152775,
-    "assets_liab_ratio": 2.284
+    "assets_liab_ratio": 0.4378
   },
   {
-    "...1": 191,
     "state.abb": "NM",
     "state.name": "New Mexico",
     "geo_id": "3502000",
@@ -3315,10 +3156,9 @@
     "modified_revenues": -60899697,
     "net_pension_liability": 904300000,
     "net_opeb_liability": 314556997,
-    "assets_liab_ratio": 2.2947
+    "assets_liab_ratio": 0.4358
   },
   {
-    "...1": 117,
     "state.abb": "NY",
     "state.name": "New York",
     "geo_id": "3684000",
@@ -3336,10 +3176,9 @@
     "modified_revenues": -396252767,
     "net_pension_liability": 120899468,
     "net_opeb_liability": 3814099761,
-    "assets_liab_ratio": 0.269
+    "assets_liab_ratio": 3.7179
   },
   {
-    "...1": 171,
     "state.abb": "NY",
     "state.name": "New York",
     "geo_id": "3663000",
@@ -3357,10 +3196,9 @@
     "modified_revenues": -334394000,
     "net_pension_liability": 55648000,
     "net_opeb_liability": 1753793000,
-    "assets_liab_ratio": 0.6877
+    "assets_liab_ratio": 1.454
   },
   {
-    "...1": 179,
     "state.abb": "NY",
     "state.name": "New York",
     "geo_id": "3651000",
@@ -3378,10 +3216,9 @@
     "modified_revenues": -27632968000,
     "net_pension_liability": 9598353000,
     "net_opeb_liability": 117979233000,
-    "assets_liab_ratio": 0.4448
+    "assets_liab_ratio": 2.2484
   },
   {
-    "...1": 291,
     "state.abb": "NY",
     "state.name": "New York",
     "geo_id": "3611000",
@@ -3399,10 +3236,9 @@
     "modified_revenues": -410764144,
     "net_pension_liability": 62224319,
     "net_opeb_liability": 1383997705,
-    "assets_liab_ratio": 0.6328
+    "assets_liab_ratio": 1.5802
   },
   {
-    "...1": 102,
     "state.abb": "NC",
     "state.name": "North Carolina",
     "geo_id": "3775000",
@@ -3420,10 +3256,9 @@
     "modified_revenues": 31396948,
     "net_pension_liability": 80074722,
     "net_opeb_liability": -12099186,
-    "assets_liab_ratio": 2.073
+    "assets_liab_ratio": 0.4824
   },
   {
-    "...1": 116,
     "state.abb": "NC",
     "state.name": "North Carolina",
     "geo_id": "3719000",
@@ -3441,10 +3276,9 @@
     "modified_revenues": 15555803,
     "net_pension_liability": 114942996,
     "net_opeb_liability": 164490386,
-    "assets_liab_ratio": 0.9872
+    "assets_liab_ratio": 1.013
   },
   {
-    "...1": 138,
     "state.abb": "NC",
     "state.name": "North Carolina",
     "geo_id": "3712000",
@@ -3462,10 +3296,9 @@
     "modified_revenues": -224852000,
     "net_pension_liability": 1019687000,
     "net_opeb_liability": 184866000,
-    "assets_liab_ratio": 2.6877
+    "assets_liab_ratio": 0.3721
   },
   {
-    "...1": 147,
     "state.abb": "NC",
     "state.name": "North Carolina",
     "geo_id": "3728000",
@@ -3483,10 +3316,9 @@
     "modified_revenues": -104889732,
     "net_pension_liability": 114198568,
     "net_opeb_liability": 124450254,
-    "assets_liab_ratio": 1.9085
+    "assets_liab_ratio": 0.524
   },
   {
-    "...1": 183,
     "state.abb": "NC",
     "state.name": "North Carolina",
     "geo_id": "3755000",
@@ -3504,10 +3336,9 @@
     "modified_revenues": -26592273,
     "net_pension_liability": 203853587,
     "net_opeb_liability": 189934098,
-    "assets_liab_ratio": 2.1723
+    "assets_liab_ratio": 0.4603
   },
   {
-    "...1": 118,
     "state.abb": "OH",
     "state.name": "Ohio",
     "geo_id": "3916000",
@@ -3525,10 +3356,9 @@
     "modified_revenues": -159828000,
     "net_pension_liability": 786813000,
     "net_opeb_liability": 42043000,
-    "assets_liab_ratio": 1.8163
+    "assets_liab_ratio": 0.5506
   },
   {
-    "...1": 131,
     "state.abb": "OH",
     "state.name": "Ohio",
     "geo_id": "3918000",
@@ -3546,10 +3376,9 @@
     "modified_revenues": 216344000,
     "net_pension_liability": 1356638000,
     "net_opeb_liability": 119789000,
-    "assets_liab_ratio": 1.5143
+    "assets_liab_ratio": 0.6604
   },
   {
-    "...1": 133,
     "state.abb": "OH",
     "state.name": "Ohio",
     "geo_id": "3977000",
@@ -3567,10 +3396,9 @@
     "modified_revenues": -34864000,
     "net_pension_liability": 338517000,
     "net_opeb_liability": 30875000,
-    "assets_liab_ratio": 1.6067
+    "assets_liab_ratio": 0.6224
   },
   {
-    "...1": 139,
     "state.abb": "OH",
     "state.name": "Ohio",
     "geo_id": "3915000",
@@ -3588,10 +3416,9 @@
     "modified_revenues": -358576000,
     "net_pension_liability": 2305754000,
     "net_opeb_liability": 10816000,
-    "assets_liab_ratio": 1.1063
+    "assets_liab_ratio": 0.9039
   },
   {
-    "...1": 105,
     "state.abb": "OK",
     "state.name": "Oklahoma",
     "geo_id": "4055000",
@@ -3609,10 +3436,9 @@
     "modified_revenues": -66206000,
     "net_pension_liability": 408312000,
     "net_opeb_liability": 443682000,
-    "assets_liab_ratio": 1.989
+    "assets_liab_ratio": 0.5028
   },
   {
-    "...1": 143,
     "state.abb": "OK",
     "state.name": "Oklahoma",
     "geo_id": "4075000",
@@ -3630,10 +3456,9 @@
     "modified_revenues": 38236000,
     "net_pension_liability": 307741000,
     "net_opeb_liability": 4600000,
-    "assets_liab_ratio": 2.8305
+    "assets_liab_ratio": 0.3533
   },
   {
-    "...1": 119,
     "state.abb": "OR",
     "state.name": "Oregon",
     "geo_id": "4159000",
@@ -3651,10 +3476,9 @@
     "modified_revenues": -277971817,
     "net_pension_liability": 5447870710,
     "net_opeb_liability": 93041373,
-    "assets_liab_ratio": 1.0602
+    "assets_liab_ratio": 0.9432
   },
   {
-    "...1": 130,
     "state.abb": "PA",
     "state.name": "Pennsylvania",
     "geo_id": "4261000",
@@ -3672,10 +3496,9 @@
     "modified_revenues": 35193130,
     "net_pension_liability": 822015601,
     "net_opeb_liability": 395364862,
-    "assets_liab_ratio": 0.3682
+    "assets_liab_ratio": 2.7158
   },
   {
-    "...1": 172,
     "state.abb": "PA",
     "state.name": "Pennsylvania",
     "geo_id": "4260000",
@@ -3693,10 +3516,9 @@
     "modified_revenues": -2531827000,
     "net_pension_liability": 4721351000,
     "net_opeb_liability": 2088155000,
-    "assets_liab_ratio": 0.751
+    "assets_liab_ratio": 1.3315
   },
   {
-    "...1": 104,
     "state.abb": "TN",
     "state.name": "Tennessee",
     "geo_id": "4748000",
@@ -3714,10 +3536,9 @@
     "modified_revenues": -168801000,
     "net_pension_liability": 4511000,
     "net_opeb_liability": 809284000,
-    "assets_liab_ratio": 1.7508
+    "assets_liab_ratio": 0.5712
   },
   {
-    "...1": 120,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4819000",
@@ -3735,10 +3556,9 @@
     "modified_revenues": 349704000,
     "net_pension_liability": 5702885000,
     "net_opeb_liability": 266160000,
-    "assets_liab_ratio": 0.1902
+    "assets_liab_ratio": 5.2574
   },
   {
-    "...1": 122,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4827000",
@@ -3756,10 +3576,9 @@
     "modified_revenues": -240173000,
     "net_pension_liability": 2359866000,
     "net_opeb_liability": 903895000,
-    "assets_liab_ratio": 1.4922
+    "assets_liab_ratio": 0.6702
   },
   {
-    "...1": 123,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4858016",
@@ -3777,10 +3596,9 @@
     "modified_revenues": -16624494,
     "net_pension_liability": 40984860,
     "net_opeb_liability": 6188875,
-    "assets_liab_ratio": 3.075
+    "assets_liab_ratio": 0.3252
   },
   {
-    "...1": 124,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4805000",
@@ -3798,10 +3616,9 @@
     "modified_revenues": -784414000,
     "net_pension_liability": 2178003000,
     "net_opeb_liability": 4346367000,
-    "assets_liab_ratio": 1.2182
+    "assets_liab_ratio": 0.8209
   },
   {
-    "...1": 125,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4841464",
@@ -3819,10 +3636,9 @@
     "modified_revenues": -13110927,
     "net_pension_liability": 251019503,
     "net_opeb_liability": 206576960,
-    "assets_liab_ratio": 1.5002
+    "assets_liab_ratio": 0.6666
   },
   {
-    "...1": 128,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4835000",
@@ -3840,10 +3656,9 @@
     "modified_revenues": 650056000,
     "net_pension_liability": 1779562000,
     "net_opeb_liability": 2629644000,
-    "assets_liab_ratio": 1.2506
+    "assets_liab_ratio": 0.7996
   },
   {
-    "...1": 129,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4829000",
@@ -3861,10 +3676,9 @@
     "modified_revenues": -97624423,
     "net_pension_liability": 11418246,
     "net_opeb_liability": 87457328,
-    "assets_liab_ratio": 1.6348
+    "assets_liab_ratio": 0.6117
   },
   {
-    "...1": 135,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4817000",
@@ -3882,10 +3696,9 @@
     "modified_revenues": -46803133,
     "net_pension_liability": 203244403,
     "net_opeb_liability": 10392386,
-    "assets_liab_ratio": 1.8869
+    "assets_liab_ratio": 0.53
   },
   {
-    "...1": 136,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4845000",
@@ -3903,10 +3716,9 @@
     "modified_revenues": -22318239,
     "net_pension_liability": 157803158,
     "net_opeb_liability": 172402112,
-    "assets_liab_ratio": 1.5975
+    "assets_liab_ratio": 0.626
   },
   {
-    "...1": 157,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4837000",
@@ -3924,10 +3736,9 @@
     "modified_revenues": -8120559,
     "net_pension_liability": 153236230,
     "net_opeb_liability": 18303061,
-    "assets_liab_ratio": 1.9793
+    "assets_liab_ratio": 0.5052
   },
   {
-    "...1": 158,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4865000",
@@ -3945,10 +3756,9 @@
     "modified_revenues": -103937000,
     "net_pension_liability": 819657000,
     "net_opeb_liability": 933170000,
-    "assets_liab_ratio": 1.4171
+    "assets_liab_ratio": 0.7057
   },
   {
-    "...1": 164,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4804000",
@@ -3966,10 +3776,9 @@
     "modified_revenues": 7926000,
     "net_pension_liability": -27444000,
     "net_opeb_liability": 144366000,
-    "assets_liab_ratio": 2.5296
+    "assets_liab_ratio": 0.3953
   },
   {
-    "...1": 167,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4824000",
@@ -3987,10 +3796,9 @@
     "modified_revenues": 49414326,
     "net_pension_liability": 485256939,
     "net_opeb_liability": 168416162,
-    "assets_liab_ratio": 1.1249
+    "assets_liab_ratio": 0.889
   },
   {
-    "...1": 98,
     "state.abb": "VA",
     "state.name": "Virginia",
     "geo_id": "5157000",
@@ -4008,10 +3816,9 @@
     "modified_revenues": -211572692,
     "net_pension_liability": 389045271,
     "net_opeb_liability": 114305792,
-    "assets_liab_ratio": 1.1955
+    "assets_liab_ratio": 0.8365
   },
   {
-    "...1": 99,
     "state.abb": "VA",
     "state.name": "Virginia",
     "geo_id": "5116000",
@@ -4029,10 +3836,9 @@
     "modified_revenues": 32345304,
     "net_pension_liability": 215077882,
     "net_opeb_liability": 30245083,
-    "assets_liab_ratio": 2.7913
+    "assets_liab_ratio": 0.3583
   },
   {
-    "...1": 100,
     "state.abb": "VA",
     "state.name": "Virginia",
     "geo_id": "5167000",
@@ -4050,10 +3856,9 @@
     "modified_revenues": -210633966,
     "net_pension_liability": 399778235,
     "net_opeb_liability": 120143312,
-    "assets_liab_ratio": 1.3622
+    "assets_liab_ratio": 0.7341
   },
   {
-    "...1": 101,
     "state.abb": "VA",
     "state.name": "Virginia",
     "geo_id": "5182000",
@@ -4071,10 +3876,9 @@
     "modified_revenues": -34651988,
     "net_pension_liability": 525466635,
     "net_opeb_liability": 94167390,
-    "assets_liab_ratio": 2.6374
+    "assets_liab_ratio": 0.3792
   },
   {
-    "...1": 148,
     "state.abb": "WA",
     "state.name": "Washington",
     "geo_id": "5363000",
@@ -4092,10 +3896,9 @@
     "modified_revenues": 292724000,
     "net_pension_liability": 567683000,
     "net_opeb_liability": 654541000,
-    "assets_liab_ratio": 1.884
+    "assets_liab_ratio": 0.5308
   },
   {
-    "...1": 175,
     "state.abb": "WA",
     "state.name": "Washington",
     "geo_id": "5370000",
@@ -4113,10 +3916,9 @@
     "modified_revenues": -29817000,
     "net_pension_liability": -66220000,
     "net_opeb_liability": 229263000,
-    "assets_liab_ratio": 2.5279
+    "assets_liab_ratio": 0.3956
   },
   {
-    "...1": 184,
     "state.abb": "WA",
     "state.name": "Washington",
     "geo_id": "5367000",
@@ -4134,10 +3936,9 @@
     "modified_revenues": 105857243,
     "net_pension_liability": -174325293,
     "net_opeb_liability": -91501555,
-    "assets_liab_ratio": 3.9545
+    "assets_liab_ratio": 0.2529
   },
   {
-    "...1": 126,
     "state.abb": "WI",
     "state.name": "Wisconsin",
     "geo_id": "5553000",
@@ -4155,10 +3956,9 @@
     "modified_revenues": -652512000,
     "net_pension_liability": 927864000,
     "net_opeb_liability": 1680554000,
-    "assets_liab_ratio": 0.8214
+    "assets_liab_ratio": 1.2174
   },
   {
-    "...1": 149,
     "state.abb": "WI",
     "state.name": "Wisconsin",
     "geo_id": "5548000",
@@ -4176,10 +3976,9 @@
     "modified_revenues": -52346687,
     "net_pension_liability": -112917178,
     "net_opeb_liability": 84581716,
-    "assets_liab_ratio": 2.6745
+    "assets_liab_ratio": 0.3739
   },
   {
-    "...1": 192,
     "state.abb": "AL",
     "state.name": "Alabama",
     "geo_id": "0137000",
@@ -4197,10 +3996,9 @@
     "modified_revenues": 14918930,
     "net_pension_liability": 195197117,
     "net_opeb_liability": 62796537,
-    "assets_liab_ratio": 1.79
+    "assets_liab_ratio": 0.5586
   },
   {
-    "...1": 201,
     "state.abb": "AZ",
     "state.name": "Arizona",
     "geo_id": "0465000",
@@ -4218,10 +4016,9 @@
     "modified_revenues": 63325000,
     "net_pension_liability": 309646000,
     "net_opeb_liability": 831000,
-    "assets_liab_ratio": 4.9648
+    "assets_liab_ratio": 0.2014
   },
   {
-    "...1": 256,
     "state.abb": "AZ",
     "state.name": "Arizona",
     "geo_id": "0427820",
@@ -4239,10 +4036,9 @@
     "modified_revenues": 63261000,
     "net_pension_liability": 339191000,
     "net_opeb_liability": -6673000,
-    "assets_liab_ratio": 1.5907
+    "assets_liab_ratio": 0.6286
   },
   {
-    "...1": 277,
     "state.abb": "AZ",
     "state.name": "Arizona",
     "geo_id": "0446000",
@@ -4260,10 +4056,9 @@
     "modified_revenues": -324615000,
     "net_pension_liability": 840814000,
     "net_opeb_liability": 987614000,
-    "assets_liab_ratio": 1.2333
+    "assets_liab_ratio": 0.8108
   },
   {
-    "...1": 278,
     "state.abb": "AZ",
     "state.name": "Arizona",
     "geo_id": "0455000",
@@ -4281,10 +4076,9 @@
     "modified_revenues": -631473000,
     "net_pension_liability": 4643155000,
     "net_opeb_liability": 101505000,
-    "assets_liab_ratio": 1.5445
+    "assets_liab_ratio": 0.6475
   },
   {
-    "...1": 281,
     "state.abb": "AZ",
     "state.name": "Arizona",
     "geo_id": "0477000",
@@ -4302,10 +4096,9 @@
     "modified_revenues": -172768977,
     "net_pension_liability": 1376887466,
     "net_opeb_liability": 187936363,
-    "assets_liab_ratio": 1.715
+    "assets_liab_ratio": 0.5831
   },
   {
-    "...1": 284,
     "state.abb": "AZ",
     "state.name": "Arizona",
     "geo_id": "0412000",
@@ -4323,10 +4116,9 @@
     "modified_revenues": -24760424,
     "net_pension_liability": 212540490,
     "net_opeb_liability": 81921795,
-    "assets_liab_ratio": 2.6445
+    "assets_liab_ratio": 0.3781
   },
   {
-    "...1": 202,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0662000",
@@ -4344,10 +4136,9 @@
     "modified_revenues": -47303000,
     "net_pension_liability": -140293000,
     "net_opeb_liability": 48770000,
-    "assets_liab_ratio": 2.0624
+    "assets_liab_ratio": 0.4849
   },
   {
-    "...1": 203,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0669000",
@@ -4365,10 +4156,9 @@
     "modified_revenues": -134269049,
     "net_pension_liability": 498809640,
     "net_opeb_liability": 54557539,
-    "assets_liab_ratio": 1.3859
+    "assets_liab_ratio": 0.7216
   },
   {
-    "...1": 204,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0643000",
@@ -4386,10 +4176,9 @@
     "modified_revenues": -1569080000,
     "net_pension_liability": 1305415000,
     "net_opeb_liability": 4165000,
-    "assets_liab_ratio": 1.9969
+    "assets_liab_ratio": 0.5008
   },
   {
-    "...1": 216,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0613392",
@@ -4407,10 +4196,9 @@
     "modified_revenues": 25411740,
     "net_pension_liability": -160773888,
     "net_opeb_liability": 27450132,
-    "assets_liab_ratio": 3.718
+    "assets_liab_ratio": 0.269
   },
   {
-    "...1": 222,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0603526",
@@ -4428,10 +4216,9 @@
     "modified_revenues": -37088433,
     "net_pension_liability": 315292536,
     "net_opeb_liability": 15586823,
-    "assets_liab_ratio": 4.3484
+    "assets_liab_ratio": 0.23
   },
   {
-    "...1": 229,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0665000",
@@ -4449,10 +4236,9 @@
     "modified_revenues": -34534296,
     "net_pension_liability": 326502961,
     "net_opeb_liability": -2546218,
-    "assets_liab_ratio": 1.8586
+    "assets_liab_ratio": 0.538
   },
   {
-    "...1": 232,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0664000",
@@ -4470,10 +4256,9 @@
     "modified_revenues": 139050000,
     "net_pension_liability": 740591000,
     "net_opeb_liability": 196805000,
-    "assets_liab_ratio": 2.0395
+    "assets_liab_ratio": 0.4903
   },
   {
-    "...1": 240,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0648354",
@@ -4491,10 +4276,9 @@
     "modified_revenues": -19567159,
     "net_pension_liability": 249803716,
     "net_opeb_liability": 29551870,
-    "assets_liab_ratio": 2.7309
+    "assets_liab_ratio": 0.3662
   },
   {
-    "...1": 242,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0626000",
@@ -4512,10 +4296,9 @@
     "modified_revenues": 79421005,
     "net_pension_liability": 272252574,
     "net_opeb_liability": 70589546,
-    "assets_liab_ratio": 2.8943
+    "assets_liab_ratio": 0.3455
   },
   {
-    "...1": 257,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0602000",
@@ -4533,10 +4316,9 @@
     "modified_revenues": 57683000,
     "net_pension_liability": 510106000,
     "net_opeb_liability": 107149000,
-    "assets_liab_ratio": 1.7956
+    "assets_liab_ratio": 0.5569
   },
   {
-    "...1": 258,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0653000",
@@ -4554,10 +4336,9 @@
     "modified_revenues": -24534000,
     "net_pension_liability": 1215883000,
     "net_opeb_liability": 617469000,
-    "assets_liab_ratio": 1.2326
+    "assets_liab_ratio": 0.8113
   },
   {
-    "...1": 261,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0636770",
@@ -4575,10 +4356,9 @@
     "modified_revenues": -115659000,
     "net_pension_liability": 36051000,
     "net_opeb_liability": 8475000,
-    "assets_liab_ratio": 16.2322
+    "assets_liab_ratio": 0.0616
   },
   {
-    "...1": 262,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0649270",
@@ -4596,10 +4376,9 @@
     "modified_revenues": -15261289,
     "net_pension_liability": 54897196,
     "net_opeb_liability": 5274815,
-    "assets_liab_ratio": 5.8157
+    "assets_liab_ratio": 0.1719
   },
   {
-    "...1": 265,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0627000",
@@ -4617,10 +4396,9 @@
     "modified_revenues": -42368000,
     "net_pension_liability": -805653000,
     "net_opeb_liability": 99760000,
-    "assets_liab_ratio": 3.0656
+    "assets_liab_ratio": 0.3262
   },
   {
-    "...1": 266,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0644000",
@@ -4638,10 +4416,9 @@
     "modified_revenues": -402321000,
     "net_pension_liability": 3580000,
     "net_opeb_liability": 387751000,
-    "assets_liab_ratio": 1.705
+    "assets_liab_ratio": 0.5865
   },
   {
-    "...1": 268,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0675000",
@@ -4659,10 +4436,9 @@
     "modified_revenues": 99094071,
     "net_pension_liability": 321906746,
     "net_opeb_liability": 65400233,
-    "assets_liab_ratio": 2.9308
+    "assets_liab_ratio": 0.3412
   },
   {
-    "...1": 272,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0667000",
@@ -4680,10 +4456,9 @@
     "modified_revenues": -3470570000,
     "net_pension_liability": -2104167000,
     "net_opeb_liability": 3679684000,
-    "assets_liab_ratio": 1.5592
+    "assets_liab_ratio": 0.6414
   },
   {
-    "...1": 279,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0669088",
@@ -4701,10 +4476,9 @@
     "modified_revenues": 49224115,
     "net_pension_liability": -432938,
     "net_opeb_liability": -2071568,
-    "assets_liab_ratio": 8.6757
+    "assets_liab_ratio": 0.1153
   },
   {
-    "...1": 282,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0666000",
@@ -4722,10 +4496,9 @@
     "modified_revenues": -370625000,
     "net_pension_liability": 2164171000,
     "net_opeb_liability": 429719000,
-    "assets_liab_ratio": 2.3381
+    "assets_liab_ratio": 0.4277
   },
   {
-    "...1": 295,
     "state.abb": "CA",
     "state.name": "California",
     "geo_id": "0668000",
@@ -4743,10 +4516,9 @@
     "modified_revenues": -343599000,
     "net_pension_liability": 2340132000,
     "net_opeb_liability": 776346000,
-    "assets_liab_ratio": 1.6378
+    "assets_liab_ratio": 0.6106
   },
   {
-    "...1": 205,
     "state.abb": "CO",
     "state.name": "Colorado",
     "geo_id": "0816000",
@@ -4764,10 +4536,9 @@
     "modified_revenues": 271248312,
     "net_pension_liability": -23921963,
     "net_opeb_liability": 63978000,
-    "assets_liab_ratio": 2.3295
+    "assets_liab_ratio": 0.4293
   },
   {
-    "...1": 239,
     "state.abb": "CO",
     "state.name": "Colorado",
     "geo_id": "0804000",
@@ -4785,10 +4556,9 @@
     "modified_revenues": 261583444,
     "net_pension_liability": -10735712,
     "net_opeb_liability": 24874408,
-    "assets_liab_ratio": 6.3218
+    "assets_liab_ratio": 0.1582
   },
   {
-    "...1": 296,
     "state.abb": "CO",
     "state.name": "Colorado",
     "geo_id": "0820000",
@@ -4806,10 +4576,9 @@
     "modified_revenues": -686701000,
     "net_pension_liability": 1297505000,
     "net_opeb_liability": 244985000,
-    "assets_liab_ratio": 1.4309
+    "assets_liab_ratio": 0.6989
   },
   {
-    "...1": 206,
     "state.abb": "FL",
     "state.name": "Florida",
     "geo_id": "1271000",
@@ -4827,10 +4596,9 @@
     "modified_revenues": -133470180,
     "net_pension_liability": 139826968,
     "net_opeb_liability": 70312514,
-    "assets_liab_ratio": 2.3111
+    "assets_liab_ratio": 0.4327
   },
   {
-    "...1": 227,
     "state.abb": "FL",
     "state.name": "Florida",
     "geo_id": "1230000",
@@ -4848,10 +4616,9 @@
     "modified_revenues": -98728926,
     "net_pension_liability": 207569680,
     "net_opeb_liability": 360568124,
-    "assets_liab_ratio": 0.7831
+    "assets_liab_ratio": 1.2769
   },
   {
-    "...1": 233,
     "state.abb": "FL",
     "state.name": "Florida",
     "geo_id": "1245000",
@@ -4869,10 +4636,9 @@
     "modified_revenues": -214299990,
     "net_pension_liability": 1301418710,
     "net_opeb_liability": 777314329,
-    "assets_liab_ratio": 0.7388
+    "assets_liab_ratio": 1.3535
   },
   {
-    "...1": 237,
     "state.abb": "FL",
     "state.name": "Florida",
     "geo_id": "1253000",
@@ -4890,10 +4656,9 @@
     "modified_revenues": 57001174,
     "net_pension_liability": 130635034,
     "net_opeb_liability": 271036950,
-    "assets_liab_ratio": 2.5663
+    "assets_liab_ratio": 0.3897
   },
   {
-    "...1": 275,
     "state.abb": "FL",
     "state.name": "Florida",
     "geo_id": "1235000",
@@ -4911,10 +4676,9 @@
     "modified_revenues": -376522000,
     "net_pension_liability": 2905810000,
     "net_opeb_liability": 274269000,
-    "assets_liab_ratio": 0.8968
+    "assets_liab_ratio": 1.1151
   },
   {
-    "...1": 280,
     "state.abb": "FL",
     "state.name": "Florida",
     "geo_id": "1263000",
@@ -4932,10 +4696,9 @@
     "modified_revenues": -36876432,
     "net_pension_liability": -41235204,
     "net_opeb_liability": 261024918,
-    "assets_liab_ratio": 2.0489
+    "assets_liab_ratio": 0.4881
   },
   {
-    "...1": 283,
     "state.abb": "GA",
     "state.name": "Georgia",
     "geo_id": "1304000",
@@ -4953,10 +4716,9 @@
     "modified_revenues": 153578000,
     "net_pension_liability": 619780000,
     "net_opeb_liability": 884365000,
-    "assets_liab_ratio": 1.8575
+    "assets_liab_ratio": 0.5384
   },
   {
-    "...1": 255,
     "state.abb": "ID",
     "state.name": "Idaho",
     "geo_id": "1608830",
@@ -4974,10 +4736,9 @@
     "modified_revenues": -68807000,
     "net_pension_liability": 63498000,
     "net_opeb_liability": 12226000,
-    "assets_liab_ratio": 3.9386
+    "assets_liab_ratio": 0.2539
   },
   {
-    "...1": 207,
     "state.abb": "IL",
     "state.name": "Illinois",
     "geo_id": "1714000",
@@ -4995,10 +4756,9 @@
     "modified_revenues": -6736833000,
     "net_pension_liability": 35436606000,
     "net_opeb_liability": 1835039000,
-    "assets_liab_ratio": 0.6411
+    "assets_liab_ratio": 1.5599
   },
   {
-    "...1": 270,
     "state.abb": "IN",
     "state.name": "Indiana",
     "geo_id": "1825000",
@@ -5016,10 +4776,9 @@
     "modified_revenues": 72999672,
     "net_pension_liability": 219498841,
     "net_opeb_liability": 151689246,
-    "assets_liab_ratio": 1.9637
+    "assets_liab_ratio": 0.5092
   },
   {
-    "...1": 254,
     "state.abb": "IA",
     "state.name": "Iowa",
     "geo_id": "1921000",
@@ -5037,10 +4796,9 @@
     "modified_revenues": -35502927,
     "net_pension_liability": 42649067,
     "net_opeb_liability": 27681903,
-    "assets_liab_ratio": 2.5414
+    "assets_liab_ratio": 0.3935
   },
   {
-    "...1": 241,
     "state.abb": "KS",
     "state.name": "Kansas",
     "geo_id": "2079000",
@@ -5058,10 +4816,9 @@
     "modified_revenues": -22623535,
     "net_pension_liability": -49328335,
     "net_opeb_liability": 35568000,
-    "assets_liab_ratio": 2.7899
+    "assets_liab_ratio": 0.3584
   },
   {
-    "...1": 297,
     "state.abb": "LA",
     "state.name": "Louisiana",
     "geo_id": "2255000",
@@ -5079,10 +4836,9 @@
     "modified_revenues": 81881000,
     "net_pension_liability": 1008184000,
     "net_opeb_liability": 137415000,
-    "assets_liab_ratio": 1.252
+    "assets_liab_ratio": 0.7987
   },
   {
-    "...1": 236,
     "state.abb": "MD",
     "state.name": "Maryland",
     "geo_id": "2404000",
@@ -5100,10 +4856,9 @@
     "modified_revenues": -778470000,
     "net_pension_liability": 1271476000,
     "net_opeb_liability": 102595000,
-    "assets_liab_ratio": 1.5038
+    "assets_liab_ratio": 0.665
   },
   {
-    "...1": 253,
     "state.abb": "MA",
     "state.name": "Massachusetts",
     "geo_id": "2507000",
@@ -5121,10 +4876,9 @@
     "modified_revenues": -461301000,
     "net_pension_liability": 1080235000,
     "net_opeb_liability": 2310198000,
-    "assets_liab_ratio": 0.8716
+    "assets_liab_ratio": 1.1473
   },
   {
-    "...1": 276,
     "state.abb": "MI",
     "state.name": "Michigan",
     "geo_id": "2622000",
@@ -5142,10 +4896,9 @@
     "modified_revenues": -1274038584,
     "net_pension_liability": 1591447038,
     "net_opeb_liability": 1476914,
-    "assets_liab_ratio": 1.1845
+    "assets_liab_ratio": 0.8443
   },
   {
-    "...1": 248,
     "state.abb": "MN",
     "state.name": "Minnesota",
     "geo_id": "2743000",
@@ -5163,10 +4916,9 @@
     "modified_revenues": -99909000,
     "net_pension_liability": 872688000,
     "net_opeb_liability": 48422000,
-    "assets_liab_ratio": 2.0509
+    "assets_liab_ratio": 0.4876
   },
   {
-    "...1": 251,
     "state.abb": "MO",
     "state.name": "Missouri",
     "geo_id": "2938000",
@@ -5184,10 +4936,9 @@
     "modified_revenues": -230543000,
     "net_pension_liability": 650718000,
     "net_opeb_liability": 108427000,
-    "assets_liab_ratio": 1.8673
+    "assets_liab_ratio": 0.5355
   },
   {
-    "...1": 252,
     "state.abb": "MO",
     "state.name": "Missouri",
     "geo_id": "2965000",
@@ -5205,10 +4956,9 @@
     "modified_revenues": -613997000,
     "net_pension_liability": 326508000,
     "net_opeb_liability": 441033000,
-    "assets_liab_ratio": 1.295
+    "assets_liab_ratio": 0.7722
   },
   {
-    "...1": 208,
     "state.abb": "NE",
     "state.name": "Nebraska",
     "geo_id": "3137000",
@@ -5226,10 +4976,9 @@
     "modified_revenues": 79681697,
     "net_pension_liability": 975536427,
     "net_opeb_liability": 505771438,
-    "assets_liab_ratio": 1.2254
+    "assets_liab_ratio": 0.8161
   },
   {
-    "...1": 260,
     "state.abb": "NE",
     "state.name": "Nebraska",
     "geo_id": "3128000",
@@ -5247,10 +4996,9 @@
     "modified_revenues": -13939371,
     "net_pension_liability": 74246000,
     "net_opeb_liability": 28734000,
-    "assets_liab_ratio": 2.6042
+    "assets_liab_ratio": 0.384
   },
   {
-    "...1": 198,
     "state.abb": "NV",
     "state.name": "Nevada",
     "geo_id": "3251800",
@@ -5268,10 +5016,9 @@
     "modified_revenues": 109985097,
     "net_pension_liability": 149081779,
     "net_opeb_liability": 86225700,
-    "assets_liab_ratio": 3.5582
+    "assets_liab_ratio": 0.281
   },
   {
-    "...1": 209,
     "state.abb": "NV",
     "state.name": "Nevada",
     "geo_id": "3240000",
@@ -5289,10 +5036,9 @@
     "modified_revenues": 223917557,
     "net_pension_liability": 565585141,
     "net_opeb_liability": 53751119,
-    "assets_liab_ratio": 4.1171
+    "assets_liab_ratio": 0.2429
   },
   {
-    "...1": 210,
     "state.abb": "NV",
     "state.name": "Nevada",
     "geo_id": "3231900",
@@ -5310,10 +5056,9 @@
     "modified_revenues": 172188130,
     "net_pension_liability": 69332241,
     "net_opeb_liability": 276458484,
-    "assets_liab_ratio": 4.23
+    "assets_liab_ratio": 0.2364
   },
   {
-    "...1": 249,
     "state.abb": "NV",
     "state.name": "Nevada",
     "geo_id": "3260600",
@@ -5331,10 +5076,9 @@
     "modified_revenues": -29521330,
     "net_pension_liability": 173851338,
     "net_opeb_liability": 133546458,
-    "assets_liab_ratio": 2.0343
+    "assets_liab_ratio": 0.4916
   },
   {
-    "...1": 271,
     "state.abb": "NJ",
     "state.name": "New Jersey",
     "geo_id": "3436000",
@@ -5352,10 +5096,9 @@
     "modified_revenues": -182720683,
     "net_pension_liability": 60959025,
     "net_opeb_liability": 1418603618,
-    "assets_liab_ratio": 6.0607
+    "assets_liab_ratio": 0.165
   },
   {
-    "...1": 285,
     "state.abb": "NM",
     "state.name": "New Mexico",
     "geo_id": "3502000",
@@ -5373,10 +5116,9 @@
     "modified_revenues": -143612846,
     "net_pension_liability": 576889743,
     "net_opeb_liability": 257870420,
-    "assets_liab_ratio": 2.758
+    "assets_liab_ratio": 0.3626
   },
   {
-    "...1": 212,
     "state.abb": "NY",
     "state.name": "New York",
     "geo_id": "3684000",
@@ -5394,10 +5136,9 @@
     "modified_revenues": -57572592,
     "net_pension_liability": -280479817,
     "net_opeb_liability": 2595913992,
-    "assets_liab_ratio": 0.4968
+    "assets_liab_ratio": 2.0127
   },
   {
-    "...1": 263,
     "state.abb": "NY",
     "state.name": "New York",
     "geo_id": "3663000",
@@ -5415,10 +5156,9 @@
     "modified_revenues": -340202000,
     "net_pension_liability": -6861000,
     "net_opeb_liability": 1147549000,
-    "assets_liab_ratio": 0.9657
+    "assets_liab_ratio": 1.0355
   },
   {
-    "...1": 269,
     "state.abb": "NY",
     "state.name": "New York",
     "geo_id": "3651000",
@@ -5436,10 +5176,9 @@
     "modified_revenues": -27854305000,
     "net_pension_liability": 42349466000,
     "net_opeb_liability": 89525858000,
-    "assets_liab_ratio": 0.4764
+    "assets_liab_ratio": 2.0993
   },
   {
-    "...1": 294,
     "state.abb": "NY",
     "state.name": "New York",
     "geo_id": "3611000",
@@ -5457,10 +5196,9 @@
     "modified_revenues": -601999457,
     "net_pension_liability": 292424,
     "net_opeb_liability": 1312274426,
-    "assets_liab_ratio": 0.7361
+    "assets_liab_ratio": 1.3584
   },
   {
-    "...1": 197,
     "state.abb": "NC",
     "state.name": "North Carolina",
     "geo_id": "3775000",
@@ -5478,10 +5216,9 @@
     "modified_revenues": 32006571,
     "net_pension_liability": 89185304,
     "net_opeb_liability": 1459209,
-    "assets_liab_ratio": 2.1005
+    "assets_liab_ratio": 0.4761
   },
   {
-    "...1": 211,
     "state.abb": "NC",
     "state.name": "North Carolina",
     "geo_id": "3719000",
@@ -5499,10 +5236,9 @@
     "modified_revenues": -41661907,
     "net_pension_liability": 71632896,
     "net_opeb_liability": 161244534,
-    "assets_liab_ratio": 2.6644
+    "assets_liab_ratio": 0.3753
   },
   {
-    "...1": 231,
     "state.abb": "NC",
     "state.name": "North Carolina",
     "geo_id": "3712000",
@@ -5520,10 +5256,9 @@
     "modified_revenues": -164698000,
     "net_pension_liability": 422459000,
     "net_opeb_liability": 332111000,
-    "assets_liab_ratio": 2.8544
+    "assets_liab_ratio": 0.3503
   },
   {
-    "...1": 244,
     "state.abb": "NC",
     "state.name": "North Carolina",
     "geo_id": "3728000",
@@ -5541,10 +5276,9 @@
     "modified_revenues": -129967173,
     "net_pension_liability": 62478040,
     "net_opeb_liability": 118633659,
-    "assets_liab_ratio": 1.9904
+    "assets_liab_ratio": 0.5024
   },
   {
-    "...1": 273,
     "state.abb": "NC",
     "state.name": "North Carolina",
     "geo_id": "3755000",
@@ -5562,10 +5296,9 @@
     "modified_revenues": 9597988,
     "net_pension_liability": 129081538,
     "net_opeb_liability": 205633329,
-    "assets_liab_ratio": 2.3262
+    "assets_liab_ratio": 0.4299
   },
   {
-    "...1": 213,
     "state.abb": "OH",
     "state.name": "Ohio",
     "geo_id": "3916000",
@@ -5583,10 +5316,9 @@
     "modified_revenues": -160360000,
     "net_pension_liability": 606103000,
     "net_opeb_liability": 17147000,
-    "assets_liab_ratio": 2.0297
+    "assets_liab_ratio": 0.4927
   },
   {
-    "...1": 226,
     "state.abb": "OH",
     "state.name": "Ohio",
     "geo_id": "3918000",
@@ -5604,10 +5336,9 @@
     "modified_revenues": 58749000,
     "net_pension_liability": 1099799000,
     "net_opeb_liability": 87068000,
-    "assets_liab_ratio": 1.6056
+    "assets_liab_ratio": 0.6228
   },
   {
-    "...1": 228,
     "state.abb": "OH",
     "state.name": "Ohio",
     "geo_id": "3977000",
@@ -5625,10 +5356,9 @@
     "modified_revenues": -84931000,
     "net_pension_liability": 286965000,
     "net_opeb_liability": 25136000,
-    "assets_liab_ratio": 1.7036
+    "assets_liab_ratio": 0.587
   },
   {
-    "...1": 234,
     "state.abb": "OH",
     "state.name": "Ohio",
     "geo_id": "3915000",
@@ -5646,10 +5376,9 @@
     "modified_revenues": 296737000,
     "net_pension_liability": 955536000,
     "net_opeb_liability": -61142000,
-    "assets_liab_ratio": 1.7942
+    "assets_liab_ratio": 0.5573
   },
   {
-    "...1": 200,
     "state.abb": "OK",
     "state.name": "Oklahoma",
     "geo_id": "4055000",
@@ -5667,10 +5396,9 @@
     "modified_revenues": 106858000,
     "net_pension_liability": -56491000,
     "net_opeb_liability": 419069000,
-    "assets_liab_ratio": 2.1771
+    "assets_liab_ratio": 0.4593
   },
   {
-    "...1": 238,
     "state.abb": "OK",
     "state.name": "Oklahoma",
     "geo_id": "4075000",
@@ -5688,10 +5416,9 @@
     "modified_revenues": 52916000,
     "net_pension_liability": 236765000,
     "net_opeb_liability": 3211000,
-    "assets_liab_ratio": 3.295
+    "assets_liab_ratio": 0.3035
   },
   {
-    "...1": 214,
     "state.abb": "OR",
     "state.name": "Oregon",
     "geo_id": "4159000",
@@ -5709,10 +5436,9 @@
     "modified_revenues": 12120386,
     "net_pension_liability": 4275718773,
     "net_opeb_liability": 105361719,
-    "assets_liab_ratio": 1.2768
+    "assets_liab_ratio": 0.7832
   },
   {
-    "...1": 225,
     "state.abb": "PA",
     "state.name": "Pennsylvania",
     "geo_id": "4261000",
@@ -5730,10 +5456,9 @@
     "modified_revenues": -195456137,
     "net_pension_liability": 924293454,
     "net_opeb_liability": 352713530,
-    "assets_liab_ratio": 0.4332
+    "assets_liab_ratio": 2.3084
   },
   {
-    "...1": 264,
     "state.abb": "PA",
     "state.name": "Pennsylvania",
     "geo_id": "4260000",
@@ -5751,10 +5476,9 @@
     "modified_revenues": -2066608000,
     "net_pension_liability": 5386419000,
     "net_opeb_liability": 2156649000,
-    "assets_liab_ratio": 0.8006
+    "assets_liab_ratio": 1.2491
   },
   {
-    "...1": 199,
     "state.abb": "TN",
     "state.name": "Tennessee",
     "geo_id": "4748000",
@@ -5772,10 +5496,9 @@
     "modified_revenues": -543664000,
     "net_pension_liability": 555464000,
     "net_opeb_liability": 662704000,
-    "assets_liab_ratio": 1.6329
+    "assets_liab_ratio": 0.6124
   },
   {
-    "...1": 215,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4819000",
@@ -5793,10 +5516,9 @@
     "modified_revenues": 1272000,
     "net_pension_liability": 4029247000,
     "net_opeb_liability": 221571000,
-    "assets_liab_ratio": 1.3432
+    "assets_liab_ratio": 0.7445
   },
   {
-    "...1": 217,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4827000",
@@ -5814,10 +5536,9 @@
     "modified_revenues": -182615000,
     "net_pension_liability": 2062436000,
     "net_opeb_liability": 864008000,
-    "assets_liab_ratio": 1.6426
+    "assets_liab_ratio": 0.6088
   },
   {
-    "...1": 218,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4858016",
@@ -5835,10 +5556,9 @@
     "modified_revenues": 599786,
     "net_pension_liability": -37631774,
     "net_opeb_liability": -5690194,
-    "assets_liab_ratio": 3.2873
+    "assets_liab_ratio": 0.3042
   },
   {
-    "...1": 219,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4805000",
@@ -5856,10 +5576,9 @@
     "modified_revenues": -716890000,
     "net_pension_liability": 2023188000,
     "net_opeb_liability": 4253955000,
-    "assets_liab_ratio": 1.2803
+    "assets_liab_ratio": 0.7811
   },
   {
-    "...1": 220,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4841464",
@@ -5877,10 +5596,9 @@
     "modified_revenues": -26608091,
     "net_pension_liability": 187273236,
     "net_opeb_liability": 172161855,
-    "assets_liab_ratio": 1.6455
+    "assets_liab_ratio": 0.6077
   },
   {
-    "...1": 223,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4835000",
@@ -5898,10 +5616,9 @@
     "modified_revenues": 581904000,
     "net_pension_liability": 2192174000,
     "net_opeb_liability": 2350595000,
-    "assets_liab_ratio": 1.3027
+    "assets_liab_ratio": 0.7676
   },
   {
-    "...1": 224,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4829000",
@@ -5919,10 +5636,9 @@
     "modified_revenues": -63654965,
     "net_pension_liability": -62295681,
     "net_opeb_liability": 95156017,
-    "assets_liab_ratio": 1.6967
+    "assets_liab_ratio": 0.5894
   },
   {
-    "...1": 230,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4817000",
@@ -5940,10 +5656,9 @@
     "modified_revenues": 14601744,
     "net_pension_liability": 141067731,
     "net_opeb_liability": 13937528,
-    "assets_liab_ratio": 1.9846
+    "assets_liab_ratio": 0.5039
   },
   {
-    "...1": 235,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4845000",
@@ -5961,10 +5676,9 @@
     "modified_revenues": 18182923,
     "net_pension_liability": 99473975,
     "net_opeb_liability": 154946406,
-    "assets_liab_ratio": 1.7442
+    "assets_liab_ratio": 0.5733
   },
   {
-    "...1": 243,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4865000",
@@ -5982,10 +5696,9 @@
     "modified_revenues": -57605000,
     "net_pension_liability": 454333000,
     "net_opeb_liability": 811969000,
-    "assets_liab_ratio": 1.6265
+    "assets_liab_ratio": 0.6148
   },
   {
-    "...1": 245,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4804000",
@@ -6003,10 +5716,9 @@
     "modified_revenues": -78268000,
     "net_pension_liability": -119626000,
     "net_opeb_liability": 143042000,
-    "assets_liab_ratio": 2.5356
+    "assets_liab_ratio": 0.3944
   },
   {
-    "...1": 250,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4837000",
@@ -6024,10 +5736,9 @@
     "modified_revenues": 26965081,
     "net_pension_liability": -4305530,
     "net_opeb_liability": 17063616,
-    "assets_liab_ratio": 1.9101
+    "assets_liab_ratio": 0.5235
   },
   {
-    "...1": 259,
     "state.abb": "TX",
     "state.name": "Texas",
     "geo_id": "4824000",
@@ -6045,10 +5756,9 @@
     "modified_revenues": -86606956,
     "net_pension_liability": 249896511,
     "net_opeb_liability": 120299852,
-    "assets_liab_ratio": 1.3624
+    "assets_liab_ratio": 0.734
   },
   {
-    "...1": 193,
     "state.abb": "VA",
     "state.name": "Virginia",
     "geo_id": "5157000",
@@ -6066,10 +5776,9 @@
     "modified_revenues": -42518550,
     "net_pension_liability": 38108794,
     "net_opeb_liability": 116281900,
-    "assets_liab_ratio": 1.4871
+    "assets_liab_ratio": 0.6725
   },
   {
-    "...1": 194,
     "state.abb": "VA",
     "state.name": "Virginia",
     "geo_id": "5116000",
@@ -6087,10 +5796,9 @@
     "modified_revenues": 17831930,
     "net_pension_liability": 69545639,
     "net_opeb_liability": 46042830,
-    "assets_liab_ratio": 3.2451
+    "assets_liab_ratio": 0.3082
   },
   {
-    "...1": 195,
     "state.abb": "VA",
     "state.name": "Virginia",
     "geo_id": "5167000",
@@ -6108,10 +5816,9 @@
     "modified_revenues": -140619149,
     "net_pension_liability": 257171812,
     "net_opeb_liability": 24127873,
-    "assets_liab_ratio": 1.5477
+    "assets_liab_ratio": 0.6461
   },
   {
-    "...1": 196,
     "state.abb": "VA",
     "state.name": "Virginia",
     "geo_id": "5182000",
@@ -6129,10 +5836,9 @@
     "modified_revenues": -45776831,
     "net_pension_liability": 260062702,
     "net_opeb_liability": 99991906,
-    "assets_liab_ratio": 2.9979
+    "assets_liab_ratio": 0.3336
   },
   {
-    "...1": 246,
     "state.abb": "WA",
     "state.name": "Washington",
     "geo_id": "5363000",
@@ -6150,10 +5856,9 @@
     "modified_revenues": 290778000,
     "net_pension_liability": 671920000,
     "net_opeb_liability": 537513000,
-    "assets_liab_ratio": 1.9825
+    "assets_liab_ratio": 0.5044
   },
   {
-    "...1": 267,
     "state.abb": "WA",
     "state.name": "Washington",
     "geo_id": "5370000",
@@ -6171,10 +5876,9 @@
     "modified_revenues": -105757000,
     "net_pension_liability": -208476000,
     "net_opeb_liability": 227442000,
-    "assets_liab_ratio": 2.6439
+    "assets_liab_ratio": 0.3782
   },
   {
-    "...1": 274,
     "state.abb": "WA",
     "state.name": "Washington",
     "geo_id": "5367000",
@@ -6192,10 +5896,9 @@
     "modified_revenues": 27217170,
     "net_pension_liability": -102836353,
     "net_opeb_liability": -93475431,
-    "assets_liab_ratio": 4.0011
+    "assets_liab_ratio": 0.2499
   },
   {
-    "...1": 221,
     "state.abb": "WI",
     "state.name": "Wisconsin",
     "geo_id": "5553000",
@@ -6213,10 +5916,9 @@
     "modified_revenues": -401578000,
     "net_pension_liability": 380776000,
     "net_opeb_liability": 1228831000,
-    "assets_liab_ratio": 1.0733
+    "assets_liab_ratio": 0.9317
   },
   {
-    "...1": 247,
     "state.abb": "WI",
     "state.name": "Wisconsin",
     "geo_id": "5548000",
@@ -6234,6 +5936,6 @@
     "modified_revenues": -44407178,
     "net_pension_liability": -147307513,
     "net_opeb_liability": 69016664,
-    "assets_liab_ratio": 2.8135
+    "assets_liab_ratio": 0.3554
   }
 ]

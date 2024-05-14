@@ -18,7 +18,7 @@
     "modified_revenues": -206581000,
     "net_pension_liability": -142088000,
     "net_opeb_liability": 119964000,
-    "assets_liab_ratio": 1.2497
+    "assets_liab_ratio": 0.8002
   },
   {
     "state.abb": "AZ",
@@ -39,7 +39,7 @@
     "modified_revenues": -279885078,
     "net_pension_liability": 1876917812,
     "net_opeb_liability": -13427999,
-    "assets_liab_ratio": 2.226
+    "assets_liab_ratio": 0.4492
   },
   {
     "state.abb": "AZ",
@@ -60,7 +60,7 @@
     "modified_revenues": -62787000,
     "net_pension_liability": 776192000,
     "net_opeb_liability": -530000,
-    "assets_liab_ratio": 2.0638
+    "assets_liab_ratio": 0.4845
   },
   {
     "state.abb": "CA",
@@ -81,7 +81,7 @@
     "modified_revenues": -4562169000,
     "net_pension_liability": 11560668000,
     "net_opeb_liability": 25921499000,
-    "assets_liab_ratio": 0.7086
+    "assets_liab_ratio": 1.4113
   },
   {
     "state.abb": "CA",
@@ -102,7 +102,7 @@
     "modified_revenues": -816035000,
     "net_pension_liability": 3790434000,
     "net_opeb_liability": 106033000,
-    "assets_liab_ratio": 1.3541
+    "assets_liab_ratio": 0.7385
   },
   {
     "state.abb": "CA",
@@ -123,7 +123,7 @@
     "modified_revenues": -573611000,
     "net_pension_liability": 4125372000,
     "net_opeb_liability": 328412000,
-    "assets_liab_ratio": 1.3805
+    "assets_liab_ratio": 0.7244
   },
   {
     "state.abb": "CA",
@@ -144,7 +144,7 @@
     "modified_revenues": -2340895000,
     "net_pension_liability": 3517404000,
     "net_opeb_liability": 60207000,
-    "assets_liab_ratio": 1.0744
+    "assets_liab_ratio": 0.9307
   },
   {
     "state.abb": "CA",
@@ -165,7 +165,7 @@
     "modified_revenues": -472277000,
     "net_pension_liability": 2236518000,
     "net_opeb_liability": 8506000,
-    "assets_liab_ratio": 1.6203
+    "assets_liab_ratio": 0.6172
   },
   {
     "state.abb": "CA",
@@ -186,7 +186,7 @@
     "modified_revenues": -1509704000,
     "net_pension_liability": 4369993000,
     "net_opeb_liability": 1193745000,
-    "assets_liab_ratio": 0.8031
+    "assets_liab_ratio": 1.2452
   },
   {
     "state.abb": "CA",
@@ -207,7 +207,7 @@
     "modified_revenues": -703680000,
     "net_pension_liability": 1785396000,
     "net_opeb_liability": 173413000,
-    "assets_liab_ratio": 1.5065
+    "assets_liab_ratio": 0.6638
   },
   {
     "state.abb": "CA",
@@ -228,7 +228,7 @@
     "modified_revenues": -250327000,
     "net_pension_liability": 1843333000,
     "net_opeb_liability": 135237000,
-    "assets_liab_ratio": 1.0728
+    "assets_liab_ratio": 0.9321
   },
   {
     "state.abb": "CA",
@@ -249,7 +249,7 @@
     "modified_revenues": -241051000,
     "net_pension_liability": 677976000,
     "net_opeb_liability": 523697000,
-    "assets_liab_ratio": 1.4413
+    "assets_liab_ratio": 0.6938
   },
   {
     "state.abb": "CA",
@@ -270,7 +270,7 @@
     "modified_revenues": -187923000,
     "net_pension_liability": 1054510000,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 1.082
+    "assets_liab_ratio": 0.9242
   },
   {
     "state.abb": "CA",
@@ -291,7 +291,7 @@
     "modified_revenues": -224861000,
     "net_pension_liability": 1804165000,
     "net_opeb_liability": 42679000,
-    "assets_liab_ratio": 1.3254
+    "assets_liab_ratio": 0.7545
   },
   {
     "state.abb": "CA",
@@ -312,7 +312,7 @@
     "modified_revenues": -409966000,
     "net_pension_liability": 677172000,
     "net_opeb_liability": 129986000,
-    "assets_liab_ratio": 1.7884
+    "assets_liab_ratio": 0.5592
   },
   {
     "state.abb": "CA",
@@ -333,7 +333,7 @@
     "modified_revenues": -182267629,
     "net_pension_liability": 1584683469,
     "net_opeb_liability": 129969434,
-    "assets_liab_ratio": 1.1348
+    "assets_liab_ratio": 0.8812
   },
   {
     "state.abb": "CA",
@@ -354,7 +354,7 @@
     "modified_revenues": -301361000,
     "net_pension_liability": 582014000,
     "net_opeb_liability": 93292000,
-    "assets_liab_ratio": 2.097
+    "assets_liab_ratio": 0.4769
   },
   {
     "state.abb": "CA",
@@ -375,7 +375,7 @@
     "modified_revenues": -5113674000,
     "net_pension_liability": 4655538000,
     "net_opeb_liability": 3903016000,
-    "assets_liab_ratio": 1.263
+    "assets_liab_ratio": 0.7917
   },
   {
     "state.abb": "CO",
@@ -396,7 +396,7 @@
     "modified_revenues": -22165470,
     "net_pension_liability": 485244387,
     "net_opeb_liability": 138991599,
-    "assets_liab_ratio": 1.0521
+    "assets_liab_ratio": 0.9505
   },
   {
     "state.abb": "CO",
@@ -417,7 +417,7 @@
     "modified_revenues": -677897000,
     "net_pension_liability": 1682238000,
     "net_opeb_liability": 249680000,
-    "assets_liab_ratio": 1.3751
+    "assets_liab_ratio": 0.7272
   },
   {
     "state.abb": "CO",
@@ -438,7 +438,7 @@
     "modified_revenues": -43508668,
     "net_pension_liability": 208374554,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 2.9513
+    "assets_liab_ratio": 0.3388
   },
   {
     "state.abb": "FL",
@@ -459,7 +459,7 @@
     "modified_revenues": -2543199000,
     "net_pension_liability": 4414212000,
     "net_opeb_liability": 692290000,
-    "assets_liab_ratio": 1.0719
+    "assets_liab_ratio": 0.9329
   },
   {
     "state.abb": "FL",
@@ -480,7 +480,7 @@
     "modified_revenues": 32509000,
     "net_pension_liability": 1835950000,
     "net_opeb_liability": 315136000,
-    "assets_liab_ratio": 1.6767
+    "assets_liab_ratio": 0.5964
   },
   {
     "state.abb": "FL",
@@ -501,7 +501,7 @@
     "modified_revenues": -435892389,
     "net_pension_liability": 1867489307,
     "net_opeb_liability": 447740399,
-    "assets_liab_ratio": 1.6529
+    "assets_liab_ratio": 0.605
   },
   {
     "state.abb": "FL",
@@ -522,7 +522,7 @@
     "modified_revenues": -259317000,
     "net_pension_liability": 1266841000,
     "net_opeb_liability": 116670000,
-    "assets_liab_ratio": 3.8893
+    "assets_liab_ratio": 0.2571
   },
   {
     "state.abb": "FL",
@@ -543,7 +543,7 @@
     "modified_revenues": -87615592,
     "net_pension_liability": 1287393180,
     "net_opeb_liability": 42576776,
-    "assets_liab_ratio": 3.1519
+    "assets_liab_ratio": 0.3173
   },
   {
     "state.abb": "FL",
@@ -564,7 +564,7 @@
     "modified_revenues": -154881069,
     "net_pension_liability": 710305897,
     "net_opeb_liability": 697335520,
-    "assets_liab_ratio": 2.6581
+    "assets_liab_ratio": 0.3762
   },
   {
     "state.abb": "FL",
@@ -585,7 +585,7 @@
     "modified_revenues": -187356000,
     "net_pension_liability": 585079000,
     "net_opeb_liability": 807852000,
-    "assets_liab_ratio": 2.0844
+    "assets_liab_ratio": 0.4797
   },
   {
     "state.abb": "FL",
@@ -606,7 +606,7 @@
     "modified_revenues": -147837681,
     "net_pension_liability": 519641860,
     "net_opeb_liability": 198094593,
-    "assets_liab_ratio": 3.5992
+    "assets_liab_ratio": 0.2778
   },
   {
     "state.abb": "FL",
@@ -627,7 +627,7 @@
     "modified_revenues": -35999065,
     "net_pension_liability": 414905456,
     "net_opeb_liability": 27264556,
-    "assets_liab_ratio": 2.1582
+    "assets_liab_ratio": 0.4634
   },
   {
     "state.abb": "FL",
@@ -648,7 +648,7 @@
     "modified_revenues": -254566000,
     "net_pension_liability": 2985785000,
     "net_opeb_liability": 261160000,
-    "assets_liab_ratio": 0.8109
+    "assets_liab_ratio": 1.2333
   },
   {
     "state.abb": "GA",
@@ -669,7 +669,7 @@
     "modified_revenues": -71073000,
     "net_pension_liability": 333578000,
     "net_opeb_liability": 1675472000,
-    "assets_liab_ratio": 0.9654
+    "assets_liab_ratio": 1.0359
   },
   {
     "state.abb": "GA",
@@ -690,7 +690,7 @@
     "modified_revenues": 170057000,
     "net_pension_liability": 213317000,
     "net_opeb_liability": 39204000,
-    "assets_liab_ratio": 6.31
+    "assets_liab_ratio": 0.1585
   },
   {
     "state.abb": "GA",
@@ -711,7 +711,7 @@
     "modified_revenues": -60880325,
     "net_pension_liability": 667140390,
     "net_opeb_liability": 178505026,
-    "assets_liab_ratio": 3.7116
+    "assets_liab_ratio": 0.2694
   },
   {
     "state.abb": "GA",
@@ -732,7 +732,7 @@
     "modified_revenues": -196820000,
     "net_pension_liability": 845083000,
     "net_opeb_liability": 611429000,
-    "assets_liab_ratio": 1.5466
+    "assets_liab_ratio": 0.6466
   },
   {
     "state.abb": "HI",
@@ -753,7 +753,7 @@
     "modified_revenues": 81002000,
     "net_pension_liability": 2665559000,
     "net_opeb_liability": 1871583000,
-    "assets_liab_ratio": 0.9808
+    "assets_liab_ratio": 1.0195
   },
   {
     "state.abb": "IL",
@@ -774,7 +774,7 @@
     "modified_revenues": -979566831,
     "net_pension_liability": 13580982590,
     "net_opeb_liability": 1900989370,
-    "assets_liab_ratio": 0.2307
+    "assets_liab_ratio": 4.3344
   },
   {
     "state.abb": "IL",
@@ -795,7 +795,7 @@
     "modified_revenues": -55930916,
     "net_pension_liability": 165805602,
     "net_opeb_liability": 13632860,
-    "assets_liab_ratio": 2.9634
+    "assets_liab_ratio": 0.3375
   },
   {
     "state.abb": "IL",
@@ -816,7 +816,7 @@
     "modified_revenues": -28029023,
     "net_pension_liability": 47434620,
     "net_opeb_liability": 18804476,
-    "assets_liab_ratio": 4.5345
+    "assets_liab_ratio": 0.2205
   },
   {
     "state.abb": "IL",
@@ -837,7 +837,7 @@
     "modified_revenues": 12974141,
     "net_pension_liability": 130130559,
     "net_opeb_liability": 43959176,
-    "assets_liab_ratio": 2.1196
+    "assets_liab_ratio": 0.4718
   },
   {
     "state.abb": "IN",
@@ -858,7 +858,7 @@
     "modified_revenues": -21112329,
     "net_pension_liability": 114023647,
     "net_opeb_liability": 15112759,
-    "assets_liab_ratio": 0.9903
+    "assets_liab_ratio": 1.0098
   },
   {
     "state.abb": "KS",
@@ -879,7 +879,7 @@
     "modified_revenues": -529086,
     "net_pension_liability": 251000703,
     "net_opeb_liability": 23868678,
-    "assets_liab_ratio": 1.7429
+    "assets_liab_ratio": 0.5738
   },
   {
     "state.abb": "KY",
@@ -900,7 +900,7 @@
     "modified_revenues": -62995664,
     "net_pension_liability": 1158168356,
     "net_opeb_liability": 295693343,
-    "assets_liab_ratio": 1.102
+    "assets_liab_ratio": 0.9075
   },
   {
     "state.abb": "MD",
@@ -921,7 +921,7 @@
     "modified_revenues": -567155467,
     "net_pension_liability": 106518934,
     "net_opeb_liability": 825636740,
-    "assets_liab_ratio": 1.2446
+    "assets_liab_ratio": 0.8035
   },
   {
     "state.abb": "MD",
@@ -942,7 +942,7 @@
     "modified_revenues": -789322703,
     "net_pension_liability": 1828515183,
     "net_opeb_liability": 2063326398,
-    "assets_liab_ratio": 0.6427
+    "assets_liab_ratio": 1.556
   },
   {
     "state.abb": "MD",
@@ -963,7 +963,7 @@
     "modified_revenues": -767485000,
     "net_pension_liability": 1831608000,
     "net_opeb_liability": 1696611000,
-    "assets_liab_ratio": 0.6594
+    "assets_liab_ratio": 1.5166
   },
   {
     "state.abb": "MA",
@@ -984,7 +984,7 @@
     "modified_revenues": -9168174,
     "net_pension_liability": 30650254,
     "net_opeb_liability": 55376593,
-    "assets_liab_ratio": 0.5084
+    "assets_liab_ratio": 1.967
   },
   {
     "state.abb": "MI",
@@ -1005,7 +1005,7 @@
     "modified_revenues": -175620712,
     "net_pension_liability": 22497565,
     "net_opeb_liability": -384338239,
-    "assets_liab_ratio": 3.1887
+    "assets_liab_ratio": 0.3136
   },
   {
     "state.abb": "MI",
@@ -1026,7 +1026,7 @@
     "modified_revenues": 31757735,
     "net_pension_liability": -84215482,
     "net_opeb_liability": 110683716,
-    "assets_liab_ratio": 3.6341
+    "assets_liab_ratio": 0.2752
   },
   {
     "state.abb": "MI",
@@ -1047,7 +1047,7 @@
     "modified_revenues": 7769301,
     "net_pension_liability": -56763648,
     "net_opeb_liability": 20274392,
-    "assets_liab_ratio": 3.1683
+    "assets_liab_ratio": 0.3156
   },
   {
     "state.abb": "MN",
@@ -1068,7 +1068,7 @@
     "modified_revenues": -580702458,
     "net_pension_liability": 839268166,
     "net_opeb_liability": 145819803,
-    "assets_liab_ratio": 1.3089
+    "assets_liab_ratio": 0.764
   },
   {
     "state.abb": "MO",
@@ -1088,8 +1088,7 @@
     "median_hh_income_21": 72507,
     "modified_revenues": -211147609,
     "net_pension_liability": 324443093,
-    "net_opeb_liability": 0,
-    "assets_liab_ratio": 0
+    "net_opeb_liability": 0
   },
   {
     "state.abb": "MO",
@@ -1110,7 +1109,7 @@
     "modified_revenues": -48371234,
     "net_pension_liability": 46067941,
     "net_opeb_liability": 5636802,
-    "assets_liab_ratio": 1.662
+    "assets_liab_ratio": 0.6017
   },
   {
     "state.abb": "NV",
@@ -1131,7 +1130,7 @@
     "modified_revenues": -549758066,
     "net_pension_liability": 2971365931,
     "net_opeb_liability": 683532382,
-    "assets_liab_ratio": 1.8488
+    "assets_liab_ratio": 0.5409
   },
   {
     "state.abb": "NJ",
@@ -1152,7 +1151,7 @@
     "modified_revenues": 38464003,
     "net_pension_liability": 458269025,
     "net_opeb_liability": 1209601242,
-    "assets_liab_ratio": 0.1456
+    "assets_liab_ratio": 6.8703
   },
   {
     "state.abb": "NJ",
@@ -1173,7 +1172,7 @@
     "modified_revenues": -12486748,
     "net_pension_liability": 177540900,
     "net_opeb_liability": 1171909109,
-    "assets_liab_ratio": 5.9936
+    "assets_liab_ratio": 0.1668
   },
   {
     "state.abb": "NJ",
@@ -1193,8 +1192,7 @@
     "median_hh_income_21": 66191,
     "modified_revenues": 37232544,
     "net_pension_liability": 0,
-    "net_opeb_liability": 0,
-    "assets_liab_ratio": 0
+    "net_opeb_liability": 0
   },
   {
     "state.abb": "NJ",
@@ -1215,7 +1213,7 @@
     "modified_revenues": -64617961,
     "net_pension_liability": 247717198,
     "net_opeb_liability": 471436462,
-    "assets_liab_ratio": 2.034
+    "assets_liab_ratio": 0.4916
   },
   {
     "state.abb": "NJ",
@@ -1236,7 +1234,7 @@
     "modified_revenues": -21799825,
     "net_pension_liability": 179957990,
     "net_opeb_liability": 473743040,
-    "assets_liab_ratio": 4.735
+    "assets_liab_ratio": 0.2112
   },
   {
     "state.abb": "NJ",
@@ -1257,7 +1255,7 @@
     "modified_revenues": 31447626,
     "net_pension_liability": 320908683,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 0.2902
+    "assets_liab_ratio": 3.4463
   },
   {
     "state.abb": "NM",
@@ -1278,7 +1276,7 @@
     "modified_revenues": -71692548,
     "net_pension_liability": 325383442,
     "net_opeb_liability": 96053173,
-    "assets_liab_ratio": 1.4913
+    "assets_liab_ratio": 0.6706
   },
   {
     "state.abb": "NY",
@@ -1299,7 +1297,7 @@
     "modified_revenues": -603353059,
     "net_pension_liability": 1104493609,
     "net_opeb_liability": 6901030000,
-    "assets_liab_ratio": 0.4586
+    "assets_liab_ratio": 2.1806
   },
   {
     "state.abb": "NY",
@@ -1320,7 +1318,7 @@
     "modified_revenues": -1204948000,
     "net_pension_liability": 918259000,
     "net_opeb_liability": 6311284000,
-    "assets_liab_ratio": 0.3691
+    "assets_liab_ratio": 2.7092
   },
   {
     "state.abb": "NY",
@@ -1341,7 +1339,7 @@
     "modified_revenues": -734390538,
     "net_pension_liability": 498291015,
     "net_opeb_liability": 4264402132,
-    "assets_liab_ratio": 0.6139
+    "assets_liab_ratio": 1.6289
   },
   {
     "state.abb": "NY",
@@ -1362,7 +1360,7 @@
     "modified_revenues": -323487000,
     "net_pension_liability": 289687000,
     "net_opeb_liability": 1345295000,
-    "assets_liab_ratio": 0.6125
+    "assets_liab_ratio": 1.6327
   },
   {
     "state.abb": "NY",
@@ -1383,7 +1381,7 @@
     "modified_revenues": -344138000,
     "net_pension_liability": 271901000,
     "net_opeb_liability": 608043000,
-    "assets_liab_ratio": 0.8637
+    "assets_liab_ratio": 1.1578
   },
   {
     "state.abb": "NC",
@@ -1404,7 +1402,7 @@
     "modified_revenues": -312209416,
     "net_pension_liability": 113302929,
     "net_opeb_liability": 415753783,
-    "assets_liab_ratio": 0.6064
+    "assets_liab_ratio": 1.649
   },
   {
     "state.abb": "NC",
@@ -1425,7 +1423,7 @@
     "modified_revenues": -231958166,
     "net_pension_liability": 136510837,
     "net_opeb_liability": 514883109,
-    "assets_liab_ratio": 1.0713
+    "assets_liab_ratio": 0.9334
   },
   {
     "state.abb": "OH",
@@ -1446,7 +1444,7 @@
     "modified_revenues": -69900000,
     "net_pension_liability": 485833000,
     "net_opeb_liability": 329202000,
-    "assets_liab_ratio": 2.0048
+    "assets_liab_ratio": 0.4988
   },
   {
     "state.abb": "OH",
@@ -1467,7 +1465,7 @@
     "modified_revenues": -102912872,
     "net_pension_liability": 574879699,
     "net_opeb_liability": 392431113,
-    "assets_liab_ratio": 1.3712
+    "assets_liab_ratio": 0.7293
   },
   {
     "state.abb": "OH",
@@ -1488,7 +1486,7 @@
     "modified_revenues": -174724000,
     "net_pension_liability": 724487000,
     "net_opeb_liability": 218552000,
-    "assets_liab_ratio": 1.6728
+    "assets_liab_ratio": 0.5978
   },
   {
     "state.abb": "OK",
@@ -1509,7 +1507,7 @@
     "modified_revenues": 30920467,
     "net_pension_liability": 11866832,
     "net_opeb_liability": 341340034,
-    "assets_liab_ratio": 0.6794
+    "assets_liab_ratio": 1.472
   },
   {
     "state.abb": "OK",
@@ -1530,7 +1528,7 @@
     "modified_revenues": 96818665,
     "net_pension_liability": 101018575,
     "net_opeb_liability": 3994591,
-    "assets_liab_ratio": 2.4695
+    "assets_liab_ratio": 0.4049
   },
   {
     "state.abb": "OR",
@@ -1551,7 +1549,7 @@
     "modified_revenues": -155035000,
     "net_pension_liability": 581413000,
     "net_opeb_liability": 121091000,
-    "assets_liab_ratio": 1.5676
+    "assets_liab_ratio": 0.6379
   },
   {
     "state.abb": "PA",
@@ -1572,7 +1570,7 @@
     "modified_revenues": -489087296,
     "net_pension_liability": 1648275854,
     "net_opeb_liability": 57453399,
-    "assets_liab_ratio": 0.4703
+    "assets_liab_ratio": 2.1265
   },
   {
     "state.abb": "PA",
@@ -1593,7 +1591,7 @@
     "modified_revenues": -31355504,
     "net_pension_liability": 83324020,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 1.0943
+    "assets_liab_ratio": 0.9138
   },
   {
     "state.abb": "PA",
@@ -1614,7 +1612,7 @@
     "modified_revenues": -88054317,
     "net_pension_liability": 2702513,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 1.5512
+    "assets_liab_ratio": 0.6446
   },
   {
     "state.abb": "PA",
@@ -1635,7 +1633,7 @@
     "modified_revenues": -1971915000,
     "net_pension_liability": 6095885000,
     "net_opeb_liability": 1935327000,
-    "assets_liab_ratio": 0.6905
+    "assets_liab_ratio": 1.4483
   },
   {
     "state.abb": "TN",
@@ -1656,7 +1654,7 @@
     "modified_revenues": -278853564,
     "net_pension_liability": 571656496,
     "net_opeb_liability": -18933000,
-    "assets_liab_ratio": 1.0443
+    "assets_liab_ratio": 0.9576
   },
   {
     "state.abb": "TN",
@@ -1677,7 +1675,7 @@
     "modified_revenues": -628332800,
     "net_pension_liability": 303734402,
     "net_opeb_liability": 4261044596,
-    "assets_liab_ratio": 0.9053
+    "assets_liab_ratio": 1.1046
   },
   {
     "state.abb": "TX",
@@ -1698,7 +1696,7 @@
     "modified_revenues": -122603583,
     "net_pension_liability": 470462074,
     "net_opeb_liability": 2733774269,
-    "assets_liab_ratio": 2.2984
+    "assets_liab_ratio": 0.4351
   },
   {
     "state.abb": "TX",
@@ -1719,7 +1717,7 @@
     "modified_revenues": -242038000,
     "net_pension_liability": 156475000,
     "net_opeb_liability": 228011000,
-    "assets_liab_ratio": 2.4685
+    "assets_liab_ratio": 0.4051
   },
   {
     "state.abb": "TX",
@@ -1740,7 +1738,7 @@
     "modified_revenues": -87824000,
     "net_pension_liability": 227323000,
     "net_opeb_liability": 184230000,
-    "assets_liab_ratio": 1.2193
+    "assets_liab_ratio": 0.8201
   },
   {
     "state.abb": "TX",
@@ -1761,7 +1759,7 @@
     "modified_revenues": -193128995,
     "net_pension_liability": 117083764,
     "net_opeb_liability": 216578397,
-    "assets_liab_ratio": 1.0664
+    "assets_liab_ratio": 0.9378
   },
   {
     "state.abb": "TX",
@@ -1782,7 +1780,7 @@
     "modified_revenues": -92417968,
     "net_pension_liability": 172394620,
     "net_opeb_liability": 1125420726,
-    "assets_liab_ratio": 1.0783
+    "assets_liab_ratio": 0.9274
   },
   {
     "state.abb": "TX",
@@ -1803,7 +1801,7 @@
     "modified_revenues": -44855348,
     "net_pension_liability": -32523900,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 2.0907
+    "assets_liab_ratio": 0.4783
   },
   {
     "state.abb": "TX",
@@ -1824,7 +1822,7 @@
     "modified_revenues": -16180804,
     "net_pension_liability": 43366444,
     "net_opeb_liability": 124544261,
-    "assets_liab_ratio": 0.8863
+    "assets_liab_ratio": 1.1282
   },
   {
     "state.abb": "TX",
@@ -1845,7 +1843,7 @@
     "modified_revenues": -136162492,
     "net_pension_liability": 47598461,
     "net_opeb_liability": 47475188,
-    "assets_liab_ratio": 1.6388
+    "assets_liab_ratio": 0.6102
   },
   {
     "state.abb": "TX",
@@ -1866,7 +1864,7 @@
     "modified_revenues": -52726325,
     "net_pension_liability": 108703516,
     "net_opeb_liability": 48906739,
-    "assets_liab_ratio": 1.1587
+    "assets_liab_ratio": 0.863
   },
   {
     "state.abb": "TX",
@@ -1887,7 +1885,7 @@
     "modified_revenues": -29418,
     "net_pension_liability": 47941506,
     "net_opeb_liability": 597396893,
-    "assets_liab_ratio": 1.8538
+    "assets_liab_ratio": 0.5394
   },
   {
     "state.abb": "TX",
@@ -1908,7 +1906,7 @@
     "modified_revenues": -138209556,
     "net_pension_liability": 24066035,
     "net_opeb_liability": 253594793,
-    "assets_liab_ratio": 1.4676
+    "assets_liab_ratio": 0.6814
   },
   {
     "state.abb": "TX",
@@ -1929,7 +1927,7 @@
     "modified_revenues": 25125614,
     "net_pension_liability": 55619549,
     "net_opeb_liability": 59226881,
-    "assets_liab_ratio": 1.3984
+    "assets_liab_ratio": 0.7151
   },
   {
     "state.abb": "UT",
@@ -1950,7 +1948,7 @@
     "modified_revenues": -59792423,
     "net_pension_liability": 75995899,
     "net_opeb_liability": 95202533,
-    "assets_liab_ratio": 1.9814
+    "assets_liab_ratio": 0.5047
   },
   {
     "state.abb": "UT",
@@ -1971,7 +1969,7 @@
     "modified_revenues": 201429124,
     "net_pension_liability": 24085947,
     "net_opeb_liability": 8261379,
-    "assets_liab_ratio": 2.5486
+    "assets_liab_ratio": 0.3924
   },
   {
     "state.abb": "VA",
@@ -1992,7 +1990,7 @@
     "modified_revenues": -651116825,
     "net_pension_liability": 1838029525,
     "net_opeb_liability": 136090113,
-    "assets_liab_ratio": 1.5408
+    "assets_liab_ratio": 0.649
   },
   {
     "state.abb": "WA",
@@ -2013,7 +2011,7 @@
     "modified_revenues": -137965000,
     "net_pension_liability": 375161000,
     "net_opeb_liability": 106619000,
-    "assets_liab_ratio": 2.0999
+    "assets_liab_ratio": 0.4762
   },
   {
     "state.abb": "WA",
@@ -2034,7 +2032,7 @@
     "modified_revenues": -11134000,
     "net_pension_liability": 49245000,
     "net_opeb_liability": 87223000,
-    "assets_liab_ratio": 3.6923
+    "assets_liab_ratio": 0.2708
   },
   {
     "state.abb": "WA",
@@ -2055,7 +2053,7 @@
     "modified_revenues": -45127557,
     "net_pension_liability": 43474693,
     "net_opeb_liability": 4929447,
-    "assets_liab_ratio": 3.5593
+    "assets_liab_ratio": 0.281
   },
   {
     "state.abb": "WI",
@@ -2076,7 +2074,7 @@
     "modified_revenues": 3810000,
     "net_pension_liability": 594769000,
     "net_opeb_liability": 1415115000,
-    "assets_liab_ratio": 0.6903
+    "assets_liab_ratio": 1.4486
   },
   {
     "state.abb": "AL",
@@ -2097,7 +2095,7 @@
     "modified_revenues": -205086428,
     "net_pension_liability": -121961328,
     "net_opeb_liability": 115072977,
-    "assets_liab_ratio": 1.2329
+    "assets_liab_ratio": 0.8111
   },
   {
     "state.abb": "AZ",
@@ -2118,7 +2116,7 @@
     "modified_revenues": -404529978,
     "net_pension_liability": 2061212073,
     "net_opeb_liability": -11334078,
-    "assets_liab_ratio": 2.1557
+    "assets_liab_ratio": 0.4639
   },
   {
     "state.abb": "AZ",
@@ -2139,7 +2137,7 @@
     "modified_revenues": -135716000,
     "net_pension_liability": 869089000,
     "net_opeb_liability": -5456000,
-    "assets_liab_ratio": 1.8757
+    "assets_liab_ratio": 0.5331
   },
   {
     "state.abb": "CA",
@@ -2160,7 +2158,7 @@
     "modified_revenues": -7316176000,
     "net_pension_liability": 17394887000,
     "net_opeb_liability": 29368129000,
-    "assets_liab_ratio": 0.6424
+    "assets_liab_ratio": 1.5567
   },
   {
     "state.abb": "CA",
@@ -2181,7 +2179,7 @@
     "modified_revenues": -1298227000,
     "net_pension_liability": 4478532000,
     "net_opeb_liability": 92006000,
-    "assets_liab_ratio": 1.2551
+    "assets_liab_ratio": 0.7967
   },
   {
     "state.abb": "CA",
@@ -2202,7 +2200,7 @@
     "modified_revenues": -174352000,
     "net_pension_liability": 3547702000,
     "net_opeb_liability": 305411000,
-    "assets_liab_ratio": 1.5765
+    "assets_liab_ratio": 0.6343
   },
   {
     "state.abb": "CA",
@@ -2223,7 +2221,7 @@
     "modified_revenues": -699766000,
     "net_pension_liability": 2983082000,
     "net_opeb_liability": 187718000,
-    "assets_liab_ratio": 1.1652
+    "assets_liab_ratio": 0.8582
   },
   {
     "state.abb": "CA",
@@ -2244,7 +2242,7 @@
     "modified_revenues": -233714000,
     "net_pension_liability": 3317265000,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 1.4447
+    "assets_liab_ratio": 0.6922
   },
   {
     "state.abb": "CA",
@@ -2265,7 +2263,7 @@
     "modified_revenues": -2179937000,
     "net_pension_liability": 4769151000,
     "net_opeb_liability": 1088627000,
-    "assets_liab_ratio": 0.7988
+    "assets_liab_ratio": 1.2519
   },
   {
     "state.abb": "CA",
@@ -2286,7 +2284,7 @@
     "modified_revenues": -488168000,
     "net_pension_liability": 1843225000,
     "net_opeb_liability": 92241000,
-    "assets_liab_ratio": 1.422
+    "assets_liab_ratio": 0.7032
   },
   {
     "state.abb": "CA",
@@ -2307,7 +2305,7 @@
     "modified_revenues": -573370000,
     "net_pension_liability": 2389783000,
     "net_opeb_liability": 162324000,
-    "assets_liab_ratio": 1.0439
+    "assets_liab_ratio": 0.9579
   },
   {
     "state.abb": "CA",
@@ -2328,7 +2326,7 @@
     "modified_revenues": -13822000,
     "net_pension_liability": 341498000,
     "net_opeb_liability": 433321000,
-    "assets_liab_ratio": 1.8439
+    "assets_liab_ratio": 0.5423
   },
   {
     "state.abb": "CA",
@@ -2349,7 +2347,7 @@
     "modified_revenues": -117382000,
     "net_pension_liability": 1296105000,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 1.0482
+    "assets_liab_ratio": 0.954
   },
   {
     "state.abb": "CA",
@@ -2370,7 +2368,7 @@
     "modified_revenues": 78262000,
     "net_pension_liability": 1984698000,
     "net_opeb_liability": 18400000,
-    "assets_liab_ratio": 1.3328
+    "assets_liab_ratio": 0.7503
   },
   {
     "state.abb": "CA",
@@ -2391,7 +2389,7 @@
     "modified_revenues": -338954000,
     "net_pension_liability": 809287000,
     "net_opeb_liability": 192704000,
-    "assets_liab_ratio": 1.7426
+    "assets_liab_ratio": 0.5739
   },
   {
     "state.abb": "CA",
@@ -2412,7 +2410,7 @@
     "modified_revenues": -31744946,
     "net_pension_liability": 1573255627,
     "net_opeb_liability": 103570248,
-    "assets_liab_ratio": 1.2813
+    "assets_liab_ratio": 0.7804
   },
   {
     "state.abb": "CA",
@@ -2433,7 +2431,7 @@
     "modified_revenues": -266169000,
     "net_pension_liability": 831037000,
     "net_opeb_liability": 58418000,
-    "assets_liab_ratio": 1.9848
+    "assets_liab_ratio": 0.5038
   },
   {
     "state.abb": "CA",
@@ -2454,7 +2452,7 @@
     "modified_revenues": -5006912000,
     "net_pension_liability": 5614021000,
     "net_opeb_liability": 3811347000,
-    "assets_liab_ratio": 1.2474
+    "assets_liab_ratio": 0.8016
   },
   {
     "state.abb": "CO",
@@ -2475,7 +2473,7 @@
     "modified_revenues": -42758741,
     "net_pension_liability": 157726231,
     "net_opeb_liability": 177433869,
-    "assets_liab_ratio": 1.7477
+    "assets_liab_ratio": 0.5722
   },
   {
     "state.abb": "CO",
@@ -2496,7 +2494,7 @@
     "modified_revenues": -506427000,
     "net_pension_liability": 1698513000,
     "net_opeb_liability": 253829000,
-    "assets_liab_ratio": 1.3927
+    "assets_liab_ratio": 0.7181
   },
   {
     "state.abb": "CO",
@@ -2517,7 +2515,7 @@
     "modified_revenues": -110251224,
     "net_pension_liability": 207654520,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 2.7772
+    "assets_liab_ratio": 0.3601
   },
   {
     "state.abb": "FL",
@@ -2538,7 +2536,7 @@
     "modified_revenues": -1628491000,
     "net_pension_liability": 1397295000,
     "net_opeb_liability": 745948000,
-    "assets_liab_ratio": 1.1903
+    "assets_liab_ratio": 0.8401
   },
   {
     "state.abb": "FL",
@@ -2559,7 +2557,7 @@
     "modified_revenues": -85282000,
     "net_pension_liability": 571574000,
     "net_opeb_liability": 312871000,
-    "assets_liab_ratio": 2.0919
+    "assets_liab_ratio": 0.478
   },
   {
     "state.abb": "FL",
@@ -2580,7 +2578,7 @@
     "modified_revenues": 134698880,
     "net_pension_liability": 572344587,
     "net_opeb_liability": 435910997,
-    "assets_liab_ratio": 2.5622
+    "assets_liab_ratio": 0.3903
   },
   {
     "state.abb": "FL",
@@ -2601,7 +2599,7 @@
     "modified_revenues": 117324000,
     "net_pension_liability": 398407000,
     "net_opeb_liability": 140126000,
-    "assets_liab_ratio": 5.0151
+    "assets_liab_ratio": 0.1994
   },
   {
     "state.abb": "FL",
@@ -2622,7 +2620,7 @@
     "modified_revenues": -168917619,
     "net_pension_liability": 412121992,
     "net_opeb_liability": 37837456,
-    "assets_liab_ratio": 3.9982
+    "assets_liab_ratio": 0.2501
   },
   {
     "state.abb": "FL",
@@ -2643,7 +2641,7 @@
     "modified_revenues": 36879244,
     "net_pension_liability": 229726672,
     "net_opeb_liability": 717811753,
-    "assets_liab_ratio": 3.6343
+    "assets_liab_ratio": 0.2752
   },
   {
     "state.abb": "FL",
@@ -2664,7 +2662,7 @@
     "modified_revenues": -31412000,
     "net_pension_liability": 185941000,
     "net_opeb_liability": 652769000,
-    "assets_liab_ratio": 2.7776
+    "assets_liab_ratio": 0.36
   },
   {
     "state.abb": "FL",
@@ -2685,7 +2683,7 @@
     "modified_revenues": 14601080,
     "net_pension_liability": 155096480,
     "net_opeb_liability": 186387615,
-    "assets_liab_ratio": 5.1751
+    "assets_liab_ratio": 0.1932
   },
   {
     "state.abb": "FL",
@@ -2706,7 +2704,7 @@
     "modified_revenues": 13757141,
     "net_pension_liability": 127428928,
     "net_opeb_liability": 27571556,
-    "assets_liab_ratio": 3.2446
+    "assets_liab_ratio": 0.3082
   },
   {
     "state.abb": "FL",
@@ -2727,7 +2725,7 @@
     "modified_revenues": -452008000,
     "net_pension_liability": 3107155000,
     "net_opeb_liability": 416420000,
-    "assets_liab_ratio": 0.804
+    "assets_liab_ratio": 1.2438
   },
   {
     "state.abb": "GA",
@@ -2748,7 +2746,7 @@
     "modified_revenues": -76140000,
     "net_pension_liability": 228976000,
     "net_opeb_liability": 1710105000,
-    "assets_liab_ratio": 1.017
+    "assets_liab_ratio": 0.9833
   },
   {
     "state.abb": "GA",
@@ -2769,7 +2767,7 @@
     "modified_revenues": 146466000,
     "net_pension_liability": 135727000,
     "net_opeb_liability": 10373000,
-    "assets_liab_ratio": 7.0238
+    "assets_liab_ratio": 0.1424
   },
   {
     "state.abb": "GA",
@@ -2790,7 +2788,7 @@
     "modified_revenues": 310082,
     "net_pension_liability": 557302031,
     "net_opeb_liability": 154309832,
-    "assets_liab_ratio": 4.2775
+    "assets_liab_ratio": 0.2338
   },
   {
     "state.abb": "GA",
@@ -2811,7 +2809,7 @@
     "modified_revenues": -79023000,
     "net_pension_liability": 717694000,
     "net_opeb_liability": 609092000,
-    "assets_liab_ratio": 1.6054
+    "assets_liab_ratio": 0.6229
   },
   {
     "state.abb": "HI",
@@ -2832,7 +2830,7 @@
     "modified_revenues": -395592000,
     "net_pension_liability": 2919908000,
     "net_opeb_liability": 1723506000,
-    "assets_liab_ratio": 0.98
+    "assets_liab_ratio": 1.0204
   },
   {
     "state.abb": "IL",
@@ -2853,7 +2851,7 @@
     "modified_revenues": -1579012164,
     "net_pension_liability": 14984908546,
     "net_opeb_liability": 2105154520,
-    "assets_liab_ratio": 0.2453
+    "assets_liab_ratio": 4.0766
   },
   {
     "state.abb": "IL",
@@ -2874,7 +2872,7 @@
     "modified_revenues": 4128474,
     "net_pension_liability": 78601550,
     "net_opeb_liability": 13474029,
-    "assets_liab_ratio": 3.9942
+    "assets_liab_ratio": 0.2504
   },
   {
     "state.abb": "IL",
@@ -2895,7 +2893,7 @@
     "modified_revenues": -30050953,
     "net_pension_liability": -39077298,
     "net_opeb_liability": 18696673,
-    "assets_liab_ratio": 5.1485
+    "assets_liab_ratio": 0.1942
   },
   {
     "state.abb": "IL",
@@ -2916,7 +2914,7 @@
     "modified_revenues": -18142546,
     "net_pension_liability": 44960011,
     "net_opeb_liability": 53068222,
-    "assets_liab_ratio": 2.3241
+    "assets_liab_ratio": 0.4303
   },
   {
     "state.abb": "IN",
@@ -2937,7 +2935,7 @@
     "modified_revenues": -55560828,
     "net_pension_liability": 72628957,
     "net_opeb_liability": 12698175,
-    "assets_liab_ratio": 1.0162
+    "assets_liab_ratio": 0.984
   },
   {
     "state.abb": "KS",
@@ -2958,7 +2956,7 @@
     "modified_revenues": -104515175,
     "net_pension_liability": 181941520,
     "net_opeb_liability": 25212996,
-    "assets_liab_ratio": 1.8457
+    "assets_liab_ratio": 0.5418
   },
   {
     "state.abb": "KY",
@@ -2979,7 +2977,7 @@
     "modified_revenues": -43573745,
     "net_pension_liability": 1209969000,
     "net_opeb_liability": 371956000,
-    "assets_liab_ratio": 1.122
+    "assets_liab_ratio": 0.8913
   },
   {
     "state.abb": "MD",
@@ -3000,7 +2998,7 @@
     "modified_revenues": 1944248,
     "net_pension_liability": 147199286,
     "net_opeb_liability": 983532109,
-    "assets_liab_ratio": 1.2826
+    "assets_liab_ratio": 0.7796
   },
   {
     "state.abb": "MD",
@@ -3021,7 +3019,7 @@
     "modified_revenues": -611778191,
     "net_pension_liability": 1521298858,
     "net_opeb_liability": 2362474000,
-    "assets_liab_ratio": 0.6697
+    "assets_liab_ratio": 1.4933
   },
   {
     "state.abb": "MD",
@@ -3042,7 +3040,7 @@
     "modified_revenues": -531567000,
     "net_pension_liability": 2019377000,
     "net_opeb_liability": 1937925000,
-    "assets_liab_ratio": 0.6508
+    "assets_liab_ratio": 1.5366
   },
   {
     "state.abb": "MA",
@@ -3063,7 +3061,7 @@
     "modified_revenues": -8957566,
     "net_pension_liability": 26064827,
     "net_opeb_liability": 47116906,
-    "assets_liab_ratio": 0.6356
+    "assets_liab_ratio": 1.5732
   },
   {
     "state.abb": "MI",
@@ -3084,7 +3082,7 @@
     "modified_revenues": -98446940,
     "net_pension_liability": -71914093,
     "net_opeb_liability": -618263365,
-    "assets_liab_ratio": 4.2689
+    "assets_liab_ratio": 0.2343
   },
   {
     "state.abb": "MI",
@@ -3105,7 +3103,7 @@
     "modified_revenues": -64399447,
     "net_pension_liability": -235350995,
     "net_opeb_liability": 17104551,
-    "assets_liab_ratio": 4.0092
+    "assets_liab_ratio": 0.2494
   },
   {
     "state.abb": "MI",
@@ -3126,7 +3124,7 @@
     "modified_revenues": -39111366,
     "net_pension_liability": -87473853,
     "net_opeb_liability": 19822380,
-    "assets_liab_ratio": 2.9301
+    "assets_liab_ratio": 0.3413
   },
   {
     "state.abb": "MN",
@@ -3147,7 +3145,7 @@
     "modified_revenues": -223245109,
     "net_pension_liability": 594886582,
     "net_opeb_liability": 150763144,
-    "assets_liab_ratio": 1.4622
+    "assets_liab_ratio": 0.6839
   },
   {
     "state.abb": "MO",
@@ -3167,8 +3165,7 @@
     "median_hh_income_21": 72507,
     "modified_revenues": 62799378,
     "net_pension_liability": 267696492,
-    "net_opeb_liability": 0,
-    "assets_liab_ratio": 0
+    "net_opeb_liability": 0
   },
   {
     "state.abb": "MO",
@@ -3189,7 +3186,7 @@
     "modified_revenues": -72070920,
     "net_pension_liability": 720855,
     "net_opeb_liability": 5721309,
-    "assets_liab_ratio": 1.8422
+    "assets_liab_ratio": 0.5428
   },
   {
     "state.abb": "NV",
@@ -3210,7 +3207,7 @@
     "modified_revenues": -322413797,
     "net_pension_liability": 3013888321,
     "net_opeb_liability": 798014345,
-    "assets_liab_ratio": 1.8928
+    "assets_liab_ratio": 0.5283
   },
   {
     "state.abb": "NJ",
@@ -3231,7 +3228,7 @@
     "modified_revenues": 28319748,
     "net_pension_liability": 458269025,
     "net_opeb_liability": 1266760449,
-    "assets_liab_ratio": 2.642
+    "assets_liab_ratio": 0.3785
   },
   {
     "state.abb": "NJ",
@@ -3252,7 +3249,7 @@
     "modified_revenues": -15360197,
     "net_pension_liability": 128422051,
     "net_opeb_liability": 1231405298,
-    "assets_liab_ratio": 10.4818
+    "assets_liab_ratio": 0.0954
   },
   {
     "state.abb": "NJ",
@@ -3272,8 +3269,7 @@
     "median_hh_income_21": 66191,
     "modified_revenues": 50084610,
     "net_pension_liability": 0,
-    "net_opeb_liability": 0,
-    "assets_liab_ratio": 0
+    "net_opeb_liability": 0
   },
   {
     "state.abb": "NJ",
@@ -3294,7 +3290,7 @@
     "modified_revenues": -92587764,
     "net_pension_liability": 185364574,
     "net_opeb_liability": 676531494,
-    "assets_liab_ratio": 2.4565
+    "assets_liab_ratio": 0.4071
   },
   {
     "state.abb": "NJ",
@@ -3315,7 +3311,7 @@
     "modified_revenues": -407348,
     "net_pension_liability": 189001523,
     "net_opeb_liability": 421395689,
-    "assets_liab_ratio": 8.1121
+    "assets_liab_ratio": 0.1233
   },
   {
     "state.abb": "NJ",
@@ -3336,7 +3332,7 @@
     "modified_revenues": 38983378,
     "net_pension_liability": 320908683,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 0.2973
+    "assets_liab_ratio": 3.3637
   },
   {
     "state.abb": "NM",
@@ -3357,7 +3353,7 @@
     "modified_revenues": -38940942,
     "net_pension_liability": 378957607,
     "net_opeb_liability": 120642605,
-    "assets_liab_ratio": 1.433
+    "assets_liab_ratio": 0.6978
   },
   {
     "state.abb": "NY",
@@ -3378,7 +3374,7 @@
     "modified_revenues": -291045076,
     "net_pension_liability": 153186365,
     "net_opeb_liability": 6543850000,
-    "assets_liab_ratio": 0.5341
+    "assets_liab_ratio": 1.8723
   },
   {
     "state.abb": "NY",
@@ -3399,7 +3395,7 @@
     "modified_revenues": -645428000,
     "net_pension_liability": 145322000,
     "net_opeb_liability": 6580900000,
-    "assets_liab_ratio": 0.4319
+    "assets_liab_ratio": 2.3153
   },
   {
     "state.abb": "NY",
@@ -3420,7 +3416,7 @@
     "modified_revenues": -630932668,
     "net_pension_liability": 18684807,
     "net_opeb_liability": 4010990120,
-    "assets_liab_ratio": 0.7334
+    "assets_liab_ratio": 1.3635
   },
   {
     "state.abb": "NY",
@@ -3441,7 +3437,7 @@
     "modified_revenues": -53961000,
     "net_pension_liability": 1080000,
     "net_opeb_liability": 1561629000,
-    "assets_liab_ratio": 0.7049
+    "assets_liab_ratio": 1.4187
   },
   {
     "state.abb": "NY",
@@ -3462,7 +3458,7 @@
     "modified_revenues": -235709000,
     "net_pension_liability": 1546000,
     "net_opeb_liability": 526739000,
-    "assets_liab_ratio": 1.0855
+    "assets_liab_ratio": 0.9213
   },
   {
     "state.abb": "NC",
@@ -3483,7 +3479,7 @@
     "modified_revenues": -258874283,
     "net_pension_liability": 149381996,
     "net_opeb_liability": 540414829,
-    "assets_liab_ratio": 0.6216
+    "assets_liab_ratio": 1.6087
   },
   {
     "state.abb": "NC",
@@ -3504,7 +3500,7 @@
     "modified_revenues": -356536630,
     "net_pension_liability": 192764420,
     "net_opeb_liability": 401088310,
-    "assets_liab_ratio": 1.1116
+    "assets_liab_ratio": 0.8996
   },
   {
     "state.abb": "OH",
@@ -3525,7 +3521,7 @@
     "modified_revenues": 226317000,
     "net_pension_liability": 393456000,
     "net_opeb_liability": -46762000,
-    "assets_liab_ratio": 2.8059
+    "assets_liab_ratio": 0.3564
   },
   {
     "state.abb": "OH",
@@ -3546,7 +3542,7 @@
     "modified_revenues": 600996753,
     "net_pension_liability": 405480894,
     "net_opeb_liability": -49172412,
-    "assets_liab_ratio": 2.0497
+    "assets_liab_ratio": 0.4879
   },
   {
     "state.abb": "OH",
@@ -3567,7 +3563,7 @@
     "modified_revenues": 111451000,
     "net_pension_liability": 236424000,
     "net_opeb_liability": -59749000,
-    "assets_liab_ratio": 2.2164
+    "assets_liab_ratio": 0.4512
   },
   {
     "state.abb": "OK",
@@ -3588,7 +3584,7 @@
     "modified_revenues": -127622909,
     "net_pension_liability": 9502733,
     "net_opeb_liability": 308520735,
-    "assets_liab_ratio": 0.7006
+    "assets_liab_ratio": 1.4274
   },
   {
     "state.abb": "OK",
@@ -3609,7 +3605,7 @@
     "modified_revenues": -41222705,
     "net_pension_liability": 138553911,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 2.1696
+    "assets_liab_ratio": 0.4609
   },
   {
     "state.abb": "OR",
@@ -3630,7 +3626,7 @@
     "modified_revenues": -327065000,
     "net_pension_liability": 728099000,
     "net_opeb_liability": 102208000,
-    "assets_liab_ratio": 1.3515
+    "assets_liab_ratio": 0.7399
   },
   {
     "state.abb": "PA",
@@ -3651,7 +3647,7 @@
     "modified_revenues": -813278796,
     "net_pension_liability": 2120359787,
     "net_opeb_liability": 63988013,
-    "assets_liab_ratio": 0.4307
+    "assets_liab_ratio": 2.3216
   },
   {
     "state.abb": "PA",
@@ -3672,7 +3668,7 @@
     "modified_revenues": -224067420,
     "net_pension_liability": 53257603,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 1.1535
+    "assets_liab_ratio": 0.8669
   },
   {
     "state.abb": "PA",
@@ -3693,7 +3689,7 @@
     "modified_revenues": -218927296,
     "net_pension_liability": -35668309,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 1.605
+    "assets_liab_ratio": 0.6231
   },
   {
     "state.abb": "PA",
@@ -3714,7 +3710,7 @@
     "modified_revenues": -2531827000,
     "net_pension_liability": 4721351000,
     "net_opeb_liability": 2088155000,
-    "assets_liab_ratio": 0.751
+    "assets_liab_ratio": 1.3315
   },
   {
     "state.abb": "TN",
@@ -3735,7 +3731,7 @@
     "modified_revenues": -144801623,
     "net_pension_liability": 700758008,
     "net_opeb_liability": -38920000,
-    "assets_liab_ratio": 1.0421
+    "assets_liab_ratio": 0.9596
   },
   {
     "state.abb": "TN",
@@ -3756,7 +3752,7 @@
     "modified_revenues": 143746142,
     "net_pension_liability": 48089719,
     "net_opeb_liability": 4302183871,
-    "assets_liab_ratio": 1.044
+    "assets_liab_ratio": 0.9579
   },
   {
     "state.abb": "TX",
@@ -3777,7 +3773,7 @@
     "modified_revenues": -1372236030,
     "net_pension_liability": 725075920,
     "net_opeb_liability": 3473489714,
-    "assets_liab_ratio": 2.0135
+    "assets_liab_ratio": 0.4967
   },
   {
     "state.abb": "TX",
@@ -3798,7 +3794,7 @@
     "modified_revenues": -363572000,
     "net_pension_liability": 246648000,
     "net_opeb_liability": 194549000,
-    "assets_liab_ratio": 2.2015
+    "assets_liab_ratio": 0.4542
   },
   {
     "state.abb": "TX",
@@ -3819,7 +3815,7 @@
     "modified_revenues": -209521000,
     "net_pension_liability": 290929000,
     "net_opeb_liability": 213391000,
-    "assets_liab_ratio": 1.1845
+    "assets_liab_ratio": 0.8442
   },
   {
     "state.abb": "TX",
@@ -3840,7 +3836,7 @@
     "modified_revenues": -435671280,
     "net_pension_liability": 166644668,
     "net_opeb_liability": 227493053,
-    "assets_liab_ratio": 1.0274
+    "assets_liab_ratio": 0.9733
   },
   {
     "state.abb": "TX",
@@ -3861,7 +3857,7 @@
     "modified_revenues": -124888261,
     "net_pension_liability": 248672256,
     "net_opeb_liability": 947786046,
-    "assets_liab_ratio": 1.1942
+    "assets_liab_ratio": 0.8374
   },
   {
     "state.abb": "TX",
@@ -3882,7 +3878,7 @@
     "modified_revenues": -45043079,
     "net_pension_liability": -15726894,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 2.0898
+    "assets_liab_ratio": 0.4785
   },
   {
     "state.abb": "TX",
@@ -3903,7 +3899,7 @@
     "modified_revenues": -47471387,
     "net_pension_liability": 63577282,
     "net_opeb_liability": 120611720,
-    "assets_liab_ratio": 0.946
+    "assets_liab_ratio": 1.0571
   },
   {
     "state.abb": "TX",
@@ -3924,7 +3920,7 @@
     "modified_revenues": -169823865,
     "net_pension_liability": 72709939,
     "net_opeb_liability": 54140220,
-    "assets_liab_ratio": 1.561
+    "assets_liab_ratio": 0.6406
   },
   {
     "state.abb": "TX",
@@ -3945,7 +3941,7 @@
     "modified_revenues": -98636694,
     "net_pension_liability": 152970622,
     "net_opeb_liability": 58857250,
-    "assets_liab_ratio": 1.0738
+    "assets_liab_ratio": 0.9313
   },
   {
     "state.abb": "TX",
@@ -3966,7 +3962,7 @@
     "modified_revenues": 332621005,
     "net_pension_liability": 78846469,
     "net_opeb_liability": 634919158,
-    "assets_liab_ratio": 2.0338
+    "assets_liab_ratio": 0.4917
   },
   {
     "state.abb": "TX",
@@ -3987,7 +3983,7 @@
     "modified_revenues": -159807665,
     "net_pension_liability": 49048682,
     "net_opeb_liability": 311015175,
-    "assets_liab_ratio": 1.3983
+    "assets_liab_ratio": 0.7152
   },
   {
     "state.abb": "TX",
@@ -4008,7 +4004,7 @@
     "modified_revenues": 10248964,
     "net_pension_liability": 58153888,
     "net_opeb_liability": 61086970,
-    "assets_liab_ratio": 1.4448
+    "assets_liab_ratio": 0.6921
   },
   {
     "state.abb": "UT",
@@ -4029,7 +4025,7 @@
     "modified_revenues": -44528411,
     "net_pension_liability": 18899863,
     "net_opeb_liability": 92332859,
-    "assets_liab_ratio": 2.2445
+    "assets_liab_ratio": 0.4455
   },
   {
     "state.abb": "UT",
@@ -4050,7 +4046,7 @@
     "modified_revenues": 8923757,
     "net_pension_liability": 9409376,
     "net_opeb_liability": 8226676,
-    "assets_liab_ratio": 2.8469
+    "assets_liab_ratio": 0.3513
   },
   {
     "state.abb": "VA",
@@ -4071,7 +4067,7 @@
     "modified_revenues": -553183874,
     "net_pension_liability": 2235726340,
     "net_opeb_liability": 16360027,
-    "assets_liab_ratio": 1.5014
+    "assets_liab_ratio": 0.6661
   },
   {
     "state.abb": "WA",
@@ -4092,7 +4088,7 @@
     "modified_revenues": 211975000,
     "net_pension_liability": 105494000,
     "net_opeb_liability": 106488000,
-    "assets_liab_ratio": 2.4303
+    "assets_liab_ratio": 0.4115
   },
   {
     "state.abb": "WA",
@@ -4113,7 +4109,7 @@
     "modified_revenues": 52102000,
     "net_pension_liability": 18247000,
     "net_opeb_liability": 91356000,
-    "assets_liab_ratio": 4.2052
+    "assets_liab_ratio": 0.2378
   },
   {
     "state.abb": "WA",
@@ -4134,7 +4130,7 @@
     "modified_revenues": 65103871,
     "net_pension_liability": -188424019,
     "net_opeb_liability": 4651634,
-    "assets_liab_ratio": 4.2061
+    "assets_liab_ratio": 0.2377
   },
   {
     "state.abb": "WI",
@@ -4155,7 +4151,7 @@
     "modified_revenues": -43214000,
     "net_pension_liability": 480636000,
     "net_opeb_liability": 1332245000,
-    "assets_liab_ratio": 0.773
+    "assets_liab_ratio": 1.2936
   },
   {
     "state.abb": "AL",
@@ -4176,7 +4172,7 @@
     "modified_revenues": -280895745,
     "net_pension_liability": -265102822,
     "net_opeb_liability": 117668334,
-    "assets_liab_ratio": 1.2479
+    "assets_liab_ratio": 0.8013
   },
   {
     "state.abb": "AZ",
@@ -4197,7 +4193,7 @@
     "modified_revenues": -540009527,
     "net_pension_liability": 1626366174,
     "net_opeb_liability": -49909693,
-    "assets_liab_ratio": 2.2555
+    "assets_liab_ratio": 0.4434
   },
   {
     "state.abb": "AZ",
@@ -4218,7 +4214,7 @@
     "modified_revenues": -242192000,
     "net_pension_liability": 656632000,
     "net_opeb_liability": -19452000,
-    "assets_liab_ratio": 1.9928
+    "assets_liab_ratio": 0.5018
   },
   {
     "state.abb": "CA",
@@ -4239,7 +4235,7 @@
     "modified_revenues": -6296206000,
     "net_pension_liability": 7030463000,
     "net_opeb_liability": 26997560000,
-    "assets_liab_ratio": 0.8789
+    "assets_liab_ratio": 1.1377
   },
   {
     "state.abb": "CA",
@@ -4260,7 +4256,7 @@
     "modified_revenues": -849229000,
     "net_pension_liability": 2246673000,
     "net_opeb_liability": 71147000,
-    "assets_liab_ratio": 1.8351
+    "assets_liab_ratio": 0.5449
   },
   {
     "state.abb": "CA",
@@ -4281,7 +4277,7 @@
     "modified_revenues": 389400000,
     "net_pension_liability": 2048680000,
     "net_opeb_liability": 233049000,
-    "assets_liab_ratio": 2.1582
+    "assets_liab_ratio": 0.4633
   },
   {
     "state.abb": "CA",
@@ -4302,7 +4298,7 @@
     "modified_revenues": -1529494000,
     "net_pension_liability": 1288258000,
     "net_opeb_liability": 192288000,
-    "assets_liab_ratio": 1.4682
+    "assets_liab_ratio": 0.6811
   },
   {
     "state.abb": "CA",
@@ -4323,7 +4319,7 @@
     "modified_revenues": 82376000,
     "net_pension_liability": 1065771000,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 2.4883
+    "assets_liab_ratio": 0.4019
   },
   {
     "state.abb": "CA",
@@ -4344,7 +4340,7 @@
     "modified_revenues": -1245023000,
     "net_pension_liability": 2989893000,
     "net_opeb_liability": 867326000,
-    "assets_liab_ratio": 1.0333
+    "assets_liab_ratio": 0.9678
   },
   {
     "state.abb": "CA",
@@ -4365,7 +4361,7 @@
     "modified_revenues": -734107000,
     "net_pension_liability": 542754000,
     "net_opeb_liability": -255953000,
-    "assets_liab_ratio": 2.0757
+    "assets_liab_ratio": 0.4818
   },
   {
     "state.abb": "CA",
@@ -4386,7 +4382,7 @@
     "modified_revenues": 68996000,
     "net_pension_liability": 403532000,
     "net_opeb_liability": 147206000,
-    "assets_liab_ratio": 1.6553
+    "assets_liab_ratio": 0.6041
   },
   {
     "state.abb": "CA",
@@ -4407,7 +4403,7 @@
     "modified_revenues": -140454000,
     "net_pension_liability": -179943000,
     "net_opeb_liability": 407767000,
-    "assets_liab_ratio": 2.2331
+    "assets_liab_ratio": 0.4478
   },
   {
     "state.abb": "CA",
@@ -4428,7 +4424,7 @@
     "modified_revenues": -127359000,
     "net_pension_liability": 436078000,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 1.5388
+    "assets_liab_ratio": 0.6498
   },
   {
     "state.abb": "CA",
@@ -4449,7 +4445,7 @@
     "modified_revenues": 122576000,
     "net_pension_liability": 1401786000,
     "net_opeb_liability": 66568000,
-    "assets_liab_ratio": 1.7192
+    "assets_liab_ratio": 0.5817
   },
   {
     "state.abb": "CA",
@@ -4470,7 +4466,7 @@
     "modified_revenues": -30581000,
     "net_pension_liability": -474411000,
     "net_opeb_liability": 157784000,
-    "assets_liab_ratio": 3.0786
+    "assets_liab_ratio": 0.3248
   },
   {
     "state.abb": "CA",
@@ -4491,7 +4487,7 @@
     "modified_revenues": -37941442,
     "net_pension_liability": 1137961048,
     "net_opeb_liability": 81333690,
-    "assets_liab_ratio": 1.674
+    "assets_liab_ratio": 0.5974
   },
   {
     "state.abb": "CA",
@@ -4512,7 +4508,7 @@
     "modified_revenues": -156398000,
     "net_pension_liability": 99609000,
     "net_opeb_liability": -14243000,
-    "assets_liab_ratio": 3.068
+    "assets_liab_ratio": 0.3259
   },
   {
     "state.abb": "CA",
@@ -4533,7 +4529,7 @@
     "modified_revenues": -3470570000,
     "net_pension_liability": -2104167000,
     "net_opeb_liability": 3679684000,
-    "assets_liab_ratio": 1.5592
+    "assets_liab_ratio": 0.6414
   },
   {
     "state.abb": "CO",
@@ -4554,7 +4550,7 @@
     "modified_revenues": -92217010,
     "net_pension_liability": 219998638,
     "net_opeb_liability": 129120022,
-    "assets_liab_ratio": 1.771
+    "assets_liab_ratio": 0.5646
   },
   {
     "state.abb": "CO",
@@ -4575,7 +4571,7 @@
     "modified_revenues": -686701000,
     "net_pension_liability": 1297505000,
     "net_opeb_liability": 244985000,
-    "assets_liab_ratio": 1.4309
+    "assets_liab_ratio": 0.6989
   },
   {
     "state.abb": "CO",
@@ -4596,7 +4592,7 @@
     "modified_revenues": -91652754,
     "net_pension_liability": 181684482,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 2.9878
+    "assets_liab_ratio": 0.3347
   },
   {
     "state.abb": "FL",
@@ -4617,7 +4613,7 @@
     "modified_revenues": -661904000,
     "net_pension_liability": 3979267000,
     "net_opeb_liability": 734469000,
-    "assets_liab_ratio": 1.1605
+    "assets_liab_ratio": 0.8617
   },
   {
     "state.abb": "FL",
@@ -4638,7 +4634,7 @@
     "modified_revenues": 349616000,
     "net_pension_liability": 1505308000,
     "net_opeb_liability": 312736000,
-    "assets_liab_ratio": 1.9372
+    "assets_liab_ratio": 0.5162
   },
   {
     "state.abb": "FL",
@@ -4659,7 +4655,7 @@
     "modified_revenues": 355380104,
     "net_pension_liability": 1539693692,
     "net_opeb_liability": 395323262,
-    "assets_liab_ratio": 2.2014
+    "assets_liab_ratio": 0.4543
   },
   {
     "state.abb": "FL",
@@ -4680,7 +4676,7 @@
     "modified_revenues": -217502000,
     "net_pension_liability": 1040344000,
     "net_opeb_liability": 142427000,
-    "assets_liab_ratio": 4.0816
+    "assets_liab_ratio": 0.245
   },
   {
     "state.abb": "FL",
@@ -4701,7 +4697,7 @@
     "modified_revenues": -223693879,
     "net_pension_liability": 1058941820,
     "net_opeb_liability": 81132926,
-    "assets_liab_ratio": 3.2109
+    "assets_liab_ratio": 0.3114
   },
   {
     "state.abb": "FL",
@@ -4722,7 +4718,7 @@
     "modified_revenues": -7890104,
     "net_pension_liability": 574430889,
     "net_opeb_liability": 515479700,
-    "assets_liab_ratio": 3.4462
+    "assets_liab_ratio": 0.2902
   },
   {
     "state.abb": "FL",
@@ -4743,7 +4739,7 @@
     "modified_revenues": -181872000,
     "net_pension_liability": 491165000,
     "net_opeb_liability": 590557000,
-    "assets_liab_ratio": 2.3769
+    "assets_liab_ratio": 0.4207
   },
   {
     "state.abb": "FL",
@@ -4764,7 +4760,7 @@
     "modified_revenues": -195156683,
     "net_pension_liability": 418623364,
     "net_opeb_liability": 208784936,
-    "assets_liab_ratio": 3.9607
+    "assets_liab_ratio": 0.2525
   },
   {
     "state.abb": "FL",
@@ -4785,7 +4781,7 @@
     "modified_revenues": -28518228,
     "net_pension_liability": 341923924,
     "net_opeb_liability": 28940840,
-    "assets_liab_ratio": 2.69
+    "assets_liab_ratio": 0.3718
   },
   {
     "state.abb": "FL",
@@ -4806,7 +4802,7 @@
     "modified_revenues": -376522000,
     "net_pension_liability": 2905810000,
     "net_opeb_liability": 274269000,
-    "assets_liab_ratio": 0.8968
+    "assets_liab_ratio": 1.1151
   },
   {
     "state.abb": "GA",
@@ -4827,7 +4823,7 @@
     "modified_revenues": -366306000,
     "net_pension_liability": 579392000,
     "net_opeb_liability": 1282596000,
-    "assets_liab_ratio": 1.0756
+    "assets_liab_ratio": 0.9297
   },
   {
     "state.abb": "GA",
@@ -4848,7 +4844,7 @@
     "modified_revenues": 15893000,
     "net_pension_liability": 442861000,
     "net_opeb_liability": 29686000,
-    "assets_liab_ratio": 5.6894
+    "assets_liab_ratio": 0.1758
   },
   {
     "state.abb": "GA",
@@ -4869,7 +4865,7 @@
     "modified_revenues": -152831773,
     "net_pension_liability": 785875583,
     "net_opeb_liability": 213167041,
-    "assets_liab_ratio": 3.6473
+    "assets_liab_ratio": 0.2742
   },
   {
     "state.abb": "GA",
@@ -4890,7 +4886,7 @@
     "modified_revenues": -178361000,
     "net_pension_liability": 1170291000,
     "net_opeb_liability": 421340000,
-    "assets_liab_ratio": 1.4721
+    "assets_liab_ratio": 0.6793
   },
   {
     "state.abb": "HI",
@@ -4911,7 +4907,7 @@
     "modified_revenues": -529941000,
     "net_pension_liability": 2270106000,
     "net_opeb_liability": 1472298000,
-    "assets_liab_ratio": 1.0536
+    "assets_liab_ratio": 0.9491
   },
   {
     "state.abb": "IL",
@@ -4932,7 +4928,7 @@
     "modified_revenues": -1457507195,
     "net_pension_liability": 10837262892,
     "net_opeb_liability": 1978062391,
-    "assets_liab_ratio": 0.3792
+    "assets_liab_ratio": 2.6374
   },
   {
     "state.abb": "IL",
@@ -4953,7 +4949,7 @@
     "modified_revenues": -41117688,
     "net_pension_liability": -64653716,
     "net_opeb_liability": 14480279,
-    "assets_liab_ratio": 4.6796
+    "assets_liab_ratio": 0.2137
   },
   {
     "state.abb": "IL",
@@ -4974,7 +4970,7 @@
     "modified_revenues": -69075663,
     "net_pension_liability": -158816041,
     "net_opeb_liability": 19634133,
-    "assets_liab_ratio": 4.9153
+    "assets_liab_ratio": 0.2034
   },
   {
     "state.abb": "IL",
@@ -4995,7 +4991,7 @@
     "modified_revenues": -34354623,
     "net_pension_liability": -48169434,
     "net_opeb_liability": 50988576,
-    "assets_liab_ratio": 2.6018
+    "assets_liab_ratio": 0.3843
   },
   {
     "state.abb": "IN",
@@ -5016,7 +5012,7 @@
     "modified_revenues": 7881602,
     "net_pension_liability": 156364982,
     "net_opeb_liability": 10649537,
-    "assets_liab_ratio": 0.9757
+    "assets_liab_ratio": 1.0249
   },
   {
     "state.abb": "KS",
@@ -5037,7 +5033,7 @@
     "modified_revenues": 31777002,
     "net_pension_liability": 294761994,
     "net_opeb_liability": 20223892,
-    "assets_liab_ratio": 1.9052
+    "assets_liab_ratio": 0.5249
   },
   {
     "state.abb": "KY",
@@ -5058,7 +5054,7 @@
     "modified_revenues": 96646312,
     "net_pension_liability": 1029232000,
     "net_opeb_liability": 310565000,
-    "assets_liab_ratio": 1.3029
+    "assets_liab_ratio": 0.7675
   },
   {
     "state.abb": "MD",
@@ -5079,7 +5075,7 @@
     "modified_revenues": 170224740,
     "net_pension_liability": 57114416,
     "net_opeb_liability": 819410047,
-    "assets_liab_ratio": 1.5244
+    "assets_liab_ratio": 0.656
   },
   {
     "state.abb": "MD",
@@ -5100,7 +5096,7 @@
     "modified_revenues": -658068335,
     "net_pension_liability": 2011969036,
     "net_opeb_liability": 1827234000,
-    "assets_liab_ratio": 0.6941
+    "assets_liab_ratio": 1.4407
   },
   {
     "state.abb": "MD",
@@ -5121,7 +5117,7 @@
     "modified_revenues": -235370000,
     "net_pension_liability": 1592201000,
     "net_opeb_liability": 1993525000,
-    "assets_liab_ratio": 0.7276
+    "assets_liab_ratio": 1.3745
   },
   {
     "state.abb": "MI",
@@ -5142,7 +5138,7 @@
     "modified_revenues": -365348535,
     "net_pension_liability": 69207954,
     "net_opeb_liability": -400265102,
-    "assets_liab_ratio": 3.0049
+    "assets_liab_ratio": 0.3328
   },
   {
     "state.abb": "MI",
@@ -5163,7 +5159,7 @@
     "modified_revenues": -213900146,
     "net_pension_liability": 29807879,
     "net_opeb_liability": 79426180,
-    "assets_liab_ratio": 3.144
+    "assets_liab_ratio": 0.3181
   },
   {
     "state.abb": "MI",
@@ -5184,7 +5180,7 @@
     "modified_revenues": -169883231,
     "net_pension_liability": 130987955,
     "net_opeb_liability": 22376361,
-    "assets_liab_ratio": 1.8951
+    "assets_liab_ratio": 0.5277
   },
   {
     "state.abb": "MN",
@@ -5205,7 +5201,7 @@
     "modified_revenues": -498637635,
     "net_pension_liability": 1282413828,
     "net_opeb_liability": 141031543,
-    "assets_liab_ratio": 1.2489
+    "assets_liab_ratio": 0.8007
   },
   {
     "state.abb": "MO",
@@ -5226,7 +5222,7 @@
     "modified_revenues": 98281987,
     "net_pension_liability": 223749888,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 2.2895
+    "assets_liab_ratio": 0.4368
   },
   {
     "state.abb": "MO",
@@ -5247,7 +5243,7 @@
     "modified_revenues": -71619409,
     "net_pension_liability": 44377642,
     "net_opeb_liability": 4547369,
-    "assets_liab_ratio": 1.8389
+    "assets_liab_ratio": 0.5438
   },
   {
     "state.abb": "NV",
@@ -5268,7 +5264,7 @@
     "modified_revenues": 416862992,
     "net_pension_liability": 1909884763,
     "net_opeb_liability": 699929865,
-    "assets_liab_ratio": 2.2862
+    "assets_liab_ratio": 0.4374
   },
   {
     "state.abb": "NJ",
@@ -5289,7 +5285,7 @@
     "modified_revenues": 35243926,
     "net_pension_liability": 424813024,
     "net_opeb_liability": 1102707506,
-    "assets_liab_ratio": 8.9566
+    "assets_liab_ratio": 0.1116
   },
   {
     "state.abb": "NJ",
@@ -5310,7 +5306,7 @@
     "modified_revenues": -11473129,
     "net_pension_liability": 160125268,
     "net_opeb_liability": 864329337,
-    "assets_liab_ratio": 34.0068
+    "assets_liab_ratio": 0.0294
   },
   {
     "state.abb": "NJ",
@@ -5352,7 +5348,7 @@
     "modified_revenues": -93612125,
     "net_pension_liability": 241964470,
     "net_opeb_liability": 672080872,
-    "assets_liab_ratio": 6.8555
+    "assets_liab_ratio": 0.1459
   },
   {
     "state.abb": "NJ",
@@ -5373,7 +5369,7 @@
     "modified_revenues": -11526259,
     "net_pension_liability": 200168238,
     "net_opeb_liability": 332633236,
-    "assets_liab_ratio": 23.2729
+    "assets_liab_ratio": 0.043
   },
   {
     "state.abb": "NJ",
@@ -5415,7 +5411,7 @@
     "modified_revenues": -113842787,
     "net_pension_liability": 234892180,
     "net_opeb_liability": 95808405,
-    "assets_liab_ratio": 1.8337
+    "assets_liab_ratio": 0.5453
   },
   {
     "state.abb": "NY",
@@ -5436,7 +5432,7 @@
     "modified_revenues": -107504153,
     "net_pension_liability": -129675084,
     "net_opeb_liability": 4723930000,
-    "assets_liab_ratio": 0.7689
+    "assets_liab_ratio": 1.3006
   },
   {
     "state.abb": "NY",
@@ -5457,7 +5453,7 @@
     "modified_revenues": 49471000,
     "net_pension_liability": -85605000,
     "net_opeb_liability": 6777227000,
-    "assets_liab_ratio": 0.4998
+    "assets_liab_ratio": 2.0009
   },
   {
     "state.abb": "NY",
@@ -5478,7 +5474,7 @@
     "modified_revenues": -382528837,
     "net_pension_liability": -114934671,
     "net_opeb_liability": 2765190616,
-    "assets_liab_ratio": 1.0191
+    "assets_liab_ratio": 0.9812
   },
   {
     "state.abb": "NY",
@@ -5499,7 +5495,7 @@
     "modified_revenues": -143351000,
     "net_pension_liability": -88970000,
     "net_opeb_liability": 1319702000,
-    "assets_liab_ratio": 0.8887
+    "assets_liab_ratio": 1.1253
   },
   {
     "state.abb": "NY",
@@ -5520,7 +5516,7 @@
     "modified_revenues": -269290000,
     "net_pension_liability": -90627000,
     "net_opeb_liability": 421149000,
-    "assets_liab_ratio": 1.262
+    "assets_liab_ratio": 0.7924
   },
   {
     "state.abb": "NC",
@@ -5541,7 +5537,7 @@
     "modified_revenues": -284199192,
     "net_pension_liability": 85096956,
     "net_opeb_liability": 582455375,
-    "assets_liab_ratio": 0.6644
+    "assets_liab_ratio": 1.5052
   },
   {
     "state.abb": "NC",
@@ -5562,7 +5558,7 @@
     "modified_revenues": -334559360,
     "net_pension_liability": 95413624,
     "net_opeb_liability": 445605480,
-    "assets_liab_ratio": 1.1837
+    "assets_liab_ratio": 0.8448
   },
   {
     "state.abb": "OH",
@@ -5583,7 +5579,7 @@
     "modified_revenues": -129184000,
     "net_pension_liability": 235764000,
     "net_opeb_liability": -79476000,
-    "assets_liab_ratio": 3.1806
+    "assets_liab_ratio": 0.3144
   },
   {
     "state.abb": "OH",
@@ -5604,7 +5600,7 @@
     "modified_revenues": 2697449,
     "net_pension_liability": 237203019,
     "net_opeb_liability": -87108546,
-    "assets_liab_ratio": 2.1139
+    "assets_liab_ratio": 0.4731
   },
   {
     "state.abb": "OH",
@@ -5625,7 +5621,7 @@
     "modified_revenues": -24007000,
     "net_pension_liability": 423265000,
     "net_opeb_liability": -79527000,
-    "assets_liab_ratio": 2.2887
+    "assets_liab_ratio": 0.4369
   },
   {
     "state.abb": "OK",
@@ -5644,7 +5640,7 @@
     "pct_urban_pop": 0.9241,
     "median_hh_income_21": 57890,
     "modified_revenues": -173026908,
-    "assets_liab_ratio": 0.7285
+    "assets_liab_ratio": 1.3726
   },
   {
     "state.abb": "OK",
@@ -5663,7 +5659,7 @@
     "pct_urban_pop": 0.9487,
     "median_hh_income_21": 59232,
     "modified_revenues": 22417811,
-    "assets_liab_ratio": 2.8188
+    "assets_liab_ratio": 0.3548
   },
   {
     "state.abb": "OR",
@@ -5684,7 +5680,7 @@
     "modified_revenues": 63317000,
     "net_pension_liability": 396720000,
     "net_opeb_liability": 114171000,
-    "assets_liab_ratio": 1.8661
+    "assets_liab_ratio": 0.5359
   },
   {
     "state.abb": "PA",
@@ -5705,7 +5701,7 @@
     "modified_revenues": -226434736,
     "net_pension_liability": 1709287075,
     "net_opeb_liability": 64322191,
-    "assets_liab_ratio": 0.5579
+    "assets_liab_ratio": 1.7923
   },
   {
     "state.abb": "PA",
@@ -5726,7 +5722,7 @@
     "modified_revenues": -201822180,
     "net_pension_liability": 167833441,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 1.4518
+    "assets_liab_ratio": 0.6888
   },
   {
     "state.abb": "PA",
@@ -5747,7 +5743,7 @@
     "modified_revenues": -2066608000,
     "net_pension_liability": 5386419000,
     "net_opeb_liability": 2156649000,
-    "assets_liab_ratio": 0.8006
+    "assets_liab_ratio": 1.2491
   },
   {
     "state.abb": "TN",
@@ -5768,7 +5764,7 @@
     "modified_revenues": -101868069,
     "net_pension_liability": 458893000,
     "net_opeb_liability": -119734000,
-    "assets_liab_ratio": 1.3025
+    "assets_liab_ratio": 0.7678
   },
   {
     "state.abb": "TN",
@@ -5789,7 +5785,7 @@
     "modified_revenues": 636818837,
     "net_pension_liability": 42884484,
     "net_opeb_liability": 2414800324,
-    "assets_liab_ratio": 1.3365
+    "assets_liab_ratio": 0.7482
   },
   {
     "state.abb": "TX",
@@ -5810,7 +5806,7 @@
     "modified_revenues": -1376510598,
     "net_pension_liability": -253423134,
     "net_opeb_liability": 3922333666,
-    "assets_liab_ratio": 2.0608
+    "assets_liab_ratio": 0.4853
   },
   {
     "state.abb": "TX",
@@ -5831,7 +5827,7 @@
     "modified_revenues": -377658000,
     "net_pension_liability": 246648000,
     "net_opeb_liability": 194549000,
-    "assets_liab_ratio": 2.2015
+    "assets_liab_ratio": 0.4542
   },
   {
     "state.abb": "TX",
@@ -5852,7 +5848,7 @@
     "modified_revenues": -327043000,
     "net_pension_liability": 28589000,
     "net_opeb_liability": 222716000,
-    "assets_liab_ratio": 1.4502
+    "assets_liab_ratio": 0.6895
   },
   {
     "state.abb": "TX",
@@ -5873,7 +5869,7 @@
     "modified_revenues": -388466712,
     "net_pension_liability": -55969325,
     "net_opeb_liability": 187140419,
-    "assets_liab_ratio": 1.1375
+    "assets_liab_ratio": 0.8791
   },
   {
     "state.abb": "TX",
@@ -5894,7 +5890,7 @@
     "modified_revenues": -214532708,
     "net_pension_liability": -39569661,
     "net_opeb_liability": 650170983,
-    "assets_liab_ratio": 1.6481
+    "assets_liab_ratio": 0.6068
   },
   {
     "state.abb": "TX",
@@ -5915,7 +5911,7 @@
     "modified_revenues": -148119328,
     "net_pension_liability": -126559762,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 2.1309
+    "assets_liab_ratio": 0.4693
   },
   {
     "state.abb": "TX",
@@ -5936,7 +5932,7 @@
     "modified_revenues": -147961468,
     "net_pension_liability": -7850277,
     "net_opeb_liability": 131981180,
-    "assets_liab_ratio": 1.0544
+    "assets_liab_ratio": 0.9484
   },
   {
     "state.abb": "TX",
@@ -5957,7 +5953,7 @@
     "modified_revenues": -210526923,
     "net_pension_liability": -17497275,
     "net_opeb_liability": 35754355,
-    "assets_liab_ratio": 1.8507
+    "assets_liab_ratio": 0.5403
   },
   {
     "state.abb": "TX",
@@ -5978,7 +5974,7 @@
     "modified_revenues": -115367079,
     "net_pension_liability": -2669398,
     "net_opeb_liability": 61501898,
-    "assets_liab_ratio": 1.5014
+    "assets_liab_ratio": 0.666
   },
   {
     "state.abb": "TX",
@@ -5999,7 +5995,7 @@
     "modified_revenues": 93209740,
     "net_pension_liability": -32298711,
     "net_opeb_liability": 495366734,
-    "assets_liab_ratio": 2.5108
+    "assets_liab_ratio": 0.3983
   },
   {
     "state.abb": "TX",
@@ -6020,7 +6016,7 @@
     "modified_revenues": -185298513,
     "net_pension_liability": -47475152,
     "net_opeb_liability": 224199623,
-    "assets_liab_ratio": 1.6251
+    "assets_liab_ratio": 0.6154
   },
   {
     "state.abb": "TX",
@@ -6041,7 +6037,7 @@
     "modified_revenues": 62728877,
     "net_pension_liability": -15236030,
     "net_opeb_liability": 55615361,
-    "assets_liab_ratio": 1.6666
+    "assets_liab_ratio": 0.6
   },
   {
     "state.abb": "UT",
@@ -6062,7 +6058,7 @@
     "modified_revenues": -65560068,
     "net_pension_liability": -93065740,
     "net_opeb_liability": 89452848,
-    "assets_liab_ratio": 2.6023
+    "assets_liab_ratio": 0.3843
   },
   {
     "state.abb": "UT",
@@ -6083,7 +6079,7 @@
     "modified_revenues": -30446891,
     "net_pension_liability": -28151124,
     "net_opeb_liability": 6543375,
-    "assets_liab_ratio": 3.1337
+    "assets_liab_ratio": 0.3191
   },
   {
     "state.abb": "VA",
@@ -6104,7 +6100,7 @@
     "modified_revenues": -244396343,
     "net_pension_liability": 1298126521,
     "net_opeb_liability": -39502513,
-    "assets_liab_ratio": 1.7816
+    "assets_liab_ratio": 0.5613
   },
   {
     "state.abb": "WA",
@@ -6125,7 +6121,7 @@
     "modified_revenues": -397673000,
     "net_pension_liability": -249349000,
     "net_opeb_liability": 92158000,
-    "assets_liab_ratio": 2.427
+    "assets_liab_ratio": 0.412
   },
   {
     "state.abb": "WA",
@@ -6146,7 +6142,7 @@
     "modified_revenues": 32759000,
     "net_pension_liability": -55500000,
     "net_opeb_liability": 65840000,
-    "assets_liab_ratio": 4.218
+    "assets_liab_ratio": 0.2371
   },
   {
     "state.abb": "WA",
@@ -6167,7 +6163,7 @@
     "modified_revenues": -108920664,
     "net_pension_liability": -48380254,
     "net_opeb_liability": 3574222,
-    "assets_liab_ratio": 4.2077
+    "assets_liab_ratio": 0.2377
   },
   {
     "state.abb": "WI",
@@ -6188,6 +6184,6 @@
     "modified_revenues": -210520000,
     "net_pension_liability": 231020000,
     "net_opeb_liability": 1189697000,
-    "assets_liab_ratio": 0.9438
+    "assets_liab_ratio": 1.0596
   }
 ]
