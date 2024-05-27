@@ -135,6 +135,8 @@ top100_county_3years %>% add_count(geo_id) %>% filter(n <3 ) %>% arrange(name)
 write.csv(top100_county_3years, "output/top100_counties.csv")
 write.csv(county_all, "output/all_counties_3years.csv")
 saveRDS(top100_county_3years, "top100_county.RDS")
+
+top100_county_3years %>% filter(name == "st louis county")
 ```
 
 

@@ -22,7 +22,7 @@ options(scipen = 999)
 df <- data_frame(state.abb, state.name)
 ```
 
-# School districts from Acfrs database 2020, 2021
+# School districts from Acfrs database
 
 ```{r echo = FALSE}
 school_districts <- readRDS("data/acfrs_data.RDS") %>% 
@@ -34,7 +34,7 @@ school_districts <- readRDS("data/acfrs_data.RDS") %>%
 ## Dictionary ACFRs ID ~ NCES ID
 
 ```{r echo = FALSE}
-dictionary <- readRDS("dictionary.RDS") %>% 
+dictionary <- readRDS("data/dictionary.RDS") %>% 
   add_row(ncesID = c("4703180"), #ncesID == "4703180" ~ "107203", # Davidson County Board of Education, previously id = 1267426
                   name = c("Metropolitan Nashville Public Schools"),
                   id = c("107203"),
@@ -59,14 +59,14 @@ dictionary <- readRDS("dictionary.RDS") %>%
 
 
 ```{r}
-nces %>% select(state.abb, ncesID, enrollment_20, enrollment_21, enrollment_22) -> nces_enrollment
-
-school_districts %>% select(state, name, id) %>% distinct() %>% 
-  left_join(dictionary) %>% 
-  left_join(nces_enrollment) %>% 
-  filter(!is.na(ncesID)) %>% 
-  mutate(government_level = "school district") %>% 
-  write.csv("output/school district_enrollment_20_21_22.csv")
+# nces %>% select(state.abb, ncesID, enrollment_20, enrollment_21, enrollment_22) -> nces_enrollment
+# 
+# school_districts %>% select(state, name, id) %>% distinct() %>% 
+#   left_join(dictionary) %>% 
+#   left_join(nces_enrollment) %>% 
+#   filter(!is.na(ncesID)) %>% 
+#   mutate(government_level = "school district") #%>% 
+#  # write.csv("output/school district_enrollment_20_21_22.csv")
 ```
 
 # Top 100 SD
@@ -80,31 +80,30 @@ top100_school_districts <- school_districts %>%
   filter(id %in% dict_top100_ELSI$id) %>% select(-name) %>% 
   left_join(dict_top100_ELSI, by = c("id", "state")) %>% 
   rename(state.abb = state) %>% 
-  
-  #bind with NYC
-  rbind(nyc_top5_20_21_22) %>% 
+  # get state name
   left_join(df) %>% 
 
   #join with nces to get county, city info
   left_join(nces, by = c("ncesID", "state.abb", "state.name")) %>% 
   rename(name = name.x) %>% 
-  select(-name.y)
+  select(-name.y) %>% 
+#bind with NYC
+  rbind(nyc_top5)
 
-# Note: new york city geographic district #10 is not in the list of top 100 by enrollment 2022
-top_schools_by_year %>% 
-  mutate(name = str_to_lower(name)) %>% 
-  filter(str_detect(name, "new york"))
  
 #TODO: check back missing: 
 #GA Clayton County Board of education.
 #https://www.clayton.k12.ga.us/departments/business-services/financial-reports
 
-top100_school_districts %>% 
+top100_school_districts %>% #filter(name == "Rutherford County Schools")
   add_count(ncesID) %>% filter(n < 3) %>% 
   select(state.abb, ncesID, year, name, n)
 
 
 ```
+
+
+
 
 # Export result
 ```{r}
@@ -116,8 +115,6 @@ school_districts %>% write.csv("output/all_schooldistricts_3years.csv")
 top100_school_districts %>% 
   filter(expenses == revenues) 
 
-
-school_districts
 ```
 
 ## Delaware
