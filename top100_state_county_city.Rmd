@@ -49,8 +49,6 @@ state_3years %>% #filter(is.na(net_pension_assets))
          ) %>% write.csv("output/all_states_3years.csv")
 saveRDS(state_3years, "state_3years.RDS") 
 
-
-
 ```
 
 # County
@@ -134,7 +132,16 @@ officials
 ##### Top 100 acfrs counties 
 # Find acfrs entities from the list of Top 100 county census
 top100_county_3years <- county_all %>% 
-  filter(geo_id %in% census_county_top100$geo_id)
+  filter(geo_id %in% census_county_top100$geo_id) %>% 
+  
+  #TODO: pull from acfrvalue table
+  
+  mutate(total_assets = ifelse(name == "st louis county" & year == 2020, 2138938727, total_assets), 
+         total_assets = ifelse(name == "st louis county" & year == 2021, 2199076860, total_assets),
+         total_assets = ifelse(name == "essex county", NA, total_assets),
+         net_pension_assets = ifelse(name == "oklahoma county", 0, net_pension_assets),
+         net_opeb_assets = ifelse(name == "oklahoma county", 0, net_opeb_assets),
+         current_assets = ifelse(name == "oklahoma county" & year == 2020, 146236643, current_assets))
 
 
 top100_county_3years %>% add_count(geo_id) %>% filter(n <3 ) %>% arrange(name)
@@ -147,7 +154,8 @@ write.csv(top100_county_3years, "output/top100_counties.csv")
 write.csv(county_all, "output/all_counties_3years.csv")
 saveRDS(top100_county_3years, "top100_county.RDS")
 
-top100_county_3years %>% filter(name == "st louis county")
+top100_county_3years %>% filter(state.abb == "NJ")
+  filter(name == "oklahoma county")
 ```
 
 
