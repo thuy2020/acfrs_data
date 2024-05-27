@@ -37,8 +37,19 @@ state_3years <- state_gov %>%
 #double check missing:
 state_3years %>% add_count(state.name) %>% filter(n<3)
 
-state_3years %>% write.csv("output/all_states_3years.csv")
+
+
+# Resolve NA value for CA and SD 
+#TODO: currently the acfrvalue in database is not fully populated. Fix it later --> don't have to impute 0 here. 
+state_3years %>% #filter(is.na(net_pension_assets))
+  mutate(net_pension_assets = ifelse(state.abb == "CA", 0, net_pension_assets),
+         net_opeb_assets = ifelse(state.abb == "CA", 0, net_opeb_assets),
+         current_assets = ifelse(state.abb == "CA" & year == 2020, 163031521000, current_assets),
+         current_liabilities = ifelse(state.abb == "CA" & year == 2020, 103649199000, current_liabilities)
+         ) %>% write.csv("output/all_states_3years.csv")
 saveRDS(state_3years, "state_3years.RDS") 
+
+
 
 ```
 

@@ -95,16 +95,16 @@
     "year": 2020,
     "name": "California",
     "total_liabilities": 408305319000,
-    "current_liabilities": 85723585000,
+    "current_liabilities": 103649199000,
     "total_assets": 340835100000,
-    "current_assets": 0,
+    "current_assets": 163031521000,
     "expenses": 386953774000,
     "revenues": 386615995000,
     "population": 39538245,
     "urban_pop": 37259490,
     "pct_urban_pop": 94.2366,
     "median_hh_income_21": 84831,
-    "modified_revenues": -86061364000,
+    "modified_revenues": -103986978000,
     "net_pension_liability": 92089623000,
     "net_opeb_liability": 90486960000,
     "assets_liab_ratio": 1.198
@@ -2347,6 +2347,8 @@
     "pct_urban_pop": 94.2366,
     "median_hh_income_21": 84831,
     "modified_revenues": -203395493000,
+    "net_pension_liability": 54169128000,
+    "net_opeb_liability": 94283183000,
     "assets_liab_ratio": 1.0647
   },
   {
