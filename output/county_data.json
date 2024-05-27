@@ -1130,7 +1130,7 @@
     "name": "St Louis County, MO",
     "total_liabilities": 1099837660,
     "current_liabilities": 161735874,
-    "total_assets": 0,
+    "total_assets": 2138938727,
     "current_assets": 0,
     "expenses": 920256114,
     "revenues": 870844379,
@@ -1140,7 +1140,8 @@
     "median_hh_income_21": 72507,
     "modified_revenues": -211147609,
     "net_pension_liability": 324443093,
-    "net_opeb_liability": 0
+    "net_opeb_liability": 0,
+    "assets_liab_ratio": 0.5142
   },
   {
     "state.abb": "MO",
@@ -1239,7 +1240,6 @@
     "name": "Essex County, NJ",
     "total_liabilities": 1244720579,
     "current_liabilities": 0,
-    "total_assets": 0,
     "current_assets": 0,
     "expenses": 970983653,
     "revenues": 1008216197,
@@ -1569,7 +1569,7 @@
     "total_liabilities": 407711309,
     "current_liabilities": 26993632,
     "total_assets": 276984576,
-    "current_assets": 0,
+    "current_assets": 146236643,
     "expenses": 143243674,
     "revenues": 201157773,
     "population": 796567,
@@ -3306,7 +3306,7 @@
     "name": "St Louis County, MO",
     "total_liabilities": 961302688,
     "current_liabilities": 101822218,
-    "total_assets": 0,
+    "total_assets": 2199076860,
     "current_assets": 0,
     "expenses": 846092409,
     "revenues": 1010714005,
@@ -3316,7 +3316,8 @@
     "median_hh_income_21": 72507,
     "modified_revenues": 62799378,
     "net_pension_liability": 267696492,
-    "net_opeb_liability": 0
+    "net_opeb_liability": 0,
+    "assets_liab_ratio": 0.4371
   },
   {
     "state.abb": "MO",
@@ -3415,7 +3416,6 @@
     "name": "Essex County, NJ",
     "total_liabilities": 853905018,
     "current_liabilities": 0,
-    "total_assets": 0,
     "current_assets": 0,
     "expenses": 934915605,
     "revenues": 985000215,
@@ -5570,7 +5570,6 @@
     "name": "Essex County, NJ",
     "total_liabilities": 1333822760,
     "current_liabilities": 0,
-    "total_assets": 1333822760,
     "current_assets": 0,
     "expenses": 940128190,
     "revenues": 980178939,
@@ -5580,8 +5579,7 @@
     "median_hh_income_21": 66191,
     "modified_revenues": 40050749,
     "net_pension_liability": 0,
-    "net_opeb_liability": 0,
-    "assets_liab_ratio": 1
+    "net_opeb_liability": 0
   },
   {
     "state.abb": "NJ",
@@ -5909,6 +5907,8 @@
     "pct_urban_pop": 0.9241,
     "median_hh_income_21": 57890,
     "modified_revenues": -173026908,
+    "net_pension_liability": 9589446,
+    "net_opeb_liability": 313471344,
     "assets_liab_ratio": 1.3726
   },
   {

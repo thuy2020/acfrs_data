@@ -83,7 +83,9 @@ nces <- nces_20 %>% left_join(nces_21) %>% left_join(nces_22) %>%
          ncesID = ifelse(
            nchar(ncesID) == 6, paste0("0", ncesID), ncesID)) %>% 
   
-  mutate(across(.cols = c(5:12, 22:23), as.double)) 
+  mutate(across(.cols = c(5:12, 22:23), as.double)) %>% 
+  
+  mutate(state.name = str_to_title(state.name))
 
 
 # Top 100 schools in each of the 3 years:

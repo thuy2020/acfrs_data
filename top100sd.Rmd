@@ -100,9 +100,8 @@ top100_school_districts %>% #filter(name == "Rutherford County Schools")
   select(state.abb, ncesID, year, name, n)
 
 
+top100_school_districts %>% filter(str_detect(name, "Detroit"))
 ```
-
-
 
 
 # Export result
@@ -112,91 +111,10 @@ saveRDS(top100_school_districts, "top100_sd.RDS")
 top100_school_districts %>% write.csv("output/top100_sd.csv")
 school_districts %>% write.csv("output/all_schooldistricts_3years.csv")
 #TODO: ask Geoff about this revenues = expense cases
+
 top100_school_districts %>% 
+  select(state.abb, id, year, name, expenses, revenues) %>% 
   filter(expenses == revenues) 
-
-```
-
-## Delaware
-Delaware has school district info in the state ACFR: FY 2021 ACFR (delaware.gov). Balance sheet info is on p. 166-167 and activities are on p. 168-169.
---> manually inserted these numbers to excel file. 
---> Where to find net pension, net OPEB for K12? (State of Delaware in page 20)
---> Don't do this yet. Let me figure out why school districts are only listed in the statistical section--I'm not sure whether the liabilities are consolidated with the state's.
-
-## Davidson County TN & Portland SD 1J OR
-
-```{r warning=FALSE, message=FALSE}
-sd_96_2020 <- top_sd_nces %>% 
-  left_join(top_sd_acfrs) %>% # to get id
-  left_join(sd2020_db, by = "id") %>% # need to specify join by=id, if not, some rows in sd2020_db loose values (eg. id == 196828) 
-  
-  select(-c(name.y, name.x, state.y)) %>% 
-  rename(state = state.x) %>% 
-
-  # take out sd whose acfrs are not known to date
-  filter(!nces_original_name %in% c("Boston", "CHESTERFIELD CO PBLC SCHS", "HENRICO CO PBLC SCHS", "OMAHA PUBLIC SCHOOLS")) %>% 
-  
-  # take out 5 sd of NYC to later rbind with nyc_20_21_5sd
-  filter(state != "NY") %>% 
-  
-  # Collect data for some sd manually 
-  mutate(year = 2020,
-  total_liabilities = case_when(nces_original_name == "Davidson County"& state == "TN" ~ 0,
-                                nces_original_name == "Portland SD 1J"& state == "OR" ~ 1882236000, 
-                                TRUE ~ total_liabilities), #page 34
-  
-  net_pension_liability = case_when(nces_original_name == "Davidson County" & state == "TN" ~ 0,
-                                    nces_original_name == "Portland SD 1J"& state == "OR" ~ 306140000, 
-                                    TRUE ~ net_pension_liability), # page 34, Net pension liability-PERS
-  
-  net_opeb_liability = case_when(nces_original_name == "Davidson County" & state == "TN" ~ 0,
-                                 nces_original_name == "Portland SD 1J"& state == "OR" ~ 81319999,
-                                 TRUE ~ net_opeb_liability), # page 34, TOTAL OPEB liability-RHIS
-  
-  expenses = case_when(nces_original_name == "Davidson County" & state == "TN" ~ 0,
-                       nces_original_name == "Portland SD 1J"& state == "OR" ~ 824384000, 
-                       TRUE ~ expenses),#page 35
-                       
-  
-  revenues = case_when(nces_original_name == "Davidson County" & state == "TN" ~ 0,
-                       nces_original_name == "Portland SD 1J"& state == "OR" ~ (8271000 + 90072000 + 11368000 + 823400000), #page 35 (charges + operating + grant + Total general revenues)
-                       TRUE ~ revenues))
-```
-
-```{r}
-sd_96_2021 <- top_sd_nces %>% 
-  left_join(top_sd_acfrs) %>% # to get id
-  left_join(sd2021_db, by = "id") %>% # NOTE: filter(is.na(total_liabilities)) -> some have id carried from 2020, but no values for 2021
-  select(-c(name.y, name.x, state.y)) %>% 
-  rename(state = state.x) %>%  
-  
-  # take out sd whose acfrs are not known to date
-  filter(!nces_original_name %in% c("Boston", "CHESTERFIELD CO PBLC SCHS", "HENRICO CO PBLC SCHS", "OMAHA PUBLIC SCHOOLS")) %>% 
-  
-  # take out 5 sd of NYC to later rbind with nyc_20_21_5sd
-  filter(state != "NY") %>% 
-  
-  mutate(year = 2021,
-  total_liabilities = case_when(nces_original_name == "Davidson County"& state == "TN" ~ 0,
-                                nces_original_name == "Portland SD 1J"& state == "OR" ~ 2380580000,
-                                TRUE ~ total_liabilities),
-  
-  net_pension_liability = case_when(nces_original_name == "Davidson County" & state == "TN" ~ 84041613,
-                                    nces_original_name == "Portland SD 1J"& state == "OR" ~ 521329000,
-                                    TRUE ~ net_pension_liability), # page 32, Net pension liability-PERS
-  
-  net_opeb_liability = case_when(nces_original_name == "Davidson County" & state == "TN" ~ 1061732808, # page B-93, column School professional employee
-                                 nces_original_name == "Portland SD 1J"& state == "OR" ~ 78581000,
-                                 TRUE ~ net_opeb_liability), # page 32, TOTAL OPEB liability-RHIS
-  
-  expenses = case_when(nces_original_name == "Davidson County" & state == "TN" ~ 1195361854,
-                       nces_original_name == "Portland SD 1J"& state == "OR" ~ 931870000,
-                       TRUE ~ expenses), #page 33
-  
-  revenues = case_when(nces_original_name == "Davidson County" & state == "TN" ~ 488401680,
-                       nces_original_name == "Portland SD 1J"& state == "OR" ~ (1914000 + 113835000 + 1319000 + 822868000), # Geoff: need to take sum 4 of these: charges, operating, capital grant and general revenues)
-                       TRUE ~ revenues) #page 33
-)
 
 ```
 
