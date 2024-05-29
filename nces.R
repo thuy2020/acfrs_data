@@ -124,6 +124,5 @@ anti_join(top100_2022, top100_2021, by = "ncesID")
 
 nces %>% saveRDS("nces.RDS")
 
-
 ###########
 

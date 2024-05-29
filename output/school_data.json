@@ -2476,6 +2476,7 @@
     "total_liabilities": 194241342,
     "current_liabilities": 54795278,
     "total_assets": 872748668,
+    "current_assets": 229017352,
     "compensated_absences": 1780810,
     "expenses": 443132101,
     "revenues": 444774269,
@@ -2501,6 +2502,8 @@
     "enrollment_22": 49253,
     "fte_22": 3082.8,
     "name_state": "Murfreesboro, TN",
+    "net_pension_liability": -56254755,
+    "net_opeb_liability": 137665254,
     "assets_liab_ratio": 0.2226
   },
   {
@@ -6285,6 +6288,7 @@
     "total_liabilities": 191405854,
     "current_liabilities": 40384350,
     "total_assets": 939851918,
+    "current_assets": 284767091,
     "compensated_absences": 1965061,
     "expenses": 493952264,
     "revenues": 595234346,
@@ -6310,6 +6314,8 @@
     "enrollment_22": 49253,
     "fte_22": 3082.8,
     "name_state": "Murfreesboro, TN",
+    "net_pension_liability": -42123364,
+    "net_opeb_liability": 149056443,
     "assets_liab_ratio": 0.2037
   },
   {
@@ -10045,6 +10051,8 @@
     "enrollment_22": 49253,
     "fte_22": 3082.8,
     "name_state": "Murfreesboro, TN",
+    "net_pension_liability": -224126502,
+    "net_opeb_liability": 147335929,
     "assets_liab_ratio": 0.1611
   },
   {
