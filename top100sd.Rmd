@@ -100,7 +100,6 @@ top100_school_districts %>% #filter(name == "Rutherford County Schools")
   select(state.abb, ncesID, year, name, n)
 
 
-top100_school_districts %>% filter(str_detect(name, "Detroit"))
 ```
 
 

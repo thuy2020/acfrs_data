@@ -18,9 +18,10 @@ source("nces.R")
 nyc_nces <- nces %>% filter(str_detect(name, "(?i)NEW YORK CITY GEOGRAPHIC DISTRICT")) %>% 
   mutate(id = NA) %>% mutate(name = str_to_lower(name))
 
-nyc_sd <- import("data/_NY department of education of the city of new york.xlsx", skip = 5) %>% 
+nyc_sd <- import("data/_apportion values.xlsx", sheet = 1, skip = 5) %>% 
   filter(name != "DOE") %>% 
-  select(-c(charges_services, operating_grant, general_rev))
+  select(-c(charges_services, operating_grant, general_rev)) %>% 
+  mutate(compensated_absences = NA)
 
 # only get those in top100 largest
 nyc_top5 <- nyc_sd %>% 

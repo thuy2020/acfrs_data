@@ -49,6 +49,9 @@ state_3years %>% #filter(is.na(net_pension_assets))
          ) %>% write.csv("output/all_states_3years.csv")
 saveRDS(state_3years, "state_3years.RDS") 
 
+
+state_3years %>% select(name, compensated_absences, year) %>% arrange(name) %>% write.csv("tmp/state_compensated_absenses.csv")
+  filter(compensated_absences == 0)
 ```
 
 # County
@@ -110,6 +113,7 @@ county_all <- county_gov %>%
   # bind with consolidated
   rbind(consolidated_city_county_all)
   
+
 ```
 
 
@@ -155,7 +159,7 @@ write.csv(county_all, "output/all_counties_3years.csv")
 saveRDS(top100_county_3years, "top100_county.RDS")
 
 top100_county_3years %>% filter(state.abb == "NJ")
-  filter(name == "oklahoma county")
+
 ```
 
 
