@@ -1250,7 +1250,7 @@
     "name_state": "Jersey City, New Jersey",
     "modified_revenues": -48720600,
     "net_pension_liability": 1081996047,
-    "net_opeb_liability": 0,
+    "net_opeb_liability": 1081996047,
     "assets_liab_ratio": 0.289
   },
   {
@@ -3418,8 +3418,8 @@
     "name": "Newark, NJ",
     "total_liabilities": 2271924473,
     "current_liabilities": 0,
-    "total_assets": 0,
-    "current_assets": 0,
+    "total_assets": 635368314,
+    "current_assets": 635368314,
     "compensated_absences": 0,
     "expenses": 1114111829,
     "revenues": 1141989198,
@@ -3428,7 +3428,8 @@
     "name_state": "Newark, New Jersey",
     "modified_revenues": 27877369,
     "net_pension_liability": 0,
-    "net_opeb_liability": 0
+    "net_opeb_liability": 0,
+    "assets_liab_ratio": 3.5758
   },
   {
     "state.abb": "NJ",
