@@ -138,11 +138,18 @@ officials
 top100_county_3years <- county_all %>% 
   filter(geo_id %in% census_county_top100$geo_id) %>% 
   
-  #TODO: This is temporary fix. Will need to pull from acfrvalue table once the database is fixed.
+  #TODO: This is temporary fix. Will need to pull from acfrvalue table once the database is fixed.As of May 29, the current database does not allow to update. 
   
   mutate(total_assets = ifelse(name == "st louis county" & year == 2020, 2138938727, total_assets), 
          total_assets = ifelse(name == "st louis county" & year == 2021, 2199076860, total_assets),
-         total_assets = ifelse(name == "essex county", NA, total_assets),
+         total_assets = ifelse(name == "essex county" & state.abb == "NJ" & year == 2020, 403188793, total_assets),
+         total_assets = ifelse(name == "essex county" & state.abb == "NJ" & year == 2021, 476104005, total_assets),
+         total_assets = ifelse(name == "essex county" & state.abb == "NJ" & year == 2022, 509061826, total_assets),
+         
+         current_assets = ifelse(name == "essex county" & state.abb == "NJ" & year == 2020, 403188793, current_assets),
+         current_assets = ifelse(name == "essex county" & state.abb == "NJ" & year == 2021, 476104005, current_assets),
+          current_assets = ifelse(name == "essex county" & state.abb == "NJ" & year == 2022, 509061826, current_assets),
+         
          net_pension_assets = ifelse(name == "oklahoma county" | name == "tulsa county", 0, net_pension_assets),
          net_opeb_assets = ifelse(name == "oklahoma county"| name == "tulsa county", 0, net_opeb_assets),
          current_assets = ifelse(name == "oklahoma county" & year == 2020, 146236643, current_assets), 
@@ -160,9 +167,7 @@ write.csv(county_all, "output/all_counties_3years.csv")
 saveRDS(top100_county_3years, "top100_county.RDS")
 
 top100_county_3years %>% 
-  filter(name == "tulsa county") #%>% write.csv("tmp/essex_county.csv")
-  select(state.abb, name, year) %>% 
-  filter()
+  filter(name == "essex county") 
 
 ```
 

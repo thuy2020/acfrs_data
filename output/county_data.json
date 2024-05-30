@@ -1296,7 +1296,8 @@
     "name": "Essex County, NJ",
     "total_liabilities": 1244720579,
     "current_liabilities": 0,
-    "current_assets": 0,
+    "total_assets": 403188793,
+    "current_assets": 403188793,
     "compensated_absences": 0,
     "expenses": 970983653,
     "revenues": 1008216197,
@@ -1306,7 +1307,8 @@
     "median_hh_income_21": 66191,
     "modified_revenues": 37232544,
     "net_pension_liability": 0,
-    "net_opeb_liability": 0
+    "net_opeb_liability": 0,
+    "assets_liab_ratio": 3.0872
   },
   {
     "state.abb": "NJ",
@@ -3571,7 +3573,8 @@
     "name": "Essex County, NJ",
     "total_liabilities": 853905018,
     "current_liabilities": 0,
-    "current_assets": 0,
+    "total_assets": 476104005,
+    "current_assets": 476104005,
     "compensated_absences": 0,
     "expenses": 934915605,
     "revenues": 985000215,
@@ -3581,7 +3584,8 @@
     "median_hh_income_21": 66191,
     "modified_revenues": 50084610,
     "net_pension_liability": 0,
-    "net_opeb_liability": 0
+    "net_opeb_liability": 0,
+    "assets_liab_ratio": 1.7935
   },
   {
     "state.abb": "NJ",
@@ -5823,7 +5827,8 @@
     "name": "Essex County, NJ",
     "total_liabilities": 1333822760,
     "current_liabilities": 0,
-    "current_assets": 0,
+    "total_assets": 509061826,
+    "current_assets": 509061826,
     "compensated_absences": 0,
     "expenses": 940128190,
     "revenues": 980178939,
@@ -5833,7 +5838,8 @@
     "median_hh_income_21": 66191,
     "modified_revenues": 40050749,
     "net_pension_liability": 0,
-    "net_opeb_liability": 0
+    "net_opeb_liability": 0,
+    "assets_liab_ratio": 2.6202
   },
   {
     "state.abb": "NJ",
