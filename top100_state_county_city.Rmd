@@ -32,26 +32,38 @@ state_3years <- state_gov %>%
   left_join(income) %>% 
   
   #get a set of variables
-  select(all_of(fields_to_select)) 
+  select(all_of(fields_to_select)) %>% 
+
+# Resolve NA value for CA and SD 
+#TODO: currently the acfrvalue in database is not fully populated. Fix it later --> don't have to impute 0 here. 
+ #filter(is.na(net_pension_assets))
+  mutate(net_pension_assets = ifelse(state.abb == "CA", 0, net_pension_assets),
+         net_opeb_assets = ifelse(state.abb == "CA", 0, net_opeb_assets),
+         current_assets = ifelse(state.abb == "CA" & year == 2020, 163031521000, current_assets),
+         current_liabilities = ifelse(state.abb == "CA" & year == 2020, 103649199000, current_liabilities)
+         ) %>% 
+  
+  mutate(current_assets = ifelse(state.abb == "DE"& year == 2020, 3812406000, current_assets),
+         total_assets = ifelse(state.abb == "DE"& year == 2020, 14570384000, total_assets),
+         current_assets = ifelse(state.abb == "DE"& year == 2021, 4944436000, current_assets),
+         total_assets = ifelse(state.abb == "DE" & year == 2021, 16440516000, total_assets),
+         net_pension_assets = ifelse(state.abb == "DE" & year == 2021, 8830000,
+                                     net_pension_assets))
+
 
 #double check missing:
 state_3years %>% add_count(state.name) %>% filter(n<3)
 
 
-
-# Resolve NA value for CA and SD 
-#TODO: currently the acfrvalue in database is not fully populated. Fix it later --> don't have to impute 0 here. 
-state_3years %>% #filter(is.na(net_pension_assets))
-  mutate(net_pension_assets = ifelse(state.abb == "CA", 0, net_pension_assets),
-         net_opeb_assets = ifelse(state.abb == "CA", 0, net_opeb_assets),
-         current_assets = ifelse(state.abb == "CA" & year == 2020, 163031521000, current_assets),
-         current_liabilities = ifelse(state.abb == "CA" & year == 2020, 103649199000, current_liabilities)
-         ) %>% write.csv("output/all_states_3years.csv")
+state_3years %>% write.csv("output/all_states_3years.csv")
 saveRDS(state_3years, "state_3years.RDS") 
 
 
-state_3years %>% select(name, compensated_absences, year) %>% arrange(name) %>% write.csv("tmp/state_compensated_absenses.csv")
-  filter(compensated_absences == 0)
+state_3years %>% filter(state.abb == "DE")
+  select(state.abb, name, current_liabilities, current_assets) %>%
+  filter(current_liabilities == 0)
+  filter(if_any(everything(), ~. == 0))
+
 ```
 
 # County
@@ -169,8 +181,12 @@ write.csv(top100_county_3years, "output/top100_counties.csv")
 write.csv(county_all, "output/all_counties_3years.csv")
 saveRDS(top100_county_3years, "top100_county.RDS")
 
+top100_county_3years %>% select(state.abb, name, current_liabilities, current_assets) %>%
+  filter(current_liabilities == 0)
+  filter(if_any(everything(), ~. == 0))
+
 top100_county_3years %>% 
-  filter(name == "san bernardino county") 
+  filter(name == "newark") 
 
 ```
 
