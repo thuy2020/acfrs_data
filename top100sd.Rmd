@@ -102,7 +102,7 @@ top100_school_districts <- school_districts %>%
 #GA Clayton County Board of education.
 #https://www.clayton.k12.ga.us/departments/business-services/financial-reports
 
-top100_school_districts %>% filter(name == "Rutherford County Schools")
+top100_school_districts %>% filter(name == "")
   add_count(ncesID) %>% filter(n < 3) %>% 
   select(state.abb, ncesID, year, name, n)
 
