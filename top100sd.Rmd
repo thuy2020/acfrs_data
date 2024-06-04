@@ -19,7 +19,7 @@ source("nces.R")
 source("general_purpose.R")
 source("nyc_school_districts.R")
 options(scipen = 999)
-df <- data_frame(state.abb, state.name)
+
 ```
 
 # School districts from Acfrs database
@@ -28,7 +28,8 @@ df <- data_frame(state.abb, state.name)
 school_districts <- readRDS("data/acfrs_data.RDS") %>% 
   filter(category == "School District") %>% 
   mutate(id = as.character(id)) %>% 
-  select(state, any_of(fields_to_select))
+  select(any_of(fields_to_select))
+
 ```
 
 ## Dictionary ACFRs ID ~ NCES ID
@@ -58,54 +59,30 @@ dictionary <- readRDS("data/dictionary.RDS") %>%
 ```
 
 
-```{r}
-# nces %>% select(state.abb, ncesID, enrollment_20, enrollment_21, enrollment_22) -> nces_enrollment
-# 
-# school_districts %>% select(state, name, id) %>% distinct() %>% 
-#   left_join(dictionary) %>% 
-#   left_join(nces_enrollment) %>% 
-#   filter(!is.na(ncesID)) %>% 
-#   mutate(government_level = "school district") #%>% 
-#  # write.csv("output/school district_enrollment_20_21_22.csv")
-```
-
 # Top 100 SD
 ```{r}
 # filter only top 100
 dict_top100_ELSI <- dictionary %>% 
   filter(ncesID %in% top_schools_by_year$ncesID) %>% 
-  drop_na(id)
+  drop_na(id) %>% select(-name)
 
 top100_school_districts <- school_districts %>% 
-  filter(id %in% dict_top100_ELSI$id) %>% select(-name) %>% 
-  left_join(dict_top100_ELSI, by = c("id", "state")) %>% 
-  rename(state.abb = state) %>% 
-  # get state name
-  left_join(df) %>% 
+  filter(id %in% dict_top100_ELSI$id) %>% 
+  left_join(dict_top100_ELSI, by = c("id",  "state.abb"= "state")) %>% 
 
   #join with nces to get county, city info
-  left_join(nces, by = c("ncesID", "state.abb", "state.name")) %>% 
-  rename(name = name.x) %>% 
-  select(-name.y) %>% 
+  left_join(nces, by = c("ncesID", "state.abb", "state.name")) 
+  
 #bind with NYC
-  rbind(nyc_top5) %>% 
-  
-  #TODO: remove this once acfrsvalue table in database is fixed
-  
-  mutate(net_pension_liability = ifelse(name == "Rutherford County Schools", 0, net_pension_liability),
-         net_opeb_assets = ifelse(name == "Rutherford County Schools", 0, net_opeb_assets),
-         current_assets = ifelse(name == "Rutherford County Schools" & year == 2020, 229017352, current_assets),
-         current_assets = ifelse(name == "Rutherford County Schools" & year == 2021, 284767091, current_assets))
-
+  rbind(nyc_top5)
  
 #TODO: check back missing: 
 #GA Clayton County Board of education.
 #https://www.clayton.k12.ga.us/departments/business-services/financial-reports
 
-top100_school_districts %>% filter(name == "")
+top100_school_districts %>% 
   add_count(ncesID) %>% filter(n < 3) %>% 
   select(state.abb, ncesID, year, name, n)
-
 
 ```
 
@@ -117,11 +94,6 @@ saveRDS(top100_school_districts, "top100_sd.RDS")
 top100_school_districts %>% write.csv("output/top100_sd.csv")
 school_districts %>% write.csv("output/all_schooldistricts_3years.csv")
 #TODO: ask Geoff about this revenues = expense cases
-
-
-
- 
-  
  
 ```
 

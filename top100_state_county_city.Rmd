@@ -20,49 +20,22 @@ library(stringr)
 source("census.R")
 source("general_purpose.R")
 source("supplement_data.R")
-df_state <- tibble(state.abb, state.name)
 ```
 
 
 # State 
 ```{r}
 state_3years <- state_gov %>% 
-  left_join(df_state) %>% 
   #join income
   left_join(income) %>% 
-  
   #get a set of variables
-  select(all_of(fields_to_select)) %>% 
-
-# Resolve NA value for CA and SD 
-#TODO: currently the acfrvalue in database is not fully populated. Fix it later --> don't have to impute 0 here. 
- #filter(is.na(net_pension_assets))
-  mutate(net_pension_assets = ifelse(state.abb == "CA", 0, net_pension_assets),
-         net_opeb_assets = ifelse(state.abb == "CA", 0, net_opeb_assets),
-         current_assets = ifelse(state.abb == "CA" & year == 2020, 163031521000, current_assets),
-         current_liabilities = ifelse(state.abb == "CA" & year == 2020, 103649199000, current_liabilities)
-         ) %>% 
-  
-  mutate(current_assets = ifelse(state.abb == "DE"& year == 2020, 3812406000, current_assets),
-         total_assets = ifelse(state.abb == "DE"& year == 2020, 14570384000, total_assets),
-         current_assets = ifelse(state.abb == "DE"& year == 2021, 4944436000, current_assets),
-         total_assets = ifelse(state.abb == "DE" & year == 2021, 16440516000, total_assets),
-         net_pension_assets = ifelse(state.abb == "DE" & year == 2021, 8830000,
-                                     net_pension_assets))
-
+  select(all_of(fields_to_select)) 
 
 #double check missing:
 state_3years %>% add_count(state.name) %>% filter(n<3)
 
-
 state_3years %>% write.csv("output/all_states_3years.csv")
 saveRDS(state_3years, "state_3years.RDS") 
-
-
-state_3years %>% filter(state.abb == "DE")
-  select(state.abb, name, current_liabilities, current_assets) %>%
-  filter(current_liabilities == 0)
-  filter(if_any(everything(), ~. == 0))
 
 ```
 
@@ -104,7 +77,6 @@ consolidated_city_county_urbanicity <- county_urb %>% filter(geo_id %in% consoli
 
 # get income
 consolidated_city_county_income <- income %>% filter(geo_id %in% consolidated_city_county$geo_id)
-
 
 # all
 consolidated_city_county_all <- consolidated_city_county %>% left_join(consolidated_city_county_population) %>% 
@@ -148,27 +120,7 @@ officials
 ##### Top 100 acfrs counties 
 # Find acfrs entities from the list of Top 100 county census
 top100_county_3years <- county_all %>% 
-  filter(geo_id %in% census_county_top100$geo_id) %>% 
-  
-  #TODO: This is temporary fix. Will need to pull from acfrvalue table once the database is fixed.As of May 29, the current database does not allow to update. 
-  
-  mutate(total_assets = ifelse(name == "st louis county" & year == 2020, 2138938727, total_assets), 
-         total_assets = ifelse(name == "st louis county" & year == 2021, 2199076860, total_assets),
-         total_assets = ifelse(name == "essex county" & state.abb == "NJ" & year == 2020, 403188793, total_assets),
-         total_assets = ifelse(name == "essex county" & state.abb == "NJ" & year == 2021, 476104005, total_assets),
-         total_assets = ifelse(name == "essex county" & state.abb == "NJ" & year == 2022, 509061826, total_assets),
-         
-         current_assets = ifelse(name == "essex county" & state.abb == "NJ" & year == 2020, 403188793, current_assets),
-         current_assets = ifelse(name == "essex county" & state.abb == "NJ" & year == 2021, 476104005, current_assets),
-          current_assets = ifelse(name == "essex county" & state.abb == "NJ" & year == 2022, 509061826, current_assets),
-         
-         net_pension_assets = ifelse(name == "oklahoma county" | name == "tulsa county", 0, net_pension_assets),
-         net_opeb_assets = ifelse(name == "oklahoma county"| name == "tulsa county", 0, net_opeb_assets),
-         current_assets = ifelse(name == "oklahoma county" & year == 2020, 146236643, current_assets), 
-         net_opeb_liability = ifelse(name == "tulsa county" & year == 2022, 0, net_opeb_liability)) %>% 
-  
-  mutate(current_assets = ifelse(name == "san bernardino county" & state.abb == "CA" & year == 2021, 5287235000, current_assets),
-         current_assets = ifelse(name == "san bernardino county" & state.abb == "CA" & year == 2020, 4809570000, current_assets))
+  filter(geo_id %in% census_county_top100$geo_id)
 
 
 top100_county_3years %>% add_count(geo_id) %>% filter(n <3 ) %>% arrange(name)
@@ -181,12 +133,9 @@ write.csv(top100_county_3years, "output/top100_counties.csv")
 write.csv(county_all, "output/all_counties_3years.csv")
 saveRDS(top100_county_3years, "top100_county.RDS")
 
-top100_county_3years %>% select(state.abb, name, current_liabilities, current_assets) %>%
-  filter(current_liabilities == 0)
-  filter(if_any(everything(), ~. == 0))
-
-top100_county_3years %>% 
-  filter(name == "newark") 
+# top100_county_3years %>% select(state.abb, name, current_liabilities, current_assets) %>%
+#   filter(current_liabilities == 0)
+#   filter(if_any(everything(), ~. == 0))
 
 ```
 
@@ -249,39 +198,27 @@ census_city_top100
 top100_cities <- city_gov %>% 
   filter(geo_id %in% census_city_top100$geo_id) %>% distinct() %>% 
   
-  mutate(net_opeb_liability = ifelse(name == "jersey city" & state.abb == "NJ" & year == 2020, 1081996047, net_opeb_liability),
-         total_assets = ifelse(name == "newark" & state.abb == "NJ" & year == 2021, 635368314, total_assets),
-         current_assets = ifelse(name == "newark" & state.abb == "NJ" & year == 2021, 635368314, current_assets) )
+# TODO: check why newark does not get the revenues as a sum of other columns
+  mutate(revenues = ifelse(name == "newark" & state.abb == "NJ" & year == 2022, 943928678, revenues))
 
 #missing
 top100_cities %>% add_count(geo_id) %>% filter(n<3) %>% arrange(name)
-# missing: 3 as of April 25, 2024
-# MN saint paul 2022
-# NJ newark 2020, 
+# missing: 1 as of June 4, 2024
 #NJ newark 2022
 
 top100_cities %>% write.csv("output/top100_cities.csv")
 city_gov %>% write.csv("output/all_cities_3years.csv")
 saveRDS(top100_cities, "top100_cities.RDS")
 
-top100_cities %>% filter(name == "newark")
-```
+# TODO: check why newark does not get the revenues as a sum of other columns
+top100_cities %>% filter(name == "newark") %>% 
+  mutate(
+    revenues = pmax(
+      charges_for_services + operating_grants + capital_grants + general_revenue,
+      activities_change_in_net_position + expenses,
+      na.rm = TRUE
+    ))
 
-
-
-```{r}
-
- #add_row(state.abb = "NY", name = "roschester", geo_id = "3663000") %>% 
-  #add_row(state.abb = "CA", name = "san jose", geo_id = "0668000") %>% 
-  # add_row(state.abb = "LA", name = "new orleans", geo_id = "2255000") %>% 
-  # add_row(state.abb = "LA", name = "new orleans", geo_id = "2255000") %>% 
-  # add_row(state.abb = "NJ", name = "newark", geo_id = "3451000") %>% 
-  # add_row(state.abb = "NY", name = "buffalo", geo_id = "3611000") %>% 
-  # add_row(state.abb = "PA", name = "philadelphia", geo_id = "4260000") %>% 
-  # add_row(state.abb = "NY", name = "buffalo", geo_id = "3611000") %>% 
-  # add_row(state.abb = "CA", name = "bakersfield", geo_id = "0603526") %>% 
-  # add_row(state.abb = "MN", name = "st paul", geo_id = "2758000") %>% 
-  # add_row(state.abb = "NJ", name = "jersey city", geo_id = "3436000") 
 ```
 
 

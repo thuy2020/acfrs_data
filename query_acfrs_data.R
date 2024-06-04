@@ -20,39 +20,25 @@ fetch_data <- function(years, con){
   data_list <- list()
   
   for (year in years){
-    statement <- sprintf("SELECT cafrs_state.abbreviation as state,
+    statement <- sprintf("SELECT cafrs_state.abbreviation as state_abb,
+                         cafrs_state.name as state_name,
                          cafrs_entity.name, CAST(cafrs_entity.census_id as varchar),
                     
-                         cafrs_entity.id, 
+                         cafrs_entity.id, cafrs_entity.nces_district_id, 
                          year, category,
                          
-                         total_liabilities, current_liabilities, 
-                         net_pension_liability, net_pension_assets, 
-                         net_opeb_liability, net_opeb_assets, total_assets, current_assets,
-                         unrestricted,
-                         
-                         loans_outstanding, notes_outstanding,bonds_outstanding,compensated_absences, leases, 
-                         
-                         charges_for_services, operating_grants, capital_grants, general_revenue, 
-                         cafrs_activities.activities_change_in_net_position, expenses, 
-                         total_operating_revenues, non_operating_revenues, capital_contributions,
-                         
-                         greatest(charges_for_services + operating_grants + capital_grants + general_revenue,
-                                  cafrs_activities.activities_change_in_net_position + expenses,
-                                  total_operating_revenues + non_operating_revenues) as revenues
-                         
+                         cafrs_acfrvalue.reason_value, cafrs_acfrvalue.name as field_name
                          
                          FROM cafrs_acfr
                          INNER JOIN cafrs_entity on (cafrs_acfr.entity_id = cafrs_entity.id)
                          INNER JOIN cafrs_state on (cafrs_state.id = cafrs_entity.state_id)
-                         INNER JOIN cafrs_netposition on (cafrs_netposition.cafr_id = cafrs_acfr.id)
-                         INNER JOIN cafrs_activities on (cafrs_activities.cafr_id = cafrs_acfr.id)
-                         INNER JOIN cafrs_proprietaryrevenues on (cafrs_proprietaryrevenues.cafr_id = cafrs_acfr.id)
+                      
+                         INNER JOIN cafrs_acfrvalue on (cafrs_acfrvalue.acfr_id = cafrs_acfr.id)
                          
                          WHERE year = %d
                          AND category != 'Non-Profit'
                          AND is_valid
-                         AND reviewed_date is not null
+                         
                          AND not is_nonstandard", year)
     
     
@@ -68,9 +54,28 @@ fetch_data <- function(years, con){
   acfrs_data <- bind_rows(data_list, .id = "source_year") %>% 
     
     #TODO: fix this in database
-    mutate(census_id = case_when(state == "NY" & name == "Rochester" ~ "33202800800000",
-                                 state == "WI" & name == "Madison" ~ "50201301100000",
-                                 TRUE ~ as.character(census_id)))
+    mutate(census_id = case_when(state_abb == "NY" & name == "Rochester" ~ "33202800800000",
+                                 state_abb == "WI" & name == "Madison" ~ "50201301100000",
+                                 TRUE ~ as.character(census_id))) %>% 
+  
+    # pivot to get all fields as columns 
+  pivot_wider(names_from = field_name, 
+                values_from = reason_value) %>% 
+    
+    # some cleaning to be compatible with other data
+  mutate(name = str_to_lower(name)) %>% 
+  rename(state.abb = state_abb,
+           state.name = state_name) %>% 
+    
+    # calculate revenues
+    mutate(
+      revenues = pmax(
+        charges_for_services + operating_grants + capital_grants + general_revenue,
+        activities_change_in_net_position + expenses,
+        na.rm = TRUE
+      )
+    )
+    
 
   saveRDS(acfrs_data, "data/acfrs_data.RDS")
   write.csv(acfrs_data, "output/acfrs_data.csv")
@@ -89,6 +94,3 @@ for (con in all_cons) {
 all_cons <- dbListConnections(drv)
 print(all_cons)  
 
-#fetch_data(2022, con) -> temp
-
-#temp %>% filter(name == "Cleveland") %>% distinct() %>% write.csv("testing_reasonvalue_cleveland.csv")

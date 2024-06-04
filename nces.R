@@ -42,7 +42,7 @@ nces_22 <- import(here::here("data", "ELSI_school year 2021 2022_cordinate.csv")
 
 
 nces <- nces_20 %>% left_join(nces_21) %>% left_join(nces_22) %>% 
-  rename(name = 1,
+  rename(name_nces = 1,
          state.name = 2, 
          state.abb = 3,
          ncesID = 4,
@@ -90,7 +90,7 @@ nces <- nces_20 %>% left_join(nces_21) %>% left_join(nces_22) %>%
 
 # Top 100 schools in each of the 3 years:
 top_schools_by_year <- nces %>% 
-  select(name, ncesID, enrollment_20, enrollment_21, enrollment_22) %>% 
+  select(name_nces, ncesID, enrollment_20, enrollment_21, enrollment_22) %>% 
   pivot_longer(cols = 3:5, 
                names_to = "year",
                values_to = "value") %>% 

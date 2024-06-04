@@ -26,8 +26,8 @@ source("census.R")
 acfrs_general_purpose <- readRDS("data/acfrs_data.RDS") %>% 
   filter(category == "General Purpose") %>% 
   
-  rename(government_id = census_id, # census_id in Acfrs database is actually government_id
-         state.abb = state) %>% 
+  rename(government_id = census_id) %>%  # census_id in Acfrs database is actually government_id
+       
   # some government_id in ACFRs has 13 characters-> need to add 0
   mutate(government_id = ifelse(str_length(government_id) < 14, paste0("0", government_id), government_id)) %>% 
   
@@ -103,7 +103,7 @@ acfrs_county <- acfrs_general_purpose %>%
 # join acfrs with census population 
 county_gov <- acfrs_county %>% 
   # most acfrs_county do not have geo_id --> must join by state.abb and name
-  left_join(census_county, by = c("state.abb", "name" = "name_census")) %>% 
+  left_join(census_county, by = c("state.abb", "state.name","name" = "name_census")) %>% 
   
   # drop non-county entities
   arrange(desc(population)) %>% 
@@ -118,29 +118,13 @@ place_division_gov <- acfrs_general_purpose %>%
   filter(!id %in% county_gov$id) %>% distinct() %>% 
 
 # Join Incorporated Place in ACFRs to Census  
-  left_join(census_place_division, by= c("geo_id", "state.abb")) 
+  left_join(census_place_division, by= c("geo_id", "state.abb", "state.name")) 
 
 #### City #########
 city_gov <- place_division_gov %>% 
   filter(geo_id %in% census_city$geo_id)
 
-
-#####Population##########
-# export population to load in database
-state_gov %>% select(state.abb, name, id, geo_id, population) %>% 
-  mutate(government_level = "state") -> temp1
-  
-county_gov %>% select(state.abb, name, id, geo_id, population) %>% 
-  mutate(government_level = "county") -> temp2
-  
-place_division_gov %>% select(state.abb, name, id, geo_id, population) %>% 
-  mutate(government_level = "municipal_township") -> temp3
-
-rbind(temp1, temp2, temp3) %>% 
-  rename(population_2020 = population) %>% distinct() 
-#write.csv("output/general_purpose_population_2020.csv")
-  
-
+# only select some fields to display on datatool
 
 fields_to_select <- c("state.abb", "state.name", "id", "geo_id", "year", "name",
                       "total_liabilities", "current_liabilities",

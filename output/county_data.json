@@ -966,29 +966,6 @@
     "assets_liab_ratio": 0.5738
   },
   {
-    "state.abb": "KY",
-    "state.name": "Kentucky",
-    "id": 115965,
-    "geo_id": "21111",
-    "year": 2020,
-    "name": "Jefferson County, KY",
-    "total_liabilities": 2335363514,
-    "current_liabilities": 84027033,
-    "total_assets": 2573461783,
-    "current_assets": 0,
-    "compensated_absences": 22025000,
-    "expenses": 968529820,
-    "revenues": 989561189,
-    "population": 782956,
-    "urban_pop": 770185,
-    "pct_urban_pop": 0.9837,
-    "median_hh_income_21": 60636,
-    "modified_revenues": -62995664,
-    "net_pension_liability": 1158168356,
-    "net_opeb_liability": 295693343,
-    "assets_liab_ratio": 0.9075
-  },
-  {
     "state.abb": "MD",
     "state.name": "Maryland",
     "id": 33967,
@@ -3243,29 +3220,6 @@
     "assets_liab_ratio": 0.5418
   },
   {
-    "state.abb": "KY",
-    "state.name": "Kentucky",
-    "id": 115965,
-    "geo_id": "21111",
-    "year": 2021,
-    "name": "Jefferson County, KY",
-    "total_liabilities": 2477366174,
-    "current_liabilities": 104708561,
-    "total_assets": 2779606755,
-    "current_assets": 0,
-    "compensated_absences": 24021000,
-    "expenses": 1098801319,
-    "revenues": 1159936135,
-    "population": 782956,
-    "urban_pop": 770185,
-    "pct_urban_pop": 0.9837,
-    "median_hh_income_21": 60636,
-    "modified_revenues": -43573745,
-    "net_pension_liability": 1209969000,
-    "net_opeb_liability": 371956000,
-    "assets_liab_ratio": 0.8913
-  },
-  {
     "state.abb": "MD",
     "state.name": "Maryland",
     "id": 33967,
@@ -3942,7 +3896,7 @@
     "total_liabilities": 278870421,
     "current_liabilities": 17493788,
     "total_assets": 605024334,
-    "current_assets": 0,
+    "current_assets": 285147497,
     "compensated_absences": 6589102,
     "expenses": 318341854,
     "revenues": 294612937,
@@ -4679,7 +4633,6 @@
     "current_liabilities": 994260000,
     "total_assets": 11810759000,
     "current_assets": 6205957000,
-    "compensated_absences": 181364000,
     "expenses": 4260936000,
     "revenues": 5644596000,
     "population": 3186979,
@@ -4687,8 +4640,6 @@
     "pct_urban_pop": 0.9975,
     "median_hh_income_21": 100210,
     "modified_revenues": 389400000,
-    "net_pension_liability": 2048680000,
-    "net_opeb_liability": 233049000,
     "assets_liab_ratio": 0.4633
   },
   {
@@ -4840,7 +4791,6 @@
     "current_liabilities": 367406000,
     "total_assets": 2867306000,
     "current_assets": 1485913000,
-    "compensated_absences": 57333000,
     "expenses": 1814287000,
     "revenues": 2054334000,
     "population": 1008650,
@@ -4848,8 +4798,6 @@
     "pct_urban_pop": 0.8873,
     "median_hh_income_21": 63140,
     "modified_revenues": -127359000,
-    "net_pension_liability": 436078000,
-    "net_opeb_liability": 0,
     "assets_liab_ratio": 0.6498
   },
   {
@@ -5078,8 +5026,6 @@
     "pct_urban_pop": 0.9999,
     "median_hh_income_21": 65536,
     "modified_revenues": 349616000,
-    "net_pension_liability": 1505308000,
-    "net_opeb_liability": 312736000,
     "assets_liab_ratio": 0.5162
   },
   {
@@ -5164,14 +5110,10 @@
     "current_assets": 906364983,
     "compensated_absences": 70182803,
     "expenses": 1393012585,
-    "revenues": 1729243797,
     "population": 959103,
     "urban_pop": 957280,
     "pct_urban_pop": 0.9981,
     "median_hh_income_21": 61851,
-    "modified_revenues": -7890104,
-    "net_pension_liability": 574430889,
-    "net_opeb_liability": 515479700,
     "assets_liab_ratio": 0.2902
   },
   {
@@ -5277,7 +5219,6 @@
     "current_liabilities": 234532000,
     "total_assets": 3517092000,
     "current_assets": 960096000,
-    "compensated_absences": 49154000,
     "expenses": 1300657000,
     "revenues": 1168883000,
     "population": 1066702,
@@ -5285,8 +5226,6 @@
     "pct_urban_pop": 0.9937,
     "median_hh_income_21": 82820,
     "modified_revenues": -366306000,
-    "net_pension_liability": 579392000,
-    "net_opeb_liability": 1282596000,
     "assets_liab_ratio": 0.9297
   },
   {
@@ -5520,29 +5459,6 @@
     "assets_liab_ratio": 0.5249
   },
   {
-    "state.abb": "KY",
-    "state.name": "Kentucky",
-    "id": 115965,
-    "geo_id": "21111",
-    "year": 2022,
-    "name": "Jefferson County, KY",
-    "total_liabilities": 2400797800,
-    "current_liabilities": 94866508,
-    "total_assets": 3127894325,
-    "current_assets": 152099203,
-    "compensated_absences": 25742000,
-    "expenses": 1070721978,
-    "revenues": 1262234798,
-    "population": 782956,
-    "urban_pop": 770185,
-    "pct_urban_pop": 0.9837,
-    "median_hh_income_21": 60636,
-    "modified_revenues": 96646312,
-    "net_pension_liability": 1029232000,
-    "net_opeb_liability": 310565000,
-    "assets_liab_ratio": 0.7675
-  },
-  {
     "state.abb": "MD",
     "state.name": "Maryland",
     "id": 33967,
@@ -5758,19 +5674,16 @@
     "name": "Clark County, NV",
     "total_liabilities": 9487340495,
     "current_liabilities": 884775706,
-    "total_assets": 21689836959,
     "current_assets": 6965083255,
     "compensated_absences": 307613570,
-    "expenses": 4982849801,
-    "revenues": 6284488499,
+    "expenses": 3474391296,
+    "revenues": 4776029994,
     "population": 2265469,
     "urban_pop": 2236714,
     "pct_urban_pop": 0.9873,
     "median_hh_income_21": 63735,
     "modified_revenues": 416862992,
-    "net_pension_liability": 1909884763,
-    "net_opeb_liability": 699929865,
-    "assets_liab_ratio": 0.4374
+    "net_opeb_liability": 699929865
   },
   {
     "state.abb": "NJ",
@@ -6036,7 +5949,6 @@
     "current_liabilities": 451053000,
     "total_assets": 2226677000,
     "current_assets": 794606000,
-    "compensated_absences": 0,
     "expenses": 1669037000,
     "revenues": 1850800000,
     "population": 759444,
@@ -6045,7 +5957,6 @@
     "median_hh_income_21": 66003,
     "modified_revenues": -269290000,
     "net_pension_liability": -90627000,
-    "net_opeb_liability": 421149000,
     "assets_liab_ratio": 0.7924
   },
   {

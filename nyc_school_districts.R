@@ -15,11 +15,12 @@ source("nces.R")
 # - Multiply this share to the DOE total.
 # 
 # Geoff:Just make all the pension liabilities 0, as the note states. 
-nyc_nces <- nces %>% filter(str_detect(name, "(?i)NEW YORK CITY GEOGRAPHIC DISTRICT")) %>% 
-  mutate(id = NA) %>% mutate(name = str_to_lower(name))
+nyc_nces <- nces %>% filter(str_detect(name_nces, "(?i)NEW YORK CITY GEOGRAPHIC DISTRICT")) %>% 
+  mutate(id = NA) %>% mutate(name_nces = str_to_lower(name_nces))
 
 nyc_sd <- import("data/_apportion values.xlsx", sheet = 1, skip = 5) %>% 
   filter(name != "DOE") %>% 
+  mutate(name_nces = NA) %>% 
   select(-c(charges_services, operating_grant, general_rev)) 
 
 # only get those in top100 largest
