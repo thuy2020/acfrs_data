@@ -19,6 +19,7 @@ source("census.R")
 # - Use a "middle file" to link geo_id and government_ID
 # - Joining by names and states 
 
+acfrs_data <- readRDS("data/acfrs_data.RDS")
 
 ##### ACFRs General Purpose 
 
@@ -102,6 +103,11 @@ acfrs_county <- acfrs_general_purpose %>%
 
 # join acfrs with census population 
 county_gov <- acfrs_county %>% 
+  
+  #TODO: fixing some name changes to match with census
+  mutate(name = case_when(id == "115965" ~ "jefferson county", 
+                          TRUE ~ name)) %>% 
+  
   # most acfrs_county do not have geo_id --> must join by state.abb and name
   left_join(census_county, by = c("state.abb", "state.name","name" = "name_census")) %>% 
   
@@ -123,6 +129,7 @@ place_division_gov <- acfrs_general_purpose %>%
 #### City #########
 city_gov <- place_division_gov %>% 
   filter(geo_id %in% census_city$geo_id)
+
 
 # only select some fields to display on datatool
 

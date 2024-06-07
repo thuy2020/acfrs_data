@@ -96,8 +96,6 @@ county_all <- county_gov %>%
   select(all_of(fields_to_select)) %>% 
   # bind with consolidated
   rbind(consolidated_city_county_all)
-  
-
 ```
 
 
@@ -210,15 +208,9 @@ top100_cities %>% write.csv("output/top100_cities.csv")
 city_gov %>% write.csv("output/all_cities_3years.csv")
 saveRDS(top100_cities, "top100_cities.RDS")
 
-# TODO: check why newark does not get the revenues as a sum of other columns
-top100_cities %>% filter(name == "newark") %>% 
-  mutate(
-    revenues = pmax(
-      charges_for_services + operating_grants + capital_grants + general_revenue,
-      activities_change_in_net_position + expenses,
-      na.rm = TRUE
-    ))
 
+#test
+top100_cities %>% filter(name == "newark") 
 ```
 
 
