@@ -71,7 +71,7 @@ top100_school_districts <- school_districts %>%
   left_join(dict_top100_ELSI, by = c("id",  "state.abb"= "state")) %>% 
 
   #join with nces to get county, city info
-  left_join(nces, by = c("ncesID", "state.abb", "state.name")) 
+  left_join(nces, by = c("ncesID", "state.abb", "state.name")) %>% 
   
 #bind with NYC
   rbind(nyc_top5)
