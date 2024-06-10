@@ -2617,8 +2617,6 @@
     "pct_urban_pop": 86.063,
     "median_hh_income_21": 85547,
     "modified_revenues": -366066000,
-    "net_pension_liability": 6323283000,
-    "net_opeb_liability": 5415988000,
     "assets_liab_ratio": 1.0059
   },
   {
@@ -2802,7 +2800,6 @@
     "median_hh_income_21": 64823,
     "modified_revenues": -876855000,
     "net_pension_liability": 1393739000,
-    "net_opeb_liability": 2577091000,
     "assets_liab_ratio": 0.7125
   },
   {
