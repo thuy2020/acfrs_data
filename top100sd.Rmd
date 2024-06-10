@@ -95,6 +95,9 @@ top100_school_districts %>% write.csv("output/top100_sd.csv")
 school_districts %>% write.csv("output/all_schooldistricts_3years.csv")
 #TODO: ask Geoff about this revenues = expense cases
  
+top100_school_districts %>% #filter(id == "35480")
+  filter(str_detect(name, "(?i)Chesterfield County School "))
+
 ```
 
 

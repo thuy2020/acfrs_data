@@ -1083,6 +1083,29 @@
   {
     "state.abb": "MI",
     "state.name": "Michigan",
+    "id": 40867,
+    "geo_id": "26163",
+    "year": 2020,
+    "name": "Wayne County, MI",
+    "total_liabilities": 1812948420,
+    "current_liabilities": 331168554,
+    "total_assets": 2851979979,
+    "current_assets": 0,
+    "compensated_absences": 22332762,
+    "expenses": 776082084,
+    "revenues": 1084737794,
+    "population": 1793549,
+    "urban_pop": 1777476,
+    "pct_urban_pop": 0.991,
+    "median_hh_income_21": 52644,
+    "modified_revenues": -22512844,
+    "net_pension_liability": 547323476,
+    "net_opeb_liability": 91675340,
+    "assets_liab_ratio": 0.6357
+  },
+  {
+    "state.abb": "MI",
+    "state.name": "Michigan",
     "id": 34282,
     "geo_id": "26125",
     "year": 2020,
@@ -3360,6 +3383,29 @@
   {
     "state.abb": "MI",
     "state.name": "Michigan",
+    "id": 40867,
+    "geo_id": "26163",
+    "year": 2021,
+    "name": "Wayne County, MI",
+    "total_liabilities": 1833822081,
+    "current_liabilities": 492542009,
+    "total_assets": 3250602007,
+    "current_assets": 0,
+    "compensated_absences": 21797298,
+    "expenses": 881524450,
+    "revenues": 1129125590,
+    "population": 1793549,
+    "urban_pop": 1777476,
+    "pct_urban_pop": 0.991,
+    "median_hh_income_21": 52644,
+    "modified_revenues": -244940869,
+    "net_pension_liability": 419609419,
+    "net_opeb_liability": 74938340,
+    "assets_liab_ratio": 0.5641
+  },
+  {
+    "state.abb": "MI",
+    "state.name": "Michigan",
     "id": 34282,
     "geo_id": "26125",
     "year": 2021,
@@ -4652,7 +4698,9 @@
     "geo_id": "06073",
     "year": 2022,
     "name": "San Diego County, CA",
+    "total_liabilities": 5680147000,
     "current_liabilities": 1535468000,
+    "total_assets": 10423386000,
     "current_assets": 5470933000,
     "compensated_absences": 138845000,
     "expenses": 5340993000,
@@ -4661,7 +4709,9 @@
     "urban_pop": 3153671,
     "pct_urban_pop": 0.9561,
     "median_hh_income_21": 90756,
-    "modified_revenues": -849229000
+    "modified_revenues": -849229000,
+    "net_pension_liability": 0,
+    "assets_liab_ratio": 0.5449
   },
   {
     "state.abb": "CA",
@@ -4681,6 +4731,8 @@
     "pct_urban_pop": 0.9975,
     "median_hh_income_21": 100210,
     "modified_revenues": 389400000,
+    "net_pension_liability": 2048680000,
+    "net_opeb_liability": 233049000,
     "assets_liab_ratio": 0.4633
   },
   {
@@ -4839,6 +4891,8 @@
     "pct_urban_pop": 0.8873,
     "median_hh_income_21": 63140,
     "modified_revenues": -127359000,
+    "net_pension_liability": 436078000,
+    "net_opeb_liability": 0,
     "assets_liab_ratio": 0.6498
   },
   {
@@ -4973,6 +5027,8 @@
     "pct_urban_pop": 0.8975,
     "median_hh_income_21": 79094,
     "modified_revenues": -139294639,
+    "net_pension_liability": 219998638,
+    "net_opeb_liability": 129120022,
     "assets_liab_ratio": 0.5646
   },
   {
@@ -5063,6 +5119,8 @@
     "pct_urban_pop": 0.9999,
     "median_hh_income_21": 65536,
     "modified_revenues": 349616000,
+    "net_pension_liability": 1505308000,
+    "net_opeb_liability": 312736000,
     "assets_liab_ratio": 0.5162
   },
   {
@@ -5147,10 +5205,14 @@
     "current_assets": 906364983,
     "compensated_absences": 70182803,
     "expenses": 1393012585,
+    "revenues": 1393012585,
     "population": 959103,
     "urban_pop": 957280,
     "pct_urban_pop": 0.9981,
     "median_hh_income_21": 61851,
+    "modified_revenues": -344121316,
+    "net_pension_liability": 574430889,
+    "net_opeb_liability": 515479700,
     "assets_liab_ratio": 0.2902
   },
   {
@@ -5263,6 +5325,8 @@
     "pct_urban_pop": 0.9937,
     "median_hh_income_21": 82820,
     "modified_revenues": -366306000,
+    "net_pension_liability": 579392000,
+    "net_opeb_liability": 1282596000,
     "assets_liab_ratio": 0.9297
   },
   {
@@ -5590,6 +5654,29 @@
   {
     "state.abb": "MI",
     "state.name": "Michigan",
+    "id": 40867,
+    "geo_id": "26163",
+    "year": 2022,
+    "name": "Wayne County, MI",
+    "total_liabilities": 2118429006,
+    "current_liabilities": 623396057,
+    "total_assets": 3666528737,
+    "current_assets": 2010651719,
+    "compensated_absences": 22336965,
+    "expenses": 846795263,
+    "revenues": 1113482231,
+    "population": 1793549,
+    "urban_pop": 1777476,
+    "pct_urban_pop": 0.991,
+    "median_hh_income_21": 52644,
+    "modified_revenues": -356709089,
+    "net_pension_liability": 563847992,
+    "net_opeb_liability": 75074340,
+    "assets_liab_ratio": 0.5778
+  },
+  {
+    "state.abb": "MI",
+    "state.name": "Michigan",
     "id": 34282,
     "geo_id": "26125",
     "year": 2022,
@@ -5734,6 +5821,7 @@
     "name": "Clark County, NV",
     "total_liabilities": 9487340495,
     "current_liabilities": 884775706,
+    "total_assets": 21689836959,
     "current_assets": 6965083255,
     "compensated_absences": 307613570,
     "expenses": 3474391296,
@@ -5743,7 +5831,9 @@
     "pct_urban_pop": 0.9873,
     "median_hh_income_21": 63735,
     "modified_revenues": 416862992,
-    "net_opeb_liability": 699929865
+    "net_pension_liability": 1909884763,
+    "net_opeb_liability": 699929865,
+    "assets_liab_ratio": 0.4374
   },
   {
     "state.abb": "NJ",
@@ -6017,6 +6107,7 @@
     "median_hh_income_21": 66003,
     "modified_revenues": -269290000,
     "net_pension_liability": -90627000,
+    "net_opeb_liability": 421149000,
     "assets_liab_ratio": 0.7924
   },
   {
@@ -6101,14 +6192,13 @@
     "current_assets": 2163305368,
     "compensated_absences": 34786484,
     "expenses": 1390422019,
-    "revenues": 1550202031,
+    "revenues": 1390422019,
     "population": 1264813,
     "urban_pop": 1257664,
     "pct_urban_pop": 0.9943,
     "median_hh_income_21": 55250,
-    "modified_revenues": 2697449,
+    "modified_revenues": -157082563,
     "net_pension_liability": 237203019,
-    "net_opeb_liability": -87108546,
     "assets_liab_ratio": 0.4731
   },
   {

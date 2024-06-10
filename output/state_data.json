@@ -538,7 +538,7 @@
     "total_liabilities": 23927324000,
     "current_liabilities": 6463164000,
     "total_assets": 48199480000,
-    "current_assets": 0,
+    "current_assets": 26252284000,
     "compensated_absences": 527476000,
     "expenses": 50004800000,
     "revenues": 49990315000,
@@ -722,7 +722,7 @@
     "total_liabilities": 14617951000,
     "current_liabilities": 3134067000,
     "total_assets": 47762954000,
-    "current_assets": 0,
+    "current_assets": 12259898000,
     "compensated_absences": 182688000,
     "expenses": 21701968000,
     "revenues": 23558395000,
@@ -731,7 +731,7 @@
     "pct_urban_pop": 74.5471,
     "median_hh_income_21": 54304,
     "modified_revenues": -1277640000,
-    "net_pension_liability": 5617739000,
+    "net_pension_liability": 5598463000,
     "net_opeb_liability": 1159319000,
     "assets_liab_ratio": 0.3061
   },
@@ -1711,7 +1711,7 @@
     "total_liabilities": 24774908000,
     "current_liabilities": 7261740000,
     "total_assets": 52272292000,
-    "current_assets": 0,
+    "current_assets": 29742288000,
     "compensated_absences": 561800000,
     "expenses": 56725995000,
     "revenues": 59996799000,
@@ -1895,7 +1895,7 @@
     "total_liabilities": 20216469000,
     "current_liabilities": 4117189000,
     "total_assets": 58617130000,
-    "current_assets": 0,
+    "current_assets": 15346023000,
     "compensated_absences": 208090000,
     "expenses": 27485101000,
     "revenues": 35714206000,
@@ -2916,6 +2916,8 @@
     "pct_urban_pop": 46.2905,
     "median_hh_income_21": 48871,
     "modified_revenues": -863173000,
+    "net_pension_liability": 2601904000,
+    "net_opeb_liability": 143450000,
     "assets_liab_ratio": 0.4018
   },
   {
@@ -3076,6 +3078,7 @@
     "median_hh_income_21": 54304,
     "modified_revenues": 1048651000,
     "net_pension_liability": 4995027000,
+    "net_opeb_liability": 1179892000,
     "assets_liab_ratio": 0.2507
   },
   {
