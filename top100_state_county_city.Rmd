@@ -39,7 +39,8 @@ saveRDS(state_3years, "state_3years.RDS")
 # 
 # state_3years %>% select(state.abb, id, name, year, current_assets) %>% arrange(name) %>% write.csv("tmp/current_assets_states_manual_input.csv")
 
-state_3years %>% filter(state.abb == "NM")
+state_3years %>% filter(state.abb == "HI")
+  
 ```
 
 # County
@@ -203,8 +204,7 @@ census_city_top100
 top100_cities <- city_gov %>% 
   filter(geo_id %in% census_city_top100$geo_id) %>% distinct() 
   
-# TODO: check why newark does not get the revenues as a sum of other columns
-  mutate(revenues = ifelse(name == "newark" & state.abb == "NJ" & year == 2022, 943928678, revenues))
+
 
 #missing
 top100_cities %>% add_count(geo_id) %>% filter(n<3) %>% arrange(name)
