@@ -1,7 +1,7 @@
 # Processing ACFRs data
 
 * Identify & Categorize acfrs entity
-* Joining with external data from census, nces
+* Joining with external data from census, nces.
 * Exporting result for other purposes: analysis, data tool, update database
 
 Run the following main files for replication. 
@@ -16,6 +16,12 @@ general_purpose.R
 top100_state_county_city.Rmd
 
 # School District
+
+## Mapping school district collected in ACFRs and NCES school district
+
+dictionary_ncesID_acfrsID.R
+
+## Processing acfrs school districts
 
 top100sd.Rmd
 
