@@ -620,7 +620,9 @@ unique_schools <- schools_2020  %>%
   select(year_2022, year_2021, year_2020)
 
 
-
-
+View(na_states)
+View(na_counties)
+View(na_cities)
+View(na_schools)
 
                                  

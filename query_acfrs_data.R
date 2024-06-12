@@ -1,6 +1,9 @@
 library(DBI)  
 library(dplyr)
+library(tidyr)
+library(stringr)
 source("db_connection.R")
+
 ##########NOTE######
 # the file "db_connection.R" - database connection is not tracked by git. 
 # To run this script, use your own personal credential to connect to database below:

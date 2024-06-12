@@ -2,7 +2,7 @@
 library(tidyverse)
 library(scales)
 library(jsonlite)
-source("supplement_data.R")
+source("census.R")
 
 # read in data
 state_data_temp <- read_csv("output/all_states_3years.csv")
@@ -233,7 +233,7 @@ city_data_growth <- city_data_22 |>
   ) |>
   select(-geo_id_20)
 
-cityCoordinates <- readRDS("cityCoordinates.RDS")
+cityCoordinates <- readRDS("data/cityCoordinates.RDS")
 
 cityCoordinates <- cityCoordinates[, (3:5)]
 

@@ -17,12 +17,12 @@ library(tidyr)
 
 nces_20 <- import(here::here("data", "ELSI_school year 2019 2020.csv")) 
 #%>% 
-  #filter(str_detect(`Agency Type [District] 2019-20`, "Regular local school district"))
+#filter(str_detect(`Agency Type [District] 2019-20`, "Regular local school district"))
 nces_21 <- import(here::here("data", "ELSI_school year 2020 2021.csv")) 
 #%>% 
- # filter(str_detect(`Agency Type [District] 2020-21`, "Regular local school district"))
+# filter(str_detect(`Agency Type [District] 2020-21`, "Regular local school district"))
 nces_22 <- import(here::here("data", "ELSI_school year 2021 2022_cordinate.csv")) %>% 
- # filter(str_detect(`Agency Type [District] 2021-22`, "Regular local school district"))
+  # filter(str_detect(`Agency Type [District] 2021-22`, "Regular local school district"))
   
   select(-c(`State Name [District] 2021-22`, 
             `Location State Abbr [District] 2021-22`,
@@ -122,7 +122,4 @@ anti_join(top100_2021, top100_2022, by = "ncesID")
 # 4 sd in 2022 but not 2021
 anti_join(top100_2022, top100_2021, by = "ncesID")
 
-nces %>% saveRDS("nces.RDS")
-
-###########
-
+#nces %>% saveRDS("nces.RDS")

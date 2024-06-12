@@ -1,0 +1,179 @@
+options(scipen = 999)
+library(tidyverse)
+library(dplyr)
+library(janitor)
+library(jsonlite)
+library(stringr)
+library(forcats)
+source("census.R")
+source("general_purpose.R")
+source("nces.R")
+source("exceptions.R")
+options(scipen = 999)
+
+####State######
+state_3years <- state_gov %>% 
+  #join income
+  left_join(income) %>% 
+  #get a set of variables
+  select(all_of(fields_to_select)) 
+
+#double check missing:
+state_3years %>% add_count(state.name) %>% filter(n<3)
+
+state_3years %>% write.csv("output/all_states_3years.csv")
+
+
+####County####
+
+##Consolidated county-city##
+
+#These counties are consolidated --> have some other name in acfrs list:  
+consolidated_city_county <- acfrs_general_purpose %>% 
+  filter((name == "city and county of san francisco" & state.abb == "CA") |
+           (name == "philadelphia" & state.abb == "PA") |
+           (name == "jacksonville" & state.abb == "FL") |
+           (name == "the metropolitan government of nashville and davidson county" & state.abb == "TN")  |
+           name == "city and county of honolulu") %>% 
+  left_join(df_state) %>% 
+  
+  #Same population, but when it's identified as county, it has different geo_id. The geo_id as a metro is different and does not contain income & urbanicity info. Use these geo_id to get income and urbanicity. 
+  # get this county geo_id from census_county
+  mutate(geo_id = case_when(name == "city and county of san francisco"~ "06075", 
+                            name == "philadelphia" ~ "42101",
+                            name == "city and county of honolulu" ~ "15003", 
+                            name == "jacksonville" ~ "12031", # Duval county geo_id
+                            name == "the metropolitan government of nashville and davidson county" ~ "47037",
+                            TRUE ~ as.character(geo_id))) 
+
+
+# get population
+consolidated_city_county_population <- census_all %>% filter(geo_id %in% consolidated_city_county$geo_id) %>% 
+  select(geo_id, population) 
+
+# get urbanicity
+consolidated_city_county_urbanicity <- county_urb %>% filter(geo_id %in% consolidated_city_county$geo_id)
+
+# get income
+consolidated_city_county_income <- income %>% filter(geo_id %in% consolidated_city_county$geo_id)
+
+# all
+consolidated_city_county_all <- consolidated_city_county %>% left_join(consolidated_city_county_population) %>% 
+  left_join(consolidated_city_county_urbanicity) %>% 
+  left_join(consolidated_city_county_income) %>% 
+  select(all_of(fields_to_select))
+
+## All counties ###
+
+county_all <- county_gov %>% 
+  
+  #get income
+  left_join(income) %>% 
+  
+  select(all_of(fields_to_select)) %>% 
+  # bind with consolidated
+  rbind(consolidated_city_county_all)
+
+
+# Find acfrs entities from the list of Top 100 county census
+top100_county_3years <- county_all %>% 
+  filter(geo_id %in% census_county_top100$geo_id)
+
+
+top100_county_3years %>% add_count(geo_id) %>% filter(n <3 ) %>% arrange(name)
+#TODO: Checking on 2 missing - as of June 7, 2024
+# PA montgomery county 2022: https://www.montgomerycountypa.gov/Archive.aspx?AMID=45
+# MA norfolk county 2022: https://www.norfolkcounty.org/county_commission/about_norfolk_county/annual_reports.php#outer-31
+
+
+write.csv(top100_county_3years, "output/top100_counties.csv")
+write.csv(county_all, "output/all_counties_3years.csv")
+
+
+####Incorporated Place & Minor Civil Division####
+
+##Special cities##
+special_cities <- acfrs_general_purpose %>% 
+  #only filter those missing
+  filter(id %in% c("101868", "1266697", "1266289", "149470")) %>% 
+  mutate(geo_id = case_when(id == "101868" ~ "0668000", # san jose CA
+                            id == "1266697" ~ "2255000", # new orleans LA
+                            id == "1266289" ~ "0820000",# CO denver county, also denver city
+                            id == "149470" ~ "3611000")) %>%  # NY buffalo
+  
+  left_join(city_income) %>% 
+  
+  left_join(df_state) %>% 
+  left_join(census_all)
+
+city_gov <- city_gov %>% left_join(city_income) %>% 
+  rbind(special_cities) %>% 
+  select(any_of(fields_to_select)) 
+
+top100_cities <- city_gov %>% 
+  filter(geo_id %in% census_city_top100$geo_id) %>% distinct() 
+
+#missing
+top100_cities %>% add_count(geo_id) %>% filter(n<3) %>% arrange(name)
+# missing: 1 as of June 4, 2024
+#NJ newark 2022
+
+top100_cities %>% write.csv("output/top100_cities.csv")
+city_gov %>% write.csv("output/all_cities_3years.csv")
+
+
+####School districts####
+
+school_districts <- readRDS("data/acfrs_data.RDS") %>% 
+  filter(category == "School District") %>% 
+  mutate(id = as.character(id)) %>% 
+  select(any_of(fields_to_select))
+
+
+dictionary <- readRDS("data/dictionary.RDS") %>% 
+  add_row(ncesID = c("4703180"), #ncesID == "4703180" ~ "107203", # Davidson County Board of Education, previously id = 1267426
+          name = c("Metropolitan Nashville Public Schools"),
+          id = c("107203"),
+          state = c("TN")) %>% 
+  
+  #fixing id (old dictionary reflects old acfrs id --> update these new acfrs id currently showing on database)
+  mutate(id = case_when(ncesID == "5101260" ~ "1267421", # why previous id = "1250807", # Fairfax County Public Schools
+                        ncesID == "5102250" ~ "1250804", #Loudoun County Public Schools	
+                        ncesID == "5103130"~	"1250808",# Prince William County Public Schools		VA
+                        ncesID == "0803360" ~ "1237862", #City and County of Denver School District No. 1
+                        ncesID == "0102370" ~ "1017229",#Mobile County Board of School Commissioners	
+                        ncesID == "5103840" ~ "1265776", #School Board of the City of Virginia Beach	
+                        ncesID == "5100840" ~ "1267422", #VA	Chesterfield County Public Schools	1267422
+                        ncesID == "5101890" ~ "1267423", #VA	Henrico County Public Schools	1267423
+                        ncesID == "2502790" ~ "1267424", #MA	Boston Public Schools	
+                        ncesID == "3174820" ~ "35480", #NE Omaha City School District 1 = 	Douglas County School District No. 0001	35480
+                        ncesID == "2601103" ~ "161679", # MI Detroit Public Schools
+                        ncesID == "1602100" ~ "32700", #ID	JOINT SCHOOL DISTRICT NO. 2
+                        TRUE ~ as.character(id))) 
+
+# filter only top 100
+dict_top100_ELSI <- dictionary %>% 
+  filter(ncesID %in% top_schools_by_year$ncesID) %>% 
+  drop_na(id) %>% select(-name)
+
+top100_school_districts <- school_districts %>% 
+  filter(id %in% dict_top100_ELSI$id) %>% 
+  left_join(dict_top100_ELSI, by = c("id",  "state.abb"= "state")) %>% 
+  
+  #join with nces to get county, city info
+  left_join(nces, by = c("ncesID", "state.abb", "state.name")) %>% 
+  
+  #bind with NYC
+  rbind(nyc_top5)
+
+#TODO: check back missing: 
+#GA Clayton County Board of education.
+#https://www.clayton.k12.ga.us/departments/business-services/financial-reports
+
+top100_school_districts %>% 
+  add_count(ncesID) %>% filter(n < 3) %>% 
+  select(state.abb, ncesID, year, name, n)
+
+top100_school_districts %>% write.csv("output/top100_sd.csv")
+school_districts %>% write.csv("output/all_schooldistricts_3years.csv")
+#TODO: ask Geoff about this revenues = expense cases

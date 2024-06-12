@@ -1,3 +1,5 @@
+# Run `main.R` to run all scripts. 
+
 # Processing ACFRs data
 
 * Identify & Categorize acfrs entity
@@ -9,34 +11,28 @@ Run the following main files for replication.
 # Query data from database
 query_acfrs_data.R
 
-# Genereal purpose entity
+# Top 100 entities in 4 categories: state, county, city, school districts
 
-general_purpose.R
+top100.R
 
-top100_state_county_city.Rmd
-
-# School District
+# Others
 
 ## Mapping school district collected in ACFRs and NCES school district
 
 dictionary_ncesID_acfrsID.R
 
-## Processing acfrs school districts
-
-top100sd.Rmd
 
 # External data
 
 These files are sourced to the above files. No need to run separately. 
 
-supplement_data.R
+census.R
 
-nyc_school_districts.R
+exceptions.R
 
 nces.R
 
-census.R
-
-# Result
+# Result & checking
 
 processing_for_data_tool.R
+database_tool_check.R
