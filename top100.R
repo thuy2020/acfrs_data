@@ -123,33 +123,12 @@ city_gov %>% write.csv("output/all_cities_3years.csv")
 
 
 ####School districts####
+dictionary <- readRDS("data/dictionary.RDS")
 
 school_districts <- readRDS("data/acfrs_data.RDS") %>% 
   filter(category == "School District") %>% 
   mutate(id = as.character(id)) %>% 
   select(any_of(fields_to_select))
-
-
-dictionary <- readRDS("data/dictionary.RDS") %>% 
-  add_row(ncesID = c("4703180"), #ncesID == "4703180" ~ "107203", # Davidson County Board of Education, previously id = 1267426
-          name = c("Metropolitan Nashville Public Schools"),
-          id = c("107203"),
-          state = c("TN")) %>% 
-  
-  #fixing id (old dictionary reflects old acfrs id --> update these new acfrs id currently showing on database)
-  mutate(id = case_when(ncesID == "5101260" ~ "1267421", # why previous id = "1250807", # Fairfax County Public Schools
-                        ncesID == "5102250" ~ "1250804", #Loudoun County Public Schools	
-                        ncesID == "5103130"~	"1250808",# Prince William County Public Schools		VA
-                        ncesID == "0803360" ~ "1237862", #City and County of Denver School District No. 1
-                        ncesID == "0102370" ~ "1017229",#Mobile County Board of School Commissioners	
-                        ncesID == "5103840" ~ "1265776", #School Board of the City of Virginia Beach	
-                        ncesID == "5100840" ~ "1267422", #VA	Chesterfield County Public Schools	1267422
-                        ncesID == "5101890" ~ "1267423", #VA	Henrico County Public Schools	1267423
-                        ncesID == "2502790" ~ "1267424", #MA	Boston Public Schools	
-                        ncesID == "3174820" ~ "35480", #NE Omaha City School District 1 = 	Douglas County School District No. 0001	35480
-                        ncesID == "2601103" ~ "161679", # MI Detroit Public Schools
-                        ncesID == "1602100" ~ "32700", #ID	JOINT SCHOOL DISTRICT NO. 2
-                        TRUE ~ as.character(id))) 
 
 # filter only top 100
 dict_top100_ELSI <- dictionary %>% 
@@ -158,13 +137,15 @@ dict_top100_ELSI <- dictionary %>%
 
 top100_school_districts <- school_districts %>% 
   filter(id %in% dict_top100_ELSI$id) %>% 
-  left_join(dict_top100_ELSI, by = c("id",  "state.abb"= "state")) %>% 
+  left_join(dict_top100_ELSI, by = c("id",  "state.abb")) %>% 
   
   #join with nces to get county, city info
   left_join(nces, by = c("ncesID", "state.abb", "state.name")) %>% 
   
   #bind with NYC
-  rbind(nyc_top5)
+  rbind(nyc_top5) %>% arrange(state.abb, name) %>% distinct() %>% 
+  add_count(id) 
+
 
 #TODO: check back missing: 
 #GA Clayton County Board of education.

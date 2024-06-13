@@ -14,6 +14,16 @@ library(tidyr)
 #NOTE: Enrollment data year 2022 is for school year 2021 - 2022
 #download data: https://nces.ed.gov/ccd/elsi/tableGenerator.aspx?savedTableID=649124
 
+# HSD = High School District
+# CHSD = Community High School District
+# CUSD = Community Unit School District
+# 
+# CCSD = Community Consolidated School District
+# Spec Educ Coop = Special Education Cooperative
+# ROE = Regional Office of Education
+# sd = public schools district
+# USD = School District
+# UD =  Consolidated School District
 
 nces_20 <- import(here::here("data", "ELSI_school year 2019 2020.csv")) 
 #%>% 
@@ -39,7 +49,6 @@ nces_22 <- import(here::here("data", "ELSI_school year 2021 2022_cordinate.csv")
     longitude = `Longitude [District] 2021-22`, 
     congresstional_code = `Congressional Code [District] 2021-22`,
     metro_code = `Metro Micro Area Code [District] 2021-22`)
-
 
 nces <- nces_20 %>% left_join(nces_21) %>% left_join(nces_22) %>% 
   rename(name_nces = 1,
@@ -70,7 +79,8 @@ nces <- nces_20 %>% left_join(nces_21) %>% left_join(nces_22) %>%
   ) %>% 
   filter(state.abb != "PR") %>% 
   
-  filter(!agency_type_20 %in% c("7-Independent Charter District", "†")) %>% 
+  filter(!agency_type_20 %in% c("7-Independent Charter District", "†", 
+                                "6-Federal agency providing elementary and/or secondary level instruction")) %>% 
   
   # year 20 & 21 have revenue by source local, state, fed
   select(-contains("Source")) %>% 
@@ -110,6 +120,7 @@ top100_2021 <- top_schools_by_year %>%
 top100_2022 <- top_schools_by_year %>% 
   filter(year == "enrollment_22")
 
+
 # lists of top 100 sd for each year are slightly different
 
 # 2020 and 2021 are the same
@@ -117,7 +128,7 @@ anti_join(top100_2020, top100_2021, by = "ncesID")
 anti_join(top100_2021, top100_2020, by = "ncesID")
 
 # 4 sd in 2021 but not 2022
-anti_join(top100_2021, top100_2022, by = "ncesID")
+anti_join(top100_2021, top100_2022, by = "ncesID") %>% mutate(name_nces = str_to_lower(name_nces))
 
 # 4 sd in 2022 but not 2021
 anti_join(top100_2022, top100_2021, by = "ncesID")
