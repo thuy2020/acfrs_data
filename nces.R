@@ -79,8 +79,15 @@ nces <- nces_20 %>% left_join(nces_21) %>% left_join(nces_22) %>%
   ) %>% 
   filter(state.abb != "PR") %>% 
   
-  filter(!agency_type_20 %in% c("7-Independent Charter District", "†", 
-                                "6-Federal agency providing elementary and/or secondary level instruction")) %>% 
+  # excluding school districts that belong to one of these categories for at least 1 year
+  filter(!(agency_type_20 %in% c("7-Independent Charter District", "†", "6-Federal agency providing elementary and/or secondary level instruction")) |
+         !(agency_type_21 %in% c("7-Independent Charter District", "†", "6-Federal agency providing elementary and/or secondary level instruction")) | 
+         !(agency_type_22 %in% c("7-Independent Charter District", "†", "6-Federal agency providing elementary and/or secondary level instruction"))) %>% 
+  
+  
+  # excluding school districts who has 0 or NA enrollment for any school year. 
+  filter(!is.na(enrollment_20) & !is.na(enrollment_21) & !is.na(enrollment_22)) %>% 
+  filter(enrollment_20 != 0 & enrollment_21 != 0 & enrollment_22 != 0) %>% 
   
   # year 20 & 21 have revenue by source local, state, fed
   select(-contains("Source")) %>% 
@@ -91,10 +98,10 @@ nces <- nces_20 %>% left_join(nces_21) %>% left_join(nces_22) %>%
   # some ncesID missing leading 0
   mutate(ncesID = as.character(ncesID),
          ncesID = ifelse(
-           nchar(ncesID) == 6, paste0("0", ncesID), ncesID)) %>% 
+                  nchar(ncesID) == 6, paste0("0", ncesID), ncesID),
+         name_nces = str_to_lower(name_nces)) %>% 
   
   mutate(across(.cols = c(5:12, 22:23), as.double)) %>% 
-  
   mutate(state.name = str_to_title(state.name))
 
 
@@ -133,4 +140,4 @@ anti_join(top100_2021, top100_2022, by = "ncesID") %>% mutate(name_nces = str_to
 # 4 sd in 2022 but not 2021
 anti_join(top100_2022, top100_2021, by = "ncesID")
 
-#nces %>% saveRDS("nces.RDS")
+nces %>% saveRDS("data/nces.RDS")

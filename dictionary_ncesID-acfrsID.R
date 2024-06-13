@@ -1018,61 +1018,51 @@ round1234 <- round123 %>% rbind(round4) %>%
 
 
 ####Manual mapping####
-round5 <- read.csv("data/_dictionary_4.csv") %>% 
+round5 <- read.csv("data/_dictionary_5.csv") %>% 
   filter(!is.na(ncesID)) %>% 
   select(-ncesName) %>% 
   rename(state.abb = state) %>% 
     mutate(name = str_to_lower(name))
 
 # this file has number of students, NCES names, and other notes about the entities
-round6 <- readxl::read_xlsx("data/_dictionary_5_manually_created.xlsx") %>% 
-
-  mutate(type = case_when(is.na(type) ~ "regular", 
-                          TRUE ~ type)) %>% 
-  rename(state.abb = state) %>% 
-  mutate(name = str_to_lower(name)) %>% 
-  select(state.abb, name, id, ncesID) 
+round6 <- readxl::read_xlsx("data/_dictionary_6_manually_created.xlsx") %>% select(id, name, ncesID, state.abb)
+round7 <- read_csv("data/_dictionary_7_manually_created.csv") %>% select(-1)
 
 ####Exceptions####
+  #NE Omaha City School District 1 = 	Douglas County School District No. 0001	35480
+  
 # This dictionary was constructed using an other NCES list that is similar but not identical to the ELSI list
 dictionary_old <- readRDS("data/dictionary_old.RDS") %>% rename(state.abb = state)
 
-dictionary <- rbind(round1234,round5, round6) %>% distinct() %>% 
-  # keep the inflated out
-  add_count(id) %>% filter(n==1) %>% select(-n) %>% 
-  mutate(id = as.character(id)) %>% 
-  add_row(ncesID = c("4703180"), #ncesID == "4703180" ~ "107203", # Davidson County Board of Education, previously id = 1267426
-          name = c("Metropolitan Nashville Public Schools"),
-          id = c("107203"),
-          state.abb = c("TN")) %>% 
+#list of wrong sd
+wrong_sd <- c("detroit community schools")
   
-  bind_rows(dictionary_old) %>% 
-
-  #fixing id (old dictionary reflects old acfrs id --> update these new acfrs id currently showing on database)
-  mutate(id = case_when(ncesID == "5101260" ~ "1267421", # why previous id = "1250807", # Fairfax County Public Schools
-                        ncesID == "5102250" ~ "1250804", #Loudoun County Public Schools	
-                        ncesID == "5103130"~	"1250808",# Prince William County Public Schools		VA
-                        ncesID == "0803360" ~ "1237862", #City and County of Denver School District No. 1
-                        ncesID == "0102370" ~ "1017229",#Mobile County Board of School Commissioners	
-                        ncesID == "5103840" ~ "1265776", #School Board of the City of Virginia Beach	
-                        ncesID == "5100840" ~ "1267422", #VA	Chesterfield County Public Schools	1267422
-                        ncesID == "5101890" ~ "1267423", #VA	Henrico County Public Schools	1267423
-                        ncesID == "2502790" ~ "1267424", #MA	Boston Public Schools	
-                        ncesID == "3174820" ~ "35480", #NE Omaha City School District 1 = 	Douglas County School District No. 0001	35480
-                        ncesID == "2601103" ~ "161679", # MI Detroit Public Schools
-                        ncesID == "1602100" ~ "32700", #ID	JOINT SCHOOL DISTRICT NO. 2
-                        TRUE ~ as.character(id))) %>% 
-drop_na() %>% distinct()
+dictionary <- rbind(round1234,round5, round6, round7, dictionary_old) %>% 
+  mutate(name = str_to_lower(name)) %>% 
+  mutate(ncesID = ifelse(nchar(ncesID) < 7, paste0("0", ncesID), ncesID)) %>% 
+  drop_na() %>% distinct() %>% 
+#  keep the inflated out
+  #add_count(id) %>% filter(n==1) %>% select(-n) %>%
+  filter(!name %in% wrong_sd)
 
 
 #### Result####
 saveRDS(dictionary, "data/dictionary.RDS")
 
-
 #TODO: check inflated join.  
-rbind(round1234,round5, round6) %>% add_count(id) %>% filter(n>1) %>% 
-  arrange(desc(n)) -> inflated_join
- 
+rbind(round1234,round5, round6, round7, dictionary_old) %>% 
+  mutate(name = str_to_lower(name)) %>% 
+  mutate(ncesID = ifelse(nchar(ncesID) < 7, paste0("0", ncesID), ncesID)) %>% 
+  drop_na() %>% distinct() %>% 
+   select(id, ncesID, state.abb) %>% 
+  add_count(id) %>% filter(n>1) %>% distinct() %>% arrange(desc(n)) %>% select(id) %>% distinct() -> inflated_acfr
+
+
+inflated_join %>% filter(nchar(ncesID) <7)
+inflated_join %>% 
+
+nces <- readRDS("data/nces.RDS")
+nces %>% filter(ncesID %in% inflated_join$ncesID) %>% select(ncesID, name_nces, state.abb) -> foo
 ###
 
 #   dictionary <- readRDS("data/dictionary.RDS") %>% rename(state.abb = state) %>% 

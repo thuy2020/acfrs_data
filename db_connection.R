@@ -1,3 +1,8 @@
+
+library(RPostgreSQL)
+
+library(DBI)
+
 drv = dbDriver("PostgreSQL")
 con <- dbConnect(drv, 
                  host = "acfr.cluster-c30my4s8gc8w.us-west-2.rds.amazonaws.com",
