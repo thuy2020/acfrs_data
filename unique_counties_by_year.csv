@@ -4,86 +4,83 @@ tulsa county_OK,tulsa county_OK,tulsa county_OK
 gwinnett county_GA,gwinnett county_GA,gwinnett county_GA
 suffolk county_NY,suffolk county_NY,suffolk county_NY
 middlesex county_NJ,middlesex county_NJ,middlesex county_NJ
+alameda county_CA,alameda county_CA,alameda county_CA
 maricopa county_AZ,maricopa county_AZ,maricopa county_AZ
 pima county_AZ,pima county_AZ,pima county_AZ
-alameda county_CA,alameda county_CA,alameda county_CA
 contra costa county_CA,contra costa county_CA,contra costa county_CA
-city and county of san francisco_CA,city and county of san francisco_CA,city and county of san francisco_CA
-los angeles county_CA,los angeles county_CA,los angeles county_CA
-kern county_CA,kern county_CA,kern county_CA
 fresno county_CA,fresno county_CA,fresno county_CA
+city and county of san francisco_CA,city and county of san francisco_CA,city and county of san francisco_CA
+kern county_CA,kern county_CA,kern county_CA
+los angeles county_CA,los angeles county_CA,los angeles county_CA
 cobb county_GA,cobb county_GA,cobb county_GA
 essex county_NJ,essex county_NJ,essex county_NJ
 oklahoma county_OK,oklahoma county_OK,oklahoma county_OK
-dekalb county_GA,dekalb county_GA,dekalb county_GA
-orange county_CA,orange county_CA,orange county_CA
-ventura county_CA,ventura county_CA,ventura county_CA
 jefferson county_AL,jefferson county_AL,jefferson county_AL
+dekalb county_GA,dekalb county_GA,dekalb county_GA
+ventura county_CA,ventura county_CA,ventura county_CA
+orange county_CA,orange county_CA,orange county_CA
 arapahoe county_CO,arapahoe county_CO,arapahoe county_CO
-montgomery county_MD,montgomery county_MD,montgomery county_MD
-prince georges county_MD,prince georges county_MD,prince georges county_MD
 denver county_CO,denver county_CO,denver county_CO
+montgomery county_MD,montgomery county_MD,montgomery county_MD
 el paso county_CO,el paso county_CO,el paso county_CO
 riverside county_CA,riverside county_CA,riverside county_CA
+prince georges county_MD,prince georges county_MD,prince georges county_MD
 sacramento county_CA,sacramento county_CA,sacramento county_CA
 san bernardino county_CA,san bernardino county_CA,san bernardino county_CA
 san diego county_CA,san diego county_CA,san diego county_CA
+san joaquin county_CA,san joaquin county_CA,san joaquin county_CA
+fulton county_GA,fulton county_GA,fulton county_GA
 brevard county_FL,brevard county_FL,brevard county_FL
 broward county_FL,broward county_FL,broward county_FL
-san joaquin county_CA,san joaquin county_CA,san joaquin county_CA
 san mateo county_CA,san mateo county_CA,san mateo county_CA
-fulton county_GA,fulton county_GA,fulton county_GA
-santa clara county_CA,santa clara county_CA,santa clara county_CA
 baltimore county_MD,baltimore county_MD,baltimore county_MD
-NA,norfolk county_MA,norfolk county_MA
-orange county_FL,orange county_FL,orange county_FL
-palm beach county_FL,palm beach county_FL,palm beach county_FL
-pinellas county_FL,pinellas county_FL,pinellas county_FL
-polk county_FL,polk county_FL,polk county_FL
-multnomah county_OR,multnomah county_OR,multnomah county_OR
+santa clara county_CA,santa clara county_CA,santa clara county_CA
 hillsborough county_FL,hillsborough county_FL,hillsborough county_FL
 jacksonville_FL,jacksonville_FL,jacksonville_FL
+NA,norfolk county_MA,norfolk county_MA
+lee county_FL,lee county_FL,lee county_FL
+miami-dade county_FL,miami-dade county_FL,miami-dade county_FL
+orange county_FL,orange county_FL,orange county_FL
+palm beach county_FL,palm beach county_FL,palm beach county_FL
 city and county of honolulu_HI,city and county of honolulu_HI,city and county of honolulu_HI
 allegheny county_PA,allegheny county_PA,allegheny county_PA
-lee county_FL,lee county_FL,lee county_FL
+pinellas county_FL,pinellas county_FL,pinellas county_FL
+polk county_FL,polk county_FL,polk county_FL
 bucks county_PA,bucks county_PA,bucks county_PA
-miami-dade county_FL,miami-dade county_FL,miami-dade county_FL
+multnomah county_OR,multnomah county_OR,multnomah county_OR
 dupage county_IL,dupage county_IL,dupage county_IL
 cook county_IL,cook county_IL,cook county_IL
 NA,montgomery county_PA,montgomery county_PA
+philadelphia_PA,philadelphia_PA,philadelphia_PA
 will county_IL,will county_IL,will county_IL
 kent county_MI,kent county_MI,kent county_MI
-philadelphia_PA,philadelphia_PA,philadelphia_PA
+lake county_IL,lake county_IL,lake county_IL
 macomb county_MI,macomb county_MI,macomb county_MI
-oakland county_MI,oakland county_MI,oakland county_MI
 westchester county_NY,westchester county_NY,westchester county_NY
 marion county_IN,marion county_IN,marion county_IN
+oakland county_MI,oakland county_MI,oakland county_MI
 johnson county_KS,johnson county_KS,johnson county_KS
-hennepin county_MN,hennepin county_MN,hennepin county_MN
-lake county_IL,lake county_IL,lake county_IL
 shelby county_TN,shelby county_TN,shelby county_TN
-jackson county_MO,jackson county_MO,jackson county_MO
-the metropolitan government of nashville and davidson county_TN,the metropolitan government of nashville and davidson county_TN,the metropolitan government of nashville and davidson county_TN
 mecklenburg county_NC,mecklenburg county_NC,mecklenburg county_NC
-bexar county_TX,bexar county_TX,bexar county_TX
-wake county_NC,wake county_NC,wake county_NC
 collin county_TX,collin county_TX,collin county_TX
+bexar county_TX,bexar county_TX,bexar county_TX
 dallas county_TX,dallas county_TX,dallas county_TX
 denton county_TX,denton county_TX,denton county_TX
 el paso county_TX,el paso county_TX,el paso county_TX
+wake county_NC,wake county_NC,wake county_NC
+fort bend county_TX,fort bend county_TX,fort bend county_TX
 montgomery county_TX,montgomery county_TX,montgomery county_TX
 hudson county_NJ,hudson county_NJ,hudson county_NJ
-monmouth county_NJ,monmouth county_NJ,monmouth county_NJ
-fort bend county_TX,fort bend county_TX,fort bend county_TX
-ocean county_NJ,ocean county_NJ,ocean county_NJ
 harris county_TX,harris county_TX,harris county_TX
-bernalillo county_NM,bernalillo county_NM,bernalillo county_NM
 hidalgo county_TX,hidalgo county_TX,hidalgo county_TX
+monmouth county_NJ,monmouth county_NJ,monmouth county_NJ
+ocean county_NJ,ocean county_NJ,ocean county_NJ
+bernalillo county_NM,bernalillo county_NM,bernalillo county_NM
+hennepin county_MN,hennepin county_MN,hennepin county_MN
 clark county_NV,clark county_NV,clark county_NV
 bergen county_NJ,bergen county_NJ,bergen county_NJ
 erie county_NY,erie county_NY,erie county_NY
 tarrant county_TX,tarrant county_TX,tarrant county_TX
-fairfax county_VA,fairfax county_VA,fairfax county_VA
 travis county_TX,travis county_TX,travis county_TX
 monroe county_NY,monroe county_NY,monroe county_NY
 nassau county_NY,nassau county_NY,nassau county_NY
@@ -91,9 +88,12 @@ williamson county_TX,williamson county_TX,williamson county_TX
 cuyahoga county_OH,cuyahoga county_OH,cuyahoga county_OH
 franklin county_OH,franklin county_OH,franklin county_OH
 hamilton county_OH,hamilton county_OH,hamilton county_OH
+jackson county_MO,jackson county_MO,jackson county_MO
+the metropolitan government of nashville and davidson county_TN,the metropolitan government of nashville and davidson county_TN,the metropolitan government of nashville and davidson county_TN
 salt lake county_UT,salt lake county_UT,salt lake county_UT
 utah county_UT,utah county_UT,utah county_UT
+fairfax county_VA,fairfax county_VA,fairfax county_VA
 pierce county_WA,pierce county_WA,pierce county_WA
 snohomish county_WA,snohomish county_WA,snohomish county_WA
-milwaukee county_WI,milwaukee county_WI,milwaukee county_WI
 king county_WA,king county_WA,king county_WA
+milwaukee county_WI,milwaukee county_WI,milwaukee county_WI

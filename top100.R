@@ -1,4 +1,4 @@
-options(scipen = 999)
+
 library(tidyverse)
 library(dplyr)
 library(janitor)
@@ -9,20 +9,36 @@ source("census.R")
 source("general_purpose.R")
 source("nces.R")
 source("exceptions.R")
+source("functions.R")
 options(scipen = 999)
 
+# only select some fields to display on datatool
+
+fields_to_select <- c("state.abb", "state.name", "id", "geo_id", "year", "name", 
+                      "identifier", "category",
+                      "total_liabilities", "current_liabilities",
+                      "net_pension_liability", "net_pension_assets",
+                      "net_opeb_liability", "net_opeb_assets", 
+                      "total_assets", "current_assets", "compensated_absences",
+                      "expenses", "revenues",
+                      "population", "urban_pop", "pct_urban_pop", "median_hh_income_21")
+
+
 ####State######
-state_3years <- state_gov %>% 
+state_gov_3years <- state_gov %>% 
   #join income
   left_join(income) %>% 
   #get a set of variables
   select(all_of(fields_to_select)) 
+  
+  #append url
+state_3years <- append_url(state_gov_3years) %>% 
+  select(-identifier)
 
 #double check missing:
 state_3years %>% add_count(state.name) %>% filter(n<3)
 
 state_3years %>% write.csv("output/all_states_3years.csv")
-
 
 ####County####
 
@@ -65,7 +81,7 @@ consolidated_city_county_all <- consolidated_city_county %>% left_join(consolida
 
 ## All counties ###
 
-county_all <- county_gov %>% 
+county_gov_all <- county_gov %>% 
   
   #get income
   left_join(income) %>% 
@@ -74,6 +90,9 @@ county_all <- county_gov %>%
   # bind with consolidated
   rbind(consolidated_city_county_all)
 
+  #append URL
+county_all <- append_url(county_gov_all) %>% 
+  select(-identifier)
 
 # Find acfrs entities from the list of Top 100 county census
 top100_county_3years <- county_all %>% 
@@ -85,10 +104,8 @@ top100_county_3years %>% add_count(geo_id) %>% filter(n <3 ) %>% arrange(name)
 # PA montgomery county 2022: https://www.montgomerycountypa.gov/Archive.aspx?AMID=45
 # MA norfolk county 2022: https://www.norfolkcounty.org/county_commission/about_norfolk_county/annual_reports.php#outer-31
 
-
 write.csv(top100_county_3years, "output/top100_counties.csv")
 write.csv(county_all, "output/all_counties_3years.csv")
-
 
 ####Incorporated Place & Minor Civil Division####
 
@@ -102,16 +119,22 @@ special_cities <- acfrs_general_purpose %>%
                             id == "149470" ~ "3611000")) %>%  # NY buffalo
   
   left_join(city_income) %>% 
-  
   left_join(df_state) %>% 
   left_join(census_all)
 
-city_gov <- city_gov %>% left_join(city_income) %>% 
+city_gov_ <- city_gov %>% left_join(city_income) %>% 
   rbind(special_cities) %>% 
   select(any_of(fields_to_select)) 
 
+#append ULR
+
+city_gov <- append_url(city_gov_) %>% select(-identifier)
+
+
 top100_cities <- city_gov %>% 
-  filter(geo_id %in% census_city_top100$geo_id) %>% distinct() 
+  filter((geo_id %in% census_city_top100$geo_id) | 
+           name == "district of columbia") %>% distinct() %>% 
+  mutate(population = ifelse(name == "district of columbia", 689546, population))
 
 #missing
 top100_cities %>% add_count(geo_id) %>% filter(n<3) %>% arrange(name)
@@ -125,10 +148,14 @@ city_gov %>% write.csv("output/all_cities_3years.csv")
 ####School districts####
 dictionary <- readRDS("data/dictionary.RDS")
 
-school_districts <- readRDS("data/acfrs_data.RDS") %>% 
+school_districts_ <- readRDS("data/acfrs_data.RDS") %>% 
   filter(category == "School District") %>% 
   mutate(id = as.character(id)) %>% 
   select(any_of(fields_to_select))
+
+#append URLs
+
+school_districts <- append_url(school_districts_) %>% select(-identifier)
 
 # filter only top 100
 dict_top100_ELSI <- dictionary %>% 
@@ -143,8 +170,7 @@ top100_school_districts <- school_districts %>%
   left_join(nces, by = c("ncesID", "state.abb", "state.name")) %>% 
   
   #bind with NYC
-  rbind(nyc_top5) %>% arrange(state.abb, name) %>% distinct() %>% 
-  add_count(id) 
+  rbind(nyc_top5) %>% arrange(state.abb, name) %>% distinct() 
 
 
 #TODO: check back missing: 
@@ -158,3 +184,7 @@ top100_school_districts %>%
 top100_school_districts %>% write.csv("output/top100_sd.csv")
 school_districts %>% write.csv("output/all_schooldistricts_3years.csv")
 #TODO: ask Geoff about this revenues = expense cases
+
+
+
+

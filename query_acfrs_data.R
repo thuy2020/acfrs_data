@@ -30,6 +30,8 @@ fetch_data <- function(years, con){
                          cafrs_entity.id, cafrs_entity.nces_district_id, 
                          year, category,
                          
+                         cafrs_acfr.identifier,
+                         
                          cafrs_acfrvalue.reason_value, cafrs_acfrvalue.name as field_name
                          
                          FROM cafrs_acfr

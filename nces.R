@@ -4,7 +4,7 @@ library(stringr)
 library(rio)
 library(tidyr)
 
-# Glossary
+#####Glossary#####
 #https://nces.ed.gov/ccd/elsi/glossary.aspx?app=tableGenerator&term=11020,9558,13403,13392,21783,21784,21785,21786,21779,21780,21778,21781,21777,21776,21546,21545,21789,21544,21569,21553,21572,21554,21571,21875&level=PublicSchool&groupby=0
 
 #Total Students, All Grades (Excludes AE) [Public School]: 
@@ -25,13 +25,20 @@ library(tidyr)
 # USD = School District
 # UD =  Consolidated School District
 
-nces_20 <- import(here::here("data", "ELSI_school year 2019 2020.csv")) 
+# old data: Marc emailed 8/23/2022
+
+# old_sd <- rio::import("data/ncesdata_DBBFFFC.xlsx", skip = 14) %>% select(1, 3, 11) %>% 
+#   mutate(student = as.double(`Students*`))
+# sum(old_sd$student)
+
+####Input####
+d_20 <- import(here::here("data", "ELSI_school year 2019 2020.csv")) 
 #%>% 
 #filter(str_detect(`Agency Type [District] 2019-20`, "Regular local school district"))
-nces_21 <- import(here::here("data", "ELSI_school year 2020 2021.csv")) 
+d_21 <- import(here::here("data", "ELSI_school year 2020 2021.csv")) 
 #%>% 
 # filter(str_detect(`Agency Type [District] 2020-21`, "Regular local school district"))
-nces_22 <- import(here::here("data", "ELSI_school year 2021 2022_cordinate.csv")) %>% 
+d_22 <- import(here::here("data", "ELSI_school year 2021 2022_cordinate.csv")) %>% 
   # filter(str_detect(`Agency Type [District] 2021-22`, "Regular local school district"))
   
   select(-c(`State Name [District] 2021-22`, 
@@ -50,7 +57,7 @@ nces_22 <- import(here::here("data", "ELSI_school year 2021 2022_cordinate.csv")
     congresstional_code = `Congressional Code [District] 2021-22`,
     metro_code = `Metro Micro Area Code [District] 2021-22`)
 
-nces <- nces_20 %>% left_join(nces_21) %>% left_join(nces_22) %>% 
+nces <- d_20 %>% left_join(d_21) %>% left_join(d_22) %>% 
   rename(name_nces = 1,
          state.name = 2, 
          state.abb = 3,
@@ -103,9 +110,15 @@ nces <- nces_20 %>% left_join(nces_21) %>% left_join(nces_22) %>%
   
   mutate(across(.cols = c(5:12, 22:23), as.double)) %>% 
   mutate(state.name = str_to_title(state.name))
+####Count total enrollment each year####
 
+nrow(nces %>% select(state.abb, ncesID, enrollment_20) %>% distinct())
 
-# Top 100 schools in each of the 3 years:
+sum(nces$enrollment_20, na.rm = TRUE)
+sum(nces$enrollment_21, na.rm = TRUE)
+sum(nces$enrollment_22, na.rm = TRUE)
+
+####Top 100 schools in each of the 3 years####
 top_schools_by_year <- nces %>% 
   select(name_nces, ncesID, enrollment_20, enrollment_21, enrollment_22) %>% 
   pivot_longer(cols = 3:5, 

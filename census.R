@@ -111,6 +111,7 @@ census_county %>%
 # Alaska has 30 entities " 17 Borough", "Census Area", "Municipality"
 # Connecticut has 9 entities "Planning Region"
 
+
 ###### Top 100 county Census 2021: 
 census_county_top100 <- census_county %>% 
   arrange(desc(population)) %>% 
@@ -135,24 +136,54 @@ census_county_top101_200 <- census_county %>%
 
 ##### Census Incorporated Place & Minor Civil Division #########
 census_place_division <- census_all %>% 
-  filter(sumlev %in% c(162, 061, 170, 172)) %>% 
+  filter(sumlev %in% c(162, 061, 170, 172, 61)) %>% 
   filter(funcstat %in% c("A", "C")) %>% 
   distinct()
 
-#### City
 
-census_city <- census_all %>% filter(sumlev == 162) %>% 
+#### Incorporated 
+
+census_incorporated <- census_all %>% filter(sumlev == 162) %>% 
+  filter(funcstat %in% c("A", "C")) 
+
+census_incorporated_city <- census_all %>% filter(sumlev == 162) %>% 
   filter(str_detect(name_census, "city$")) %>% 
   filter(funcstat %in% c("A", "C")) 
 
-census_city_top100 <- census_city %>% 
+census_incorporated_others <- census_all %>% filter(sumlev == 162) %>% 
+  mutate(name_census = str_squish(name_census)) %>% 
+  filter(!str_detect(name_census, "city$")) %>% 
+  filter(funcstat %in% c("A", "C")) 
+
+#####Count population in each cat######
+
+municipalities_others <- census_all %>% 
+  filter(sumlev %in% c(061, 170, 172, 61)) %>% 
+  filter(funcstat %in% c("A", "C")) %>% 
+  distinct()
+
+
+others <- census_all %>% 
+  filter(sumlev %in% c(162, 061, 170, 172, 61)) %>% 
+  filter(funcstat %in% c("A", "C")) %>% 
+  distinct()
+
+sum(census_place_division$population)
+sum(census_incorporated$population)
+sum(census_incorporated_city$population)
+sum(census_incorporated_others$population)
+sum(municipalities_others$population)
+
+
+#####Top100 cities####
+
+census_city_top100 <- census_incorporated_city %>% 
   arrange(desc(population)) %>% slice(1:100) %>% 
   mutate(#name_census = str_remove_all(name_census, " city$"),
          name_census = str_trim(name_census)) %>% 
   select(state.abb, name_census, population, geo_id)
 
-
-census_city_top101_200 <- census_city %>% 
+census_city_top101_200 <- census_incorporated_city %>% 
   arrange(desc(population)) %>% slice(101:200) %>% 
   mutate(#name_census = str_remove_all(name_census, " city$"),
     name_census = str_trim(name_census)) %>% 
@@ -202,6 +233,12 @@ income <- rio::import(here::here("data", "Unemployment_median income.xlsx"), ski
   select(FIPS_Code, Median_Household_Income_2021) %>% 
   rename(geo_id = FIPS_Code, 
          median_hh_income_21 = Median_Household_Income_2021)
+
+#TODO:
+# test <- rio::import(here::here("data/census/ACSST1Y2021.S1901_2024-06-24T093508/ACSST1Y2021.S1901-Data.csv"), skip = 1) 
+#   select(1, `Geographic Area Name`, `Estimate!!Median income (dollars)!!HOUSEHOLD INCOME BY RACE AND HISPANIC OR LATINO ORIGIN OF HOUSEHOLDER!!Households`)
+# 
+# 
 
 #City:
 #S1903 MEDIAN INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)

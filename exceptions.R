@@ -19,10 +19,13 @@ source("nces.R")
 
 nyc_nces <- nces %>% filter(str_detect(name_nces, "(?i)NEW YORK CITY GEOGRAPHIC DISTRICT")) %>% 
   mutate(id = NA) %>% mutate(name_nces = str_to_lower(name_nces))
+sum(nyc_nces$enrollment_20)
 
 nyc_sd <- import("data/_apportion values.xlsx", sheet = 1, skip = 5) %>% 
   filter(name != "DOE") %>% 
-  mutate(name_nces = NA) %>% 
+  mutate(name_nces = NA,
+         category = "School District",
+         url = NA) %>% 
   select(-c(charges_services, operating_grant, general_rev)) 
 
 # only get those in top100 largest

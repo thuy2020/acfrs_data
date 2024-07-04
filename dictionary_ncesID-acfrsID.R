@@ -1037,12 +1037,12 @@ dictionary_old <- readRDS("data/dictionary_old.RDS") %>% rename(state.abb = stat
 #list of wrong sd
 wrong_sd <- c("detroit community schools")
   
-dictionary <- rbind(round1234,round5, round6, round7, dictionary_old) %>% 
+dictionary <- rbind(round1234, round5, round6, round7, dictionary_old) %>% 
   mutate(name = str_to_lower(name)) %>% 
   mutate(ncesID = ifelse(nchar(ncesID) < 7, paste0("0", ncesID), ncesID)) %>% 
   drop_na() %>% distinct() %>% 
-#  keep the inflated out
-  #add_count(id) %>% filter(n==1) %>% select(-n) %>%
+# keep the inflated rows out
+  add_count(id) %>% filter(n==1) %>% select(-n) %>%
   filter(!name %in% wrong_sd)
 
 
@@ -1050,16 +1050,16 @@ dictionary <- rbind(round1234,round5, round6, round7, dictionary_old) %>%
 saveRDS(dictionary, "data/dictionary.RDS")
 
 #TODO: check inflated join.  
-rbind(round1234,round5, round6, round7, dictionary_old) %>% 
+rbind(round1234, round5, round6, round7, dictionary_old) %>% 
   mutate(name = str_to_lower(name)) %>% 
   mutate(ncesID = ifelse(nchar(ncesID) < 7, paste0("0", ncesID), ncesID)) %>% 
   drop_na() %>% distinct() %>% 
-   select(id, ncesID, state.abb) %>% 
-  add_count(id) %>% filter(n>1) %>% distinct() %>% arrange(desc(n)) %>% select(id) %>% distinct() -> inflated_acfr
+  add_count(id) %>% filter(n>1)  -> inflated_dictionary
 
+inflated_dictionary %>% writexl::write_xlsx("tmp/inflated_dictionary.xlsx")
 
 inflated_join %>% filter(nchar(ncesID) <7)
-inflated_join %>% 
+
 
 nces <- readRDS("data/nces.RDS")
 nces %>% filter(ncesID %in% inflated_join$ncesID) %>% select(ncesID, name_nces, state.abb) -> foo

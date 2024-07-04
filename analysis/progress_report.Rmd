@@ -16,15 +16,7 @@ library(forcats)
 ```{r}
 # This is a manual file, do not delete file 
 # Missing as manually tracked 
-missing_county_SEP2023 <- rio::import("data/_manuallyChecked_missing_county_SEP2023.xlsx") %>% select(-c(id, having_county_gov, acfrs_name))
-
-# counties_missing <- county_acfrs_20_21 %>% select(-c(missing_2020, missing_2021)) %>% 
-#   left_join(missing_county_SEP2023) 
-
-# missing_county_SEP2023 %>% 
-#   #filter(`2020` == "missing" & `2021` == "missing") 
-#   #filter(`2020` == "missing")
-#   filter(`2021` == "missing") 
+missing_county_SEP2023 <- rio::import("../data/_manuallyChecked_missing_county_SEP2023.xlsx") %>% select(-c(id, having_county_gov, acfrs_name)) %>% filter(`2020` == "uploaded file to portal")
 
 missing_2020 <- missing_county_SEP2023 %>% select(state.abb, `2020`) %>% 
   filter(`2020` == "missing") %>% group_by(state.abb) %>% 
@@ -36,70 +28,262 @@ missing_2021 <- missing_county_SEP2023 %>% select(state.abb, `2021`) %>%
   rename(missing_2021 = n) %>% select(-`2021`)
 
 missing_2021 %>% left_join(missing_2020) %>% arrange(desc(missing_2021)) %>%  #write.csv("missing_county_by_state_2020_2021.csv")
-datatable()
-#missing_county_SEP2023 %>% filter(`2021` == "missing") 
-  #filter(`2020` == "missing" & `2021` == "missing")
+
 
 ```
 
+#Notes
+```{r}
+#barbour county 2021 just release 2024
+# IA montgomery 2022 just release March 2024
+#MO atchison released 2021 in May 2023
+# MO Shannon released 2021 in Jan 2024
+# OH Morgan county 2021 released in Feb 2024
+# menard county: The Annual Audit is not available. This local government's Annual Financial Report (AFR) was due on 07/28/2023 
+# https://illinoiscomptroller.gov/constituent-services/local-government/local-government-warehouse/landingpage?code=065/000/00&searchtype=AFRSearch&originalSearchString=Menard%20County%20%20-%20%20065/000/00
 
-# Viz missing counties
+#ND adams county 2021, 2022: scan of a book
+
+
+# portal for state: 
+#GA: https://ted.cviog.uga.edu/financial-documents/financial-reports?og_group_ref_target_id%5B%5D=215&field_fiscal_year_value%5Bmin%5D%5Byear%5D=2020&field_fiscal_year_value%5Bmax%5D%5Byear%5D=2023
+
+# IW county: https://publications.iowa.gov/view/subjects/DE.html#group_2022-12-12
+#ND: https://www.nd.gov/auditor/counties#AgyW
+
+
+#PA: Municipal portal: https://munstats.pa.gov/
+```
+
+
+## Missing counties
 
 ```{r}
-missing_county_SEP2023 %>% 
-  filter(`2020` == "missing" & `2021` == "missing") %>% 
-  mutate(missing_pop = sum(population)) %>% 
-  add_count() %>% 
-  rename(missing_both = n) -> missingboth
+acfrs_county %>% select(state.abb, name, id, year) %>% filter(year == 2020) %>% select(-year) -> county20
+acfrs_county %>% select(state.abb, name, id, year) %>% filter(year == 2021) %>% select(-year) -> county21
+acfrs_county %>% select(state.abb, name, id, year) %>% filter(year == 2022) %>% select(-year) -> county22
+
+anti_join(county20, county21)  %>% mutate(year = 2021) -> missing21
+anti_join(county20, county22)  %>% mutate(year = 2022)-> missing22
+
+rbind(missing21, missing22) %>% distinct() %>% arrange(state.abb, name) #%>% 
+
+read.csv("../tmp/missing_counties_2021_2022_June13_2024.csv") %>% 
+  filter(X.1 == "") 
+
+
+```
+
+```{r}
+place_division_gov %>% select(state.abb, name, id, year) %>% filter(year == 2020) %>% select(-year) -> place20
+place_division_gov %>% select(state.abb, name, id, year) %>% filter(year == 2021) %>% select(-year) -> place21
+place_division_gov %>% select(state.abb, name, id, year) %>% filter(year == 2022) %>% select(-year) -> place22
+
+rbind((anti_join(place20, place21)  %>% mutate(year = 2021) ),
+(anti_join(place21, place20)  %>% mutate(year = 2020) ),
+(anti_join(place20, place22)  %>% mutate(year = 2022)),
+(anti_join(place22, place20)  %>% mutate(year = 2020) ),
+(anti_join(place21, place22)  %>% mutate(year = 2022)),
+(anti_join(place22, place21)  %>% mutate(year = 2021) )) %>% arrange(state.abb, name) %>% distinct() -> missing_places_20_21_22_june14_2024
   
-Prop <- c(3144, 254)
-pie(Prop , labels = c("All counties: 3,144","254 entities,\nPopulation: 10,2M"), 
-    main = "Missing both years 2020 & 2021")
-
+missing_places_20_21_22_june14_2024 %>% write.csv("../tmp/missing_places_20_21_22_june14_2024.csv")
 ```
 
+
 ```{r}
-missing_county_SEP2023 %>% select(state.abb, population, `2020`) %>% 
-  filter(`2020` == "missing") %>% 
-mutate(missing_pop = sum(population)) %>% 
-  group_by(state.abb) -> missing20
+city_gov %>% select(state.abb, name, id, year, population) %>% filter(year == 2020) %>% select(-year) -> city20
+city_gov %>% select(state.abb, name, id, year, population) %>% filter(year == 2021) %>% select(-year) -> city21
+city_gov %>% select(state.abb, name, id, year, population) %>% filter(year == 2022) %>% select(-year) -> city22
+
+sum(city20$population, na.rm = TRUE)
+sum(city21$population, na.rm = TRUE)
+sum(city22$population, na.rm = TRUE)
+
+rbind((anti_join(city20, city21)  %>% mutate(year = 2021) ),
+(anti_join(city21, city20)  %>% mutate(year = 2020) ),
+(anti_join(city20, city22)  %>% mutate(year = 2022)),
+(anti_join(city22, city20)  %>% mutate(year = 2020) ),
+(anti_join(city21, city22)  %>% mutate(year = 2022)),
+(anti_join(city22, city21)  %>% mutate(year = 2021) )) %>% 
+  arrange(state.abb, desc(population)) %>% 
+  distinct() -> missing_city_20_21_22_june14_2024
   
-Prop_20 <- c(3144, 312)
-pie(Prop_20 , labels = c("All counties: 3,144","312 entities\nPopulation: 11,5M"), 
-    main = "Missing county ACFRs 2020",
-    col = c("white","lightyellow"))
-```
+missing_city_20_21_22_june14_2024 %>% write.csv("../tmp/missing_city_20_21_22_june14_2024.csv")
 
+readxl::read_excel("../tmp/missing_city_20_21_22_june14_2024.xlsx") %>% 
+  filter(population >=10000) %>% 
+  filter(is.na(`...7`))
+```
+# School districts
 
 ```{r}
-missing_county_SEP2023 %>% select(state.abb, population, `2021`) %>% 
-  filter(`2021` == "missing") %>% 
-mutate(missing_pop = sum(population)) %>% 
-  group_by(state.abb) -> missing21
+school_districts
+
+school_districts %>% select(state.abb, name, id, year, total_liabilities) %>% filter(year == 2020) %>% select(-year) -> sd20
+school_districts %>% select(state.abb, name, id, year, total_liabilities) %>% filter(year == 2021) %>% select(-year) -> sd21
+school_districts %>% select(state.abb, name, id, year, total_liabilities) %>% filter(year == 2022) %>% select(-year) -> sd22
+
+# w/o NCES 1579
+rbind(
+  (sd20 %>% left_join(dictionary) %>% 
+  filter(is.na(ncesID))
+),
+# no NCES 2128
+(sd21 %>% left_join(dictionary) %>% 
+  filter(is.na(ncesID))), 
+
+# no NCES 2063
+(sd22 %>% left_join(dictionary) %>% 
+  filter(is.na(ncesID))
+)) %>% select(-total_liabilities) %>% 
+  distinct() %>% writexl::write_xlsx("../tmp/missingNCES_june24_2024.xlsx")
+
+# with NCES 1579
+sd20 %>% left_join(dictionary) %>% 
+  filter(!is.na(ncesID)) %>% 
+  left_join(nces, by = c("state.abb", "ncesID")) %>% select(state.abb, name, id, ncesID, enrollment_20, total_liabilities) -> sd20_withnces
+sum(sd20_withnces$enrollment_20, na.rm = TRUE)
+
+
+# with NCES 2128
+sd21 %>% left_join(dictionary) %>% 
+  filter(!is.na(ncesID)) %>% 
+  left_join(nces, by = c("state.abb", "ncesID")) %>% select(state.abb, name, id, ncesID, enrollment_21, total_liabilities) -> sd21_withnces
+sum(sd21_withnces$enrollment_21, na.rm = TRUE)
+
+# with NCES 2063
+sd22 %>% left_join(dictionary) %>% 
+  filter(!is.na(ncesID)) %>% 
+  left_join(nces, by = c("state.abb", "ncesID")) %>% select(state.abb, name, id, ncesID, enrollment_22, total_liabilities) -> sd22_withnces
+sum(sd22_withnces$enrollment_22, na.rm = TRUE)
+
+# Examples of ACFRs not in NCES: NY otsego northern catskills boces
+
+
+### Top 200:
+nces %>% select(state.abb, name_nces, ncesID, enrollment_20) %>% arrange(desc(enrollment_20)) %>% slice(100:200)->top200
+
+dictionary %>% filter(ncesID %in% top200$ncesID) -> dict200
+
+anti_join(top200, dict200, by = "ncesID")
+
+school_districts %>% filter(id %in% dict200$id) %>% select(state.abb, id, year, name) %>% 
+  add_count(year) %>% select(year, n) %>% distinct()
+
+```
+
+```{r}
+
+rbind((anti_join(sd20, sd21)  %>% mutate(year = 2021) ),
+(anti_join(sd21, sd20)  %>% mutate(year = 2020) ),
+(anti_join(sd20, sd22)  %>% mutate(year = 2022)),
+(anti_join(sd22, sd20)  %>% mutate(year = 2020) ),
+(anti_join(sd21, sd22)  %>% mutate(year = 2022)),
+(anti_join(sd22, sd21)  %>% mutate(year = 2021) )) %>% 
+  arrange(state.abb, name) %>% 
+  distinct() -> missing_school_20_21_22_june17_2024
+
+missing_school_20_21_22_june17_2024 %>% 
+  left_join(dictionary, by = c("state.abb", "id")) %>% drop_na(ncesID) %>% 
+  left_join(nces, by = c("state.abb", "ncesID")) %>% 
+    # there're 59 name pair different in minor details, already checked. They're the same
+  select(-name.y) %>% rename(name = name.x) %>% 
+  select(state.abb, name, year, ncesID, id, enrollment_20) %>% 
+  mutate(enrollment_20 = as.double(enrollment_20)) %>% 
+  arrange(state.abb, desc(enrollment_20)) %>% 
+  mutate(name = str_squish(name)) %>% distinct() %>% 
+  write.csv("../tmp/missing_schooldistricts_june21_20_21_22.csv")
   
-Prop_21 <- c(3144, 510)
-pie(Prop_21 , labels = c("All counties: 3,144","510 entities\nPopulation: 19,1M"), 
-    main = "Missing county ACFRs 2021",
-    col = c("white","lightpink"))
+  
+  readxl::read_excel("../tmp/missing_schooldistricts_june21_20_21_22.xlsx") %>% 
+  filter(as.numeric(enrollment_20) >=10000) %>% 
+   select(-1) %>% 
+    distinct() %>% filter(is.na(`...4`)) %>% arrange(desc(enrollment_20)) %>% 
+    mutate(enrollment_20 = as.double(enrollment_20)) ->foo_enroll
+    
+  sum(foo_enroll$enrollment_20)
 ```
 
 
-# List county ACFRs with population: Missing either 2020 or 2021 
+# Viz progress
 
 ```{r}
-missing_county_SEP2023 %>% select(state.abb, name, population, `2020`, `2021`) %>% 
-  filter(`2020` == "missing" | `2021` == "missing") %>% #write.csv("missing_county_2020_2021.csv")
-  datatable()
-```
+####Population collected - county 
+co_2020 <- county_gov %>% filter(year == 2020)
+#population collected:
+sum(co_2020$population)
+# adding population of 10 counties/cities
+#873959 + 15057 + 91471 + 15388 + 1016506 + 715875 + 35128 + 9424 + 97596
+# 1 CA city and county of san francisco                                                                            
+# 2 AL        cleburne commission county                                                                                   
+# 3 AL        st clair county commission                      
+# 4 AL        washington commission county       
+# 6 HI        city and county of honolulu      
+# 7 TN        the metropolitan government of nashville and davidson county     
+# 8 MT        city & county of butte silver bow                 
+# 9 MT        anaconda-deer lodge county                       
+# 10 OH        ashtabula metroparks county  
+setdiff(acfrs_county$id, co_2020$id) -> test1
+acfrs_county %>% filter(year == 2020) %>% 
+  filter(id %in% test1) -> city_county
 
+
+co_2021 <- county_gov %>% filter(year == 2021)
+#population collected:
+sum(co_2021$population)
+setdiff(acfrs_county$id, co_2021$id) -> test21
+acfrs_county %>% filter(year == 2021) %>% 
+  filter(id %in% test21) -> city_county_21
+
+
+co_2022 <- county_gov %>% filter(year == 2022)
+#population collected:
+sum(co_2022$population)
+setdiff(acfrs_county$id, co_2022$id) -> test22
+acfrs_county %>% filter(year == 2022) %>% 
+  filter(id %in% test22) -> city_county_22
+```
 
 
 ```{r}
-# Processing by Hgarb: either 2020 or 2021 
-# missing_county_SEP2023 %>% select(state.abb, name, population, `2020`, `2021`) %>% 
-#   filter(name == "hamden")
-#   
-#   filter(`2020` == "uploaded file to portal" | `2021` == "uploaded file to portal") %>% 
-#   datatable()
+readxl::read_excel("progress_report.xlsx") %>% 
+  filter(!Row %in% c("municipalities_all_place_division", "municipalities_incorporated", "municipalities_incorporated_others", "municipalities_others")) -> data
+
+# Function to create pie charts with raw numbers in the labels
+create_count_pie_chart <- function(values, labels, title) {
+  pie(values, labels = labels, main = title, col = c("steelblue", "lightgray"))
+}
+
+# Function to create pie charts with percentages in the labels
+create_population_pie_chart <- function(values, total, title) {
+  percentages <- round((values / total) * 100, 1)
+  labels <- paste(c("Collected\n", ""), "", percentages, "%")
+  pie(values, labels = labels, main = title, col = c("steelblue", "lightgray"))
+}
+
+# Plot pie charts for count and population for each entity in separate grids
+for (entity in unique(data$Row)) {
+  # Set up the plotting area for Count
+  par(mfrow = c(1, 3), mar = c(2, 2, 2, 2)) # 1 row, 3 columns
+  for (year in unique(data$Year)) {
+    subset_data <- data %>% filter(Row == entity, Year == year)
+    create_count_pie_chart(
+      values = c(subset_data$Collected_Count, subset_data$Remaining_Count),
+      labels = c(paste("Collected:\n", subset_data$Collected_Count), paste("", subset_data$Remaining_Count)),
+      title = paste(entity, year, "- Count")
+    )
+  }
+  # Set up the plotting area for Population
+  par(mfrow = c(1, 3), mar = c(2, 2, 2, 2)) # 1 row, 3 columns
+  for (year in unique(data$Year)) {
+    subset_data <- data %>% filter(Row == entity, Year == year)
+    create_population_pie_chart(
+      values = c(subset_data$Collected_Population, subset_data$Remaining_Population),
+      total = subset_data$Universal_Population,
+      title = paste(entity, year, "- Population")
+    )
+  }
+}
 ```
+
 

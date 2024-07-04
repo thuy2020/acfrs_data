@@ -63,15 +63,11 @@ acfrs_general_purpose <- readRDS("data/acfrs_data.RDS") %>%
 #######States########
 
 acfrs_state <- acfrs_general_purpose %>% 
-  filter(str_detect(name, "(state of)|(district of columbia)|(commonwealth)")) %>% 
+  filter(str_detect(name, "(state of)|(commonwealth)")) %>% 
   filter(!str_detect(name, "yap|kosrae")) %>% 
   filter(!str_detect(name, "(iowa single audit)|(puerto rico)")) %>% 
   mutate(name = str_remove_all(name, "(state of)|(commonwealth of)"),
          name = str_trim(name))
-
-# state from census
-# census_state <- census_all %>% filter(sumlev == 40) %>% 
-#   select(state.abb, geo_id, population)
 
 # Joining acfrs states & census states: state_gov_2020
 state_gov <- acfrs_state %>% select(-geo_id) %>% 
@@ -88,7 +84,7 @@ state_gov <- acfrs_state %>% select(-geo_id) %>%
 ####### Counties########
 
 # Special case: Alaska
-#Alaska counties in census
+#Find Alaska counties in census
 alaska_county_census <- census_county %>% filter(state.abb == "AK")
 
 # Alaska counties in Acfrs:
@@ -126,20 +122,12 @@ place_division_gov <- acfrs_general_purpose %>%
 # Join Incorporated Place in ACFRs to Census  
   left_join(census_place_division, by= c("geo_id", "state.abb", "state.name")) 
 
-#### City #########
+#### City&DC #########
+
 city_gov <- place_division_gov %>% 
-  filter(geo_id %in% census_city$geo_id)
+  filter((geo_id %in% census_incorporated$geo_id) | name == "district of columbia") 
 
 
-# only select some fields to display on datatool
-
-fields_to_select <- c("state.abb", "state.name", "id", "geo_id", "year", "name",
-                      "total_liabilities", "current_liabilities",
-                      "net_pension_liability", "net_pension_assets",
-                      "net_opeb_liability", "net_opeb_assets", 
-                      "total_assets", "current_assets", "compensated_absences",
-                      "expenses", "revenues",
-                      "population", "urban_pop", "pct_urban_pop", "median_hh_income_21")
 
 
 
