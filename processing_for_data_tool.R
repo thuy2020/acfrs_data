@@ -83,7 +83,7 @@ state_data_growth <- state_data_growth |>
   mutate(id = str_sub(id, 1, str_length(id)-3)) |>
   mutate(
     geo_id = str_pad(as.numeric(id), width = 2, pad = "0"),
-    partisan_lean = `2021`
+    partisan_lean = `2022`
   ) |>
   mutate(pct_urban_pop_22_normalized = rescale(pct_urban_pop_22, to = c(-50, 50))) |>
   mutate(median_hh_income_normalized = rescale(median_hh_income_21_22, to = c(-50, 50)))

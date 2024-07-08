@@ -101,8 +101,9 @@ top100_county_3years <- county_all %>%
 
 # Find acfrs entities from the list of Top 200 county census
 top200_county_3years <- county_all %>% 
-  filter(geo_id %in% census_county_top200$geo_id) %>% 
-  select(state.abb, name, id, year, geo_id) %>% add_count(geo_id) %>% filter(n <3)
+  filter(geo_id %in% census_county_top200$geo_id) #%>% 
+#   select(state.abb, name, id, year, geo_id) %>% add_count(geo_id)
+# %>% filter(n <3)
 
 #MA Norfolk 2022: not released yet
 # MA Bristol: have 2022, 2023 but not 2020, 2021
@@ -158,14 +159,14 @@ top200_cities <- city_gov %>%
   filter((geo_id %in% census_city_top200$geo_id) | 
            name == "district of columbia") %>% distinct() %>% 
   mutate(population = ifelse(name == "district of columbia", 689546, population)) #%>% 
-  select(state.abb, name, id, year, geo_id) %>% add_count(geo_id) %>% filter(n <3)
+  #select(state.abb, name, id, year, geo_id) %>% add_count(geo_id) %>% filter(n <3)
 
 #missing
 top100_cities %>% add_count(geo_id) %>% filter(n<3) %>% arrange(name)
 
 # missing: 1 as of Jul 8, 2024
 #NJ newark 2022
-# MS Jackson 2022
+#MS Jackson 2022
 #NJ patterson 2022
 
 top200_cities %>% write.csv("output/top200_cities.csv")
@@ -218,8 +219,8 @@ top200_school_districts <- school_districts %>%
   
   #bind with NYC
   rbind(nyc_top5) %>% arrange(state.abb, name) %>% distinct() #%>% 
-  select(state.abb, ncesID, year, name) %>% 
-  add_count(ncesID) %>% filter(n < 3) 
+  #select(state.abb, ncesID, year, name) %>% 
+  #add_count(ncesID) %>% filter(n < 3) 
 
 
 #TODO: check back missing: 

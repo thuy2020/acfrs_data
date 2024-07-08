@@ -212,12 +212,13 @@ sheet2 <- rio::import(here::here("data", "City and Town Mapping.xlsx"), sheet = 
   
   mutate(government_id = "") %>% 
   select(government_id, geo_id, name, state.abb) %>% 
-  
   mutate(name = str_to_lower(name))
+
          #name = str_remove_all(name, "(city)|(town)$"))
 
 # dictionary linking governmentID and geo ID of cities 
-governmentID_geoID <- rbind(sheet2, sheet3) %>% rename(name_midfile = name)
+governmentID_geoID <- rbind(sheet2, sheet3) %>% 
+  rename(name_midfile = name)
 
 
 #########Income###########
@@ -249,8 +250,7 @@ city_income <- rio::import(here::here("data/ACSST1Y2021.S1903_2023-12-29T105538/
   mutate(geo_id = paste0(state, place)) %>% 
   select(geo_id, median_hh_income_21)
 
-
 ####### Partisan lean - state ##########
 
-partisan_lean <- read_csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/partisan-lean/2021/fivethirtyeight_partisan_lean_STATES.csv")
+partisan_lean <- read_csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/partisan-lean/fivethirtyeight_partisan_lean_STATES.csv")
 
