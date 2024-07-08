@@ -217,7 +217,7 @@ top200_school_districts <- school_districts %>%
   left_join(nces, by = c("ncesID", "state.abb", "state.name")) %>% 
   
   #bind with NYC
-  rbind(nyc_top5) %>% arrange(state.abb, name) %>% distinct() %>% 
+  rbind(nyc_top5) %>% arrange(state.abb, name) %>% distinct() #%>% 
   select(state.abb, ncesID, year, name) %>% 
   add_count(ncesID) %>% filter(n < 3) 
 
