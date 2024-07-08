@@ -4,6 +4,7 @@ library(dplyr)
 library(DT)
 library(viridis)
 library(janitor)
+library(stringr)
 
 # The key for SUMLEV is as follows (SUB-EST2022.pdf):
 #   040 = State
@@ -122,15 +123,13 @@ census_county_top100 <- census_county %>%
   slice(1:100) #%>% 
   #select(state.abb, name_census, population, funcstat, geo_id) 
 
-##### Top county 101-200
-census_county_top101_200 <- census_county %>% 
+##### Top county 200
+census_county_top200 <- census_county %>% 
   arrange(desc(population)) %>% 
   filter(funcstat %in% c("A", "C")) %>% 
   # does not count 5 counties in NY
   filter(!name_census %in% c("kings county", "queens county", "new york county", "bronx county")) %>% 
-  
-  slice(101:200) 
-
+  slice(1:200) 
 
 #census_county_top100 %>% write_csv("output/census_county_top100.csv")
 
@@ -183,8 +182,8 @@ census_city_top100 <- census_incorporated_city %>%
          name_census = str_trim(name_census)) %>% 
   select(state.abb, name_census, population, geo_id)
 
-census_city_top101_200 <- census_incorporated_city %>% 
-  arrange(desc(population)) %>% slice(101:200) %>% 
+census_city_top200 <- census_incorporated_city %>% 
+  arrange(desc(population)) %>% slice(1:200) %>% 
   mutate(#name_census = str_remove_all(name_census, " city$"),
     name_census = str_trim(name_census)) %>% 
   select(state.abb, name_census, population, geo_id)
@@ -219,12 +218,6 @@ sheet2 <- rio::import(here::here("data", "City and Town Mapping.xlsx"), sheet = 
 
 # dictionary linking governmentID and geo ID of cities 
 governmentID_geoID <- rbind(sheet2, sheet3) %>% rename(name_midfile = name)
-
-
-options(scipen = 999)
-library(tidyverse)
-library(dplyr)
-library(janitor)
 
 
 #########Income###########

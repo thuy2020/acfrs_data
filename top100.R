@@ -99,6 +99,21 @@ top100_county_3years <- county_all %>%
   filter(geo_id %in% census_county_top100$geo_id)
 
 
+# Find acfrs entities from the list of Top 200 county census
+top200_county_3years <- county_all %>% 
+  filter(geo_id %in% census_county_top200$geo_id) %>% 
+  select(state.abb, name, id, year, geo_id) %>% add_count(geo_id) %>% filter(n <3)
+
+#MA Norfolk 2022: not released yet
+# MA Bristol: have 2022, 2023 but not 2020, 2021
+# Uploaded: Union county 2020, PA montgomery county
+# AL Mobile: should be non-standard 
+
+#Lake County’s Chronically Poor Audit Results Continue
+#https://comptroller.tn.gov/news/2024/3/5/lake-county-s-chronically-poor-audit-results-continue.html
+
+
+
 top100_county_3years %>% add_count(geo_id) %>% filter(n <3 ) %>% arrange(name)
 #TODO: Checking on 2 missing - as of June 7, 2024
 # PA montgomery county 2022: https://www.montgomerycountypa.gov/Archive.aspx?AMID=45
@@ -106,6 +121,7 @@ top100_county_3years %>% add_count(geo_id) %>% filter(n <3 ) %>% arrange(name)
 
 write.csv(top100_county_3years, "output/top100_counties.csv")
 write.csv(county_all, "output/all_counties_3years.csv")
+top200_county_3years %>% write.csv("output/top200_counties.csv")
 
 ####Incorporated Place & Minor Civil Division####
 
@@ -131,16 +147,28 @@ city_gov_ <- city_gov %>% left_join(city_income) %>%
 city_gov <- append_url(city_gov_) %>% select(-identifier)
 
 
+#Top 100
 top100_cities <- city_gov %>% 
   filter((geo_id %in% census_city_top100$geo_id) | 
            name == "district of columbia") %>% distinct() %>% 
   mutate(population = ifelse(name == "district of columbia", 689546, population))
 
+#Top 200
+top200_cities <- city_gov %>% 
+  filter((geo_id %in% census_city_top200$geo_id) | 
+           name == "district of columbia") %>% distinct() %>% 
+  mutate(population = ifelse(name == "district of columbia", 689546, population)) #%>% 
+  select(state.abb, name, id, year, geo_id) %>% add_count(geo_id) %>% filter(n <3)
+
 #missing
 top100_cities %>% add_count(geo_id) %>% filter(n<3) %>% arrange(name)
-# missing: 1 as of June 4, 2024
-#NJ newark 2022
 
+# missing: 1 as of Jul 8, 2024
+#NJ newark 2022
+# MS Jackson 2022
+#NJ patterson 2022
+
+top200_cities %>% write.csv("output/top200_cities.csv")
 top100_cities %>% write.csv("output/top100_cities.csv")
 city_gov %>% write.csv("output/all_cities_3years.csv")
 
@@ -173,14 +201,38 @@ top100_school_districts <- school_districts %>%
   rbind(nyc_top5) %>% arrange(state.abb, name) %>% distinct() 
 
 
+
+# top 200
+top200_schools_by_year
+
+dict_top200_ELSI <- dictionary %>% 
+  filter(ncesID %in% top200_schools_by_year$ncesID) %>% 
+  drop_na(id) %>% select(-name)
+
+top200_school_districts <- school_districts %>% 
+  filter(id %in% dict_top200_ELSI$id) %>% 
+  left_join(dict_top200_ELSI, by = c("id",  "state.abb")) %>% 
+  
+  #join with nces to get county, city info
+  left_join(nces, by = c("ncesID", "state.abb", "state.name")) %>% 
+  
+  #bind with NYC
+  rbind(nyc_top5) %>% arrange(state.abb, name) %>% distinct() %>% 
+  select(state.abb, ncesID, year, name) %>% 
+  add_count(ncesID) %>% filter(n < 3) 
+
+
 #TODO: check back missing: 
 #GA Clayton County Board of education.
 #https://www.clayton.k12.ga.us/departments/business-services/financial-reports
+# Uploaded: williamson county schools, reported in county acfrs. Uploaded county's acfrs to replace
+
 
 top100_school_districts %>% 
   add_count(ncesID) %>% filter(n < 3) %>% 
   select(state.abb, ncesID, year, name, n)
 
+top200_school_districts %>% write.csv("output/top200_sd.csv")
 top100_school_districts %>% write.csv("output/top100_sd.csv")
 school_districts %>% write.csv("output/all_schooldistricts_3years.csv")
 #TODO: ask Geoff about this revenues = expense cases

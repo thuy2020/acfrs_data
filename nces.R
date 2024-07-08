@@ -118,6 +118,7 @@ sum(nces$enrollment_20, na.rm = TRUE)
 sum(nces$enrollment_21, na.rm = TRUE)
 sum(nces$enrollment_22, na.rm = TRUE)
 
+
 ####Top 100 schools in each of the 3 years####
 top_schools_by_year <- nces %>% 
   select(name_nces, ncesID, enrollment_20, enrollment_21, enrollment_22) %>% 
@@ -126,6 +127,16 @@ top_schools_by_year <- nces %>%
                values_to = "value") %>% 
   group_by(year) %>% 
   top_n(100, value) %>% 
+  ungroup() %>% 
+  arrange(year, desc(value))
+####Top 100 schools in each of the 3 years####
+top200_schools_by_year <- nces %>% 
+  select(name_nces, ncesID, enrollment_20, enrollment_21, enrollment_22) %>% 
+  pivot_longer(cols = 3:5, 
+               names_to = "year",
+               values_to = "value") %>% 
+  group_by(year) %>% 
+  top_n(200, value) %>% 
   ungroup() %>% 
   arrange(year, desc(value))
 
