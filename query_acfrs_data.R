@@ -85,7 +85,7 @@ fetch_data <- function(years, con){
   
 }
 #Call function
-fetch_data(c(2020, 2021, 2022), con)
+fetch_data(c(2020, 2021, 2022, 2023), con)
 
 # make sure to close all connections 
 all_cons <- dbListConnections(drv)

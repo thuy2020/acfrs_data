@@ -102,8 +102,10 @@ top100_county_3years <- county_all %>%
 # Find acfrs entities from the list of Top 200 county census
 top200_county_3years <- county_all %>% 
   filter(geo_id %in% census_county_top200$geo_id) #%>% 
-#   select(state.abb, name, id, year, geo_id) %>% add_count(geo_id)
-# %>% filter(n <3)
+
+missing_county <- top200_county_3years %>% 
+  select(state.abb, name, id, year, geo_id) %>% add_count(geo_id) %>% 
+    filter(n <3)
 
 #MA Norfolk 2022: not released yet
 # MA Bristol: have 2022, 2023 but not 2020, 2021
@@ -125,7 +127,6 @@ write.csv(county_all, "output/all_counties_3years.csv")
 top200_county_3years %>% write.csv("output/top200_counties.csv")
 
 ####Incorporated Place & Minor Civil Division####
-
 ##Special cities##
 special_cities <- acfrs_general_purpose %>% 
   #only filter those missing
@@ -162,7 +163,7 @@ top200_cities <- city_gov %>%
   #select(state.abb, name, id, year, geo_id) %>% add_count(geo_id) %>% filter(n <3)
 
 #missing
-top100_cities %>% add_count(geo_id) %>% filter(n<3) %>% arrange(name)
+missing_city <- top200_cities %>% add_count(geo_id) %>% filter(n<3) %>% arrange(name)
 
 # missing: 1 as of Jul 8, 2024
 #NJ newark 2022
@@ -180,7 +181,7 @@ dictionary <- readRDS("data/dictionary.RDS")
 school_districts_ <- readRDS("data/acfrs_data.RDS") %>% 
   filter(category == "School District") %>% 
   mutate(id = as.character(id)) %>% 
-  select(any_of(fields_to_select))
+  select(any_of(fields_to_select)) 
 
 #append URLs
 
@@ -202,9 +203,7 @@ top100_school_districts <- school_districts %>%
   rbind(nyc_top5) %>% arrange(state.abb, name) %>% distinct() 
 
 
-
 # top 200
-top200_schools_by_year
 
 dict_top200_ELSI <- dictionary %>% 
   filter(ncesID %in% top200_schools_by_year$ncesID) %>% 
@@ -229,7 +228,7 @@ top200_school_districts <- school_districts %>%
 # Uploaded: williamson county schools, reported in county acfrs. Uploaded county's acfrs to replace
 
 
-top100_school_districts %>% 
+missing_sd <- top200_school_districts %>% 
   add_count(ncesID) %>% filter(n < 3) %>% 
   select(state.abb, ncesID, year, name, n)
 

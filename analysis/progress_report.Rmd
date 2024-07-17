@@ -10,7 +10,34 @@ library(DT)
 library(dplyr)
 library(ggplot2)
 library(forcats)
+library(plotly)
 ```
+
+# Count by year
+
+```{r}
+acfrs_data <- readRDS("../data/acfrs_data.RDS") %>% 
+  filter(category %in% c("General Purpose", "School District"))
+
+#state collected 2023 - pop
+
+state_2023 <- state_gov %>% filter(year == 2023)
+sum(state_2023$population, na.rm = TRUE)
+
+state_missing_2023 <- 50 - nrow(state_count_by_year %>% filter(year == 2023))
+
+state_count_by_year %>% select(-year) %>% 
+  ggplot(aes(fct_reorder(state.name, n), n)) +
+  geom_col(fill = "steelblue")+
+  coord_flip() +
+  scale_y_discrete() +
+  theme_minimal()+
+  labs(x = "",
+       title = paste("State count by year\nMissing", {state_missing_2023}, "states for year 2023"))
+
+```
+
+
 
 # Missing count by state
 ```{r}
@@ -95,9 +122,12 @@ city_gov %>% select(state.abb, name, id, year, population) %>% filter(year == 20
 city_gov %>% select(state.abb, name, id, year, population) %>% filter(year == 2021) %>% select(-year) -> city21
 city_gov %>% select(state.abb, name, id, year, population) %>% filter(year == 2022) %>% select(-year) -> city22
 
+city_gov %>% select(state.abb, name, id, year, population) %>% filter(year == 2022) %>% select(-year) -> city23
+
 sum(city20$population, na.rm = TRUE)
 sum(city21$population, na.rm = TRUE)
 sum(city22$population, na.rm = TRUE)
+sum(city23$population, na.rm = TRUE)
 
 rbind((anti_join(city20, city21)  %>% mutate(year = 2021) ),
 (anti_join(city21, city20)  %>% mutate(year = 2020) ),
@@ -122,7 +152,11 @@ school_districts
 school_districts %>% select(state.abb, name, id, year, total_liabilities) %>% filter(year == 2020) %>% select(-year) -> sd20
 school_districts %>% select(state.abb, name, id, year, total_liabilities) %>% filter(year == 2021) %>% select(-year) -> sd21
 school_districts %>% select(state.abb, name, id, year, total_liabilities) %>% filter(year == 2022) %>% select(-year) -> sd22
+school_districts_ %>% select(state.abb, name, id, year, total_liabilities) %>% filter(year == 2023) %>% select(-year) -> sd23
 
+```
+
+```{r}
 # w/o NCES 1579
 rbind(
   (sd20 %>% left_join(dictionary) %>% 
@@ -142,6 +176,7 @@ rbind(
 sd20 %>% left_join(dictionary) %>% 
   filter(!is.na(ncesID)) %>% 
   left_join(nces, by = c("state.abb", "ncesID")) %>% select(state.abb, name, id, ncesID, enrollment_20, total_liabilities) -> sd20_withnces
+
 sum(sd20_withnces$enrollment_20, na.rm = TRUE)
 
 
@@ -156,6 +191,15 @@ sd22 %>% left_join(dictionary) %>%
   filter(!is.na(ncesID)) %>% 
   left_join(nces, by = c("state.abb", "ncesID")) %>% select(state.abb, name, id, ncesID, enrollment_22, total_liabilities) -> sd22_withnces
 sum(sd22_withnces$enrollment_22, na.rm = TRUE)
+
+
+# with NCES 2063, using enrollment 2022
+sd23 %>% left_join(dictionary) %>% 
+  filter(!is.na(ncesID)) %>% 
+  left_join(nces, by = c("state.abb", "ncesID")) %>% select(state.abb, name, id, ncesID, enrollment_22, total_liabilities) -> sd23_withnces
+sum(sd22_withnces$enrollment_22, na.rm = TRUE)
+
+
 
 # Examples of ACFRs not in NCES: NY otsego northern catskills boces
 
@@ -208,6 +252,13 @@ missing_school_20_21_22_june17_2024 %>%
 # Viz progress
 
 ```{r}
+####Population collected - state
+
+```
+
+
+
+```{r}
 ####Population collected - county 
 co_2020 <- county_gov %>% filter(year == 2020)
 #population collected:
@@ -242,6 +293,14 @@ sum(co_2022$population)
 setdiff(acfrs_county$id, co_2022$id) -> test22
 acfrs_county %>% filter(year == 2022) %>% 
   filter(id %in% test22) -> city_county_22
+
+#2023
+co_2023 <- county_gov %>% filter(year == 2023)
+sum(co_2023$population)
+setdiff(acfrs_county$id, co_2023$id) -> test23
+acfrs_county %>% filter(year == 2023) %>% 
+  filter(id %in% test23) -> city_county_23
+city_county_23
 ```
 
 
@@ -264,7 +323,7 @@ create_population_pie_chart <- function(values, total, title) {
 # Plot pie charts for count and population for each entity in separate grids
 for (entity in unique(data$Row)) {
   # Set up the plotting area for Count
-  par(mfrow = c(1, 3), mar = c(2, 2, 2, 2)) # 1 row, 3 columns
+  par(mfrow = c(2, 2), mar = c(2, 2, 2, 2)) # 1 row, 3 columns
   for (year in unique(data$Year)) {
     subset_data <- data %>% filter(Row == entity, Year == year)
     create_count_pie_chart(
@@ -274,7 +333,7 @@ for (entity in unique(data$Row)) {
     )
   }
   # Set up the plotting area for Population
-  par(mfrow = c(1, 3), mar = c(2, 2, 2, 2)) # 1 row, 3 columns
+  par(mfrow = c(2, 2), mar = c(2, 2, 2, 2)) # 1 row, 3 columns
   for (year in unique(data$Year)) {
     subset_data <- data %>% filter(Row == entity, Year == year)
     create_population_pie_chart(

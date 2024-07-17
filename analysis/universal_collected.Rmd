@@ -1,0 +1,60 @@
+---
+title: "ACFRs entities universal vs. collected"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(DT)
+library(dplyr)
+library(ggplot2)
+library(forcats)
+library(plotly)
+```
+
+
+```{r}
+readxl::read_excel("progress_report.xlsx") %>% 
+  filter(!Row %in% c("municipalities_all_place_division", "municipalities_incorporated", "municipalities_incorporated_others", "municipalities_others")) -> data
+
+# Function to create pie charts with raw numbers in the labels
+create_count_pie_chart <- function(values, labels, title) {
+  pie(values, labels = labels, main = title, col = c("steelblue", "lightgray"))
+}
+
+# Function to create pie charts with percentages in the labels
+create_population_pie_chart <- function(values, total, title) {
+  percentages <- round((values / total) * 100, 1)
+  labels <- paste(c("Collected\n", ""), "", percentages, "%")
+  pie(values, labels = labels, main = title, col = c("steelblue", "lightgray"))
+}
+
+# Plot pie charts for count and population for each entity 
+for (entity in unique(data$Row)) {
+  
+  # plotting area for Count
+  par(mfrow = c(2, 2), mar = c(4, 4, 4, 4)) 
+  
+  for (year in unique(data$Year)) {
+    subset_data <- data %>% filter(Row == entity, Year == year)
+    create_count_pie_chart(
+      values = c(subset_data$Collected_Count, subset_data$Remaining_Count),
+      labels = c(paste("Collected:\n", subset_data$Collected_Count), paste("", subset_data$Remaining_Count)),
+      title = paste(entity, year, "- Count")
+    )
+  }
+  
+  # plotting area for Population
+  par(mfrow = c(2, 2), mar = c(4, 4, 4, 4))
+  
+  for (year in unique(data$Year)) {
+    subset_data <- data %>% filter(Row == entity, Year == year)
+    create_population_pie_chart(
+      values = c(subset_data$Collected_Population, subset_data$Remaining_Population),
+      total = subset_data$Universal_Population,
+      title = paste(entity, year, "- Population")
+    )
+  }
+}
+
+```
