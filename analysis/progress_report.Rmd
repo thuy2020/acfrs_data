@@ -21,7 +21,12 @@ acfrs_data <- readRDS("../data/acfrs_data.RDS") %>%
 
 #state collected 2023 - pop
 
-state_2023 <- state_gov %>% filter(year == 2023)
+state_2023 <- 
+  
+  state_gov %>% select(name, year) %>% 
+  group_by(name) %>% 
+  add_count() %>% filter(n < 4) %>% distinct(name, n)
+
 sum(state_2023$population, na.rm = TRUE)
 
 state_missing_2023 <- 50 - nrow(state_count_by_year %>% filter(year == 2023))
@@ -35,6 +40,15 @@ state_count_by_year %>% select(-year) %>%
   labs(x = "",
        title = paste("State count by year\nMissing", {state_missing_2023}, "states for year 2023"))
 
+#Missing 2023
+# mississippi, 
+# nevada, 
+# CA, 
+# IL only has Interim Report
+
+state_gov %>% select(name, population) %>% 
+  filter(name %in% c("california", "mississippi", "nevada", "illinois"))
+
 ```
 
 
@@ -43,7 +57,8 @@ state_count_by_year %>% select(-year) %>%
 ```{r}
 # This is a manual file, do not delete file 
 # Missing as manually tracked 
-missing_county_SEP2023 <- rio::import("../data/_manuallyChecked_missing_county_SEP2023.xlsx") %>% select(-c(id, having_county_gov, acfrs_name)) %>% filter(`2020` == "uploaded file to portal")
+missing_county_SEP2023 <- rio::import("../data/_manuallyChecked_missing_county_SEP2023.xlsx") %>% select(-c(id, having_county_gov, acfrs_name)) %>% filter(`2020` == "uploaded file to portal") %>% 
+  arrange(desc(population))
 
 missing_2020 <- missing_county_SEP2023 %>% select(state.abb, `2020`) %>% 
   filter(`2020` == "missing") %>% group_by(state.abb) %>% 
@@ -55,7 +70,6 @@ missing_2021 <- missing_county_SEP2023 %>% select(state.abb, `2021`) %>%
   rename(missing_2021 = n) %>% select(-`2021`)
 
 missing_2021 %>% left_join(missing_2020) %>% arrange(desc(missing_2021)) %>%  #write.csv("missing_county_by_state_2020_2021.csv")
-
 
 ```
 
@@ -197,6 +211,7 @@ sum(sd22_withnces$enrollment_22, na.rm = TRUE)
 sd23 %>% left_join(dictionary) %>% 
   filter(!is.na(ncesID)) %>% 
   left_join(nces, by = c("state.abb", "ncesID")) %>% select(state.abb, name, id, ncesID, enrollment_22, total_liabilities) -> sd23_withnces
+
 sum(sd22_withnces$enrollment_22, na.rm = TRUE)
 
 

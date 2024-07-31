@@ -19,8 +19,6 @@ source("census.R")
 # - Use a "middle file" to link geo_id and government_ID
 # - Joining by names and states 
 
-acfrs_data <- readRDS("data/acfrs_data.RDS")
-
 ##### ACFRs General Purpose 
 
 # step 1: get all general purpose entities in acfrs, most contains governmentID
@@ -43,7 +41,7 @@ acfrs_general_purpose <- readRDS("data/acfrs_data.RDS") %>%
          name = str_remove_all(name, " fiscal court"),
          name = str_trim(name)) %>% 
   
-  mutate(name = case_when(name == "yakutat borough" & state.abb == "AK" ~ "yakutat city and borough",
+  mutate(name = case_when(id == "115965" ~ "jefferson county",
                           name == "dona ana county" & state.abb == "NM" ~ "doña ana county", 
                           name == "st marys county" & state.abb == "MD" ~ "st mary's county",
                           name == "athens-clarke county" & state.abb == "GA" ~ "st mary's county",
@@ -83,7 +81,7 @@ state_gov <- acfrs_state %>% select(-geo_id) %>%
 
 ####### Counties########
 
-# Special case: Alaska
+### Special case: Alaska
 #Find Alaska counties in census
 alaska_county_census <- census_county %>% filter(state.abb == "AK")
 
@@ -92,25 +90,27 @@ alaska_county_acfrs <- acfrs_general_purpose %>%
   filter(state.abb == "AK") %>% 
   filter(str_detect(name, "(borough)|(municipality)$"))
 
+### Join back to other counties
 acfrs_county <- acfrs_general_purpose %>% 
   filter(grepl("county|municipality|parish", name)) %>% #In Louisiana, counties are called Parishes.
-  filter(!str_detect(name, "\\(")) # not county. Eg: waverly township (van buren county)
+  filter(!str_detect(name, "\\(")) %>%  # not county. Eg: waverly township (van buren county)
   rbind(alaska_county_acfrs) 
-
+  
 # join acfrs with census population 
 county_gov <- acfrs_county %>% 
   
-  #TODO: fixing some name changes to match with census
-  mutate(name = case_when(id == "115965" ~ "jefferson county", 
-                          TRUE ~ name)) %>% 
-  
   # most acfrs_county do not have geo_id --> must join by state.abb and name
+  select(-geo_id) %>% 
   left_join(census_county, by = c("state.abb", "state.name","name" = "name_census")) %>% 
-  
-  # drop non-county entities
-  arrange(desc(population)) %>% 
-  drop_na(population) %>% select(-geo_id.x) %>% rename(geo_id = geo_id.y)
+  arrange(desc(population)) 
 
+missing_county <- anti_join(census_county, county_gov, by = "geo_id") %>% 
+  arrange(desc(population)) %>% 
+  
+  #not missing, just diff name, 
+  filter(!str_detect(name_census, "honolulu|philadelphia|san francisco|duval|(orleans parish)"))
+  
+  
 
 ########## Incorporated Place & Minor Civil Division#########
 # ACFRs:

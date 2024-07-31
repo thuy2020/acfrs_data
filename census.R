@@ -101,8 +101,13 @@ county_urb <- rio::import(here::here("data/census", "2020_UA_COUNTY.xlsx")) %>%
 # join with urb data
 census_county <- census_all %>% 
   filter(sumlev == 050) %>% 
-  left_join(county_urb)
+  filter(funcstat %in% c("A", "C")) %>%  #79 counties funstat not A or C
 
+#  does not count 5 counties in NY
+   filter(!name_census %in% c("kings county", "queens county", "new york county", "bronx county")) %>% 
+  left_join(county_urb) 
+
+  
 # Check special cases in Census county: 
 # cities & district of columbia categorized as county
 census_county %>% 
@@ -116,29 +121,18 @@ census_county %>%
 ###### Top 100 county Census 2021: 
 census_county_top100 <- census_county %>% 
   arrange(desc(population)) %>% 
-  filter(funcstat %in% c("A", "C")) %>% 
-  # does not count 5 counties in NY
-  filter(!name_census %in% c("kings county", "queens county", "new york county", "bronx county")) %>% 
-  
-  slice(1:100) #%>% 
-  #select(state.abb, name_census, population, funcstat, geo_id) 
+  slice(1:100)  
 
 ##### Top county 200
 census_county_top200 <- census_county %>% 
   arrange(desc(population)) %>% 
-  filter(funcstat %in% c("A", "C")) %>% 
-  # does not count 5 counties in NY
-  filter(!name_census %in% c("kings county", "queens county", "new york county", "bronx county")) %>% 
   slice(1:200) 
-
-#census_county_top100 %>% write_csv("output/census_county_top100.csv")
 
 ##### Census Incorporated Place & Minor Civil Division #########
 census_place_division <- census_all %>% 
   filter(sumlev %in% c(162, 061, 170, 172, 61)) %>% 
   filter(funcstat %in% c("A", "C")) %>% 
   distinct()
-
 
 #### Incorporated 
 

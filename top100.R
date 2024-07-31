@@ -36,9 +36,11 @@ state_3years <- append_url(state_gov_3years) %>%
   select(-identifier)
 
 #double check missing:
-state_3years %>% add_count(state.name) %>% filter(n<3)
+state_3years %>% add_count(state.name) %>% filter(n<4)
 
-state_3years %>% write.csv("output/all_states_3years.csv")
+state_3years %>% filter(year == 2023) %>% select(name, year) %>% View()
+
+state_3years %>% write.csv("output/all_states_4years_2020_2023.csv")
 
 ####County####
 
@@ -98,11 +100,40 @@ county_all <- append_url(county_gov_all) %>%
 top100_county_3years <- county_all %>% 
   filter(geo_id %in% census_county_top100$geo_id)
 
-
 # Find acfrs entities from the list of Top 200 county census
 top200_county_3years <- county_all %>% 
   filter(geo_id %in% census_county_top200$geo_id) #%>% 
 
+# missing county top100 year 2023
+# WA king county,
+#MN hennepin county
+# OH cuyahoga county
+# PA allegheny county
+# NY westchester county
+# WI milwaukee county
+# MI macomb county
+# TX hidalgo county
+# NJ middlesex county
+# PA montgomery county
+# OH hamilton county
+# WA snohomish county
+# OK oklahoma county
+# MA 	norfolk county
+# NJ hudson county
+# MO jackson county
+# CO 	denver county
+# OK tulsa county
+# UT utah county
+# PA 	bucks county
+# NJ monmouth county
+#NJ Essex county
+# NJ ocean county
+# KS johnson county
+
+top100_county_3years %>% select(state.abb, name, id, year, geo_id) %>% add_count(geo_id) %>% 
+  filter(n <4) %>% select(state.abb, name, n) %>% distinct() %>%  View()
+
+# missing county top200
 missing_county <- top200_county_3years %>% 
   select(state.abb, name, id, year, geo_id) %>% add_count(geo_id) %>% 
     filter(n <3)
@@ -114,7 +145,6 @@ missing_county <- top200_county_3years %>%
 
 #Lake County’s Chronically Poor Audit Results Continue
 #https://comptroller.tn.gov/news/2024/3/5/lake-county-s-chronically-poor-audit-results-continue.html
-
 
 
 top100_county_3years %>% add_count(geo_id) %>% filter(n <3 ) %>% arrange(name)
@@ -154,6 +184,37 @@ top100_cities <- city_gov %>%
   filter((geo_id %in% census_city_top100$geo_id) | 
            name == "district of columbia") %>% distinct() %>% 
   mutate(population = ifelse(name == "district of columbia", 689546, population))
+
+
+top100_cities %>% 
+  select(name, year) %>% 
+  group_by(year) %>% 
+  add_count() %>% filter(n< 4) %>% distinct() %>% 
+  View()
+
+
+
+top100_cities %>% select(state.abb, name, id, year, geo_id) %>% #filter(year == 2023) %>% View()
+  add_count(geo_id) %>% 
+  filter(n < 4) %>% select(state.abb, name, n) %>% distinct() %>% View()
+#Missing top 100 cities year 2023
+
+CA bakersfield
+AL huntsville
+CO aurora
+KS wichita
+NJ jersey city
+NJ newark
+NE omaha
+MN 	minneapolis
+OH cleveland
+OH toledo
+MN saint paul
+WA spokane
+WA tacoma
+WI milwaukee
+CO Denver
+
 
 #Top 200
 top200_cities <- city_gov %>% 

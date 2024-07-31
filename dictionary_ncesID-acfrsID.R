@@ -16,7 +16,7 @@ library(dplyr)
 
 # NCES
 # NCES list only has 13,713: data downloaded Jan 27, 2020. Not including charter schools. Student > 1.
-nces <- rio::import(here::here("data", "ncesdata_DBBFFFC.xlsx"), skip = 14) %>%
+nces_old <- rio::import(here::here("data", "ncesdata_DBBFFFC.xlsx"), skip = 14) %>%
   select(`NCES District ID`, `District Name`, `County Name*`, City, State) %>%
   rename(nces_original_name = `District Name`,
          county_nces = `County Name*`,
@@ -127,7 +127,7 @@ select(censusid, ncesid, gov_unit_original_name, name)
 
 
 # Only get those 13,713 in NCES to match with ACFRs: #nces %>% left_join(govname_nces_id) 
-census_gov_unit <- govname_nces_id %>% left_join(nces, by = "ncesid") %>% 
+census_gov_unit <- govname_nces_id %>% left_join(nces_old, by = "ncesid") %>% 
   mutate(name = str_replace_all(name, "\\.", " ")) %>% 
   mutate(name = str_replace_all(name, "/", " ")) %>% 
   mutate(name = str_replace_all(name, "-|&", " ")) %>% 
@@ -162,7 +162,8 @@ mutate(name = ifelse(state == "TX", str_remove_all(name, "[0-9]"), name)) %>%
 
 
 #### Round 1####
-round1 <- acfrs_school_districts %>% left_join(census_gov_unit, by = c("state", "name")) %>% drop_na(censusid)
+round1 <- acfrs_school_districts %>% left_join(census_gov_unit, by = c("state", "name")) %>% 
+  drop_na(censusid)
 
 #### Round 2 ####
 
@@ -376,7 +377,6 @@ oh_acfrs_matched <- oh_matched %>% select(state, acfrs_original_name, name)
  
 
 ## NE
-
 ne_acfrs <-  acfrs_sd_4 %>% filter(state == "NE") %>% arrange(name) %>% 
   mutate(name = str_remove_all(name, "(public schools)|"),
          name = str_remove_all(name, "(public school)"),
@@ -1037,7 +1037,7 @@ dictionary_old <- readRDS("data/dictionary_old.RDS") %>% rename(state.abb = stat
 #list of wrong sd
 wrong_sd <- c("detroit community schools")
   
-dictionary <- rbind(round1234, round5, round6, round7, dictionary_old) %>% 
+dictionary_1234567_old <- rbind(round1234, round5, round6, round7, dictionary_old) %>% 
   mutate(name = str_to_lower(name)) %>% 
   mutate(ncesID = ifelse(nchar(ncesID) < 7, paste0("0", ncesID), ncesID)) %>% 
   drop_na() %>% distinct() %>% 
@@ -1046,33 +1046,37 @@ dictionary <- rbind(round1234, round5, round6, round7, dictionary_old) %>%
   filter(!name %in% wrong_sd)
 
 
-#### Result####
-saveRDS(dictionary, "data/dictionary.RDS")
+source("nces.R")
 
-#TODO: check inflated join.  
+#TODO: check inflated id   
 rbind(round1234, round5, round6, round7, dictionary_old) %>% 
   mutate(name = str_to_lower(name)) %>% 
   mutate(ncesID = ifelse(nchar(ncesID) < 7, paste0("0", ncesID), ncesID)) %>% 
   drop_na() %>% distinct() %>% 
-  add_count(id) %>% filter(n>1)  -> inflated_dictionary
+  add_count(id) %>% filter(n>1)  %>% 
+  left_join(nces) %>% 
+  select(state.abb, id, ncesID, name, name_nces, county) -> inflated_dictionary
 
-inflated_dictionary %>% writexl::write_xlsx("tmp/inflated_dictionary.xlsx")
+inflated_dictionary %>% arrange(state.abb, name) %>% 
+  writexl::write_xlsx("tmp/inflated_dictionary.xlsx")
 
-inflated_join %>% filter(nchar(ncesID) <7)
+#TODO: check inflated ncesID  - not a real problem. Essentially duplicated due to variation in names. 
+# TODO: some acfrs id not existing. If there's a longer & a shorter acfrs id. the shorter does not exist. 
+rbind(round1234, round5, round6, round7, dictionary_old) %>% 
+  mutate(name = str_to_lower(name)) %>% 
+  mutate(ncesID = ifelse(nchar(ncesID) < 7, paste0("0", ncesID), ncesID)) %>% 
+  drop_na() %>% distinct() %>% 
+  add_count(ncesID) %>% filter(n>1)  %>% 
+  left_join(nces) %>% 
+  select(state.abb, id, ncesID, name, name_nces, county) %>% 
+  arrange(state.abb, name) -> inflated_ncesID 
 
+# corrected the inflated 
+inflated_dictionary_corrected <- readxl::read_xlsx("tmp/inflated_dictionary_corrected.xlsx") %>% 
+  drop_na() %>% select(state.abb, id, ncesID, name)
 
-nces <- readRDS("data/nces.RDS")
-nces %>% filter(ncesID %in% inflated_join$ncesID) %>% select(ncesID, name_nces, state.abb) -> foo
-###
-
-#   dictionary <- readRDS("data/dictionary.RDS") %>% rename(state.abb = state) %>% 
-#   mutate(name = str_to_lower(name))
-# 
-# anti_join(dictionary, result, by = c("id", "ncesID")) %>% drop_na(id) %>% arrange(state.abb, name) -> round100
-# anti_join(result, dictionary, by = c("id", "ncesID")) %>% drop_na(id) %>% arrange(state.abb, name) -> round200
-# 
-# difference <- anti_join(dictionary, result) %>% drop_na() %>% 
-#   bind_rows(anti_join(result, dictionary))
-# 
-# rbind(round100, round100) %>% distinct() -> round7
-#round7 %>% write.csv("data/_round7_manual_acfrID_ncesID.csv")
+# put back
+dictionary <- dictionary_1234567_old %>% rbind(inflated_dictionary_corrected)
+  
+#### Result####
+saveRDS(dictionary, "data/dictionary.RDS")
