@@ -1048,7 +1048,7 @@ dictionary_1234567_old <- rbind(round1234, round5, round6, round7, dictionary_ol
 
 source("nces.R")
 
-#TODO: check inflated id   
+#check inflated id   
 rbind(round1234, round5, round6, round7, dictionary_old) %>% 
   mutate(name = str_to_lower(name)) %>% 
   mutate(ncesID = ifelse(nchar(ncesID) < 7, paste0("0", ncesID), ncesID)) %>% 
@@ -1057,10 +1057,10 @@ rbind(round1234, round5, round6, round7, dictionary_old) %>%
   left_join(nces) %>% 
   select(state.abb, id, ncesID, name, name_nces, county) -> inflated_dictionary
 
-inflated_dictionary %>% arrange(state.abb, name) %>% 
-  writexl::write_xlsx("tmp/inflated_dictionary.xlsx")
+#inflated_dictionary %>% arrange(state.abb, name) %>% 
+#  writexl::write_xlsx("tmp/inflated_dictionary.xlsx")
 
-#TODO: check inflated ncesID  - not a real problem. Essentially duplicated due to variation in names. 
+#check inflated ncesID  - not a real problem. Essentially duplicated due to variation in names. 
 # TODO: some acfrs id not existing. If there's a longer & a shorter acfrs id. the shorter does not exist. 
 rbind(round1234, round5, round6, round7, dictionary_old) %>% 
   mutate(name = str_to_lower(name)) %>% 
@@ -1072,11 +1072,13 @@ rbind(round1234, round5, round6, round7, dictionary_old) %>%
   arrange(state.abb, name) -> inflated_ncesID 
 
 # corrected the inflated 
-inflated_dictionary_corrected <- readxl::read_xlsx("tmp/inflated_dictionary_corrected.xlsx") %>% 
-  drop_na() %>% select(state.abb, id, ncesID, name)
+inflated_dictionary_corrected <- readxl::read_xlsx("data/_inflated_dictionary_corrected_July2024.xlsx") %>% 
+  select(state.abb, id, ncesID, name)
 
-# put back
-dictionary <- dictionary_1234567_old %>% rbind(inflated_dictionary_corrected)
+
+# adding back the corrected inflated join  
+dictionary <- dictionary_1234567_old %>% 
+  rbind(inflated_dictionary_corrected)
   
 #### Result####
 saveRDS(dictionary, "data/dictionary.RDS")
