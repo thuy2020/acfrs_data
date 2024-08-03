@@ -30,7 +30,7 @@ fetch_data <- function(years, con){
                          cafrs_entity.id, cafrs_entity.nces_district_id, 
                          year, category,
                          
-                         cafrs_acfr.identifier,
+                         cafrs_acfr.identifier, cafrs_acfr.unable_to_review,
                          
                          cafrs_acfrvalue.reason_value, cafrs_acfrvalue.name as field_name
                          
@@ -43,7 +43,7 @@ fetch_data <- function(years, con){
                          WHERE year = %d
                          AND category != 'Non-Profit'
                          AND is_valid
-                         
+                        
                          AND not is_nonstandard", year)
     
     
@@ -70,14 +70,17 @@ fetch_data <- function(years, con){
     # some cleaning to be compatible with other data
   mutate(name = str_to_lower(name)) %>% 
   rename(state.abb = state_abb,
-           state.name = state_name) %>% 
+         state.name = state_name) %>% 
+    
+    # exclude acfrs unable to review due to various reason
+    filter(!unable_to_review != "") %>% 
     
     # calculate revenues. NOTE: when applying pmax(), na.rm does not work
   rowwise() %>% 
     mutate(sum1 = sum(charges_for_services, operating_grants,  capital_grants, general_revenue, na.rm = TRUE),
            sum2 = sum(activities_change_in_net_position,  expenses, na.rm = TRUE),
            revenues = max(sum1, sum2)) %>% ungroup() %>% 
-    select(-c(sum1, sum2))
+    select(-c(sum1, sum2, unable_to_review))
     
 
   saveRDS(acfrs_data, "data/acfrs_data.RDS")

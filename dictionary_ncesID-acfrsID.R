@@ -1076,9 +1076,14 @@ inflated_dictionary_corrected <- readxl::read_xlsx("data/_inflated_dictionary_co
   select(state.abb, id, ncesID, name)
 
 
+####Minesota####
+round10_minesota <- read.csv("data/_round10_minesota.csv") %>% select(-1)
+
+#### Result####
+
 # adding back the corrected inflated join  
 dictionary <- dictionary_1234567_old %>% 
-  rbind(inflated_dictionary_corrected)
-  
-#### Result####
+  rbind(inflated_dictionary_corrected) %>% 
+  rbind(round10_minesota)
+
 saveRDS(dictionary, "data/dictionary.RDS")
