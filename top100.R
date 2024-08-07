@@ -21,26 +21,27 @@ fields_to_select <- c("state.abb", "state.name", "id", "geo_id", "year", "name",
                       "net_opeb_liability", "net_opeb_assets", 
                       "total_assets", "current_assets", "compensated_absences",
                       "expenses", "revenues",
+                      "unrestricted",
                       "population", "urban_pop", "pct_urban_pop", "median_hh_income_21")
 
 
 ####State######
-state_gov_3years <- state_gov %>% 
+state_gov_4years <- state_gov %>% 
   #join income
   left_join(income) %>% 
   #get a set of variables
   select(all_of(fields_to_select)) 
   
   #append url
-state_3years <- append_url(state_gov_3years) %>% 
+state_4years <- append_url(state_gov_4years) %>% 
   select(-identifier)
 
 #double check missing:
-state_3years %>% add_count(state.name) %>% filter(n<4)
+state_4years %>% add_count(state.name) %>% filter(n<4)
 
-state_3years %>% filter(year == 2023) %>% select(name, year) %>% View()
+state_4years %>% filter(year == 2023) %>% select(name, year) %>% View()
 
-state_3years %>% write.csv("output/all_states_4years_2020_2023.csv")
+state_4years %>% write.csv("output/all_states_4years_2020_2023.csv")
 
 ####County####
 
@@ -95,6 +96,7 @@ county_gov_all <- county_gov %>%
   #append URL
 county_all <- append_url(county_gov_all) %>% 
   select(-identifier)
+county_all %>% filter(year == 2023) %>% View()
 
 # Find acfrs entities from the list of Top 100 county census
 top100_county_3years <- county_all %>% 
@@ -102,7 +104,8 @@ top100_county_3years <- county_all %>%
 
 # Find acfrs entities from the list of Top 200 county census
 top200_county_3years <- county_all %>% 
-  filter(geo_id %in% census_county_top200$geo_id) #%>% 
+  filter(geo_id %in% census_county_top200$geo_id) %>%  #%>% 
+  filter(year != 2023)
 
 # missing county top100 year 2023
 # WA king county,
@@ -193,35 +196,34 @@ top100_cities %>%
   View()
 
 
-
 top100_cities %>% select(state.abb, name, id, year, geo_id) %>% #filter(year == 2023) %>% View()
   add_count(geo_id) %>% 
   filter(n < 4) %>% select(state.abb, name, n) %>% distinct() %>% View()
 #Missing top 100 cities year 2023
 
-CA bakersfield
-AL huntsville
-CO aurora
-KS wichita
-NJ jersey city
-NJ newark
-NE omaha
-MN 	minneapolis
-OH cleveland
-OH toledo
-MN saint paul
-WA spokane
-WA tacoma
-WI milwaukee
-CO Denver
+# CA bakersfield
+# AL huntsville
+# CO aurora
+# KS wichita
+# NJ jersey city
+# NJ newark
+# NE omaha
+# MN 	minneapolis
+# OH cleveland
+# OH toledo
+# MN saint paul
+# WA spokane
+# WA tacoma
+# WI milwaukee
+# CO Denver
 
 
 #Top 200
 top200_cities <- city_gov %>% 
   filter((geo_id %in% census_city_top200$geo_id) | 
            name == "district of columbia") %>% distinct() %>% 
-  mutate(population = ifelse(name == "district of columbia", 689546, population)) #%>% 
-  #select(state.abb, name, id, year, geo_id) %>% add_count(geo_id) %>% filter(n <3)
+  mutate(population = ifelse(name == "district of columbia", 689546, population)) %>% 
+  filter(year != 2023)
 
 #missing
 missing_city <- top200_cities %>% add_count(geo_id) %>% filter(n<3) %>% arrange(name)
@@ -278,9 +280,8 @@ top200_school_districts <- school_districts %>%
   left_join(nces, by = c("ncesID", "state.abb", "state.name")) %>% 
   
   #bind with NYC
-  rbind(nyc_top5) %>% arrange(state.abb, name) %>% distinct() #%>% 
-  #select(state.abb, ncesID, year, name) %>% 
-  #add_count(ncesID) %>% filter(n < 3) 
+  rbind(nyc_top5) %>% arrange(state.abb, name) %>% distinct() %>% 
+  filter(year != 2023)
 
 
 #TODO: check back missing: 

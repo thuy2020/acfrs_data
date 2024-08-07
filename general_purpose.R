@@ -110,7 +110,14 @@ missing_county <- anti_join(census_county, county_gov, by = "geo_id") %>%
   #not missing, just diff name, 
   filter(!str_detect(name_census, "honolulu|philadelphia|san francisco|duval|(orleans parish)"))
   
-  
+county_gov %>% select(state.abb, year, name) %>% 
+  group_by(year) %>% 
+  summarise(count = n())
+
+state_gov %>% select(state.abb, year, name) %>% 
+  group_by(year) %>% 
+  summarise(count = n())
+
 
 ########## Incorporated Place & Minor Civil Division#########
 # ACFRs:

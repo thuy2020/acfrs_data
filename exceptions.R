@@ -25,6 +25,7 @@ nyc_sd <- import("data/_apportion values.xlsx", sheet = 1, skip = 5) %>%
   filter(name != "DOE") %>% 
   mutate(name_nces = NA,
          category = "School District",
+         unrestricted = NA,
          url = NA) %>% 
   select(-c(charges_services, operating_grant, general_rev)) 
 

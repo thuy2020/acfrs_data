@@ -57,6 +57,22 @@ d_22 <- import(here::here("data", "ELSI_school year 2021 2022_cordinate.csv")) %
     congresstional_code = `Congressional Code [District] 2021-22`,
     metro_code = `Metro Micro Area Code [District] 2021-22`)
 
+#NCES agency type
+
+#unique(d_20$`Agency Type [District] 2019-20`)
+# [1] "7-Independent Charter District"                                                                        
+# [2] "†"                                                                                                     
+# [3] "9-Specialized public school district"                                                                  
+# [4] "1-Regular local school district that is NOT a component of a supervisory union"                        
+# [5] "8-Other education agencies"                                                                            
+# [6] "4-Regional Education Service Agency (RESA)"                                                            
+# [7] "3-Supervisory union administrative center (or county superintendent's office serving the same purpose)"
+# [8] "2-Local school district that is a component of a supervisory union"                                    
+# [9] "5-State agency providing elementary and/or secondary level instruction"                                
+# [10] "6-Federal agency providing elementary and/or secondary level instruction"
+
+
+
 nces <- d_20 %>% left_join(d_21) %>% left_join(d_22) %>% 
   rename(name_nces = 1,
          state.name = 2, 

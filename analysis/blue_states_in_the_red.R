@@ -3,8 +3,8 @@ library(tidyverse)
 library(Hmisc)
 
 # Read the data
-states <- read_csv("output/all_states_3years.csv")
 partisan_lean <- read_csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/partisan-lean/fivethirtyeight_partisan_lean_STATES.csv")
+states <- read_csv("output/all_states_3years.csv")
 
 # Clean and prepare the data
 states <- states %>%
@@ -15,14 +15,64 @@ states <- states %>%
     free_cash_flow = (revenues - (expenses + current_liabilities)) / population
   )
 
-debt_ratio <- states %>% select(debt_ratio, state.name)
-
-cor(states$partisan_lean, states$debt_ratio, method = "spearman")
-cor.test(states$partisan_lean, states$debt_ratio, method = "spearman")
-
 # List of variables to analyze
-variables <- c("partisan_lean", "debt_ratio", "free_cash_flow", 
-               "median_hh_income_21", "pct_urban_pop")
+variables <- c("partisan_lean", "debt_ratio", "free_cash_flow", "median_hh_income_21", "pct_urban_pop")
+
+# Calculate correlations for all years combined
+data_combined <- states %>%
+  select(all_of(variables)) %>%
+  filter(complete.cases(.))  # Ensure no NA values
+
+pearson_corr_combined <- rcorr(as.matrix(data_combined), type = "pearson")
+spearman_corr_combined <- rcorr(as.matrix(data_combined), type = "spearman")
+
+# Function to create a readable summary for combined years
+create_summary_combined <- function(correlations, method) {
+  corr_matrix <- correlations$r
+  p_values <- correlations$P
+  
+  pairs <- list(
+    c("partisan_lean", "debt_ratio"),
+    c("partisan_lean", "free_cash_flow"),
+    c("median_hh_income_21", "debt_ratio"),
+    c("median_hh_income_21", "free_cash_flow"),
+    c("pct_urban_pop", "debt_ratio"),
+    c("pct_urban_pop", "free_cash_flow")
+  )
+  
+  summary_list <- list()
+  
+  for (pair in pairs) {
+    var1 <- pair[1]
+    var2 <- pair[2]
+    corr_value <- corr_matrix[var1, var2]
+    p_value <- p_values[var1, var2]
+    if (!is.na(corr_value) && !is.na(p_value)) {
+      significance <- ifelse(p_value < 0.05, "significant", "not significant")
+      summary_list[[paste(var1, var2, sep = " - ")]] <- paste("The", method, "correlation between", var1, "and", var2, "is", round(corr_value, 3), "and is", significance, "with a p-value of", round(p_value, 3), ".")
+    } else {
+      summary_list[[paste(var1, var2, sep = " - ")]] <- paste("The", method, "correlation between", var1, "and", var2, "is not available due to missing values.")
+    }
+  }
+  
+  return(summary_list)
+}
+
+# Create summaries for combined years
+summary_combined_pearson <- create_summary_combined(pearson_corr_combined, "Pearson")
+summary_combined_spearman <- create_summary_combined(spearman_corr_combined, "Spearman")
+
+# Print summaries for combined years and methods
+print_summary_list <- function(summary_list) {
+  for (summary in summary_list) {
+    cat(summary, "\n")
+  }
+}
+
+cat("Combined Years Pearson Correlation Summary:\n")
+print_summary_list(summary_combined_pearson)
+cat("\nCombined Years Spearman Correlation Summary:\n")
+print_summary_list(summary_combined_spearman)
 
 # Function to calculate correlations for a given year
 calculate_correlations <- function(data, year) {
@@ -40,7 +90,7 @@ calculate_correlations <- function(data, year) {
   )
 }
 
-# Function to create a readable summary
+# Function to create a readable summary for individual years
 create_summary <- function(correlations, method) {
   corr_matrix <- correlations[[paste0(tolower(method), "_corr")]]$r
   p_values <- correlations[[paste0(tolower(method), "_corr")]]$P
@@ -61,8 +111,12 @@ create_summary <- function(correlations, method) {
     var2 <- pair[2]
     corr_value <- corr_matrix[var1, var2]
     p_value <- p_values[var1, var2]
-    significance <- ifelse(p_value < 0.05, "significant", "not significant")
-    summary_list[[paste(var1, var2, sep = " - ")]] <- paste("The", method, "correlation between", var1, "and", var2, "in", correlations$year, "is", round(corr_value, 3), "and is", significance, "with a p-value of", round(p_value, 3), ".")
+    if (!is.na(corr_value) && !is.na(p_value)) {
+      significance <- ifelse(p_value < 0.05, "significant", "not significant")
+      summary_list[[paste(var1, var2, sep = " - ")]] <- paste("The", method, "correlation between", var1, "and", var2, "in", correlations$year, "is", round(corr_value, 3), "and is", significance, "with a p-value of", round(p_value, 3), ".")
+    } else {
+      summary_list[[paste(var1, var2, sep = " - ")]] <- paste("The", method, "correlation between", var1, "and", var2, "in", correlations$year, "is not available due to missing values.")
+    }
   }
   
   return(summary_list)
@@ -82,12 +136,6 @@ summary_2022_pearson <- create_summary(correlations_2022, "Pearson")
 summary_2022_spearman <- create_summary(correlations_2022, "Spearman")
 
 # Print summaries for each year and method
-print_summary_list <- function(summary_list) {
-  for (summary in summary_list) {
-    cat(summary, "\n")
-  }
-}
-
 cat("2020 Pearson Correlation Summary:\n")
 print_summary_list(summary_2020_pearson)
 cat("\n2020 Spearman Correlation Summary:\n")
@@ -103,45 +151,44 @@ print_summary_list(summary_2022_pearson)
 cat("\n2022 Spearman Correlation Summary:\n")
 print_summary_list(summary_2022_spearman)
 
-
 # Fact-check the specific paragraph for 2022
 # States with debt ratio over 100%
-high_debt_ratio_states <- states |>
-  filter(year == 2022) |>
-  filter(debt_ratio > 1) |>
+high_debt_ratio_states <- states %>%
+  filter(year == 2022) %>%
+  filter(debt_ratio > 1) %>%
   select(state.name, partisan_lean, debt_ratio)
 
 # Democratic-leaning states with debt ratio over 100%
-dem_high_debt_ratio <- high_debt_ratio_states |>
+dem_high_debt_ratio <- high_debt_ratio_states %>%
   filter(partisan_lean > 0)
 
 # Republican-leaning states with debt ratio over 100%
-rep_high_debt_ratio <- high_debt_ratio_states |>
+rep_high_debt_ratio <- high_debt_ratio_states %>%
   filter(partisan_lean < 0)
 
 # Specific states with high debt ratios
-specific_states <- states |>
-  filter(year == 2022) |>
-  filter(state.name %in% c("Illinois", "New Jersey")) |>
+specific_states <- states %>%
+  filter(year == 2022) %>%
+  filter(state.name %in% c("Illinois", "New Jersey")) %>%
   select(state.name, debt_ratio)
 
 # States with debt ratio under 50%
-low_debt_ratio_states <- states |>
-  filter(year == 2022) |>
-  filter(debt_ratio < 0.5) |>
+low_debt_ratio_states <- states %>%
+  filter(year == 2022) %>%
+  filter(debt_ratio < 0.5) %>%
   select(state.name, partisan_lean, debt_ratio)
 
 # Dem states with debt ratio under 50%
-deb_low_debt_ratio_states <- states |>
-  filter(year == 2022) |>
-  filter(debt_ratio < 0.5) |>
-  filter(partisan_lean > 0) |>
+deb_low_debt_ratio_states <- states %>%
+  filter(year == 2022) %>%
+  filter(debt_ratio < 0.5) %>%
+  filter(partisan_lean > 0) %>%
   select(state.name, partisan_lean, debt_ratio)
 
 # Republican-leaning states with debt ratio above 50%
-rep_above_50_debt_ratio <- states |>
-  filter(year == 2022) |>
-  filter(partisan_lean < 0 & debt_ratio > 0.5) |>
+rep_above_50_debt_ratio <- states %>%
+  filter(year == 2022) %>%
+  filter(partisan_lean < 0 & debt_ratio > 0.5) %>%
   select(state.name, debt_ratio)
 
 # Print results for verification
@@ -180,14 +227,24 @@ only_nd_increase <- all_states_debt_ratio %>%
 cat("\nStates with an increase in debt ratio from 2020 to 2022:\n")
 print(only_nd_increase)
 
+# Calculate Free Cash Flow correlation significance in 2022
+free_cash_flow_corr_2022 <- correlations_2022$pearson_corr$r["free_cash_flow", ]
+free_cash_flow_pval_2022 <- correlations_2022$pearson_corr$P["free_cash_flow", ]
+
+free_cash_flow_correlation_significance <- data.frame(
+  variable = names(free_cash_flow_corr_2022),
+  correlation = free_cash_flow_corr_2022,
+  p_value = free_cash_flow_pval_2022,
+  significance = ifelse(free_cash_flow_pval_2022 < 0.05, "significant", "not significant")
+)
+
 cat("\nFree Cash Flow Correlation Significance in 2022:\n")
 print(free_cash_flow_correlation_significance)
-
 
 # Alaska and North Dakota per capita liabilities check
 ak_nd_liabilities <- states %>%
   filter(state.name %in% c("Alaska", "North Dakota")) %>%
-  mutate(current_liabilities_pc = current_liabilities/population) |>
+  mutate(current_liabilities_pc = current_liabilities/population) %>%
   select(state.name, year, current_liabilities_pc) %>%
   filter(year %in% c(2020, 2022))
 
@@ -197,7 +254,7 @@ print(ak_nd_liabilities)
 # California per capita liabilities check
 ca_liabilities <- states %>%
   filter(state.name == "California") %>%
-  mutate(current_liabilities_pc = current_liabilities/population) |>
+  mutate(current_liabilities_pc = current_liabilities/population) %>%
   select(state.name, year, current_liabilities_pc) %>%
   filter(year %in% c(2020, 2022))
 
@@ -235,22 +292,19 @@ revenues_per_capita <- states %>%
 cat("\nPer Capita and Total Revenues for Michigan, Alaska, and Wyoming in 2020 and 2022:\n")
 print(revenues_per_capita)
 
-
-
 # Save data for 2022
-states_partisan_lean_debt_ratio_22 <- states |>
-  filter(year == 2022) |>
+states_partisan_lean_debt_ratio_22 <- states %>%
+  filter(year == 2022) %>%
   select(state.name, partisan_lean, debt_ratio)
 
 write_csv(states_partisan_lean_debt_ratio_22, "states_partisan_lean_debt_ratio_22.csv")
-
 
 # Extract and print debt ratios for 2020 and 2022 by state
 debt_ratios_2020_2022 <- states %>%
   filter(year %in% c(2020, 2022)) %>%
   select(state.name, year, debt_ratio) %>%
   spread(key = year, value = debt_ratio) %>%
-  rename(debt_ratio_2020 = `2020`, debt_ratio_2022 = `2022`) |>
+  rename(debt_ratio_2020 = `2020`, debt_ratio_2022 = `2022`) %>%
   mutate(difference = debt_ratio_2020 - debt_ratio_2022)
 
 cat("\nDebt Ratios for 2020 and 2022 by State:\n")

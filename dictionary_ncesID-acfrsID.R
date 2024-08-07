@@ -1034,8 +1034,6 @@ round7 <- read_csv("data/_dictionary_7_manually_created.csv") %>% select(-1)
 # This dictionary was constructed using an other NCES list that is similar but not identical to the ELSI list
 dictionary_old <- readRDS("data/dictionary_old.RDS") %>% rename(state.abb = state)
 
-#list of wrong sd
-wrong_sd <- c("detroit community schools")
   
 dictionary_1234567_old <- rbind(round1234, round5, round6, round7, dictionary_old) %>% 
   mutate(name = str_to_lower(name)) %>% 
@@ -1043,7 +1041,11 @@ dictionary_1234567_old <- rbind(round1234, round5, round6, round7, dictionary_ol
   drop_na() %>% distinct() %>% 
 # keep the inflated rows out
   add_count(id) %>% filter(n==1) %>% select(-n) %>%
-  filter(!name %in% wrong_sd)
+
+
+# take out some acfrs already deleted from acfrs database
+  filter(!id %in% c("30408", "76973", "87263"))
+
 
 
 source("nces.R")
@@ -1077,13 +1079,32 @@ inflated_dictionary_corrected <- readxl::read_xlsx("data/_inflated_dictionary_co
 
 
 ####Minesota####
+# mn_wiki <- readxl::read_excel("data/Minesota_school_districts_wiki_list.xlsx") %>% 
+#   mutate(number = str_extract(name_wiki, "\\d+")) %>% drop_na() 
+# mn_acfrs_needNCESid <- testc %>% mutate(number = str_extract(name, "\\d+")) %>% 
+#   select(id, name, number) %>% distinct()
+# mn_acfrs_needNCESid %>% left_join(mn_wiki, by = "number") %>% View()
+
 round10_minesota <- read.csv("data/_round10_minesota.csv") %>% select(-1)
 
-#### Result####
+# Manual input 
+round11 <- read.csv("data/_acfrs_without_ncesID_Aug2024.csv") %>% 
+  drop_na(ncesID) %>% 
+  select(state.abb, id, name, ncesID)
 
+round12 <- read.csv("data/_dictionary_12_manually_created.csv") %>% 
+  select(-1, -name_nces) %>% 
+  drop_na(ncesID)
+  
+  #### Result####
 # adding back the corrected inflated join  
 dictionary <- dictionary_1234567_old %>% 
   rbind(inflated_dictionary_corrected) %>% 
-  rbind(round10_minesota)
-
+  rbind(round10_minesota) %>% 
+  rbind(round11)  %>% 
+  rbind(round12)
+  
+dictionary %>% add_count(id) %>% 
+  distinct(ncesID) %>% nrow()
+  
 saveRDS(dictionary, "data/dictionary.RDS")
