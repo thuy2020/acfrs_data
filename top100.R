@@ -43,6 +43,11 @@ state_4years %>% filter(year == 2023) %>% select(name, year) %>% View()
 
 state_4years %>% write.csv("output/all_states_4years_2020_2023.csv")
 
+#Missing states: 
+#https://www.dfa.ms.gov/publications
+# AZ has financial report 2023 but not ACFRs 2023: https://gao.az.gov/financials/afr
+# CA, NV, MS, IL
+
 ####County####
 
 ##Consolidated county-city##
@@ -103,35 +108,31 @@ top100_county_3years <- county_all %>%
   filter(geo_id %in% census_county_top100$geo_id)
 
 # Find acfrs entities from the list of Top 200 county census
-top200_county_3years <- county_all %>% 
-  filter(geo_id %in% census_county_top200$geo_id) %>%  #%>% 
-  filter(year != 2023)
+top200_county_4years <- county_all %>% 
+  filter(geo_id %in% census_county_top200$geo_id) 
+
+top200_county_4years %>% select(state.abb, name, year, id) %>% add_count(id) %>% select(-year) %>% 
+  distinct()%>% filter(n<4) %>% write.csv("tmp/top200_counties_missing_2023.csv")
+
+# Missing states 2023: CA, NV, MS, IL, AZ
 
 # missing county top100 year 2023
-# WA king county,
-#MN hennepin county
-# OH cuyahoga county
-# PA allegheny county
-# NY westchester county
-# WI milwaukee county
-# MI macomb county
-# TX hidalgo county
-# NJ middlesex county
-# PA montgomery county
-# OH hamilton county
-# WA snohomish county
-# OK oklahoma county
+# MI macomb county https://www.macombgov.org/departments/finance-department/financial-transparency/annual-comprehensive-financial
+# TX hidalgo county https://www.hidalgocounty.us/1288/Annual-Financial-Report
+# NJ middlesex county https://www.middlesexcountynj.gov/government/departments/department-of-finance/financial-information/-folder-157
+# PA montgomery county https://www.montgomerycountypa.gov/331/Annual-Financial-Statements-Reports
+# OH hamilton county https://www.hamiltoncountyohio.gov/government/departments/budget_and_strategic_initiatives/annual_information_statement
+# WA snohomish county https://sao.wa.gov/reports-data/audit-reports?SearchText=snohomish%20county&StartDate=&EndDate=
+# OK oklahoma county https://www.sai.ok.gov/audit-reports/?counties=55&years=%2C2023&orgs=
 # MA 	norfolk county
-# NJ hudson county
-# MO jackson county
-# CO 	denver county
-# OK tulsa county
-# UT utah county
-# PA 	bucks county
-# NJ monmouth county
-#NJ Essex county
-# NJ ocean county
-# KS johnson county
+# NJ hudson county https://www.hcnj.us/finance/
+# CO 	denver county https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Department-of-Finance/Financial-Reports/Annual-Comprehensive-Financial-Report
+# OK tulsa county https://countyclerk.tulsacounty.org/Home/Reports
+# UT utah county https://www.utahcounty.gov/Dept/ClerkAud/BudgetFinance/FinancialReports.asp
+# PA 	bucks county https://www.buckscounty.gov/253/Finance-Division
+# NJ monmouth county https://www.visitmonmouth.com/page.aspx?Id=2166
+#NJ Essex county https://essexcountynj.org/treasurer/
+
 
 top100_county_3years %>% select(state.abb, name, id, year, geo_id) %>% add_count(geo_id) %>% 
   filter(n <4) %>% select(state.abb, name, n) %>% distinct() %>%  View()

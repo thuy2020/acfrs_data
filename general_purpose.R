@@ -114,10 +114,14 @@ county_gov %>% select(state.abb, year, name) %>%
   group_by(year) %>% 
   summarise(count = n())
 
-state_gov %>% select(state.abb, year, name) %>% 
+county_gov %>% select(state, name, population, year) %>% 
   group_by(year) %>% 
-  summarise(count = n())
+  summarise(collected_pop = sum(population, na.rm = TRUE))
 
+# Missing states: CA, NV, MS, IL, AZ
+#https://www.dfa.ms.gov/publications
+# AZ has financial report 2023 but not ACFRs 2023: https://gao.az.gov/financials/afr
+# CA, NV, MS, IL
 
 ########## Incorporated Place & Minor Civil Division#########
 # ACFRs:
@@ -135,8 +139,13 @@ city_gov <- place_division_gov %>%
   filter((geo_id %in% census_incorporated$geo_id) | name == "district of columbia") 
 
 
+city_gov %>% select(state.abb, year, name) %>% 
+  group_by(year) %>% 
+  summarise(count = n())
 
-
+city_gov %>% select(state, name, population, year) %>% 
+  group_by(year) %>% 
+  summarise(collected_pop = sum(population, na.rm = TRUE))
 
 
 
