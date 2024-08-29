@@ -79,6 +79,20 @@ state_gov <- acfrs_state %>% select(-geo_id) %>%
                             (nchar(geo_id) == 4) ~ paste0(geo_id, "0"),
                             TRUE ~ as.character(geo_id)))
 
+
+state_gov %>% 
+  group_by(state.abb, year) %>% 
+  add_count(state.abb) %>% 
+  select(state.abb, n)
+
+# Missing states: CA, NV, MS, IL, AZ
+#https://www.sco.ca.gov/ard_state_acfr.html
+#https://www.dfa.ms.gov/publications
+#https://controller.nv.gov/FinancialRpts/CAFR/Home/
+# https://illinoiscomptroller.gov/financial-reports-data/find-a-report/comprehensive-reporting/annual-comprehensive-financial-report/
+# AZ has financial report 2023 but not ACFRs 2023: https://gao.az.gov/financials/acfr
+
+
 ####### Counties########
 
 ### Special case: Alaska
@@ -118,10 +132,7 @@ county_gov %>% select(state, name, population, year) %>%
   group_by(year) %>% 
   summarise(collected_pop = sum(population, na.rm = TRUE))
 
-# Missing states: CA, NV, MS, IL, AZ
-#https://www.dfa.ms.gov/publications
-# AZ has financial report 2023 but not ACFRs 2023: https://gao.az.gov/financials/afr
-# CA, NV, MS, IL
+
 
 ########## Incorporated Place & Minor Civil Division#########
 # ACFRs:
@@ -146,13 +157,5 @@ city_gov %>% select(state.abb, year, name) %>%
 city_gov %>% select(state, name, population, year) %>% 
   group_by(year) %>% 
   summarise(collected_pop = sum(population, na.rm = TRUE))
-
-
-
-
-
-
-
-
 
 

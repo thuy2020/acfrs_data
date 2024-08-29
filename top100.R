@@ -37,16 +37,19 @@ state_4years <- append_url(state_gov_4years) %>%
   select(-identifier)
 
 #double check missing:
-state_4years %>% add_count(state.name) %>% filter(n<4)
+state_4years %>% add_count(state.name) %>% filter(n<4) %>% 
+  select(state.abb, n)
 
 state_4years %>% filter(year == 2023) %>% select(name, year) %>% View()
 
 state_4years %>% write.csv("output/all_states_4years_2020_2023.csv")
 
-#Missing states: 
+# Missing states: CA, NV, MS, IL, AZ
+#https://www.sco.ca.gov/ard_state_acfr.html
 #https://www.dfa.ms.gov/publications
-# AZ has financial report 2023 but not ACFRs 2023: https://gao.az.gov/financials/afr
-# CA, NV, MS, IL
+#https://controller.nv.gov/FinancialRpts/CAFR/Home/
+# https://illinoiscomptroller.gov/financial-reports-data/find-a-report/comprehensive-reporting/annual-comprehensive-financial-report/
+# AZ has financial report 2023 but not ACFRs 2023: https://gao.az.gov/financials/acfr
 
 ####County####
 
@@ -101,7 +104,9 @@ county_gov_all <- county_gov %>%
   #append URL
 county_all <- append_url(county_gov_all) %>% 
   select(-identifier)
+
 county_all %>% filter(year == 2023) %>% View()
+
 
 # Find acfrs entities from the list of Top 100 county census
 top100_county_3years <- county_all %>% 
@@ -111,8 +116,9 @@ top100_county_3years <- county_all %>%
 top200_county_4years <- county_all %>% 
   filter(geo_id %in% census_county_top200$geo_id) 
 
-top200_county_4years %>% select(state.abb, name, year, id) %>% add_count(id) %>% select(-year) %>% 
-  distinct()%>% filter(n<4) %>% write.csv("tmp/top200_counties_missing_2023.csv")
+top200_county_4years %>% select(state.abb, name, year, id) %>% 
+  add_count(id) %>% select(-year) %>% 
+  distinct()%>% filter(n<4) #%>% write.csv("tmp/top200_counties_missing_2023.csv")
 
 # Missing states 2023: CA, NV, MS, IL, AZ
 
@@ -220,14 +226,44 @@ top100_cities %>% select(state.abb, name, id, year, geo_id) %>% #filter(year == 
 
 
 #Top 200
-top200_cities <- city_gov %>% 
+top200_cities <- city_gov %>% filter(year == 2023) %>% View()
   filter((geo_id %in% census_city_top200$geo_id) | 
            name == "district of columbia") %>% distinct() %>% 
-  mutate(population = ifelse(name == "district of columbia", 689546, population)) %>% 
-  filter(year != 2023)
+  mutate(population = ifelse(name == "district of columbia", 689546, population)) 
+  #filter(year != 2023)
 
-#missing
-missing_city <- top200_cities %>% add_count(geo_id) %>% filter(n<3) %>% arrange(name)
+#missing cities 2023
+missing_city <- top200_cities %>% add_count(geo_id) %>% filter(n<4) %>% 
+  arrange(state.abb, name, year) %>% 
+  select(state.name, name, year, id, n) 
+
+read.csv("tmp/top200cities_missing2023.csv") %>% 
+  filter(X.1 != "uploaded 2023") %>% 
+  filter(!year %in% c(2020, 2021)) %>% 
+  select(state.name, name) %>% distinct() %>% write.csv("tmp/missing_cities_2023.csv")
+
+# Cities in top 200 that are missing 2023
+# state.name	name
+# 1	Alabama	birmingham
+# 2	Arkansas	little rock
+# 3	California	bakersfield
+# 4	California	salinas
+# 5	Colorado	lakewood
+# 6	Connecticut	new haven
+# 7	Connecticut	stamford
+# 8	Florida	fort lauderdale
+# 9	Georgia	savannah
+# 10	Illinois	aurora
+# 11	Illinois	joliet
+# 12	Louisiana	shreveport
+# 13	Minnesota	saint paul
+# 14	Nebraska	omaha
+# 15	New Jersey	jersey city
+# 16	Ohio	akron
+# 17	Ohio	toledo
+# 18	South Carolina	charleston
+# 19	Washington	kent
+# 20	Washington	spokane
 
 # missing: 1 as of Jul 8, 2024
 #NJ newark 2022
@@ -281,8 +317,7 @@ top200_school_districts <- school_districts %>%
   left_join(nces, by = c("ncesID", "state.abb", "state.name")) %>% 
   
   #bind with NYC
-  rbind(nyc_top5) %>% arrange(state.abb, name) %>% distinct() %>% 
-  filter(year != 2023)
+  rbind(nyc_top5) %>% arrange(state.abb, name) %>% distinct() 
 
 
 #TODO: check back missing: 
@@ -292,8 +327,30 @@ top200_school_districts <- school_districts %>%
 
 
 missing_sd <- top200_school_districts %>% 
-  add_count(ncesID) %>% filter(n < 3) %>% 
-  select(state.abb, ncesID, year, name, n)
+  add_count(ncesID) %>% filter(n < 4) %>% 
+  select(state.abb, ncesID, year, name, n, id) 
+  
+
+
+# SD in the Top 200 missing 2023:
+
+# state.abb	name	ncesID
+# 1	CA	san francisco unified school district	634410
+# 2	GA	clayton county board of education	1301230
+# 3	GA	dekalb county board of education	1301740
+# 4	MA	boston public schools	2502790
+# 5	MN	independent school district no. 625	2733840
+# 6	NY	new york city geographic district # 10	3600087
+# 7	NY	new york city geographic district # 2	3600077
+# 8	NY	new york city geographic district # 20	3600151
+# 9	NY	new york city geographic district # 24	3600098
+# 10	NY	new york city geographic district # 31	3600103
+# 11	TN	clarksville-montgomery county school system	4703030
+# 12	TN	clarksville-montgomery county school system	4703030
+# 13	VA	chesapeake public schools	5100810
+# 14	WA	seattle school district no. 1	5307710
+# 15	WI	milwaukee public schools	5509600
+# 16-20 NY new york city geographic district # 2, 10, 20, 24, 31
 
 top200_school_districts %>% write.csv("output/top200_sd.csv")
 top100_school_districts %>% write.csv("output/top100_sd.csv")
