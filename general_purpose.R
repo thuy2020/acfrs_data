@@ -85,6 +85,7 @@ state_gov %>%
   add_count(state.abb) %>% 
   select(state.abb, n)
 
+
 # Missing states: CA, NV, MS, IL, AZ
 #https://www.sco.ca.gov/ard_state_acfr.html
 #https://www.dfa.ms.gov/publications
@@ -134,6 +135,7 @@ county_gov %>% select(state, name, population, year) %>%
 
 
 
+  
 ########## Incorporated Place & Minor Civil Division#########
 # ACFRs:
 place_division_gov <- acfrs_general_purpose %>% 
@@ -158,4 +160,11 @@ city_gov %>% select(state, name, population, year) %>%
   group_by(year) %>% 
   summarise(collected_pop = sum(population, na.rm = TRUE))
 
+state_gov %>% select(state.name, state.abb, name, id) %>% distinct() %>% 
+  saveRDS("data/stateID.RDS")
 
+county_gov %>% select(state.name, state.abb, name, id) %>% distinct() %>% 
+  saveRDS("data/countyID.RDS")
+
+city_gov %>% select(state.name, state.abb, name, id) %>% distinct() %>% 
+  saveRDS("data/cityID.RDS")

@@ -145,7 +145,7 @@ top_schools_by_year <- nces %>%
   top_n(100, value) %>% 
   ungroup() %>% 
   arrange(year, desc(value))
-####Top 100 schools in each of the 3 years####
+####Top 200 schools in each of the 3 years####
 top200_schools_by_year <- nces %>% 
   select(name_nces, ncesID, enrollment_20, enrollment_21, enrollment_22) %>% 
   pivot_longer(cols = 3:5, 
@@ -153,6 +153,18 @@ top200_schools_by_year <- nces %>%
                values_to = "value") %>% 
   group_by(year) %>% 
   top_n(200, value) %>% 
+  ungroup() %>% 
+  arrange(year, desc(value))
+
+
+####Top 300 schools in each of the 3 years####
+top300_schools_by_year <- nces %>% 
+  select(name_nces, ncesID, enrollment_20, enrollment_21, enrollment_22) %>% 
+  pivot_longer(cols = 3:5, 
+               names_to = "year",
+               values_to = "value") %>% 
+  group_by(year) %>% 
+  top_n(300, value) %>% 
   ungroup() %>% 
   arrange(year, desc(value))
 

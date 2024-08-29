@@ -279,6 +279,8 @@ city_gov %>% write.csv("output/all_cities_3years.csv")
 dictionary <- readRDS("data/dictionary.RDS")
 
 school_districts_ <- readRDS("data/acfrs_data.RDS") %>% 
+  filter(name == "norfolk public schools")
+  
   filter(category == "School District") %>% 
   mutate(id = as.character(id)) %>% 
   select(any_of(fields_to_select)) 
@@ -319,6 +321,23 @@ top200_school_districts <- school_districts %>%
   #bind with NYC
   rbind(nyc_top5) %>% arrange(state.abb, name) %>% distinct() 
 
+#top 300
+top300_schools_by_year
+
+dict_top300_ELSI <- dictionary %>% 
+  filter(ncesID %in% top300_schools_by_year$ncesID) %>% 
+  drop_na(id) %>% select(-name)
+
+top300_school_districts <- school_districts %>% 
+  filter(id %in% dict_top300_ELSI$id) %>% 
+  left_join(dict_top300_ELSI, by = c("id",  "state.abb")) %>% 
+  
+  #join with nces to get county, city info
+  left_join(nces, by = c("ncesID", "state.abb", "state.name")) %>% 
+  
+  #bind with NYC
+  rbind(nyc_top5) %>% arrange(state.abb, name) %>% distinct() 
+
 
 #TODO: check back missing: 
 #GA Clayton County Board of education.
@@ -330,7 +349,9 @@ missing_sd <- top200_school_districts %>%
   add_count(ncesID) %>% filter(n < 4) %>% 
   select(state.abb, ncesID, year, name, n, id) 
   
-
+missing_sd_top300 <- top300_school_districts %>% 
+  add_count(ncesID) %>% filter(n < 4) %>% 
+  select(state.abb, ncesID, year, name, n, id) 
 
 # SD in the Top 200 missing 2023:
 
