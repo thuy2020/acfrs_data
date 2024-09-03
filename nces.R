@@ -1,4 +1,4 @@
-# Top School Districts in NCES
+
 library(dplyr)
 library(stringr)
 library(rio)
@@ -126,6 +126,9 @@ nces <- d_20 %>% left_join(d_21) %>% left_join(d_22) %>%
   
   mutate(across(.cols = c(5:12, 22:23), as.double)) %>% 
   mutate(state.name = str_to_title(state.name))
+
+
+
 ####Count total enrollment each year####
 
 nrow(nces %>% select(state.abb, ncesID, enrollment_20) %>% distinct())

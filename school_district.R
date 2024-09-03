@@ -17,7 +17,6 @@ dictionary <- readRDS("data/dictionary.RDS") %>%
   distinct()
 
 #type of school district
-
 ## NOTE: 
 #id 67836 Santa Cruz City Schools (the "District") is a consolidation of 
 #Santa Cruz City High School District nces 0635600
@@ -57,6 +56,16 @@ school_districts %>% select(state.abb,enrollment_22, year) %>%
   group_by(year) %>% 
   summarise(collected_pop = sum(enrollment_22, na.rm = TRUE))
 
+#####CT as requested by mariana
+school_districts_ %>% filter(state.abb == "CT") %>% View()
+school_districts %>% filter(state.abb == "CT") %>% 
+  group_by(year) %>% summarise(count = n())
+
+anti_join(school_districts %>% filter(state.abb == "CT") %>% filter(year == 2021),
+          school_districts %>% filter(state.abb == "CT") %>% filter(year == 2023), by = "id")
+  #%>% save.csv("tpm/CT_schoooldistricts_22")
+
+
 ####NO_ncesID####
 school_districts %>% 
   left_join(dictionary, by = c("id", "state.abb")) %>% 
@@ -68,7 +77,6 @@ school_districts %>%
 
 ####All acfrs sd####
 d_app <- school_districts %>% 
-  
   
   all_school_districts %>% saveRDS("data/all_school_districts.RDS")
   
@@ -105,8 +113,6 @@ valuebox <- d_app %>%
   
   valuebox %>% saveRDS("data/valuebox_data.RDS")
 
-
-  
   #Top 10 each state
   top10_each_state <- d_app %>% 
     select(state.name, name, enrollment_22) %>% 
@@ -118,7 +124,7 @@ valuebox <- d_app %>%
   top10_chart_data <- d_app %>%  
     select(-c(enrollment_22, `2023`)) %>% 
     filter(category %in% c("net_pension_liability", "net_opeb_liability", "total_liabilities")) %>% 
-    inner_join(top10_each_state, by = c("state......................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................name", "name")) %>% 
+    inner_join(top10_each_state, by = c("statename", "name")) %>% 
     mutate(name = str_to_title(name))
 
 saveRDS(top10_chart_data, "data/top10_chart_data.RDS")
@@ -139,7 +145,6 @@ p <- filtered_data %>%
   theme_minimal()
 
 ggplotly(p)
-
 
 
 ####Top 100####

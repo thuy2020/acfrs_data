@@ -79,13 +79,19 @@ state_gov <- acfrs_state %>% select(-geo_id) %>%
                             (nchar(geo_id) == 4) ~ paste0(geo_id, "0"),
                             TRUE ~ as.character(geo_id)))
 
+# count of state by year
+state_gov %>% select(state.abb, year, name) %>% 
+  group_by(year) %>% 
+  summarise(count = n())
 
+# State 2023
 state_gov %>% 
-  group_by(state.abb, year) %>% 
-  add_count(state.abb) %>% 
-  select(state.abb, n)
+  filter(year == 2023) %>% 
+  summarise(collected_pop = sum(population, na.rm = TRUE))
 
-
+# state missing 2023
+anti_join(state_gov %>% filter(year == 2022) %>% select(state.abb), 
+          state_gov %>% filter(year == 2023) %>% select(state.abb))
 # Missing states: CA, NV, MS, IL, AZ
 #https://www.sco.ca.gov/ard_state_acfr.html
 #https://www.dfa.ms.gov/publications
@@ -125,15 +131,19 @@ missing_county <- anti_join(census_county, county_gov, by = "geo_id") %>%
   #not missing, just diff name, 
   filter(!str_detect(name_census, "honolulu|philadelphia|san francisco|duval|(orleans parish)"))
   
+# count by year
 county_gov %>% select(state.abb, year, name) %>% 
   group_by(year) %>% 
   summarise(count = n())
 
+# those missing 2023
+anti_join(county_gov %>% filter(year == 2022) %>% select(state.abb, name, id, population), 
+          county_gov %>% filter(year == 2023) %>% select(state.abb, name, id)) %>% View()
+  #write.csv("tmp/missing_counties_23.csv")
+
 county_gov %>% select(state, name, population, year) %>% 
   group_by(year) %>% 
   summarise(collected_pop = sum(population, na.rm = TRUE))
-
-
 
   
 ########## Incorporated Place & Minor Civil Division#########
@@ -151,6 +161,9 @@ place_division_gov <- acfrs_general_purpose %>%
 city_gov <- place_division_gov %>% 
   filter((geo_id %in% census_incorporated$geo_id) | name == "district of columbia") 
 
+city_gov %>% filter(year == 2022) %>% 
+  summarise(collected_pop = sum(population, na.rm = TRUE))
+  View()
 
 city_gov %>% select(state.abb, year, name) %>% 
   group_by(year) %>% 
@@ -160,11 +173,11 @@ city_gov %>% select(state, name, population, year) %>%
   group_by(year) %>% 
   summarise(collected_pop = sum(population, na.rm = TRUE))
 
+
+# Save ID for each type of entity in general purpose
 state_gov %>% select(state.name, state.abb, name, id) %>% distinct() %>% 
   saveRDS("data/stateID.RDS")
-
 county_gov %>% select(state.name, state.abb, name, id) %>% distinct() %>% 
   saveRDS("data/countyID.RDS")
-
 city_gov %>% select(state.name, state.abb, name, id) %>% distinct() %>% 
   saveRDS("data/cityID.RDS")
