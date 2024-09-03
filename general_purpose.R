@@ -165,6 +165,14 @@ city_gov %>% filter(year == 2022) %>%
   summarise(collected_pop = sum(population, na.rm = TRUE))
   View()
 
+  # Why so few cities?
+  
+ anti_join(city_gov %>% filter(year == 2022) %>% select(state.abb, name, population), 
+           city_gov %>% filter(year == 2023) %>% select(state.abb, name, population)) %>% View()
+  
+ city_gov %>% filter(name == "new york")
+ 
+ #########
 city_gov %>% select(state.abb, year, name) %>% 
   group_by(year) %>% 
   summarise(count = n())

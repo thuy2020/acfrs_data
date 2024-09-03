@@ -35,17 +35,18 @@ school_districts_ <- readRDS("data/acfrs_data.RDS") %>%
   filter(category == "School District") %>% 
   mutate(id = as.character(id)) %>% 
   select(-c(source_year, census_id, nces_district_id))
+
   
 #append URLs
 school_districts <- append_url(school_districts_) %>% 
   select(-c(identifier, category)) %>% 
   filter(!state.name %in% c("Guam", "Puerto Rico")) %>% 
   left_join(dictionary, by = c("id", "state.abb")) %>% 
+  
   filter(!is.na(ncesID)) %>% 
   filter(ncesID != "099999") %>% 
   left_join(nces, by = c("state.abb", "state.name","ncesID")) %>% 
   arrange(state.name) 
-
 
 # collected sd
 school_districts %>% select(state.abb, name, enrollment_22, year) %>% 
@@ -55,16 +56,6 @@ school_districts %>% select(state.abb, name, enrollment_22, year) %>%
 school_districts %>% select(state.abb,enrollment_22, year) %>% 
   group_by(year) %>% 
   summarise(collected_pop = sum(enrollment_22, na.rm = TRUE))
-
-#####CT as requested by mariana
-school_districts_ %>% filter(state.abb == "CT") %>% View()
-school_districts %>% filter(state.abb == "CT") %>% 
-  group_by(year) %>% summarise(count = n())
-
-anti_join(school_districts %>% filter(state.abb == "CT") %>% filter(year == 2021),
-          school_districts %>% filter(state.abb == "CT") %>% filter(year == 2023), by = "id")
-  #%>% save.csv("tpm/CT_schoooldistricts_22")
-
 
 ####NO_ncesID####
 school_districts %>% 

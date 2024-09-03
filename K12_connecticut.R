@@ -31,6 +31,18 @@ CT_nces <- nces %>% filter(state.abb == "CT") %>%
 CT_ <- CT_general_purpose %>% left_join(CT_nces, by = c("name_general_purpose" = "name_nces")) 
 # full-time employee equivalent 
 
+# collected count + student
+
+CT_ %>% 
+  drop_na(enrollment_22) %>% 
+  group_by(year) %>% 
+  summarise(count = n())
+
+CT_ %>% 
+  drop_na(enrollment_22) %>% 
+  group_by(year) %>% 
+summarise(collected_pop = sum(enrollment_22, na.rm = TRUE))
+
 CT_employee <- readxl::read_xlsx("data/CT_education_total_full time equivalent.xlsx")
 
 CT_employee %>% left_join(CT_, by = c("name_general_purpose", "year")) %>% 

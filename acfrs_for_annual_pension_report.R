@@ -12,6 +12,7 @@ acfrs_data_2022 <- readRDS("data/acfrs_data.RDS") %>%
   select(state.abb, state.name, id, name, year, category,
          net_pension_liability, 
          net_pension_assets,
+         net_opeb_liability,
          total_liabilities) %>% 
   filter(category %in% c("General Purpose", "School District"))
 
@@ -23,6 +24,7 @@ acfrs_data_2022_summary <- acfrs_data_2022 %>% filter(id %in% c(stateID$id, coun
                               TRUE ~ category))%>% 
   group_by(state.abb, state.name, category) %>% 
 summarise(state_NPL = sum(net_pension_liability, na.rm = TRUE),
+          state_OPEB = sum(net_opeb_liability, na.rm = TRUE),
           state_NPA = sum(net_pension_assets, na.rm = TRUE),
           state_total_liabilities = sum(total_liabilities, na.rm = TRUE)) 
 
