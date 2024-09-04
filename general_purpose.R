@@ -26,7 +26,6 @@ acfrs_general_purpose <- readRDS("data/acfrs_data.RDS") %>%
   filter(category == "General Purpose") %>% 
   
   rename(government_id = census_id) %>%  # census_id in Acfrs database is actually government_id
-       
   # some government_id in ACFRs has 13 characters-> need to add 0
   mutate(government_id = ifelse(str_length(government_id) < 14, paste0("0", government_id), government_id)) %>% 
   
@@ -127,7 +126,6 @@ county_gov <- acfrs_county %>%
 
 missing_county <- anti_join(census_county, county_gov, by = "geo_id") %>% 
   arrange(desc(population)) %>% 
-  
   #not missing, just diff name, 
   filter(!str_detect(name_census, "honolulu|philadelphia|san francisco|duval|(orleans parish)"))
   
@@ -136,17 +134,17 @@ county_gov %>% select(state.abb, year, name) %>%
   group_by(year) %>% 
   summarise(count = n())
 
-# those missing 2023
-anti_join(county_gov %>% filter(year == 2022) %>% select(state.abb, name, id, population), 
-          county_gov %>% filter(year == 2023) %>% select(state.abb, name, id)) %>% View()
-  #write.csv("tmp/missing_counties_23.csv")
-
+# population by year
 
 county_gov %>% select(state, name, population, year) %>% 
   group_by(year) %>% 
   summarise(collected_pop = sum(population, na.rm = TRUE))
 
-  
+# those missing 2023
+anti_join(county_gov %>% filter(year == 2022) %>% select(state.abb, name, id, population), 
+          county_gov %>% filter(year == 2023) %>% select(state.abb, name, id)) %>% View()
+  #write.csv("tmp/missing_counties_23.csv")
+
 ########## Incorporated Place & Minor Civil Division#########
 # ACFRs:
 place_division_gov <- acfrs_general_purpose %>% 
@@ -166,7 +164,6 @@ city_gov %>% filter(year == 2022) %>%
   View()
 
   # Why so few cities?
-  
  anti_join(city_gov %>% filter(year == 2022) %>% select(state.abb, name, population), 
            city_gov %>% filter(year == 2023) %>% select(state.abb, name, population)) %>% View()
   
