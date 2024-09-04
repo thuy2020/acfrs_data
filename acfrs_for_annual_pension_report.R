@@ -1,5 +1,6 @@
 library(dplyr)
 library(tidyr)
+options(scipen = 999)
 
 ## Get the ID 
 stateID <- readRDS("data/stateID.RDS")
@@ -24,20 +25,53 @@ acfrs_data_2022_summary <- acfrs_data_2022 %>%
                               id %in% place_divisionID$id ~ "Place",
                               TRUE ~ category)) %>% 
   #  filter(!category %in% c("State", "County", "Place", "School District")) %>% 
-  
+  mutate(net_pension_liability = net_pension_liability - net_pension_assets) |>
   group_by(state.abb, state.name, category) %>% 
-summarise(state_NPL = sum(net_pension_liability, na.rm = TRUE),
-          state_OPEB = sum(net_opeb_liability, na.rm = TRUE),
-          state_NPA = sum(net_pension_assets, na.rm = TRUE),
-          state_total_liabilities = sum(total_liabilities, na.rm = TRUE)) %>% 
-  ungroup()
+  summarise(
+    net_pension_liability = sum(net_pension_liability, na.rm = TRUE)
+    ) %>% 
+  ungroup() |>
+  pivot_wider(names_from = category, values_from = net_pension_liability) |>
+  filter(state.name != "District of Columbia") |>
+  rename(
+    municipality = Place,
+    school_district = `School District`,
+    state_entity = State,
+    county = County,
+    state = state.name, 
+    state_abb = state.abb
+  ) |>
+  mutate(
+    state_entity = ifelse(is.na(state_entity), 0, state_entity),
+    county = ifelse(is.na(county), 0, county),
+    municipality = ifelse(is.na(municipality), 0, municipality),
+    school_district = ifelse(is.na(school_district), 0, school_district)
+  ) |>
+  mutate(
+    total = state_entity + county + municipality + school_district,
+    total_for_pct = ifelse(state_entity < 0, 0, state_entity) + 
+      ifelse(county < 0, 0, county) + 
+      ifelse(municipality < 0, 0, municipality) + 
+      ifelse(school_district < 0, 0, school_district)
+  )
 
+# sum columns to create national state
+national_summary <- acfrs_data_2022_summary %>% 
+  summarise(
+    state_abb = "US",
+    state = "United States",
+    state_entity = sum(state_entity),
+    county = sum(county),
+    municipality = sum(municipality),
+    school_district = sum(school_district),
+    total = sum(total),
+    total_for_pct = sum(total_for_pct)
+  )
 
-# Double check to make sure each state have 4 categories:
-acfrs_data_2022_summary %>% 
-  group_by(state.name, state.abb) %>% 
-  summarise(count = n()) %>% 
-  filter(count < 4)
+# add national summary to the data
+acfrs_data_2022_summary <- acfrs_data_2022_summary %>% 
+  bind_rows(national_summary)
+
 
 # Explanation:
 #CT Connecticut does not have county governments. 
@@ -48,28 +82,7 @@ acfrs_data_2022_summary %>%
 #All counties in VT are governed by three assistant judges.
 
 
-# View of all school district year 2022. 
-acfrs_data_2022_summary %>% 
-  ungroup() %>% 
-  select(where(is.numeric)) %>%  
-  summarise(across(everything(), sum, na.rm = TRUE)) %>% View()
-
-####Calculate percentage#######
-
-acfrs_data_2022_pct <-acfrs_data_2022_summary %>% pivot_longer(4:7, 
-                                         names_to = "acfr_field",
-                                         values_to = "value") %>% 
-  pivot_wider(names_from = category, 
-              values_from = value) %>% 
-  
-  # replace all Nas value by 1 to avoid Na at the summary
-  mutate(across(County:State, ~ replace_na(., 1))) %>% 
-  
-  rowwise() %>% 
-  mutate(tot_state = sum(c_across(County:State))) %>% 
-  mutate(across(County:State, ~ . / tot_state * 100,
-                .names = "{col}_pct")) %>% 
-  mutate(across(ends_with("_pct"), ~ round(., 2))) 
-  
-acfrs_data_2022_pct %>% write.csv("output/acfrs_data_2022_for_annual_pension_report.csv")
-  
+# write the data to js
+acfrs_data_2022_summary_json <- jsonlite::toJSON(acfrs_data_2022_summary, pretty = TRUE)
+acfrs_data_2022_summary_json <- paste0("export default ", acfrs_data_2022_summary_json)
+write(acfrs_data_2022_summary_json, file = "annual_pension_report/acfrs_data_2022_summary.js")
