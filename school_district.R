@@ -10,6 +10,7 @@ source("nces.R")
 source("exceptions.R")
 source("functions.R")
 library(scales)
+options(scipen = 9999)
 
 ####School districts####
 dictionary <- readRDS("data/dictionary.RDS") %>% 
@@ -48,6 +49,31 @@ school_districts <- append_url(school_districts_) %>%
   left_join(nces, by = c("state.abb", "state.name","ncesID")) %>% 
   arrange(state.name) 
 
+#########Sum of all school districts#########
+
+library(scales)
+school_districts %>% filter(year == 2022) %>% #View()
+  select(net_pension_liability,
+        net_opeb_liability, 
+        total_liabilities) %>% 
+  summarise(all_NPL = sum(net_pension_liability, na.rm = TRUE),
+           all_opeb = sum(net_opeb_liability, na.rm = TRUE), 
+           all_total_liabilities = sum(total_liabilities, na.rm = TRUE)) %>%
+  mutate(across(everything(), comma)) %>% 
+  View()
+
+school_districts %>% filter(year == 2023) %>% #View()
+  select(net_pension_liability,
+         net_opeb_liability, 
+         total_liabilities) %>% 
+  summarise(all_NPL = sum(net_pension_liability, na.rm = TRUE),
+            all_opeb = sum(net_opeb_liability, na.rm = TRUE), 
+            all_total_liabilities = sum(total_liabilities, na.rm = TRUE)) %>%
+  mutate(across(everything(), comma)) %>% 
+  View()
+
+#############
+
 # collected sd
 school_districts %>% select(state.abb, name, enrollment_22, year) %>% 
   group_by(year) %>% 
@@ -68,14 +94,10 @@ school_districts %>%
 
 ####All acfrs sd####
 d_app <- school_districts %>% 
-  
-  all_school_districts %>% saveRDS("data/all_school_districts.RDS")
-  
-  
   select(2:revenues, enrollment_22) %>% 
   #group_by(state.name, year) %>% 
   mutate(across(current_assets:revenues, list(tot = ~ sum(., na.rm = TRUE)), .names = "sum_{col}")) %>% 
-  select(state.name, name, enrollment_22, contains("sum_")) %>% 
+  select(state.name, name, year, enrollment_22, contains("sum_")) %>% 
   pivot_longer(cols = 5:29,
                names_to = "category", 
                values_to = "value") %>% 

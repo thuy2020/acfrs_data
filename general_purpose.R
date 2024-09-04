@@ -141,6 +141,7 @@ anti_join(county_gov %>% filter(year == 2022) %>% select(state.abb, name, id, po
           county_gov %>% filter(year == 2023) %>% select(state.abb, name, id)) %>% View()
   #write.csv("tmp/missing_counties_23.csv")
 
+
 county_gov %>% select(state, name, population, year) %>% 
   group_by(year) %>% 
   summarise(collected_pop = sum(population, na.rm = TRUE))
@@ -151,10 +152,9 @@ county_gov %>% select(state, name, population, year) %>%
 place_division_gov <- acfrs_general_purpose %>% 
   # exclude state and county
   filter(!id %in% acfrs_state$id) %>% 
-  filter(!id %in% county_gov$id) %>% distinct() %>% 
-
+  filter(!id %in% acfrs_county$id) %>% 
 # Join Incorporated Place in ACFRs to Census  
-  left_join(census_place_division, by= c("geo_id", "state.abb", "state.name")) 
+  left_join(census_place_division, by= c("geo_id", "state.abb", "state.name")) %>% distinct()
 
 #### City&DC #########
 
@@ -170,7 +170,6 @@ city_gov %>% filter(year == 2022) %>%
  anti_join(city_gov %>% filter(year == 2022) %>% select(state.abb, name, population), 
            city_gov %>% filter(year == 2023) %>% select(state.abb, name, population)) %>% View()
   
- city_gov %>% filter(name == "new york")
  
  #########
 city_gov %>% select(state.abb, year, name) %>% 
@@ -187,5 +186,7 @@ state_gov %>% select(state.name, state.abb, name, id) %>% distinct() %>%
   saveRDS("data/stateID.RDS")
 county_gov %>% select(state.name, state.abb, name, id) %>% distinct() %>% 
   saveRDS("data/countyID.RDS")
+place_division_gov %>% select(state.name, state.abb, name, id) %>% distinct() %>% 
+  saveRDS("data/place_divisionID.RDS")
 city_gov %>% select(state.name, state.abb, name, id) %>% distinct() %>% 
   saveRDS("data/cityID.RDS")
