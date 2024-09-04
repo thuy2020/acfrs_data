@@ -6,10 +6,10 @@ stateID <- readRDS("data/stateID.RDS")
 countyID <- readRDS("data/countyID.RDS")
 place_divisionID <- readRDS("data/place_divisionID.RDS")
 
-#need to read in this data: acfrs_data.RDS
-acfrs_data_2022 <- readRDS("data/acfrs_data.RDS") %>% 
+#read in data: acfrs_data.RDS
+acfrs_data_22_23 <-  readRDS("data/acfrs_data.RDS") %>% 
   filter(!state.abb %in% c("MP", "PR", "AS", "GU", "FM")) %>% 
-  filter(year == 2022) %>% 
+  filter(year == 2022 | year == 2023) %>% 
   select(state.abb, state.name, id, name, year, category,
          net_pension_liability, 
          net_pension_assets,
@@ -18,14 +18,14 @@ acfrs_data_2022 <- readRDS("data/acfrs_data.RDS") %>%
   filter(category %in% c("General Purpose", "School District"))
 
 # filter for only needed categories by ID
-acfrs_data_2022_summary <- acfrs_data_2022 %>% 
+acfrs_data_22_23_summary <- acfrs_data_22_23 %>% 
   mutate(category = case_when(id %in% stateID$id ~ "State",
                               id %in% countyID$id ~ "County",
                               id %in% place_divisionID$id ~ "Place",
                               TRUE ~ category)) %>% 
   #  filter(!category %in% c("State", "County", "Place", "School District")) %>% 
   
-  group_by(state.abb, state.name, category) %>% 
+  group_by(state.abb, state.name, category, year) %>% 
 summarise(state_NPL = sum(net_pension_liability, na.rm = TRUE),
           state_OPEB = sum(net_opeb_liability, na.rm = TRUE),
           state_NPA = sum(net_pension_assets, na.rm = TRUE),
@@ -34,7 +34,14 @@ summarise(state_NPL = sum(net_pension_liability, na.rm = TRUE),
 
 
 # Double check to make sure each state have 4 categories:
-acfrs_data_2022_summary %>% 
+acfrs_data_22_23_summary %>% 
+  filter(year == 2022) %>% 
+  group_by(state.name, state.abb) %>% 
+  summarise(count = n()) %>% 
+  filter(count < 4)
+
+acfrs_data_22_23_summary %>% 
+  filter(year == 2023) %>% View()
   group_by(state.name, state.abb) %>% 
   summarise(count = n()) %>% 
   filter(count < 4)
@@ -47,16 +54,18 @@ acfrs_data_2022_summary %>%
 #RI does not have county government
 #All counties in VT are governed by three assistant judges.
 
+#AZ, CA, IL, MS, NV doesn't have state Acfr 2023
 
-# View of all school district year 2022. 
-acfrs_data_2022_summary %>% 
-  ungroup() %>% 
+# View of all school districts. 
+acfrs_data_22_23_summary %>% 
+  group_by(year) %>% 
   select(where(is.numeric)) %>%  
   summarise(across(everything(), sum, na.rm = TRUE)) %>% View()
 
-####Calculate percentage#######
+####Calculate percentage only for year 2022 #######
 
-acfrs_data_2022_pct <-acfrs_data_2022_summary %>% pivot_longer(4:7, 
+acfrs_data_2022_pct <- acfrs_data_22_23_summary %>% filter(year == 2022) %>% 
+                            pivot_longer(4:7, 
                                          names_to = "acfr_field",
                                          values_to = "value") %>% 
   pivot_wider(names_from = category, 
