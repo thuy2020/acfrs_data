@@ -142,7 +142,8 @@ county_gov %>% select(state, name, population, year) %>%
 
 # those missing 2023
 anti_join(county_gov %>% filter(year == 2022) %>% select(state.abb, name, id, population), 
-          county_gov %>% filter(year == 2023) %>% select(state.abb, name, id)) %>% View()
+          county_gov %>% filter(year == 2023) %>% select(state.abb, name, id)) 
+View()
   #write.csv("tmp/missing_counties_23.csv")
 
 ########## Incorporated Place & Minor Civil Division#########

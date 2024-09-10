@@ -14,7 +14,6 @@ options(scipen = 9999)
 
 ####School districts####
 dictionary <- readRDS("data/dictionary.RDS") %>% 
-  select(-name) %>% 
   distinct()
 
 #type of school district
@@ -37,7 +36,6 @@ school_districts_ <- readRDS("data/acfrs_data.RDS") %>%
   mutate(id = as.character(id)) %>% 
   select(-c(source_year, census_id, nces_district_id))
 
-  
 #append URLs
 school_districts <- append_url(school_districts_) %>% 
   select(-c(identifier, category)) %>% 
@@ -47,7 +45,8 @@ school_districts <- append_url(school_districts_) %>%
   filter(!is.na(ncesID)) %>% 
   filter(ncesID != "099999") %>% 
   left_join(nces, by = c("state.abb", "state.name","ncesID")) %>% 
-  arrange(state.name) 
+  arrange(state.name) %>% 
+  rename(name = name.x)
 
 #########Sum of all school districts#########
 
@@ -84,12 +83,12 @@ school_districts %>% select(state.abb,enrollment_22, year) %>%
   summarise(collected_pop = sum(enrollment_22, na.rm = TRUE))
 
 ####NO_ncesID####
-school_districts %>% 
-  left_join(dictionary, by = c("id", "state.abb")) %>% 
-  filter(is.na(ncesID)) %>% 
-  select(state.abb, id, name, ncesID, year, total_liabilities) %>% 
-  add_count(id) %>% filter(n > 1) %>% 
-  distinct() %>% arrange(name) -> acfrs_sd_NO_ncesID
+# school_districts %>% 
+#   left_join(dictionary, by = c("id", "state.abb")) %>% 
+#   filter(is.na(ncesID)) %>% 
+#   select(state.abb, id, name, ncesID, year, total_liabilities) %>% 
+#   add_count(id) %>% filter(n > 1) %>% 
+#   distinct() %>% arrange(name) -> acfrs_sd_NO_ncesID
  # write.csv("data/_acfrs_without_ncesID_Aug2024.csv")
 
 ####All acfrs sd####

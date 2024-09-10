@@ -317,4 +317,5 @@ write(school_data_growth_json, file="output/school_data_growth.json")
 school_data_json <- toJSON(school_data, auto_unbox = TRUE, pretty = TRUE)
 write(school_data_json, file="output/school_data.json")
 
-
+school_data %>% select(-c(zip4, id)) %>% 
+  filter(if_any(everything(), is.na)) %>% View()

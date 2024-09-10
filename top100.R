@@ -188,7 +188,6 @@ city_gov_ <- city_gov %>% left_join(city_income) %>%
 
 city_gov <- append_url(city_gov_) %>% select(-identifier)
 
-
 #Top 100
 top100_cities <- city_gov %>% 
   filter((geo_id %in% census_city_top100$geo_id) | 
