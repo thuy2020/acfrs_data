@@ -1,0 +1,32 @@
+---
+title: "Untitled"
+output: html_document
+date: "2023-12-11"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(scipen = 999)
+library(tidyverse)
+library(dplyr)
+library(DT)
+library(viridis)
+library(janitor)
+source("census.R")
+```
+
+# State-level Urban and Rural Information for the 2020 Census and 2010 Census
+https://www.census.gov/programs-surveys/geography/guidance/geo-areas/urban-rural.html
+```{r}
+rio::import(here::here("data/census", "State_Urban_Rural_Pop_2020_2010.xlsx"))
+```
+#County-level Urban and Rural information for the 2020 Census
+(Updated September 2023)
+https://www.census.gov/programs-surveys/geography/guidance/geo-areas/urban-rural.html
+```{r}
+state_urb <- rio::import(here::here("data/census", "State_Urban_Rural_Pop_2020_2010.xlsx")) %>% 
+  clean_names() %>% 
+  rename(state.abb = state_abbrev) %>% 
+  select(state.abb, x2020_urban_pop, x2020_pct_urban_pop)
+```
+

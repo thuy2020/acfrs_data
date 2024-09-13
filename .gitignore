@@ -2,6 +2,10 @@
 .Rhistory
 .Rapp.history
 
+#connection
+src/data_ingestion/db_connection.R
+
+
 # Session Data files
 .RData
 .RDataTmp

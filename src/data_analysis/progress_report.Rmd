@@ -1,0 +1,83 @@
+---
+title: "ACFRs collection - County"
+output: html_document
+date: "2023-10-02"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(DT)
+library(dplyr)
+library(ggplot2)
+library(forcats)
+library(plotly)
+```
+
+
+# Missing count by state
+```{r}
+# This is a manual file, do not delete file 
+# Missing as manually tracked 
+missing_county_SEP2023 <- rio::import("../data/_manuallyChecked_missing_county_SEP2023.xlsx") %>% select(-c(id, having_county_gov, acfrs_name)) %>% filter(`2020` == "uploaded file to portal") %>% 
+  arrange(desc(population))
+
+missing_2020 <- missing_county_SEP2023 %>% select(state.abb, `2020`) %>% 
+  filter(`2020` == "missing") %>% group_by(state.abb) %>% 
+  add_count() %>% distinct() %>% rename(missing_2020 = n) %>% select(-`2020`)
+
+missing_2021 <- missing_county_SEP2023 %>% select(state.abb, `2021`) %>% 
+  filter(`2021` == "missing") %>% group_by(state.abb) %>% 
+  add_count() %>% distinct() %>% 
+  rename(missing_2021 = n) %>% select(-`2021`)
+
+missing_2021 %>% left_join(missing_2020) %>% arrange(desc(missing_2021)) %>%  #write.csv("missing_county_by_state_2020_2021.csv")
+
+```
+
+#Notes
+```{r}
+#barbour county 2021 just release 2024
+# IA montgomery 2022 just release March 2024
+#MO atchison released 2021 in May 2023
+# MO Shannon released 2021 in Jan 2024
+# OH Morgan county 2021 released in Feb 2024
+# menard county: The Annual Audit is not available. This local government's Annual Financial Report (AFR) was due on 07/28/2023 
+# https://illinoiscomptroller.gov/constituent-services/local-government/local-government-warehouse/landingpage?code=065/000/00&searchtype=AFRSearch&originalSearchString=Menard%20County%20%20-%20%20065/000/00
+
+#ND adams county 2021, 2022: scan of a book
+
+
+# portal for state: 
+#GA: https://ted.cviog.uga.edu/financial-documents/financial-reports?og_group_ref_target_id%5B%5D=215&field_fiscal_year_value%5Bmin%5D%5Byear%5D=2020&field_fiscal_year_value%5Bmax%5D%5Byear%5D=2023
+
+# IW county: https://publications.iowa.gov/view/subjects/DE.html#group_2022-12-12
+#ND: https://www.nd.gov/auditor/counties#AgyW
+
+
+#PA: Municipal portal: https://munstats.pa.gov/
+```
+
+
+```{r}
+# adding population of 10 counties/cities
+#873959 + 15057 + 91471 + 15388 + 1016506 + 715875 + 35128 + 9424 + 97596
+# 1 CA city and county of san francisco                                                                            
+# 2 AL        cleburne commission county                                                                                   
+# 3 AL        st clair county commission                      
+# 4 AL        washington commission county       
+# 6 HI        city and county of honolulu      
+# 7 TN        the metropolitan government of nashville and davidson county     
+# 8 MT        city & county of butte silver bow                 
+# 9 MT        anaconda-deer lodge county                       
+# 10 OH        ashtabula metroparks county  
+
+```
+
+
+```{r}
+readxl::read_excel("progress_report.xlsx") %>% 
+  filter(!Row %in% c("municipalities_all_place_division", "municipalities_incorporated", "municipalities_incorporated_others", "municipalities_others")) 
+
+```
+
+
