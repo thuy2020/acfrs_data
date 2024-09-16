@@ -1,6 +1,6 @@
 library(tidyverse)
 
-acfrsData <- readRDS("data/acfrs_data.RDS")
+acfrsData <- readRDS("data/acfrs_data.RDS") %>% filter(year != 2023)
 
 # Check Alabama and Wyoming across the board
 acfrsData <- acfrsData  |>
@@ -289,7 +289,7 @@ unique_counties <- counties_2020  %>%
   left_join(counties_2022, by = "county") |>
   select(year_2022, year_2021, year_2020)
 
-write_csv(unique_counties, "unique_counties_by_year.csv")
+#write_csv(unique_counties, "unique_counties_by_year.csv")
 
 unique(counties[,2:4])
 
