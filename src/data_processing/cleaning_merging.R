@@ -1,4 +1,4 @@
-options(scipen = 999)
+
 library(tidyverse)
 library(dplyr)
 library(janitor)
@@ -90,22 +90,21 @@ state_gov <- acfrs_state %>% select(-geo_id) %>%
                             TRUE ~ as.character(geo_id)))
 
 state_gov_4years <- state_gov %>% 
-
   left_join(income) %>% 
   select(all_of(fields_to_select)) 
 
 #append url
-state_4years <- append_url(state_gov_4years) %>% 
+state_all <- append_url(state_gov_4years) %>% 
   select(-identifier)
 
 #double check missing:
-state_4years %>% 
+state_all %>% 
   #group_by(year) %>% 
   #summarise(n = n())
   add_count(state.name) %>% filter(n<4) %>% 
   select(state.abb, n) %>% distinct()
 
-state_4years %>% write.csv("output/all_states_4years_2020_2023.csv")
+state_all %>% write.csv("output/all_states_4years_2020_2023.csv")
 
 ####### Counties########
 acfrs_county <- acfrs_general_purpose %>% 
@@ -170,9 +169,11 @@ county_gov_all <- county_gov %>%
 county_all <- append_url(county_gov_all) %>% 
   select(-identifier)
 
-
 # Find acfrs entities from the list of Top 100 county census for only 3 years
 top100_county_3years <- county_all %>% filter(year != 2023) %>% 
+  filter(geo_id %in% census_county_top100$geo_id)
+
+top100_county_4years <- county_all %>% 
   filter(geo_id %in% census_county_top100$geo_id)
 
 # Find acfrs entities from the list of Top 200 county census
@@ -185,16 +186,22 @@ top200_county_4years %>% write.csv("output/top200_counties.csv")
 
 ##########Municipalities#########
 # Census calls Incorporated Place & Minor Civil Division
-
-place_division_gov <- acfrs_general_purpose %>% 
+municipality_ <- acfrs_general_purpose %>% 
   # exclude state and county
   filter(!id %in% acfrs_state$id) %>% 
   filter(!id %in% acfrs_county$id) %>% 
+  
+  # get income
+  left_join(city_income) %>% 
 # Join Incorporated Place in ACFRs to Census  
-  left_join(census_place_division, by= c("geo_id", "state.abb", "state.name")) %>% distinct()
+  left_join(census_place_division, by= c("geo_id", "state.abb", "state.name")) %>% 
+  distinct()
+
+#append ULR
+municipality_all <- append_url(municipality_) %>% select(-identifier)
 
 #City&DC
-acfrs_city <- place_division_gov %>% 
+acfrs_city <- municipality %>% 
   filter((geo_id %in% census_incorporated$geo_id) | name == "district of columbia") 
 
 ##Special cities##
@@ -208,14 +215,12 @@ special_cities <- acfrs_general_purpose %>%
   
   left_join(city_income) %>% 
   left_join(df_state) %>% 
-  left_join(census_all)
+  left_join(census_all) %>% 
+  mutate(url = NA) %>% 
+  select(-identifier)
 
-city_gov_ <- acfrs_city %>% left_join(city_income) %>% 
-  rbind(special_cities) %>% 
+city_gov <- acfrs_city %>% rbind(special_cities) %>% 
   select(any_of(fields_to_select)) 
-
-#append ULR
-city_gov <- append_url(city_gov_) %>% select(-identifier)
 
 #Top 100
 top100_cities <- city_gov %>% 
@@ -223,7 +228,7 @@ top100_cities <- city_gov %>%
            name == "district of columbia") %>% distinct() %>% 
   mutate(population = ifelse(name == "district of columbia", 689546, population))
 
-#Top 100 for data tool
+#Top 100 for data tool year 20-22
 top100_cities %>% 
   filter(year != 2023) %>% 
   write.csv("output/top100_cities.csv")
@@ -232,12 +237,13 @@ top100_cities %>%
 top200_cities <- city_gov %>% 
   filter((geo_id %in% census_city_top200$geo_id) | 
            name == "district of columbia") %>% distinct() %>% 
-  mutate(population = ifelse(name == "district of columbia", 689546, population)) %>% 
-  group_by(year) %>% 
-  summarise(n = n())
-  
+  mutate(population = ifelse(name == "district of columbia", 689546, population))  
+  # group_by(year) %>% 
+  # summarise(n = n())
+  # 
 top200_cities %>% write.csv("output/top200_cities.csv")
 city_gov %>% write.csv("output/all_cities_2020_2023.csv")
+municipality_all %>% write.csv("output/all_municipalities_2020_2023.csv")
 
 ####School districts####
 dictionary <- readRDS("data/dictionary.RDS") %>% 
@@ -247,39 +253,40 @@ select(-name) %>% distinct()
 dict_top100_ELSI <- dictionary %>% 
   filter(ncesID %in% top_schools_by_year$ncesID)
 
-
 school_districts_ <- readRDS("data/acfrs_data.RDS") %>% 
 filter(category == "School District") %>% 
   mutate(id = as.character(id)) %>% 
-  select(any_of(fields_to_select)) 
-
-#append URLs
-school_districts <- append_url(school_districts_) %>% select(-identifier)
-
-
-top100_school_districts <- school_districts %>% 
-  filter(id %in% dict_top100_ELSI$id) %>% 
-  left_join(dict_top100_ELSI, by = c("id",  "state.abb")) %>% 
+  select(any_of(fields_to_select)) %>% 
+  left_join(dictionary) %>% 
   
   #join with nces to get county, city info
-  left_join(nces, by = c("ncesID", "state.abb", "state.name")) %>% 
+  left_join(nces, by = c("ncesID", "state.abb", "state.name")) 
+  
+
+#append URLs
+school_districts_all <- append_url(school_districts_) %>% select(-identifier)
+
+#Top 100
+top100_school_districts <- school_districts_all %>% 
+  filter(id %in% dict_top100_ELSI$id) %>% 
   
   #bind with NYC
   rbind(nyc_top5) %>% arrange(state.abb, name) %>% 
-  filter(year != 2023)
+  filter(year != 2023) 
 
+top100_school_districts_4years <- school_districts_all %>% 
+  filter(id %in% dict_top100_ELSI$id) 
+  
+  #bind with NYC
+  rbind(nyc_top5) %>% arrange(state.abb, name) %>% 
+  filter(year != 2023) 
 
 # top 200
 dict_top200_ELSI <- dictionary %>% 
   filter(ncesID %in% top200_schools_by_year$ncesID) 
 
-top200_school_districts <- school_districts %>% 
+top200_school_districts <- school_districts_all %>% 
   filter(id %in% dict_top200_ELSI$id) %>% 
-  left_join(dict_top200_ELSI, by = c("id",  "state.abb")) %>% 
-  
-  #join with nces to get county, city info
-  left_join(nces, by = c("ncesID", "state.abb", "state.name")) %>% 
-  
   #bind with NYC
   rbind(nyc_top5) %>% arrange(state.abb, name) %>% distinct() 
 
@@ -287,18 +294,14 @@ top200_school_districts <- school_districts %>%
 dict_top300_ELSI <- dictionary %>% 
   filter(ncesID %in% top300_schools_by_year$ncesID) 
 
-top300_school_districts <- school_districts %>% 
+top300_school_districts <- school_districts_all %>% 
   filter(id %in% dict_top300_ELSI$id) %>% 
-  left_join(dict_top300_ELSI, by = c("id",  "state.abb")) %>% 
-  
-  #join with nces to get county, city info
-  left_join(nces, by = c("ncesID", "state.abb", "state.name")) %>% 
   #bind with NYC
   rbind(nyc_top5) %>% arrange(state.abb, name) %>% distinct() 
 
 top100_school_districts %>% write.csv("output/top100_sd.csv")
 top200_school_districts %>% write.csv("output/top200_sd.csv")
-school_districts %>% write.csv("output/all_schooldistricts_4years.csv")
+school_districts_all %>% write.csv("output/all_schooldistricts_4years.csv")
 
 
 ####Entity ID####
@@ -310,3 +313,7 @@ place_division_gov %>% select(state.name, state.abb, name, id) %>% distinct() %>
   saveRDS("data/place_divisionID.RDS")
 city_gov %>% select(state.name, state.abb, name, id) %>% distinct() %>% 
   saveRDS("data/cityID.RDS")
+
+
+
+

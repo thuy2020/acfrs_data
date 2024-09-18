@@ -8,7 +8,7 @@ countyID <- readRDS("data/countyID.RDS")
 place_divisionID <- readRDS("data/place_divisionID.RDS")
 
 #read in data: acfrs_data.RDS
-acfrs_data_22_23 <-  readRDS("data/acfrs_data.RDS") %>% 
+acfrs_data_22_23_ <-  readRDS("data/acfrs_data.RDS") %>% 
   filter(!state.abb %in% c("MP", "PR", "AS", "GU", "FM")) %>% 
   filter(state.name != "District of Columbia") %>% 
   filter(year == 2022 | year == 2023) %>% 
@@ -18,6 +18,16 @@ acfrs_data_22_23 <-  readRDS("data/acfrs_data.RDS") %>%
          net_opeb_liability,
          total_liabilities) %>% 
   filter(category %in% c("General Purpose", "School District"))
+
+#back fill 2022 data for 5 states that have not yet released their ACFR 2023
+#NOTE: only backfill for 5 state government, NOT any other entity types. 
+backfill_5states <- acfrs_data_22_23 %>% 
+  filter(id %in% c("31665", "40623", "1267369", "95852", "35504")) %>% 
+  mutate(year = 2023)
+  
+acfrs_data_22_23 <- acfrs_data_22_23_ %>% rbind(backfill_5states)
+
+
 
 # break down by categories 
 acfrs_data_22_23_summary <- acfrs_data_22_23 %>% 

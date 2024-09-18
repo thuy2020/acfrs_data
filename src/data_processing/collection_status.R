@@ -1,5 +1,7 @@
 
-
+library(tidyverse)
+library(dplyr)
+library(janitor)
 
 # count of state by year
 state_gov %>% select(state.abb, year, name) %>% 
@@ -30,13 +32,13 @@ missing_county <- anti_join(census_county, county_gov, by = "geo_id") %>%
   filter(!str_detect(name_census, "honolulu|philadelphia|san francisco|duval|(orleans parish)"))
 
 # count by year
-county_gov %>% select(state.abb, year, name) %>% 
+county_gov_all %>% select(state.abb, year, name) %>% 
   group_by(year) %>% 
   summarise(count = n())
 
 # population by year
 
-county_gov %>% select(state, name, population, year) %>% 
+county_gov_all %>% #select(state, name, population, year) %>% 
   group_by(year) %>% 
   summarise(collected_pop = sum(population, na.rm = TRUE))
 
