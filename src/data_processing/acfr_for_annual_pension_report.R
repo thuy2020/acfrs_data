@@ -1,5 +1,6 @@
 library(dplyr)
 library(tidyr)
+library(scales)
 options(scipen = 999)
 
 ## Get the ID 
@@ -63,6 +64,34 @@ national_summary <- acfrs_data_22_summary %>%
 # add national summary to the data
 acfrs_data_22_summary_national <- acfrs_data_22_summary %>% 
   bind_rows(national_summary)
+
+####Checking data against the APR revised file#### 
+#https://docs.google.com/document/d/12EwKmb8As7R8CWNrMLVxMkP16Cpj_tsxLGkjgRBYCR8/edit
+
+acfrs_data_22_summary_national %>% 
+  mutate(across(3:8, ~ comma(.))) %>% View()
+
+#Illinois and New Jersey: 42.8% of the total net pension liability held by U.S. states 
+(acfrs_data_22_summary_national[acfrs_data_22_summary_national$state_abb == "IL",6] + 
+  acfrs_data_22_summary_national[acfrs_data_22_summary_national$state_abb == "NJ",6]) / 
+  acfrs_data_22_summary_national[acfrs_data_22_summary_national$state_abb == "US",6]   
+
+#while only being responsible for 6.6% of the U.S. population.
+(12.58 + 9.262)/ 333
+
+#The 10 most indebted states account for 86% of all U.S. states’ total net pension liability.
+acfrs_data_22_summary_national %>% arrange(desc(state_entity)) %>% 
+  slice(2:11) %>% 
+  summarise(tot_top10state = sum(state_entity))
+431594889300/ acfrs_data_22_summary_national[acfrs_data_22_summary_national$state_abb == "US",6]  
+
+
+
+
+
+
+
+
 
 #Notes:
 #CT Connecticut does not have county governments. 
