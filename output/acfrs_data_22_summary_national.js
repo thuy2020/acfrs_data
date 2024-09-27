@@ -70,6 +70,16 @@ export default [
     "total_for_pct": 40918985825
   },
   {
+    "state_abb": "DC",
+    "state": "District of Columbia",
+    "school_district": 0,
+    "county": 0,
+    "municipality": 36081000,
+    "state_entity": 0,
+    "total": 36081000,
+    "total_for_pct": 36081000
+  },
+  {
     "state_abb": "DE",
     "state": "Delaware",
     "school_district": 0,
@@ -504,9 +514,9 @@ export default [
     "state": "United States",
     "school_district": 186794571228,
     "county": 89759157190,
-    "municipality": 209417320868,
+    "municipality": 209453401868,
     "state_entity": 501808420392,
-    "total": 987779469678,
-    "total_for_pct": 1028647905403
+    "total": 987815550678,
+    "total_for_pct": 1028683986403
   }
 ]

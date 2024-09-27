@@ -3,14 +3,13 @@ library(tidyr)
 options(scipen = 999)
 
 ## Get the ID 
-stateID <- readRDS("data/stateID.RDS")
+stateID <- readRDS("data/stateID.RDS") # excluding DC
 countyID <- readRDS("data/countyID.RDS")
-place_divisionID <- readRDS("data/place_divisionID.RDS")
+place_divisionID <- readRDS("data/place_divisionID.RDS") # including DC
 
 #read in data: acfrs_data.RDS
 acfrs_data_22 <-  readRDS("data/acfrs_data.RDS") %>% 
   filter(!state.abb %in% c("MP", "PR", "AS", "GU", "FM")) %>% 
-  filter(state.name != "District of Columbia") %>% 
   filter(year == 2022) %>% 
   select(state.abb, state.name, id, name, category,
          net_pension_liability, 
