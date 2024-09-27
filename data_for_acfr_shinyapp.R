@@ -16,11 +16,12 @@ d <- rbind(
     select(all_of(fields_to_display), population) %>% 
     mutate(category = "State"),
   county_all %>% select(all_of(fields_to_display), population) %>% 
-    mutate(category = "County"),
+    mutate(category = "Counties"),
   place_division_gov %>% select(all_of(fields_to_display), population) %>% 
-    mutate(category = "Municipality"),
+    mutate(category = "Municipalities"),
   school_districts %>% 
     select(all_of(fields_to_display), enrollment_22) %>% 
+    mutate(category = "School Districts") %>% 
     rename(population = enrollment_22) 
 ) %>% 
   filter(year != 2023)

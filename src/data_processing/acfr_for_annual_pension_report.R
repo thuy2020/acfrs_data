@@ -8,36 +8,26 @@ countyID <- readRDS("data/countyID.RDS")
 place_divisionID <- readRDS("data/place_divisionID.RDS")
 
 #read in data: acfrs_data.RDS
-acfrs_data_22_23_ <-  readRDS("data/acfrs_data.RDS") %>% 
+acfrs_data_22 <-  readRDS("data/acfrs_data.RDS") %>% 
   filter(!state.abb %in% c("MP", "PR", "AS", "GU", "FM")) %>% 
   filter(state.name != "District of Columbia") %>% 
-  filter(year == 2022 | year == 2023) %>% 
-  select(state.abb, state.name, id, name, year, category,
+  filter(year == 2022) %>% 
+  select(state.abb, state.name, id, name, category,
          net_pension_liability, 
          net_pension_assets,
          net_opeb_liability,
          total_liabilities) %>% 
   filter(category %in% c("General Purpose", "School District"))
 
-#back fill 2022 data for 5 states that have not yet released their ACFR 2023
-#NOTE: only backfill for 5 state government, NOT any other entity types. 
-backfill_5states <- acfrs_data_22_23 %>% 
-  filter(id %in% c("31665", "40623", "1267369", "95852", "35504")) %>% 
-  mutate(year = 2023)
-  
-acfrs_data_22_23 <- acfrs_data_22_23_ %>% rbind(backfill_5states)
-
-
-
 # break down by categories 
-acfrs_data_22_23_summary <- acfrs_data_22_23 %>% 
+acfrs_data_22_summary <- acfrs_data_22 %>% 
   mutate(category = case_when(id %in% stateID$id ~ "state_entity",
                               id %in% countyID$id ~ "county",
                               id %in% place_divisionID$id ~ "municipality",
                               TRUE ~ category)) %>% 
 
   mutate(net_pension_liability = net_pension_liability - net_pension_assets) |>
-  group_by(state.abb, state.name, category, year) %>% 
+  group_by(state.abb, state.name, category) %>% 
   summarise(
     net_pension_liability = sum(net_pension_liability, na.rm = TRUE)
     ) %>% 
@@ -59,8 +49,7 @@ acfrs_data_22_23_summary <- acfrs_data_22_23 %>%
 
 
 # sum columns to create national state
-national_summary <- acfrs_data_22_23_summary %>% 
-  group_by(year) %>% 
+national_summary <- acfrs_data_22_summary %>% 
   summarise(
     state_abb = "US",
     state = "United States",
@@ -73,7 +62,7 @@ national_summary <- acfrs_data_22_23_summary %>%
   )
 
 # add national summary to the data
-acfrs_data_22_23_summary_national <- acfrs_data_22_23_summary %>% 
+acfrs_data_22_summary_national <- acfrs_data_22_summary %>% 
   bind_rows(national_summary)
 
 #Notes:
@@ -86,7 +75,8 @@ acfrs_data_22_23_summary_national <- acfrs_data_22_23_summary %>%
 #AZ, CA, IL, MS, NV doesn't have state Acfr 2023 as of Sep 4, 2024
 
 # write the data to js
-acfrs_data_2022_summary_json <- jsonlite::toJSON(acfrs_data_22_23_summary_national, pretty = TRUE)
+acfrs_data_2022_summary_json <- jsonlite::toJSON(acfrs_data_22_summary_national, 
+                                                 pretty = TRUE)
 acfrs_data_2022_summary_json <- paste0("export default ", acfrs_data_2022_summary_json)
 
-write(acfrs_data_2022_summary_json, file = "output/acfrs_data_22_23_summary_national.js")
+write(acfrs_data_2022_summary_json, file = "output/acfrs_data_22_summary_national.js")

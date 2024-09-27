@@ -83,9 +83,9 @@ export default [
     "school_district": 2552933966,
     "county": 180614394,
     "municipality": 5318428779,
-    "state_entity": 4005498000,
-    "total": 12057475139,
-    "total_for_pct": 12057475139
+    "state_entity": 8010996000,
+    "total": 16062973139,
+    "total_for_pct": 16062973139
   },
   {
     "state_abb": "CA",
@@ -105,9 +105,9 @@ export default [
     "school_district": 8899378640,
     "county": 3697878874,
     "municipality": 582991247,
-    "state_entity": 54169128000,
-    "total": 67349376761,
-    "total_for_pct": 67349376761
+    "state_entity": 108338256000,
+    "total": 121518504761,
+    "total_for_pct": 121518504761
   },
   {
     "state_abb": "CO",
@@ -303,9 +303,9 @@ export default [
     "school_district": 22507972,
     "county": 93520277,
     "municipality": 3148513688,
-    "state_entity": 139846404000,
-    "total": 143110945937,
-    "total_for_pct": 143110945937
+    "state_entity": 279692808000,
+    "total": 282957349937,
+    "total_for_pct": 282957349937
   },
   {
     "state_abb": "IN",
@@ -546,9 +546,9 @@ export default [
     "school_district": 100982510,
     "county": 0,
     "municipality": 0,
-    "state_entity": 2601904000,
-    "total": 2702886510,
-    "total_for_pct": 2702886510
+    "state_entity": 5203808000,
+    "total": 5304790510,
+    "total_for_pct": 5304790510
   },
   {
     "state_abb": "MT",
@@ -722,9 +722,9 @@ export default [
     "school_district": 0,
     "county": 262546226,
     "municipality": 1441852409,
-    "state_entity": 1517054000,
-    "total": 3221452635,
-    "total_for_pct": 3221452635
+    "state_entity": 3034108000,
+    "total": 4738506635,
+    "total_for_pct": 4738506635
   },
   {
     "state_abb": "NY",
@@ -1122,8 +1122,8 @@ export default [
     "school_district": 17287701943,
     "county": 12572448606,
     "municipality": 42316658800,
-    "state_entity": 359395842673,
-    "total": 431572652022,
-    "total_for_pct": 434933453000
+    "state_entity": 561535830673,
+    "total": 633712640022,
+    "total_for_pct": 637073441000
   }
 ]

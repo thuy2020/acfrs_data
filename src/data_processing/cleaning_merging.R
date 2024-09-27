@@ -201,7 +201,7 @@ municipality_ <- acfrs_general_purpose %>%
 municipality_all <- append_url(municipality_) %>% select(-identifier)
 
 #City&DC
-acfrs_city <- municipality %>% 
+acfrs_city <- municipality_all %>% 
   filter((geo_id %in% census_incorporated$geo_id) | name == "district of columbia") 
 
 ##Special cities##
@@ -309,7 +309,7 @@ state_gov %>% select(state.name, state.abb, name, id) %>% distinct() %>%
   saveRDS("data/stateID.RDS")
 county_gov %>% select(state.name, state.abb, name, id) %>% distinct() %>% 
   saveRDS("data/countyID.RDS")
-place_division_gov %>% select(state.name, state.abb, name, id) %>% distinct() %>% 
+municipality_all %>% select(state.name, state.abb, name, id) %>% distinct() %>% 
   saveRDS("data/place_divisionID.RDS")
 city_gov %>% select(state.name, state.abb, name, id) %>% distinct() %>% 
   saveRDS("data/cityID.RDS")
