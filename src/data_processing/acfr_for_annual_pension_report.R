@@ -2,6 +2,7 @@ library(dplyr)
 library(tidyr)
 library(scales)
 options(scipen = 999)
+source("src/data_processing/processing_for_data_tool.R")
 
 ## Get the ID 
 stateID <- readRDS("data/stateID.RDS") # excluding DC
@@ -65,34 +66,6 @@ national_summary <- acfrs_data_22_summary %>%
 acfrs_data_22_summary_national <- acfrs_data_22_summary %>% 
   bind_rows(national_summary)
 
-####Checking data against the APR revised file#### 
-#https://docs.google.com/document/d/12EwKmb8As7R8CWNrMLVxMkP16Cpj_tsxLGkjgRBYCR8/edit
-
-acfrs_data_22_summary_national %>% 
-  mutate(across(3:8, ~ comma(.))) %>% View()
-
-#Illinois and New Jersey: 42.8% of the total net pension liability held by U.S. states 
-(acfrs_data_22_summary_national[acfrs_data_22_summary_national$state_abb == "IL",6] + 
-  acfrs_data_22_summary_national[acfrs_data_22_summary_national$state_abb == "NJ",6]) / 
-  acfrs_data_22_summary_national[acfrs_data_22_summary_national$state_abb == "US",6]   
-
-#while only being responsible for 6.6% of the U.S. population.
-(12.58 + 9.262)/ 333
-
-#The 10 most indebted states account for 86% of all U.S. states’ total net pension liability.
-acfrs_data_22_summary_national %>% arrange(desc(state_entity)) %>% 
-  slice(2:11) %>% 
-  summarise(tot_top10state = sum(state_entity))
-431594889300/ acfrs_data_22_summary_national[acfrs_data_22_summary_national$state_abb == "US",6]  
-
-
-
-
-
-
-
-
-
 #Notes:
 #CT Connecticut does not have county governments. 
 #DE we currently don't have data for school district in DE. 
@@ -108,3 +81,133 @@ acfrs_data_2022_summary_json <- jsonlite::toJSON(acfrs_data_22_summary_national,
 acfrs_data_2022_summary_json <- paste0("export default ", acfrs_data_2022_summary_json)
 
 write(acfrs_data_2022_summary_json, file = "output/acfrs_data_22_summary_national.js")
+
+
+####Checking data for APR page#### 
+
+# States:
+#U.S. states owed $505.8 billion as net public pension liabilities.
+acfrs_data_22_summary_national %>% 
+  mutate(across(3:8, ~ comma(.))) %>% View()
+
+us_netnetPL_22 <- acfrs_data_22_summary_national[acfrs_data_22_summary_national$state_abb == "US",6]
+us_netnetPL_22
+
+
+#Illinois and New Jersey account for 42.8% of the total net pension liability held by U.S. states while only being responsible for 6.6% of the U.S. population.
+(acfrs_data_22_summary_national[acfrs_data_22_summary_national$state_abb == "IL",6] + 
+    acfrs_data_22_summary_national[acfrs_data_22_summary_national$state_abb == "NJ",6]) / 
+  us_netnetPL_22  
+
+#while only being responsible for 6.6% of the U.S. population.
+(12.58 + 9.262)/ 333
+
+#The ten most indebted states account for 86% of all U.S. states' total net pension liability.
+
+ten_most_indebted <- acfrs_data_22_summary_national %>% arrange(desc(state_entity)) %>% 
+  slice(2:11) %>% 
+  summarise(tot_top10state = sum(state_entity))
+
+ten_most_indebted/ acfrs_data_22_summary_national[acfrs_data_22_summary_national$state_abb == "US",6]  
+
+#Cities:
+#The 100 most populated U.S. cities owed $136.8 billion as net public pension liabilities.
+
+city_data %>% 
+  filter(year == 2022) %>% 
+  summarise(tot = sum(net_pension_liability, na.rm = TRUE))
+
+#The top ten most indebted cities alone are responsible for 77.15% of the total net pension liability held by all 100 most populous cities.
+
+ten_indebted_cities <- city_data %>% 
+  filter(year == 2022) %>% 
+  arrange(desc(net_pension_liability)) %>% 
+  slice(1:10) %>% 
+  summarise(tot = sum(net_pension_liability, na.rm = TRUE))
+
+ten_indebted_cities / 135548999937
+  
+#New York and Chicago were responsible for 56.8% of 
+#the total net pension liability held by all 100 most populous cities.
+city_data %>% 
+  filter(year == 2022) %>% 
+  arrange(desc(net_pension_liability)) %>% 
+  slice(1:2) %>% 
+  summarise(tot = sum(net_pension_liability, na.rm = TRUE))
+
+77786072000/ 135548999937
+
+#Counties:
+#  The 100 most populous U.S. counties owed $72 billion as net public pension liabilities.
+top100_populous_counties <- county_data %>% 
+  filter(year == 2022) %>% 
+  summarise(tot = sum(net_pension_liability, na.rm = TRUE))
+
+#however, if only count for those with real debt, i.e excluding those with asset bigger than liability
+county_data %>% 
+  filter(year == 2022) %>% 
+  filter(net_pension_liability >=0) %>% 
+  summarise(tot = sum(net_pension_liability, na.rm = TRUE))
+
+
+#The top ten most indebted counties alone are responsible for 64.2% of 
+#the total net pension liability held by all 100 most populous counties.
+
+ten_most_indebted_counties <- county_data %>% 
+  filter(year == 2022) %>% 
+    arrange(desc(net_pension_liability)) %>% 
+    slice(1:10) %>% 
+  summarise(tot = sum(net_pension_liability))
+
+ten_most_indebted_counties / top100_populous_counties
+  
+#The two most indebted counties were responsible for 24.8% of the 
+#total net pension liability held by all 100 most populous counties.
+#--> correct
+two_most_indebted_counties <- county_data %>% 
+  filter(year == 2022) %>% 
+  arrange(desc(net_pension_liability)) %>% 
+  slice(1:2) %>% 
+  summarise(tot = sum(net_pension_liability))
+
+two_most_indebted_counties / top100_populous_counties
+
+
+#School Districts:
+ # The 100 most populated U.S. school districts owed $136.8 billion as net public pension liabilities.
+school_data %>% 
+  filter(year == 2022) %>% 
+  arrange(desc(enrollment_22)) %>% slice(1:100) %>% 
+  summarise(tot = sum(net_pension_liability, na.rm = TRUE))
+
+#The top ten most indebted school districts alone are responsible for 59.7% of 
+#the total net pension liability held by all 100 most populous school districts.
+
+ten_indebted_sd <- school_data %>% 
+  filter(year == 2022) %>% 
+  arrange(desc(enrollment_22)) %>% slice(1:100) %>% 
+  arrange(desc(net_pension_liability)) %>% slice(1:10) %>% 
+  summarise(tot = sum(net_pension_liability, na.rm = TRUE))
+
+ten_indebted_sd/50903746980
+
+#The Chicago and Los Angeles school districts were responsible for 35.8% 
+#of the total net pension liability, 
+#while only 7.9% percent of the student population of the 100 most populous school districts.
+school_data %>% 
+  filter(year == 2022) %>% 
+  arrange(desc(enrollment_22)) %>% slice(1:100) %>% 
+  arrange(desc(net_pension_liability)) %>% slice(1:2) %>% 
+  summarise(tot = sum(net_pension_liability, na.rm = TRUE))
+
+19039085000/ 50903746980
+
+school_data %>% 
+  filter(year == 2022) %>% 
+  arrange(desc(enrollment_22)) %>% slice(1:100) %>% 
+  #arrange(desc(net_pension_liability)) %>% slice(1:2) %>%
+  summarise(tot = sum(enrollment_22, na.rm = TRUE))
+
+765794/ 9380703
+
+
