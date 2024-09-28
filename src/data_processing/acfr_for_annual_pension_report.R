@@ -48,6 +48,7 @@ acfrs_data_22_summary <- acfrs_data_22 %>%
       ifelse(school_district < 0, 0, school_district)
   )
 
+####National summary####
 
 # sum columns to create national state
 national_summary <- acfrs_data_22_summary %>% 
@@ -210,4 +211,19 @@ school_data %>%
 
 765794/ 9380703
 
+#Figure 19 illustrates the distribution of the total net pension liability, 
+#which amounts to $987.8 billion, across different levels of local government: 
+
+national_summary[,7]
+
+#The graph reveals that state-level pension plans bear 
+#the largest share of this liability, accounting for 50.8% ($501.8 billion) of the total. 
+national_summary[,3] / national_summary[,7]
+
+#City-level plans represent 21.2% ($209.5 billion), 
+#--> should be "municipality"
+national_summary[,5] / national_summary[,7]
+
+#while county-level plans hold 9.1% ($89.8 billion).
+national_summary[,4] / national_summary[,7]
 
