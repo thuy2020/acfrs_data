@@ -5,9 +5,12 @@ source("src/data_processing/census.R")
 
 # read in data
 state_data_temp <- read_csv("output/all_states_4years_2020_2023.csv")
-county_data_temp <- read_csv("output/top100_counties.csv")
-city_data_temp <- read_csv("output/top100_cities.csv")
-school_data_temp <- read_csv("output/top100_sd.csv")
+county_data_temp <- read_csv("output/top100_counties.csv") %>% 
+  filter(year != 2023) 
+city_data_temp <- read_csv("output/top100_cities.csv") %>% 
+  filter(year != 2023) 
+school_data_temp <- read_csv("output/top100_sd.csv")%>% 
+  filter(year != 2023) 
 
 
 ############################

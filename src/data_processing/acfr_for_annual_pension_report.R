@@ -89,7 +89,7 @@ write(acfrs_data_2022_summary_json, file = "output/acfrs_data_22_summary_nationa
 # States:
 #U.S. states owed $505.8 billion as net public pension liabilities.
 acfrs_data_22_summary_national %>% 
-  mutate(across(3:8, ~ comma(.))) %>% View()
+  mutate(across(3:8, ~ comma(.))) 
 
 us_netnetPL_22 <- acfrs_data_22_summary_national[acfrs_data_22_summary_national$state_abb == "US",6]
 us_netnetPL_22

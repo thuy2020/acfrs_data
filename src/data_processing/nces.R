@@ -204,3 +204,11 @@ anti_join(top100_2021, top100_2022, by = "ncesID") %>% mutate(name_nces = str_to
 anti_join(top100_2022, top100_2021, by = "ncesID")
 
 nces %>% saveRDS("data/nces.RDS")
+
+# pop break down by state 
+# nces_pop_bystate <- nces %>% 
+#   group_by(state.abb) %>% 
+#   summarise(population = sum(enrollment_22,na.rm = TRUE)) %>% 
+#   mutate(category = "School Districts")
+
+cat("End of script")

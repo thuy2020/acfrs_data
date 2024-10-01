@@ -37,7 +37,6 @@ county_gov_all %>% select(state.abb, year, name) %>%
   summarise(count = n())
 
 # population by year
-
 county_gov_all %>% #select(state, name, population, year) %>% 
   group_by(year) %>% 
   summarise(collected_pop = sum(population, na.rm = TRUE))
@@ -56,7 +55,7 @@ top200_county_4years %>% select(state.abb, name, year, id) %>%
 # missing county top200
 missing_county <- top200_county_4years %>% 
   select(state.abb, name, id, year, geo_id) %>% add_count(geo_id) %>% 
-  filter(n <3)
+  filter(n <4) 
 
 
 #TODO: Checking on 2 missing - as of June 7, 2024
@@ -84,6 +83,7 @@ missing_county <- top200_county_4years %>%
 ####Cities####
 city_gov %>% filter(year == 2022) %>% 
   summarise(collected_pop = sum(population, na.rm = TRUE))
+
 View()
 # Why so few cities?
 anti_join(city_gov %>% filter(year == 2022) %>% select(state.abb, name, population), 
@@ -93,7 +93,7 @@ city_gov %>% select(state.abb, year, name) %>%
   group_by(year) %>% 
   summarise(count = n())
 
-city_gov %>% select(state, name, population, year) %>% 
+city_gov %>% select(state.abb, name, population, year) %>% 
   group_by(year) %>% 
   summarise(collected_pop = sum(population, na.rm = TRUE))
 
@@ -153,11 +153,11 @@ city_gov %>% select(state, name, population, year) %>%
 ####SD####
 
 # collected sd
-school_districts %>% select(state.abb, name, enrollment_22, year) %>% 
+school_districts_all %>% select(state.abb, name, enrollment_22, year) %>% 
   group_by(year) %>% 
   summarise(count = n())
 
-school_districts %>% select(state.abb,enrollment_22, year) %>% 
+school_districts_all %>% select(state.abb,enrollment_22, year) %>% 
   group_by(year) %>% 
   summarise(collected_pop = sum(enrollment_22, na.rm = TRUE))
 

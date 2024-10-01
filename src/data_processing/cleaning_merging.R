@@ -170,17 +170,15 @@ county_all <- append_url(county_gov_all) %>%
   select(-identifier)
 
 # Find acfrs entities from the list of Top 100 county census for only 3 years
-top100_county_3years <- county_all %>% filter(year != 2023) %>% 
-  filter(geo_id %in% census_county_top100$geo_id)
 
-top100_county_4years <- county_all %>% 
+top100_counties <- county_all %>% 
   filter(geo_id %in% census_county_top100$geo_id)
 
 # Find acfrs entities from the list of Top 200 county census
 top200_county_4years <- county_all %>% 
   filter(geo_id %in% census_county_top200$geo_id) 
 
-write.csv(top100_county_3years, "output/top100_counties.csv")
+write.csv(top100_counties, "output/top100_counties.csv")
 write.csv(county_all, "output/all_counties_2020_2023.csv")
 top200_county_4years %>% write.csv("output/top200_counties.csv")
 
@@ -200,9 +198,10 @@ municipality_ <- acfrs_general_purpose %>%
 #append ULR
 municipality_all <- append_url(municipality_) %>% select(-identifier)
 
+
 #City&DC
-acfrs_city <- municipality_all %>% 
-  filter((geo_id %in% census_incorporated$geo_id) | name == "district of columbia") 
+acfrs_city <- municipality_all #%>% 
+  #filter((geo_id %in% census_incorporated$geo_id) | name == "district of columbia") 
 
 ##Special cities##
 special_cities <- acfrs_general_purpose %>% 
@@ -228,10 +227,7 @@ top100_cities <- city_gov %>%
            name == "district of columbia") %>% distinct() %>% 
   mutate(population = ifelse(name == "district of columbia", 689546, population))
 
-#Top 100 for data tool year 20-22
-top100_cities %>% 
-  filter(year != 2023) %>% 
-  write.csv("output/top100_cities.csv")
+
 
 #Top 200 cities
 top200_cities <- city_gov %>% 
@@ -241,6 +237,9 @@ top200_cities <- city_gov %>%
   # group_by(year) %>% 
   # summarise(n = n())
   # 
+
+#Top 100 for data tool 
+top100_cities %>% write.csv("output/top100_cities.csv")
 top200_cities %>% write.csv("output/top200_cities.csv")
 city_gov %>% write.csv("output/all_cities_2020_2023.csv")
 municipality_all %>% write.csv("output/all_municipalities_2020_2023.csv")
@@ -271,15 +270,14 @@ top100_school_districts <- school_districts_all %>%
   filter(id %in% dict_top100_ELSI$id) %>% 
   
   #bind with NYC
-  rbind(nyc_top5) %>% arrange(state.abb, name) %>% 
-  filter(year != 2023) 
+  rbind(nyc_top5) %>% arrange(state.abb, name) 
+  
 
 top100_school_districts_4years <- school_districts_all %>% 
   filter(id %in% dict_top100_ELSI$id) 
   
   #bind with NYC
-  rbind(nyc_top5) %>% arrange(state.abb, name) %>% 
-  filter(year != 2023) 
+  rbind(nyc_top5) %>% arrange(state.abb, name) 
 
 # top 200
 dict_top200_ELSI <- dictionary %>% 

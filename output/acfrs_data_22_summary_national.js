@@ -4,10 +4,10 @@ export default [
     "state": "Alaska",
     "school_district": 438185341,
     "county": 257499250,
-    "municipality": 148020088,
+    "municipality": 148013915,
     "state_entity": 2334810000,
-    "total": 3178514679,
-    "total_for_pct": 3178514679
+    "total": 3178508506,
+    "total_for_pct": 3178508506
   },
   {
     "state_abb": "AL",
@@ -144,20 +144,20 @@ export default [
     "state": "Illinois",
     "school_district": 14138376676,
     "county": 9900595782,
-    "municipality": 45938618339,
+    "municipality": 46145561604,
     "state_entity": 139846404000,
-    "total": 209823994797,
-    "total_for_pct": 209823994797
+    "total": 210030938062,
+    "total_for_pct": 210030938062
   },
   {
     "state_abb": "IN",
     "state": "Indiana",
     "school_district": -22517429,
-    "county": 315633406,
+    "county": 409928470,
     "municipality": 1199835948,
     "state_entity": 9730464000,
-    "total": 11223415925,
-    "total_for_pct": 11245933354
+    "total": 11317710989,
+    "total_for_pct": 11340228418
   },
   {
     "state_abb": "KS",
@@ -183,11 +183,11 @@ export default [
     "state_abb": "LA",
     "state": "Louisiana",
     "school_district": 3479455628,
-    "county": 232140986,
+    "county": 229538297,
     "municipality": 2694743100,
     "state_entity": 4890631000,
-    "total": 11296970714,
-    "total_for_pct": 11296970714
+    "total": 11294368025,
+    "total_for_pct": 11294368025
   },
   {
     "state_abb": "MA",
@@ -352,12 +352,12 @@ export default [
   {
     "state_abb": "OH",
     "state": "Ohio",
-    "school_district": 11054982347,
+    "school_district": 11057253463,
     "county": 2386625742,
     "municipality": 6004223435,
     "state_entity": 2200534000,
-    "total": 21646365524,
-    "total_for_pct": 21646365524
+    "total": 21648636640,
+    "total_for_pct": 21648636640
   },
   {
     "state_abb": "OK",
@@ -494,10 +494,10 @@ export default [
     "state": "West Virginia",
     "school_district": 79775365,
     "county": -50548560,
-    "municipality": 978547789,
+    "municipality": 981878244,
     "state_entity": 749536000,
-    "total": 1757310594,
-    "total_for_pct": 1807859154
+    "total": 1760641049,
+    "total_for_pct": 1811189609
   },
   {
     "state_abb": "WY",
@@ -512,11 +512,11 @@ export default [
   {
     "state_abb": "US",
     "state": "United States",
-    "school_district": 186794571228,
-    "county": 89759157190,
-    "municipality": 209453401868,
+    "school_district": 186796842344,
+    "county": 89850849565,
+    "municipality": 209663669415,
     "state_entity": 501808420392,
-    "total": 987815550678,
-    "total_for_pct": 1028683986403
+    "total": 988119781716,
+    "total_for_pct": 1028988217441
   }
 ]

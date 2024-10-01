@@ -131,7 +131,7 @@ census_county_top200 <- census_county %>%
   slice(1:200) 
 
 ##### Census Incorporated Place & Minor Civil Division #########
-census_place_division <- census_all %>% 
+census_place_division <- census_all %>% # filter(sumlev %in% c(170))
   filter(sumlev %in% c(162, 061, 170, 172, 61)) %>% 
   filter(funcstat %in% c("A", "C")) %>% 
   distinct()
@@ -245,6 +245,31 @@ city_income <- rio::import(here::here("data/ACSST1Y2021.S1903_2023-12-29T105538/
   
   mutate(geo_id = paste0(state, place)) %>% 
   select(geo_id, median_hh_income_21)
+
+####population by state, break down by category####
+
+# census_pop_by_category <- rbind(census_state %>% 
+#   select(state.abb, population) %>% 
+#   mutate(category = "State"), 
+# 
+# census_county %>% 
+#   group_by(state.abb) %>% 
+#   summarise(population = sum(population, na.rm = TRUE)) %>% 
+#   mutate(category = "Counties"), 
+# 
+# 
+# census_incorporated %>% 
+#   group_by(state.abb) %>% 
+#   summarise(population = sum(population, na.rm = TRUE)) %>% 
+#   mutate(category = "Municipalities"), 
+# 
+# nces_pop_bystate
+# )
+# 
+# census_pop_by_category %>% saveRDS("data/census_pop_by_category.RDS")
+# 
+# # check census Ohio -  municipalities
+# census_incorporated %>% filter(state.abb == "OH") %>% View()
 
 ####### Partisan lean - state ##########
 
