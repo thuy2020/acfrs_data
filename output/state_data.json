@@ -905,8 +905,8 @@
     "median_hh_income_21": 62286,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/General%20Purpose/OH/State%20of%20Ohio/OH%20State%20of%20Ohio%202020.pdf",
     "modified_revenues": -11429349000,
-    "net_pension_liability": 4641754000,
-    "net_opeb_liability": 3330409000,
+    "net_pension_liability": 4601354000,
+    "net_opeb_liability": -2669591000,
     "assets_liab_ratio": 0.6609
   },
   {
@@ -2198,15 +2198,15 @@
     "compensated_absences": 625038000,
     "expenses": 95289768000,
     "revenues": 99447285000,
-    "unrestricted": 0,
+    "unrestricted": 6150545000,
     "population": 11799374,
     "urban_pop": 9001099,
     "pct_urban_pop": 76.2841,
     "median_hh_income_21": 62286,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/General%20Purpose/OH/State%20of%20Ohio/OH%20State%20of%20Ohio%202021.pdf",
     "modified_revenues": -13848674000,
-    "net_pension_liability": 3644138000,
-    "net_opeb_liability": 633413000,
+    "net_pension_liability": 3586838000,
+    "net_opeb_liability": 284513000,
     "assets_liab_ratio": 0.6234
   },
   {
@@ -3491,12 +3491,12 @@
     "category": "General Purpose",
     "total_liabilities": 53399275000,
     "current_liabilities": 17360425000,
-    "total_assets": 97359863000,
+    "total_assets": 96693208000,
     "current_assets": 41886308000,
     "compensated_absences": 626690000,
     "expenses": 84391716000,
     "revenues": 92740138000,
-    "unrestricted": 0,
+    "unrestricted": 1104765000,
     "population": 11799374,
     "urban_pop": 9001099,
     "pct_urban_pop": 76.2841,
@@ -3505,7 +3505,7 @@
     "modified_revenues": -9012003000,
     "net_pension_liability": 2200534000,
     "net_opeb_liability": -285941000,
-    "assets_liab_ratio": 0.5485
+    "assets_liab_ratio": 0.5523
   },
   {
     "state.abb": "OK",

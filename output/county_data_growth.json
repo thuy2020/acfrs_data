@@ -54,7 +54,7 @@
     "total_assets_growth": 0.0641,
     "assets_liab_ratio_growth": 0.0015,
     "modified_revenues_growth": -0.3597,
-    "pct_urban_pop_22_normalized": -2.7662,
+    "pct_urban_pop_22_normalized": 30.2937,
     "median_hh_income_normalized": -38.6998
   },
   {
@@ -112,7 +112,7 @@
     "total_assets_growth": 0.2909,
     "assets_liab_ratio_growth": -0.0131,
     "modified_revenues_growth": -0.9294,
-    "pct_urban_pop_22_normalized": 39.9255,
+    "pct_urban_pop_22_normalized": 46.2376,
     "median_hh_income_normalized": -17.0076
   },
   {
@@ -170,7 +170,7 @@
     "total_assets_growth": 0.0908,
     "assets_liab_ratio_growth": 0.0356,
     "modified_revenues_growth": -2.8574,
-    "pct_urban_pop_22_normalized": 11.3487,
+    "pct_urban_pop_22_normalized": 35.5651,
     "median_hh_income_normalized": -33.1333
   },
   {
@@ -228,7 +228,7 @@
     "total_assets_growth": 0.2892,
     "assets_liab_ratio_growth": -0.1938,
     "modified_revenues_growth": -0.3801,
-    "pct_urban_pop_22_normalized": 46.1053,
+    "pct_urban_pop_22_normalized": 48.5455,
     "median_hh_income_normalized": -15.8456
   },
   {
@@ -286,7 +286,7 @@
     "total_assets_growth": 0.1716,
     "assets_liab_ratio_growth": -0.2621,
     "modified_revenues_growth": -0.0407,
-    "pct_urban_pop_22_normalized": 30.7895,
+    "pct_urban_pop_22_normalized": 42.8256,
     "median_hh_income_normalized": -2.017
   },
   {
@@ -343,7 +343,7 @@
     "total_assets_growth": 0.2146,
     "assets_liab_ratio_growth": -0.3604,
     "modified_revenues_growth": 1.6789,
-    "pct_urban_pop_22_normalized": 48.9079,
+    "pct_urban_pop_22_normalized": 49.5921,
     "median_hh_income_normalized": 7.7393
   },
   {
@@ -401,7 +401,7 @@
     "total_assets_growth": 0.1385,
     "assets_liab_ratio_growth": -0.2682,
     "modified_revenues_growth": 0.3466,
-    "pct_urban_pop_22_normalized": 26.0735,
+    "pct_urban_pop_22_normalized": 41.0643,
     "median_hh_income_normalized": -14.4689
   },
   {
@@ -459,7 +459,7 @@
     "total_assets_growth": 0.1816,
     "assets_liab_ratio_growth": -0.3488,
     "modified_revenues_growth": 1.1744,
-    "pct_urban_pop_22_normalized": 26.4757,
+    "pct_urban_pop_22_normalized": 41.2145,
     "median_hh_income_normalized": -19.0839
   },
   {
@@ -517,7 +517,7 @@
     "total_assets_growth": 0.2574,
     "assets_liab_ratio_growth": -0.2228,
     "modified_revenues_growth": 0.1753,
-    "pct_urban_pop_22_normalized": 44.2347,
+    "pct_urban_pop_22_normalized": 47.8469,
     "median_hh_income_normalized": 50
   },
   {
@@ -575,7 +575,7 @@
     "total_assets_growth": 0.1086,
     "assets_liab_ratio_growth": -0.2742,
     "modified_revenues_growth": -0.0432,
-    "pct_urban_pop_22_normalized": 47.8556,
+    "pct_urban_pop_22_normalized": 49.1991,
     "median_hh_income_normalized": 16.7805
   },
   {
@@ -633,7 +633,7 @@
     "total_assets_growth": 0.2293,
     "assets_liab_ratio_growth": -0.3519,
     "modified_revenues_growth": 1.2756,
-    "pct_urban_pop_22_normalized": 39.5122,
+    "pct_urban_pop_22_normalized": 46.0832,
     "median_hh_income_normalized": -13.5184
   },
   {
@@ -691,7 +691,7 @@
     "total_assets_growth": 0.3673,
     "assets_liab_ratio_growth": -0.3546,
     "modified_revenues_growth": 0.4173,
-    "pct_urban_pop_22_normalized": 45.628,
+    "pct_urban_pop_22_normalized": 48.3672,
     "median_hh_income_normalized": 18.4565
   },
   {
@@ -748,7 +748,7 @@
     "total_assets_growth": 0.2261,
     "assets_liab_ratio_growth": -0.2968,
     "modified_revenues_growth": 0.3223,
-    "pct_urban_pop_22_normalized": 0.7567,
+    "pct_urban_pop_22_normalized": 31.6094,
     "median_hh_income_normalized": -30.5162
   },
   {
@@ -806,7 +806,7 @@
     "total_assets_growth": 0.1608,
     "assets_liab_ratio_growth": -0.2291,
     "modified_revenues_growth": 1.5451,
-    "pct_urban_pop_22_normalized": -8.3701,
+    "pct_urban_pop_22_normalized": 28.2009,
     "median_hh_income_normalized": -35.8969
   },
   {
@@ -864,7 +864,7 @@
     "total_assets_growth": 0.2802,
     "assets_liab_ratio_growth": -0.4191,
     "modified_revenues_growth": 0.9254,
-    "pct_urban_pop_22_normalized": 35.2823,
+    "pct_urban_pop_22_normalized": 44.5035,
     "median_hh_income_normalized": 3.2079
   },
   {
@@ -922,7 +922,7 @@
     "total_assets_growth": 0.2464,
     "assets_liab_ratio_growth": -0.3221,
     "modified_revenues_growth": 0.7918,
-    "pct_urban_pop_22_normalized": 16.1162,
+    "pct_urban_pop_22_normalized": 37.3456,
     "median_hh_income_normalized": -13.5319
   },
   {
@@ -980,7 +980,7 @@
     "total_assets_growth": 0.2357,
     "assets_liab_ratio_growth": -0.3165,
     "modified_revenues_growth": 0.481,
-    "pct_urban_pop_22_normalized": 42.5461,
+    "pct_urban_pop_22_normalized": 47.2162,
     "median_hh_income_normalized": 39.6699
   },
   {
@@ -1096,7 +1096,7 @@
     "total_assets_growth": 0.2853,
     "assets_liab_ratio_growth": -0.4059,
     "modified_revenues_growth": -5.2843,
-    "pct_urban_pop_22_normalized": 5.1916,
+    "pct_urban_pop_22_normalized": 33.2657,
     "median_hh_income_normalized": -14.052
   },
   {
@@ -1154,7 +1154,7 @@
     "total_assets_growth": 0.2955,
     "assets_liab_ratio_growth": -0.039,
     "modified_revenues_growth": -0.013,
-    "pct_urban_pop_22_normalized": 49.9365,
+    "pct_urban_pop_22_normalized": 49.9763,
     "median_hh_income_normalized": -11.8146
   },
   {
@@ -1212,7 +1212,7 @@
     "total_assets_growth": 0.1201,
     "assets_liab_ratio_growth": -0.0122,
     "modified_revenues_growth": -1.1065,
-    "pct_urban_pop_22_normalized": 40.9793,
+    "pct_urban_pop_22_normalized": 46.6311,
     "median_hh_income_normalized": -8.6712
   },
   {
@@ -1270,7 +1270,7 @@
     "total_assets_growth": 0.1439,
     "assets_liab_ratio_growth": -0.0763,
     "modified_revenues_growth": 0.7397,
-    "pct_urban_pop_22_normalized": 46.2251,
+    "pct_urban_pop_22_normalized": 48.5902,
     "median_hh_income_normalized": -34.8866
   },
   {
@@ -1328,7 +1328,7 @@
     "total_assets_growth": 0.1993,
     "assets_liab_ratio_growth": -0.1345,
     "modified_revenues_growth": 9.7544,
-    "pct_urban_pop_22_normalized": 49.9658,
+    "pct_urban_pop_22_normalized": 49.9872,
     "median_hh_income_normalized": -28.0436
   },
   {
@@ -1386,7 +1386,7 @@
     "total_assets_growth": 0.1404,
     "assets_liab_ratio_growth": -0.2491,
     "modified_revenues_growth": 1.8153,
-    "pct_urban_pop_22_normalized": 46.2895,
+    "pct_urban_pop_22_normalized": 48.6143,
     "median_hh_income_normalized": -23.412
   },
   {
@@ -1444,7 +1444,7 @@
     "total_assets_growth": 0.0968,
     "assets_liab_ratio_growth": -0.0471,
     "modified_revenues_growth": 0.1613,
-    "pct_urban_pop_22_normalized": 33.947,
+    "pct_urban_pop_22_normalized": 44.0048,
     "median_hh_income_normalized": -27.7526
   },
   {
@@ -1502,7 +1502,7 @@
     "total_assets_growth": 0.1225,
     "assets_liab_ratio_growth": -0.0184,
     "modified_revenues_growth": -1.5531,
-    "pct_urban_pop_22_normalized": 39.7374,
+    "pct_urban_pop_22_normalized": 46.1673,
     "median_hh_income_normalized": -29.0312
   },
   {
@@ -1560,7 +1560,7 @@
     "total_assets_growth": 0.1436,
     "assets_liab_ratio_growth": -0.2287,
     "modified_revenues_growth": -1.2218,
-    "pct_urban_pop_22_normalized": 49.1673,
+    "pct_urban_pop_22_normalized": 49.689,
     "median_hh_income_normalized": -31.8464
   },
   {
@@ -1618,7 +1618,7 @@
     "total_assets_growth": 0.1795,
     "assets_liab_ratio_growth": -0.1231,
     "modified_revenues_growth": 0.0293,
-    "pct_urban_pop_22_normalized": 32.8294,
+    "pct_urban_pop_22_normalized": 43.5874,
     "median_hh_income_normalized": -27.1251
   },
   {
@@ -1676,7 +1676,7 @@
     "total_assets_growth": 0.086,
     "assets_liab_ratio_growth": -0.0913,
     "modified_revenues_growth": -0.3201,
-    "pct_urban_pop_22_normalized": 2.4192,
+    "pct_urban_pop_22_normalized": 32.2303,
     "median_hh_income_normalized": -37.5295
   },
   {
@@ -1734,7 +1734,7 @@
     "total_assets_growth": 0.2035,
     "assets_liab_ratio_growth": -0.1977,
     "modified_revenues_growth": 0.2078,
-    "pct_urban_pop_22_normalized": 33.0374,
+    "pct_urban_pop_22_normalized": 43.6651,
     "median_hh_income_normalized": -28.3078
   },
   {
@@ -1760,7 +1760,7 @@
     "url_22": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/General%20Purpose/FL/Jacksonville/FL%20Jacksonville%202022.pdf",
     "modified_revenues_22": -376522000,
     "net_pension_liability_22": 2905810000,
-    "net_opeb_liability_22": 274269000,
+    "net_opeb_liability_22": 338399000,
     "assets_liab_ratio_22": 1.1151,
     "state.abb_20": "FL",
     "id_20": 32292,
@@ -1786,13 +1786,13 @@
     "total_liabilities_growth": 0.0349,
     "current_liabilities_growth": 1.5658,
     "expenses_growth": 0.0158,
-    "net_opeb_liability_growth": 0.0502,
+    "net_opeb_liability_growth": 0.2958,
     "net_pension_liability_growth": -0.0268,
     "revenues_growth": 0.1165,
     "total_assets_growth": 0.1445,
     "assets_liab_ratio_growth": -0.0958,
     "modified_revenues_growth": -0.4791,
-    "pct_urban_pop_22_normalized": 38.4126,
+    "pct_urban_pop_22_normalized": 45.6725,
     "median_hh_income_normalized": -33.6317
   },
   {
@@ -1849,7 +1849,7 @@
     "total_assets_growth": 0.1183,
     "assets_liab_ratio_growth": -0.1025,
     "modified_revenues_growth": -4.1539,
-    "pct_urban_pop_22_normalized": 47.2359,
+    "pct_urban_pop_22_normalized": 48.9677,
     "median_hh_income_normalized": -10.2068
   },
   {
@@ -1907,7 +1907,7 @@
     "total_assets_growth": 0.0854,
     "assets_liab_ratio_growth": 0.1091,
     "modified_revenues_growth": -0.9065,
-    "pct_urban_pop_22_normalized": 47.9332,
+    "pct_urban_pop_22_normalized": 49.2281,
     "median_hh_income_normalized": -18.2552
   },
   {
@@ -1965,7 +1965,7 @@
     "total_assets_growth": 0.0451,
     "assets_liab_ratio_growth": 0.0176,
     "modified_revenues_growth": -1.5104,
-    "pct_urban_pop_22_normalized": 49.9772,
+    "pct_urban_pop_22_normalized": 49.9915,
     "median_hh_income_normalized": -5.3441
   },
   {
@@ -2023,7 +2023,7 @@
     "total_assets_growth": 0.1232,
     "assets_liab_ratio_growth": 0.0506,
     "modified_revenues_growth": 0.0938,
-    "pct_urban_pop_22_normalized": 49.3097,
+    "pct_urban_pop_22_normalized": 49.7422,
     "median_hh_income_normalized": -22.6566
   },
   {
@@ -2081,7 +2081,7 @@
     "total_assets_growth": 0.1073,
     "assets_liab_ratio_growth": -0.0691,
     "modified_revenues_growth": -7.5423,
-    "pct_urban_pop_22_normalized": 42.6176,
+    "pct_urban_pop_22_normalized": 47.2429,
     "median_hh_income_normalized": -2.6156
   },
   {
@@ -2139,7 +2139,7 @@
     "total_assets_growth": 0.5157,
     "assets_liab_ratio_growth": -0.3915,
     "modified_revenues_growth": -0.4879,
-    "pct_urban_pop_22_normalized": 49.7605,
+    "pct_urban_pop_22_normalized": 49.9106,
     "median_hh_income_normalized": -21.3078
   },
   {
@@ -2197,7 +2197,7 @@
     "total_assets_growth": 0.2324,
     "assets_liab_ratio_growth": -0.3667,
     "modified_revenues_growth": 0.2648,
-    "pct_urban_pop_22_normalized": 49.179,
+    "pct_urban_pop_22_normalized": 49.6934,
     "median_hh_income_normalized": 7.0438
   },
   {
@@ -2255,7 +2255,7 @@
     "total_assets_growth": 0.2237,
     "assets_liab_ratio_growth": -0.0775,
     "modified_revenues_growth": -1.4644,
-    "pct_urban_pop_22_normalized": 43.8133,
+    "pct_urban_pop_22_normalized": 47.6895,
     "median_hh_income_normalized": 3.2863
   },
   {
@@ -2313,7 +2313,7 @@
     "total_assets_growth": 0.2686,
     "assets_liab_ratio_growth": -0.1853,
     "modified_revenues_growth": -3.6479,
-    "pct_urban_pop_22_normalized": 28.6905,
+    "pct_urban_pop_22_normalized": 42.0417,
     "median_hh_income_normalized": 1.3245
   },
   {
@@ -2371,7 +2371,7 @@
     "total_assets_growth": 0.0528,
     "assets_liab_ratio_growth": 0.015,
     "modified_revenues_growth": 1.3733,
-    "pct_urban_pop_22_normalized": 46.1556,
+    "pct_urban_pop_22_normalized": 48.5643,
     "median_hh_income_normalized": -35.06
   },
   {
@@ -2429,7 +2429,7 @@
     "total_assets_growth": 0.0903,
     "assets_liab_ratio_growth": -0.0852,
     "modified_revenues_growth": 61.0602,
-    "pct_urban_pop_22_normalized": 32.3516,
+    "pct_urban_pop_22_normalized": 43.4089,
     "median_hh_income_normalized": 0.5258
   },
   {
@@ -2487,7 +2487,7 @@
     "total_assets_growth": 0.2154,
     "assets_liab_ratio_growth": -0.1542,
     "modified_revenues_growth": 2.5342,
-    "pct_urban_pop_22_normalized": 42.8626,
+    "pct_urban_pop_22_normalized": 47.3345,
     "median_hh_income_normalized": -33.1003
   },
   {
@@ -2545,7 +2545,7 @@
     "total_assets_growth": 0.2498,
     "assets_liab_ratio_growth": -0.1835,
     "modified_revenues_growth": 1.3001,
-    "pct_urban_pop_22_normalized": 38.2874,
+    "pct_urban_pop_22_normalized": 45.6257,
     "median_hh_income_normalized": 20.2697
   },
   {
@@ -2603,7 +2603,7 @@
     "total_assets_growth": 0.1143,
     "assets_liab_ratio_growth": -0.0741,
     "modified_revenues_growth": 0.1663,
-    "pct_urban_pop_22_normalized": 39.3577,
+    "pct_urban_pop_22_normalized": 46.0255,
     "median_hh_income_normalized": -3.1181
   },
   {
@@ -2661,7 +2661,7 @@
     "total_assets_growth": 0.1397,
     "assets_liab_ratio_growth": -0.0937,
     "modified_revenues_growth": 0.6933,
-    "pct_urban_pop_22_normalized": 18.836,
+    "pct_urban_pop_22_normalized": 38.3614,
     "median_hh_income_normalized": -12.9529
   },
   {
@@ -2714,7 +2714,7 @@
     "total_assets_growth": 1.1558,
     "assets_liab_ratio_growth": -0.4155,
     "modified_revenues_growth": -4.2267,
-    "pct_urban_pop_22_normalized": 41.1601,
+    "pct_urban_pop_22_normalized": 46.6986,
     "median_hh_income_normalized": 22.6494
   },
   {
@@ -2772,7 +2772,7 @@
     "total_assets_growth": 0.2856,
     "assets_liab_ratio_growth": -0.0911,
     "modified_revenues_growth": -14.8447,
-    "pct_urban_pop_22_normalized": 46.0797,
+    "pct_urban_pop_22_normalized": 48.5359,
     "median_hh_income_normalized": -41.3479
   },
   {
@@ -2830,7 +2830,7 @@
     "total_assets_growth": 0.047,
     "assets_liab_ratio_growth": 0.0612,
     "modified_revenues_growth": -1.0803,
-    "pct_urban_pop_22_normalized": 25.7729,
+    "pct_urban_pop_22_normalized": 40.9521,
     "median_hh_income_normalized": -6.309
   },
   {
@@ -2888,7 +2888,7 @@
     "total_assets_growth": 0.1729,
     "assets_liab_ratio_growth": 0.1559,
     "modified_revenues_growth": -7.7354,
-    "pct_urban_pop_22_normalized": 35.968,
+    "pct_urban_pop_22_normalized": 44.7596,
     "median_hh_income_normalized": -25.8661
   },
   {
@@ -2946,7 +2946,7 @@
     "total_assets_growth": 0.1938,
     "assets_liab_ratio_growth": 0.6719,
     "modified_revenues_growth": -22.866,
-    "pct_urban_pop_22_normalized": -20.7662,
+    "pct_urban_pop_22_normalized": 23.5714,
     "median_hh_income_normalized": -21.442
   },
   {
@@ -3004,7 +3004,7 @@
     "total_assets_growth": 0.0852,
     "assets_liab_ratio_growth": 0.048,
     "modified_revenues_growth": 0.1413,
-    "pct_urban_pop_22_normalized": 39.5608,
+    "pct_urban_pop_22_normalized": 46.1013,
     "median_hh_income_normalized": -8.762
   },
   {
@@ -3062,7 +3062,7 @@
     "total_assets_growth": 0.2479,
     "assets_liab_ratio_growth": -0.1506,
     "modified_revenues_growth": 1.4655,
-    "pct_urban_pop_22_normalized": 44.0785,
+    "pct_urban_pop_22_normalized": 47.7885,
     "median_hh_income_normalized": -20.8496
   },
   {
@@ -3120,7 +3120,7 @@
     "total_assets_growth": 0.1203,
     "assets_liab_ratio_growth": -0.0962,
     "modified_revenues_growth": -0.4806,
-    "pct_urban_pop_22_normalized": 31.339,
+    "pct_urban_pop_22_normalized": 43.0308,
     "median_hh_income_normalized": -30.3697
   },
   {
@@ -3178,7 +3178,7 @@
     "total_assets_growth": 0.0416,
     "assets_liab_ratio_growth": -0.1913,
     "modified_revenues_growth": 1.7583,
-    "pct_urban_pop_22_normalized": 44.4531,
+    "pct_urban_pop_22_normalized": 47.9284,
     "median_hh_income_normalized": -29.9022
   },
   {
@@ -3236,7 +3236,7 @@
     "total_assets_growth": 7.4009,
     "assets_liab_ratio_growth": -0.9837,
     "modified_revenues_growth": -0.0837,
-    "pct_urban_pop_22_normalized": 49.4708,
+    "pct_urban_pop_22_normalized": 49.8024,
     "median_hh_income_normalized": 12.4524
   },
   {
@@ -3294,7 +3294,7 @@
     "total_assets_growth": 3.4236,
     "assets_liab_ratio_growth": -0.8238,
     "modified_revenues_growth": 0.0812,
-    "pct_urban_pop_22_normalized": 45.7313,
+    "pct_urban_pop_22_normalized": 48.4058,
     "median_hh_income_normalized": 6.4824
   },
   {
@@ -3352,7 +3352,7 @@
     "total_assets_growth": 0.2626,
     "assets_liab_ratio_growth": -0.1513,
     "modified_revenues_growth": 0.0757,
-    "pct_urban_pop_22_normalized": 49.9398,
+    "pct_urban_pop_22_normalized": 49.9775,
     "median_hh_income_normalized": -27.3676
   },
   {
@@ -3468,7 +3468,7 @@
     "total_assets_growth": 3.441,
     "assets_liab_ratio_growth": -0.7965,
     "modified_revenues_growth": 0.4713,
-    "pct_urban_pop_22_normalized": 27.58,
+    "pct_urban_pop_22_normalized": 41.627,
     "median_hh_income_normalized": 15.2625
   },
   {
@@ -3526,7 +3526,7 @@
     "total_assets_growth": 2.751,
     "assets_liab_ratio_growth": -0.7098,
     "modified_revenues_growth": 0.169,
-    "pct_urban_pop_22_normalized": 33.8558,
+    "pct_urban_pop_22_normalized": 43.9707,
     "median_hh_income_normalized": -17.5215
   },
   {
@@ -3584,7 +3584,7 @@
     "total_assets_growth": 0.2351,
     "assets_liab_ratio_growth": -0.1867,
     "modified_revenues_growth": -0.5879,
-    "pct_urban_pop_22_normalized": 32.5959,
+    "pct_urban_pop_22_normalized": 43.5002,
     "median_hh_income_normalized": -34.0425
   },
   {
@@ -3642,7 +3642,7 @@
     "total_assets_growth": 0.1943,
     "assets_liab_ratio_growth": -0.4035,
     "modified_revenues_growth": 0.8218,
-    "pct_urban_pop_22_normalized": 41.4138,
+    "pct_urban_pop_22_normalized": 46.7934,
     "median_hh_income_normalized": 20.6092
   },
   {
@@ -3700,7 +3700,7 @@
     "total_assets_growth": 0.331,
     "assets_liab_ratio_growth": -0.2615,
     "modified_revenues_growth": 1.0411,
-    "pct_urban_pop_22_normalized": 48.1243,
+    "pct_urban_pop_22_normalized": 49.2995,
     "median_hh_income_normalized": 33.4439
   },
   {
@@ -3758,7 +3758,7 @@
     "total_assets_growth": 0.2987,
     "assets_liab_ratio_growth": -0.3976,
     "modified_revenues_growth": 0.4791,
-    "pct_urban_pop_22_normalized": 30.1843,
+    "pct_urban_pop_22_normalized": 42.5995,
     "median_hh_income_normalized": 16.9456
   },
   {
@@ -3816,7 +3816,7 @@
     "total_assets_growth": 0.3042,
     "assets_liab_ratio_growth": -0.3108,
     "modified_revenues_growth": 0.5569,
-    "pct_urban_pop_22_normalized": 4.9377,
+    "pct_urban_pop_22_normalized": 33.1709,
     "median_hh_income_normalized": -30.6462
   },
   {
@@ -3873,7 +3873,7 @@
     "total_assets_growth": 0.2224,
     "assets_liab_ratio_growth": -0.3156,
     "modified_revenues_growth": 0.2175,
-    "pct_urban_pop_22_normalized": 14.5039,
+    "pct_urban_pop_22_normalized": 36.7435,
     "median_hh_income_normalized": -27.5616
   },
   {
@@ -3931,7 +3931,7 @@
     "total_assets_growth": 0.2261,
     "assets_liab_ratio_growth": -0.0872,
     "modified_revenues_growth": 0.0897,
-    "pct_urban_pop_22_normalized": 27.4553,
+    "pct_urban_pop_22_normalized": 41.5804,
     "median_hh_income_normalized": -1.1894
   },
   {
@@ -3989,7 +3989,7 @@
     "total_assets_growth": 0.0917,
     "assets_liab_ratio_growth": -0.0949,
     "modified_revenues_growth": -0.4423,
-    "pct_urban_pop_22_normalized": 46.3089,
+    "pct_urban_pop_22_normalized": 48.6215,
     "median_hh_income_normalized": -18.1345
   },
   {
@@ -4047,7 +4047,7 @@
     "total_assets_growth": 0.1696,
     "assets_liab_ratio_growth": -0.3697,
     "modified_revenues_growth": -0.8481,
-    "pct_urban_pop_22_normalized": 43.9997,
+    "pct_urban_pop_22_normalized": 47.7591,
     "median_hh_income_normalized": -27.5069
   },
   {
@@ -4105,7 +4105,7 @@
     "total_assets_growth": 0.1424,
     "assets_liab_ratio_growth": -0.3513,
     "modified_revenues_growth": -0.5264,
-    "pct_urban_pop_22_normalized": 47.5278,
+    "pct_urban_pop_22_normalized": 49.0767,
     "median_hh_income_normalized": -38.6585
   },
   {
@@ -4163,7 +4163,7 @@
     "total_assets_growth": 0.0857,
     "assets_liab_ratio_growth": -0.2691,
     "modified_revenues_growth": 0.8626,
-    "pct_urban_pop_22_normalized": 39.5874,
+    "pct_urban_pop_22_normalized": 46.1113,
     "median_hh_income_normalized": -29.5389
   },
   {
@@ -4221,7 +4221,7 @@
     "total_assets_growth": 0.3659,
     "assets_liab_ratio_growth": -0.0675,
     "modified_revenues_growth": -6.5959,
-    "pct_urban_pop_22_normalized": 16.8157,
+    "pct_urban_pop_22_normalized": 37.6069,
     "median_hh_income_normalized": -35.9341
   },
   {
@@ -4279,7 +4279,7 @@
     "total_assets_growth": 0.0696,
     "assets_liab_ratio_growth": -0.1239,
     "modified_revenues_growth": -0.7685,
-    "pct_urban_pop_22_normalized": 27.5619,
+    "pct_urban_pop_22_normalized": 41.6202,
     "median_hh_income_normalized": -34.5492
   },
   {
@@ -4337,7 +4337,7 @@
     "total_assets_growth": 0.524,
     "assets_liab_ratio_growth": -0.1599,
     "modified_revenues_growth": 1.4084,
-    "pct_urban_pop_22_normalized": 44.3974,
+    "pct_urban_pop_22_normalized": 47.9076,
     "median_hh_income_normalized": -15.3347
   },
   {
@@ -4395,7 +4395,7 @@
     "total_assets_growth": 0.3618,
     "assets_liab_ratio_growth": -0.1571,
     "modified_revenues_growth": 0.537,
-    "pct_urban_pop_22_normalized": 39.4448,
+    "pct_urban_pop_22_normalized": 46.058,
     "median_hh_income_normalized": -24.5988
   },
   {
@@ -4449,7 +4449,7 @@
     "total_assets_growth": 0.7429,
     "assets_liab_ratio_growth": 0.0624,
     "modified_revenues_growth": -8.5783,
-    "pct_urban_pop_22_normalized": 35.4149,
+    "pct_urban_pop_22_normalized": 44.553,
     "median_hh_income_normalized": 10.2553
   },
   {
@@ -4507,7 +4507,7 @@
     "total_assets_growth": 0.2887,
     "assets_liab_ratio_growth": 0.0685,
     "modified_revenues_growth": -1.292,
-    "pct_urban_pop_22_normalized": 4.9889,
+    "pct_urban_pop_22_normalized": 33.19,
     "median_hh_income_normalized": 7.2698
   },
   {
@@ -4623,7 +4623,7 @@
     "total_assets_growth": 0.1396,
     "assets_liab_ratio_growth": -0.1983,
     "modified_revenues_growth": 0.6347,
-    "pct_urban_pop_22_normalized": 35.1253,
+    "pct_urban_pop_22_normalized": 44.4448,
     "median_hh_income_normalized": -38.9877
   },
   {
@@ -4632,7 +4632,7 @@
     "id_22": 1267141,
     "geo_id": "47037",
     "year_22": 2022,
-    "name": "Davidson County, TN",
+    "name": "The Metropolitan Government Of Nashwille And Davidson County, TN",
     "category_22": "General Purpose",
     "total_liabilities_22": 8592404771,
     "current_liabilities_22": 1104487524,
@@ -4642,9 +4642,9 @@
     "expenses_22": 2342151854,
     "revenues_22": 4083458215,
     "unrestricted_22": 0,
-    "population_22": 715875,
-    "urban_pop_22": 693387,
-    "pct_urban_pop_22": 0.9686,
+    "population_22": 1913459,
+    "urban_pop_22": 113939.6923,
+    "pct_urban_pop_22": 0.3875,
     "median_hh_income_21_22": 65463,
     "url_22": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/General%20Purpose/TN/The%20Metropolitan%20Government%20of%20Nashville%20and%20Davidson%20County/TN%20The%20Metropolitan%20Government%20of%20Nashville%20and%20Davidson%20County%202022.pdf",
     "modified_revenues_22": 636818837,
@@ -4663,9 +4663,9 @@
     "expenses_20": 3182771804,
     "revenues_20": 2985439389,
     "unrestricted_20": -4201043109,
-    "population_20": 715875,
-    "urban_pop_20": 693387,
-    "pct_urban_pop_20": 0.9686,
+    "population_20": 1913459,
+    "urban_pop_20": 113939.6923,
+    "pct_urban_pop_20": 0.3875,
     "median_hh_income_21_20": 65463,
     "url_20": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/General%20Purpose/TN/The%20Metropolitan%20Government%20of%20Nashville%20and%20Davidson%20County/TN%20The%20Metropolitan%20Government%20of%20Nashville%20and%20Davidson%20County%202020.pdf",
     "modified_revenues_20": -628332800,
@@ -4681,7 +4681,7 @@
     "total_assets_growth": 0.2551,
     "assets_liab_ratio_growth": -0.3227,
     "modified_revenues_growth": 2.0135,
-    "pct_urban_pop_22_normalized": 36.2628,
+    "pct_urban_pop_22_normalized": -50,
     "median_hh_income_normalized": -28.1189
   },
   {
@@ -4739,7 +4739,7 @@
     "total_assets_growth": 0.0615,
     "assets_liab_ratio_growth": 0.1153,
     "modified_revenues_growth": -10.2273,
-    "pct_urban_pop_22_normalized": 45.0441,
+    "pct_urban_pop_22_normalized": 48.1492,
     "median_hh_income_normalized": -30.1044
   },
   {
@@ -4797,7 +4797,7 @@
     "total_assets_growth": 0.146,
     "assets_liab_ratio_growth": 0.1213,
     "modified_revenues_growth": -0.5603,
-    "pct_urban_pop_22_normalized": 47.4722,
+    "pct_urban_pop_22_normalized": 49.056,
     "median_hh_income_normalized": -30.0941
   },
   {
@@ -4855,7 +4855,7 @@
     "total_assets_growth": 0.5718,
     "assets_liab_ratio_growth": -0.1592,
     "modified_revenues_growth": -2.7238,
-    "pct_urban_pop_22_normalized": 44.6313,
+    "pct_urban_pop_22_normalized": 47.995,
     "median_hh_income_normalized": -21.9931
   },
   {
@@ -4913,7 +4913,7 @@
     "total_assets_growth": 0.1339,
     "assets_liab_ratio_growth": -0.0625,
     "modified_revenues_growth": -1.0114,
-    "pct_urban_pop_22_normalized": 29.4212,
+    "pct_urban_pop_22_normalized": 42.3146,
     "median_hh_income_normalized": -30.6462
   },
   {
@@ -4971,7 +4971,7 @@
     "total_assets_growth": 0.2307,
     "assets_liab_ratio_growth": -0.3458,
     "modified_revenues_growth": -1.3213,
-    "pct_urban_pop_22_normalized": 27.6596,
+    "pct_urban_pop_22_normalized": 41.6567,
     "median_hh_income_normalized": -8.4535
   },
   {
@@ -5029,7 +5029,7 @@
     "total_assets_growth": 0.2858,
     "assets_liab_ratio_growth": -0.0189,
     "modified_revenues_growth": -2.3022,
-    "pct_urban_pop_22_normalized": 23.1181,
+    "pct_urban_pop_22_normalized": 39.9606,
     "median_hh_income_normalized": 9.7094
   },
   {
@@ -5087,7 +5087,7 @@
     "total_assets_growth": 0.218,
     "assets_liab_ratio_growth": -0.1594,
     "modified_revenues_growth": -8.1443,
-    "pct_urban_pop_22_normalized": 18.5101,
+    "pct_urban_pop_22_normalized": 38.2397,
     "median_hh_income_normalized": 5.4865
   },
   {
@@ -5145,7 +5145,7 @@
     "total_assets_growth": 0.1912,
     "assets_liab_ratio_growth": -0.1145,
     "modified_revenues_growth": -0.5461,
-    "pct_urban_pop_22_normalized": 11.0722,
+    "pct_urban_pop_22_normalized": 35.4619,
     "median_hh_income_normalized": -50
   },
   {
@@ -5203,7 +5203,7 @@
     "total_assets_growth": 0.4414,
     "assets_liab_ratio_growth": -0.2283,
     "modified_revenues_growth": -1.188,
-    "pct_urban_pop_22_normalized": 32.4112,
+    "pct_urban_pop_22_normalized": 43.4312,
     "median_hh_income_normalized": -43.062
   },
   {
@@ -5261,7 +5261,7 @@
     "total_assets_growth": 0.386,
     "assets_liab_ratio_growth": -0.2617,
     "modified_revenues_growth": 3169.4594,
-    "pct_urban_pop_22_normalized": 29.0262,
+    "pct_urban_pop_22_normalized": 42.1671,
     "median_hh_income_normalized": 5.5309
   },
   {
@@ -5319,7 +5319,7 @@
     "total_assets_growth": 0.0598,
     "assets_liab_ratio_growth": -0.0969,
     "modified_revenues_growth": -0.3407,
-    "pct_urban_pop_22_normalized": -50,
+    "pct_urban_pop_22_normalized": 12.6536,
     "median_hh_income_normalized": -5.0356
   },
   {
@@ -5377,7 +5377,7 @@
     "total_assets_growth": 0.3026,
     "assets_liab_ratio_growth": -0.1609,
     "modified_revenues_growth": 1.4966,
-    "pct_urban_pop_22_normalized": 9.9907,
+    "pct_urban_pop_22_normalized": 35.058,
     "median_hh_income_normalized": 4.0686
   },
   {
@@ -5435,7 +5435,7 @@
     "total_assets_growth": 0.2351,
     "assets_liab_ratio_growth": -0.2386,
     "modified_revenues_growth": -0.0965,
-    "pct_urban_pop_22_normalized": 46.9776,
+    "pct_urban_pop_22_normalized": 48.8712,
     "median_hh_income_normalized": -12.4194
   },
   {
@@ -5493,7 +5493,7 @@
     "total_assets_growth": 0.3077,
     "assets_liab_ratio_growth": -0.1867,
     "modified_revenues_growth": -1.1512,
-    "pct_urban_pop_22_normalized": 31.5129,
+    "pct_urban_pop_22_normalized": 43.0957,
     "median_hh_income_normalized": -6.309
   },
   {
@@ -5551,7 +5551,7 @@
     "total_assets_growth": 0.1324,
     "assets_liab_ratio_growth": -0.1352,
     "modified_revenues_growth": 0.6247,
-    "pct_urban_pop_22_normalized": 43.2604,
+    "pct_urban_pop_22_normalized": 47.483,
     "median_hh_income_normalized": 42.45
   },
   {
@@ -5609,7 +5609,7 @@
     "total_assets_growth": 0.1996,
     "assets_liab_ratio_growth": -0.1348,
     "modified_revenues_growth": -1.8824,
-    "pct_urban_pop_22_normalized": 35.5993,
+    "pct_urban_pop_22_normalized": 44.6218,
     "median_hh_income_normalized": 18.2047
   },
   {
@@ -5667,7 +5667,7 @@
     "total_assets_growth": 0.1835,
     "assets_liab_ratio_growth": -0.1246,
     "modified_revenues_growth": 3.9422,
-    "pct_urban_pop_22_normalized": 20.355,
+    "pct_urban_pop_22_normalized": 38.9286,
     "median_hh_income_normalized": -7.4494
   },
   {
@@ -5725,7 +5725,7 @@
     "total_assets_growth": 0.3763,
     "assets_liab_ratio_growth": -0.1541,
     "modified_revenues_growth": -1.4136,
-    "pct_urban_pop_22_normalized": -1.5645,
+    "pct_urban_pop_22_normalized": 30.7425,
     "median_hh_income_normalized": 7.1614
   },
   {
@@ -5783,7 +5783,7 @@
     "total_assets_growth": 0.2066,
     "assets_liab_ratio_growth": -0.2686,
     "modified_revenues_growth": -56.2546,
-    "pct_urban_pop_22_normalized": 48.7893,
+    "pct_urban_pop_22_normalized": 49.5479,
     "median_hh_income_normalized": -37.4542
   }
 ]
