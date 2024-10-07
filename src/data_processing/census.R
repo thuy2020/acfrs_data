@@ -130,6 +130,7 @@ census_county_top200 <- census_county %>%
   arrange(desc(population)) %>% 
   slice(1:200) 
 
+
 ##### Census Incorporated Place & Minor Civil Division #########
 census_place_division <- census_all %>% # filter(sumlev %in% c(170))
   filter(sumlev %in% c(162, 061, 170, 172, 61)) %>% 

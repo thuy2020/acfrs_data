@@ -113,6 +113,7 @@ acfrs_county <- acfrs_general_purpose %>%
   # In Alaska, borough)|municipality
   filter(grepl("county|municipality|parish|borough", name))
   
+
 # join acfrs with census population 
 county_gov <- acfrs_county %>% 
   # most acfrs_county do not have geo_id --> must join by state.abb and name
@@ -169,10 +170,44 @@ county_gov_all <- county_gov %>%
 county_all <- append_url(county_gov_all) %>% 
   select(-identifier)
 
-# Find acfrs entities from the list of Top 100 county census for only 3 years
+#NOTE: The Nashville Metropolitan Statistical Area encompasses the Middle Tennessee counties of 
+#Cannon, Cheatham, Davidson, Dickson, Hickman, Macon, Robertson, Rutherford, 
+#Smith, Sumner, Trousdale, Williamson, and Wilson.
+metropolitan_TN_13counties <- census_all %>% 
+  filter(state.abb == "TN" & sumlev == 50) %>% 
+  filter(str_detect(name_census,"(?i)Cannon|Cheatham|Davidson|Dickson|Hickman|Macon|Robertson|Rutherford|Smith|Sumner|Trousdale|Williamson|Wilson")) %>% 
+  filter(!str_detect(name_census,"(?i)balance of")) 
 
+metropolitan_TN_13counties_urb <- county_urb %>% 
+  filter(geo_id %in% c(metropolitan_TN_13counties$geo_id)) %>% 
+  summarise(urban_pop = mean(urban_pop),
+            pct_urban_pop = mean(pct_urban_pop))
+
+# Find acfrs entities from the list of Top 100 county census 
 top100_counties <- county_all %>% 
-  filter(geo_id %in% census_county_top100$geo_id)
+  filter(geo_id %in% census_county_top100$geo_id) %>% 
+  
+  #change population of Davidson metropolitan 
+  mutate(name = ifelse(state.abb == "TN" & name == "davidson county", 
+                       "The Metropolitan Government of Nashwille and Davidson County",
+                       name)) %>% 
+  
+  #change population of metropolitan 
+  mutate(population = ifelse(name == "The Metropolitan Government of Nashwille and Davidson County", 
+         sum(metropolitan_TN_13counties$population),
+         population
+         )) %>% 
+  
+  #change urbanicity of metropolitan 
+  mutate(urban_pop = ifelse(name == "The Metropolitan Government of Nashwille and Davidson County", 
+                             metropolitan_TN_13counties_urb$urban_pop,
+                             urban_pop)) %>% 
+  #change percent_urbanicity of metropolitan 
+  mutate(pct_urban_pop = ifelse(name == "The Metropolitan Government of Nashwille and Davidson County", 
+                            metropolitan_TN_13counties_urb$pct_urban_pop,
+                            pct_urban_pop
+  ))
+  
 
 # Find acfrs entities from the list of Top 200 county census
 top200_county_4years <- county_all %>% 
@@ -219,14 +254,13 @@ special_cities <- acfrs_general_purpose %>%
   select(-identifier)
 
 city_gov <- acfrs_city %>% rbind(special_cities) %>% 
-  select(any_of(fields_to_select)) 
+  select(any_of(fields_to_select), url) 
 
 #Top 100
 top100_cities <- city_gov %>% 
   filter((geo_id %in% census_city_top100$geo_id) | 
            name == "district of columbia") %>% distinct() %>% 
   mutate(population = ifelse(name == "district of columbia", 689546, population))
-
 
 
 #Top 200 cities
