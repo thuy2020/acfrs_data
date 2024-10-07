@@ -36,10 +36,11 @@
     "enrollment_22": 52614,
     "fte_22": 2608.55,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/AL/Mobile%20County%20Board%20of%20School%20Commissioners/AL%20Mobile%20County%20Board%20of%20School%20Commissioners%202020.pdf",
-    "name_state": "Mobile, AL",
+    "modified_revenues": 13002290,
     "net_pension_liability": 481601000,
     "net_opeb_liability": 214694867,
-    "assets_liab_ratio": 1.3037
+    "assets_liab_ratio": 1.3037,
+    "name_state": "Mobile, AL"
   },
   {
     "state.abb": "AZ",
@@ -78,10 +79,11 @@
     "enrollment_22": 58859,
     "fte_22": 3476.15,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/AZ/Mesa%20Unified%20School%20District%20No.%204/AZ%20Mesa%20Unified%20School%20District%20No.%204%202020.pdf",
-    "name_state": "Mesa, AZ",
+    "modified_revenues": -43944341,
     "net_pension_liability": 468531459,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 0.9465
+    "assets_liab_ratio": 0.9465,
+    "name_state": "Mesa, AZ"
   },
   {
     "state.abb": "CA",
@@ -120,10 +122,11 @@
     "enrollment_22": 50889,
     "fte_22": 2076.56,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CA/Corona-Norco%20Unified%20School%20District/CA%20Corona-Norco%20Unified%20School%20District%202020.pdf",
-    "name_state": "Norco, CA",
+    "modified_revenues": -116595988,
     "net_pension_liability": 625815620,
     "net_opeb_liability": 76877208,
-    "assets_liab_ratio": 1.0914
+    "assets_liab_ratio": 1.0914,
+    "name_state": "Norco, CA"
   },
   {
     "state.abb": "CA",
@@ -162,10 +165,11 @@
     "enrollment_22": 62229,
     "fte_22": 2763.54,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CA/Elk%20Grove%20Unified%20School%20District/CA%20Elk%20Grove%20Unified%20School%20District%202020.pdf",
-    "name_state": "Elk Grove, CA",
+    "modified_revenues": -46093336,
     "net_pension_liability": 749359000,
     "net_opeb_liability": 11770913,
-    "assets_liab_ratio": 1.0914
+    "assets_liab_ratio": 1.0914,
+    "name_state": "Elk Grove, CA"
   },
   {
     "state.abb": "CA",
@@ -204,10 +208,11 @@
     "enrollment_22": 69873,
     "fte_22": 3548.96,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CA/Fresno%20Unified%20School%20District/CA%20Fresno%20Unified%20School%20District%202020.pdf",
-    "name_state": "Fresno, CA",
+    "modified_revenues": -271186051,
     "net_pension_liability": 942203000,
     "net_opeb_liability": 1019190619,
-    "assets_liab_ratio": 1.7831
+    "assets_liab_ratio": 1.7831,
+    "name_state": "Fresno, CA"
   },
   {
     "state.abb": "CA",
@@ -246,10 +251,11 @@
     "enrollment_22": 67292,
     "fte_22": 2738.24,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CA/Long%20Beach%20Unified%20School%20District/CA%20Long%20Beach%20Unified%20School%20District%202020.pdf",
-    "name_state": "Long Beach, CA",
+    "modified_revenues": -170540268,
     "net_pension_liability": 922386344,
     "net_opeb_liability": 425718817,
-    "assets_liab_ratio": 1.1844
+    "assets_liab_ratio": 1.1844,
+    "name_state": "Long Beach, CA"
   },
   {
     "state.abb": "CA",
@@ -288,10 +294,11 @@
     "enrollment_22": 435958,
     "fte_22": 21893.94,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CA/Los%20Angeles%20Unified%20School%20District/CA%20Los%20Angeles%20Unified%20School%20District%202020.pdf",
-    "name_state": "Los Angeles, CA",
+    "modified_revenues": -1446316000,
     "net_pension_liability": 7446273000,
     "net_opeb_liability": 8578152000,
-    "assets_liab_ratio": 1.3491
+    "assets_liab_ratio": 1.3491,
+    "name_state": "Los Angeles, CA"
   },
   {
     "state.abb": "CA",
@@ -330,10 +337,11 @@
     "enrollment_22": 95233,
     "fte_22": 4289.35,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CA/San%20Diego%20Unified%20School%20District/CA%20San%20Diego%20Unified%20School%20District%202020.pdf",
-    "name_state": "San Diego, CA",
+    "modified_revenues": -171187364,
     "net_pension_liability": 1449568000,
     "net_opeb_liability": 135880213,
-    "assets_liab_ratio": 1.073
+    "assets_liab_ratio": 1.073,
+    "name_state": "San Diego, CA"
   },
   {
     "state.abb": "CA",
@@ -372,10 +380,11 @@
     "enrollment_22": 49204,
     "fte_22": 2547.13,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CA/San%20Francisco%20Unified%20School%20District/CA%20San%20Francisco%20Unified%20School%20District%202020.pdf",
-    "name_state": "San Francisco, CA",
+    "modified_revenues": -106844559,
     "net_pension_liability": 836406746,
     "net_opeb_liability": 782068572,
-    "assets_liab_ratio": 1.2497
+    "assets_liab_ratio": 1.2497,
+    "name_state": "San Francisco, CA"
   },
   {
     "state.abb": "CO",
@@ -414,10 +423,11 @@
     "enrollment_22": 53587,
     "fte_22": 3194.09,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CO/Cherry%20Creek%20School%20District%20No.%205/CO%20Cherry%20Creek%20School%20District%20No.%205%202020.pdf",
-    "name_state": "Greenwood Village, CO",
+    "modified_revenues": 110632457,
     "net_pension_liability": 1074427362,
     "net_opeb_liability": 52826631,
-    "assets_liab_ratio": 1.6712
+    "assets_liab_ratio": 1.6712,
+    "name_state": "Greenwood Village, CO"
   },
   {
     "state.abb": "CO",
@@ -456,10 +466,11 @@
     "enrollment_22": 88911,
     "fte_22": 6140.88,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CO/City%20and%20County%20of%20Denver%20School%20District%20No.%201/CO%20City%20and%20County%20of%20Denver%20School%20District%20No.%201%202020.pdf",
-    "name_state": "Denver, CO",
+    "modified_revenues": -46121677,
     "net_pension_liability": 400400429,
     "net_opeb_liability": 54122079,
-    "assets_liab_ratio": 1.4456
+    "assets_liab_ratio": 1.4456,
+    "name_state": "Denver, CO"
   },
   {
     "state.abb": "CO",
@@ -497,10 +508,11 @@
     "enrollment_22": 63596,
     "fte_22": 3609.66,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CO/Douglas%20County%20School%20District%20RE.%201/CO%20Douglas%20County%20School%20District%20RE.%201%202020.pdf",
-    "name_state": "Castle Rock, CO",
+    "modified_revenues": 107729115,
     "net_pension_liability": 864936787,
     "net_opeb_liability": 42529387,
-    "assets_liab_ratio": 1.3023
+    "assets_liab_ratio": 1.3023,
+    "name_state": "Castle Rock, CO"
   },
   {
     "state.abb": "CO",
@@ -539,10 +551,11 @@
     "enrollment_22": 76904,
     "fte_22": 4722.6,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CO/Jefferson%20County%20School%20District/CO%20Jefferson%20County%20School%20District%202020.pdf",
-    "name_state": "Golden, CO",
+    "modified_revenues": 92912419,
     "net_pension_liability": 1347298359,
     "net_opeb_liability": 66246238,
-    "assets_liab_ratio": 1.4042
+    "assets_liab_ratio": 1.4042,
+    "name_state": "Golden, CO"
   },
   {
     "state.abb": "FL",
@@ -581,10 +594,11 @@
     "enrollment_22": 72497,
     "fte_22": 4433.3,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/Brevard%20District%20School%20Board%20County/FL%20Brevard%20District%20School%20Board%20County%202020.pdf",
-    "name_state": "Viera, FL",
+    "modified_revenues": -98555255,
     "net_pension_liability": 393361434,
     "net_opeb_liability": 17244106,
-    "assets_liab_ratio": 0.8442
+    "assets_liab_ratio": 0.8442,
+    "name_state": "Viera, FL"
   },
   {
     "state.abb": "FL",
@@ -623,10 +637,11 @@
     "enrollment_22": 47617,
     "fte_22": 2847.74,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/Collier%20County%20District%20School%20Board/FL%20Collier%20County%20District%20School%20Board%202020.pdf",
-    "name_state": "Naples, FL",
+    "modified_revenues": -63753551,
     "net_pension_liability": 296446043,
     "net_opeb_liability": 5027106,
-    "assets_liab_ratio": 0.4498
+    "assets_liab_ratio": 0.4498,
+    "name_state": "Naples, FL"
   },
   {
     "state.abb": "FL",
@@ -665,10 +680,11 @@
     "enrollment_22": 95446,
     "fte_22": 6007.53,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/District%20School%20Board%20of%20Pinellas%20County/FL%20District%20School%20Board%20of%20Pinellas%20County%202020.pdf",
-    "name_state": "Largo, FL",
+    "modified_revenues": -121905474,
     "net_pension_liability": 608061187,
     "net_opeb_liability": 52281715,
-    "assets_liab_ratio": 0.4006
+    "assets_liab_ratio": 0.4006,
+    "name_state": "Largo, FL"
   },
   {
     "state.abb": "FL",
@@ -707,10 +723,11 @@
     "enrollment_22": 66729,
     "fte_22": 3543.27,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/District%20School%20Board%20of%20Seminole%20County/FL%20District%20School%20Board%20of%20Seminole%20County%202020.pdf",
-    "name_state": "Sanford, FL",
+    "modified_revenues": -31169311,
     "net_pension_liability": 346916779,
     "net_opeb_liability": 18813350,
-    "assets_liab_ratio": 0.5761
+    "assets_liab_ratio": 0.5761,
+    "name_state": "Sanford, FL"
   },
   {
     "state.abb": "FL",
@@ -749,10 +766,11 @@
     "enrollment_22": 128948,
     "fte_22": 7126,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/Duval%20County%20Public%20Schools/FL%20Duval%20County%20Public%20Schools%202020.pdf",
-    "name_state": "Jacksonville, FL",
+    "modified_revenues": -63000109,
     "net_pension_liability": 559189287,
     "net_opeb_liability": 33766979,
-    "assets_liab_ratio": 0.807
+    "assets_liab_ratio": 0.807,
+    "name_state": "Jacksonville, FL"
   },
   {
     "state.abb": "FL",
@@ -791,10 +809,11 @@
     "enrollment_22": 50248,
     "fte_22": 2928.34,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/Manatee%20County%20District%20School%20Board/FL%20Manatee%20County%20District%20School%20Board%202020.pdf",
-    "name_state": "Bradenton, FL",
+    "modified_revenues": -69374872,
     "net_pension_liability": 278088728,
     "net_opeb_liability": 11302048,
-    "assets_liab_ratio": 0.5449
+    "assets_liab_ratio": 0.5449,
+    "name_state": "Bradenton, FL"
   },
   {
     "state.abb": "FL",
@@ -833,10 +852,11 @@
     "enrollment_22": 203224,
     "fte_22": 11386,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/Orange%20County%20District%20School%20Board/FL%20Orange%20County%20District%20School%20Board%202020.pdf",
-    "name_state": "Orlando, FL",
+    "modified_revenues": -42226417,
     "net_pension_liability": 1128084763,
     "net_opeb_liability": 58851299,
-    "assets_liab_ratio": 0.3923
+    "assets_liab_ratio": 0.3923,
+    "name_state": "Orlando, FL"
   },
   {
     "state.abb": "FL",
@@ -875,10 +895,11 @@
     "enrollment_22": 72427,
     "fte_22": 3600.57,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/Osceola%20County%20District%20School%20Board/FL%20Osceola%20County%20District%20School%20Board%202020.pdf",
-    "name_state": "Kissimmee, FL",
+    "modified_revenues": 62302804,
     "net_pension_liability": 297815602,
     "net_opeb_liability": 15687722,
-    "assets_liab_ratio": 0.4803
+    "assets_liab_ratio": 0.4803,
+    "name_state": "Kissimmee, FL"
   },
   {
     "state.abb": "FL",
@@ -917,10 +938,11 @@
     "enrollment_22": 81157,
     "fte_22": 4711.88,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/Pasco%20County%20District%20School%20Board/FL%20Pasco%20County%20District%20School%20Board%202020.pdf",
-    "name_state": "Land O Lakes, FL",
+    "modified_revenues": -44559393,
     "net_pension_liability": 397491576,
     "net_opeb_liability": 98611974,
-    "assets_liab_ratio": 0.7261
+    "assets_liab_ratio": 0.7261,
+    "name_state": "Land O Lakes, FL"
   },
   {
     "state.abb": "FL",
@@ -959,10 +981,11 @@
     "enrollment_22": 105422,
     "fte_22": 5927,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/School%20District%20of%20Polk%20County/FL%20School%20District%20of%20Polk%20County%202020.pdf",
-    "name_state": "Bartow, FL",
+    "modified_revenues": -57945547,
     "net_pension_liability": 501853478,
     "net_opeb_liability": 33902309,
-    "assets_liab_ratio": 0.6382
+    "assets_liab_ratio": 0.6382,
+    "name_state": "Bartow, FL"
   },
   {
     "state.abb": "FL",
@@ -1001,10 +1024,11 @@
     "enrollment_22": 48032,
     "fte_22": 2600.17,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/St.%20Johns%20County%20School%20District/FL%20St.%20Johns%20County%20School%20District%202020.pdf",
-    "name_state": "St Augustine, FL",
+    "modified_revenues": 37591700,
     "net_pension_liability": 212334986,
     "net_opeb_liability": 26203755,
-    "assets_liab_ratio": 0.4598
+    "assets_liab_ratio": 0.4598,
+    "name_state": "St Augustine, FL"
   },
   {
     "state.abb": "FL",
@@ -1043,10 +1067,11 @@
     "enrollment_22": 256037,
     "fte_22": 13341.46,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/The%20School%20Board%20of%20Broward%20County/FL%20The%20School%20Board%20of%20Broward%20County%202020.pdf",
-    "name_state": "Fort Lauderdale, FL",
+    "modified_revenues": -478402000,
     "net_pension_liability": 1419517000,
     "net_opeb_liability": 216322000,
-    "assets_liab_ratio": 1.0313
+    "assets_liab_ratio": 1.0313,
+    "name_state": "Fort Lauderdale, FL"
   },
   {
     "state.abb": "FL",
@@ -1085,10 +1110,11 @@
     "enrollment_22": 328589,
     "fte_22": 17365,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/The%20School%20Board%20of%20Miami-Dade%20County/FL%20The%20School%20Board%20of%20Miami-Dade%20County%202020.pdf",
-    "name_state": "Miami, FL",
+    "modified_revenues": -527232000,
     "net_pension_liability": 1948945000,
     "net_opeb_liability": 201343000,
-    "assets_liab_ratio": 1.117
+    "assets_liab_ratio": 1.117,
+    "name_state": "Miami, FL"
   },
   {
     "state.abb": "FL",
@@ -1127,10 +1153,11 @@
     "enrollment_22": 97264,
     "fte_22": 5170.54,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/The%20School%20District%20of%20Lee%20County/FL%20The%20School%20District%20of%20Lee%20County%202020.pdf",
-    "name_state": "Fort Myers, FL",
+    "modified_revenues": -67114864,
     "net_pension_liability": 486925058,
     "net_opeb_liability": 50552528,
-    "assets_liab_ratio": 0.6511
+    "assets_liab_ratio": 0.6511,
+    "name_state": "Fort Myers, FL"
   },
   {
     "state.abb": "FL",
@@ -1169,10 +1196,11 @@
     "enrollment_22": 187943,
     "fte_22": 11554.7,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/The%20School%20District%20of%20Palm%20Beach%20County/FL%20The%20School%20District%20of%20Palm%20Beach%20County%202020.pdf",
-    "name_state": "West Palm Beach, FL",
+    "modified_revenues": -210219000,
     "net_pension_liability": 1151170000,
     "net_opeb_liability": 199429000,
-    "assets_liab_ratio": 0.7534
+    "assets_liab_ratio": 0.7534,
+    "name_state": "West Palm Beach, FL"
   },
   {
     "state.abb": "FL",
@@ -1211,10 +1239,11 @@
     "enrollment_22": 62666,
     "fte_22": 3782.92,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/Volusia%20County%20District%20School%20Board/FL%20Volusia%20County%20District%20School%20Board%202020.pdf",
-    "name_state": "Deland, FL",
+    "modified_revenues": -37109561,
     "net_pension_liability": 338806631,
     "net_opeb_liability": 18586161,
-    "assets_liab_ratio": 0.5587
+    "assets_liab_ratio": 0.5587,
+    "name_state": "Deland, FL"
   },
   {
     "state.abb": "GA",
@@ -1252,10 +1281,11 @@
     "enrollment_22": 52335,
     "fte_22": 3259.1,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/GA/Clayton%20County%20Board%20of%20Education/GA%20Clayton%20County%20Board%20of%20Education%202020.pdf",
-    "name_state": "Jonesboro, GA",
+    "modified_revenues": -55160756,
     "net_pension_liability": 467584423,
     "net_opeb_liability": 347674422,
-    "assets_liab_ratio": 0.8472
+    "assets_liab_ratio": 0.8472,
+    "name_state": "Jonesboro, GA"
   },
   {
     "state.abb": "GA",
@@ -1293,10 +1323,11 @@
     "enrollment_22": 106970,
     "fte_22": 7331.5,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/GA/Cobb%20County%20School%20District/GA%20Cobb%20County%20School%20District%202020.pdf",
-    "name_state": "Marietta, GA",
+    "modified_revenues": -129649000,
     "net_pension_liability": 1158513000,
     "net_opeb_liability": 755723000,
-    "assets_liab_ratio": 0.9825
+    "assets_liab_ratio": 0.9825,
+    "name_state": "Marietta, GA"
   },
   {
     "state.abb": "GA",
@@ -1334,10 +1365,11 @@
     "enrollment_22": 93473,
     "fte_22": 6676.1,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/GA/Dekalb%20County%20Board%20of%20Education/GA%20Dekalb%20County%20Board%20of%20Education%202020.pdf",
-    "name_state": "Decatur, GA",
+    "modified_revenues": -130449947,
     "net_pension_liability": 1122765085,
     "net_opeb_liability": 770250780,
-    "assets_liab_ratio": 1.0159
+    "assets_liab_ratio": 1.0159,
+    "name_state": "Decatur, GA"
   },
   {
     "state.abb": "GA",
@@ -1375,10 +1407,11 @@
     "enrollment_22": 52757,
     "fte_22": 3206.5,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/GA/Forsyth%20County%20Board%20of%20Education/GA%20Forsyth%20County%20Board%20of%20Education%202020.pdf",
-    "name_state": "Cumming, GA",
+    "modified_revenues": -56674077,
     "net_pension_liability": 445614082,
     "net_opeb_liability": 305628089,
-    "assets_liab_ratio": 1.0392
+    "assets_liab_ratio": 1.0392,
+    "name_state": "Cumming, GA"
   },
   {
     "state.abb": "GA",
@@ -1416,10 +1449,11 @@
     "enrollment_22": 90355,
     "fte_22": 6167.3,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/GA/Fulton%20County%20Board%20of%20Education/GA%20Fulton%20County%20Board%20of%20Education%202020.pdf",
-    "name_state": "Atlanta, GA",
+    "modified_revenues": -54942407,
     "net_pension_liability": 1091755582,
     "net_opeb_liability": 660783856,
-    "assets_liab_ratio": 0.7223
+    "assets_liab_ratio": 0.7223,
+    "name_state": "Atlanta, GA"
   },
   {
     "state.abb": "GA",
@@ -1457,10 +1491,11 @@
     "enrollment_22": 179581,
     "fte_22": 11746.5,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/GA/Gwinnett%20County%20Board%20of%20Education/GA%20Gwinnett%20County%20Board%20of%20Education%202020.pdf",
-    "name_state": "Lawrenceville, GA",
+    "modified_revenues": -201742881,
     "net_pension_liability": 1851016703,
     "net_opeb_liability": 1187241718,
-    "assets_liab_ratio": 1.3193
+    "assets_liab_ratio": 1.3193,
+    "name_state": "Lawrenceville, GA"
   },
   {
     "state.abb": "GA",
@@ -1498,10 +1533,11 @@
     "enrollment_22": 49994,
     "fte_22": 4076.9,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/GA/School%20District%20Atlanta%20Public%20Schools/GA%20School%20District%20Atlanta%20Public%20Schools%202020.pdf",
-    "name_state": "Atlanta, GA",
+    "modified_revenues": 12914830,
     "net_pension_liability": 926762156,
     "net_opeb_liability": 348020497,
-    "assets_liab_ratio": 0.8271
+    "assets_liab_ratio": 0.8271,
+    "name_state": "Atlanta, GA"
   },
   {
     "state.abb": "HI",
@@ -1539,10 +1575,11 @@
     "enrollment_22": 173178,
     "fte_22": 12026.2,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/HI/Hawaii%20Department%20of%20Education/HI%20Hawaii%20Department%20of%20Education%202020.pdf",
-    "name_state": "Honolulu, HI",
+    "modified_revenues": -132832182,
     "net_pension_liability": 0,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 0.1644
+    "assets_liab_ratio": 0.1644,
+    "name_state": "Honolulu, HI"
   },
   {
     "state.abb": "IL",
@@ -1580,10 +1617,11 @@
     "enrollment_22": 329836,
     "fte_22": 22797.43,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/IL/Chicago%20Board%20of%20Education/IL%20Chicago%20Board%20of%20Education%202020.pdf",
-    "name_state": "Chicago, IL",
+    "modified_revenues": -2218913000,
     "net_pension_liability": 14127342000,
     "net_opeb_liability": 2554892000,
-    "assets_liab_ratio": 2.8669
+    "assets_liab_ratio": 2.8669,
+    "name_state": "Chicago, IL"
   },
   {
     "state.abb": "LA",
@@ -1622,10 +1660,11 @@
     "enrollment_22": 46896,
     "fte_22": 2186.31,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/LA/Jefferson%20Parish%20Public%20School%20System/LA%20Jefferson%20Parish%20Public%20School%20System%202020.pdf",
-    "name_state": "Harvey, LA",
+    "modified_revenues": -83867075,
     "net_pension_liability": 538799170,
     "net_opeb_liability": 625990594,
-    "assets_liab_ratio": 1.9229
+    "assets_liab_ratio": 1.9229,
+    "name_state": "Harvey, LA"
   },
   {
     "state.abb": "MD",
@@ -1663,10 +1702,11 @@
     "enrollment_22": 77807,
     "fte_22": 5109.6,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/MD/Baltimore%20City%20Public%20School%20System/MD%20Baltimore%20City%20Public%20School%20System%202020.pdf",
-    "name_state": "Baltimore, MD",
+    "modified_revenues": -36279000,
     "net_pension_liability": 0,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 0.2437
+    "assets_liab_ratio": 0.2437,
+    "name_state": "Baltimore, MD"
   },
   {
     "state.abb": "MD",
@@ -1704,10 +1744,11 @@
     "enrollment_22": 83163,
     "fte_22": 6013.61,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/MD/Board%20of%20Education%20of%20Anne%20Arundel%20County/MD%20Board%20of%20Education%20of%20Anne%20Arundel%20County%202020.pdf",
-    "name_state": "Annapolis, MD",
+    "modified_revenues": -119423351,
     "net_pension_liability": 64243619,
     "net_opeb_liability": 1859904000,
-    "assets_liab_ratio": 1.227
+    "assets_liab_ratio": 1.227,
+    "name_state": "Annapolis, MD"
   },
   {
     "state.abb": "MD",
@@ -1745,10 +1786,11 @@
     "enrollment_22": 111136,
     "fte_22": 7684.77,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/MD/Board%20of%20Education%20Baltimore%20County/MD%20Board%20of%20Education%20Baltimore%20County%202020.pdf",
-    "name_state": "Towson, MD",
+    "modified_revenues": -268384000,
     "net_pension_liability": 137969000,
     "net_opeb_liability": 2045949000,
-    "assets_liab_ratio": 1.0824
+    "assets_liab_ratio": 1.0824,
+    "name_state": "Towson, MD"
   },
   {
     "state.abb": "MD",
@@ -1786,10 +1828,11 @@
     "enrollment_22": 57325,
     "fte_22": 4258.4,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/MD/Howard%20County%20Board%20of%20Education/MD%20Howard%20County%20Board%20of%20Education%202020.pdf",
-    "name_state": "Ellicott City, MD",
+    "modified_revenues": -132272371,
     "net_pension_liability": 50666596,
     "net_opeb_liability": 849712337,
-    "assets_liab_ratio": 0.7458
+    "assets_liab_ratio": 0.7458,
+    "name_state": "Ellicott City, MD"
   },
   {
     "state.abb": "MD",
@@ -1827,10 +1870,11 @@
     "enrollment_22": 128770,
     "fte_22": 9274,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/MD/Prince%20George’s%20County%20Public%20Schools/MD%20Prince%20George’s%20County%20Public%20Schools%202020.pdf",
-    "name_state": "Upper Marlboro, MD",
+    "modified_revenues": -320973223,
     "net_pension_liability": 186890787,
     "net_opeb_liability": 2858119000,
-    "assets_liab_ratio": 1.7504
+    "assets_liab_ratio": 1.7504,
+    "name_state": "Upper Marlboro, MD"
   },
   {
     "state.abb": "MD",
@@ -1868,10 +1912,11 @@
     "enrollment_22": 158231,
     "fte_22": 11605.84,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/MD/The%20Board%20of%20Education%20of%20Montgomery%20County/MD%20The%20Board%20of%20Education%20of%20Montgomery%20County%202020.pdf",
-    "name_state": "Rockville, MD",
+    "modified_revenues": -160378654,
     "net_pension_liability": 554333453,
     "net_opeb_liability": 2616173765,
-    "assets_liab_ratio": 0.9976
+    "assets_liab_ratio": 0.9976,
+    "name_state": "Rockville, MD"
   },
   {
     "state.abb": "MA",
@@ -1909,9 +1954,10 @@
     "enrollment_22": 46169,
     "fte_22": 4256.01,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/MA/Boston%20Public%20Schools/MA%20Boston%20Public%20Schools%202020.pdf",
-    "name_state": "Roxbury, MA",
+    "modified_revenues": 0,
     "net_pension_liability": 975708000,
-    "net_opeb_liability": 1263944236
+    "net_opeb_liability": 1263944236,
+    "name_state": "Roxbury, MA"
   },
   {
     "state.abb": "MI",
@@ -1950,10 +1996,11 @@
     "enrollment_22": 48536,
     "fte_22": 3143.83,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/MI/Detroit%20Public%20Schools/MI%20Detroit%20Public%20Schools%202020.pdf",
-    "name_state": "Detroit, MI",
+    "modified_revenues": 20615251,
     "net_pension_liability": 0,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 41.8832
+    "assets_liab_ratio": 41.8832,
+    "name_state": "Detroit, MI"
   },
   {
     "state.abb": "NE",
@@ -1992,10 +2039,11 @@
     "enrollment_22": 51626,
     "fte_22": 3445.22,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/NE/Douglas%20County%20School%20District%20No.%200001/NE%20Douglas%20County%20School%20District%20No.%200001%202020.pdf",
-    "name_state": "Omaha, NE",
+    "modified_revenues": -213626000,
     "net_pension_liability": 848152000,
     "net_opeb_liability": 24055000,
-    "assets_liab_ratio": 1.2811
+    "assets_liab_ratio": 1.2811,
+    "name_state": "Omaha, NE"
   },
   {
     "state.abb": "NV",
@@ -2032,10 +2080,11 @@
     "metro_code": "1-Metropolitan Area",
     "enrollment_22": 315787,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/NV/Clark%20County%20School%20District/NV%20Clark%20County%20School%20District%202020.pdf",
-    "name_state": "Las Vegas, NV",
+    "modified_revenues": -248626685,
     "net_pension_liability": 3186524832,
     "net_opeb_liability": 281606000,
-    "assets_liab_ratio": 1.0353
+    "assets_liab_ratio": 1.0353,
+    "name_state": "Las Vegas, NV"
   },
   {
     "state.abb": "NV",
@@ -2072,10 +2121,11 @@
     "metro_code": "1-Metropolitan Area",
     "enrollment_22": 65538,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/NV/Washoe%20County%20School%20District/NV%20Washoe%20County%20School%20District%202020.pdf",
-    "name_state": "Reno, NV",
+    "modified_revenues": -105333913,
     "net_pension_liability": 716187044,
     "net_opeb_liability": 196695810,
-    "assets_liab_ratio": 1.286
+    "assets_liab_ratio": 1.286,
+    "name_state": "Reno, NV"
   },
   {
     "state.abb": "NM",
@@ -2113,10 +2163,11 @@
     "enrollment_22": 81762,
     "fte_22": 6029.47,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/NM/Albuquerque%20Municipal%20School%20District%20No.%2012/NM%20Albuquerque%20Municipal%20School%20District%20No.%2012%202020.pdf",
-    "name_state": "Albuquerque, NM",
+    "modified_revenues": 453550823,
     "net_pension_liability": 1284568723,
     "net_opeb_liability": 363064860,
-    "assets_liab_ratio": 1.1769
+    "assets_liab_ratio": 1.1769,
+    "name_state": "Albuquerque, NM"
   },
   {
     "state.abb": "NY",
@@ -2145,10 +2196,11 @@
     "metro_code": "1-Metropolitan Area",
     "enrollment_22": 46525,
     "fte_22": 4107.03,
-    "name_state": "Bronx, NY",
+    "modified_revenues": -291875127.958,
     "net_pension_liability": 0,
     "net_opeb_liability": 1974724189.8845,
-    "assets_liab_ratio": 0.895
+    "assets_liab_ratio": 0.895,
+    "name_state": "Bronx, NY"
   },
   {
     "state.abb": "NY",
@@ -2177,10 +2229,11 @@
     "metro_code": "1-Metropolitan Area",
     "enrollment_22": 56893,
     "fte_22": 4707.28,
-    "name_state": "New York, NY",
+    "modified_revenues": -340918169.8988,
     "net_pension_liability": 0,
     "net_opeb_liability": 2306532117.28,
-    "assets_liab_ratio": 0.895
+    "assets_liab_ratio": 0.895,
+    "name_state": "New York, NY"
   },
   {
     "state.abb": "NY",
@@ -2209,10 +2262,11 @@
     "metro_code": "1-Metropolitan Area",
     "enrollment_22": 47493,
     "fte_22": 3430.38,
-    "name_state": "Brooklyn, NY",
+    "modified_revenues": -284955851.5984,
     "net_pension_liability": 0,
     "net_opeb_liability": 1927910806.0261,
-    "assets_liab_ratio": 0.895
+    "assets_liab_ratio": 0.895,
+    "name_state": "Brooklyn, NY"
   },
   {
     "state.abb": "NY",
@@ -2241,10 +2295,11 @@
     "metro_code": "1-Metropolitan Area",
     "enrollment_22": 51878,
     "fte_22": 4245.19,
-    "name_state": "Corona, NY",
+    "modified_revenues": -316352821.3664,
     "net_pension_liability": 0,
     "net_opeb_liability": 2140331631.7526,
-    "assets_liab_ratio": 0.895
+    "assets_liab_ratio": 0.895,
+    "name_state": "Corona, NY"
   },
   {
     "state.abb": "NY",
@@ -2274,10 +2329,11 @@
     "metro_code": "1-Metropolitan Area",
     "enrollment_22": 60749,
     "fte_22": 4751.01,
-    "name_state": "Staten Island, NY",
+    "modified_revenues": -351661401.0478,
     "net_pension_liability": 0,
     "net_opeb_liability": 2379217030.7767,
-    "assets_liab_ratio": 0.895
+    "assets_liab_ratio": 0.895,
+    "name_state": "Staten Island, NY"
   },
   {
     "state.abb": "NC",
@@ -2315,10 +2371,11 @@
     "enrollment_22": 143244,
     "fte_22": 9030.26,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/NC/Charlotte-Mecklenburg%20Board%20of%20Education/NC%20Charlotte-Mecklenburg%20Board%20of%20Education%202020.pdf",
-    "name_state": "Charlotte, NC",
+    "modified_revenues": -37578000,
     "net_pension_liability": 622449000,
     "net_opeb_liability": 1685915000,
-    "assets_liab_ratio": 1.0418
+    "assets_liab_ratio": 1.0418,
+    "name_state": "Charlotte, NC"
   },
   {
     "state.abb": "NC",
@@ -2356,10 +2413,11 @@
     "enrollment_22": 48860,
     "fte_22": 3516.85,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/NC/Cumberland%20County%20Board%20of%20Education/NC%20Cumberland%20County%20Board%20of%20Education%202020.pdf",
-    "name_state": "Fayetteville, NC",
+    "modified_revenues": -44363594,
     "net_pension_liability": 183778157,
     "net_opeb_liability": 490167460,
-    "assets_liab_ratio": 2.2746
+    "assets_liab_ratio": 2.2746,
+    "name_state": "Fayetteville, NC"
   },
   {
     "state.abb": "NC",
@@ -2397,10 +2455,11 @@
     "enrollment_22": 69173,
     "fte_22": 4757.33,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/NC/Guilford%20County%20Board%20of%20Education/NC%20Guilford%20County%20Board%20of%20Education%202020.pdf",
-    "name_state": "Greensboro, NC",
+    "modified_revenues": -52070326,
     "net_pension_liability": 301635944,
     "net_opeb_liability": 802892434,
-    "assets_liab_ratio": 1.2282
+    "assets_liab_ratio": 1.2282,
+    "name_state": "Greensboro, NC"
   },
   {
     "state.abb": "NC",
@@ -2439,10 +2498,11 @@
     "enrollment_22": 160099,
     "fte_22": 10961.49,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/NC/Wake%20County%20Board%20of%20Education/NC%20Wake%20County%20Board%20of%20Education%202020.pdf",
-    "name_state": "Cary, NC",
+    "modified_revenues": 70288042,
     "net_pension_liability": 691000187,
     "net_opeb_liability": 1853265163,
-    "assets_liab_ratio": 0.6935
+    "assets_liab_ratio": 0.6935,
+    "name_state": "Cary, NC"
   },
   {
     "state.abb": "NC",
@@ -2480,10 +2540,11 @@
     "enrollment_22": 52681,
     "fte_22": 3593.91,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/NC/Winston-Salem/Forsyth%20County%20Board%20of%20Education/NC%20Winston-Salem/Forsyth%20County%20Board%20of%20Education%202020.pdf",
-    "name_state": "Winston Salem, NC",
+    "modified_revenues": -38893230,
     "net_pension_liability": 213912827,
     "net_opeb_liability": 604742509,
-    "assets_liab_ratio": 1.2124
+    "assets_liab_ratio": 1.2124,
+    "name_state": "Winston Salem, NC"
   },
   {
     "state.abb": "PA",
@@ -2521,10 +2582,11 @@
     "enrollment_22": 118053,
     "fte_22": 7968.97,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/PA/School%20District%20of%20Philadelphia/PA%20School%20District%20of%20Philadelphia%202020.pdf",
-    "name_state": "Philadelphia, PA",
+    "modified_revenues": -581112168,
     "net_pension_liability": 3571478000,
     "net_opeb_liability": 179300000,
-    "assets_liab_ratio": 2.4433
+    "assets_liab_ratio": 2.4433,
+    "name_state": "Philadelphia, PA"
   },
   {
     "state.abb": "SC",
@@ -2562,10 +2624,11 @@
     "enrollment_22": 49331,
     "fte_22": 3822.48,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/SC/Charleston%20County%20School%20District/SC%20Charleston%20County%20School%20District%202020.pdf",
-    "name_state": "Charleston, SC",
+    "modified_revenues": 38281213,
     "net_pension_liability": 583236524,
     "net_opeb_liability": 501590758,
-    "assets_liab_ratio": 0.9765
+    "assets_liab_ratio": 0.9765,
+    "name_state": "Charleston, SC"
   },
   {
     "state.abb": "SC",
@@ -2603,10 +2666,11 @@
     "enrollment_22": 76939,
     "fte_22": 5133.93,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/SC/The%20School%20District%20of%20Greenville%20County/SC%20The%20School%20District%20of%20Greenville%20County%202020.pdf",
-    "name_state": "Greenville, SC",
+    "modified_revenues": -129689507,
     "net_pension_liability": 895763981,
     "net_opeb_liability": 760663343,
-    "assets_liab_ratio": 1.4875
+    "assets_liab_ratio": 1.4875,
+    "name_state": "Greenville, SC"
   },
   {
     "state.abb": "TN",
@@ -2644,10 +2708,11 @@
     "enrollment_22": 105596,
     "fte_22": 6694.54,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TN/Board%20of%20Education%20of%20Shelby%20County/TN%20Board%20of%20Education%20of%20Shelby%20County%202020.pdf",
-    "name_state": "Memphis, TN",
+    "modified_revenues": 107258451,
     "net_pension_liability": -190784362,
     "net_opeb_liability": 879359591,
-    "assets_liab_ratio": 0.6193
+    "assets_liab_ratio": 0.6193,
+    "name_state": "Memphis, TN"
   },
   {
     "state.abb": "TN",
@@ -2685,10 +2750,11 @@
     "enrollment_22": 60426,
     "fte_22": 4016.73,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TN/Knox%20County%20Schools/TN%20Knox%20County%20Schools%202020.pdf",
-    "name_state": "Knoxville, TN",
+    "modified_revenues": -7813818,
     "net_pension_liability": 15036000,
     "net_opeb_liability": 29575244,
-    "assets_liab_ratio": 0.1348
+    "assets_liab_ratio": 0.1348,
+    "name_state": "Knoxville, TN"
   },
   {
     "state.abb": "TN",
@@ -2726,10 +2792,11 @@
     "enrollment_22": 80381,
     "fte_22": 4856.29,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TN/Metropolitan%20Nashville%20Public%20Schools/TN%20Metropolitan%20Nashville%20Public%20Schools%202020.pdf",
-    "name_state": "Nashville, TN",
+    "modified_revenues": 0,
     "net_pension_liability": -85027339,
     "net_opeb_liability": 1196937989,
-    "assets_liab_ratio": 2.1533
+    "assets_liab_ratio": 2.1533,
+    "name_state": "Nashville, TN"
   },
   {
     "state.abb": "TN",
@@ -2766,10 +2833,11 @@
     "enrollment_22": 49253,
     "fte_22": 3082.8,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TN/Rutherford%20County%20Schools/TN%20Rutherford%20County%20Schools%202020.pdf",
-    "name_state": "Murfreesboro, TN",
+    "modified_revenues": -53153110,
     "net_pension_liability": -56254755,
     "net_opeb_liability": 137665254,
-    "assets_liab_ratio": 0.2226
+    "assets_liab_ratio": 0.2226,
+    "name_state": "Murfreesboro, TN"
   },
   {
     "state.abb": "TN",
@@ -2807,9 +2875,10 @@
     "enrollment_22": 105596,
     "fte_22": 6694.54,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TN/Shelby%20County%20Board%20of%20Education/TN%20Shelby%20County%20Board%20of%20Education%202020.pdf",
-    "name_state": "Memphis, TN",
+    "modified_revenues": 59236,
     "net_pension_liability": 0,
-    "net_opeb_liability": 0
+    "net_opeb_liability": 0,
+    "name_state": "Memphis, TN"
   },
   {
     "state.abb": "TX",
@@ -2847,10 +2916,11 @@
     "enrollment_22": 61633,
     "fte_22": 3990.7,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Aldine%20Independent%20School%20District/TX%20Aldine%20Independent%20School%20District%202020.pdf",
-    "name_state": "Houston, TX",
+    "modified_revenues": -101901784,
     "net_pension_liability": 206674704,
     "net_opeb_liability": 244402754,
-    "assets_liab_ratio": 0.9788
+    "assets_liab_ratio": 0.9788,
+    "name_state": "Houston, TX"
   },
   {
     "state.abb": "TX",
@@ -2888,10 +2958,11 @@
     "enrollment_22": 56311,
     "fte_22": 3923.88,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Arlington%20Independent%20School%20District/TX%20Arlington%20Independent%20School%20District%202020.pdf",
-    "name_state": "Arlington, TX",
+    "modified_revenues": -106591083,
     "net_pension_liability": 202083399,
     "net_opeb_liability": 231749147,
-    "assets_liab_ratio": 1.1502
+    "assets_liab_ratio": 1.1502,
+    "name_state": "Arlington, TX"
   },
   {
     "state.abb": "TX",
@@ -2929,10 +3000,11 @@
     "enrollment_22": 74602,
     "fte_22": 5238.78,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Austin%20Independent%20School%20District/TX%20Austin%20Independent%20School%20District%202020.pdf",
-    "name_state": "Austin, TX",
+    "modified_revenues": -719203162,
     "net_pension_liability": 118517031,
     "net_opeb_liability": 302775488,
-    "assets_liab_ratio": 0.9189
+    "assets_liab_ratio": 0.9189,
+    "name_state": "Austin, TX"
   },
   {
     "state.abb": "TX",
@@ -2970,10 +3042,11 @@
     "enrollment_22": 67761,
     "fte_22": 4239.57,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Conroe%20Independent%20School%20District/TX%20Conroe%20Independent%20School%20District%202020.pdf",
-    "name_state": "Conroe, TX",
+    "modified_revenues": -60705213,
     "net_pension_liability": 169824823,
     "net_opeb_liability": 205866828,
-    "assets_liab_ratio": 1.0576
+    "assets_liab_ratio": 1.0576,
+    "name_state": "Conroe, TX"
   },
   {
     "state.abb": "TX",
@@ -3012,10 +3085,11 @@
     "enrollment_22": 117217,
     "fte_22": 7682.15,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Cypress-Fairbanks%20Independent%20School%20District/TX%20Cypress-Fairbanks%20Independent%20School%20District%202020.pdf",
-    "name_state": "Houston, TX",
+    "modified_revenues": -278894129,
     "net_pension_liability": 354920841,
     "net_opeb_liability": 416699640,
-    "assets_liab_ratio": 1.1414
+    "assets_liab_ratio": 1.1414,
+    "name_state": "Houston, TX"
   },
   {
     "state.abb": "TX",
@@ -3053,10 +3127,11 @@
     "enrollment_22": 143558,
     "fte_22": 9873.5,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Dallas%20Independent%20School%20District/TX%20Dallas%20Independent%20School%20District%202020.pdf",
-    "name_state": "Dallas, TX",
+    "modified_revenues": -292728364,
     "net_pension_liability": 595195671,
     "net_opeb_liability": 690114814,
-    "assets_liab_ratio": 0.9706
+    "assets_liab_ratio": 0.9706,
+    "name_state": "Dallas, TX"
   },
   {
     "state.abb": "TX",
@@ -3094,10 +3169,11 @@
     "enrollment_22": 50769,
     "fte_22": 3511.69,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/El%20Paso%20Independent%20School%20District/TX%20El%20Paso%20Independent%20School%20District%202020.pdf",
-    "name_state": "El Paso, TX",
+    "modified_revenues": -158853318,
     "net_pension_liability": 165283406,
     "net_opeb_liability": 214670423,
-    "assets_liab_ratio": 0.9939
+    "assets_liab_ratio": 0.9939,
+    "name_state": "El Paso, TX"
   },
   {
     "state.abb": "TX",
@@ -3136,10 +3212,11 @@
     "enrollment_22": 77545,
     "fte_22": 5019.98,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Fort%20Bend%20Independent%20School%20District/TX%20Fort%20Bend%20Independent%20School%20District%202020.pdf",
-    "name_state": "Sugar Land, TX",
+    "modified_revenues": -308234019,
     "net_pension_liability": 206732032,
     "net_opeb_liability": 270110960,
-    "assets_liab_ratio": 1.1555
+    "assets_liab_ratio": 1.1555,
+    "name_state": "Sugar Land, TX"
   },
   {
     "state.abb": "TX",
@@ -3178,10 +3255,11 @@
     "enrollment_22": 74850,
     "fte_22": 5069.52,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Fort%20Worth%20Independent%20School%20District/TX%20Fort%20Worth%20Independent%20School%20District%202020.pdf",
-    "name_state": "Fort Worth, TX",
+    "modified_revenues": -190655737,
     "net_pension_liability": 305150969,
     "net_opeb_liability": 352419124,
-    "assets_liab_ratio": 0.9812
+    "assets_liab_ratio": 0.9812,
+    "name_state": "Fort Worth, TX"
   },
   {
     "state.abb": "TX",
@@ -3219,10 +3297,11 @@
     "enrollment_22": 65825,
     "fte_22": 4407.63,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Frisco%20Independent%20School%20District/TX%20Frisco%20Independent%20School%20District%202020.pdf",
-    "name_state": "Frisco, TX",
+    "modified_revenues": -154461651,
     "net_pension_liability": 182078056,
     "net_opeb_liability": 195016124,
-    "assets_liab_ratio": 1.2023
+    "assets_liab_ratio": 1.2023,
+    "name_state": "Frisco, TX"
   },
   {
     "state.abb": "TX",
@@ -3261,10 +3340,11 @@
     "enrollment_22": 53674,
     "fte_22": 3448.14,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Garland%20Independent%20School%20District/TX%20Garland%20Independent%20School%20District%202020.pdf",
-    "name_state": "Garland, TX",
+    "modified_revenues": -39367806,
     "net_pension_liability": 176503815,
     "net_opeb_liability": 204393433,
-    "assets_liab_ratio": 0.7751
+    "assets_liab_ratio": 0.7751,
+    "name_state": "Garland, TX"
   },
   {
     "state.abb": "TX",
@@ -3303,10 +3383,11 @@
     "enrollment_22": 194607,
     "fte_22": 10982.91,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Houston%20Independent%20School%20District/TX%20Houston%20Independent%20School%20District%202020.pdf",
-    "name_state": "Houston, TX",
+    "modified_revenues": -267830141,
     "net_pension_liability": 594268532,
     "net_opeb_liability": 716497750,
-    "assets_liab_ratio": 0.7461
+    "assets_liab_ratio": 0.7461,
+    "name_state": "Houston, TX"
   },
   {
     "state.abb": "TX",
@@ -3344,10 +3425,11 @@
     "enrollment_22": 48112,
     "fte_22": 3200.11,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Humble%20Independent%20School%20District/TX%20Humble%20Independent%20School%20District%202020.pdf",
-    "name_state": "Humble, TX",
+    "modified_revenues": -107404098,
     "net_pension_liability": 121906407,
     "net_opeb_liability": 149154126,
-    "assets_liab_ratio": 0.9635
+    "assets_liab_ratio": 0.9635,
+    "name_state": "Humble, TX"
   },
   {
     "state.abb": "TX",
@@ -3386,10 +3468,11 @@
     "enrollment_22": 88368,
     "fte_22": 6080.62,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Katy%20Independent%20School%20District/TX%20Katy%20Independent%20School%20District%202020.pdf",
-    "name_state": "Katy, TX",
+    "modified_revenues": -91295434,
     "net_pension_liability": 223796599,
     "net_opeb_liability": 281189550,
-    "assets_liab_ratio": 0.9952
+    "assets_liab_ratio": 0.9952,
+    "name_state": "Katy, TX"
   },
   {
     "state.abb": "TX",
@@ -3428,10 +3511,11 @@
     "enrollment_22": 53294,
     "fte_22": 3653.1,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Klein%20Independent%20School%20District/TX%20Klein%20Independent%20School%20District%202020.pdf",
-    "name_state": "Klein, TX",
+    "modified_revenues": -44305801,
     "net_pension_liability": 171536152,
     "net_opeb_liability": 192705677,
-    "assets_liab_ratio": 1.0068
+    "assets_liab_ratio": 1.0068,
+    "name_state": "Klein, TX"
   },
   {
     "state.abb": "TX",
@@ -3470,10 +3554,11 @@
     "enrollment_22": 49205,
     "fte_22": 3752.34,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Lewisville%20Independent%20School%20District/TX%20Lewisville%20Independent%20School%20District%202020.pdf",
-    "name_state": "Lewisville, TX",
+    "modified_revenues": -23038965,
     "net_pension_liability": 159467259,
     "net_opeb_liability": 183776610,
-    "assets_liab_ratio": 0.9946
+    "assets_liab_ratio": 0.9946,
+    "name_state": "Lewisville, TX"
   },
   {
     "state.abb": "TX",
@@ -3511,10 +3596,11 @@
     "enrollment_22": 59830,
     "fte_22": 4001.53,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/North%20East%20Independent%20School%20District/TX%20North%20East%20Independent%20School%20District%202020.pdf",
-    "name_state": "San Antonio, TX",
+    "modified_revenues": -146959217,
     "net_pension_liability": 184611924,
     "net_opeb_liability": 237167621,
-    "assets_liab_ratio": 1.0807
+    "assets_liab_ratio": 1.0807,
+    "name_state": "San Antonio, TX"
   },
   {
     "state.abb": "TX",
@@ -3553,10 +3639,11 @@
     "enrollment_22": 102377,
     "fte_22": 6792.17,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Northside%20Independent%20School%20District%20(Bexar%20County)/TX%20Northside%20Independent%20School%20District%20(Bexar%20County)%202020.pdf",
-    "name_state": "San Antonio, TX",
+    "modified_revenues": -84424168,
     "net_pension_liability": 330423641,
     "net_opeb_liability": 386107674,
-    "assets_liab_ratio": 1.0235
+    "assets_liab_ratio": 1.0235,
+    "name_state": "San Antonio, TX"
   },
   {
     "state.abb": "TX",
@@ -3594,10 +3681,11 @@
     "enrollment_22": 49326,
     "fte_22": 3828.17,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Pasadena%20Independent%20School%20District/TX%20Pasadena%20Independent%20School%20District%202020.pdf",
-    "name_state": "Pasadena, TX",
+    "modified_revenues": -118975740,
     "net_pension_liability": 209167194,
     "net_opeb_liability": 237273584,
-    "assets_liab_ratio": 0.9725
+    "assets_liab_ratio": 0.9725,
+    "name_state": "Pasadena, TX"
   },
   {
     "state.abb": "TX",
@@ -3636,10 +3724,11 @@
     "enrollment_22": 49400,
     "fte_22": 3638.01,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Plano%20Independent%20School%20District/TX%20Plano%20Independent%20School%20District%202020.pdf",
-    "name_state": "Plano, TX",
+    "modified_revenues": -213815938,
     "net_pension_liability": 174271009,
     "net_opeb_liability": 198353587,
-    "assets_liab_ratio": 0.7952
+    "assets_liab_ratio": 0.7952,
+    "name_state": "Plano, TX"
   },
   {
     "state.abb": "TX",
@@ -3678,10 +3767,11 @@
     "enrollment_22": 47167,
     "fte_22": 3450.84,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Round%20Rock%20Independent%20School%20District/TX%20Round%20Rock%20Independent%20School%20District%202020.pdf",
-    "name_state": "Round Rock, TX",
+    "modified_revenues": -91976478,
     "net_pension_liability": 124392763,
     "net_opeb_liability": 165202836,
-    "assets_liab_ratio": 0.9144
+    "assets_liab_ratio": 0.9144,
+    "name_state": "Round Rock, TX"
   },
   {
     "state.abb": "UT",
@@ -3718,10 +3808,11 @@
     "enrollment_22": 86275,
     "fte_22": 3308.62,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/UT/Alpine%20School%20District/UT%20Alpine%20School%20District%202020.pdf",
-    "name_state": "American Fork, UT",
+    "modified_revenues": -157266100,
     "net_pension_liability": 185909219,
     "net_opeb_liability": 66222363,
-    "assets_liab_ratio": 0.6207
+    "assets_liab_ratio": 0.6207,
+    "name_state": "American Fork, UT"
   },
   {
     "state.abb": "UT",
@@ -3758,10 +3849,11 @@
     "enrollment_22": 74486,
     "fte_22": 3061.45,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/UT/Davis%20School%20District/UT%20Davis%20School%20District%202020.pdf",
-    "name_state": "Farmington, UT",
+    "modified_revenues": -59867237,
     "net_pension_liability": 181144594,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 0.6719
+    "assets_liab_ratio": 0.6719,
+    "name_state": "Farmington, UT"
   },
   {
     "state.abb": "UT",
@@ -3798,10 +3890,11 @@
     "enrollment_22": 62544,
     "fte_22": 2785.77,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/UT/Granite%20School%20District/UT%20Granite%20School%20District%202020.pdf",
-    "name_state": "Salt Lake City, UT",
+    "modified_revenues": -63214892,
     "net_pension_liability": 214554003,
     "net_opeb_liability": 1982613,
-    "assets_liab_ratio": 0.5012
+    "assets_liab_ratio": 0.5012,
+    "name_state": "Salt Lake City, UT"
   },
   {
     "state.abb": "UT",
@@ -3838,10 +3931,11 @@
     "enrollment_22": 59363,
     "fte_22": 2632.94,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/UT/Jordan%20School%20District/UT%20Jordan%20School%20District%202020.pdf",
-    "name_state": "West Jordan, UT",
+    "modified_revenues": -93129969,
     "net_pension_liability": 154946340,
     "net_opeb_liability": 2387087,
-    "assets_liab_ratio": 0.3135
+    "assets_liab_ratio": 0.3135,
+    "name_state": "West Jordan, UT"
   },
   {
     "state.abb": "VA",
@@ -3879,10 +3973,11 @@
     "enrollment_22": 62445,
     "fte_22": 4149,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/VA/Chesterfield%20County%20Public%20Schools/VA%20Chesterfield%20County%20Public%20Schools%202020.pdf",
-    "name_state": "Chesterfield, VA",
+    "modified_revenues": 20557424,
     "net_pension_liability": 16290927,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 5.057
+    "assets_liab_ratio": 5.057,
+    "name_state": "Chesterfield, VA"
   },
   {
     "state.abb": "VA",
@@ -3920,10 +4015,11 @@
     "enrollment_22": 178479,
     "fte_22": 13199,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/VA/Fairfax%20County%20Public%20Schools/VA%20Fairfax%20County%20Public%20Schools%202020.pdf",
-    "name_state": "Falls Church, VA",
+    "modified_revenues": -159018569,
     "net_pension_liability": 3769693854,
     "net_opeb_liability": 435474585,
-    "assets_liab_ratio": 1.4315
+    "assets_liab_ratio": 1.4315,
+    "name_state": "Falls Church, VA"
   },
   {
     "state.abb": "VA",
@@ -3962,10 +4058,11 @@
     "enrollment_22": 49991,
     "fte_22": 2893,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/VA/Henrico%20County%20Public%20Schools/VA%20Henrico%20County%20Public%20Schools%202020.pdf",
-    "name_state": "Henrico, VA",
+    "modified_revenues": -12120755,
     "net_pension_liability": 462836320,
     "net_opeb_liability": 81756137,
-    "assets_liab_ratio": 1.533
+    "assets_liab_ratio": 1.533,
+    "name_state": "Henrico, VA"
   },
   {
     "state.abb": "VA",
@@ -4003,10 +4100,11 @@
     "enrollment_22": 81131,
     "fte_22": 5924,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/VA/Loudoun%20County%20Public%20Schools/VA%20Loudoun%20County%20Public%20Schools%202020.pdf",
-    "name_state": "Ashburn, VA",
+    "modified_revenues": -153619265,
     "net_pension_liability": 993580040,
     "net_opeb_liability": 403737216,
-    "assets_liab_ratio": 0.6844
+    "assets_liab_ratio": 0.6844,
+    "name_state": "Ashburn, VA"
   },
   {
     "state.abb": "VA",
@@ -4044,10 +4142,11 @@
     "enrollment_22": 90070,
     "fte_22": 5631,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/VA/Prince%20William%20County%20Public%20Schools/VA%20Prince%20William%20County%20Public%20Schools%202020.pdf",
-    "name_state": "Manassas, VA",
+    "modified_revenues": -31445296,
     "net_pension_liability": -880640955,
     "net_opeb_liability": -159352777,
-    "assets_liab_ratio": 0.5619
+    "assets_liab_ratio": 0.5619,
+    "name_state": "Manassas, VA"
   },
   {
     "state.abb": "VA",
@@ -4086,10 +4185,11 @@
     "enrollment_22": 65450,
     "fte_22": 4238,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/VA/School%20Board%20of%20the%20City%20of%20Virginia%20Beach/VA%20School%20Board%20of%20the%20City%20of%20Virginia%20Beach%202020.pdf",
-    "name_state": "Virginia Beach, VA",
+    "modified_revenues": -47328884,
     "net_pension_liability": 678825000,
     "net_opeb_liability": 152746000,
-    "assets_liab_ratio": 1.1937
+    "assets_liab_ratio": 1.1937,
+    "name_state": "Virginia Beach, VA"
   },
   {
     "state.abb": "WA",
@@ -4128,10 +4228,11 @@
     "enrollment_22": 51443,
     "fte_22": 3110.54,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/WA/Seattle%20School%20District%20No.%201/WA%20Seattle%20School%20District%20No.%201%202020.pdf",
-    "name_state": "Seattle, WA",
+    "modified_revenues": -4263831,
     "net_pension_liability": 295248620,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 0.2005
+    "assets_liab_ratio": 0.2005,
+    "name_state": "Seattle, WA"
   },
   {
     "state.abb": "WI",
@@ -4170,10 +4271,11 @@
     "enrollment_22": 69115,
     "fte_22": 4269.89,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/WI/Milwaukee%20Public%20Schools/WI%20Milwaukee%20Public%20Schools%202020.pdf",
-    "name_state": "Milwaukee, WI",
+    "modified_revenues": -141922021,
     "net_pension_liability": 110801411,
     "net_opeb_liability": 762277112,
-    "assets_liab_ratio": 1.4949
+    "assets_liab_ratio": 1.4949,
+    "name_state": "Milwaukee, WI"
   },
   {
     "state.abb": "AL",
@@ -4212,10 +4314,11 @@
     "enrollment_22": 52614,
     "fte_22": 2608.55,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/AL/Mobile%20County%20Board%20of%20School%20Commissioners/AL%20Mobile%20County%20Board%20of%20School%20Commissioners%202021.pdf",
-    "name_state": "Mobile, AL",
+    "modified_revenues": 76638470,
     "net_pension_liability": 518336000,
     "net_opeb_liability": 325912829,
-    "assets_liab_ratio": 1.3917
+    "assets_liab_ratio": 1.3917,
+    "name_state": "Mobile, AL"
   },
   {
     "state.abb": "AZ",
@@ -4254,10 +4357,11 @@
     "enrollment_22": 58859,
     "fte_22": 3476.15,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/AZ/Mesa%20Unified%20School%20District%20No.%204/AZ%20Mesa%20Unified%20School%20District%20No.%204%202021.pdf",
-    "name_state": "Mesa, AZ",
+    "modified_revenues": -37761830,
     "net_pension_liability": 567135119,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 1.0028
+    "assets_liab_ratio": 1.0028,
+    "name_state": "Mesa, AZ"
   },
   {
     "state.abb": "CA",
@@ -4296,10 +4400,11 @@
     "enrollment_22": 50889,
     "fte_22": 2076.56,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CA/Corona-Norco%20Unified%20School%20District/CA%20Corona-Norco%20Unified%20School%20District%202021.pdf",
-    "name_state": "Norco, CA",
+    "modified_revenues": -73752334,
     "net_pension_liability": 671097338,
     "net_opeb_liability": 91005083,
-    "assets_liab_ratio": 1.0964
+    "assets_liab_ratio": 1.0964,
+    "name_state": "Norco, CA"
   },
   {
     "state.abb": "CA",
@@ -4338,10 +4443,11 @@
     "enrollment_22": 62229,
     "fte_22": 2763.54,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CA/Elk%20Grove%20Unified%20School%20District/CA%20Elk%20Grove%20Unified%20School%20District%202021.pdf",
-    "name_state": "Elk Grove, CA",
+    "modified_revenues": -24356079,
     "net_pension_liability": 756867000,
     "net_opeb_liability": 12171425,
-    "assets_liab_ratio": 1.003
+    "assets_liab_ratio": 1.003,
+    "name_state": "Elk Grove, CA"
   },
   {
     "state.abb": "CA",
@@ -4380,10 +4486,11 @@
     "enrollment_22": 69873,
     "fte_22": 3548.96,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CA/Fresno%20Unified%20School%20District/CA%20Fresno%20Unified%20School%20District%202021.pdf",
-    "name_state": "Fresno, CA",
+    "modified_revenues": -280838548,
     "net_pension_liability": 993525000,
     "net_opeb_liability": 1050247712,
-    "assets_liab_ratio": 1.6439
+    "assets_liab_ratio": 1.6439,
+    "name_state": "Fresno, CA"
   },
   {
     "state.abb": "CA",
@@ -4422,10 +4529,11 @@
     "enrollment_22": 67292,
     "fte_22": 2738.24,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CA/Long%20Beach%20Unified%20School%20District/CA%20Long%20Beach%20Unified%20School%20District%202021.pdf",
-    "name_state": "Long Beach, CA",
+    "modified_revenues": -55541205,
     "net_pension_liability": 962921099,
     "net_opeb_liability": 451231966,
-    "assets_liab_ratio": 1.1315
+    "assets_liab_ratio": 1.1315,
+    "name_state": "Long Beach, CA"
   },
   {
     "state.abb": "CA",
@@ -4464,10 +4572,11 @@
     "enrollment_22": 435958,
     "fte_22": 21893.94,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CA/Los%20Angeles%20Unified%20School%20District/CA%20Los%20Angeles%20Unified%20School%20District%202021.pdf",
-    "name_state": "Los Angeles, CA",
+    "modified_revenues": -762356000,
     "net_pension_liability": 7935187000,
     "net_opeb_liability": 11062961000,
-    "assets_liab_ratio": 1.4046
+    "assets_liab_ratio": 1.4046,
+    "name_state": "Los Angeles, CA"
   },
   {
     "state.abb": "CA",
@@ -4506,10 +4615,11 @@
     "enrollment_22": 95233,
     "fte_22": 4289.35,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CA/San%20Diego%20Unified%20School%20District/CA%20San%20Diego%20Unified%20School%20District%202021.pdf",
-    "name_state": "San Diego, CA",
+    "modified_revenues": -182210572,
     "net_pension_liability": 1546135000,
     "net_opeb_liability": 143083016,
-    "assets_liab_ratio": 1.0491
+    "assets_liab_ratio": 1.0491,
+    "name_state": "San Diego, CA"
   },
   {
     "state.abb": "CA",
@@ -4548,10 +4658,11 @@
     "enrollment_22": 49204,
     "fte_22": 2547.13,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CA/San%20Francisco%20Unified%20School%20District/CA%20San%20Francisco%20Unified%20School%20District%202021.pdf",
-    "name_state": "San Francisco, CA",
+    "modified_revenues": -34639546,
     "net_pension_liability": 942536683,
     "net_opeb_liability": 1012295819,
-    "assets_liab_ratio": 1.2672
+    "assets_liab_ratio": 1.2672,
+    "name_state": "San Francisco, CA"
   },
   {
     "state.abb": "CO",
@@ -4590,10 +4701,11 @@
     "enrollment_22": 53587,
     "fte_22": 3194.09,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CO/Cherry%20Creek%20School%20District%20No.%205/CO%20Cherry%20Creek%20School%20District%20No.%205%202021.pdf",
-    "name_state": "Greenwood Village, CO",
+    "modified_revenues": 244613235,
     "net_pension_liability": 1215421688,
     "net_opeb_liability": 44195888,
-    "assets_liab_ratio": 1.6778
+    "assets_liab_ratio": 1.6778,
+    "name_state": "Greenwood Village, CO"
   },
   {
     "state.abb": "CO",
@@ -4632,10 +4744,11 @@
     "enrollment_22": 88911,
     "fte_22": 6140.88,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CO/City%20and%20County%20of%20Denver%20School%20District%20No.%201/CO%20City%20and%20County%20of%20Denver%20School%20District%20No.%201%202021.pdf",
-    "name_state": "Denver, CO",
+    "modified_revenues": -37321328,
     "net_pension_liability": 395426442,
     "net_opeb_liability": 40625946,
-    "assets_liab_ratio": 1.351
+    "assets_liab_ratio": 1.351,
+    "name_state": "Denver, CO"
   },
   {
     "state.abb": "CO",
@@ -4673,10 +4786,11 @@
     "enrollment_22": 63596,
     "fte_22": 3609.66,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CO/Douglas%20County%20School%20District%20RE.%201/CO%20Douglas%20County%20School%20District%20RE.%201%202021.pdf",
-    "name_state": "Castle Rock, CO",
+    "modified_revenues": 263808147,
     "net_pension_liability": 936328834,
     "net_opeb_liability": 34048351,
-    "assets_liab_ratio": 1.3047
+    "assets_liab_ratio": 1.3047,
+    "name_state": "Castle Rock, CO"
   },
   {
     "state.abb": "CO",
@@ -4715,10 +4829,11 @@
     "enrollment_22": 76904,
     "fte_22": 4722.6,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CO/Jefferson%20County%20School%20District/CO%20Jefferson%20County%20School%20District%202021.pdf",
-    "name_state": "Golden, CO",
+    "modified_revenues": 208039492,
     "net_pension_liability": 1523282578,
     "net_opeb_liability": 55380519,
-    "assets_liab_ratio": 1.4304
+    "assets_liab_ratio": 1.4304,
+    "name_state": "Golden, CO"
   },
   {
     "state.abb": "FL",
@@ -4757,10 +4872,11 @@
     "enrollment_22": 72497,
     "fte_22": 4433.3,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/Brevard%20District%20School%20Board%20County/FL%20Brevard%20District%20School%20Board%20County%202021.pdf",
-    "name_state": "Viera, FL",
+    "modified_revenues": -71037951,
     "net_pension_liability": 475178596,
     "net_opeb_liability": 17121999,
-    "assets_liab_ratio": 0.8625
+    "assets_liab_ratio": 0.8625,
+    "name_state": "Viera, FL"
   },
   {
     "state.abb": "FL",
@@ -4799,10 +4915,11 @@
     "enrollment_22": 47617,
     "fte_22": 2847.74,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/Collier%20County%20District%20School%20Board/FL%20Collier%20County%20District%20School%20Board%202021.pdf",
-    "name_state": "Naples, FL",
+    "modified_revenues": -40473979,
     "net_pension_liability": 359379264,
     "net_opeb_liability": 4984361,
-    "assets_liab_ratio": 0.4704
+    "assets_liab_ratio": 0.4704,
+    "name_state": "Naples, FL"
   },
   {
     "state.abb": "FL",
@@ -4841,10 +4958,11 @@
     "enrollment_22": 95446,
     "fte_22": 6007.53,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/District%20School%20Board%20of%20Pinellas%20County/FL%20District%20School%20Board%20of%20Pinellas%20County%202021.pdf",
-    "name_state": "Largo, FL",
+    "modified_revenues": -104903444,
     "net_pension_liability": 720789781,
     "net_opeb_liability": 58611005,
-    "assets_liab_ratio": 0.4607
+    "assets_liab_ratio": 0.4607,
+    "name_state": "Largo, FL"
   },
   {
     "state.abb": "FL",
@@ -4883,10 +5001,11 @@
     "enrollment_22": 66729,
     "fte_22": 3543.27,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/District%20School%20Board%20of%20Seminole%20County/FL%20District%20School%20Board%20of%20Seminole%20County%202021.pdf",
-    "name_state": "Sanford, FL",
+    "modified_revenues": -21398039,
     "net_pension_liability": 409745367,
     "net_opeb_liability": 21740202,
-    "assets_liab_ratio": 0.5914
+    "assets_liab_ratio": 0.5914,
+    "name_state": "Sanford, FL"
   },
   {
     "state.abb": "FL",
@@ -4925,10 +5044,11 @@
     "enrollment_22": 128948,
     "fte_22": 7126,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/Duval%20County%20Public%20Schools/FL%20Duval%20County%20Public%20Schools%202021.pdf",
-    "name_state": "Jacksonville, FL",
+    "modified_revenues": -47748914,
     "net_pension_liability": 650761367,
     "net_opeb_liability": 53682679,
-    "assets_liab_ratio": 0.8464
+    "assets_liab_ratio": 0.8464,
+    "name_state": "Jacksonville, FL"
   },
   {
     "state.abb": "FL",
@@ -4967,10 +5087,11 @@
     "enrollment_22": 50248,
     "fte_22": 2928.34,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/Manatee%20County%20District%20School%20Board/FL%20Manatee%20County%20District%20School%20Board%202021.pdf",
-    "name_state": "Bradenton, FL",
+    "modified_revenues": -42306296,
     "net_pension_liability": 341334666,
     "net_opeb_liability": 17853453,
-    "assets_liab_ratio": 0.5729
+    "assets_liab_ratio": 0.5729,
+    "name_state": "Bradenton, FL"
   },
   {
     "state.abb": "FL",
@@ -5009,10 +5130,11 @@
     "enrollment_22": 203224,
     "fte_22": 11386,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/Orange%20County%20District%20School%20Board/FL%20Orange%20County%20District%20School%20Board%202021.pdf",
-    "name_state": "Orlando, FL",
+    "modified_revenues": 30358890,
     "net_pension_liability": 1384664900,
     "net_opeb_liability": 57427977,
-    "assets_liab_ratio": 0.3986
+    "assets_liab_ratio": 0.3986,
+    "name_state": "Orlando, FL"
   },
   {
     "state.abb": "FL",
@@ -5051,10 +5173,11 @@
     "enrollment_22": 72427,
     "fte_22": 3600.57,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/Osceola%20County%20District%20School%20Board/FL%20Osceola%20County%20District%20School%20Board%202021.pdf",
-    "name_state": "Kissimmee, FL",
+    "modified_revenues": 84725354,
     "net_pension_liability": 347343200,
     "net_opeb_liability": 16582352,
-    "assets_liab_ratio": 0.4871
+    "assets_liab_ratio": 0.4871,
+    "name_state": "Kissimmee, FL"
   },
   {
     "state.abb": "FL",
@@ -5093,10 +5216,11 @@
     "enrollment_22": 81157,
     "fte_22": 4711.88,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/Pasco%20County%20District%20School%20Board/FL%20Pasco%20County%20District%20School%20Board%202021.pdf",
-    "name_state": "Land O Lakes, FL",
+    "modified_revenues": -79179391,
     "net_pension_liability": 474876083,
     "net_opeb_liability": 106858334,
-    "assets_liab_ratio": 0.7427
+    "assets_liab_ratio": 0.7427,
+    "name_state": "Land O Lakes, FL"
   },
   {
     "state.abb": "FL",
@@ -5135,10 +5259,11 @@
     "enrollment_22": 105422,
     "fte_22": 5927,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/School%20District%20of%20Polk%20County/FL%20School%20District%20of%20Polk%20County%202021.pdf",
-    "name_state": "Bartow, FL",
+    "modified_revenues": -115686508,
     "net_pension_liability": 584171515,
     "net_opeb_liability": 35381443,
-    "assets_liab_ratio": 0.6717
+    "assets_liab_ratio": 0.6717,
+    "name_state": "Bartow, FL"
   },
   {
     "state.abb": "FL",
@@ -5177,10 +5302,11 @@
     "enrollment_22": 48032,
     "fte_22": 2600.17,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/St.%20Johns%20County%20School%20District/FL%20St.%20Johns%20County%20School%20District%202021.pdf",
-    "name_state": "St Augustine, FL",
+    "modified_revenues": 1419333,
     "net_pension_liability": 263530874,
     "net_opeb_liability": 27886089,
-    "assets_liab_ratio": 0.4916
+    "assets_liab_ratio": 0.4916,
+    "name_state": "St Augustine, FL"
   },
   {
     "state.abb": "FL",
@@ -5219,10 +5345,11 @@
     "enrollment_22": 256037,
     "fte_22": 13341.46,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/The%20School%20Board%20of%20Broward%20County/FL%20The%20School%20Board%20of%20Broward%20County%202021.pdf",
-    "name_state": "Fort Lauderdale, FL",
+    "modified_revenues": -414124000,
     "net_pension_liability": 1708054000,
     "net_opeb_liability": 197602000,
-    "assets_liab_ratio": 1.0676
+    "assets_liab_ratio": 1.0676,
+    "name_state": "Fort Lauderdale, FL"
   },
   {
     "state.abb": "FL",
@@ -5261,10 +5388,11 @@
     "enrollment_22": 328589,
     "fte_22": 17365,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/The%20School%20Board%20of%20Miami-Dade%20County/FL%20The%20School%20Board%20of%20Miami-Dade%20County%202021.pdf",
-    "name_state": "Miami, FL",
+    "modified_revenues": -264623000,
     "net_pension_liability": 2434673000,
     "net_opeb_liability": 269536000,
-    "assets_liab_ratio": 1.1518
+    "assets_liab_ratio": 1.1518,
+    "name_state": "Miami, FL"
   },
   {
     "state.abb": "FL",
@@ -5303,10 +5431,11 @@
     "enrollment_22": 97264,
     "fte_22": 5170.54,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/The%20School%20District%20of%20Lee%20County/FL%20The%20School%20District%20of%20Lee%20County%202021.pdf",
-    "name_state": "Fort Myers, FL",
+    "modified_revenues": -54548898,
     "net_pension_liability": 567716145,
     "net_opeb_liability": 51818919,
-    "assets_liab_ratio": 0.6386
+    "assets_liab_ratio": 0.6386,
+    "name_state": "Fort Myers, FL"
   },
   {
     "state.abb": "FL",
@@ -5345,10 +5474,11 @@
     "enrollment_22": 187943,
     "fte_22": 11554.7,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/The%20School%20District%20of%20Palm%20Beach%20County/FL%20The%20School%20District%20of%20Palm%20Beach%20County%202021.pdf",
-    "name_state": "West Palm Beach, FL",
+    "modified_revenues": 31024000,
     "net_pension_liability": 1496769000,
     "net_opeb_liability": 66950000,
-    "assets_liab_ratio": 0.7493
+    "assets_liab_ratio": 0.7493,
+    "name_state": "West Palm Beach, FL"
   },
   {
     "state.abb": "FL",
@@ -5387,10 +5517,11 @@
     "enrollment_22": 62666,
     "fte_22": 3782.92,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/Volusia%20County%20District%20School%20Board/FL%20Volusia%20County%20District%20School%20Board%202021.pdf",
-    "name_state": "Deland, FL",
+    "modified_revenues": 9998476,
     "net_pension_liability": 400285028,
     "net_opeb_liability": 34931301,
-    "assets_liab_ratio": 0.5897
+    "assets_liab_ratio": 0.5897,
+    "name_state": "Deland, FL"
   },
   {
     "state.abb": "GA",
@@ -5428,10 +5559,11 @@
     "enrollment_22": 52335,
     "fte_22": 3259.1,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/GA/Clayton%20County%20Board%20of%20Education/GA%20Clayton%20County%20Board%20of%20Education%202021.pdf",
-    "name_state": "Jonesboro, GA",
+    "modified_revenues": -9416401,
     "net_pension_liability": 528087620,
     "net_opeb_liability": 409845950,
-    "assets_liab_ratio": 0.8754
+    "assets_liab_ratio": 0.8754,
+    "name_state": "Jonesboro, GA"
   },
   {
     "state.abb": "GA",
@@ -5469,10 +5601,11 @@
     "enrollment_22": 106970,
     "fte_22": 7331.5,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/GA/Cobb%20County%20School%20District/GA%20Cobb%20County%20School%20District%202021.pdf",
-    "name_state": "Marietta, GA",
+    "modified_revenues": -117127000,
     "net_pension_liability": 1350882000,
     "net_opeb_liability": 909504000,
-    "assets_liab_ratio": 1.061
+    "assets_liab_ratio": 1.061,
+    "name_state": "Marietta, GA"
   },
   {
     "state.abb": "GA",
@@ -5510,10 +5643,11 @@
     "enrollment_22": 93473,
     "fte_22": 6676.1,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/GA/Dekalb%20County%20Board%20of%20Education/GA%20Dekalb%20County%20Board%20of%20Education%202021.pdf",
-    "name_state": "Decatur, GA",
+    "modified_revenues": -118594088,
     "net_pension_liability": 1281485515,
     "net_opeb_liability": 914081630,
-    "assets_liab_ratio": 1.0649
+    "assets_liab_ratio": 1.0649,
+    "name_state": "Decatur, GA"
   },
   {
     "state.abb": "GA",
@@ -5551,10 +5685,11 @@
     "enrollment_22": 52757,
     "fte_22": 3206.5,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/GA/Forsyth%20County%20Board%20of%20Education/GA%20Forsyth%20County%20Board%20of%20Education%202021.pdf",
-    "name_state": "Cumming, GA",
+    "modified_revenues": -65724535,
     "net_pension_liability": 514807347,
     "net_opeb_liability": 378154509,
-    "assets_liab_ratio": 1.0955
+    "assets_liab_ratio": 1.0955,
+    "name_state": "Cumming, GA"
   },
   {
     "state.abb": "GA",
@@ -5592,10 +5727,11 @@
     "enrollment_22": 90355,
     "fte_22": 6167.3,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/GA/Fulton%20County%20Board%20of%20Education/GA%20Fulton%20County%20Board%20of%20Education%202021.pdf",
-    "name_state": "Atlanta, GA",
+    "modified_revenues": -67018744,
     "net_pension_liability": 1125485679,
     "net_opeb_liability": 779381586,
-    "assets_liab_ratio": 0.7398
+    "assets_liab_ratio": 0.7398,
+    "name_state": "Atlanta, GA"
   },
   {
     "state.abb": "GA",
@@ -5633,10 +5769,11 @@
     "enrollment_22": 179581,
     "fte_22": 11746.5,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/GA/Gwinnett%20County%20Board%20of%20Education/GA%20Gwinnett%20County%20Board%20of%20Education%202021.pdf",
-    "name_state": "Lawrenceville, GA",
+    "modified_revenues": -234519132,
     "net_pension_liability": 2014869263,
     "net_opeb_liability": 1420468758,
-    "assets_liab_ratio": 1.3678
+    "assets_liab_ratio": 1.3678,
+    "name_state": "Lawrenceville, GA"
   },
   {
     "state.abb": "GA",
@@ -5674,10 +5811,11 @@
     "enrollment_22": 49994,
     "fte_22": 4076.9,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/GA/School%20District%20Atlanta%20Public%20Schools/GA%20School%20District%20Atlanta%20Public%20Schools%202021.pdf",
-    "name_state": "Atlanta, GA",
+    "modified_revenues": -26479321,
     "net_pension_liability": 954785144,
     "net_opeb_liability": 411088967,
-    "assets_liab_ratio": 0.8448
+    "assets_liab_ratio": 0.8448,
+    "name_state": "Atlanta, GA"
   },
   {
     "state.abb": "HI",
@@ -5715,10 +5853,11 @@
     "enrollment_22": 173178,
     "fte_22": 12026.2,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/HI/Hawaii%20Department%20of%20Education/HI%20Hawaii%20Department%20of%20Education%202021.pdf",
-    "name_state": "Honolulu, HI",
+    "modified_revenues": -87151577,
     "net_pension_liability": 0,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 0.1544
+    "assets_liab_ratio": 0.1544,
+    "name_state": "Honolulu, HI"
   },
   {
     "state.abb": "IL",
@@ -5756,10 +5895,11 @@
     "enrollment_22": 329836,
     "fte_22": 22797.43,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/IL/Chicago%20Board%20of%20Education/IL%20Chicago%20Board%20of%20Education%202021.pdf",
-    "name_state": "Chicago, IL",
+    "modified_revenues": -2627425000,
     "net_pension_liability": 15440803000,
     "net_opeb_liability": 2908390000,
-    "assets_liab_ratio": 2.9818
+    "assets_liab_ratio": 2.9818,
+    "name_state": "Chicago, IL"
   },
   {
     "state.abb": "LA",
@@ -5798,10 +5938,11 @@
     "enrollment_22": 46896,
     "fte_22": 2186.31,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/LA/Jefferson%20Parish%20Public%20School%20System/LA%20Jefferson%20Parish%20Public%20School%20System%202021.pdf",
-    "name_state": "Harvey, LA",
+    "modified_revenues": -84381623,
     "net_pension_liability": 641548785,
     "net_opeb_liability": 659142753,
-    "assets_liab_ratio": 1.945
+    "assets_liab_ratio": 1.945,
+    "name_state": "Harvey, LA"
   },
   {
     "state.abb": "MD",
@@ -5839,10 +5980,11 @@
     "enrollment_22": 77807,
     "fte_22": 5109.6,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/MD/Baltimore%20City%20Public%20School%20System/MD%20Baltimore%20City%20Public%20School%20System%202021.pdf",
-    "name_state": "Baltimore, MD",
+    "modified_revenues": -163959000,
     "net_pension_liability": 0,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 0.229
+    "assets_liab_ratio": 0.229,
+    "name_state": "Baltimore, MD"
   },
   {
     "state.abb": "MD",
@@ -5880,10 +6022,11 @@
     "enrollment_22": 83163,
     "fte_22": 6013.61,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/MD/Board%20of%20Education%20of%20Anne%20Arundel%20County/MD%20Board%20of%20Education%20of%20Anne%20Arundel%20County%202021.pdf",
-    "name_state": "Annapolis, MD",
+    "modified_revenues": -171493066,
     "net_pension_liability": 76712926,
     "net_opeb_liability": 2064794000,
-    "assets_liab_ratio": 1.3207
+    "assets_liab_ratio": 1.3207,
+    "name_state": "Annapolis, MD"
   },
   {
     "state.abb": "MD",
@@ -5921,10 +6064,11 @@
     "enrollment_22": 111136,
     "fte_22": 7684.77,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/MD/Board%20of%20Education%20Baltimore%20County/MD%20Board%20of%20Education%20Baltimore%20County%202021.pdf",
-    "name_state": "Towson, MD",
+    "modified_revenues": -319504000,
     "net_pension_liability": 116025000,
     "net_opeb_liability": 2420620000,
-    "assets_liab_ratio": 1.2039
+    "assets_liab_ratio": 1.2039,
+    "name_state": "Towson, MD"
   },
   {
     "state.abb": "MD",
@@ -5962,10 +6106,11 @@
     "enrollment_22": 57325,
     "fte_22": 4258.4,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/MD/Howard%20County%20Board%20of%20Education/MD%20Howard%20County%20Board%20of%20Education%202021.pdf",
-    "name_state": "Ellicott City, MD",
+    "modified_revenues": -89242395,
     "net_pension_liability": 55884306,
     "net_opeb_liability": 1080270015,
-    "assets_liab_ratio": 0.8598
+    "assets_liab_ratio": 0.8598,
+    "name_state": "Ellicott City, MD"
   },
   {
     "state.abb": "MD",
@@ -6003,10 +6148,11 @@
     "enrollment_22": 128770,
     "fte_22": 9274,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/MD/Prince%20George’s%20County%20Public%20Schools/MD%20Prince%20George’s%20County%20Public%20Schools%202021.pdf",
-    "name_state": "Upper Marlboro, MD",
+    "modified_revenues": -226584061,
     "net_pension_liability": 207678490,
     "net_opeb_liability": 2911750000,
-    "assets_liab_ratio": 1.6406
+    "assets_liab_ratio": 1.6406,
+    "name_state": "Upper Marlboro, MD"
   },
   {
     "state.abb": "MD",
@@ -6044,10 +6190,11 @@
     "enrollment_22": 158231,
     "fte_22": 11605.84,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/MD/The%20Board%20of%20Education%20of%20Montgomery%20County/MD%20The%20Board%20of%20Education%20of%20Montgomery%20County%202021.pdf",
-    "name_state": "Rockville, MD",
+    "modified_revenues": -312729190,
     "net_pension_liability": 464686817,
     "net_opeb_liability": 2499298431,
-    "assets_liab_ratio": 0.9259
+    "assets_liab_ratio": 0.9259,
+    "name_state": "Rockville, MD"
   },
   {
     "state.abb": "MA",
@@ -6085,9 +6232,10 @@
     "enrollment_22": 46169,
     "fte_22": 4256.01,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/MA/Boston%20Public%20Schools/MA%20Boston%20Public%20Schools%202021.pdf",
-    "name_state": "Roxbury, MA",
+    "modified_revenues": 0,
     "net_pension_liability": 756926000,
-    "net_opeb_liability": 1182277000
+    "net_opeb_liability": 1182277000,
+    "name_state": "Roxbury, MA"
   },
   {
     "state.abb": "MI",
@@ -6126,10 +6274,11 @@
     "enrollment_22": 48536,
     "fte_22": 3143.83,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/MI/Detroit%20Public%20Schools/MI%20Detroit%20Public%20Schools%202021.pdf",
-    "name_state": "Detroit, MI",
+    "modified_revenues": 27282379,
     "net_pension_liability": 0,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 32.9433
+    "assets_liab_ratio": 32.9433,
+    "name_state": "Detroit, MI"
   },
   {
     "state.abb": "NE",
@@ -6168,10 +6317,11 @@
     "enrollment_22": 51626,
     "fte_22": 3445.22,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/NE/Douglas%20County%20School%20District%20No.%200001/NE%20Douglas%20County%20School%20District%20No.%200001%202021.pdf",
-    "name_state": "Omaha, NE",
+    "modified_revenues": -170147000,
     "net_pension_liability": 833386000,
     "net_opeb_liability": 28475000,
-    "assets_liab_ratio": 1.2419
+    "assets_liab_ratio": 1.2419,
+    "name_state": "Omaha, NE"
   },
   {
     "state.abb": "NV",
@@ -6208,10 +6358,11 @@
     "metro_code": "1-Metropolitan Area",
     "enrollment_22": 315787,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/NV/Clark%20County%20School%20District/NV%20Clark%20County%20School%20District%202021.pdf",
-    "name_state": "Las Vegas, NV",
+    "modified_revenues": -337157737,
     "net_pension_liability": 3246664848,
     "net_opeb_liability": 341397008,
-    "assets_liab_ratio": 1.0189
+    "assets_liab_ratio": 1.0189,
+    "name_state": "Las Vegas, NV"
   },
   {
     "state.abb": "NV",
@@ -6248,10 +6399,11 @@
     "metro_code": "1-Metropolitan Area",
     "enrollment_22": 65538,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/NV/Washoe%20County%20School%20District/NV%20Washoe%20County%20School%20District%202021.pdf",
-    "name_state": "Reno, NV",
+    "modified_revenues": -52718211,
     "net_pension_liability": 732973503,
     "net_opeb_liability": 101100866,
-    "assets_liab_ratio": 1.1836
+    "assets_liab_ratio": 1.1836,
+    "name_state": "Reno, NV"
   },
   {
     "state.abb": "NM",
@@ -6289,10 +6441,11 @@
     "enrollment_22": 81762,
     "fte_22": 6029.47,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/NM/Albuquerque%20Municipal%20School%20District%20No.%2012/NM%20Albuquerque%20Municipal%20School%20District%20No.%2012%202021.pdf",
-    "name_state": "Albuquerque, NM",
+    "modified_revenues": -862018962,
     "net_pension_liability": 3536282260,
     "net_opeb_liability": 485256883,
-    "assets_liab_ratio": 2.3091
+    "assets_liab_ratio": 2.3091,
+    "name_state": "Albuquerque, NM"
   },
   {
     "state.abb": "NY",
@@ -6321,10 +6474,11 @@
     "metro_code": "1-Metropolitan Area",
     "enrollment_22": 46525,
     "fte_22": 4107.03,
-    "name_state": "Bronx, NY",
+    "modified_revenues": -310296075.464,
     "net_pension_liability": -64112293.8793,
     "net_opeb_liability": 2197493048.3738,
-    "assets_liab_ratio": 0.735
+    "assets_liab_ratio": 0.735,
+    "name_state": "Bronx, NY"
   },
   {
     "state.abb": "NY",
@@ -6353,10 +6507,11 @@
     "metro_code": "1-Metropolitan Area",
     "enrollment_22": 56893,
     "fte_22": 4707.28,
-    "name_state": "New York, NY",
+    "modified_revenues": -364430733.8196,
     "net_pension_liability": -75297408.3554,
     "net_opeb_liability": 2580870553.9861,
-    "assets_liab_ratio": 0.735
+    "assets_liab_ratio": 0.735,
+    "name_state": "New York, NY"
   },
   {
     "state.abb": "NY",
@@ -6385,10 +6540,11 @@
     "metro_code": "1-Metropolitan Area",
     "enrollment_22": 47493,
     "fte_22": 3430.38,
-    "name_state": "Brooklyn, NY",
+    "modified_revenues": -302168943.3264,
     "net_pension_liability": -62433094.1561,
     "net_opeb_liability": 2139937320.8356,
-    "assets_liab_ratio": 0.735
+    "assets_liab_ratio": 0.735,
+    "name_state": "Brooklyn, NY"
   },
   {
     "state.abb": "NY",
@@ -6417,10 +6573,11 @@
     "metro_code": "1-Metropolitan Area",
     "enrollment_22": 51878,
     "fte_22": 4245.19,
-    "name_state": "Corona, NY",
+    "modified_revenues": -327334113.61,
     "net_pension_liability": -67632633.9516,
     "net_opeb_liability": 2318155129.9932,
-    "assets_liab_ratio": 0.735
+    "assets_liab_ratio": 0.735,
+    "name_state": "Corona, NY"
   },
   {
     "state.abb": "NY",
@@ -6450,10 +6607,11 @@
     "metro_code": "1-Metropolitan Area",
     "enrollment_22": 60749,
     "fte_22": 4751.01,
-    "name_state": "Staten Island, NY",
+    "modified_revenues": -378966724.6087,
     "net_pension_liability": -78300784.1213,
     "net_opeb_liability": 2683813327.7951,
-    "assets_liab_ratio": 0.735
+    "assets_liab_ratio": 0.735,
+    "name_state": "Staten Island, NY"
   },
   {
     "state.abb": "NC",
@@ -6491,10 +6649,11 @@
     "enrollment_22": 143244,
     "fte_22": 9030.26,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/NC/Charlotte-Mecklenburg%20Board%20of%20Education/NC%20Charlotte-Mecklenburg%20Board%20of%20Education%202021.pdf",
-    "name_state": "Charlotte, NC",
+    "modified_revenues": 77795000,
     "net_pension_liability": 729458000,
     "net_opeb_liability": 1492484000,
-    "assets_liab_ratio": 0.9301
+    "assets_liab_ratio": 0.9301,
+    "name_state": "Charlotte, NC"
   },
   {
     "state.abb": "NC",
@@ -6532,10 +6691,11 @@
     "enrollment_22": 48860,
     "fte_22": 3516.85,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/NC/Cumberland%20County%20Board%20of%20Education/NC%20Cumberland%20County%20Board%20of%20Education%202021.pdf",
-    "name_state": "Fayetteville, NC",
+    "modified_revenues": -3689637,
     "net_pension_liability": 204652114,
     "net_opeb_liability": 410436423,
-    "assets_liab_ratio": 2.0536
+    "assets_liab_ratio": 2.0536,
+    "name_state": "Fayetteville, NC"
   },
   {
     "state.abb": "NC",
@@ -6573,10 +6733,11 @@
     "enrollment_22": 69173,
     "fte_22": 4757.33,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/NC/Guilford%20County%20Board%20of%20Education/NC%20Guilford%20County%20Board%20of%20Education%202021.pdf",
-    "name_state": "Greensboro, NC",
+    "modified_revenues": -22984389,
     "net_pension_liability": 344503647,
     "net_opeb_liability": 689895759,
-    "assets_liab_ratio": 1.1905
+    "assets_liab_ratio": 1.1905,
+    "name_state": "Greensboro, NC"
   },
   {
     "state.abb": "NC",
@@ -6615,10 +6776,11 @@
     "enrollment_22": 160099,
     "fte_22": 10961.49,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/NC/Wake%20County%20Board%20of%20Education/NC%20Wake%20County%20Board%20of%20Education%202021.pdf",
-    "name_state": "Cary, NC",
+    "modified_revenues": 129238354,
     "net_pension_liability": 809760809,
     "net_opeb_liability": 1629283239,
-    "assets_liab_ratio": 0.6371
+    "assets_liab_ratio": 0.6371,
+    "name_state": "Cary, NC"
   },
   {
     "state.abb": "NC",
@@ -6656,10 +6818,11 @@
     "enrollment_22": 52681,
     "fte_22": 3593.91,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/NC/Winston-Salem/Forsyth%20County%20Board%20of%20Education/NC%20Winston-Salem/Forsyth%20County%20Board%20of%20Education%202021.pdf",
-    "name_state": "Winston Salem, NC",
+    "modified_revenues": 16992318,
     "net_pension_liability": 247807799,
     "net_opeb_liability": 539430084,
-    "assets_liab_ratio": 1.1137
+    "assets_liab_ratio": 1.1137,
+    "name_state": "Winston Salem, NC"
   },
   {
     "state.abb": "PA",
@@ -6697,10 +6860,11 @@
     "enrollment_22": 118053,
     "fte_22": 7968.97,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/PA/School%20District%20of%20Philadelphia/PA%20School%20District%20of%20Philadelphia%202021.pdf",
-    "name_state": "Philadelphia, PA",
+    "modified_revenues": -528260040,
     "net_pension_liability": 3790600000,
     "net_opeb_liability": 186300000,
-    "assets_liab_ratio": 2.4364
+    "assets_liab_ratio": 2.4364,
+    "name_state": "Philadelphia, PA"
   },
   {
     "state.abb": "SC",
@@ -6738,10 +6902,11 @@
     "enrollment_22": 49331,
     "fte_22": 3822.48,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/SC/Charleston%20County%20School%20District/SC%20Charleston%20County%20School%20District%202021.pdf",
-    "name_state": "Charleston, SC",
+    "modified_revenues": -52438685,
     "net_pension_liability": 656117028,
     "net_opeb_liability": 604134867,
-    "assets_liab_ratio": 1.0054
+    "assets_liab_ratio": 1.0054,
+    "name_state": "Charleston, SC"
   },
   {
     "state.abb": "SC",
@@ -6779,10 +6944,11 @@
     "enrollment_22": 76939,
     "fte_22": 5133.93,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/SC/The%20School%20District%20of%20Greenville%20County/SC%20The%20School%20District%20of%20Greenville%20County%202021.pdf",
-    "name_state": "Greenville, SC",
+    "modified_revenues": -106163695,
     "net_pension_liability": 1014813176,
     "net_opeb_liability": 919301322,
-    "assets_liab_ratio": 1.5368
+    "assets_liab_ratio": 1.5368,
+    "name_state": "Greenville, SC"
   },
   {
     "state.abb": "TN",
@@ -6820,10 +6986,11 @@
     "enrollment_22": 105596,
     "fte_22": 6694.54,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TN/Board%20of%20Education%20of%20Shelby%20County/TN%20Board%20of%20Education%20of%20Shelby%20County%202021.pdf",
-    "name_state": "Memphis, TN",
+    "modified_revenues": -37136136,
     "net_pension_liability": -161209687,
     "net_opeb_liability": 1130535591,
-    "assets_liab_ratio": 0.7876
+    "assets_liab_ratio": 0.7876,
+    "name_state": "Memphis, TN"
   },
   {
     "state.abb": "TN",
@@ -6861,10 +7028,11 @@
     "enrollment_22": 60426,
     "fte_22": 4016.73,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TN/Knox%20County%20Schools/TN%20Knox%20County%20Schools%202021.pdf",
-    "name_state": "Knoxville, TN",
+    "modified_revenues": 70427675,
     "net_pension_liability": 5443392,
     "net_opeb_liability": 39453803,
-    "assets_liab_ratio": 0.1307
+    "assets_liab_ratio": 0.1307,
+    "name_state": "Knoxville, TN"
   },
   {
     "state.abb": "TN",
@@ -6902,10 +7070,11 @@
     "enrollment_22": 80381,
     "fte_22": 4856.29,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TN/Metropolitan%20Nashville%20Public%20Schools/TN%20Metropolitan%20Nashville%20Public%20Schools%202021.pdf",
-    "name_state": "Nashville, TN",
+    "modified_revenues": 103409085,
     "net_pension_liability": -62553403,
     "net_opeb_liability": 1061732808,
-    "assets_liab_ratio": 0.1509
+    "assets_liab_ratio": 0.1509,
+    "name_state": "Nashville, TN"
   },
   {
     "state.abb": "TN",
@@ -6942,10 +7111,11 @@
     "enrollment_22": 49253,
     "fte_22": 3082.8,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TN/Rutherford%20County%20Schools/TN%20Rutherford%20County%20Schools%202021.pdf",
-    "name_state": "Murfreesboro, TN",
+    "modified_revenues": 60897732,
     "net_pension_liability": -42123364,
     "net_opeb_liability": 149056443,
-    "assets_liab_ratio": 0.2037
+    "assets_liab_ratio": 0.2037,
+    "name_state": "Murfreesboro, TN"
   },
   {
     "state.abb": "TN",
@@ -6983,9 +7153,10 @@
     "enrollment_22": 105596,
     "fte_22": 6694.54,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TN/Shelby%20County%20Board%20of%20Education/TN%20Shelby%20County%20Board%20of%20Education%202021.pdf",
-    "name_state": "Memphis, TN",
+    "modified_revenues": 2509913,
     "net_pension_liability": 0,
-    "net_opeb_liability": 0
+    "net_opeb_liability": 0,
+    "name_state": "Memphis, TN"
   },
   {
     "state.abb": "TX",
@@ -7023,10 +7194,11 @@
     "enrollment_22": 61633,
     "fte_22": 3990.7,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Aldine%20Independent%20School%20District/TX%20Aldine%20Independent%20School%20District%202021.pdf",
-    "name_state": "Houston, TX",
+    "modified_revenues": -72670892,
     "net_pension_liability": 189964192,
     "net_opeb_liability": 195448921,
-    "assets_liab_ratio": 0.9157
+    "assets_liab_ratio": 0.9157,
+    "name_state": "Houston, TX"
   },
   {
     "state.abb": "TX",
@@ -7064,10 +7236,11 @@
     "enrollment_22": 56311,
     "fte_22": 3923.88,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Arlington%20Independent%20School%20District/TX%20Arlington%20Independent%20School%20District%202021.pdf",
-    "name_state": "Arlington, TX",
+    "modified_revenues": -82102442,
     "net_pension_liability": 190880824,
     "net_opeb_liability": 179590022,
-    "assets_liab_ratio": 0.9025
+    "assets_liab_ratio": 0.9025,
+    "name_state": "Arlington, TX"
   },
   {
     "state.abb": "TX",
@@ -7105,10 +7278,11 @@
     "enrollment_22": 74602,
     "fte_22": 5238.78,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Austin%20Independent%20School%20District/TX%20Austin%20Independent%20School%20District%202021.pdf",
-    "name_state": "Austin, TX",
+    "modified_revenues": -856489350,
     "net_pension_liability": 246709201,
     "net_opeb_liability": 256544236,
-    "assets_liab_ratio": 0.9514
+    "assets_liab_ratio": 0.9514,
+    "name_state": "Austin, TX"
   },
   {
     "state.abb": "TX",
@@ -7146,10 +7320,11 @@
     "enrollment_22": 67761,
     "fte_22": 4239.57,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Conroe%20Independent%20School%20District/TX%20Conroe%20Independent%20School%20District%202021.pdf",
-    "name_state": "Conroe, TX",
+    "modified_revenues": -48543548,
     "net_pension_liability": 165523063,
     "net_opeb_liability": 162575489,
-    "assets_liab_ratio": 0.9879
+    "assets_liab_ratio": 0.9879,
+    "name_state": "Conroe, TX"
   },
   {
     "state.abb": "TX",
@@ -7188,10 +7363,11 @@
     "enrollment_22": 117217,
     "fte_22": 7682.15,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Cypress-Fairbanks%20Independent%20School%20District/TX%20Cypress-Fairbanks%20Independent%20School%20District%202021.pdf",
-    "name_state": "Houston, TX",
+    "modified_revenues": -361037227,
     "net_pension_liability": 348098746,
     "net_opeb_liability": 327842108,
-    "assets_liab_ratio": 1.1116
+    "assets_liab_ratio": 1.1116,
+    "name_state": "Houston, TX"
   },
   {
     "state.abb": "TX",
@@ -7229,10 +7405,11 @@
     "enrollment_22": 143558,
     "fte_22": 9873.5,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Dallas%20Independent%20School%20District/TX%20Dallas%20Independent%20School%20District%202021.pdf",
-    "name_state": "Dallas, TX",
+    "modified_revenues": -319081872,
     "net_pension_liability": 600167381,
     "net_opeb_liability": 557369210,
-    "assets_liab_ratio": 0.9228
+    "assets_liab_ratio": 0.9228,
+    "name_state": "Dallas, TX"
   },
   {
     "state.abb": "TX",
@@ -7270,10 +7447,11 @@
     "enrollment_22": 50769,
     "fte_22": 3511.69,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/El%20Paso%20Independent%20School%20District/TX%20El%20Paso%20Independent%20School%20District%202021.pdf",
-    "name_state": "El Paso, TX",
+    "modified_revenues": -157171592,
     "net_pension_liability": 162623787,
     "net_opeb_liability": 169499197,
-    "assets_liab_ratio": 0.9597
+    "assets_liab_ratio": 0.9597,
+    "name_state": "El Paso, TX"
   },
   {
     "state.abb": "TX",
@@ -7312,10 +7490,11 @@
     "enrollment_22": 77545,
     "fte_22": 5019.98,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Fort%20Bend%20Independent%20School%20District/TX%20Fort%20Bend%20Independent%20School%20District%202021.pdf",
-    "name_state": "Sugar Land, TX",
+    "modified_revenues": -277015549,
     "net_pension_liability": 220611616,
     "net_opeb_liability": 221244800,
-    "assets_liab_ratio": 1.1629
+    "assets_liab_ratio": 1.1629,
+    "name_state": "Sugar Land, TX"
   },
   {
     "state.abb": "TX",
@@ -7354,10 +7533,11 @@
     "enrollment_22": 74850,
     "fte_22": 5069.52,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Fort%20Worth%20Independent%20School%20District/TX%20Fort%20Worth%20Independent%20School%20District%202021.pdf",
-    "name_state": "Fort Worth, TX",
+    "modified_revenues": -125674756,
     "net_pension_liability": 284706401,
     "net_opeb_liability": 269695599,
-    "assets_liab_ratio": 0.8726
+    "assets_liab_ratio": 0.8726,
+    "name_state": "Fort Worth, TX"
   },
   {
     "state.abb": "TX",
@@ -7395,10 +7575,11 @@
     "enrollment_22": 65825,
     "fte_22": 4407.63,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Frisco%20Independent%20School%20District/TX%20Frisco%20Independent%20School%20District%202021.pdf",
-    "name_state": "Frisco, TX",
+    "modified_revenues": -157274229,
     "net_pension_liability": 173815951,
     "net_opeb_liability": 159309242,
-    "assets_liab_ratio": 1.1659
+    "assets_liab_ratio": 1.1659,
+    "name_state": "Frisco, TX"
   },
   {
     "state.abb": "TX",
@@ -7437,10 +7618,11 @@
     "enrollment_22": 53674,
     "fte_22": 3448.14,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Garland%20Independent%20School%20District/TX%20Garland%20Independent%20School%20District%202021.pdf",
-    "name_state": "Garland, TX",
+    "modified_revenues": -69543435,
     "net_pension_liability": 162986411,
     "net_opeb_liability": 156820871,
-    "assets_liab_ratio": 0.7164
+    "assets_liab_ratio": 0.7164,
+    "name_state": "Garland, TX"
   },
   {
     "state.abb": "TX",
@@ -7479,10 +7661,11 @@
     "enrollment_22": 194607,
     "fte_22": 10982.91,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Houston%20Independent%20School%20District/TX%20Houston%20Independent%20School%20District%202021.pdf",
-    "name_state": "Houston, TX",
+    "modified_revenues": -375351000,
     "net_pension_liability": 556359739,
     "net_opeb_liability": 540884130,
-    "assets_liab_ratio": 0.6824
+    "assets_liab_ratio": 0.6824,
+    "name_state": "Houston, TX"
   },
   {
     "state.abb": "TX",
@@ -7520,10 +7703,11 @@
     "enrollment_22": 48112,
     "fte_22": 3200.11,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Humble%20Independent%20School%20District/TX%20Humble%20Independent%20School%20District%202021.pdf",
-    "name_state": "Humble, TX",
+    "modified_revenues": -101564918,
     "net_pension_liability": 124922803,
     "net_opeb_liability": 121473922,
-    "assets_liab_ratio": 0.9295
+    "assets_liab_ratio": 0.9295,
+    "name_state": "Humble, TX"
   },
   {
     "state.abb": "TX",
@@ -7562,10 +7746,11 @@
     "enrollment_22": 88368,
     "fte_22": 6080.62,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Katy%20Independent%20School%20District/TX%20Katy%20Independent%20School%20District%202021.pdf",
-    "name_state": "Katy, TX",
+    "modified_revenues": -89563326,
     "net_pension_liability": 239987931,
     "net_opeb_liability": 232773193,
-    "assets_liab_ratio": 0.9722
+    "assets_liab_ratio": 0.9722,
+    "name_state": "Katy, TX"
   },
   {
     "state.abb": "TX",
@@ -7604,10 +7789,11 @@
     "enrollment_22": 53294,
     "fte_22": 3653.1,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Klein%20Independent%20School%20District/TX%20Klein%20Independent%20School%20District%202021.pdf",
-    "name_state": "Klein, TX",
+    "modified_revenues": -69606243,
     "net_pension_liability": 157094062,
     "net_opeb_liability": 151372041,
-    "assets_liab_ratio": 0.9555
+    "assets_liab_ratio": 0.9555,
+    "name_state": "Klein, TX"
   },
   {
     "state.abb": "TX",
@@ -7646,10 +7832,11 @@
     "enrollment_22": 49205,
     "fte_22": 3752.34,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Lewisville%20Independent%20School%20District/TX%20Lewisville%20Independent%20School%20District%202021.pdf",
-    "name_state": "Lewisville, TX",
+    "modified_revenues": -40110516,
     "net_pension_liability": 120078526,
     "net_opeb_liability": 139565467,
-    "assets_liab_ratio": 0.9236
+    "assets_liab_ratio": 0.9236,
+    "name_state": "Lewisville, TX"
   },
   {
     "state.abb": "TX",
@@ -7687,10 +7874,11 @@
     "enrollment_22": 59830,
     "fte_22": 4001.53,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/North%20East%20Independent%20School%20District/TX%20North%20East%20Independent%20School%20District%202021.pdf",
-    "name_state": "San Antonio, TX",
+    "modified_revenues": -97194266,
     "net_pension_liability": 172926149,
     "net_opeb_liability": 189664039,
-    "assets_liab_ratio": 1.0475
+    "assets_liab_ratio": 1.0475,
+    "name_state": "San Antonio, TX"
   },
   {
     "state.abb": "TX",
@@ -7729,10 +7917,11 @@
     "enrollment_22": 102377,
     "fte_22": 6792.17,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Northside%20Independent%20School%20District%20(Bexar%20County)/TX%20Northside%20Independent%20School%20District%20(Bexar%20County)%202021.pdf",
-    "name_state": "San Antonio, TX",
+    "modified_revenues": -76412681,
     "net_pension_liability": 304096292,
     "net_opeb_liability": 298608482,
-    "assets_liab_ratio": 0.9724
+    "assets_liab_ratio": 0.9724,
+    "name_state": "San Antonio, TX"
   },
   {
     "state.abb": "TX",
@@ -7770,10 +7959,11 @@
     "enrollment_22": 49326,
     "fte_22": 3828.17,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Pasadena%20Independent%20School%20District/TX%20Pasadena%20Independent%20School%20District%202021.pdf",
-    "name_state": "Pasadena, TX",
+    "modified_revenues": -134948902,
     "net_pension_liability": 192750901,
     "net_opeb_liability": 177412041,
-    "assets_liab_ratio": 0.9084
+    "assets_liab_ratio": 0.9084,
+    "name_state": "Pasadena, TX"
   },
   {
     "state.abb": "TX",
@@ -7812,10 +8002,11 @@
     "enrollment_22": 49400,
     "fte_22": 3638.01,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Plano%20Independent%20School%20District/TX%20Plano%20Independent%20School%20District%202021.pdf",
-    "name_state": "Plano, TX",
+    "modified_revenues": -208132752,
     "net_pension_liability": 158421891,
     "net_opeb_liability": 150887500,
-    "assets_liab_ratio": 0.7072
+    "assets_liab_ratio": 0.7072,
+    "name_state": "Plano, TX"
   },
   {
     "state.abb": "TX",
@@ -7854,10 +8045,11 @@
     "enrollment_22": 47167,
     "fte_22": 3450.84,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Round%20Rock%20Independent%20School%20District/TX%20Round%20Rock%20Independent%20School%20District%202021.pdf",
-    "name_state": "Round Rock, TX",
+    "modified_revenues": -147832271,
     "net_pension_liability": 122550951,
     "net_opeb_liability": 132474011,
-    "assets_liab_ratio": 0.9048
+    "assets_liab_ratio": 0.9048,
+    "name_state": "Round Rock, TX"
   },
   {
     "state.abb": "UT",
@@ -7894,10 +8086,11 @@
     "enrollment_22": 86275,
     "fte_22": 3308.62,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/UT/Alpine%20School%20District/UT%20Alpine%20School%20District%202021.pdf",
-    "name_state": "American Fork, UT",
+    "modified_revenues": -52334064,
     "net_pension_liability": 112644823,
     "net_opeb_liability": 51252537,
-    "assets_liab_ratio": 0.5339
+    "assets_liab_ratio": 0.5339,
+    "name_state": "American Fork, UT"
   },
   {
     "state.abb": "UT",
@@ -7934,10 +8127,11 @@
     "enrollment_22": 74486,
     "fte_22": 3061.45,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/UT/Davis%20School%20District/UT%20Davis%20School%20District%202021.pdf",
-    "name_state": "Farmington, UT",
+    "modified_revenues": -15752968,
     "net_pension_liability": 109278145,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 0.57
+    "assets_liab_ratio": 0.57,
+    "name_state": "Farmington, UT"
   },
   {
     "state.abb": "UT",
@@ -7974,10 +8168,11 @@
     "enrollment_22": 62544,
     "fte_22": 2785.77,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/UT/Granite%20School%20District/UT%20Granite%20School%20District%202021.pdf",
-    "name_state": "Salt Lake City, UT",
+    "modified_revenues": -42688183,
     "net_pension_liability": 134427733,
     "net_opeb_liability": 1880526,
-    "assets_liab_ratio": 0.4432
+    "assets_liab_ratio": 0.4432,
+    "name_state": "Salt Lake City, UT"
   },
   {
     "state.abb": "UT",
@@ -8014,10 +8209,11 @@
     "enrollment_22": 59363,
     "fte_22": 2632.94,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/UT/Jordan%20School%20District/UT%20Jordan%20School%20District%202021.pdf",
-    "name_state": "West Jordan, UT",
+    "modified_revenues": -67669231,
     "net_pension_liability": 100535296,
     "net_opeb_liability": 2102296,
-    "assets_liab_ratio": 0.2797
+    "assets_liab_ratio": 0.2797,
+    "name_state": "West Jordan, UT"
   },
   {
     "state.abb": "VA",
@@ -8054,10 +8250,11 @@
     "enrollment_22": 62445,
     "fte_22": 4149,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/VA/Chesterfield%20County%20School%20Board/VA%20Chesterfield%20County%20School%20Board%202021.pdf",
-    "name_state": "Chesterfield, VA",
+    "modified_revenues": -430020484,
     "net_pension_liability": 20311386,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 4.5761
+    "assets_liab_ratio": 4.5761,
+    "name_state": "Chesterfield, VA"
   },
   {
     "state.abb": "VA",
@@ -8095,10 +8292,11 @@
     "enrollment_22": 178479,
     "fte_22": 13199,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/VA/Fairfax%20County%20Public%20Schools/VA%20Fairfax%20County%20Public%20Schools%202021.pdf",
-    "name_state": "Falls Church, VA",
+    "modified_revenues": -114370762,
     "net_pension_liability": 4115292996,
     "net_opeb_liability": 387461319,
-    "assets_liab_ratio": 1.4285
+    "assets_liab_ratio": 1.4285,
+    "name_state": "Falls Church, VA"
   },
   {
     "state.abb": "VA",
@@ -8137,10 +8335,11 @@
     "enrollment_22": 49991,
     "fte_22": 2893,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/VA/Henrico%20County%20Public%20Schools/VA%20Henrico%20County%20Public%20Schools%202021.pdf",
-    "name_state": "Henrico, VA",
+    "modified_revenues": -47211755,
     "net_pension_liability": 520851160,
     "net_opeb_liability": 76925442,
-    "assets_liab_ratio": 1.6925
+    "assets_liab_ratio": 1.6925,
+    "name_state": "Henrico, VA"
   },
   {
     "state.abb": "VA",
@@ -8178,10 +8377,11 @@
     "enrollment_22": 81131,
     "fte_22": 5924,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/VA/Loudoun%20County%20Public%20Schools/VA%20Loudoun%20County%20Public%20Schools%202021.pdf",
-    "name_state": "Ashburn, VA",
+    "modified_revenues": -124828897,
     "net_pension_liability": 1185302293,
     "net_opeb_liability": 334779254,
-    "assets_liab_ratio": 0.6942
+    "assets_liab_ratio": 0.6942,
+    "name_state": "Ashburn, VA"
   },
   {
     "state.abb": "VA",
@@ -8219,10 +8419,11 @@
     "enrollment_22": 90070,
     "fte_22": 5631,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/VA/Prince%20William%20County%20Public%20Schools/VA%20Prince%20William%20County%20Public%20Schools%202021.pdf",
-    "name_state": "Manassas, VA",
+    "modified_revenues": 4915660,
     "net_pension_liability": -1003741236,
     "net_opeb_liability": -142765589,
-    "assets_liab_ratio": 0.5628
+    "assets_liab_ratio": 0.5628,
+    "name_state": "Manassas, VA"
   },
   {
     "state.abb": "VA",
@@ -8261,10 +8462,11 @@
     "enrollment_22": 65450,
     "fte_22": 4238,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/VA/School%20Board%20of%20the%20City%20of%20Virginia%20Beach/VA%20School%20Board%20of%20the%20City%20of%20Virginia%20Beach%202021.pdf",
-    "name_state": "Virginia Beach, VA",
+    "modified_revenues": -89665483,
     "net_pension_liability": 748825120,
     "net_opeb_liability": 147744327,
-    "assets_liab_ratio": 1.1975
+    "assets_liab_ratio": 1.1975,
+    "name_state": "Virginia Beach, VA"
   },
   {
     "state.abb": "WA",
@@ -8303,10 +8505,11 @@
     "enrollment_22": 51443,
     "fte_22": 3110.54,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/WA/Seattle%20School%20District%20No.%201/WA%20Seattle%20School%20District%20No.%201%202021.pdf",
-    "name_state": "Seattle, WA",
+    "modified_revenues": 9268759,
     "net_pension_liability": -178857504,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 0.1935
+    "assets_liab_ratio": 0.1935,
+    "name_state": "Seattle, WA"
   },
   {
     "state.abb": "WI",
@@ -8345,10 +8548,11 @@
     "enrollment_22": 69115,
     "fte_22": 4269.89,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/WI/Milwaukee%20Public%20Schools/WI%20Milwaukee%20Public%20Schools%202021.pdf",
-    "name_state": "Milwaukee, WI",
+    "modified_revenues": 61543017,
     "net_pension_liability": 161786883,
     "net_opeb_liability": 631694509,
-    "assets_liab_ratio": 1.1633
+    "assets_liab_ratio": 1.1633,
+    "name_state": "Milwaukee, WI"
   },
   {
     "state.abb": "AL",
@@ -8387,10 +8591,11 @@
     "enrollment_22": 52614,
     "fte_22": 2608.55,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/AL/Mobile%20County%20Board%20of%20School%20Commissioners/AL%20Mobile%20County%20Board%20of%20School%20Commissioners%202022.pdf",
-    "name_state": "Mobile, AL",
+    "modified_revenues": 63184929,
     "net_pension_liability": 393780000,
     "net_opeb_liability": 255091005,
-    "assets_liab_ratio": 1.062
+    "assets_liab_ratio": 1.062,
+    "name_state": "Mobile, AL"
   },
   {
     "state.abb": "AZ",
@@ -8429,10 +8634,11 @@
     "enrollment_22": 58859,
     "fte_22": 3476.15,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/AZ/Mesa%20Unified%20School%20District%20No.%204/AZ%20Mesa%20Unified%20School%20District%20No.%204%202022.pdf",
-    "name_state": "Mesa, AZ",
+    "modified_revenues": -41457678,
     "net_pension_liability": 438021553,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 0.8466
+    "assets_liab_ratio": 0.8466,
+    "name_state": "Mesa, AZ"
   },
   {
     "state.abb": "CA",
@@ -8469,10 +8675,11 @@
     "enrollment_22": 50889,
     "fte_22": 2076.56,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CA/Corona-Norco%20Unified%20School%20District/CA%20Corona-Norco%20Unified%20School%20District%202022.pdf",
-    "name_state": "Norco, CA",
+    "modified_revenues": 19376156,
     "net_pension_liability": 345568234,
     "net_opeb_liability": 90317797,
-    "assets_liab_ratio": 0.8142
+    "assets_liab_ratio": 0.8142,
+    "name_state": "Norco, CA"
   },
   {
     "state.abb": "CA",
@@ -8511,10 +8718,11 @@
     "enrollment_22": 62229,
     "fte_22": 2763.54,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CA/Elk%20Grove%20Unified%20School%20District/CA%20Elk%20Grove%20Unified%20School%20District%202022.pdf",
-    "name_state": "Elk Grove, CA",
+    "modified_revenues": 1179744,
     "net_pension_liability": 363655000,
     "net_opeb_liability": 11624895,
-    "assets_liab_ratio": 0.6886
+    "assets_liab_ratio": 0.6886,
+    "name_state": "Elk Grove, CA"
   },
   {
     "state.abb": "CA",
@@ -8553,10 +8761,11 @@
     "enrollment_22": 69873,
     "fte_22": 3548.96,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CA/Fresno%20Unified%20School%20District/CA%20Fresno%20Unified%20School%20District%202022.pdf",
-    "name_state": "Fresno, CA",
+    "modified_revenues": -23719671,
     "net_pension_liability": 492432000,
     "net_opeb_liability": 987304445,
-    "assets_liab_ratio": 1.3319
+    "assets_liab_ratio": 1.3319,
+    "name_state": "Fresno, CA"
   },
   {
     "state.abb": "CA",
@@ -8595,10 +8804,11 @@
     "enrollment_22": 67292,
     "fte_22": 2738.24,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CA/Long%20Beach%20Unified%20School%20District/CA%20Long%20Beach%20Unified%20School%20District%202022.pdf",
-    "name_state": "Long Beach, CA",
+    "modified_revenues": -57560020,
     "net_pension_liability": 480681147,
     "net_opeb_liability": 401299005,
-    "assets_liab_ratio": 0.9126
+    "assets_liab_ratio": 0.9126,
+    "name_state": "Long Beach, CA"
   },
   {
     "state.abb": "CA",
@@ -8637,10 +8847,11 @@
     "enrollment_22": 435958,
     "fte_22": 21893.94,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CA/Los%20Angeles%20Unified%20School%20District/CA%20Los%20Angeles%20Unified%20School%20District%202022.pdf",
-    "name_state": "Los Angeles, CA",
+    "modified_revenues": 49391000,
     "net_pension_liability": 4311675000,
     "net_opeb_liability": 10186225000,
-    "assets_liab_ratio": 1.1768
+    "assets_liab_ratio": 1.1768,
+    "name_state": "Los Angeles, CA"
   },
   {
     "state.abb": "CA",
@@ -8679,10 +8890,11 @@
     "enrollment_22": 95233,
     "fte_22": 4289.35,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CA/San%20Diego%20Unified%20School%20District/CA%20San%20Diego%20Unified%20School%20District%202022.pdf",
-    "name_state": "San Diego, CA",
+    "modified_revenues": 35175597,
     "net_pension_liability": 793205000,
     "net_opeb_liability": 136132998,
-    "assets_liab_ratio": 0.9035
+    "assets_liab_ratio": 0.9035,
+    "name_state": "San Diego, CA"
   },
   {
     "state.abb": "CA",
@@ -8721,9 +8933,10 @@
     "enrollment_22": 49204,
     "fte_22": 2547.13,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CA/San%20Francisco%20Unified%20School%20District/CA%20San%20Francisco%20Unified%20School%20District%202022.pdf",
-    "name_state": "San Francisco, CA",
+    "modified_revenues": 308680709,
     "net_pension_liability": 0,
-    "net_opeb_liability": 1038791715
+    "net_opeb_liability": 1038791715,
+    "name_state": "San Francisco, CA"
   },
   {
     "state.abb": "CO",
@@ -8762,10 +8975,11 @@
     "enrollment_22": 53587,
     "fte_22": 3194.09,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CO/Cherry%20Creek%20School%20District%20No.%205/CO%20Cherry%20Creek%20School%20District%20No.%205%202022.pdf",
-    "name_state": "Greenwood Village, CO",
+    "modified_revenues": 280725138,
     "net_pension_liability": 845137624,
     "net_opeb_liability": 40888024,
-    "assets_liab_ratio": 1.3345
+    "assets_liab_ratio": 1.3345,
+    "name_state": "Greenwood Village, CO"
   },
   {
     "state.abb": "CO",
@@ -8804,10 +9018,11 @@
     "enrollment_22": 88911,
     "fte_22": 6140.88,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CO/City%20and%20County%20of%20Denver%20School%20District%20No.%201/CO%20City%20and%20County%20of%20Denver%20School%20District%20No.%201%202022.pdf",
-    "name_state": "Denver, CO",
+    "modified_revenues": 124758206,
     "net_pension_liability": 4035111,
     "net_opeb_liability": 26552730,
-    "assets_liab_ratio": 1.1629
+    "assets_liab_ratio": 1.1629,
+    "name_state": "Denver, CO"
   },
   {
     "state.abb": "CO",
@@ -8845,10 +9060,11 @@
     "enrollment_22": 63596,
     "fte_22": 3609.66,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CO/Douglas%20County%20School%20District%20RE.%201/CO%20Douglas%20County%20School%20District%20RE.%201%202022.pdf",
-    "name_state": "Castle Rock, CO",
+    "modified_revenues": 232885693,
     "net_pension_liability": 636750686,
     "net_opeb_liability": 30807156,
-    "assets_liab_ratio": 1.0056
+    "assets_liab_ratio": 1.0056,
+    "name_state": "Castle Rock, CO"
   },
   {
     "state.abb": "CO",
@@ -8887,10 +9103,11 @@
     "enrollment_22": 76904,
     "fte_22": 4722.6,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CO/Jefferson%20County%20School%20District/CO%20Jefferson%20County%20School%20District%202022.pdf",
-    "name_state": "Golden, CO",
+    "modified_revenues": 240933044,
     "net_pension_liability": 1032420784,
     "net_opeb_liability": 49949079,
-    "assets_liab_ratio": 1.1748
+    "assets_liab_ratio": 1.1748,
+    "name_state": "Golden, CO"
   },
   {
     "state.abb": "CO",
@@ -8929,8 +9146,9 @@
     "enrollment_22": 88911,
     "fte_22": 6140.88,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/CO/School%20District%20No.%201%20in%20the%20City%20and%20County%20of%20Denver%20and%20State%20of%20Colorado/CO%20School%20District%20No.%201%20in%20the%20City%20and%20County%20of%20Denver%20and%20State%20of%20Colorado%202022.pdf",
-    "name_state": "Denver, CO",
-    "assets_liab_ratio": 1.1629
+    "modified_revenues": -42678896,
+    "assets_liab_ratio": 1.1629,
+    "name_state": "Denver, CO"
   },
   {
     "state.abb": "FL",
@@ -8969,10 +9187,11 @@
     "enrollment_22": 72497,
     "fte_22": 4433.3,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/Brevard%20District%20School%20Board%20County/FL%20Brevard%20District%20School%20Board%20County%202022.pdf",
-    "name_state": "Viera, FL",
+    "modified_revenues": 5007131,
     "net_pension_liability": 192510509,
     "net_opeb_liability": 17479901,
-    "assets_liab_ratio": 0.585
+    "assets_liab_ratio": 0.585,
+    "name_state": "Viera, FL"
   },
   {
     "state.abb": "FL",
@@ -9011,10 +9230,11 @@
     "enrollment_22": 47617,
     "fte_22": 2847.74,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/Collier%20County%20District%20School%20Board/FL%20Collier%20County%20District%20School%20Board%202022.pdf",
-    "name_state": "Naples, FL",
+    "modified_revenues": 56984982,
     "net_pension_liability": 157178954,
     "net_opeb_liability": 4668040,
-    "assets_liab_ratio": 0.2801
+    "assets_liab_ratio": 0.2801,
+    "name_state": "Naples, FL"
   },
   {
     "state.abb": "FL",
@@ -9053,10 +9273,11 @@
     "enrollment_22": 95446,
     "fte_22": 6007.53,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/District%20School%20Board%20of%20Pinellas%20County/FL%20District%20School%20Board%20of%20Pinellas%20County%202022.pdf",
-    "name_state": "Largo, FL",
+    "modified_revenues": -33679019,
     "net_pension_liability": 305861431,
     "net_opeb_liability": 61258742,
-    "assets_liab_ratio": 0.2933
+    "assets_liab_ratio": 0.2933,
+    "name_state": "Largo, FL"
   },
   {
     "state.abb": "FL",
@@ -9095,10 +9316,11 @@
     "enrollment_22": 66729,
     "fte_22": 3543.27,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/District%20School%20Board%20of%20Seminole%20County/FL%20District%20School%20Board%20of%20Seminole%20County%202022.pdf",
-    "name_state": "Sanford, FL",
+    "modified_revenues": 28779405,
     "net_pension_liability": 172583468,
     "net_opeb_liability": 9869686,
-    "assets_liab_ratio": 0.3329
+    "assets_liab_ratio": 0.3329,
+    "name_state": "Sanford, FL"
   },
   {
     "state.abb": "FL",
@@ -9137,10 +9359,11 @@
     "enrollment_22": 128948,
     "fte_22": 7126,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/Duval%20County%20Public%20Schools/FL%20Duval%20County%20Public%20Schools%202022.pdf",
-    "name_state": "Jacksonville, FL",
+    "modified_revenues": 95484393,
     "net_pension_liability": 284255138,
     "net_opeb_liability": 47375605,
-    "assets_liab_ratio": 0.5404
+    "assets_liab_ratio": 0.5404,
+    "name_state": "Jacksonville, FL"
   },
   {
     "state.abb": "FL",
@@ -9179,10 +9402,11 @@
     "enrollment_22": 50248,
     "fte_22": 2928.34,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/Manatee%20County%20District%20School%20Board/FL%20Manatee%20County%20District%20School%20Board%202022.pdf",
-    "name_state": "Bradenton, FL",
+    "modified_revenues": 78174545,
     "net_pension_liability": 142380945,
     "net_opeb_liability": 17487904,
-    "assets_liab_ratio": 0.3677
+    "assets_liab_ratio": 0.3677,
+    "name_state": "Bradenton, FL"
   },
   {
     "state.abb": "FL",
@@ -9221,10 +9445,11 @@
     "enrollment_22": 203224,
     "fte_22": 11386,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/Orange%20County%20District%20School%20Board/FL%20Orange%20County%20District%20School%20Board%202022.pdf",
-    "name_state": "Orlando, FL",
+    "modified_revenues": 345357393,
     "net_pension_liability": 559308621,
     "net_opeb_liability": 48695858,
-    "assets_liab_ratio": 0.2611
+    "assets_liab_ratio": 0.2611,
+    "name_state": "Orlando, FL"
   },
   {
     "state.abb": "FL",
@@ -9263,10 +9488,11 @@
     "enrollment_22": 72427,
     "fte_22": 3600.57,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/Osceola%20County%20District%20School%20Board/FL%20Osceola%20County%20District%20School%20Board%202022.pdf",
-    "name_state": "Kissimmee, FL",
+    "modified_revenues": 150304634,
     "net_pension_liability": 151318672,
     "net_opeb_liability": 15279565,
-    "assets_liab_ratio": 0.3119
+    "assets_liab_ratio": 0.3119,
+    "name_state": "Kissimmee, FL"
   },
   {
     "state.abb": "FL",
@@ -9305,10 +9531,11 @@
     "enrollment_22": 81157,
     "fte_22": 4711.88,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/Pasco%20County%20District%20School%20Board/FL%20Pasco%20County%20District%20School%20Board%202022.pdf",
-    "name_state": "Land O Lakes, FL",
+    "modified_revenues": 64614388,
     "net_pension_liability": 204212328,
     "net_opeb_liability": 112148615,
-    "assets_liab_ratio": 0.5637
+    "assets_liab_ratio": 0.5637,
+    "name_state": "Land O Lakes, FL"
   },
   {
     "state.abb": "FL",
@@ -9347,10 +9574,11 @@
     "enrollment_22": 105422,
     "fte_22": 5927,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/School%20District%20of%20Polk%20County/FL%20School%20District%20of%20Polk%20County%202022.pdf",
-    "name_state": "Bartow, FL",
+    "modified_revenues": -11759818,
     "net_pension_liability": 250868681,
     "net_opeb_liability": 48799141,
-    "assets_liab_ratio": 0.4408
+    "assets_liab_ratio": 0.4408,
+    "name_state": "Bartow, FL"
   },
   {
     "state.abb": "FL",
@@ -9389,10 +9617,11 @@
     "enrollment_22": 48032,
     "fte_22": 2600.17,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/St.%20Johns%20County%20School%20District/FL%20St.%20Johns%20County%20School%20District%202022.pdf",
-    "name_state": "St Augustine, FL",
+    "modified_revenues": 22455859,
     "net_pension_liability": 117730342,
     "net_opeb_liability": 31422551,
-    "assets_liab_ratio": 0.3494
+    "assets_liab_ratio": 0.3494,
+    "name_state": "St Augustine, FL"
   },
   {
     "state.abb": "FL",
@@ -9431,10 +9660,11 @@
     "enrollment_22": 256037,
     "fte_22": 13341.46,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/The%20School%20Board%20of%20Broward%20County/FL%20The%20School%20Board%20of%20Broward%20County%202022.pdf",
-    "name_state": "Fort Lauderdale, FL",
+    "modified_revenues": -117110000,
     "net_pension_liability": 717399000,
     "net_opeb_liability": 218703000,
-    "assets_liab_ratio": 0.8327
+    "assets_liab_ratio": 0.8327,
+    "name_state": "Fort Lauderdale, FL"
   },
   {
     "state.abb": "FL",
@@ -9473,10 +9703,11 @@
     "enrollment_22": 328589,
     "fte_22": 17365,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/The%20School%20Board%20of%20Miami-Dade%20County/FL%20The%20School%20Board%20of%20Miami-Dade%20County%202022.pdf",
-    "name_state": "Miami, FL",
+    "modified_revenues": -139080000,
     "net_pension_liability": 979938000,
     "net_opeb_liability": 293561000,
-    "assets_liab_ratio": 0.8924
+    "assets_liab_ratio": 0.8924,
+    "name_state": "Miami, FL"
   },
   {
     "state.abb": "FL",
@@ -9515,10 +9746,11 @@
     "enrollment_22": 97264,
     "fte_22": 5170.54,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/The%20School%20District%20of%20Lee%20County/FL%20The%20School%20District%20of%20Lee%20County%202022.pdf",
-    "name_state": "Fort Myers, FL",
+    "modified_revenues": -147309724,
     "net_pension_liability": 246395024,
     "net_opeb_liability": 52461989,
-    "assets_liab_ratio": 0.4332
+    "assets_liab_ratio": 0.4332,
+    "name_state": "Fort Myers, FL"
   },
   {
     "state.abb": "FL",
@@ -9557,10 +9789,11 @@
     "enrollment_22": 187943,
     "fte_22": 11554.7,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/The%20School%20District%20of%20Palm%20Beach%20County/FL%20The%20School%20District%20of%20Palm%20Beach%20County%202022.pdf",
-    "name_state": "West Palm Beach, FL",
+    "modified_revenues": 99389000,
     "net_pension_liability": 616040000,
     "net_opeb_liability": 63218000,
-    "assets_liab_ratio": 0.5259
+    "assets_liab_ratio": 0.5259,
+    "name_state": "West Palm Beach, FL"
   },
   {
     "state.abb": "FL",
@@ -9599,10 +9832,11 @@
     "enrollment_22": 62666,
     "fte_22": 3782.92,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/FL/Volusia%20County%20District%20School%20Board/FL%20Volusia%20County%20District%20School%20Board%202022.pdf",
-    "name_state": "Deland, FL",
+    "modified_revenues": 8600695,
     "net_pension_liability": 166740065,
     "net_opeb_liability": 52779620,
-    "assets_liab_ratio": 0.4244
+    "assets_liab_ratio": 0.4244,
+    "name_state": "Deland, FL"
   },
   {
     "state.abb": "GA",
@@ -9640,8 +9874,9 @@
     "enrollment_22": 52335,
     "fte_22": 3259.1,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/GA/Clayton%20County%20Board%20of%20Education/GA%20Clayton%20County%20Board%20of%20Education%202022.pdf",
-    "name_state": "Jonesboro, GA",
-    "assets_liab_ratio": 0.4817
+    "modified_revenues": 60903627,
+    "assets_liab_ratio": 0.4817,
+    "name_state": "Jonesboro, GA"
   },
   {
     "state.abb": "GA",
@@ -9679,10 +9914,11 @@
     "enrollment_22": 106970,
     "fte_22": 7331.5,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/GA/Cobb%20County%20School%20District/GA%20Cobb%20County%20School%20District%202022.pdf",
-    "name_state": "Marietta, GA",
+    "modified_revenues": 122218000,
     "net_pension_liability": 497854000,
     "net_opeb_liability": 677878000,
-    "assets_liab_ratio": 0.5754
+    "assets_liab_ratio": 0.5754,
+    "name_state": "Marietta, GA"
   },
   {
     "state.abb": "GA",
@@ -9720,10 +9956,11 @@
     "enrollment_22": 93473,
     "fte_22": 6676.1,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/GA/Dekalb%20County%20Board%20of%20Education/GA%20Dekalb%20County%20Board%20of%20Education%202022.pdf",
-    "name_state": "Decatur, GA",
+    "modified_revenues": 214383793,
     "net_pension_liability": 458069789,
     "net_opeb_liability": 674481213,
-    "assets_liab_ratio": 0.554
+    "assets_liab_ratio": 0.554,
+    "name_state": "Decatur, GA"
   },
   {
     "state.abb": "GA",
@@ -9761,10 +9998,11 @@
     "enrollment_22": 52757,
     "fte_22": 3206.5,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/GA/Forsyth%20County%20Board%20of%20Education/GA%20Forsyth%20County%20Board%20of%20Education%202022.pdf",
-    "name_state": "Cumming, GA",
+    "modified_revenues": 89251094,
     "net_pension_liability": 189187977,
     "net_opeb_liability": 282977024,
-    "assets_liab_ratio": 0.7389
+    "assets_liab_ratio": 0.7389,
+    "name_state": "Cumming, GA"
   },
   {
     "state.abb": "GA",
@@ -9802,10 +10040,11 @@
     "enrollment_22": 90355,
     "fte_22": 6167.3,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/GA/Fulton%20County%20Board%20of%20Education/GA%20Fulton%20County%20Board%20of%20Education%202022.pdf",
-    "name_state": "Atlanta, GA",
+    "modified_revenues": 187023200,
     "net_pension_liability": 481981956,
     "net_opeb_liability": 578951041,
-    "assets_liab_ratio": 0.4206
+    "assets_liab_ratio": 0.4206,
+    "name_state": "Atlanta, GA"
   },
   {
     "state.abb": "GA",
@@ -9843,10 +10082,11 @@
     "enrollment_22": 179581,
     "fte_22": 11746.5,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/GA/Gwinnett%20County%20Board%20of%20Education/GA%20Gwinnett%20County%20Board%20of%20Education%202022.pdf",
-    "name_state": "Lawrenceville, GA",
+    "modified_revenues": 255600994,
     "net_pension_liability": 581621322,
     "net_opeb_liability": 1040000402,
-    "assets_liab_ratio": 0.8288
+    "assets_liab_ratio": 0.8288,
+    "name_state": "Lawrenceville, GA"
   },
   {
     "state.abb": "GA",
@@ -9884,10 +10124,11 @@
     "enrollment_22": 49994,
     "fte_22": 4076.9,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/GA/School%20District%20Atlanta%20Public%20Schools/GA%20School%20District%20Atlanta%20Public%20Schools%202022.pdf",
-    "name_state": "Atlanta, GA",
+    "modified_revenues": 125761472,
     "net_pension_liability": 513809696,
     "net_opeb_liability": 311254040,
-    "assets_liab_ratio": 0.5137
+    "assets_liab_ratio": 0.5137,
+    "name_state": "Atlanta, GA"
   },
   {
     "state.abb": "HI",
@@ -9923,10 +10164,11 @@
     "enrollment_22": 173178,
     "fte_22": 12026.2,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/HI/Hawaii%20Department%20of%20Education/HI%20Hawaii%20Department%20of%20Education%202022.pdf",
-    "name_state": "Honolulu, HI",
+    "modified_revenues": -391409881,
     "net_pension_liability": 0,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 0.1493
+    "assets_liab_ratio": 0.1493,
+    "name_state": "Honolulu, HI"
   },
   {
     "state.abb": "IL",
@@ -9964,10 +10206,11 @@
     "enrollment_22": 329836,
     "fte_22": 22797.43,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/IL/Chicago%20Board%20of%20Education/IL%20Chicago%20Board%20of%20Education%202022.pdf",
-    "name_state": "Chicago, IL",
+    "modified_revenues": -2037477000,
     "net_pension_liability": 14727410000,
     "net_opeb_liability": 3304981000,
-    "assets_liab_ratio": 2.8104
+    "assets_liab_ratio": 2.8104,
+    "name_state": "Chicago, IL"
   },
   {
     "state.abb": "LA",
@@ -10006,10 +10249,11 @@
     "enrollment_22": 46896,
     "fte_22": 2186.31,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/LA/Jefferson%20Parish%20Public%20School%20System/LA%20Jefferson%20Parish%20Public%20School%20System%202022.pdf",
-    "name_state": "Harvey, LA",
+    "modified_revenues": 14966853,
     "net_pension_liability": 287711839,
     "net_opeb_liability": 558494795,
-    "assets_liab_ratio": 1.2303
+    "assets_liab_ratio": 1.2303,
+    "name_state": "Harvey, LA"
   },
   {
     "state.abb": "MD",
@@ -10047,10 +10291,11 @@
     "enrollment_22": 77807,
     "fte_22": 5109.6,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/MD/Baltimore%20City%20Public%20School%20System/MD%20Baltimore%20City%20Public%20School%20System%202022.pdf",
-    "name_state": "Baltimore, MD",
+    "modified_revenues": -74779000,
     "net_pension_liability": 0,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 0.2182
+    "assets_liab_ratio": 0.2182,
+    "name_state": "Baltimore, MD"
   },
   {
     "state.abb": "MD",
@@ -10088,10 +10333,11 @@
     "enrollment_22": 83163,
     "fte_22": 6013.61,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/MD/Board%20of%20Education%20of%20Anne%20Arundel%20County/MD%20Board%20of%20Education%20of%20Anne%20Arundel%20County%202022.pdf",
-    "name_state": "Annapolis, MD",
+    "modified_revenues": -98851773,
     "net_pension_liability": 59724128,
     "net_opeb_liability": 2234317354,
-    "assets_liab_ratio": 1.2762
+    "assets_liab_ratio": 1.2762,
+    "name_state": "Annapolis, MD"
   },
   {
     "state.abb": "MD",
@@ -10128,10 +10374,11 @@
     "enrollment_22": 111136,
     "fte_22": 7684.77,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/MD/Board%20of%20Education%20Baltimore%20County/MD%20Board%20of%20Education%20Baltimore%20County%202022.pdf",
-    "name_state": "Towson, MD",
+    "modified_revenues": -206492000,
     "net_pension_liability": 98387,
     "net_opeb_liability": 1746250,
-    "assets_liab_ratio": 0.8756
+    "assets_liab_ratio": 0.8756,
+    "name_state": "Towson, MD"
   },
   {
     "state.abb": "MD",
@@ -10169,10 +10416,11 @@
     "enrollment_22": 57325,
     "fte_22": 4258.4,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/MD/Howard%20County%20Board%20of%20Education/MD%20Howard%20County%20Board%20of%20Education%202022.pdf",
-    "name_state": "Ellicott City, MD",
+    "modified_revenues": -109036479,
     "net_pension_liability": 40867624,
     "net_opeb_liability": 1224705936,
-    "assets_liab_ratio": 0.8915
+    "assets_liab_ratio": 0.8915,
+    "name_state": "Ellicott City, MD"
   },
   {
     "state.abb": "MD",
@@ -10210,10 +10458,11 @@
     "enrollment_22": 128770,
     "fte_22": 9274,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/MD/Prince%20George’s%20County%20Public%20Schools/MD%20Prince%20George’s%20County%20Public%20Schools%202022.pdf",
-    "name_state": "Upper Marlboro, MD",
+    "modified_revenues": -220767632,
     "net_pension_liability": 155041238,
     "net_opeb_liability": 2586693000,
-    "assets_liab_ratio": 1.3613
+    "assets_liab_ratio": 1.3613,
+    "name_state": "Upper Marlboro, MD"
   },
   {
     "state.abb": "MD",
@@ -10251,10 +10500,11 @@
     "enrollment_22": 158231,
     "fte_22": 11605.84,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/MD/The%20Board%20of%20Education%20of%20Montgomery%20County/MD%20The%20Board%20of%20Education%20of%20Montgomery%20County%202022.pdf",
-    "name_state": "Rockville, MD",
+    "modified_revenues": -204667528,
     "net_pension_liability": 99777369,
     "net_opeb_liability": 2827843426,
-    "assets_liab_ratio": 0.8963
+    "assets_liab_ratio": 0.8963,
+    "name_state": "Rockville, MD"
   },
   {
     "state.abb": "MA",
@@ -10292,9 +10542,10 @@
     "enrollment_22": 46169,
     "fte_22": 4256.01,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/MA/Boston%20Public%20Schools/MA%20Boston%20Public%20Schools%202022.pdf",
-    "name_state": "Roxbury, MA",
+    "modified_revenues": 0,
     "net_pension_liability": 594129250,
-    "net_opeb_liability": 1270608900
+    "net_opeb_liability": 1270608900,
+    "name_state": "Roxbury, MA"
   },
   {
     "state.abb": "MI",
@@ -10333,10 +10584,11 @@
     "enrollment_22": 48536,
     "fte_22": 3143.83,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/MI/Detroit%20Public%20Schools/MI%20Detroit%20Public%20Schools%202022.pdf",
-    "name_state": "Detroit, MI",
+    "modified_revenues": 46483197,
     "net_pension_liability": 0,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 39.167
+    "assets_liab_ratio": 39.167,
+    "name_state": "Detroit, MI"
   },
   {
     "state.abb": "MI",
@@ -10374,8 +10626,9 @@
     "enrollment_22": 48536,
     "fte_22": 3143.83,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/MI/Detroit%20Public%20Schools%20Community%20District/MI%20Detroit%20Public%20Schools%20Community%20District%202022.pdf",
-    "name_state": "Detroit, MI",
-    "assets_liab_ratio": 0.739
+    "modified_revenues": 4138961,
+    "assets_liab_ratio": 0.739,
+    "name_state": "Detroit, MI"
   },
   {
     "state.abb": "NE",
@@ -10413,10 +10666,11 @@
     "enrollment_22": 51626,
     "fte_22": 3445.22,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/NE/Douglas%20County%20School%20District%20No.%200001/NE%20Douglas%20County%20School%20District%20No.%200001%202022.pdf",
-    "name_state": "Omaha, NE",
+    "modified_revenues": -239254000,
     "net_pension_liability": 709651000,
     "net_opeb_liability": 26659000,
-    "assets_liab_ratio": 1.2046
+    "assets_liab_ratio": 1.2046,
+    "name_state": "Omaha, NE"
   },
   {
     "state.abb": "NV",
@@ -10453,10 +10707,11 @@
     "metro_code": "1-Metropolitan Area",
     "enrollment_22": 315787,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/NV/Clark%20County%20School%20District/NV%20Clark%20County%20School%20District%202022.pdf",
-    "name_state": "Las Vegas, NV",
+    "modified_revenues": 167997431,
     "net_pension_liability": 2167406738,
     "net_opeb_liability": 375206564,
-    "assets_liab_ratio": 0.831
+    "assets_liab_ratio": 0.831,
+    "name_state": "Las Vegas, NV"
   },
   {
     "state.abb": "NV",
@@ -10493,10 +10748,11 @@
     "metro_code": "1-Metropolitan Area",
     "enrollment_22": 65538,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/NV/Washoe%20County%20School%20District/NV%20Washoe%20County%20School%20District%202022.pdf",
-    "name_state": "Reno, NV",
+    "modified_revenues": 14910845,
     "net_pension_liability": 480019715,
     "net_opeb_liability": 84116082,
-    "assets_liab_ratio": 1.0133
+    "assets_liab_ratio": 1.0133,
+    "name_state": "Reno, NV"
   },
   {
     "state.abb": "NM",
@@ -10534,10 +10790,11 @@
     "enrollment_22": 81762,
     "fte_22": 6029.47,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/NM/Albuquerque%20Municipal%20School%20District%20No.%2012/NM%20Albuquerque%20Municipal%20School%20District%20No.%2012%202022.pdf",
-    "name_state": "Albuquerque, NM",
+    "modified_revenues": -176424888,
     "net_pension_liability": 1208673186,
     "net_opeb_liability": 372367571,
-    "assets_liab_ratio": 1.114
+    "assets_liab_ratio": 1.114,
+    "name_state": "Albuquerque, NM"
   },
   {
     "state.abb": "NY",
@@ -10566,10 +10823,11 @@
     "metro_code": "1-Metropolitan Area",
     "enrollment_22": 46525,
     "fte_22": 4107.03,
-    "name_state": "Bronx, NY",
+    "modified_revenues": -364328823.5561,
     "net_pension_liability": 766813425.8139,
     "net_opeb_liability": 1592902308.7175,
-    "assets_liab_ratio": 0.8458
+    "assets_liab_ratio": 0.8458,
+    "name_state": "Bronx, NY"
   },
   {
     "state.abb": "NY",
@@ -10598,10 +10856,11 @@
     "metro_code": "1-Metropolitan Area",
     "enrollment_22": 56893,
     "fte_22": 4707.28,
-    "name_state": "New York, NY",
+    "modified_revenues": -445518748.1693,
     "net_pension_liability": 937696211.3881,
     "net_opeb_liability": 1947877292.8504,
-    "assets_liab_ratio": 0.8458
+    "assets_liab_ratio": 0.8458,
+    "name_state": "New York, NY"
   },
   {
     "state.abb": "NY",
@@ -10630,10 +10889,11 @@
     "metro_code": "1-Metropolitan Area",
     "enrollment_22": 47493,
     "fte_22": 3430.38,
-    "name_state": "Brooklyn, NY",
+    "modified_revenues": -371909055.7152,
     "net_pension_liability": 782767759.9609,
     "net_opeb_liability": 1626044263.2546,
-    "assets_liab_ratio": 0.8458
+    "assets_liab_ratio": 0.8458,
+    "name_state": "Brooklyn, NY"
   },
   {
     "state.abb": "NY",
@@ -10662,10 +10922,11 @@
     "metro_code": "1-Metropolitan Area",
     "enrollment_22": 51878,
     "fte_22": 4245.19,
-    "name_state": "Corona, NY",
+    "modified_revenues": -406247194.1632,
     "net_pension_liability": 855040234.3766,
     "net_opeb_liability": 1776175947.8054,
-    "assets_liab_ratio": 0.8458
+    "assets_liab_ratio": 0.8458,
+    "name_state": "Corona, NY"
   },
   {
     "state.abb": "NY",
@@ -10695,10 +10956,11 @@
     "metro_code": "1-Metropolitan Area",
     "enrollment_22": 60749,
     "fte_22": 4751.01,
-    "name_state": "Staten Island, NY",
+    "modified_revenues": -475714383.7122,
     "net_pension_liability": 1001249839.9735,
     "net_opeb_liability": 2079897310.0973,
-    "assets_liab_ratio": 0.8458
+    "assets_liab_ratio": 0.8458,
+    "name_state": "Staten Island, NY"
   },
   {
     "state.abb": "NC",
@@ -10736,10 +10998,11 @@
     "enrollment_22": 143244,
     "fte_22": 9030.26,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/NC/Charlotte-Mecklenburg%20Board%20of%20Education/NC%20Charlotte-Mecklenburg%20Board%20of%20Education%202022.pdf",
-    "name_state": "Charlotte, NC",
+    "modified_revenues": 269242000,
     "net_pension_liability": 288326000,
     "net_opeb_liability": 1677649000,
-    "assets_liab_ratio": 0.7799
+    "assets_liab_ratio": 0.7799,
+    "name_state": "Charlotte, NC"
   },
   {
     "state.abb": "NC",
@@ -10777,10 +11040,11 @@
     "enrollment_22": 48860,
     "fte_22": 3516.85,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/NC/Cumberland%20County%20Board%20of%20Education/NC%20Cumberland%20County%20Board%20of%20Education%202022.pdf",
-    "name_state": "Fayetteville, NC",
+    "modified_revenues": 55087419,
     "net_pension_liability": 79131743,
     "net_opeb_liability": 455474809,
-    "assets_liab_ratio": 1.8842
+    "assets_liab_ratio": 1.8842,
+    "name_state": "Fayetteville, NC"
   },
   {
     "state.abb": "NC",
@@ -10818,10 +11082,11 @@
     "enrollment_22": 69173,
     "fte_22": 4757.33,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/NC/Guilford%20County%20Board%20of%20Education/NC%20Guilford%20County%20Board%20of%20Education%202022.pdf",
-    "name_state": "Greensboro, NC",
+    "modified_revenues": 65653571,
     "net_pension_liability": 130946596,
     "net_opeb_liability": 749622399,
-    "assets_liab_ratio": 1.0284
+    "assets_liab_ratio": 1.0284,
+    "name_state": "Greensboro, NC"
   },
   {
     "state.abb": "NC",
@@ -10860,10 +11125,11 @@
     "enrollment_22": 160099,
     "fte_22": 10961.49,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/NC/Wake%20County%20Board%20of%20Education/NC%20Wake%20County%20Board%20of%20Education%202022.pdf",
-    "name_state": "Cary, NC",
+    "modified_revenues": 258797623,
     "net_pension_liability": 312359922,
     "net_opeb_liability": 1807874920,
-    "assets_liab_ratio": 0.5528
+    "assets_liab_ratio": 0.5528,
+    "name_state": "Cary, NC"
   },
   {
     "state.abb": "NC",
@@ -10901,10 +11167,11 @@
     "enrollment_22": 52681,
     "fte_22": 3593.91,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/NC/Winston-Salem/Forsyth%20County%20Board%20of%20Education/NC%20Winston-Salem/Forsyth%20County%20Board%20of%20Education%202022.pdf",
-    "name_state": "Winston Salem, NC",
+    "modified_revenues": 79746270,
     "net_pension_liability": 94326783,
     "net_opeb_liability": 588962875,
-    "assets_liab_ratio": 0.9484
+    "assets_liab_ratio": 0.9484,
+    "name_state": "Winston Salem, NC"
   },
   {
     "state.abb": "PA",
@@ -10942,10 +11209,11 @@
     "enrollment_22": 118053,
     "fte_22": 7968.97,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/PA/School%20District%20of%20Philadelphia/PA%20School%20District%20of%20Philadelphia%202022.pdf",
-    "name_state": "Philadelphia, PA",
+    "modified_revenues": -380869805,
     "net_pension_liability": 3253100000,
     "net_opeb_liability": 208300000,
-    "assets_liab_ratio": 1.9953
+    "assets_liab_ratio": 1.9953,
+    "name_state": "Philadelphia, PA"
   },
   {
     "state.abb": "SC",
@@ -10983,10 +11251,11 @@
     "enrollment_22": 49331,
     "fte_22": 3822.48,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/SC/Charleston%20County%20School%20District/SC%20Charleston%20County%20School%20District%202022.pdf",
-    "name_state": "Charleston, SC",
+    "modified_revenues": -225270719,
     "net_pension_liability": 595948185,
     "net_opeb_liability": 718715844,
-    "assets_liab_ratio": 0.9586
+    "assets_liab_ratio": 0.9586,
+    "name_state": "Charleston, SC"
   },
   {
     "state.abb": "SC",
@@ -11024,10 +11293,11 @@
     "enrollment_22": 76939,
     "fte_22": 5133.93,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/SC/The%20School%20District%20of%20Greenville%20County/SC%20The%20School%20District%20of%20Greenville%20County%202022.pdf",
-    "name_state": "Greenville, SC",
+    "modified_revenues": -47257491,
     "net_pension_liability": 860615385,
     "net_opeb_liability": 1065211698,
-    "assets_liab_ratio": 1.4402
+    "assets_liab_ratio": 1.4402,
+    "name_state": "Greenville, SC"
   },
   {
     "state.abb": "TN",
@@ -11065,10 +11335,11 @@
     "enrollment_22": 105596,
     "fte_22": 6694.54,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TN/Board%20of%20Education%20of%20Shelby%20County/TN%20Board%20of%20Education%20of%20Shelby%20County%202022.pdf",
-    "name_state": "Memphis, TN",
+    "modified_revenues": 97445257,
     "net_pension_liability": -595022143,
     "net_opeb_liability": 997809591,
-    "assets_liab_ratio": 0.5344
+    "assets_liab_ratio": 0.5344,
+    "name_state": "Memphis, TN"
   },
   {
     "state.abb": "TN",
@@ -11106,10 +11377,11 @@
     "enrollment_22": 60426,
     "fte_22": 4016.73,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TN/Knox%20County%20Schools/TN%20Knox%20County%20Schools%202022.pdf",
-    "name_state": "Knoxville, TN",
+    "modified_revenues": 158589039,
     "net_pension_liability": 16005458,
     "net_opeb_liability": 46555298,
-    "assets_liab_ratio": 0.1459
+    "assets_liab_ratio": 0.1459,
+    "name_state": "Knoxville, TN"
   },
   {
     "state.abb": "TN",
@@ -11147,10 +11419,11 @@
     "enrollment_22": 80381,
     "fte_22": 4856.29,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TN/Metropolitan%20Nashville%20Public%20Schools/TN%20Metropolitan%20Nashville%20Public%20Schools%202022.pdf",
-    "name_state": "Nashville, TN",
+    "modified_revenues": 153225299,
     "net_pension_liability": -338115259,
     "net_opeb_liability": 805950838,
-    "assets_liab_ratio": 0.1949
+    "assets_liab_ratio": 0.1949,
+    "name_state": "Nashville, TN"
   },
   {
     "state.abb": "TN",
@@ -11188,10 +11461,11 @@
     "enrollment_22": 49253,
     "fte_22": 3082.8,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TN/Rutherford%20County%20Schools/TN%20Rutherford%20County%20Schools%202022.pdf",
-    "name_state": "Murfreesboro, TN",
+    "modified_revenues": 63952643,
     "net_pension_liability": -224126502,
     "net_opeb_liability": 147335929,
-    "assets_liab_ratio": 0.1611
+    "assets_liab_ratio": 0.1611,
+    "name_state": "Murfreesboro, TN"
   },
   {
     "state.abb": "TX",
@@ -11229,10 +11503,11 @@
     "enrollment_22": 61633,
     "fte_22": 3990.7,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Aldine%20Independent%20School%20District/TX%20Aldine%20Independent%20School%20District%202022.pdf",
-    "name_state": "Houston, TX",
+    "modified_revenues": -11528235,
     "net_pension_liability": 100160353,
     "net_opeb_liability": 198628115,
-    "assets_liab_ratio": 0.8245
+    "assets_liab_ratio": 0.8245,
+    "name_state": "Houston, TX"
   },
   {
     "state.abb": "TX",
@@ -11270,10 +11545,11 @@
     "enrollment_22": 56311,
     "fte_22": 3923.88,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Arlington%20Independent%20School%20District/TX%20Arlington%20Independent%20School%20District%202022.pdf",
-    "name_state": "Arlington, TX",
+    "modified_revenues": -71479375,
     "net_pension_liability": 94001973,
     "net_opeb_liability": 184805089,
-    "assets_liab_ratio": 0.849
+    "assets_liab_ratio": 0.849,
+    "name_state": "Arlington, TX"
   },
   {
     "state.abb": "TX",
@@ -11311,10 +11587,11 @@
     "enrollment_22": 74602,
     "fte_22": 5238.78,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Austin%20Independent%20School%20District/TX%20Austin%20Independent%20School%20District%202022.pdf",
-    "name_state": "Austin, TX",
+    "modified_revenues": -214532608,
     "net_pension_liability": 118923950,
     "net_opeb_liability": 261315475,
-    "assets_liab_ratio": 0.8786
+    "assets_liab_ratio": 0.8786,
+    "name_state": "Austin, TX"
   },
   {
     "state.abb": "TX",
@@ -11352,10 +11629,11 @@
     "enrollment_22": 67761,
     "fte_22": 4239.57,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Conroe%20Independent%20School%20District/TX%20Conroe%20Independent%20School%20District%202022.pdf",
-    "name_state": "Conroe, TX",
+    "modified_revenues": -62351720,
     "net_pension_liability": 86473036,
     "net_opeb_liability": 172908251,
-    "assets_liab_ratio": 0.9456
+    "assets_liab_ratio": 0.9456,
+    "name_state": "Conroe, TX"
   },
   {
     "state.abb": "TX",
@@ -11394,10 +11672,11 @@
     "enrollment_22": 117217,
     "fte_22": 7682.15,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Cypress-Fairbanks%20Independent%20School%20District/TX%20Cypress-Fairbanks%20Independent%20School%20District%202022.pdf",
-    "name_state": "Houston, TX",
+    "modified_revenues": -216517222,
     "net_pension_liability": 169555630,
     "net_opeb_liability": 340606217,
-    "assets_liab_ratio": 1.0621
+    "assets_liab_ratio": 1.0621,
+    "name_state": "Houston, TX"
   },
   {
     "state.abb": "TX",
@@ -11435,10 +11714,11 @@
     "enrollment_22": 143558,
     "fte_22": 9873.5,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Dallas%20Independent%20School%20District/TX%20Dallas%20Independent%20School%20District%202022.pdf",
-    "name_state": "Dallas, TX",
+    "modified_revenues": -219706784,
     "net_pension_liability": 303114994,
     "net_opeb_liability": 569594378,
-    "assets_liab_ratio": 0.8485
+    "assets_liab_ratio": 0.8485,
+    "name_state": "Dallas, TX"
   },
   {
     "state.abb": "TX",
@@ -11476,10 +11756,11 @@
     "enrollment_22": 50769,
     "fte_22": 3511.69,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/El%20Paso%20Independent%20School%20District/TX%20El%20Paso%20Independent%20School%20District%202022.pdf",
-    "name_state": "El Paso, TX",
+    "modified_revenues": -92539693,
     "net_pension_liability": 74746455,
     "net_opeb_liability": 162029167,
-    "assets_liab_ratio": 0.8785
+    "assets_liab_ratio": 0.8785,
+    "name_state": "El Paso, TX"
   },
   {
     "state.abb": "TX",
@@ -11518,10 +11799,11 @@
     "enrollment_22": 77545,
     "fte_22": 5019.98,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Fort%20Bend%20Independent%20School%20District/TX%20Fort%20Bend%20Independent%20School%20District%202022.pdf",
-    "name_state": "Sugar Land, TX",
+    "modified_revenues": -159323658,
     "net_pension_liability": 114694828,
     "net_opeb_liability": 226752430,
-    "assets_liab_ratio": 1.1058
+    "assets_liab_ratio": 1.1058,
+    "name_state": "Sugar Land, TX"
   },
   {
     "state.abb": "TX",
@@ -11560,10 +11842,11 @@
     "enrollment_22": 74850,
     "fte_22": 5069.52,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Fort%20Worth%20Independent%20School%20District/TX%20Fort%20Worth%20Independent%20School%20District%202022.pdf",
-    "name_state": "Fort Worth, TX",
+    "modified_revenues": -74142035,
     "net_pension_liability": 137291685,
     "net_opeb_liability": 266947488,
-    "assets_liab_ratio": 0.7827
+    "assets_liab_ratio": 0.7827,
+    "name_state": "Fort Worth, TX"
   },
   {
     "state.abb": "TX",
@@ -11601,10 +11884,11 @@
     "enrollment_22": 65825,
     "fte_22": 4407.63,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Frisco%20Independent%20School%20District/TX%20Frisco%20Independent%20School%20District%202022.pdf",
-    "name_state": "Frisco, TX",
+    "modified_revenues": -152535694,
     "net_pension_liability": 87846717,
     "net_opeb_liability": 167202174,
-    "assets_liab_ratio": 1.1358
+    "assets_liab_ratio": 1.1358,
+    "name_state": "Frisco, TX"
   },
   {
     "state.abb": "TX",
@@ -11643,10 +11927,11 @@
     "enrollment_22": 53674,
     "fte_22": 3448.14,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Garland%20Independent%20School%20District/TX%20Garland%20Independent%20School%20District%202022.pdf",
-    "name_state": "Garland, TX",
+    "modified_revenues": -13821770,
     "net_pension_liability": 80131846,
     "net_opeb_liability": 158355733,
-    "assets_liab_ratio": 0.6136
+    "assets_liab_ratio": 0.6136,
+    "name_state": "Garland, TX"
   },
   {
     "state.abb": "TX",
@@ -11685,10 +11970,11 @@
     "enrollment_22": 194607,
     "fte_22": 10982.91,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Houston%20Independent%20School%20District/TX%20Houston%20Independent%20School%20District%202022.pdf",
-    "name_state": "Houston, TX",
+    "modified_revenues": -215261611,
     "net_pension_liability": 261676905,
     "net_opeb_liability": 531819720,
-    "assets_liab_ratio": 0.6045
+    "assets_liab_ratio": 0.6045,
+    "name_state": "Houston, TX"
   },
   {
     "state.abb": "TX",
@@ -11726,10 +12012,11 @@
     "enrollment_22": 48112,
     "fte_22": 3200.11,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Humble%20Independent%20School%20District/TX%20Humble%20Independent%20School%20District%202022.pdf",
-    "name_state": "Humble, TX",
+    "modified_revenues": -84776319,
     "net_pension_liability": 55777235,
     "net_opeb_liability": 115558569,
-    "assets_liab_ratio": 0.8651
+    "assets_liab_ratio": 0.8651,
+    "name_state": "Humble, TX"
   },
   {
     "state.abb": "TX",
@@ -11768,10 +12055,11 @@
     "enrollment_22": 88368,
     "fte_22": 6080.62,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Katy%20Independent%20School%20District/TX%20Katy%20Independent%20School%20District%202022.pdf",
-    "name_state": "Katy, TX",
+    "modified_revenues": -77456458,
     "net_pension_liability": 120591481,
     "net_opeb_liability": 244188502,
-    "assets_liab_ratio": 0.924
+    "assets_liab_ratio": 0.924,
+    "name_state": "Katy, TX"
   },
   {
     "state.abb": "TX",
@@ -11810,10 +12098,11 @@
     "enrollment_22": 53294,
     "fte_22": 3653.1,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Klein%20Independent%20School%20District/TX%20Klein%20Independent%20School%20District%202022.pdf",
-    "name_state": "Klein, TX",
+    "modified_revenues": -31728805,
     "net_pension_liability": 77661481,
     "net_opeb_liability": 155117901,
-    "assets_liab_ratio": 0.878
+    "assets_liab_ratio": 0.878,
+    "name_state": "Klein, TX"
   },
   {
     "state.abb": "TX",
@@ -11851,10 +12140,11 @@
     "enrollment_22": 49205,
     "fte_22": 3752.34,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Lewisville%20Independent%20School%20District/TX%20Lewisville%20Independent%20School%20District%202022.pdf",
-    "name_state": "Lewisville, TX",
+    "modified_revenues": 5765061,
     "net_pension_liability": 70028626,
     "net_opeb_liability": 143876935,
-    "assets_liab_ratio": 0.8548
+    "assets_liab_ratio": 0.8548,
+    "name_state": "Lewisville, TX"
   },
   {
     "state.abb": "TX",
@@ -11892,10 +12182,11 @@
     "enrollment_22": 59830,
     "fte_22": 4001.53,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/North%20East%20Independent%20School%20District/TX%20North%20East%20Independent%20School%20District%202022.pdf",
-    "name_state": "San Antonio, TX",
+    "modified_revenues": -6139196,
     "net_pension_liability": 81593041,
     "net_opeb_liability": 183769031,
-    "assets_liab_ratio": 0.956
+    "assets_liab_ratio": 0.956,
+    "name_state": "San Antonio, TX"
   },
   {
     "state.abb": "TX",
@@ -11934,10 +12225,11 @@
     "enrollment_22": 102377,
     "fte_22": 6792.17,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Northside%20Independent%20School%20District%20(Bexar%20County)/TX%20Northside%20Independent%20School%20District%20(Bexar%20County)%202022.pdf",
-    "name_state": "San Antonio, TX",
+    "modified_revenues": 4088917,
     "net_pension_liability": 137638982,
     "net_opeb_liability": 288188237,
-    "assets_liab_ratio": 0.8878
+    "assets_liab_ratio": 0.8878,
+    "name_state": "San Antonio, TX"
   },
   {
     "state.abb": "TX",
@@ -11975,10 +12267,11 @@
     "enrollment_22": 49326,
     "fte_22": 3828.17,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Pasadena%20Independent%20School%20District/TX%20Pasadena%20Independent%20School%20District%202022.pdf",
-    "name_state": "Pasadena, TX",
+    "modified_revenues": -52833109,
     "net_pension_liability": 92055497,
     "net_opeb_liability": 177646693,
-    "assets_liab_ratio": 0.8077
+    "assets_liab_ratio": 0.8077,
+    "name_state": "Pasadena, TX"
   },
   {
     "state.abb": "TX",
@@ -12017,10 +12310,11 @@
     "enrollment_22": 49400,
     "fte_22": 3638.01,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Plano%20Independent%20School%20District/TX%20Plano%20Independent%20School%20District%202022.pdf",
-    "name_state": "Plano, TX",
+    "modified_revenues": -197702961,
     "net_pension_liability": 74488392,
     "net_opeb_liability": 147854332,
-    "assets_liab_ratio": 0.5968
+    "assets_liab_ratio": 0.5968,
+    "name_state": "Plano, TX"
   },
   {
     "state.abb": "TX",
@@ -12059,10 +12353,11 @@
     "enrollment_22": 47167,
     "fte_22": 3450.84,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/TX/Round%20Rock%20Independent%20School%20District/TX%20Round%20Rock%20Independent%20School%20District%202022.pdf",
-    "name_state": "Round Rock, TX",
+    "modified_revenues": -159460040,
     "net_pension_liability": 60755425,
     "net_opeb_liability": 133656092,
-    "assets_liab_ratio": 0.8639
+    "assets_liab_ratio": 0.8639,
+    "name_state": "Round Rock, TX"
   },
   {
     "state.abb": "UT",
@@ -12099,10 +12394,11 @@
     "enrollment_22": 86275,
     "fte_22": 3308.62,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/UT/Alpine%20School%20District/UT%20Alpine%20School%20District%202022.pdf",
-    "name_state": "American Fork, UT",
+    "modified_revenues": 13943201,
     "net_pension_liability": -67529945,
     "net_opeb_liability": 59817996,
-    "assets_liab_ratio": 0.4199
+    "assets_liab_ratio": 0.4199,
+    "name_state": "American Fork, UT"
   },
   {
     "state.abb": "UT",
@@ -12139,10 +12435,11 @@
     "enrollment_22": 74486,
     "fte_22": 3061.45,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/UT/Davis%20School%20District/UT%20Davis%20School%20District%202022.pdf",
-    "name_state": "Farmington, UT",
+    "modified_revenues": 52290853,
     "net_pension_liability": -65971070,
     "net_opeb_liability": -65971070,
-    "assets_liab_ratio": 0.4223
+    "assets_liab_ratio": 0.4223,
+    "name_state": "Farmington, UT"
   },
   {
     "state.abb": "UT",
@@ -12179,10 +12476,11 @@
     "enrollment_22": 62544,
     "fte_22": 2785.77,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/UT/Granite%20School%20District/UT%20Granite%20School%20District%202022.pdf",
-    "name_state": "Salt Lake City, UT",
+    "modified_revenues": 71987433,
     "net_pension_liability": -57991931,
     "net_opeb_liability": 1620690,
-    "assets_liab_ratio": 0.3011
+    "assets_liab_ratio": 0.3011,
+    "name_state": "Salt Lake City, UT"
   },
   {
     "state.abb": "UT",
@@ -12219,10 +12517,11 @@
     "enrollment_22": 59363,
     "fte_22": 2632.94,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/UT/Jordan%20School%20District/UT%20Jordan%20School%20District%202022.pdf",
-    "name_state": "West Jordan, UT",
+    "modified_revenues": -3123124,
     "net_pension_liability": -40718256,
     "net_opeb_liability": 2919669,
-    "assets_liab_ratio": 0.1997
+    "assets_liab_ratio": 0.1997,
+    "name_state": "West Jordan, UT"
   },
   {
     "state.abb": "VA",
@@ -12258,10 +12557,10 @@
     "enrollment_22": 62445,
     "fte_22": 4149,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/VA/Chesterfield%20County%20School%20Board/VA%20Chesterfield%20County%20School%20Board%202022.pdf",
-    "name_state": "Chesterfield, VA",
     "net_pension_liability": 4167372,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 2.483
+    "assets_liab_ratio": 2.483,
+    "name_state": "Chesterfield, VA"
   },
   {
     "state.abb": "VA",
@@ -12299,10 +12598,11 @@
     "enrollment_22": 178479,
     "fte_22": 13199,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/VA/Fairfax%20County%20Public%20Schools/VA%20Fairfax%20County%20Public%20Schools%202022.pdf",
-    "name_state": "Falls Church, VA",
+    "modified_revenues": 305449718,
     "net_pension_liability": 2163904859,
     "net_opeb_liability": 380070500,
-    "assets_liab_ratio": 0.8267
+    "assets_liab_ratio": 0.8267,
+    "name_state": "Falls Church, VA"
   },
   {
     "state.abb": "VA",
@@ -12341,10 +12641,11 @@
     "enrollment_22": 49991,
     "fte_22": 2893,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/VA/Henrico%20County%20Public%20Schools/VA%20Henrico%20County%20Public%20Schools%202022.pdf",
-    "name_state": "Henrico, VA",
+    "modified_revenues": -7981057,
     "net_pension_liability": 274688193,
     "net_opeb_liability": 78353723,
-    "assets_liab_ratio": 0.9821
+    "assets_liab_ratio": 0.9821,
+    "name_state": "Henrico, VA"
   },
   {
     "state.abb": "VA",
@@ -12382,10 +12683,11 @@
     "enrollment_22": 81131,
     "fte_22": 5924,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/VA/Loudoun%20County%20Public%20Schools/VA%20Loudoun%20County%20Public%20Schools%202022.pdf",
-    "name_state": "Ashburn, VA",
+    "modified_revenues": -102985130,
     "net_pension_liability": 636300637,
     "net_opeb_liability": 347197802,
-    "assets_liab_ratio": 0.4921
+    "assets_liab_ratio": 0.4921,
+    "name_state": "Ashburn, VA"
   },
   {
     "state.abb": "VA",
@@ -12423,10 +12725,11 @@
     "enrollment_22": 90070,
     "fte_22": 5631,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/VA/Prince%20William%20County%20Public%20Schools/VA%20Prince%20William%20County%20Public%20Schools%202022.pdf",
-    "name_state": "Manassas, VA",
+    "modified_revenues": 39353352,
     "net_pension_liability": -520381119,
     "net_opeb_liability": -127137030,
-    "assets_liab_ratio": 0.3408
+    "assets_liab_ratio": 0.3408,
+    "name_state": "Manassas, VA"
   },
   {
     "state.abb": "VA",
@@ -12465,10 +12768,11 @@
     "enrollment_22": 65450,
     "fte_22": 4238,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/VA/School%20Board%20of%20the%20City%20of%20Virginia%20Beach/VA%20School%20Board%20of%20the%20City%20of%20Virginia%20Beach%202022.pdf",
-    "name_state": "Virginia Beach, VA",
+    "modified_revenues": 28434093,
     "net_pension_liability": 373365708,
     "net_opeb_liability": 144826418,
-    "assets_liab_ratio": 0.7257
+    "assets_liab_ratio": 0.7257,
+    "name_state": "Virginia Beach, VA"
   },
   {
     "state.abb": "WA",
@@ -12507,10 +12811,11 @@
     "enrollment_22": 51443,
     "fte_22": 3110.54,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/WA/Seattle%20School%20District%20No.%201/WA%20Seattle%20School%20District%20No.%201%202022.pdf",
-    "name_state": "Seattle, WA",
+    "modified_revenues": -123277765,
     "net_pension_liability": 112333430,
     "net_opeb_liability": 0,
-    "assets_liab_ratio": 0.1842
+    "assets_liab_ratio": 0.1842,
+    "name_state": "Seattle, WA"
   },
   {
     "state.abb": "WI",
@@ -12549,9 +12854,10 @@
     "enrollment_22": 69115,
     "fte_22": 4269.89,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/WI/Milwaukee%20Public%20Schools/WI%20Milwaukee%20Public%20Schools%202022.pdf",
-    "name_state": "Milwaukee, WI",
+    "modified_revenues": 140446197,
     "net_pension_liability": -70401661,
     "net_opeb_liability": 579869520,
-    "assets_liab_ratio": 0.957
+    "assets_liab_ratio": 0.957,
+    "name_state": "Milwaukee, WI"
   }
 ]
