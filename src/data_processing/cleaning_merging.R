@@ -196,27 +196,27 @@ top100_counties <- county_all %>%
   
   #change population of Davidson metropolitan 
   mutate(name = ifelse(state.abb == "TN" & name == "davidson county", 
-                       "The Metropolitan Government of Nashwille and Davidson County",
+                       "The Metropolitan Government of Nashville and Davidson County",
                        name)) %>% 
   
   #change population of metropolitan 
-  mutate(population = ifelse(name == "The Metropolitan Government of Nashwille and Davidson County", 
+  mutate(population = ifelse(name == "The Metropolitan Government of Nashville and Davidson County", 
          sum(metropolitan_TN_13counties$population),
          population
          )) %>% 
   
   #change urbanicity of metropolitan 
-  mutate(urban_pop = ifelse(name == "The Metropolitan Government of Nashwille and Davidson County", 
+  mutate(urban_pop = ifelse(name == "The Metropolitan Government of Nashville and Davidson County", 
                              metropolitan_TN_13counties_urb$urban_pop,
                              urban_pop)) %>% 
   #change percent_urbanicity of metropolitan 
-  mutate(pct_urban_pop = ifelse(name == "The Metropolitan Government of Nashwille and Davidson County", 
+  mutate(pct_urban_pop = ifelse(name == "The Metropolitan Government of Nashville and Davidson County", 
                             metropolitan_TN_13counties_urb$pct_urban_pop,
                             pct_urban_pop
   )) %>% 
   
   # income of metropolitan
-  mutate(median_hh_income_21 = ifelse(name == "The Metropolitan Government of Nashwille and Davidson County", 
+  mutate(median_hh_income_21 = ifelse(name == "The Metropolitan Government of Nashville and Davidson County", 
                                 metropolitan_TN_13counties_income,
                                 median_hh_income_21
   ),
