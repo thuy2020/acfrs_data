@@ -1807,6 +1807,7 @@
     "current_liabilities_22": 234532000,
     "total_assets_22": 3517092000,
     "current_assets_22": 960096000,
+    "compensated_absences_22": 49154000,
     "expenses_22": 1300657000,
     "revenues_22": 1168883000,
     "unrestricted_22": -1447626000,
@@ -4645,7 +4646,7 @@
     "population_22": 1913459,
     "urban_pop_22": 113939.6923,
     "pct_urban_pop_22": 0.3875,
-    "median_hh_income_21_22": 65463,
+    "median_hh_income_21_22": 67918,
     "url_22": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/General%20Purpose/TN/The%20Metropolitan%20Government%20of%20Nashville%20and%20Davidson%20County/TN%20The%20Metropolitan%20Government%20of%20Nashville%20and%20Davidson%20County%202022.pdf",
     "modified_revenues_22": 636818837,
     "net_pension_liability_22": 42884484,
@@ -4666,7 +4667,7 @@
     "population_20": 1913459,
     "urban_pop_20": 113939.6923,
     "pct_urban_pop_20": 0.3875,
-    "median_hh_income_21_20": 65463,
+    "median_hh_income_21_20": 67918,
     "url_20": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/General%20Purpose/TN/The%20Metropolitan%20Government%20of%20Nashville%20and%20Davidson%20County/TN%20The%20Metropolitan%20Government%20of%20Nashville%20and%20Davidson%20County%202020.pdf",
     "modified_revenues_20": -628332800,
     "net_pension_liability_20": 303734402,
@@ -4682,7 +4683,7 @@
     "assets_liab_ratio_growth": -0.3227,
     "modified_revenues_growth": 2.0135,
     "pct_urban_pop_22_normalized": -50,
-    "median_hh_income_normalized": -28.1189
+    "median_hh_income_normalized": -25.5854
   },
   {
     "state.abb": "TX",

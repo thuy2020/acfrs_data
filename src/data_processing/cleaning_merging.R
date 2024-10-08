@@ -153,7 +153,8 @@ consolidated_city_county_urbanicity <- county_urb %>% filter(geo_id %in% consoli
 consolidated_city_county_income <- income %>% filter(geo_id %in% consolidated_city_county$geo_id)
 
 # all
-consolidated_city_county_all <- consolidated_city_county %>% left_join(consolidated_city_county_population) %>% 
+consolidated_city_county_all <- consolidated_city_county %>% 
+  left_join(consolidated_city_county_population) %>% 
   left_join(consolidated_city_county_urbanicity) %>% 
   left_join(consolidated_city_county_income) %>% 
   select(all_of(fields_to_select))
@@ -178,10 +179,16 @@ metropolitan_TN_13counties <- census_all %>%
   filter(str_detect(name_census,"(?i)Cannon|Cheatham|Davidson|Dickson|Hickman|Macon|Robertson|Rutherford|Smith|Sumner|Trousdale|Williamson|Wilson")) %>% 
   filter(!str_detect(name_census,"(?i)balance of")) 
 
+#write.csv(metropolitan_TN_13counties, "tmp/geo_id_metropolitan_TN_13counties.csv")
+
 metropolitan_TN_13counties_urb <- county_urb %>% 
   filter(geo_id %in% c(metropolitan_TN_13counties$geo_id)) %>% 
   summarise(urban_pop = mean(urban_pop),
             pct_urban_pop = mean(pct_urban_pop))
+
+metropolitan_TN_13counties_income <- income %>% 
+  filter(geo_id %in% c(metropolitan_TN_13counties$geo_id)) %>%
+  summarise(median_hh_income_21 = round(mean(median_hh_income_21)))
 
 # Find acfrs entities from the list of Top 100 county census 
 top100_counties <- county_all %>% 
@@ -206,14 +213,21 @@ top100_counties <- county_all %>%
   mutate(pct_urban_pop = ifelse(name == "The Metropolitan Government of Nashwille and Davidson County", 
                             metropolitan_TN_13counties_urb$pct_urban_pop,
                             pct_urban_pop
-  ))
+  )) %>% 
   
+  # income of metropolitan
+  mutate(median_hh_income_21 = ifelse(name == "The Metropolitan Government of Nashwille and Davidson County", 
+                                metropolitan_TN_13counties_income,
+                                median_hh_income_21
+  ),
+  median_hh_income_21 = as.numeric(median_hh_income_21)) 
+  
+write.csv(top100_counties, "output/top100_counties.csv")
 
 # Find acfrs entities from the list of Top 200 county census
 top200_county_4years <- county_all %>% 
   filter(geo_id %in% census_county_top200$geo_id) 
 
-write.csv(top100_counties, "output/top100_counties.csv")
 write.csv(county_all, "output/all_counties_2020_2023.csv")
 top200_county_4years %>% write.csv("output/top200_counties.csv")
 
