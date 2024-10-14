@@ -1,4 +1,3 @@
-
 library(tidyverse)
 library(dplyr)
 library(janitor)
@@ -26,15 +25,16 @@ anti_join(state_gov %>% filter(year == 2022) %>% select(state.abb),
 
 ####County####
 
+# count by year
+county_gov_all %>% select(state.abb, year, name) %>% 
+  #filter(year == 2023) %>% View()
+  group_by(year) %>% 
+  summarise(count = n())
+
 missing_county <- anti_join(census_county, county_gov, by = "geo_id") %>% 
   arrange(desc(population)) %>% 
   #not missing, just diff name, 
   filter(!str_detect(name_census, "honolulu|philadelphia|san francisco|duval|(orleans parish)"))
-
-# count by year
-county_gov_all %>% select(state.abb, year, name) %>% 
-  group_by(year) %>% 
-  summarise(count = n())
 
 # population by year
 county_gov_all %>% #select(state, name, population, year) %>% 
@@ -43,26 +43,21 @@ county_gov_all %>% #select(state, name, population, year) %>%
 
 # those missing 2023
 anti_join(county_gov %>% filter(year == 2022) %>% select(state.abb, name, id, population), 
-          county_gov %>% filter(year == 2023) %>% select(state.abb, name, id)) 
-View()
+          county_gov %>% filter(year == 2023) %>% select(state.abb, name, id)) %>% View()
 #write.csv("tmp/missing_counties_23.csv")
 
 
 top200_county_4years %>% select(state.abb, name, year, id) %>% 
   add_count(id) %>% select(-year) %>% 
-  distinct()%>% filter(n<4) #%>% write.csv("tmp/top200_counties_missing_2023.csv")
+  distinct()%>% filter(n<4) %>% write.csv("tmp/top200_counties_missing_2023.csv")
 
-# missing county top200
+# missing county in top200
 missing_county <- top200_county_4years %>% 
-  select(state.abb, name, id, year, geo_id) %>% add_count(geo_id) %>% 
-  filter(n <4) 
+  select(state.abb, name, id, year, geo_id) %>% add_count(geo_id) %>% select(-year) %>% 
+  filter(n <4) %>% distinct()
 
 
-#TODO: Checking on 2 missing - as of June 7, 2024
-# PA montgomery county 2022: https://www.montgomerycountypa.gov/Archive.aspx?AMID=45
-# MA norfolk county 2022: https://www.norfolkcounty.org/county_commission/about_norfolk_county/annual_reports.php#outer-31
-
-# missing county top100 year 2023
+#TODO: missing county top100 year 2023
 # MI macomb county https://www.macombgov.org/departments/finance-department/financial-transparency/annual-comprehensive-financial
 # TX hidalgo county https://www.hidalgocounty.us/1288/Annual-Financial-Report
 # NJ middlesex county https://www.middlesexcountynj.gov/government/departments/department-of-finance/financial-information/-folder-157

@@ -131,48 +131,34 @@ census_county_top200 <- census_county %>%
   slice(1:200) 
 
 
-##### Census Incorporated Place & Minor Civil Division #########
-census_place_division <- census_all %>% # filter(sumlev %in% c(170))
-  filter(sumlev %in% c(162, 061, 170, 172, 61)) %>% 
-  filter(funcstat %in% c("A", "C")) %>% 
-  distinct()
+##### Incorporated Place & Minor Civil Division #########
+#   040 = State
+#   050 = County
+#   061 = Minor Civil Division
+#   071 = Minor Civil Division place part
+#   157 = County place part
+#   160 = State-place
+#   162 = Incorporated place
+#   170 = Consolidated city
+#   172 = Consolidated city -- place within consolidated city
 
-#### Incorporated 
+# census_place_division <- census_all %>% # filter(sumlev %in% c(170))
+#   filter(sumlev %in% c(162, 061, 170, 172, 61)) %>% 
+#   filter(funcstat %in% c("A", "C")) %>% 
+#   distinct()
 
-census_incorporated <- census_all %>% filter(sumlev == 162) %>% 
-  filter(funcstat %in% c("A", "C")) 
+census_incorporated <- census_all %>% filter(sumlev == 162 | sumlev == 170) %>% 
+  filter(funcstat %in% c("A", "C"))
 
+sum(census_incorporated$population)
+
+#####Top100 cities####
+#find all cities within incorporated place
 census_incorporated_city <- census_all %>% filter(sumlev == 162) %>% 
   filter(str_detect(name_census, "city$")) %>% 
   filter(funcstat %in% c("A", "C")) 
 
-census_incorporated_others <- census_all %>% filter(sumlev == 162) %>% 
-  mutate(name_census = str_squish(name_census)) %>% 
-  filter(!str_detect(name_census, "city$")) %>% 
-  filter(funcstat %in% c("A", "C")) 
-
-#####Count population in each cat######
-
-municipalities_others <- census_all %>% 
-  filter(sumlev %in% c(061, 170, 172, 61)) %>% 
-  filter(funcstat %in% c("A", "C")) %>% 
-  distinct()
-
-
-others <- census_all %>% 
-  filter(sumlev %in% c(162, 061, 170, 172, 61)) %>% 
-  filter(funcstat %in% c("A", "C")) %>% 
-  distinct()
-
-sum(census_place_division$population)
-sum(census_incorporated$population)
-sum(census_incorporated_city$population)
-sum(census_incorporated_others$population)
-sum(municipalities_others$population)
-
-
-#####Top100 cities####
-
+#get top 100
 census_city_top100 <- census_incorporated_city %>% 
   arrange(desc(population)) %>% slice(1:100) %>% 
   mutate(#name_census = str_remove_all(name_census, " city$"),
@@ -249,28 +235,26 @@ city_income <- rio::import(here::here("data/ACSST1Y2021.S1903_2023-12-29T105538/
 
 ####population by state, break down by category####
 
-# census_pop_by_category <- rbind(census_state %>% 
-#   select(state.abb, population) %>% 
-#   mutate(category = "State"), 
+# census_pop_by_category <- rbind(census_state %>%
+#   select(state.abb, population) %>%
+#   mutate(category = "State"),
 # 
-# census_county %>% 
-#   group_by(state.abb) %>% 
-#   summarise(population = sum(population, na.rm = TRUE)) %>% 
-#   mutate(category = "Counties"), 
+# census_county %>%
+#   group_by(state.abb) %>%
+#   summarise(population = sum(population, na.rm = TRUE)) %>%
+#   mutate(category = "Counties"),
 # 
 # 
-# census_incorporated %>% 
-#   group_by(state.abb) %>% 
-#   summarise(population = sum(population, na.rm = TRUE)) %>% 
-#   mutate(category = "Municipalities"), 
+# census_incorporated %>%
+#   group_by(state.abb) %>%
+#   summarise(population = sum(population, na.rm = TRUE)) %>%
+#   mutate(category = "Municipalities"),
 # 
 # nces_pop_bystate
 # )
 # 
 # census_pop_by_category %>% saveRDS("data/census_pop_by_category.RDS")
-# 
-# # check census Ohio -  municipalities
-# census_incorporated %>% filter(state.abb == "OH") %>% View()
+
 
 ####### Partisan lean - state ##########
 

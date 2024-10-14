@@ -3256,7 +3256,7 @@
     "name": "Montana",
     "category": "General Purpose",
     "total_liabilities": 4907686000,
-    "current_liabilities": 2078098000,
+    "current_liabilities": 2097687000,
     "total_assets": 18193420000,
     "current_assets": 6940337000,
     "compensated_absences": 110898000,
@@ -3268,7 +3268,7 @@
     "pct_urban_pop": 53.4185,
     "median_hh_income_21": 63357,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/General%20Purpose/MT/State%20of%20Montana/MT%20State%20of%20Montana%202022.pdf",
-    "modified_revenues": -402186000,
+    "modified_revenues": -421775000,
     "net_pension_liability": 1867384000,
     "net_opeb_liability": 120548000,
     "assets_liab_ratio": 0.2698
