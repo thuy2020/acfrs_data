@@ -13,9 +13,6 @@ city_data_temp <- read_csv("output/top100_cities.csv") %>%
 school_data_temp <- read_csv("output/top100_sd.csv")%>% 
   filter(year != 2023) 
 
-city_data_temp %>% 
-  group_by(name) %>% 
-  summarise(n = n()) %>% filter(n <3)
 
 #function to clean up data
 modify_data <- function(data_temp){
