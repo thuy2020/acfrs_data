@@ -122,6 +122,12 @@ county_gov <- acfrs_county %>%
   arrange(desc(population)) 
 
 ##Consolidated county-city##
+#census identify theses as consolidated county-city:
+#   170 = Consolidated city
+#   172 = Consolidated city -- place within consolidated city
+# census_all %>% 
+#   filter(sumlev %in% c(170))
+
 #These counties are consolidated --> have some other name in acfrs list:  
 consolidated_city_county <- acfrs_general_purpose %>% 
   filter((name == "city and county of san francisco" & state.abb == "CA") |
@@ -143,7 +149,8 @@ consolidated_city_county <- acfrs_general_purpose %>%
                             TRUE ~ as.character(geo_id))) 
 
 # get population
-consolidated_city_county_population <- census_all %>% filter(geo_id %in% consolidated_city_county$geo_id) %>% 
+consolidated_city_county_population <- census_all %>% 
+  filter(geo_id %in% consolidated_city_county$geo_id) %>% 
   select(geo_id, population) 
 
 # get urbanicity
@@ -241,7 +248,7 @@ municipality_ <- acfrs_general_purpose %>%
   # get income
   left_join(city_income) %>% 
 # Join Incorporated Place in ACFRs to Census  
-  left_join(census_place_division, by= c("geo_id", "state.abb", "state.name")) %>% 
+  left_join(census_incorporated, by= c("geo_id", "state.abb", "state.name")) %>% 
   distinct()
 
 #append ULR
@@ -327,6 +334,8 @@ top100_school_districts_4years <- school_districts_all %>%
   #bind with NYC
   rbind(nyc_top5) %>% arrange(state.abb, name) 
 
+
+  
 # top 200
 dict_top200_ELSI <- dictionary %>% 
   filter(ncesID %in% top200_schools_by_year$ncesID) 

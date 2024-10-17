@@ -28,7 +28,6 @@ school_data_temp <- read_csv("output/top100_sd.csv") %>%
   slice_head(n = 100)
 
 
-
 #function to clean up data
 modify_data <- function(data_temp){
   data_temp|>
@@ -260,7 +259,23 @@ school_data <- modify_data(school_data_temp) %>%
   mutate(city = str_to_title(tolower(city))) |>
   mutate(name_state = paste(city, `state.abb`, sep = ", ")) 
 
+# check difference in top100 of each year
+anti_join(school_data_temp %>% filter(year == 2020) %>% ungroup %>% 
+            select(state.abb, name), 
+          
+          school_data_temp %>% filter(year == 2022) %>% ungroup %>%
+            select(state.abb, name)) #%>% View()
 
+anti_join(school_data_temp %>% filter(year == 2022) %>% ungroup %>% 
+            select(state.abb, name), 
+          
+          school_data_temp %>% filter(year == 2020) %>% ungroup %>%
+            select(state.abb, name)) #%>% View()
+
+school_data_temp %>% filter(year == 2020) %>% ungroup %>%
+  select(state.abb, name) #%>% View()
+
+########
 school_data_22 <- school_data |>
   filter(year == 2022) |>
   rename_with(~ paste0(., "_22"))
@@ -316,6 +331,8 @@ dw_school_data_growth <- school_data_growth |>
     net_pension_liability_growth = net_pension_liability_growth * 100,
     expenses_growth = expenses_growth * 100
   )
+
+dw_school_data_growth %>% select(name, name_nces_22) %>% View()
 
 write_csv(dw_school_data_growth, "output/dw_school_data_growth.csv")
 

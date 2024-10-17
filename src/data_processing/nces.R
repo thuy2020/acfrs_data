@@ -198,7 +198,8 @@ anti_join(top100_2020, top100_2021, by = "ncesID")
 anti_join(top100_2021, top100_2020, by = "ncesID")
 
 # 4 sd in 2021 but not 2022
-anti_join(top100_2021, top100_2022, by = "ncesID") %>% mutate(name_nces = str_to_lower(name_nces))
+anti_join(top100_2021, top100_2022, by = "ncesID") %>% 
+  mutate(name_nces = str_to_lower(name_nces))
 
 # 4 sd in 2022 but not 2021
 anti_join(top100_2022, top100_2021, by = "ncesID")
