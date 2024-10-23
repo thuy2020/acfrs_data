@@ -38,7 +38,7 @@ states <- read_csv("output/all_states_4years_2020_2023.csv") |>
     debt_ratio = total_liabilities / total_assets,
     free_cash_flow = (revenues - (expenses + current_liabilities)) / population
   ) %>% 
-  select(state.name, year, debt_ratio, free_cash_flow, median_hh_income_21, pct_urban_pop) %>% 
+  select(state.name, year, debt_ratio, free_cash_flow, median_hh_income_21, pct_urban_pop, current_liabilities, population) %>% 
   mutate(year = as.character(year))
 
 cor_data <- states %>% 
@@ -274,8 +274,9 @@ cat("\nStates with an increase in debt ratio from 2020 to 2022:\n")
 print(only_nd_increase)
 
 # Calculate Free Cash Flow correlation significance in 2022
-
-# need code here
+# Print summary for combined years
+cat("\nCombined Years Spearman Correlation Summary:\n")
+print_summary_list(summary_combined_spearman)
 
 # Alaska and North Dakota per capita liabilities check
 ak_nd_liabilities <- cor_data %>%
@@ -296,6 +297,21 @@ ca_liabilities <- cor_data %>%
 
 cat("\nCalifornia Per Capita Liabilities:\n")
 print(ca_liabilities)
+
+
+# Current liabilities change per capita for all states
+all_states_current_liabilities <- cor_data %>%
+  filter(year %in% c(2020, 2022)) %>%
+  select(state.name, year, current_liabilities, population) %>%
+  mutate(current_liabilities_pc = current_liabilities / population) %>%
+  select(state.name, year, current_liabilities_pc) |>
+  pivot_wider(names_from = "year", values_from = "current_liabilities_pc") %>%
+  mutate(change = `2022` - `2020`) %>%
+  arrange(desc(change))
+
+
+cat("\nStates with the Largest Increase in Current Liabilities per Capita from 2020 to 2022:\n")
+print(all_states_current_liabilities)
 
 # Revenue declines between 2020 and 2022
 all_states_revenue <- cor_data %>%
