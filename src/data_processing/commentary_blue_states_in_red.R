@@ -38,7 +38,7 @@ states <- read_csv("output/all_states_4years_2020_2023.csv") |>
     debt_ratio = total_liabilities / total_assets,
     free_cash_flow = (revenues - (expenses + current_liabilities)) / population
   ) %>% 
-  select(state.name, year, debt_ratio, free_cash_flow, median_hh_income_21, pct_urban_pop, current_liabilities, population) %>% 
+  select(state.name, year, debt_ratio, free_cash_flow, median_hh_income_21, pct_urban_pop, current_liabilities, revenues, population) %>% 
   mutate(year = as.character(year))
 
 cor_data <- states %>% 
