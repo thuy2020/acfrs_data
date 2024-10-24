@@ -61,15 +61,17 @@ monotonicity_debt_ratio <- sm.monotonicity(cor_data$partisan_lean, cor_data$debt
 # Test monotonicity between free_cash_flow and partisan_lean for combined years
 monotonicity_free_cash_flow <- sm.monotonicity(cor_data_sans_wyaknd$partisan_lean, cor_data_sans_wyaknd$free_cash_flow)
 
+#TN: should not exclude 3 states out of this test
+#monotonicity_free_cash_flow <- sm.monotonicity(cor_data_sans_wyaknd$partisan_lean, cor_data_sans_wyaknd$free_cash_flow)
 # Print the results
+
 cat("\nMonotonicity test between partisan_lean and debt_ratio:\n")
 print(monotonicity_debt_ratio)
+# This means no monotonic relationship between partisan_lean and debt_ratio
 
 cat("\nMonotonicity test between partisan_lean and free_cash_flow:\n")
 print(monotonicity_free_cash_flow)
-
-
-
+#no monotonic relationship between partisan_lean and free_cash_flow. 
 
 # List of variables to analyze
 variables <- c("partisan_lean", "debt_ratio", "free_cash_flow", "median_hh_income_21", "pct_urban_pop")
@@ -297,7 +299,7 @@ ca_liabilities <- cor_data %>%
 
 cat("\nCalifornia Per Capita Liabilities:\n")
 print(ca_liabilities)
-
+#TN: correct increased current liab
 
 # Current liabilities change per capita for all states
 all_states_current_liabilities <- cor_data %>%
@@ -331,6 +333,8 @@ revenue_declines <- cor_data %>%
   filter(state.name %in% c("Alaska", "Michigan", "Wyoming")) %>%
   select(state.name, year, revenues) %>%
   filter(year %in% c(2020, 2022))
+#TN: true, AK, MI, WY lost general revenue in 2022
+
 
 cat("\nRevenue Declines for Alaska, Michigan, and Wyoming:\n")
 print(revenue_declines)
