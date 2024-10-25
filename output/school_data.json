@@ -12146,6 +12146,7 @@
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/School%20District/UT/Davis%20School%20District/UT%20Davis%20School%20District%202022.pdf",
     "modified_revenues": 52290853,
     "net_pension_liability": -65971070,
+    "net_opeb_liability": 0,
     "assets_liab_ratio": 0.4223,
     "name_state": "Farmington, UT"
   },
