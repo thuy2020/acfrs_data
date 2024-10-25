@@ -353,7 +353,7 @@ states_partisan_lean_debt_ratio_22 <- cor_data %>%
   filter(year == 2022) %>%
   select(state.name, partisan_lean, debt_ratio)
 
-write_csv(states_partisan_lean_debt_ratio_22, "states_partisan_lean_debt_ratio_22.csv")
+write_csv(states_partisan_lean_debt_ratio_22, "output/states_partisan_lean_debt_ratio_22.csv")
 
 # Extract and print debt ratios for 2020 and 2022 by state
 debt_ratios_2020_2022 <- cor_data %>%
@@ -367,5 +367,5 @@ cat("\nDebt Ratios for 2020 and 2022 by State:\n")
 print(debt_ratios_2020_2022)
 
 # Save the debt ratios for 2020 and 2022 by state
-write_csv(debt_ratios_2020_2022, "debt_ratios_2020_2022.csv")
+write_csv(debt_ratios_2020_2022, "output/debt_ratios_2020_2022.csv")
 

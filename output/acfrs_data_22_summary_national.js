@@ -2,12 +2,12 @@ export default [
   {
     "state_abb": "AK",
     "state": "Alaska",
-    "school_district": 438185341,
+    "school_district": 438857632,
     "county": 257499250,
-    "municipality": 148013915,
+    "municipality": 149586971,
     "state_entity": 2334810000,
-    "total": 3178508506,
-    "total_for_pct": 3178508506
+    "total": 3180753853,
+    "total_for_pct": 3180753853
   },
   {
     "state_abb": "AL",
@@ -42,12 +42,12 @@ export default [
   {
     "state_abb": "CA",
     "state": "California",
-    "school_district": 36605787207,
+    "school_district": 36874893359,
     "county": 22689482761,
     "municipality": 21853963485,
     "state_entity": 54169128000,
-    "total": 135318361453,
-    "total_for_pct": 135318361453
+    "total": 135587467605,
+    "total_for_pct": 135587467605
   },
   {
     "state_abb": "CO",
@@ -92,12 +92,12 @@ export default [
   {
     "state_abb": "FL",
     "state": "Florida",
-    "school_district": 7604994040,
-    "county": 16949135876,
-    "municipality": 8890422354,
+    "school_district": 7655905530,
+    "county": 16783469799,
+    "municipality": 8893113078,
     "state_entity": 3506978000,
-    "total": 36951530270,
-    "total_for_pct": 36951530270
+    "total": 36839466407,
+    "total_for_pct": 36839466407
   },
   {
     "state_abb": "GA",
@@ -122,32 +122,32 @@ export default [
   {
     "state_abb": "IA",
     "state": "Iowa",
-    "school_district": 125004719,
+    "school_district": 125086223,
     "county": -197171625,
     "municipality": 131993573,
     "state_entity": 158854000,
-    "total": 218680667,
-    "total_for_pct": 415852292
+    "total": 218762171,
+    "total_for_pct": 415933796
   },
   {
     "state_abb": "ID",
     "state": "Idaho",
-    "school_district": -26611331,
+    "school_district": -27036386,
     "county": 190505184,
     "municipality": 272487410,
     "state_entity": 23641000,
-    "total": 460022263,
+    "total": 459597208,
     "total_for_pct": 486633594
   },
   {
     "state_abb": "IL",
     "state": "Illinois",
-    "school_district": 14138376676,
+    "school_district": 14131134626,
     "county": 9900595782,
-    "municipality": 46145561604,
+    "municipality": 46165053930,
     "state_entity": 139846404000,
-    "total": 210030938062,
-    "total_for_pct": 210030938062
+    "total": 210043188338,
+    "total_for_pct": 210043188338
   },
   {
     "state_abb": "IN",
@@ -172,42 +172,42 @@ export default [
   {
     "state_abb": "KY",
     "state": "Kentucky",
-    "school_district": 2275227525,
+    "school_district": 2278516731,
     "county": 1029232000,
-    "municipality": 1268886131,
+    "municipality": 1268709223,
     "state_entity": 25034578000,
-    "total": 29607923656,
-    "total_for_pct": 29607923656
+    "total": 29611035954,
+    "total_for_pct": 29611035954
   },
   {
     "state_abb": "LA",
     "state": "Louisiana",
     "school_district": 3479455628,
-    "county": 229538297,
+    "county": 226935608,
     "municipality": 2694743100,
     "state_entity": 4890631000,
-    "total": 11294368025,
-    "total_for_pct": 11294368025
+    "total": 11291765336,
+    "total_for_pct": 11291765336
   },
   {
     "state_abb": "MA",
     "state": "Massachusetts",
     "school_district": 955942105,
-    "county": 221469012,
+    "county": 239753541,
     "municipality": 6781886331,
     "state_entity": 34806645000,
-    "total": 42765942448,
-    "total_for_pct": 42765942448
+    "total": 42784226977,
+    "total_for_pct": 42784226977
   },
   {
     "state_abb": "MD",
     "state": "Maryland",
     "school_district": 515775624,
-    "county": 4394508677,
+    "county": 3604055800,
     "municipality": 1676332813,
     "state_entity": 13366859000,
-    "total": 19953476114,
-    "total_for_pct": 19953476114
+    "total": 19163023237,
+    "total_for_pct": 19163023237
   },
   {
     "state_abb": "ME",
@@ -234,50 +234,50 @@ export default [
     "state": "Minnesota",
     "school_district": 4651258885,
     "county": 3284822323,
-    "municipality": 3655330007,
+    "municipality": 3683913020,
     "state_entity": 1692383000,
-    "total": 13283794215,
-    "total_for_pct": 13283794215
+    "total": 13312377228,
+    "total_for_pct": 13312377228
   },
   {
     "state_abb": "MO",
     "state": "Missouri",
-    "school_district": 577335385,
-    "county": 165660778,
-    "municipality": 1042501211,
+    "school_district": 577395908,
+    "county": 164375815,
+    "municipality": 1042920773,
     "state_entity": 6458736000,
-    "total": 8244233374,
-    "total_for_pct": 8244233374
+    "total": 8243428496,
+    "total_for_pct": 8243428496
   },
   {
     "state_abb": "MS",
     "state": "Mississippi",
-    "school_district": 4340049364,
+    "school_district": 4338809848,
     "county": 190300879,
     "municipality": 671979980,
     "state_entity": 2601904000,
-    "total": 7804234223,
-    "total_for_pct": 7804234223
+    "total": 7802994707,
+    "total_for_pct": 7802994707
   },
   {
     "state_abb": "MT",
     "state": "Montana",
-    "school_district": 614546846,
+    "school_district": 675706118,
     "county": 157117207,
     "municipality": 178742618,
     "state_entity": 1867384000,
-    "total": 2817790671,
-    "total_for_pct": 2817790671
+    "total": 2878949943,
+    "total_for_pct": 2878949943
   },
   {
     "state_abb": "NC",
     "state": "North Carolina",
     "school_district": 2494762976,
-    "county": 1095861214,
+    "county": 1103102417,
     "municipality": 1336361322,
     "state_entity": 1471285000,
-    "total": 6398270512,
-    "total_for_pct": 6398270512
+    "total": 6405511715,
+    "total_for_pct": 6405511715
   },
   {
     "state_abb": "ND",
@@ -292,12 +292,12 @@ export default [
   {
     "state_abb": "NE",
     "state": "Nebraska",
-    "school_district": -4050292,
+    "school_district": 38990429,
     "county": 137723416,
     "municipality": 1053295883,
     "state_entity": -533298000,
-    "total": 653671007,
-    "total_for_pct": 1191019299
+    "total": 696711728,
+    "total_for_pct": 1230009728
   },
   {
     "state_abb": "NH",
@@ -342,52 +342,52 @@ export default [
   {
     "state_abb": "NY",
     "state": "New York",
-    "school_district": -15816525317,
+    "school_district": -15819484965,
     "county": -1156719727,
-    "municipality": 41876685805,
+    "municipality": 41874940868,
     "state_entity": 513000000,
-    "total": 25416440761,
-    "total_for_pct": 42389685805
+    "total": 25411736176,
+    "total_for_pct": 42387940868
   },
   {
     "state_abb": "OH",
     "state": "Ohio",
-    "school_district": 11057253463,
-    "county": 2386625742,
-    "municipality": 6004223435,
-    "state_entity": 2200534000,
-    "total": 21648636640,
-    "total_for_pct": 21648636640
+    "school_district": 11097903387,
+    "county": 2408548837,
+    "municipality": 6172790244,
+    "state_entity": 2121734000,
+    "total": 21800976468,
+    "total_for_pct": 21800976468
   },
   {
     "state_abb": "OK",
     "state": "Oklahoma",
     "school_district": 782234149,
     "county": 119805031,
-    "municipality": 302725811,
+    "municipality": 335418069,
     "state_entity": -1012092000,
-    "total": 192672991,
-    "total_for_pct": 1204764991
+    "total": 225365249,
+    "total_for_pct": 1237457249
   },
   {
     "state_abb": "OR",
     "state": "Oregon",
-    "school_district": 3187747770,
+    "school_district": 3021895575,
     "county": 1264023155,
     "municipality": 5209870042,
     "state_entity": 2894714000,
-    "total": 12556354967,
-    "total_for_pct": 12556354967
+    "total": 12390502772,
+    "total_for_pct": 12390502772
   },
   {
     "state_abb": "PA",
     "state": "Pennsylvania",
     "school_district": 32117515203,
-    "county": 2839010887,
-    "municipality": 7178633250,
+    "county": 3058491439,
+    "municipality": 7188805031,
     "state_entity": 12550399000,
-    "total": 54685558340,
-    "total_for_pct": 54685558340
+    "total": 54915210673,
+    "total_for_pct": 54915210673
   },
   {
     "state_abb": "RI",
@@ -422,22 +422,22 @@ export default [
   {
     "state_abb": "TN",
     "state": "Tennessee",
-    "school_district": -1434417630,
+    "school_district": -1481694170,
     "county": 282753422,
-    "municipality": 92975364,
+    "municipality": 92997520,
     "state_entity": -488630000,
-    "total": -1547318844,
-    "total_for_pct": 375728786
+    "total": -1594573228,
+    "total_for_pct": 375750942
   },
   {
     "state_abb": "TX",
     "state": "Texas",
     "school_district": 6672160697,
-    "county": -951923055,
-    "municipality": 9346581760,
+    "county": -958155018,
+    "municipality": 9353361751,
     "state_entity": 30883865000,
-    "total": 45950684402,
-    "total_for_pct": 46902607457
+    "total": 45951232430,
+    "total_for_pct": 46909387448
   },
   {
     "state_abb": "UT",
@@ -452,12 +452,12 @@ export default [
   {
     "state_abb": "VA",
     "state": "Virginia",
-    "school_district": 3981227846,
+    "school_district": 5021990084,
     "county": 1201465875,
-    "municipality": 1437605883,
+    "municipality": 1437635069,
     "state_entity": 2823571000,
-    "total": 9443870604,
-    "total_for_pct": 9443870604
+    "total": 10484662028,
+    "total_for_pct": 10484662028
   },
   {
     "state_abb": "VT",
@@ -472,12 +472,12 @@ export default [
   {
     "state_abb": "WA",
     "state": "Washington",
-    "school_district": 1560055552,
-    "county": -534682950,
-    "municipality": -197515443,
+    "school_district": 5993119309,
+    "county": -575815467,
+    "municipality": -275553502,
     "state_entity": -9922650000,
-    "total": -9094792841,
-    "total_for_pct": 1560055552
+    "total": -4780899660,
+    "total_for_pct": 5993119309
   },
   {
     "state_abb": "WI",
@@ -492,31 +492,31 @@ export default [
   {
     "state_abb": "WV",
     "state": "West Virginia",
-    "school_district": 79775365,
+    "school_district": 78889801,
     "county": -50548560,
     "municipality": 981878244,
     "state_entity": 749536000,
-    "total": 1760641049,
-    "total_for_pct": 1811189609
+    "total": 1759755485,
+    "total_for_pct": 1810304045
   },
   {
     "state_abb": "WY",
     "state": "Wyoming",
     "school_district": 573048262,
     "county": 178016133,
-    "municipality": 214842617,
+    "municipality": 405993524,
     "state_entity": 343209946,
-    "total": 1309116958,
-    "total_for_pct": 1309116958
+    "total": 1500267865,
+    "total_for_pct": 1500267865
   },
   {
     "state_abb": "US",
     "state": "United States",
-    "school_district": 186796842344,
-    "county": 89850849565,
-    "municipality": 209663669415,
-    "state_entity": 501808420392,
-    "total": 988119781716,
-    "total_for_pct": 1028988217441
+    "school_district": 192513758854,
+    "county": 89110407858,
+    "municipality": 210045881280,
+    "state_entity": 501729620392,
+    "total": 993399668384,
+    "total_for_pct": 1034440117599
   }
 ]
