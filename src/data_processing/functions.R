@@ -51,9 +51,9 @@ changes_across_years <- function(data, metric) {
            diff_23_22 = `2023`/`2022`) 
 }
 
-# Function to save the changes of metrict across years to Excel
+# Function to save the changes of metrics across years to Excel
 save_metric_changes_to_excel <- function(data, dataset_name, 
-                                         output_dir = "output/testing_validation/") {
+                                         output_dir = "output/testing/") {
   
   if (!dir.exists(output_dir)) {
     dir.create(output_dir, recursive = TRUE)  # Creates the directory, including any parent directories

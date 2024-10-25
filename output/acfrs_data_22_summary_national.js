@@ -183,11 +183,11 @@ export default [
     "state_abb": "LA",
     "state": "Louisiana",
     "school_district": 3479455628,
-    "county": 226935608,
+    "county": 78355747,
     "municipality": 2694743100,
     "state_entity": 4890631000,
-    "total": 11291765336,
-    "total_for_pct": 11291765336
+    "total": 11143185475,
+    "total_for_pct": 11143185475
   },
   {
     "state_abb": "MA",
@@ -513,10 +513,10 @@ export default [
     "state_abb": "US",
     "state": "United States",
     "school_district": 192513758854,
-    "county": 89110407858,
+    "county": 88961827997,
     "municipality": 210045881280,
     "state_entity": 501729620392,
-    "total": 993399668384,
-    "total_for_pct": 1034440117599
+    "total": 993251088523,
+    "total_for_pct": 1034291537738
   }
 ]

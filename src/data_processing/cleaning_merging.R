@@ -172,8 +172,13 @@ county_gov_all <- county_gov %>%
   left_join(income) %>% 
   select(all_of(fields_to_select)) %>% 
   # bind with consolidated
-  rbind(consolidated_city_county_all)
-
+  rbind(consolidated_city_county_all) %>% 
+  
+  #removing some duplicate
+  #TODO: trace this back to initial join to remove dup from there
+  filter(!(name %in% c("city and county of honolulu", 
+                       "city and county of san francisco") & (!is.na(geo_id)))) 
+  
 #append URL
 county_all <- append_url(county_gov_all) %>% 
   select(-identifier)
@@ -196,6 +201,11 @@ metropolitan_TN_13counties_urb <- county_urb %>%
 metropolitan_TN_13counties_income <- income %>% 
   filter(geo_id %in% c(metropolitan_TN_13counties$geo_id)) %>%
   summarise(median_hh_income_21 = round(mean(median_hh_income_21)))
+  
+#TODO: check thoese with No geo
+# no_GEO <- county_all %>% filter(is.na(geo_id)) %>%
+#   select(name, state.abb, geo_id, total_liabilities, year) %>%
+#   filter(year != 2023)
 
 # Find acfrs entities from the list of Top 100 county census 
 top100_counties <- county_all %>% 

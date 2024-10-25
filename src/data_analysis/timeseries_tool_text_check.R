@@ -751,9 +751,7 @@ city_takeaway_7/city_takeaway_5[3] * 100
 school_data_temp %>% select(name, total_assets) %>% 
   filter(year %in% c(2020, 2022)) %>% 
   pivot_wider(names_from = year, values_from = total_assets) %>% 
-  mutate(increase = `2022` - `2020`) %>% 
-  #filter(increase = FALSE) %>% 
-  View()
+  mutate(increase = `2022` - `2020`) #%>% View()
 
 # per capita change
 school_takeaway_1 <- school_data_temp |>
