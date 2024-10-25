@@ -3,9 +3,10 @@ library(scales)
 library(jsonlite)
 # source("census.R")
 
-# read in data
+####read in data####
 state_data_temp <- read_csv("output/all_states_4years_2020_2023.csv")
-county_data_temp <- read_csv("output/top100_counties.csv")
+county_data_temp <- read_csv("output/top100_counties.csv") %>% 
+  filter(year != 2023)
 city_data_temp <- read_csv("output/top200_cities.csv") %>% 
   filter(year != 2023) |>
   filter(name != "denver county") |>
@@ -20,176 +21,77 @@ school_data_temp <- read_csv("output/top100_sd.csv") %>%
   arrange(desc(enrollment_20)) %>%
   slice_head(n = 100)
 
+####summary data####
+#function to summary data each category
+create_entity_summary <- function(data) {
+  data %>% 
+    filter(year != 2023) |>
+    mutate(
+      debt_ratio = total_liabilities / total_assets,
+      net_net_opeb_liability = net_opeb_liability - net_opeb_assets,
+      net_net_pension_liability = net_pension_liability - net_pension_assets,
+      free_cash_flow = revenues - (expenses + current_liabilities)
+    ) |>
+    group_by(year) |>
+    summarise(
+      current_liabilities_sum = sum(current_liabilities, na.rm = TRUE),
+      net_net_opeb_liability_sum = sum(net_net_opeb_liability, na.rm = TRUE),
+      net_net_pension_liability_sum = sum(net_net_pension_liability, na.rm = TRUE),
+      expenses_sum = sum(expenses, na.rm = TRUE),
+      total_liabilities_sum = sum(total_liabilities, na.rm = TRUE),
+      free_cash_flow_sum = sum(free_cash_flow, na.rm = TRUE),
+      revenues_sum = sum(revenues, na.rm = TRUE),
+      total_assets_sum = sum(total_assets, na.rm = TRUE),
+      debt_ratio = total_liabilities_sum / total_assets_sum,
+      current_liabilities_pc = sum(current_liabilities, na.rm = TRUE) / sum(population[!is.na(current_liabilities)], na.rm = TRUE),
+      net_net_opeb_liability_pc = sum(net_net_opeb_liability, na.rm = TRUE) / sum(population[!is.na(net_net_opeb_liability)], na.rm = TRUE),
+      net_net_pension_liability_pc = sum(net_net_pension_liability, na.rm = TRUE) / sum(population[!is.na(net_net_pension_liability)], na.rm = TRUE),
+      expenses_pc = sum(expenses, na.rm = TRUE) / sum(population[!is.na(expenses)], na.rm = TRUE),
+      total_liabilities_pc = sum(total_liabilities_sum, na.rm = TRUE) / sum(population[!is.na(total_liabilities_sum)], na.rm = TRUE),
+      free_cash_flow_pc = sum(free_cash_flow_sum, na.rm = TRUE) / sum(population[!is.na(free_cash_flow_sum)], na.rm = TRUE),
+      revenues_pc = sum(revenues_sum, na.rm = TRUE) / sum(population[!is.na(revenues_sum)], na.rm = TRUE),
+      total_assets_pc = sum(total_assets_sum, na.rm = TRUE) / sum(population[!is.na(total_assets_sum)], na.rm = TRUE)
+    ) |>
+    select(
+      year,
+      current_liabilities_sum,
+      current_liabilities_pc,
+      debt_ratio,
+      net_net_opeb_liability_sum,
+      net_net_opeb_liability_pc,
+      net_net_pension_liability_sum,
+      net_net_pension_liability_pc,
+      expenses_sum,
+      expenses_pc,
+      total_liabilities_sum,
+      total_liabilities_pc,
+      free_cash_flow_sum,
+      free_cash_flow_pc,
+      revenues_sum,
+      revenues_pc,
+      total_assets_sum,
+      total_assets_pc
+    ) |>
+    rename_with(~ str_replace(., "_sum", ""), ends_with("_sum"))}
 
-state_data_summary <- state_data_temp |>
-  filter(year != 2023) |>
-  mutate(
-    debt_ratio = total_liabilities / total_assets,
-    net_net_opeb_liability = net_opeb_liability - net_opeb_assets,
-    net_net_pension_liability = net_pension_liability - net_pension_assets,
-    free_cash_flow = revenues - (expenses + current_liabilities)
-  ) |>
-  group_by(year) |>
-  summarise(
-    current_liabilities_sum = sum(current_liabilities, na.rm = TRUE),
-    net_net_opeb_liability_sum = sum(net_net_opeb_liability, na.rm = TRUE),
-    net_net_pension_liability_sum = sum(net_net_pension_liability, na.rm = TRUE),
-    expenses_sum = sum(expenses, na.rm = TRUE),
-    total_liabilities_sum = sum(total_liabilities, na.rm = TRUE),
-    free_cash_flow_sum = sum(free_cash_flow, na.rm = TRUE),
-    revenues_sum = sum(revenues, na.rm = TRUE),
-    total_assets_sum = sum(total_assets, na.rm = TRUE),
-    debt_ratio = total_liabilities_sum / total_assets_sum,
-    current_liabilities_pc = sum(current_liabilities, na.rm = TRUE) / sum(population[!is.na(current_liabilities)], na.rm = TRUE),
-    net_net_opeb_liability_pc = sum(net_net_opeb_liability, na.rm = TRUE) / sum(population[!is.na(net_net_opeb_liability)], na.rm = TRUE),
-    net_net_pension_liability_pc = sum(net_net_pension_liability, na.rm = TRUE) / sum(population[!is.na(net_net_pension_liability)], na.rm = TRUE),
-    expenses_pc = sum(expenses, na.rm = TRUE) / sum(population[!is.na(expenses)], na.rm = TRUE),
-    total_liabilities_pc = sum(total_liabilities_sum, na.rm = TRUE) / sum(population[!is.na(total_liabilities_sum)], na.rm = TRUE),
-    free_cash_flow_pc = sum(free_cash_flow_sum, na.rm = TRUE) / sum(population[!is.na(free_cash_flow_sum)], na.rm = TRUE),
-    revenues_pc = sum(revenues_sum, na.rm = TRUE) / sum(population[!is.na(revenues_sum)], na.rm = TRUE),
-    total_assets_pc = sum(total_assets_sum, na.rm = TRUE) / sum(population[!is.na(total_assets_sum)], na.rm = TRUE)
-  ) |>
-  select(
-    year,
-    current_liabilities_sum,
-    current_liabilities_pc,
-    debt_ratio,
-    net_net_opeb_liability_sum,
-    net_net_opeb_liability_pc,
-    net_net_pension_liability_sum,
-    net_net_pension_liability_pc,
-    expenses_sum,
-    expenses_pc,
-    total_liabilities_sum,
-    total_liabilities_pc,
-    free_cash_flow_sum,
-    free_cash_flow_pc,
-    revenues_sum,
-    revenues_pc,
-    total_assets_sum,
-    total_assets_pc
-  ) |>
-  rename_with(~ str_replace(., "_sum", ""), ends_with("_sum"))
+state_data_summary <- create_entity_summary(state_data_temp)
 
 # Write the summary to CSV
+
 write_csv(state_data_summary, "output/data_validation/state_data_summary.csv")
 
-
-
-
-county_data_summary <- county_data_temp |>
-  filter(year != 2023) |>
-  mutate(
-    debt_ratio = total_liabilities / total_assets,
-    net_net_opeb_liability = net_opeb_liability - net_opeb_assets,
-    net_net_pension_liability = net_pension_liability - net_pension_assets,
-    free_cash_flow = revenues - (expenses + current_liabilities)
-  ) |>
-  group_by(year) |>
-  summarise(
-    current_liabilities_sum = sum(current_liabilities, na.rm = TRUE),
-    net_net_opeb_liability_sum = sum(net_net_opeb_liability, na.rm = TRUE),
-    net_net_pension_liability_sum = sum(net_net_pension_liability, na.rm = TRUE),
-    expenses_sum = sum(expenses, na.rm = TRUE),
-    total_liabilities_sum = sum(total_liabilities, na.rm = TRUE),
-    free_cash_flow_sum = sum(free_cash_flow, na.rm = TRUE),
-    revenues_sum = sum(revenues, na.rm = TRUE),
-    total_assets_sum = sum(total_assets, na.rm = TRUE),
-    debt_ratio = total_liabilities_sum / total_assets_sum,
-    current_liabilities_pc = sum(current_liabilities, na.rm = TRUE) / sum(population[!is.na(current_liabilities)], na.rm = TRUE),
-    net_net_opeb_liability_pc = sum(net_net_opeb_liability, na.rm = TRUE) / sum(population[!is.na(net_net_opeb_liability)], na.rm = TRUE),
-    net_net_pension_liability_pc = sum(net_net_pension_liability, na.rm = TRUE) / sum(population[!is.na(net_net_pension_liability)], na.rm = TRUE),
-    expenses_pc = sum(expenses, na.rm = TRUE) / sum(population[!is.na(expenses)], na.rm = TRUE),
-    total_liabilities_pc = sum(total_liabilities_sum, na.rm = TRUE) / sum(population[!is.na(total_liabilities_sum)], na.rm = TRUE),
-    free_cash_flow_pc = sum(free_cash_flow_sum, na.rm = TRUE) / sum(population[!is.na(free_cash_flow_sum)], na.rm = TRUE),
-    revenues_pc = sum(revenues_sum, na.rm = TRUE) / sum(population[!is.na(revenues_sum)], na.rm = TRUE),
-    total_assets_pc = sum(total_assets_sum, na.rm = TRUE) / sum(population[!is.na(total_assets_sum)], na.rm = TRUE)
-  ) |>
-  select(
-    year,
-    current_liabilities_sum,
-    current_liabilities_pc,
-    debt_ratio,
-    net_net_opeb_liability_sum,
-    net_net_opeb_liability_pc,
-    net_net_pension_liability_sum,
-    net_net_pension_liability_pc,
-    expenses_sum,
-    expenses_pc,
-    total_liabilities_sum,
-    total_liabilities_pc,
-    free_cash_flow_sum,
-    free_cash_flow_pc,
-    revenues_sum,
-    revenues_pc,
-    total_assets_sum,
-    total_assets_pc
-  ) |>
-  rename_with(~ str_replace(., "_sum", ""), ends_with("_sum"))
+####
+county_data_summary <- create_entity_summary(county_data_temp)
 
 # Write the summary to CSV
 write_csv(county_data_temp, "output/data_validation/county_data_temp.csv")
 write_csv(county_data_summary, "output/data_validation/county_data_summary.csv")
 
 
-
-
-city_data_summary <- city_data_temp |>
-  filter(year != 2023) |>
-  mutate(
-    debt_ratio = total_liabilities / total_assets,
-    net_net_opeb_liability = net_opeb_liability - net_opeb_assets,
-    net_net_pension_liability = net_pension_liability - net_pension_assets,
-    free_cash_flow = revenues - (expenses + current_liabilities)
-  ) |>
-  group_by(year) |>
-  summarise(
-    current_liabilities_sum = sum(current_liabilities, na.rm = TRUE),
-    net_net_opeb_liability_sum = sum(net_net_opeb_liability, na.rm = TRUE),
-    net_net_pension_liability_sum = sum(net_net_pension_liability, na.rm = TRUE),
-    expenses_sum = sum(expenses, na.rm = TRUE),
-    total_liabilities_sum = sum(total_liabilities, na.rm = TRUE),
-    free_cash_flow_sum = sum(free_cash_flow, na.rm = TRUE),
-    revenues_sum = sum(revenues, na.rm = TRUE),
-    total_assets_sum = sum(total_assets, na.rm = TRUE),
-    debt_ratio = total_liabilities_sum / total_assets_sum,
-    current_liabilities_pc = sum(current_liabilities, na.rm = TRUE) / sum(population[!is.na(current_liabilities)], na.rm = TRUE),
-    net_net_opeb_liability_pc = sum(net_net_opeb_liability, na.rm = TRUE) / sum(population[!is.na(net_net_opeb_liability)], na.rm = TRUE),
-    net_net_pension_liability_pc = sum(net_net_pension_liability, na.rm = TRUE) / sum(population[!is.na(net_net_pension_liability)], na.rm = TRUE),
-    expenses_pc = sum(expenses, na.rm = TRUE) / sum(population[!is.na(expenses)], na.rm = TRUE),
-    total_liabilities_pc = sum(total_liabilities_sum, na.rm = TRUE) / sum(population[!is.na(total_liabilities_sum)], na.rm = TRUE),
-    free_cash_flow_pc = free_cash_flow / sum(population[!is.na(revenues) & !is.na(expenses) & !is.na(current_liabilities)], na.rm = TRUE),
-    revenues_pc = sum(revenues_sum, na.rm = TRUE) / sum(population[!is.na(revenues_sum)], na.rm = TRUE),
-    total_assets_pc = sum(total_assets_sum, na.rm = TRUE) / sum(population[!is.na(total_assets_sum)], na.rm = TRUE)
-  ) |>
-  select(
-    year,
-    current_liabilities_sum,
-    current_liabilities_pc,
-    debt_ratio,
-    net_net_opeb_liability_sum,
-    net_net_opeb_liability_pc,
-    net_net_pension_liability_sum,
-    net_net_pension_liability_pc,
-    expenses_sum,
-    expenses_pc,
-    total_liabilities_sum,
-    total_liabilities_pc,
-    free_cash_flow_sum,
-    free_cash_flow_pc,
-    revenues_sum,
-    revenues_pc,
-    total_assets_sum,
-    total_assets_pc
-  ) |>
-  rename_with(~ str_replace(., "_sum", ""), ends_with("_sum"))
-
+city_data_summary <- create_entity_summary(city_data_temp)
 # Write the summary to CSV
 write_csv(city_data_temp, "output/data_validation/city_data_temp.csv")
 write_csv(city_data_summary, "output/data_validation/city_data_summary.csv")
-
-
-
 
 # Process School Data Summary
 school_data_summary <- school_data_temp |>
@@ -201,7 +103,7 @@ school_data_summary <- school_data_temp |>
     year == 2021 ~ enrollment_21,
     year == 2022 ~ enrollment_22,
     TRUE ~ NA_real_  # Assign NA for any other years, if applicable
-  )) |>
+  )) |> 
   mutate(
     debt_ratio = total_liabilities / total_assets,
     net_net_opeb_liability = net_opeb_liability - net_opeb_assets,
@@ -241,12 +143,8 @@ school_data_summary <- school_data_temp |>
   ) |>
   rename_with(~ str_replace(., "_sum", ""), ends_with("_sum"))
 
-
 write_csv(school_data_temp, "output/data_validation/school_data_temp.csv")
 write_csv(school_data_summary, "output/data_validation/school_data_summary.csv")
-
-
-
 
 
 
@@ -257,6 +155,28 @@ state_data_temp |>
   head(10) |>
   select(state.name, total_liabilities)
 
+# bottom 10 for total_liabilities
+state_data_temp |>
+  filter(year == 2022) |>
+  arrange(desc(total_liabilities)) |>
+  tail(10) |>
+  select(state.name, total_liabilities)
+
+# top 10 total liabilities per cap
+state_data_temp  %>% 
+filter(year == 2022)  %>% 
+  mutate(total_liabilities_pc = total_liabilities/population) %>% 
+  arrange(desc(total_liabilities_pc)) %>% 
+  select(state.name, total_liabilities_pc) %>% 
+  head(10)
+  
+# bottom 10 total liabilities per cap
+  state_data_temp  %>% 
+    filter(year == 2022)  %>% 
+    mutate(total_liabilities_pc = total_liabilities/population) %>% 
+    arrange(desc(total_liabilities_pc)) %>% 
+    select(state.name, total_liabilities_pc) %>% 
+  tail(10)
 
 county_data_temp |>
   filter(year == 2022) |>
@@ -313,6 +233,7 @@ state_data_temp |>
   head(10) |>
   select(state.name, debt_ratio)
 
+#top 10 county debt ratios
 county_data_temp |>
   filter(year == 2022) |>
   mutate(debt_ratio = total_liabilities / total_assets) |>
@@ -430,7 +351,7 @@ school_data_temp |>
 
 
 
-# State Page
+####State Page####
 
 # From FY 2020 through 2022, 47 states saw increases in revenues. 
 # Alaska, Michigan, and Wyoming were the three states that did not
@@ -482,7 +403,7 @@ state_data_temp |>
          free_cash_flow_change = free_cash_flow_2022 - free_cash_flow_2020) |>
   arrange(desc(free_cash_flow_change)) |>
   select(state.name, free_cash_flow_2020, free_cash_flow_2022, free_cash_flow_change) |>
-  filter(free_cash_flow_change > 0)
+  filter(free_cash_flow_change > 0) 
 
 
 # At the end of the 2022 fiscal year, the 50 states held an aggregate of 
@@ -571,12 +492,11 @@ net_liab_state_10 <- state_data_temp |>
 net_liab_state_10/net_liab_state[3]
 
 
-# County Page
+####County Page####
 
 # Of the 100 most populous counties in the United States, all counties increased 
 # their total assets betwee 2020 and 2022, the city and county of San Francisco 
 # and Denver County, CO did so dramatically. 
-
 
 county_takeaway_1 <- county_data_temp |>
   filter(year %in% c(2020, 2022)) |>
@@ -612,7 +532,7 @@ county_takeaway_3 <- county_data_temp |>
   filter(year == 2022) |>
   mutate(free_cash_flow = revenues - (expenses + current_liabilities),
          free_cash_flow_pc = free_cash_flow / population) |>
-  arrange(free_cash_flow_pc) |>
+  arrange(free_cash_flow_pc) |> 
   select(name, state.name, free_cash_flow_pc)
 
 
@@ -678,16 +598,16 @@ county_takeaway_6b <- county_data_temp |>
 
 
 
-# City Page
+####City Page####
 
-# Of the 99 municipalities in the top 100 that reported in FY 2022, all but one 
+# Of the 100 municipalities in the top 100 that reported in FY 2022, all but one 
 # (Long Beach, CA) increased total assets in 2022. Newark, NJ hasn’t reported its 
 # 2022 information.
 
 city_takeaway_1 <- city_data_temp |>
   filter(year %in% c(2020, 2022)) |>
   mutate(name = paste0(name,  ", ",state.name)) |>
-  select(name, year, total_assets, population) |>
+  select(name, year, total_assets, population) |> 
   mutate(total_assets_pc = total_assets / population) |>
   select(-total_assets, -population) |>
   pivot_wider(names_from = "year", values_from = "total_assets_pc") |>
@@ -698,10 +618,12 @@ city_takeaway_1 <- city_data_temp |>
 
 
 # Most municipal governments’ debt ratios, defined as the proportion of total 
-# liabilities to total assets, decreased from 2020 to 2022. Nine municipalities 
-# had modest increases in their debt ratios during that span: Glendale, AZ, 
-# Aurora, CO, Tampa, FL, Boise, ID, Minneapolis, MN, Saint Paul, MN, 
-# Kansas City, MO, Raleigh, NC, and Garland, TX.
+# liabilities to total assets, decreased from 2020 to 2022. Twelve municipalities 
+# had modest increases in their debt ratios during that span: 
+#Santa Ana, CA, Boise, ID, Saint Paul, MN, Minneapolis, MN, 
+#Long Beach, CA, Tampa, FL, Fayetteville, NC, Irving, TX, Garland, TX, 
+#Aurora, CO, and Kansas City, MO, and Glendale, AZ.
+
 
 city_takeaway_2 <- city_data_temp |>
   filter(year %in% c(2020, 2022)) |>
@@ -712,7 +634,6 @@ city_takeaway_2 <- city_data_temp |>
   mutate(debt_ratio_change = `2022` - `2020`) |>
   arrange(debt_ratio_change) |>
   select(name, `2020`, `2022`, debt_ratio_change) 
-
 
 
 # A positive free cash flow indicates the municipal government has the capacity 
@@ -817,18 +738,24 @@ city_takeaway_7 <- city_data_temp |>
 city_takeaway_7/city_takeaway_5[3] * 100
 
 
-
-
-# School Page
+####School Page####
 
 # Most school districts increased their total assets, such as Los Angeles Unified
 # School District, CA, San Diego Unified School District, CA, and Dallas 
-# Independent School District, TX from FY 2020 to 2022. Three districts had small 
-# decreases in total assets: Lewisville Independent School District in Texas,
+# Independent School District, TX from FY 2020 to 2022. Three districts
+# decreased their total assets per capita: Lewisville Independent School District in Texas,
 # Forsyth County Board of Education in Georgia, and Cumberland County Board of 
-# Education in North Carolina. Additionally, Boston Public Schools in 
-# Massachusetts reported zero total assets and total liabilities over the period.
+# Education in North Carolina. 
 
+# raw change
+school_data_temp %>% select(name, total_assets) %>% 
+  filter(year %in% c(2020, 2022)) %>% 
+  pivot_wider(names_from = year, values_from = total_assets) %>% 
+  mutate(increase = `2022` - `2020`) %>% 
+  #filter(increase = FALSE) %>% 
+  View()
+
+# per capita change
 school_takeaway_1 <- school_data_temp |>
   filter(year %in% c(2020, 2022)) |>
   mutate(enrollment = case_when(
