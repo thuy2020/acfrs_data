@@ -332,7 +332,7 @@ dw_school_data_growth <- school_data_growth |>
     expenses_growth = expenses_growth * 100
   )
 
-dw_school_data_growth %>% select(name, name_nces_22) %>% View()
+dw_school_data_growth %>% select(name, name_nces_22) 
 
 write_csv(dw_school_data_growth, "output/dw_school_data_growth.csv")
 
