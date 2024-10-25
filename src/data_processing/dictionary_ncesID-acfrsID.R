@@ -2,6 +2,7 @@ library(tidyverse)
 library(stringr)
 library(tidyr)
 library(dplyr)
+source("src/data_processing/nces.R")
 
 # HSD = High School District
 # CHSD = Community High School District
@@ -1042,13 +1043,13 @@ dictionary_1234567_old <- rbind(round1234, round5, round6, round7, dictionary_ol
 # keep the inflated rows out
   add_count(id) %>% filter(n==1) %>% select(-n) %>%
 
-
 # take out some acfrs already deleted from acfrs database
-  filter(!id %in% c("30408", "76973", "87263"))
+  filter(!id %in% c("30408", "76973", "87263")) %>% 
+  
+# filter out wrong matches
+  filter(!ncesID %in% c("0618810"))
 
 
-
-source("nces.R")
 
 #check inflated id   
 rbind(round1234, round5, round6, round7, dictionary_old) %>% 
@@ -1102,9 +1103,34 @@ dictionary <- dictionary_1234567_old %>%
   rbind(inflated_dictionary_corrected) %>% 
   rbind(round10_minesota) %>% 
   rbind(round11)  %>% 
-  rbind(round12)
+  rbind(round12) %>% 
+  #filter out entities that were removed from database OR wrong matches
+  filter(!id %in% c("168053", "1268310")) %>% 
+
+  #fixing wrong pairs
+  mutate(ncesID = case_when(id == "225139" ~ "3406540",
+                            id == "42008" ~ "3412060",
+                            id == "37130" ~ "3904778",
+                            id == "37201" ~ "3904849",
+                            id == "37134" ~ "3904945",
+                            id == "37260" ~ "3904790",
+                            id == "37149" ~ "3904809",
+                            id == "37307" ~ "3905058",
+                            id == "49866" ~ "3904627",
+                            id == "42545" ~ "4810140",
+                            id == "39070" ~ "4813410",
+                            id == "39183" ~ "4813680",
+                            id == "163540" ~ "4816380",
+                            id == "38814" ~ "4818120",
+                            id == "45440" ~ "4835560",
+                            id == "163660" ~ "4823730",
+                            id == "65007" ~ "3904853",
+                            
+                        
+                            TRUE ~ ncesID)) 
   
-dictionary %>% add_count(id) %>% 
-  distinct(ncesID) %>% nrow()
+  
+  
+  
   
 saveRDS(dictionary, "data/dictionary.RDS")
