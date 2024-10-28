@@ -177,7 +177,8 @@ county_gov_all <- county_gov %>%
   #removing some duplicate
   #TODO: trace this back to initial join to remove dup from there
   filter(!(name %in% c("city and county of honolulu", 
-                       "city and county of san francisco") & (!is.na(geo_id)))) 
+                       "city and county of san francisco") & (is.na(geo_id))))  
+
   
 #append URL
 county_all <- append_url(county_gov_all) %>% 

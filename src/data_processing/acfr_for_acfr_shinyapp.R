@@ -17,9 +17,9 @@ d <- rbind(
     mutate(category = "State"),
   county_all %>% select(all_of(fields_to_display), population) %>% 
     mutate(category = "Counties"),
-  place_division_gov %>% select(all_of(fields_to_display), population) %>% 
+  municipality_all %>% select(all_of(fields_to_display), population) %>% 
     mutate(category = "Municipalities"),
-  school_districts %>% 
+  school_districts_all %>% 
     select(all_of(fields_to_display), enrollment_22) %>% 
     mutate(category = "School Districts") %>% 
     rename(population = enrollment_22) 
