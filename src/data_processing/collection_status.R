@@ -43,8 +43,8 @@ county_gov_all %>% #select(state, name, population, year) %>%
 
 # those missing 2023
 anti_join(county_gov %>% filter(year == 2022) %>% select(state.abb, name, id, population), 
-          county_gov %>% filter(year == 2023) %>% select(state.abb, name, id)) %>% View()
-#write.csv("tmp/missing_counties_23.csv")
+          county_gov %>% filter(year == 2023) %>% select(state.abb, name, id)) %>% 
+#write.csv("tmp/missing_counties_fy23_Nov2024.csv")
 
 
 top200_county_4years %>% select(state.abb, name, year, id) %>% 
@@ -79,7 +79,6 @@ missing_county <- top200_county_4years %>%
 city_gov %>% filter(year == 2022) %>% 
   summarise(collected_pop = sum(population, na.rm = TRUE))
 
-View()
 # Why so few cities?
 anti_join(city_gov %>% filter(year == 2022) %>% select(state.abb, name, population), 
           city_gov %>% filter(year == 2023) %>% select(state.abb, name, population)) %>% View()

@@ -45,15 +45,10 @@ anti_join(county_gov %>% filter(year == 2022) %>% select(state.abb, name, id, po
           county_gov %>% filter(year == 2023) %>% select(state.abb, name, id)) %>% 
 View()
 
-
-top200_county_4years %>% select(state.abb, name, year, id) %>% 
-  add_count(id) %>% select(-year) %>% 
-  distinct()%>% filter(n<4) %>% View()
-
 # missing county top200
-missing_county <- top200_county_4years %>% 
-  select(state.abb, name, id, year, geo_id) %>% add_count(geo_id) %>% 
-  filter(n <3)
+missing_county_top200 <- top200_county_4years %>% select(state.abb, name, year, id) %>% 
+  add_count(id) %>% select(-year) %>% 
+  distinct()%>% filter(n<4) 
 
 
 #TODO: Checking on 2 missing - as of June 7, 2024
@@ -61,21 +56,19 @@ missing_county <- top200_county_4years %>%
 # MA norfolk county 2022: https://www.norfolkcounty.org/county_commission/about_norfolk_county/annual_reports.php#outer-31
 
 # missing county top100 year 2023
-# MI macomb county https://www.macombgov.org/departments/finance-department/financial-transparency/annual-comprehensive-financial
-# TX hidalgo county https://www.hidalgocounty.us/1288/Annual-Financial-Report
-# NJ middlesex county https://www.middlesexcountynj.gov/government/departments/department-of-finance/financial-information/-folder-157
+
 # PA montgomery county https://www.montgomerycountypa.gov/331/Annual-Financial-Statements-Reports
-# OH hamilton county https://www.hamiltoncountyohio.gov/government/departments/budget_and_strategic_initiatives/annual_information_statement
+# MI macomb county https://www.macombgov.org/departments/finance-department/financial-transparency/annual-comprehensive-financial
 # WA snohomish county https://sao.wa.gov/reports-data/audit-reports?SearchText=snohomish%20county&StartDate=&EndDate=
 # OK oklahoma county https://www.sai.ok.gov/audit-reports/?counties=55&years=%2C2023&orgs=
 # MA 	norfolk county
 # NJ hudson county https://www.hcnj.us/finance/
 # CO 	denver county https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Department-of-Finance/Financial-Reports/Annual-Comprehensive-Financial-Report
 # OK tulsa county https://countyclerk.tulsacounty.org/Home/Reports
-# UT utah county https://www.utahcounty.gov/Dept/ClerkAud/BudgetFinance/FinancialReports.asp
+
 # PA 	bucks county https://www.buckscounty.gov/253/Finance-Division
 # NJ monmouth county https://www.visitmonmouth.com/page.aspx?Id=2166
-#NJ Essex county https://essexcountynj.org/treasurer/
+
 
 
 ####Cities####
@@ -90,7 +83,7 @@ city_gov %>% select(state.abb, year, name) %>%
   group_by(year) %>% 
   summarise(count = n())
 
-city_gov %>% select(state, name, population, year) %>% 
+city_gov %>% select(state.abb, name, population, year) %>% 
   group_by(year) %>% 
   summarise(collected_pop = sum(population, na.rm = TRUE))
 
@@ -230,7 +223,7 @@ missing_sd_top300 <- top300_school_districts %>%
 # 16-20 NY new york city geographic district # 2, 10, 20, 24, 31
 
 ####All acfrs sd####
-d_app <- school_districts %>% 
+d_app <- school_districts_all %>% 
   select(2:revenues, enrollment_22) %>% 
   #group_by(state.name, year) %>% 
   mutate(across(current_assets:revenues, list(tot = ~ sum(., na.rm = TRUE)), .names = "sum_{col}")) %>% 

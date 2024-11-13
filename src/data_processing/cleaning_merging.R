@@ -331,6 +331,8 @@ filter(category == "School District") %>%
 #append URLs
 school_districts_all <- append_url(school_districts_) %>% select(-identifier)
 
+####
+
 #Top 100
 top100_school_districts <- school_districts_all %>% 
   filter(id %in% dict_top100_ELSI$id) %>% 
@@ -368,7 +370,7 @@ top300_school_districts <- school_districts_all %>%
 top100_school_districts %>% write.csv("output/top100_sd.csv")
 top200_school_districts %>% write.csv("output/top200_sd.csv")
 school_districts_all %>% write.csv("output/all_schooldistricts_4years.csv")
-
+ 
 
 ####Entity ID####
 state_gov %>% select(state.name, state.abb, name, id) %>% distinct() %>% 
@@ -380,5 +382,5 @@ municipality_all %>% select(state.name, state.abb, name, id) %>% distinct() %>%
 city_gov %>% select(state.name, state.abb, name, id) %>% distinct() %>% 
   saveRDS("data/cityID.RDS")
 
-
+cat("End of script")
 

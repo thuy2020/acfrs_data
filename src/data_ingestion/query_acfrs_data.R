@@ -99,3 +99,4 @@ for (con in all_cons) {
 all_cons <- dbListConnections(drv)
 print(all_cons)  
 
+

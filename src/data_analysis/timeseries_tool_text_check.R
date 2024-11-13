@@ -4,7 +4,8 @@ library(jsonlite)
 # source("census.R")
 
 ####read in data####
-state_data_temp <- read_csv("output/all_states_4years_2020_2023.csv")
+state_data_temp <- read_csv("output/all_states_4years_2020_2023.csv") %>% 
+  filter(year != 2023)
 county_data_temp <- read_csv("output/top100_counties.csv") %>% 
   filter(year != 2023)
 city_data_temp <- read_csv("output/top200_cities.csv") %>% 
@@ -21,7 +22,7 @@ school_data_temp <- read_csv("output/top100_sd.csv") %>%
   arrange(desc(enrollment_20)) %>%
   slice_head(n = 100)
 
-####summary data####
+####Summary data####
 #function to summary data each category
 create_entity_summary <- function(data) {
   data %>% 
@@ -74,26 +75,23 @@ create_entity_summary <- function(data) {
     ) |>
     rename_with(~ str_replace(., "_sum", ""), ends_with("_sum"))}
 
+#state summary#
 state_data_summary <- create_entity_summary(state_data_temp)
 
-# Write the summary to CSV
 
 write_csv(state_data_summary, "output/data_validation/state_data_summary.csv")
 
-####
 county_data_summary <- create_entity_summary(county_data_temp)
 
-# Write the summary to CSV
 write_csv(county_data_temp, "output/data_validation/county_data_temp.csv")
 write_csv(county_data_summary, "output/data_validation/county_data_summary.csv")
 
-
+#city
 city_data_summary <- create_entity_summary(city_data_temp)
-# Write the summary to CSV
 write_csv(city_data_temp, "output/data_validation/city_data_temp.csv")
 write_csv(city_data_summary, "output/data_validation/city_data_summary.csv")
 
-# Process School Data Summary
+#School Data Summary
 school_data_summary <- school_data_temp |>
   filter(year != 2023) |>
   drop_na(net_opeb_assets, net_opeb_liability, net_pension_assets, net_pension_liability,
@@ -146,7 +144,7 @@ school_data_summary <- school_data_temp |>
 write_csv(school_data_temp, "output/data_validation/school_data_temp.csv")
 write_csv(school_data_summary, "output/data_validation/school_data_summary.csv")
 
-
+#####Top 10 in each category#####
 
 # Get the top 10 for total_liabilities
 state_data_temp |>
@@ -164,20 +162,19 @@ state_data_temp |>
 
 # top 10 total liabilities per cap
 state_data_temp  %>% 
-filter(year == 2022)  %>% 
+  filter(year == 2022)  %>% 
   mutate(total_liabilities_pc = total_liabilities/population) %>% 
   arrange(desc(total_liabilities_pc)) %>% 
   select(state.name, total_liabilities_pc) %>% 
   head(10)
-  
-# bottom 10 total liabilities per cap
-  state_data_temp  %>% 
-    filter(year == 2022)  %>% 
-    mutate(total_liabilities_pc = total_liabilities/population) %>% 
-    arrange(desc(total_liabilities_pc)) %>% 
-    select(state.name, total_liabilities_pc) %>% 
-  tail(10)
 
+# bottom 10 total liabilities per cap
+state_data_temp  %>% 
+  filter(year == 2022)  %>% 
+  mutate(total_liabilities_pc = total_liabilities/population) %>% 
+  arrange(desc(total_liabilities_pc)) %>% 
+  select(state.name, total_liabilities_pc) %>% 
+  tail(10)
 county_data_temp |>
   filter(year == 2022) |>
   arrange(desc(total_liabilities)) |>
@@ -190,7 +187,6 @@ city_data_temp |>
   arrange(desc(total_liabilities)) |>
   head(10) |>
   select(name, state.name, total_liabilities)
-
 
 school_data_temp |>
   filter(year == 2022) |>
@@ -256,7 +252,6 @@ school_data_temp |>
   arrange(desc(debt_ratio)) |>
   head(10) |>
   select(name, state.name, debt_ratio)
-
 
 
 # Get the top 10 for free_cash_flow
@@ -349,8 +344,6 @@ school_data_temp |>
 
 
 
-
-
 ####State Page####
 
 # From FY 2020 through 2022, 47 states saw increases in revenues. 
@@ -408,7 +401,7 @@ state_data_temp |>
 
 # At the end of the 2022 fiscal year, the 50 states held an aggregate of 
 # $1.03 trillion in employee-related debt, including $502 billion in net public 
-# pension liabilities and $525 billion in net other post-employment benefit 
+# pension liabilities and $524 billion in net other post-employment benefit 
 # liabilities, such as promised medical benefits for retirees.
 state_data_temp |>
   filter(year == 2022) |>
@@ -536,11 +529,14 @@ county_takeaway_3 <- county_data_temp |>
   select(name, state.name, free_cash_flow_pc)
 
 
-# At the end of 2022, the governments representing the 100 most populous counties
-# across America owed $447.3 billion in total debt, including an aggregate of 
-# $151.7 billion in employee-related benefits debt—$71.9 billion as net public 
-# pension liabilities and $79.8 as net other post-employment benefit liabilities,
-# such as medical benefits promised to retirees.
+# At the end of 2022, the governments representing the 100 most populous counties across America 
+# owed $448.6 billion in total debt, including an aggregate of $151.2 billion in employee-related 
+# benefits debt—$71.3 billion as net public pension liabilities and $79.9 as net other 
+# post-employment benefit liabilities, such as medical benefits promised to retirees.
+
+county_takeaway_4_0 <- county_data_temp |>
+  filter(year == 2022) |>
+  summarise(tot = sum(total_liabilities)/1e8)
 
 county_takeaway_4 <- county_data_temp |>
   filter(year == 2022) |>
@@ -556,7 +552,7 @@ county_takeaway_4 <- county_data_temp |>
 
 
 # The 10 most indebted counties, in terms of total liabilities, were responsible
-# for more than half (56.4%) of the total liabilities held by the 100 most populous
+# for more than half (56.5%) of the total liabilities held by the 100 most populous
 # counties.
 
 county_takeaway_5 <- county_data_temp |>
@@ -600,9 +596,8 @@ county_takeaway_6b <- county_data_temp |>
 
 ####City Page####
 
-# Of the 100 municipalities in the top 100 that reported in FY 2022, all but one 
-# (Long Beach, CA) increased total assets in 2022. Newark, NJ hasn’t reported its 
-# 2022 information.
+# In FY 2022, all but one (Long Beach, CA) of the top 100 most populous municipalities 
+# increased total assets in 2022.
 
 city_takeaway_1 <- city_data_temp |>
   filter(year %in% c(2020, 2022)) |>
@@ -742,10 +737,7 @@ city_takeaway_7/city_takeaway_5[3] * 100
 
 # Most school districts increased their total assets, such as Los Angeles Unified
 # School District, CA, San Diego Unified School District, CA, and Dallas 
-# Independent School District, TX from FY 2020 to 2022. Three districts
-# decreased their total assets per capita: Lewisville Independent School District in Texas,
-# Forsyth County Board of Education in Georgia, and Cumberland County Board of 
-# Education in North Carolina. 
+# Independent School District, TX from FY 2020 to 2022. 
 
 # raw change
 school_data_temp %>% select(name, total_assets) %>% 
@@ -772,7 +764,7 @@ school_takeaway_1 <- school_data_temp |>
 
 
 
-# From 2020 to 2022, only four school districts reported an increase in debt 
+# From 2020 to 2022, only 3 school districts reported an increase in debt 
 # ratio, the ratio of total liabilities to total assets, over the period: 
 # Howard County Board of Education in Maryland, Knox County Schools in Kentucky, 
 # Board of Education of Anne Arundel County in Maryland, and Shelby County Board 

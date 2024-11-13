@@ -27,4 +27,3 @@ d <- rbind(
   filter(year != 2023)
 
 d %>% saveRDS("data/data_for_acfr_shinyapp.RDS")
-
