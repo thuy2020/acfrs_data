@@ -12,7 +12,7 @@ county_data_temp <- read_csv("output/top100_counties.csv") %>%
 
 city_data_temp <- read_csv("output/top200_cities.csv") %>% 
   filter(year != 2023) |>
-  filter(name != "denver county") |>
+  filter(name != "denver county") |> 
   group_by(year) %>%                      
   arrange(desc(population)) %>%           
   slice_head(n = 100) %>%                 

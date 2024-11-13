@@ -286,13 +286,15 @@ special_cities <- acfrs_general_purpose %>%
   select(-identifier)
 
 city_gov <- acfrs_city %>% rbind(special_cities) %>% 
+  #avoid double count - these entities are counted in county_gov
+  filter(name != "denver county") %>% 
   select(any_of(fields_to_select), url) 
 
 #Top 100
 top100_cities <- city_gov %>% 
   filter((geo_id %in% census_city_top100$geo_id) | 
            name == "district of columbia") %>% distinct() %>% 
-  mutate(population = ifelse(name == "district of columbia", 689546, population))
+  mutate(population = ifelse(name == "district of columbia", 689546, population)) 
 
 
 #Top 200 cities
@@ -300,9 +302,7 @@ top200_cities <- city_gov %>%
   filter((geo_id %in% census_city_top200$geo_id) | 
            name == "district of columbia") %>% distinct() %>% 
   mutate(population = ifelse(name == "district of columbia", 689546, population))  
-  # group_by(year) %>% 
-  # summarise(n = n())
-  # 
+
 
 #Top 100 for data tool 
 top100_cities %>% write.csv("output/top100_cities.csv")

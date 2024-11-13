@@ -160,15 +160,21 @@ census_incorporated_city <- census_all %>% filter(sumlev == 162) %>%
 
 #get top 100
 census_city_top100 <- census_incorporated_city %>% 
-  arrange(desc(population)) %>% slice(1:100) %>% 
-  mutate(#name_census = str_remove_all(name_census, " city$"),
-         name_census = str_trim(name_census)) %>% 
+  arrange(desc(population)) %>% 
+  
+  #although Denver city is in top100 cities, it's already counted in counties, 
+  #so take a list of top100 excluding Denver city 
+  filter(name_census != "denver city") %>%
+  slice(1:100) %>% 
+  mutate(name_census = str_trim(name_census)) %>% 
   select(state.abb, name_census, population, geo_id)
 
 census_city_top200 <- census_incorporated_city %>% 
-  arrange(desc(population)) %>% slice(1:200) %>% 
-  mutate(#name_census = str_remove_all(name_census, " city$"),
-    name_census = str_trim(name_census)) %>% 
+  arrange(desc(population)) %>% 
+  #filter(name_census != "denver city") %>%
+  
+  slice(1:200) %>% 
+  mutate(name_census = str_trim(name_census)) %>% 
   select(state.abb, name_census, population, geo_id)
 
 ##### Middle file - Use this file to bridge geo_id from census data to into acfrs_general_purpose
