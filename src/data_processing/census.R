@@ -158,13 +158,16 @@ census_incorporated_city <- census_all %>% filter(sumlev == 162) %>%
   filter(str_detect(name_census, "city$")) %>% 
   filter(funcstat %in% c("A", "C")) 
 
-#get top 100
+#get top 100 census, excluding Denver city, Philadelphia city
 census_city_top100 <- census_incorporated_city %>% 
   arrange(desc(population)) %>% 
   
   #although Denver city is in top100 cities, it's already counted in counties, 
   #so take a list of top100 excluding Denver city 
   filter(name_census != "denver city") %>%
+  
+  #take philadelphia city out, already counted in philadelphia county
+  filter(!(name_census == "philadelphia city" & state.name == "Pennsylvania")) %>% 
   slice(1:100) %>% 
   mutate(name_census = str_trim(name_census)) %>% 
   select(state.abb, name_census, population, geo_id)
@@ -173,6 +176,8 @@ census_city_top200 <- census_incorporated_city %>%
   arrange(desc(population)) %>% 
   #filter(name_census != "denver city") %>%
   
+  #take philadelphia city out, already counted in philadelphia county
+  filter(!(name_census == "philadelphia city" & state.name == "Pennsylvania")) %>% 
   slice(1:200) %>% 
   mutate(name_census = str_trim(name_census)) %>% 
   select(state.abb, name_census, population, geo_id)

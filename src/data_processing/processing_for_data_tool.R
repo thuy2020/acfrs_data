@@ -18,7 +18,6 @@ city_data_temp <- read_csv("output/top200_cities.csv") %>%
   slice_head(n = 100) %>%                 
   ungroup()
 
-
 school_data_temp <- read_csv("output/top100_sd.csv") %>% 
   filter(year != 2023) |>
   filter(name != "detroit public schools community district") |>
