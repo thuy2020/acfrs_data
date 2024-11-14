@@ -94,8 +94,8 @@ write_csv(city_data_summary, "output/data_validation/city_data_summary.csv")
 #School Data Summary
 school_data_summary <- school_data_temp |>
   filter(year != 2023) |>
-  drop_na(net_opeb_assets, net_opeb_liability, net_pension_assets, net_pension_liability,
-          expenses, total_liabilities, revenues, total_assets) |>
+  #drop_na(net_opeb_assets, net_opeb_liability, net_pension_assets, net_pension_liability,
+   #       expenses, total_liabilities, revenues, total_assets) |>
   mutate(enrollment = case_when(
     year == 2020 ~ enrollment_20,
     year == 2021 ~ enrollment_21,
