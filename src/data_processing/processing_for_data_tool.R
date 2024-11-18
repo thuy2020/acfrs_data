@@ -47,9 +47,9 @@ modify_data <- function(data_temp){
     arrange(year, state.name) |>
     select(-`...1`)
 }
-############################
+
 ####### State Data ########
-############################
+
 
 state_data <- modify_data(state_data_temp) 
 
@@ -150,10 +150,8 @@ state_data_json <- toJSON(state_data, auto_unbox = TRUE, pretty = TRUE)
 write(state_data_json, file="output/state_data.json")
 
 
-
-############################
 ####### County Data ########
-############################
+
 
 # clean up data
 county_data <- modify_data(county_data_temp) %>% 
@@ -190,9 +188,9 @@ county_data_json <- toJSON(county_data, auto_unbox = TRUE, pretty = TRUE)
 write(county_data_json, file="output/county_data.json")
 
 
-############################
+
 ######## City Data #########
-############################
+
 
 # clean up data
 city_data <- modify_data(city_data_temp) %>% 
@@ -248,10 +246,12 @@ write_csv(dw_city_data_growth, "output/dw_city_data_growth.csv")
 city_data_json <- toJSON(city_data, auto_unbox = TRUE, pretty = TRUE)
 write(city_data_json, file="output/city_data.json")
 
+#####checking county - city #####
 
-############################
-####### School Data ########
-############################
+
+
+###School Data ########
+
 
 # clean up data
 school_data <- modify_data(school_data_temp) %>% 
@@ -274,7 +274,7 @@ anti_join(school_data_temp %>% filter(year == 2022) %>% ungroup %>%
 school_data_temp %>% filter(year == 2020) %>% ungroup %>%
   select(state.abb, name) #%>% View()
 
-########
+
 school_data_22 <- school_data |>
   filter(year == 2022) |>
   rename_with(~ paste0(., "_22"))
