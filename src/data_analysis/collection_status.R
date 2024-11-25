@@ -15,13 +15,14 @@ state_gov %>%
 
 # state missing 2023
 missing_state <- anti_join(state_gov %>% filter(year == 2022) %>% select(state.abb), 
-          state_gov %>% filter(year == 2023) %>% select(state.abb))
-# Missing states: CA, NV, MS, IL, AZ
+          state_gov %>% filter(year == 2023) %>% select(state.abb, population))
+# Missing states: CA, NV, IL
 #https://www.sco.ca.gov/ard_state_acfr.html
-#https://www.dfa.ms.gov/publications
 #https://controller.nv.gov/FinancialRpts/CAFR/Home/
 # https://illinoiscomptroller.gov/financial-reports-data/find-a-report/comprehensive-reporting/annual-comprehensive-financial-report/
-# AZ has financial report 2023 but not ACFRs 2023: https://gao.az.gov/financials/acfr
+state_gov %>% filter(year == 2022) %>% 
+  filter(!state.abb %in% c("CA", "NV", "IL")) %>% 
+  summarise(tot_pop = sum(population))
 
 ####County####
 missing_county <- anti_join(census_county, county_gov, by = "geo_id") %>% 
@@ -40,6 +41,7 @@ county_gov %>% select(state, name, population, year) %>%
   group_by(year) %>% 
   summarise(collected_pop = sum(population, na.rm = TRUE))
 
+
 # those missing 2023
 anti_join(county_gov %>% filter(year == 2022) %>% select(state.abb, name, id, population), 
           county_gov %>% filter(year == 2023) %>% select(state.abb, name, id)) %>% 
@@ -50,7 +52,6 @@ missing_county_top200 <- top200_county_4years %>% select(state.abb, name, year, 
   add_count(id) %>% select(-year) %>% 
   distinct()%>% filter(n<4) 
 
-
 #TODO: Checking on 2 missing - as of June 7, 2024
 # PA montgomery county 2022: https://www.montgomerycountypa.gov/Archive.aspx?AMID=45
 # MA norfolk county 2022: https://www.norfolkcounty.org/county_commission/about_norfolk_county/annual_reports.php#outer-31
@@ -58,20 +59,15 @@ missing_county_top200 <- top200_county_4years %>% select(state.abb, name, year, 
 # missing county top100 year 2023
 
 # PA montgomery county https://www.montgomerycountypa.gov/331/Annual-Financial-Statements-Reports
-# MI macomb county https://www.macombgov.org/departments/finance-department/financial-transparency/annual-comprehensive-financial
 # WA snohomish county https://sao.wa.gov/reports-data/audit-reports?SearchText=snohomish%20county&StartDate=&EndDate=
 # OK oklahoma county https://www.sai.ok.gov/audit-reports/?counties=55&years=%2C2023&orgs=
 # MA 	norfolk county
-# NJ hudson county https://www.hcnj.us/finance/
-# CO 	denver county https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Department-of-Finance/Financial-Reports/Annual-Comprehensive-Financial-Report
 # OK tulsa county https://countyclerk.tulsacounty.org/Home/Reports
-
-# PA 	bucks county https://www.buckscounty.gov/253/Finance-Division
-# NJ monmouth county https://www.visitmonmouth.com/page.aspx?Id=2166
+# PA 	bucks county https://www.buckscounty.gov/Archive.aspx?AMID=40
 
 
 
-####Cities####
+####Municipalities####
 city_gov %>% filter(year == 2022) %>% 
   summarise(collected_pop = sum(population, na.rm = TRUE))
 View()
@@ -88,32 +84,8 @@ city_gov %>% select(state.abb, name, population, year) %>%
   summarise(collected_pop = sum(population, na.rm = TRUE))
 
 
-#########Sum of all school districts#########
-
-school_districts_all %>% filter(year == 2022) %>% #View()
-  select(net_pension_liability,
-         net_opeb_liability, 
-         total_liabilities) %>% 
-  summarise(all_NPL = sum(net_pension_liability, na.rm = TRUE),
-            all_opeb = sum(net_opeb_liability, na.rm = TRUE), 
-            all_total_liabilities = sum(total_liabilities, na.rm = TRUE)) %>%
-  mutate(across(everything(), comma)) 
-
-school_districts_all %>% filter(year == 2023) %>% #View()
-  select(net_pension_liability,
-         net_opeb_liability, 
-         total_liabilities) %>% 
-  summarise(all_NPL = sum(net_pension_liability, na.rm = TRUE),
-            all_opeb = sum(net_opeb_liability, na.rm = TRUE), 
-            all_total_liabilities = sum(total_liabilities, na.rm = TRUE)) %>%
-  mutate(across(everything(), comma)) 
-
-
-
-
 #MA Norfolk 2022: not released yet
 # MA Bristol: have 2022, 2023 but not 2020, 2021
-# Uploaded: Union county 2020, PA montgomery county
 # AL Mobile: should be non-standard 
 
 #Lake County’s Chronically Poor Audit Results Continue
@@ -121,21 +93,12 @@ school_districts_all %>% filter(year == 2023) %>% #View()
 
 #Missing top 100 cities year 2023
 
-# CA bakersfield
-# AL huntsville
-# CO aurora
-# KS wichita
-# NJ jersey city
-# NJ newark
-# NE omaha
-# MN 	minneapolis
-# OH cleveland
-# OH toledo
-# MN saint paul
-# WA spokane
-# WA tacoma
-# WI milwaukee
-# CO Denver
+# CA bakersfield: https://www.bakersfieldcity.us/220/Annual-Comprehensive-Financial-Reports
+# NJ newark https://www.newarknj.gov/departments/finance
+# NE omaha https://finance.cityofomaha.org/
+# MN saint paul https://www.stpaul.gov/ofs/annual-comprehensive-financial-report
+# WA spokane https://my.spokanecity.org/opendata/documents/financial-reports/
+
 
 # Cities in top 200 that are missing 2023
 # state.name	name
@@ -151,19 +114,11 @@ school_districts_all %>% filter(year == 2023) %>% #View()
 # 10	Illinois	aurora
 # 11	Illinois	joliet
 # 12	Louisiana	shreveport
-# 13	Minnesota	saint paul
 # 14	Nebraska	omaha
-# 15	New Jersey	jersey city
 # 16	Ohio	akron
-# 17	Ohio	toledo
 # 18	South Carolina	charleston
 # 19	Washington	kent
-# 20	Washington	spokane
 
-# missing: 1 as of Jul 8, 2024
-#NJ newark 2022
-#MS Jackson 2022
-#NJ patterson 2022
 ####SD####
 
 # collected sd

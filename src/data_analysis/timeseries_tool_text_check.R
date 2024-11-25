@@ -48,10 +48,10 @@ create_entity_summary <- function(data) {
       net_net_opeb_liability_pc = sum(net_net_opeb_liability, na.rm = TRUE) / sum(population[!is.na(net_net_opeb_liability)], na.rm = TRUE),
       net_net_pension_liability_pc = sum(net_net_pension_liability, na.rm = TRUE) / sum(population[!is.na(net_net_pension_liability)], na.rm = TRUE),
       expenses_pc = sum(expenses, na.rm = TRUE) / sum(population[!is.na(expenses)], na.rm = TRUE),
-      total_liabilities_pc = sum(total_liabilities_sum, na.rm = TRUE) / sum(population[!is.na(total_liabilities_sum)], na.rm = TRUE),
-      free_cash_flow_pc = sum(free_cash_flow_sum, na.rm = TRUE) / sum(population[!is.na(free_cash_flow_sum)], na.rm = TRUE),
-      revenues_pc = sum(revenues_sum, na.rm = TRUE) / sum(population[!is.na(revenues_sum)], na.rm = TRUE),
-      total_assets_pc = sum(total_assets_sum, na.rm = TRUE) / sum(population[!is.na(total_assets_sum)], na.rm = TRUE)
+      total_liabilities_pc = sum(total_liabilities_sum, na.rm = TRUE) / sum(population[!is.na(total_liabilities)], na.rm = TRUE),
+      free_cash_flow_pc = sum(free_cash_flow_sum, na.rm = TRUE) / sum(population[!is.na(free_cash_flow)], na.rm = TRUE),
+      revenues_pc = sum(revenues_sum, na.rm = TRUE) / sum(population[!is.na(revenues)], na.rm = TRUE),
+      total_assets_pc = sum(total_assets_sum, na.rm = TRUE) / sum(population[!is.na(total_assets)], na.rm = TRUE)
     ) |>
     select(
       year,

@@ -1132,9 +1132,17 @@ source("src/data_processing/nces.R")
 
 #TODO: Update anything after this. DO NOT run the above code again. 
 
+dict_13 <- read.csv("data/_dictionary_13.csv") %>% 
+  select(id, ncesID, state.abb, name) %>% 
+  mutate(across(everything(), as.character))
+
+
 dictionary <- readRDS("data/dictionary_tmp.RDS") %>% 
   mutate(id = case_when(ncesID == "4700148" ~ "87787",
-                        TRUE ~ id))
+                        ncesID == "3622050" ~ "36342",
+                        TRUE ~ id)) %>% 
+  rbind(dict_13)
+
 #take out all ids that are mismatched, then join back with the excel file. 
 
 # update changes here
