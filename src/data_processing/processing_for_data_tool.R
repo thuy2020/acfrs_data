@@ -219,17 +219,21 @@ city_data_growth <- city_data_growth |>
                              "San Francisco, California",
                              name_state)) |>
   left_join(cityCoordinates, by = c("name_state" = "name_state"))|>
-  mutate(median_hh_income_normalized = rescale(median_hh_income_21_22, to = c(-50, 50))) |>
-  # manually add latitude and longitude for name == "District of Columbia", "Saint Paul", and "Fayetteville" North Carolina
+  mutate(median_hh_income_normalized = rescale(median_hh_income_21_22, to = c(-50, 50))) %>% 
+  # manually add latitude and longitude for name == "District of Columbia", 
+  #"Saint Paul", and "Fayetteville" North Carolina, MA Worcester
   mutate(
     latitude = ifelse(name == "District Of Columbia", 38.8951,
-                      ifelse(name == "Saint Paul, ND", 44.9537,
-                             ifelse(name == "Fayetteville, NC", 35.0526, latitude))),
+                      ifelse(name == "Saint Paul, MN", 44.9537,
+                             ifelse(name == "Fayetteville, NC", 35.0526,
+                                    ifelse(name == "Worcester, MA", 42.2626,
+                                           ifelse(name == "Fontana, CA", 34.0922, latitude))))),
     longitude = ifelse(name == "District Of Columbia", -77.0364,
                        ifelse(name == "Saint Paul, MN", -93.0892,
-                              ifelse(name == "Fayetteville, NC", -78.8784, longitude)))
+                              ifelse(name == "Fayetteville, NC", -78.8784,
+                                     ifelse(name == "Worcester, MA", -71.8023,
+                                            ifelse(name == "Fontana, CA", -117.4350, longitude)))))
   )
-
 
 city_data_growth_json <- toJSON(city_data_growth, auto_unbox = TRUE, pretty = TRUE)
 write(city_data_growth_json, file="output/city_data_growth.json")

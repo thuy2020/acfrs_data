@@ -91,6 +91,9 @@ city_data_summary <- create_entity_summary(city_data_temp)
 write_csv(city_data_temp, "output/data_validation/city_data_temp.csv")
 write_csv(city_data_summary, "output/data_validation/city_data_summary.csv")
 
+city_data_temp %>% filter(year == 2022) %>% View()
+
+
 #School Data Summary
 school_data_summary <- school_data_temp |>
   filter(year != 2023) |>
@@ -597,7 +600,8 @@ county_takeaway_6b <- county_data_temp |>
 
 ####City Page####
 
-# In FY 2022, all but one (Long Beach, CA) of the top 100 most populous municipalities 
+# In FY 2022, all but one (Long Beach, CA) of the top 100 most populous 
+#municipalities 
 # increased total assets in 2022.
 
 city_takeaway_1 <- city_data_temp |>
@@ -611,6 +615,18 @@ city_takeaway_1 <- city_data_temp |>
   arrange(desc(asset_change)) |>
   select(name, `2020`, `2022`, asset_change)
 
+
+#In 2022, governments representing the 100 most populous municipalities across 
+#America owed $252.9 billion in employee-related debt, including 
+#$129 billion in net public pension liabilities and 
+#$123.9 billion in net other post-employment benefit liabilities, 
+#such as medical benefits promised to retirees.
+
+city_data_temp %>% 
+  filter(year == 2022) %>% 
+  summarise(tot_pension = sum(net_pension_liability, na.rm = TRUE),
+            tot_opeb = sum(net_opeb_liability, na.rm = TRUE),
+            total_pension_opeb = tot_pension + tot_opeb)
 
 
 # Most municipal governments’ debt ratios, defined as the proportion of total 

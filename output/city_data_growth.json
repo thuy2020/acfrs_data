@@ -1531,6 +1531,8 @@
     "total_assets_growth": 0.1421,
     "assets_liab_ratio_growth": -0.0013,
     "modified_revenues_growth": -0.52,
+    "latitude": 34.0922,
+    "longitude": -117.435,
     "median_hh_income_normalized": -1.5896
   },
   {
@@ -2549,6 +2551,8 @@
     "net_pension_liability_growth": -0.3969,
     "revenues_growth": 0.1178,
     "modified_revenues_growth": -0.4751,
+    "latitude": 42.2626,
+    "longitude": -71.8023,
     "median_hh_income_normalized": -27.051
   },
   {
@@ -2717,6 +2721,7 @@
     "total_assets_growth": 0.1087,
     "assets_liab_ratio_growth": 0.1731,
     "modified_revenues_growth": -37.2993,
+    "latitude": 44.9537,
     "longitude": -93.0892,
     "median_hh_income_normalized": -24.6391
   },
