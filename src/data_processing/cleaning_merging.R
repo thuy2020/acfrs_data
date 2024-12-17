@@ -316,10 +316,10 @@ top100_cities <- city_gov %>%
 
 #TODO: changer WA to before the Hgarb update on 2024-12-11
   mutate(
-    current_liabilities = if_else(name == "spokane" & state.name == "Washington", 36792571, current_liabilities),
-    net_pension_liability = if_else(name == "spokane" & state.name == "Washington", 0, net_pension_liability),
-    net_opeb_liability = if_else(name == "spokane" & state.name == "Washington", 0, net_opeb_liability),
-    current_assets = if_else(name == "spokane" & state.name == "Washington", 150943988, current_assets)
+    current_liabilities = if_else(name == "spokane" & state.name == "Washington" & year == 2022, 36792571, current_liabilities),
+    net_pension_liability = if_else(name == "spokane" & state.name == "Washington" & year == 2022, 0, net_pension_liability),
+    net_opeb_liability = if_else(name == "spokane" & state.name == "Washington" & year == 2022, 0, net_opeb_liability),
+    current_assets = if_else(name == "spokane" & state.name == "Washington" & year == 2022, 150943988, current_assets)
   )
   
 
