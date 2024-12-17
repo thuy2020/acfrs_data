@@ -314,12 +314,12 @@ top100_cities <- city_gov %>%
            name == "district of columbia") %>% distinct() %>% 
   mutate(population = ifelse(name == "district of columbia", 689546, population)) %>% 
 
-#TODO: changer WA to before the Hgarb update on 2024-12-11
+#TODO: change Spokane WA to before the Hgarb update on 2024-12-11
   mutate(
     current_liabilities = if_else(name == "spokane" & state.name == "Washington" & year == 2022, 36792571, current_liabilities),
     net_pension_liability = if_else(name == "spokane" & state.name == "Washington" & year == 2022, 0, net_pension_liability),
     net_opeb_liability = if_else(name == "spokane" & state.name == "Washington" & year == 2022, 0, net_opeb_liability),
-    net_pension_assets = if_else(name == "spokane" & state.name == "Washington" & year == 2022, 93475431, net_pension_assets),
+    net_opeb_assets = if_else(name == "spokane" & state.name == "Washington" & year == 2022, 93475431, net_opeb_assets),
     current_assets = if_else(name == "spokane" & state.name == "Washington" & year == 2022, 150943988, current_assets)
   )
   
