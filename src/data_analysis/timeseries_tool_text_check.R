@@ -8,7 +8,7 @@ state_data_temp <- read_csv("output/all_states_4years_2020_2023.csv") %>%
   filter(year != 2023)
 county_data_temp <- read_csv("output/top100_counties.csv") %>% 
   filter(year != 2023)
-city_data_temp <- read_csv("output/top200_cities.csv") %>% 
+city_data_temp <- read_csv("output/top100_cities.csv") %>% 
   filter(year != 2023) |>
   filter(name != "denver county") |>
   group_by(year) %>%                      

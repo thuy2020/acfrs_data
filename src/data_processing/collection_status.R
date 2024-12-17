@@ -15,26 +15,37 @@ state_gov %>%
 # state missing 2023
 anti_join(state_gov %>% filter(year == 2022) %>% select(state.abb), 
           state_gov %>% filter(year == 2023) %>% select(state.abb))
-# Missing states: CA, NV, MS, IL, AZ
+# Missing states: CA, NV, IL
 #https://www.sco.ca.gov/ard_state_acfr.html
-#https://www.dfa.ms.gov/publications
 #https://controller.nv.gov/FinancialRpts/CAFR/Home/
 # https://illinoiscomptroller.gov/financial-reports-data/find-a-report/comprehensive-reporting/annual-comprehensive-financial-report/
-# AZ has financial report 2023 but not ACFRs 2023: https://gao.az.gov/financials/acfr
 
 
 ####County####
 
 # count by year
-county_gov_all %>% select(state.abb, year, name) %>% 
+county_gov_all %>% select(state.abb, year, name, population) %>% 
   #filter(year == 2023) %>% View()
   group_by(year) %>% 
-  summarise(count = n())
+  summarise(count = n(), 
+            tot = sum(population, na.rm = TRUE))
+
+consolitated_county <- census_county %>% 
+  filter(funcstat == "C")
+
+counted_as_city <- c("juneau city and borough", "wrangell city and borough", "san francisco county",
+                     "philadelphia county")
+  
 
 missing_county <- anti_join(census_county, county_gov, by = "geo_id") %>% 
   arrange(desc(population)) %>% 
   #not missing, just diff name, 
-  filter(!str_detect(name_census, "honolulu|philadelphia|san francisco|duval|(orleans parish)"))
+  filter(!str_detect(name_census, "honolulu|philadelphia|san francisco|duval|(orleans parish)")) %>% 
+  # check consolidated separately
+  filter(funcstat == "A") %>% 
+  select(state.abb, state.name, name_census, population) 
+
+missing_county %>% summarise(tot = sum(population, na.rm = TRUE))
 
 # population by year
 county_gov_all %>% #select(state, name, population, year) %>% 
@@ -43,45 +54,47 @@ county_gov_all %>% #select(state, name, population, year) %>%
 
 # those missing 2023
 anti_join(county_gov %>% filter(year == 2022) %>% select(state.abb, name, id, population), 
-          county_gov %>% filter(year == 2023) %>% select(state.abb, name, id)) %>% 
-#write.csv("tmp/missing_counties_fy23_Nov2024.csv")
+          county_gov %>% filter(year == 2023) %>% select(state.abb, name, id)) %>% View()
+#write.csv("tmp/missing_counties_fy23_Dec2024.csv")
 
-
-top200_county_4years %>% select(state.abb, name, year, id) %>% 
-  add_count(id) %>% select(-year) %>% 
-  distinct()%>% filter(n<4) %>% write.csv("tmp/top200_counties_missing_2023.csv")
-
-# missing county in top200
-missing_county <- top200_county_4years %>% 
-  select(state.abb, name, id, year, geo_id) %>% add_count(geo_id) %>% select(-year) %>% 
-  filter(n <4) %>% distinct()
+#NOTE: some have good source here: 
+#MS: https://www.osa.ms.gov/reports/audit-reports
+#OH: https://ohioauditor.gov/auditsearch/search.aspx
+#WA: https://www.sao.wa.gov/reports-data/audit-reports
+#AK: https://arklegaudit.gov/reports
+#TN: https://comptroller.tn.gov/advanced-search.html
+#LA: https://www.lla.la.gov/reports/audit-reports?tab=by-parish&search=p
+#AR: https://www.arklegaudit.gov/reports?keyword=lonoke+county
 
 
 #TODO: missing county top100 year 2023
-# MI macomb county https://www.macombgov.org/departments/finance-department/financial-transparency/annual-comprehensive-financial
-# TX hidalgo county https://www.hidalgocounty.us/1288/Annual-Financial-Report
-# NJ middlesex county https://www.middlesexcountynj.gov/government/departments/department-of-finance/financial-information/-folder-157
+
 # PA montgomery county https://www.montgomerycountypa.gov/331/Annual-Financial-Statements-Reports
-# OH hamilton county https://www.hamiltoncountyohio.gov/government/departments/budget_and_strategic_initiatives/annual_information_statement
-# WA snohomish county https://sao.wa.gov/reports-data/audit-reports?SearchText=snohomish%20county&StartDate=&EndDate=
 # OK oklahoma county https://www.sai.ok.gov/audit-reports/?counties=55&years=%2C2023&orgs=
 # MA 	norfolk county
-# NJ hudson county https://www.hcnj.us/finance/
-# CO 	denver county https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Department-of-Finance/Financial-Reports/Annual-Comprehensive-Financial-Report
-# OK tulsa county https://countyclerk.tulsacounty.org/Home/Reports
-# UT utah county https://www.utahcounty.gov/Dept/ClerkAud/BudgetFinance/FinancialReports.asp
-# PA 	bucks county https://www.buckscounty.gov/253/Finance-Division
-# NJ monmouth county https://www.visitmonmouth.com/page.aspx?Id=2166
-#NJ Essex county https://essexcountynj.org/treasurer/
+#NJ bergen county
 
+
+top200_county_4years %>% select(state.abb, name, year, id, population) %>% 
+  add_count(id) %>% select(-year) %>% 
+  distinct()%>% filter(n<4) 
+
+#%>% write.csv("tmp/top200_counties_missing_2023.csv")
+
+top300_county %>% select(state.abb, name, id, population, year) %>% 
+  add_count(id) %>% 
+  distinct()%>% filter(n<4) %>% 
+  filter(year != 2023) %>% View()
 
 ####Cities####
 city_gov %>% filter(year == 2022) %>% 
   summarise(collected_pop = sum(population, na.rm = TRUE))
 
 # Why so few cities?
-anti_join(city_gov %>% filter(year == 2022) %>% select(state.abb, name, population), 
-          city_gov %>% filter(year == 2023) %>% select(state.abb, name, population)) %>% View()
+anti_join(city_gov %>% filter(year == 2022) %>% select(state.abb, name, id, population), 
+          city_gov %>% filter(year == 2023) %>% select(state.abb, name, id, population)) %>%
+  arrange(desc(population)) 
+  #writexl::write_xlsx("tmp/missing_cities_Dec2024.xlsx")
 
 city_gov %>% select(state.abb, year, name) %>% 
   group_by(year) %>% 
@@ -89,7 +102,8 @@ city_gov %>% select(state.abb, year, name) %>%
 
 city_gov %>% select(state.abb, name, population, year) %>% 
   group_by(year) %>% 
-  summarise(collected_pop = sum(population, na.rm = TRUE))
+  summarise(collected_pop = sum(population, na.rm = TRUE),
+            count =n())
 
 #MA Norfolk 2022: not released yet
 # MA Bristol: have 2022, 2023 but not 2020, 2021
@@ -168,6 +182,11 @@ missing_sd_top300 <- top300_school_districts %>%
   add_count(ncesID) %>% filter(n < 4) %>% 
   select(state.abb, ncesID, year, name, n, id) 
 
+
+anti_join(school_districts_all %>% filter(year == 2022) %>% select(state.abb, name, id, enrollment_22), 
+          school_districts_all %>% filter(year == 2023) %>% select(state.abb, name, id, enrollment_22)) %>%
+  arrange(desc(enrollment_22)) 
+  
 #type of school district
 ## NOTE: 
 #id 67836 Santa Cruz City Schools (the "District") is a consolidation of 

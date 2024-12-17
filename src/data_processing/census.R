@@ -129,7 +129,10 @@ census_county_top100 <- census_county %>%
 census_county_top200 <- census_county %>% 
   arrange(desc(population)) %>% 
   slice(1:200) 
-
+##### Top county 300
+census_county_top300 <- census_county %>% 
+  arrange(desc(population)) %>% 
+  slice(1:300) 
 
 ##### Incorporated Place & Minor Civil Division #########
 #   040 = State
@@ -168,6 +171,14 @@ census_city_top100 <- census_incorporated_city %>%
   
   #take philadelphia city out, already counted in philadelphia county
   filter(!(name_census == "philadelphia city" & state.name == "Pennsylvania")) %>% 
+  
+  # take jacksonville out, already counted in jacksonville-duval county
+  filter(!(name_census == "jacksonville city" & state.abb == "FL")) %>% 
+  
+  # take out GA columbus, consolidated with Muscogee County
+  filter(!(name_census == "columbus city" & state.abb == "GA")) %>% 
+  
+  
   slice(1:100) %>% 
   mutate(name_census = str_trim(name_census)) %>% 
   select(state.abb, name_census, population, geo_id)
@@ -179,6 +190,20 @@ census_city_top200 <- census_incorporated_city %>%
   #take philadelphia city out, already counted in philadelphia county
   filter(!(name_census == "philadelphia city" & state.name == "Pennsylvania")) %>% 
   slice(1:200) %>% 
+  mutate(name_census = str_trim(name_census)) %>% 
+  select(state.abb, name_census, population, geo_id)
+
+census_city_top300 <- census_incorporated_city %>% 
+  arrange(desc(population)) %>% 
+  #filter(name_census != "denver city") %>%
+  
+  #take philadelphia city out, already counted in philadelphia county
+  filter(!(name_census == "philadelphia city" & state.name == "Pennsylvania")) %>% 
+  filter(!(name_census == "denver city" & state.name == "Colorado")) %>% 
+  filter(!(name_census == "san francisco city" & state.name == "California")) %>% 
+  
+  
+  slice(1:300) %>% 
   mutate(name_census = str_trim(name_census)) %>% 
   select(state.abb, name_census, population, geo_id)
 

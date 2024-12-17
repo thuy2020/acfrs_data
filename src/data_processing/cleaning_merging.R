@@ -246,8 +246,21 @@ write.csv(top100_counties, "output/top100_counties.csv")
 top200_county_4years <- county_all %>% 
   filter(geo_id %in% census_county_top200$geo_id) 
 
+
+# Find acfrs entities from the list of Top 200 county census
+top300_county <- county_all %>% 
+  filter(geo_id %in% census_county_top300$geo_id) %>% 
+  select(state.abb, id, geo_id, name, population, year) %>% distinct()
+
+#these 2 are consolidated city-county
+anti_join(census_county_top300, top300_county, by = ("geo_id"))
+top300_county %>% write.csv("tmp/list_top300_counties.csv")
+
+
 write.csv(county_all, "output/all_counties_2020_2023.csv")
 top200_county_4years %>% write.csv("output/top200_counties.csv")
+
+
 
 ##########Municipalities#########
 # Census calls Incorporated Place & Minor Civil Division
@@ -267,8 +280,11 @@ municipality_all <- append_url(municipality_) %>% select(-identifier)
 
 
 #City&DC
-acfrs_city <- municipality_all #%>% 
-  #filter((geo_id %in% census_incorporated$geo_id) | name == "district of columbia") 
+acfrs_city <- municipality_all %>% 
+  mutate(geo_id = case_when(id == "138430" ~ "0827425",
+                            id == "39880" ~ "5531000", # green bay
+                            id == "1265296" ~ "0660620", #CA richmond
+                            TRUE ~ geo_id)) 
 
 ##Special cities##
 special_cities <- acfrs_general_purpose %>% 
@@ -277,7 +293,9 @@ special_cities <- acfrs_general_purpose %>%
   mutate(geo_id = case_when(id == "101868" ~ "0668000", # san jose CA
                             id == "1266697" ~ "2255000", # new orleans LA
                             id == "1266289" ~ "0820000",# CO denver county, also denver city
-                            id == "149470" ~ "3611000")) %>%  # NY buffalo
+                            id == "149470" ~ "3611000")# NY buffalo
+                            
+         ) %>%  
   
   left_join(city_income) %>% 
   left_join(df_state) %>% 
@@ -303,6 +321,19 @@ top200_cities <- city_gov %>%
            name == "district of columbia") %>% distinct() %>% 
   mutate(population = ifelse(name == "district of columbia", 689546, population))  
 
+#Top 300 cities
+top300_cities <- city_gov %>% 
+  filter((geo_id %in% census_city_top300$geo_id) | 
+           name == "district of columbia") %>% distinct() %>% 
+  mutate(population = ifelse(name == "district of columbia", 689546, population))  
+
+top300_cities_namelist <- top300_cities %>% select(state.abb, id, geo_id, name) %>% distinct()
+
+#those in top 300 cencus but not collected in acfr: 
+#Columbus consolidated in Muscogee county
+# KS kansas city consolidated in Wyandotte County 
+anti_join(census_city_top300, top300_cities_namelist, by="geo_id")
+top300_cities_namelist %>% write.csv("tmp/list_top300_municipalities.csv")
 
 #Top 100 for data tool 
 top100_cities %>% write.csv("output/top100_cities.csv")
@@ -342,13 +373,12 @@ top100_school_districts <- school_districts_all %>%
   
 
 top100_school_districts_4years <- school_districts_all %>% 
-  filter(id %in% dict_top100_ELSI$id) 
+  filter(id %in% dict_top100_ELSI$id) %>% 
   
   #bind with NYC
   rbind(nyc_top5) %>% arrange(state.abb, name) 
 
 
-  
 # top 200
 dict_top200_ELSI <- dictionary %>% 
   filter(ncesID %in% top200_schools_by_year$ncesID) 
@@ -359,13 +389,23 @@ top200_school_districts <- school_districts_all %>%
   rbind(nyc_top5) %>% arrange(state.abb, name) %>% distinct() 
 
 #top 300
+
+top300_schools_22 <- top300_schools_by_year %>% filter(year == "enrollment_22")
+
 dict_top300_ELSI <- dictionary %>% 
-  filter(ncesID %in% top300_schools_by_year$ncesID) 
+  filter(ncesID %in% top300_schools_22$ncesID) 
+
+#missing 5 NY schools
+anti_join(top300_schools_22, dict_top300_ELSI, by = "ncesID")
+dict_top300_ELSI %>% write.csv("tmp/list_top300_sd.csv")
 
 top300_school_districts <- school_districts_all %>% 
   filter(id %in% dict_top300_ELSI$id) %>% 
   #bind with NYC
   rbind(nyc_top5) %>% arrange(state.abb, name) %>% distinct() 
+
+dict_top300_ELSI %>% filter(!id %in% top300_school_districts$id)
+
 
 top100_school_districts %>% write.csv("output/top100_sd.csv")
 top200_school_districts %>% write.csv("output/top200_sd.csv")

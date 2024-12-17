@@ -12,17 +12,12 @@ states <- read_csv("output/all_states_4years_2020_2023.csv") %>%
   filter(year != 2023)
 counties <- read_csv("output/top100_counties.csv") %>% 
   filter(year != 2023)
-cities <- read_csv("output/top200_cities.csv") %>% 
-  filter(year != 2023) |>
-  filter(name != "denver county") |>
-  group_by(year) %>%                      
-  arrange(desc(population)) %>%           
-  slice_head(n = 100) %>%                 
-  ungroup()
+cities <- read_csv("output/top100_cities.csv") %>% 
+  filter(year != 2023)
+
 schools <- read_csv("output/top100_sd.csv") %>% 
-  filter(year != 2023) |>
+  filter(year != 2023) %>%
   # top 100 by enrollment_20
-  group_by(year) %>%
   arrange(desc(enrollment_20)) %>%
   slice_head(n = 100)
 
@@ -168,7 +163,7 @@ top_10_schools_pc <- schools_mod |>
 top_10_schools_least_pension_debt <- schools_mod |>
   mutate(total_pension_liability = net_pension_liability + net_opeb_liability) |>
   mutate(total_pension_liability_pc = total_pension_liability / enrollment_22) |>
-  arrange(total_pension_liability) |>
+  arrange(total_pension_liability) |> 
   top_n(10, -total_pension_liability) |>
   select(name, state.name, total_pension_liability, total_pension_liability_pc)
 

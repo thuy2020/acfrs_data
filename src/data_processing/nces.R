@@ -179,6 +179,7 @@ top300_schools_by_year <- nces %>%
   ungroup() %>% 
   arrange(year, desc(value))
 
+
 # split each year
 
 top100_2020 <- top_schools_by_year %>% 

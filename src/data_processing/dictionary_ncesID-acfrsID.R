@@ -1132,14 +1132,24 @@ source("src/data_processing/nces.R")
 
 #TODO: Update anything after this. DO NOT run the above code again. 
 
-dict_13 <- read.csv("data/_dictionary_13.csv") %>% 
+dict_13 <- readxl::read_xls("data/_dictionary_13.xls") %>% 
   select(id, ncesID, state.abb, name) %>% 
   mutate(across(everything(), as.character))
 
 
 dictionary <- readRDS("data/dictionary_tmp.RDS") %>% 
+  #removed entity no longer exist in acfr database
+  filter(!id %in% c("1268507", "34840", "30371", "31164", "1133206", 
+                    "31398", "189042", "69024", "105267", "196794",
+                    "1267815", "171323", "1267835", "58299", "34840",
+                    "1268507", "34887", "1240701", "46287", "1240220",
+                    "82195", "36553", "147069", "37500", "38854", "200059",
+                    "197654", "197659", "197665", "88825", "197671", "32051")) %>% 
+  
+  
   mutate(id = case_when(ncesID == "4700148" ~ "87787",
                         ncesID == "3622050" ~ "36342",
+                        ncesID == "0805370" ~ "1266165",
                         TRUE ~ id)) %>% 
   rbind(dict_13)
 

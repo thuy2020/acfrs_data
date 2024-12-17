@@ -2660,7 +2660,7 @@
     "name": "Arizona",
     "category": "General Purpose",
     "total_liabilities": 24785156000,
-    "current_liabilities": 7179513000,
+    "current_liabilities": 7287368000,
     "total_assets": 71928237000,
     "current_assets": 23549222000,
     "compensated_absences": 513983000,
@@ -2672,7 +2672,7 @@
     "pct_urban_pop": 89.2852,
     "median_hh_income_21": 68967,
     "url": "https://acfrs-docs.s3.us-east-2.amazonaws.com/acfrs/General%20Purpose/AZ/State%20of%20Arizona/AZ%20State%20of%20Arizona%202022.pdf",
-    "modified_revenues": 1365472000,
+    "modified_revenues": 1257617000,
     "net_pension_liability": 4005498000,
     "net_opeb_liability": 1034461000,
     "assets_liab_ratio": 0.3446
