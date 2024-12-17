@@ -312,7 +312,17 @@ city_gov <- acfrs_city %>% rbind(special_cities) %>%
 top100_cities <- city_gov %>% 
   filter((geo_id %in% census_city_top100$geo_id) | 
            name == "district of columbia") %>% distinct() %>% 
-  mutate(population = ifelse(name == "district of columbia", 689546, population)) 
+  mutate(population = ifelse(name == "district of columbia", 689546, population)) %>% 
+
+#TODO: changer WA to before the Hgarb update on 2024-12-11
+  mutate(
+    current_liabilities = if_else(name == "spokane" & state.name == "Washington", 36792571, current_liabilities),
+    net_pension_liability = if_else(name == "spokane" & state.name == "Washington", 0, net_pension_liability),
+    net_opeb_liability = if_else(name == "spokane" & state.name == "Washington", 0, net_opeb_liability),
+    current_assets = if_else(name == "spokane" & state.name == "Washington", 150943988, current_assets)
+  )
+  
+
 
 
 #Top 200 cities
