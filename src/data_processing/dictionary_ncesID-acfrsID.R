@@ -1137,7 +1137,7 @@ dict_13 <- readxl::read_xls("data/_dictionary_13.xls") %>%
   mutate(across(everything(), as.character))
 
 
-dictionary <- readRDS("data/dictionary_tmp.RDS") %>% 
+dictionary_tmp <- readRDS("data/dictionary_tmp.RDS") %>% 
   #removed entity no longer exist in acfr database
   filter(!id %in% c("1268507", "34840", "30371", "31164", "1133206", 
                     "31398", "189042", "69024", "105267", "196794",
@@ -1153,7 +1153,32 @@ dictionary <- readRDS("data/dictionary_tmp.RDS") %>%
                         TRUE ~ id)) %>% 
   rbind(dict_13)
 
-#take out all ids that are mismatched, then join back with the excel file. 
+
+# id in dictionary but no longer exist in acfr database
+id_nolonger_exist <- anti_join(dictionary_tmp, school_districts_all, by = "id") 
+
+dictionary <- dictionary_tmp %>% filter(!id %in% id_nolonger_exist$id) %>% 
+  add_count(id) %>% filter(n == 1) %>% select(-n) %>% 
+  add_count(ncesID) %>% filter(n == 1) %>% select(-n)
+
+dictionary %>% 
+  write.csv("tmp/school_districts_id_ncesID_dictionary.csv")
+  
+
+
+# why different here - because some ncesID matches 2 ids
+dictionary %>% distinct(id, ncesID, state.abb) %>% add_count(ncesID) %>% filter(n==1) %>% 
+  View()
+
+dictionary %>% distinct(id, ncesID, state.abb, name)  %>% add_count(ncesID) %>% filter(n==1) %>% 
+  View()
+
+dictionary %>% 
+  write.csv("tmp/school_districts_id_ncesID_dictionary.csv")
+
+
+
+
 
 # update changes here
 saveRDS(dictionary, "data/dictionary.RDS")

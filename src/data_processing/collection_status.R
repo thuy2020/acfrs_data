@@ -15,8 +15,7 @@ state_gov %>%
 # state missing 2023
 anti_join(state_gov %>% filter(year == 2022) %>% select(state.abb), 
           state_gov %>% filter(year == 2023) %>% select(state.abb))
-# Missing states: CA, NV, IL
-#https://www.sco.ca.gov/ard_state_acfr.html
+# Missing states: NV, IL
 #https://controller.nv.gov/FinancialRpts/CAFR/Home/
 # https://illinoiscomptroller.gov/financial-reports-data/find-a-report/comprehensive-reporting/annual-comprehensive-financial-report/
 
@@ -52,6 +51,10 @@ county_gov_all %>% #select(state, name, population, year) %>%
   group_by(year) %>% 
   summarise(collected_pop = sum(population, na.rm = TRUE))
 
+# those having 22, missing 23
+anti_join(county_gov %>% filter(year == 2021) %>% select(state.abb, name, id, population), 
+          county_gov %>% filter(year == 2022) %>% select(state.abb, name, id)) %>% View()
+
 # those missing 2023
 anti_join(county_gov %>% filter(year == 2022) %>% select(state.abb, name, id, population), 
           county_gov %>% filter(year == 2023) %>% select(state.abb, name, id)) %>% View()
@@ -65,6 +68,8 @@ anti_join(county_gov %>% filter(year == 2022) %>% select(state.abb, name, id, po
 #TN: https://comptroller.tn.gov/advanced-search.html
 #LA: https://www.lla.la.gov/reports/audit-reports?tab=by-parish&search=p
 #AR: https://www.arklegaudit.gov/reports?keyword=lonoke+county
+#AL: https://alison.legislature.state.al.us/epa-audit-reports
+#MO: https://auditor.mo.gov/AuditReport/Reports?SearchLocalState=4
 
 
 #TODO: missing county top100 year 2023
@@ -74,17 +79,19 @@ anti_join(county_gov %>% filter(year == 2022) %>% select(state.abb, name, id, po
 # MA 	norfolk county
 #NJ bergen county
 
-
 top200_county_4years %>% select(state.abb, name, year, id, population) %>% 
   add_count(id) %>% select(-year) %>% 
-  distinct()%>% filter(n<4) 
+  distinct()%>% filter(n<4) %>%
+  
+  View()
 
 #%>% write.csv("tmp/top200_counties_missing_2023.csv")
 
-top300_county %>% select(state.abb, name, id, population, year) %>% 
-  add_count(id) %>% 
+top300_county %>% select(state.abb, name, year, id, population) %>% 
+  add_count(id) %>% select(-year) %>% 
   distinct()%>% filter(n<4) %>% 
-  filter(year != 2023) %>% View()
+  filter(!id %in% c("116575")) %>% 
+  View()
 
 ####Cities####
 city_gov %>% filter(year == 2022) %>% 
@@ -114,7 +121,6 @@ city_gov %>% select(state.abb, name, population, year) %>%
 #https://comptroller.tn.gov/news/2024/3/5/lake-county-s-chronically-poor-audit-results-continue.html
 
 #Missing top 100 cities year 2023
-
 # CA bakersfield
 # AL huntsville
 # CO aurora
@@ -158,6 +164,7 @@ city_gov %>% select(state.abb, name, population, year) %>%
 #NJ newark 2022
 #MS Jackson 2022
 #NJ patterson 2022
+
 ####SD####
 
 # collected sd
@@ -185,7 +192,10 @@ missing_sd_top300 <- top300_school_districts %>%
 
 anti_join(school_districts_all %>% filter(year == 2022) %>% select(state.abb, name, id, enrollment_22), 
           school_districts_all %>% filter(year == 2023) %>% select(state.abb, name, id, enrollment_22)) %>%
-  arrange(desc(enrollment_22)) 
+  arrange(desc(enrollment_22)) %>% 
+  
+  
+  View() #%>% write.csv("tmp/sd_missing2023.csv")
   
 #type of school district
 ## NOTE: 
@@ -204,11 +214,10 @@ anti_join(school_districts_all %>% filter(year == 2022) %>% select(state.abb, na
 
 # SD in the Top 200 missing 2023:
 # state.abb	name	ncesID
-# 1	CA	san francisco unified school district	634410
-# 2	GA	clayton county board of education	1301230
-# 3	GA	dekalb county board of education	1301740
+
+# 2	GA	clayton county board of education	1301230 https://app.fac.gov/dissemination/search/
 # 4	MA	boston public schools	2502790
-# 5	MN	independent school district no. 625	2733840
+
 # 6	NY	new york city geographic district # 10	3600087
 # 7	NY	new york city geographic district # 2	3600077
 # 8	NY	new york city geographic district # 20	3600151
@@ -217,6 +226,5 @@ anti_join(school_districts_all %>% filter(year == 2022) %>% select(state.abb, na
 # 11	TN	clarksville-montgomery county school system	4703030
 # 12	TN	clarksville-montgomery county school system	4703030
 # 13	VA	chesapeake public schools	5100810
-# 14	WA	seattle school district no. 1	5307710
 # 15	WI	milwaukee public schools	5509600
 # 16-20 NY new york city geographic district # 2, 10, 20, 24, 31

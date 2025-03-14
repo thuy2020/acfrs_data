@@ -213,6 +213,9 @@ nces_pop_bystate <- nces %>%
   summarise(population = sum(enrollment_22,na.rm = TRUE)) %>%
   mutate(category = "School Districts")
 
+sd_top300_nces <- nces %>% select(state.abb, name_nces, ncesID, enrollment_22) %>% 
+  arrange(desc(enrollment_22)) %>% 
+  slice(1:300)
 
 cat("End of script")
 

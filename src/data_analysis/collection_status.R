@@ -1,7 +1,7 @@
 library(tidyverse)
 library(dplyr)
 library(scales)
-
+source("src/data_processing/nces.R")
 ####State####
 # count of state by year
 state_gov %>% select(state.abb, year, name) %>% 
@@ -14,10 +14,12 @@ state_gov %>%
   summarise(collected_pop = sum(population, na.rm = TRUE))
 
 # state missing 2023
-missing_state <- anti_join(state_gov %>% filter(year == 2022) %>% select(state.abb), 
-          state_gov %>% filter(year == 2023) %>% select(state.abb, population))
-# Missing states: CA, NV, IL
-#https://www.sco.ca.gov/ard_state_acfr.html
+missing_state <- anti_join(state_gov %>% filter(year == 2022) %>% select(state.abb, name, population), 
+                          state_gov %>% filter(year == 2023)) %>% 
+  select(state.abb, name, population) %>% 
+  add_column(category = "state")
+# Missing states: NV, IL
+
 #https://controller.nv.gov/FinancialRpts/CAFR/Home/
 # https://illinoiscomptroller.gov/financial-reports-data/find-a-report/comprehensive-reporting/annual-comprehensive-financial-report/
 state_gov %>% filter(year == 2022) %>% 
@@ -35,6 +37,12 @@ county_gov %>% select(state.abb, year, name) %>%
   group_by(year) %>% 
   summarise(count = n())
 
+
+#top 300 counties by population cencus (> 211 l pop)
+
+top300_counties <- census_county %>% 
+  arrange(desc(population)) %>% 
+  slice(1:300) %>%  select(state.abb, name_census, geo_id, population)
 # population by year
 
 county_gov %>% select(state, name, population, year) %>% 
@@ -43,34 +51,35 @@ county_gov %>% select(state, name, population, year) %>%
 
 
 # those missing 2023
-anti_join(county_gov %>% filter(year == 2022) %>% select(state.abb, name, id, population), 
-          county_gov %>% filter(year == 2023) %>% select(state.abb, name, id)) %>% 
-View()
+missing_top300_counties <- anti_join(county_gov %>% filter(year == 2022) %>% 
+                                       select(state.abb, name, id, population), 
+                                     
+                                      county_gov %>% filter(year == 2023)) %>%
+  filter(population > 211981) %>% # pop of york county
+    add_column(category = "county") %>% select(-id)
+    
 
-# missing county top200
-missing_county_top200 <- top200_county_4years %>% select(state.abb, name, year, id) %>% 
-  add_count(id) %>% select(-year) %>% 
-  distinct()%>% filter(n<4) 
-
-#TODO: Checking on 2 missing - as of June 7, 2024
-# PA montgomery county 2022: https://www.montgomerycountypa.gov/Archive.aspx?AMID=45
-# MA norfolk county 2022: https://www.norfolkcounty.org/county_commission/about_norfolk_county/annual_reports.php#outer-31
-
+#TODO: 
 # missing county top100 year 2023
-
 # PA montgomery county https://www.montgomerycountypa.gov/331/Annual-Financial-Statements-Reports
 # WA snohomish county https://sao.wa.gov/reports-data/audit-reports?SearchText=snohomish%20county&StartDate=&EndDate=
-# OK oklahoma county https://www.sai.ok.gov/audit-reports/?counties=55&years=%2C2023&orgs=
-# MA 	norfolk county
-# OK tulsa county https://countyclerk.tulsacounty.org/Home/Reports
-# PA 	bucks county https://www.buckscounty.gov/Archive.aspx?AMID=40
-
+# OK oklahoma county https://www.sai.ok.gov/audit-reports/?type=3&rpp=50&years=,2023&sort=&counties=55&searchtext=
 
 
 ####Municipalities####
-city_gov %>% filter(year == 2022) %>% 
+census_city_top300 
+
+missing_top300_municipalities <- anti_join( census_city_top300, 
+           city_gov %>% filter(year == 2023), by = "geo_id") %>% 
+  rename(name = name_census) %>% 
+  select(-geo_id) %>% 
+  add_column(category = "municipality")
+
+
+city_gov %>% filter(year == 2023) %>% 
   summarise(collected_pop = sum(population, na.rm = TRUE))
 View()
+
 # Why so few cities?
 anti_join(city_gov %>% filter(year == 2022) %>% select(state.abb, name, population), 
           city_gov %>% filter(year == 2023) %>% select(state.abb, name, population)) %>% View()
@@ -84,40 +93,12 @@ city_gov %>% select(state.abb, name, population, year) %>%
   summarise(collected_pop = sum(population, na.rm = TRUE))
 
 
-#MA Norfolk 2022: not released yet
 # MA Bristol: have 2022, 2023 but not 2020, 2021
 # AL Mobile: should be non-standard 
-
-#Lake County’s Chronically Poor Audit Results Continue
-#https://comptroller.tn.gov/news/2024/3/5/lake-county-s-chronically-poor-audit-results-continue.html
-
-#Missing top 100 cities year 2023
-
-# CA bakersfield: https://www.bakersfieldcity.us/220/Annual-Comprehensive-Financial-Reports
+#Missing top 200 cities year 2023
 # NJ newark https://www.newarknj.gov/departments/finance
-# NE omaha https://finance.cityofomaha.org/
-# MN saint paul https://www.stpaul.gov/ofs/annual-comprehensive-financial-report
-# WA spokane https://my.spokanecity.org/opendata/documents/financial-reports/
+# 7	Connecticut	stamford https://www.stamfordct.gov/government/administration/annual-reports-and-budgets
 
-
-# Cities in top 200 that are missing 2023
-# state.name	name
-# 1	Alabama	birmingham
-# 2	Arkansas	little rock
-# 3	California	bakersfield
-# 4	California	salinas
-# 5	Colorado	lakewood
-# 6	Connecticut	new haven
-# 7	Connecticut	stamford
-# 8	Florida	fort lauderdale
-# 9	Georgia	savannah
-# 10	Illinois	aurora
-# 11	Illinois	joliet
-# 12	Louisiana	shreveport
-# 14	Nebraska	omaha
-# 16	Ohio	akron
-# 18	South Carolina	charleston
-# 19	Washington	kent
 
 ####SD####
 
@@ -131,17 +112,31 @@ school_districts_all %>% select(state.abb,enrollment_22, year) %>%
   summarise(collected_pop = sum(enrollment_22, na.rm = TRUE))
 
 #TODO: check back missing: 
-#GA Clayton County Board of education.
-#https://www.clayton.k12.ga.us/departments/business-services/financial-reports
 # Uploaded: williamson county schools, reported in county acfrs. Uploaded county's acfrs to replace
 
 missing_sd <- top200_school_districts %>% 
   add_count(ncesID) %>% filter(n < 4) %>% 
   select(state.abb, ncesID, name, n, id) %>% distinct()
 
-missing_sd_top300 <- top300_school_districts %>% 
-  add_count(ncesID) %>% filter(n < 4) %>% 
-  select(state.abb, ncesID, name, n, id) %>% distinct()
+# threshold top 300 sd: enrollment 22 = 23908
+
+missing_top300_schools <- anti_join(sd_top300_nces, 
+          school_districts_all %>% filter(year == 2023), by = "ncesID") %>% 
+  rename(population = enrollment_22,
+         name = name_nces) %>% 
+  select(-ncesID) %>% 
+  add_column(category = "school")
+
+
+missing_top300 <- rbind (missing_state,
+  missing_top300_counties,
+missing_top300_municipalities,
+missing_top300_schools) %>% 
+  
+  rename(state_abbreviation = state.abb) %>% 
+  add_column(year = "2023")
+
+missing_top300 %>% write.csv("tmp/missing_top300.csv")
 
 #type of school district
 ## NOTE: 
@@ -160,22 +155,25 @@ missing_sd_top300 <- top300_school_districts %>%
 
 # SD in the Top 200 missing 2023:
 # state.abb	name	ncesID
-# 1	CA	san francisco unified school district	634410
-# 2	GA	clayton county board of education	1301230
+
 # 3	GA	dekalb county board of education	1301740
 # 4	MA	boston public schools	2502790
-# 5	MN	independent school district no. 625	2733840
+
 # 6	NY	new york city geographic district # 10	3600087
 # 7	NY	new york city geographic district # 2	3600077
 # 8	NY	new york city geographic district # 20	3600151
 # 9	NY	new york city geographic district # 24	3600098
 # 10	NY	new york city geographic district # 31	3600103
+# 16-20 NY new york city geographic district # 2, 10, 20, 24, 31
+
+
+# In Montgomery County county: 
 # 11	TN	clarksville-montgomery county school system	4703030
 # 12	TN	clarksville-montgomery county school system	4703030
+
+#Component of city
 # 13	VA	chesapeake public schools	5100810
-# 14	WA	seattle school district no. 1	5307710
-# 15	WI	milwaukee public schools	5509600
-# 16-20 NY new york city geographic district # 2, 10, 20, 24, 31
+
 
 ####All acfrs sd####
 d_app <- school_districts_all %>% 

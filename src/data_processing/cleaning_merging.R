@@ -68,7 +68,12 @@ fields_to_select <- c("state.abb", "state.name", "id", "geo_id", "year", "name",
                       "total_assets", "current_assets", "compensated_absences",
                       "expenses", "revenues",
                       "unrestricted",
+                      "bonds_outstanding", "loans_outstanding", "notes_outstanding", 
+                      "compensated_absences", 
                       "population", "urban_pop", "pct_urban_pop", "median_hh_income_21")
+
+
+
 #######States########
 acfrs_state <- acfrs_general_purpose %>% 
   filter(!state.abb %in% c("FM", "PR")) %>% 
@@ -246,20 +251,19 @@ write.csv(top100_counties, "output/top100_counties.csv")
 top200_county_4years <- county_all %>% 
   filter(geo_id %in% census_county_top200$geo_id) 
 
+top200_county_4years %>% write.csv("output/top200_counties.csv")
 
-# Find acfrs entities from the list of Top 200 county census
+# Find acfrs entities from the list of Top 300 county census
 top300_county <- county_all %>% 
   filter(geo_id %in% census_county_top300$geo_id) %>% 
   select(state.abb, id, geo_id, name, population, year) %>% distinct()
+top300_county %>% write.csv("tmp/list_top300_counties.csv")
 
 #these 2 are consolidated city-county
 anti_join(census_county_top300, top300_county, by = ("geo_id"))
-top300_county %>% write.csv("tmp/list_top300_counties.csv")
 
 
 write.csv(county_all, "output/all_counties_2020_2023.csv")
-top200_county_4years %>% write.csv("output/top200_counties.csv")
-
 
 
 ##########Municipalities#########
@@ -312,18 +316,18 @@ city_gov <- acfrs_city %>% rbind(special_cities) %>%
 top100_cities <- city_gov %>% 
   filter((geo_id %in% census_city_top100$geo_id) | 
            name == "district of columbia") %>% distinct() %>% 
-  mutate(population = ifelse(name == "district of columbia", 689546, population)) %>% 
+  mutate(population = ifelse(name == "district of columbia", 689546, population)) #%>% 
 
-#TODO: change Spokane WA to before the Hgarb update on 2024-12-11
-  mutate(
-    current_liabilities = if_else(name == "spokane" & state.name == "Washington" & year == 2022, 36792571, current_liabilities),
-    net_pension_liability = if_else(name == "spokane" & state.name == "Washington" & year == 2022, 0, net_pension_liability),
-    net_opeb_liability = if_else(name == "spokane" & state.name == "Washington" & year == 2022, 0, net_opeb_liability),
-    net_opeb_assets = if_else(name == "spokane" & state.name == "Washington" & year == 2022, 93475431, net_opeb_assets),
-    current_assets = if_else(name == "spokane" & state.name == "Washington" & year == 2022, 150943988, current_assets)
-  )
-  
-
+#TODO: change Spokane WA to before the Hgarb update on 2024-12-11 - 
+#TODO: check if the changes made by Hgarb is correct
+  # mutate(
+  #   current_liabilities = if_else(name == "spokane" & state.name == "Washington" & year == 2022, 36792571, current_liabilities),
+  #   net_pension_liability = if_else(name == "spokane" & state.name == "Washington" & year == 2022, 0, net_pension_liability),
+  #   net_opeb_liability = if_else(name == "spokane" & state.name == "Washington" & year == 2022, 0, net_opeb_liability),
+  #   net_opeb_assets = if_else(name == "spokane" & state.name == "Washington" & year == 2022, 93475431, net_opeb_assets),
+  #   current_assets = if_else(name == "spokane" & state.name == "Washington" & year == 2022, 150943988, current_assets)
+  # )
+  # 
 
 
 #Top 200 cities
@@ -346,7 +350,7 @@ top300_cities_namelist <- top300_cities %>% select(state.abb, id, geo_id, name) 
 anti_join(census_city_top300, top300_cities_namelist, by="geo_id")
 top300_cities_namelist %>% write.csv("tmp/list_top300_municipalities.csv")
 
-#Top 100 for data tool 
+
 top100_cities %>% write.csv("output/top100_cities.csv")
 top200_cities %>% write.csv("output/top200_cities.csv")
 city_gov %>% write.csv("output/all_cities_2020_2023.csv")
@@ -355,6 +359,19 @@ municipality_all %>% write.csv("output/all_municipalities_2020_2023.csv")
 ####School districts####
 dictionary <- readRDS("data/dictionary.RDS") %>% 
 select(-name) %>% distinct()
+
+
+# dictionary %>% 
+#   count(id) %>% filter(n>1)
+# 
+# dictionary %>% 
+#   count(ncesID) %>% filter(n>1) %>% View() 
+#   distinct(ncesID) %>% View()
+#   
+#   # acfr sd do not have ncesID in dictionary
+# anti_join(school_districts_all, dictionary, by = "id") %>% View()
+
+
 
 # filter only top 100
 dict_top100_ELSI <- dictionary %>% 
@@ -368,10 +385,18 @@ filter(category == "School District") %>%
   
   #join with nces to get county, city info
   left_join(nces, by = c("ncesID", "state.abb", "state.name")) 
-  
 
 #append URLs
-school_districts_all <- append_url(school_districts_) %>% select(-identifier)
+school_districts_all <- append_url(school_districts_) %>% select(-identifier) %>% 
+  #bind with NYC
+  rbind(nyc_top5 %>% 
+          mutate(
+    bonds_outstanding = NA,
+    loans_outstanding = NA,
+    notes_outstanding = NA,
+    compensated_absences = NA
+  )) %>% 
+  filter(!state.abb %in% c("MP", "GU", "PR")) 
 
 ####
 
@@ -408,7 +433,8 @@ dict_top300_ELSI <- dictionary %>%
 
 #missing 5 NY schools
 anti_join(top300_schools_22, dict_top300_ELSI, by = "ncesID")
-dict_top300_ELSI %>% write.csv("tmp/list_top300_sd.csv")
+
+#dict_top300_ELSI %>% write.csv("tmp/list_top300_sd.csv")
 
 top300_school_districts <- school_districts_all %>% 
   filter(id %in% dict_top300_ELSI$id) %>% 
@@ -422,6 +448,7 @@ top100_school_districts %>% write.csv("output/top100_sd.csv")
 top200_school_districts %>% write.csv("output/top200_sd.csv")
 school_districts_all %>% write.csv("output/all_schooldistricts_4years.csv")
  
+
 
 ####Entity ID####
 state_gov %>% select(state.name, state.abb, name, id) %>% distinct() %>% 
