@@ -424,6 +424,7 @@ top200_school_districts <- school_districts_all %>%
   #bind with NYC
   rbind(nyc_top5) %>% arrange(state.abb, name) %>% distinct() 
 
+
 #top 300
 
 top300_schools_22 <- top300_schools_by_year %>% filter(year == "enrollment_22")
@@ -462,3 +463,25 @@ city_gov %>% select(state.name, state.abb, name, id) %>% distinct() %>%
 
 cat("End of script")
 
+
+#### Test large tool####
+####
+#check large tool
+
+large_data <- readRDS("data/acfrs_data.RDS")
+nrow(large_data %>% filter(year == 2023))
+
+large_data %>% filter(year == 2023) %>%
+  #select(state.name, year, total_assets) %>%
+  summarise(tot_assets = sum(total_assets, na.rm = TRUE)/1e12,
+            tot_current_assets = sum(current_assets, na.rm = TRUE)/1e12,
+            tot_total_liabilities = sum(total_liabilities, na.rm = TRUE)/1e12,
+            tot_NPL = sum(net_pension_liability, na.rm = TRUE)/1e12,
+            tot_net_pension_assets = sum(net_pension_assets, na.rm = TRUE)/1e12,
+            tot_net_net_PL = (tot_NPL - tot_net_pension_assets))
+
+large_data %>% filter(year == 2023) %>%
+  filter(state.abb == "CA") %>%
+  summarise(tot_total_liabilities = sum(total_liabilities, na.rm = TRUE)/1e12)
+
+####

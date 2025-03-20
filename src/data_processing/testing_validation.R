@@ -32,6 +32,9 @@ result <- df %>%
 state <- do.call(rbind, lapply(2020:2023, function(year) test1(state_all, year)))
 View(state)
 
+
+
+
 test1_general_purpose <- do.call(rbind, lapply(2023, function(year) test1(acfrs_general_purpose, year))) %>% 
   arrange(desc(total_liabilities))%>% filter(state.abb != "NJ")
 View(test1_general_purpose)
@@ -40,7 +43,12 @@ test1_general_purpose_allyears <- do.call(rbind, lapply(2020:2023, function(year
   arrange(desc(total_liabilities))%>% 
   filter(state.abb != "NJ")
 
-#View(test1_general_purpose_allyears)
+View(test1_general_purpose_allyears)
+
+#View washington county NE
+test1_general_purpose_allyears %>% #filter(total_liabilities == 0) %>% View()
+  filter(name == "washington county" & state.abb == "NE") %>% View()
+
 #test1_general_purpose_allyears %>% writexl::write_xlsx("tmp/test1_general_purpose_allyears.xlsx")
 
 test1_school_districts_23 <- do.call(rbind, lapply(2023, function(year) test1(school_districts_all, year))) %>% 

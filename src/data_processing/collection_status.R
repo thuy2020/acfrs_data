@@ -71,7 +71,6 @@ anti_join(county_gov %>% filter(year == 2022) %>% select(state.abb, name, id, po
 #AL: https://alison.legislature.state.al.us/epa-audit-reports
 #MO: https://auditor.mo.gov/AuditReport/Reports?SearchLocalState=4
 
-
 #TODO: missing county top100 year 2023
 
 # PA montgomery county https://www.montgomerycountypa.gov/331/Annual-Financial-Statements-Reports
@@ -100,7 +99,7 @@ city_gov %>% filter(year == 2022) %>%
 # Why so few cities?
 anti_join(city_gov %>% filter(year == 2022) %>% select(state.abb, name, id, population), 
           city_gov %>% filter(year == 2023) %>% select(state.abb, name, id, population)) %>%
-  arrange(desc(population)) 
+  arrange(desc(population)) %>% View()
   #writexl::write_xlsx("tmp/missing_cities_Dec2024.xlsx")
 
 city_gov %>% select(state.abb, year, name) %>% 
@@ -121,10 +120,6 @@ city_gov %>% select(state.abb, name, population, year) %>%
 #https://comptroller.tn.gov/news/2024/3/5/lake-county-s-chronically-poor-audit-results-continue.html
 
 #Missing top 100 cities year 2023
-# CA bakersfield
-# AL huntsville
-# CO aurora
-# KS wichita
 # NJ jersey city
 # NJ newark
 # NE omaha
