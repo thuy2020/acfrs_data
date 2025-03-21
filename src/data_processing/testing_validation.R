@@ -33,8 +33,6 @@ state <- do.call(rbind, lapply(2020:2023, function(year) test1(state_all, year))
 View(state)
 
 
-
-
 test1_general_purpose <- do.call(rbind, lapply(2023, function(year) test1(acfrs_general_purpose, year))) %>% 
   arrange(desc(total_liabilities))%>% filter(state.abb != "NJ")
 View(test1_general_purpose)
@@ -173,4 +171,6 @@ test4 %>% write.csv("tmp/test4.csv")
 
 test4%>% 
   View()
+
+
   

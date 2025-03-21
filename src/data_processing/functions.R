@@ -85,3 +85,29 @@ save_metric_changes_to_excel <- function(data, dataset_name,
   saveWorkbook(wb, file = output_file, overwrite = TRUE)
   return(output_file)
 }
+
+
+bind_2df_different_size <- function(df1, df2) {
+  # Get all column names from both dataframes
+  all_cols <- union(names(df1), names(df2))
+  
+  # Add missing columns to df1
+  for (col in setdiff(all_cols, names(df1))) {
+    df1[[col]] <- NA
+  }
+  
+  # Add missing columns to df2
+  for (col in setdiff(all_cols, names(df2))) {
+    df2[[col]] <- NA
+  }
+  
+  # Reorder columns to be the same in both
+  df1 <- df1[, all_cols]
+  df2 <- df2[, all_cols]
+  
+  # Bind the rows
+  result <- rbind(df1, df2)
+  
+  return(result)
+}
+

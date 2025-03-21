@@ -77,12 +77,13 @@ fetch_data <- function(years, con){
     
     # calculate revenues. NOTE: when applying pmax(), na.rm does not work
   rowwise() %>% 
-    mutate(sum1 = sum(charges_for_services, operating_grants,  capital_grants, general_revenue, na.rm = TRUE),
+    mutate(sum1 = sum(charges_for_services, operating_grants, capital_grants, general_revenue, 
+                      na.rm = TRUE),
            sum2 = sum(activities_change_in_net_position,  expenses, na.rm = TRUE),
            revenues = max(sum1, sum2)) %>% ungroup() %>% 
-    select(-c(sum1, sum2, unable_to_review))
+    select(-c(sum1, sum2, unable_to_review)) %>% 
+    filter(!state.abb %in% c("MP", "GU", "PR", "FM"))
     
-
   saveRDS(acfrs_data, "data/acfrs_data.RDS")
   
 }

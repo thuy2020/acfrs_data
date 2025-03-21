@@ -1,4 +1,3 @@
-
 library(tidyverse)
 library(dplyr)
 library(janitor)
@@ -245,7 +244,7 @@ top100_counties <- county_all %>%
   ),
   median_hh_income_21 = as.numeric(median_hh_income_21)) 
   
-write.csv(top100_counties, "output/top100_counties.csv")
+#write.csv(top100_counties, "output/top100_counties.csv")
 
 # Find acfrs entities from the list of Top 200 county census
 top200_county_4years <- county_all %>% 
@@ -329,7 +328,6 @@ top100_cities <- city_gov %>%
   # )
   # 
 
-
 #Top 200 cities
 top200_cities <- city_gov %>% 
   filter((geo_id %in% census_city_top200$geo_id) | 
@@ -351,15 +349,14 @@ anti_join(census_city_top300, top300_cities_namelist, by="geo_id")
 top300_cities_namelist %>% write.csv("tmp/list_top300_municipalities.csv")
 
 
-top100_cities %>% write.csv("output/top100_cities.csv")
-top200_cities %>% write.csv("output/top200_cities.csv")
-city_gov %>% write.csv("output/all_cities_2020_2023.csv")
+#top100_cities %>% write.csv("output/top100_cities.csv")
+#top200_cities %>% write.csv("output/top200_cities.csv")
+#city_gov %>% write.csv("output/all_cities_2020_2023.csv")
 municipality_all %>% write.csv("output/all_municipalities_2020_2023.csv")
 
 ####School districts####
 dictionary <- readRDS("data/dictionary.RDS") %>% 
 select(-name) %>% distinct()
-
 
 # dictionary %>% 
 #   count(id) %>% filter(n>1)
@@ -371,33 +368,27 @@ select(-name) %>% distinct()
 #   # acfr sd do not have ncesID in dictionary
 # anti_join(school_districts_all, dictionary, by = "id") %>% View()
 
-
-
 # filter only top 100
 dict_top100_ELSI <- dictionary %>% 
   filter(ncesID %in% top_schools_by_year$ncesID)
 
 school_districts_ <- readRDS("data/acfrs_data.RDS") %>% 
-filter(category == "School District") %>% 
+  filter(category == "School District") %>% 
   mutate(id = as.character(id)) %>% 
   select(any_of(fields_to_select)) %>% 
   left_join(dictionary) %>% 
-  
   #join with nces to get county, city info
-  left_join(nces, by = c("ncesID", "state.abb", "state.name")) 
+  left_join(nces, by = c("ncesID", "state.abb", "state.name")) %>% 
+ 
+   #append URLs
+  append_url() %>% select(-identifier) 
 
-#append URLs
-school_districts_all <- append_url(school_districts_) %>% select(-identifier) %>% 
-  #bind with NYC
-  rbind(nyc_top5 %>% 
-          mutate(
-    bonds_outstanding = NA,
-    loans_outstanding = NA,
-    notes_outstanding = NA,
-    compensated_absences = NA
-  )) %>% 
-  filter(!state.abb %in% c("MP", "GU", "PR")) 
+#bind with other special cases:
 
+
+# Now bind them
+school_districts_all <- 
+bind_2df_different_size(school_districts_, exceptions)
 ####
 
 #Top 100
@@ -445,10 +436,9 @@ top300_school_districts <- school_districts_all %>%
 dict_top300_ELSI %>% filter(!id %in% top300_school_districts$id)
 
 
-top100_school_districts %>% write.csv("output/top100_sd.csv")
-top200_school_districts %>% write.csv("output/top200_sd.csv")
+#top100_school_districts %>% write.csv("output/top100_sd.csv")
+#top200_school_districts %>% write.csv("output/top200_sd.csv")
 school_districts_all %>% write.csv("output/all_schooldistricts_4years.csv")
- 
 
 
 ####Entity ID####
@@ -458,30 +448,10 @@ county_gov %>% select(state.name, state.abb, name, id) %>% distinct() %>%
   saveRDS("data/countyID.RDS")
 municipality_all %>% select(state.name, state.abb, name, id) %>% distinct() %>% 
   saveRDS("data/place_divisionID.RDS")
-city_gov %>% select(state.name, state.abb, name, id) %>% distinct() %>% 
-  saveRDS("data/cityID.RDS")
+#city_gov %>% select(state.name, state.abb, name, id) %>% distinct() %>% 
+ # saveRDS("data/cityID.RDS")
 
 cat("End of script")
 
 
-#### Test large tool####
-####
-#check large tool
 
-large_data <- readRDS("data/acfrs_data.RDS")
-nrow(large_data %>% filter(year == 2023))
-
-large_data %>% filter(year == 2023) %>%
-  #select(state.name, year, total_assets) %>%
-  summarise(tot_assets = sum(total_assets, na.rm = TRUE)/1e12,
-            tot_current_assets = sum(current_assets, na.rm = TRUE)/1e12,
-            tot_total_liabilities = sum(total_liabilities, na.rm = TRUE)/1e12,
-            tot_NPL = sum(net_pension_liability, na.rm = TRUE)/1e12,
-            tot_net_pension_assets = sum(net_pension_assets, na.rm = TRUE)/1e12,
-            tot_net_net_PL = (tot_NPL - tot_net_pension_assets))
-
-large_data %>% filter(year == 2023) %>%
-  filter(state.abb == "CA") %>%
-  summarise(tot_total_liabilities = sum(total_liabilities, na.rm = TRUE)/1e12)
-
-####
