@@ -108,7 +108,7 @@ state_all %>%
   add_count(state.name) %>% filter(n<4) %>% 
   select(state.abb, n) %>% distinct()
 
-state_all %>% write.csv("output/all_states_4years_2020_2023.csv")
+state_all %>% write.csv("output/all_states_2020_2023.csv")
 
 ####### Counties########
 acfrs_county <- acfrs_general_purpose %>% 
@@ -438,7 +438,7 @@ dict_top300_ELSI %>% filter(!id %in% top300_school_districts$id)
 
 #top100_school_districts %>% write.csv("output/top100_sd.csv")
 #top200_school_districts %>% write.csv("output/top200_sd.csv")
-school_districts_all %>% write.csv("output/all_schooldistricts_4years.csv")
+school_districts_all %>% write.csv("output/all_schooldistricts_2020_2023.csv")
 
 
 ####Entity ID####
