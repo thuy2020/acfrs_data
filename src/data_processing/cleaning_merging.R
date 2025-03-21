@@ -269,8 +269,8 @@ write.csv(county_all, "output/all_counties_2020_2023.csv")
 # Census calls Incorporated Place & Minor Civil Division
 municipality_ <- acfrs_general_purpose %>% 
   # exclude state and county
-  filter(!id %in% acfrs_state$id) %>% 
-  filter(!id %in% acfrs_county$id) %>% 
+  filter(!id %in% state_all$id) %>% 
+  filter(!id %in% county_all$id) %>% 
   
   # get income
   left_join(city_income) %>% 

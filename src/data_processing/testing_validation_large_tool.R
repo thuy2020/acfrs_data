@@ -40,6 +40,13 @@ school_districts_all%>%
 # total acfrs
 nrow(large_tool_data)
 
+large_tool_data %>% 
+  select(state.abb, id, name) %>% 
+  filter(duplicated(id) | duplicated(id, fromLast = TRUE)) %>%
+  View()
+
+large_tool_data %>% filter(id == "32292")
+
 # number of acfrs in each category
 nrow(state_all %>% filter(year == 2023))
 nrow(county_all %>% filter(year == 2023))
