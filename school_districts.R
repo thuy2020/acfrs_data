@@ -4,51 +4,6 @@ library(janitor)
 options(scipen = 999)
 
 
-#####ALL SD####
-
-sd_aggregated <- school_districts_all %>% 
-  ## netting 
-  mutate_all(~ replace(., is.na(.), 0)) %>% 
-  mutate(netted_NPL = net_pension_liability - net_pension_assets,
-         netted_OPEB = net_opeb_liability - net_opeb_assets,
-         bonds_notes_loans_compensatedAbsences = bonds_outstanding + loans_outstanding + 
-           notes_outstanding + compensated_absences) %>% 
-  
-  select(state.abb, id, ncesID, year, name, 
-         
-         netted_NPL,
-         netted_OPEB,
-         bonds_notes_loans_compensatedAbsences,
-         enrollment_22) %>% 
-  filter(year %in% c(2022, 2023)) %>% 
-  arrange(state.abb, desc(enrollment_22)) %>% 
-  
-  #aggregated 
-  group_by(year) %>% 
-  summarise(
-    aggregated_netted_NPL = sum(netted_NPL, na.rm = TRUE),
-    aggregated_netted_OPEB = sum(netted_OPEB, na.rm = TRUE),
-    agg_bonds_notes_loans_compensatedAbsences = sum(bonds_notes_loans_compensatedAbsences, na.rm = TRUE),
-    total_enrollment_collected = sum(enrollment_22, na.rm = TRUE)) %>% 
-  
-  # share
-  mutate(total_6debts = aggregated_netted_NPL + aggregated_netted_OPEB + agg_bonds_notes_loans_compensatedAbsences) %>% 
-  mutate(pct_NPL = round(aggregated_netted_NPL/total_6debts*100, 2),
-         pct_OPEB = round(aggregated_netted_OPEB/total_6debts*100, 2),
-         pct_other_debts = round(agg_bonds_notes_loans_compensatedAbsences/total_6debts*100,2)
-  ) 
-
-
-# Add total students in aggregeted:
-nces %>% 
-  summarise(tot_enrollment_22 = sum(enrollment_22, na.rm = TRUE))
-
-result_sd_aggregated <- sd_aggregated %>% 
-  select(-total_enrollment_collected, everything(), total_enrollment_collected) %>% 
-  add_column(total_enrollment = 46629252) %>% 
-  mutate(pct_total_enrollment_collected = round(total_enrollment_collected/total_enrollment*100,2)) 
-
-
 #break down by state
 breakdown_state <- school_districts_all %>% 
   filter(year %in% c(2022, 2023)) %>% 
@@ -71,14 +26,16 @@ nces_by_state <- nces %>%
     total_sd = n()  
   ) 
 
-school_districts_all %>% filter(state.name == "Arkansas" & year == 2022) %>% View()
-
 breakdown_state_pct_collected <- breakdown_state %>% 
+  filter(year == 2023) %>% 
   #TODO: chech why MI has too many enrollment
   mutate(enrollment_collected = ifelse(state.name == "Michigan", enrollment_collected*.95, enrollment_collected)) %>% 
   left_join(nces_by_state, by = "state.name") %>% 
   mutate(pct_enrollment_collected = round(enrollment_collected/total_enrollment_22*100,2),
-         pct_sd_collected = round(sd_collected/total_sd*100,2)) 
+         pct_sd_collected = round(sd_collected/total_sd*100,2)) %>% 
+
+# Carter checked: MT, MI, CO
+  filter(!`state.name` %in% c("Michigan", "Montana", "Colorado"))
 
 
 ####Michigan####
@@ -122,9 +79,10 @@ compare_school_districts <- function(state_name) {
   inACFR_NOT_in_nces <- anti_join(state_acfr_22, state_nces, by = "ncesID")
   
   # Find ACFR already in 2022 but not in 2023
-  inACFR2022_NOT_inACFR2023 <- anti_join(school_districts_all %>% filter(state.name == "Arkansas" & year == 2022),
-            school_districts_all %>% filter(state.name == "Arkansas" & year == 2023), by = "id") %>% 
+  inACFR2022_NOT_inACFR2023 <- anti_join(school_districts_all %>% filter(state.name == state_name & year == 2022),
+            school_districts_all %>% filter(state.name == state_name & year == 2023), by = "id") %>% 
     select(state.abb, year, id, name, name_nces, ncesID, county, city)
+  
   # Define output file path
   output_path <- paste0("tmp/", tolower(gsub(" ", "_", state_name)), "_school_districts.xlsx")
   
@@ -143,7 +101,7 @@ compare_school_districts <- function(state_name) {
 }
 
 # Example usage
-compare_school_districts("Montana")
+compare_school_districts("Oklahoma")
 
 anti_join(school_districts_all %>% filter(state.name == "Montana" & year == 2022),
           school_districts_all %>% filter(state.name == "Montana" & year == 2023), by = "id") %>% View()
@@ -158,6 +116,18 @@ anti_join(
  
    nces %>% filter(state.name == "Colorado"), by = "ncesID") %>% View()
 
+# school in nces but not acr 2022 
+anti_join(
+  nces %>% filter(state.name == "Montana"),
+  school_districts_all %>% filter(state.name == "Montana" & year == 2022),
+  by = "ncesID") %>% View()
+
+nces %>% filter(state.name == "Montana") %>% 
+  summarise(tot_students = sum(enrollment_22, na.rm = TRUE))
+  View()
+  
+  school_districts_all %>% filter(state.name == "Montana" & year == 2023) %>% View()
+    summarise(tot_students = sum(enrollment_22, na.rm = TRUE))
 
 ####Result####
 writexl::write_xlsx(

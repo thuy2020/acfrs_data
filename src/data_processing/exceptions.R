@@ -1,4 +1,3 @@
-
 library(dplyr)
 library(stringr)
 library(rio)
@@ -73,7 +72,6 @@ boston_public_schools <- import("data/_apportion values.xlsx", sheet = 2, skip =
   filter(name == "Boston Public Schools") %>% 
   select(-3, -c(general_revenue,charges_for_services, operating_grants, capital_grants))
   mutate(ncesID = as.character(ncesID))
-
 
 
 exceptions <-  bind_2df_different_size(nyc_sd, boston_public_schools) %>% 

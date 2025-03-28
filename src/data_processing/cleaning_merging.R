@@ -388,7 +388,8 @@ school_districts_ <- readRDS("data/acfrs_data.RDS") %>%
 
 # Now bind them
 school_districts_all <- 
-bind_2df_different_size(school_districts_, exceptions)
+bind_2df_different_size(school_districts_, exceptions) 
+
 ####
 
 #Top 100
@@ -438,7 +439,9 @@ dict_top300_ELSI %>% filter(!id %in% top300_school_districts$id)
 
 #top100_school_districts %>% write.csv("output/top100_sd.csv")
 #top200_school_districts %>% write.csv("output/top200_sd.csv")
-school_districts_all %>% write.csv("output/all_schooldistricts_2020_2023.csv")
+
+  
+  school_districts_all %>%   write.csv("output/all_schooldistricts_2020_2023.csv")
 
 
 ####Entity ID####
@@ -453,5 +456,5 @@ municipality_all %>% select(state.name, state.abb, name, id) %>% distinct() %>%
 
 cat("End of script")
 
-
+municipality_all$category %>% distinct()
 

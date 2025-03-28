@@ -1136,6 +1136,12 @@ dict_13 <- readxl::read_xls("data/_dictionary_13.xls") %>%
   select(id, ncesID, state.abb, name) %>% 
   mutate(across(everything(), as.character))
 
+# In Montana, some separate school districts are reported in one acfrs
+# need to combine students from these sd to reflect true number of students that these acfrs cover
+dict_montana <- readxl::read_xlsx("data/_dictionary_montana_school_districts.xlsx") %>% 
+  select(id, ncesID, state.abb, name) %>% 
+  mutate(across(everything(), as.character))
+
 
 dictionary_tmp <- readRDS("data/dictionary_tmp.RDS") %>% 
   #removed entity no longer exist in acfr database
@@ -1151,36 +1157,22 @@ dictionary_tmp <- readRDS("data/dictionary_tmp.RDS") %>%
                         ncesID == "3622050" ~ "36342",
                         ncesID == "0805370" ~ "1266165",
                         TRUE ~ id)) %>% 
-  rbind(dict_13)
+  rbind(dict_13) %>% 
+  
+  rbind(dict_montana)
 
 
 # id in dictionary but no longer exist in acfr database
 id_nolonger_exist <- anti_join(dictionary_tmp, school_districts_all, by = "id") 
 
-dictionary <- dictionary_tmp %>% filter(!id %in% id_nolonger_exist$id) %>% 
+dictionary <- dictionary_tmp %>% 
+  filter(!id %in% id_nolonger_exist$id) %>% 
   add_count(id) %>% filter(n == 1) %>% select(-n) %>% 
   add_count(ncesID) %>% filter(n == 1) %>% select(-n)
 
 dictionary %>% 
   write.csv("tmp/school_districts_id_ncesID_dictionary.csv")
   
-
-
-# why different here - because some ncesID matches 2 ids
-dictionary %>% distinct(id, ncesID, state.abb) %>% add_count(ncesID) %>% filter(n==1) %>% 
-  View()
-
-dictionary %>% distinct(id, ncesID, state.abb, name)  %>% add_count(ncesID) %>% filter(n==1) %>% 
-  View()
-
-dictionary %>% 
-  write.csv("tmp/school_districts_id_ncesID_dictionary.csv")
-
-
-
-
-
 # update changes here
 saveRDS(dictionary, "data/dictionary.RDS")
-
 
