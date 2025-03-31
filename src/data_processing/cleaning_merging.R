@@ -456,5 +456,5 @@ municipality_all %>% select(state.name, state.abb, name, id) %>% distinct() %>%
 
 cat("End of script")
 
-municipality_all$category %>% distinct()
+
 

@@ -134,7 +134,8 @@ missing_top300_municipalities,
 missing_top300_schools) %>% 
   
   rename(state_abbreviation = state.abb) %>% 
-  add_column(year = "2023")
+  add_column(year = "2023") %>% 
+  filter(!name == "jacksonville city")
 
 missing_top300 %>% write.csv("tmp/missing_top300.csv")
 
