@@ -58,13 +58,7 @@ missing_top300_counties <- anti_join(county_gov %>% filter(year == 2022) %>%
   filter(population > 211981) %>% # pop of york county
     add_column(category = "county") %>% select(-id)
     
-
-#TODO: 
-# missing county top100 year 2023
-# PA montgomery county https://www.montgomerycountypa.gov/331/Annual-Financial-Statements-Reports
-# WA snohomish county https://sao.wa.gov/reports-data/audit-reports?SearchText=snohomish%20county&StartDate=&EndDate=
-# OK oklahoma county https://www.sai.ok.gov/audit-reports/?type=3&rpp=50&years=,2023&sort=&counties=55&searchtext=
-
+# all top 100 counties collected
 
 ####Municipalities####
 census_city_top300 
@@ -94,7 +88,6 @@ city_gov %>% select(state.abb, name, population, year) %>%
 
 
 # MA Bristol: have 2022, 2023 but not 2020, 2021
-# AL Mobile: should be non-standard 
 #Missing top 200 cities year 2023
 # NJ newark https://www.newarknj.gov/departments/finance
 # 7	Connecticut	stamford https://www.stamfordct.gov/government/administration/annual-reports-and-budgets
@@ -113,7 +106,7 @@ school_districts_all %>% select(state.abb,enrollment_22, year) %>%
 
 #TODO: check back missing: 
 # Uploaded: williamson county schools, reported in county acfrs. Uploaded county's acfrs to replace
-
+top100_school_districts
 missing_sd <- top200_school_districts %>% 
   add_count(ncesID) %>% filter(n < 4) %>% 
   select(state.abb, ncesID, name, n, id) %>% distinct()

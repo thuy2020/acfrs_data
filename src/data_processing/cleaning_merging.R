@@ -106,7 +106,7 @@ state_all %>%
   #group_by(year) %>% 
   #summarise(n = n())
   add_count(state.name) %>% filter(n<4) %>% 
-  select(state.abb, n) %>% distinct()
+  select(state.name, n) %>% distinct()
 
 state_all %>% write.csv("output/all_states_2020_2023.csv")
 
@@ -372,6 +372,8 @@ select(-name) %>% distinct()
 dict_top100_ELSI <- dictionary %>% 
   filter(ncesID %in% top_schools_by_year$ncesID)
 
+
+
 school_districts_ <- readRDS("data/acfrs_data.RDS") %>% 
   filter(category == "School District") %>% 
   mutate(id = as.character(id)) %>% 
@@ -391,57 +393,7 @@ school_districts_all <-
 bind_2df_different_size(school_districts_, exceptions) 
 
 ####
-
-#Top 100
-top100_school_districts <- school_districts_all %>% 
-  filter(id %in% dict_top100_ELSI$id) %>% 
-  
-  #bind with NYC
-  rbind(nyc_top5) %>% arrange(state.abb, name) 
-  
-
-top100_school_districts_4years <- school_districts_all %>% 
-  filter(id %in% dict_top100_ELSI$id) %>% 
-  
-  #bind with NYC
-  rbind(nyc_top5) %>% arrange(state.abb, name) 
-
-
-# top 200
-dict_top200_ELSI <- dictionary %>% 
-  filter(ncesID %in% top200_schools_by_year$ncesID) 
-
-top200_school_districts <- school_districts_all %>% 
-  filter(id %in% dict_top200_ELSI$id) %>% 
-  #bind with NYC
-  rbind(nyc_top5) %>% arrange(state.abb, name) %>% distinct() 
-
-
-#top 300
-
-top300_schools_22 <- top300_schools_by_year %>% filter(year == "enrollment_22")
-
-dict_top300_ELSI <- dictionary %>% 
-  filter(ncesID %in% top300_schools_22$ncesID) 
-
-#missing 5 NY schools
-anti_join(top300_schools_22, dict_top300_ELSI, by = "ncesID")
-
-#dict_top300_ELSI %>% write.csv("tmp/list_top300_sd.csv")
-
-top300_school_districts <- school_districts_all %>% 
-  filter(id %in% dict_top300_ELSI$id) %>% 
-  #bind with NYC
-  rbind(nyc_top5) %>% arrange(state.abb, name) %>% distinct() 
-
-dict_top300_ELSI %>% filter(!id %in% top300_school_districts$id)
-
-
-#top100_school_districts %>% write.csv("output/top100_sd.csv")
-#top200_school_districts %>% write.csv("output/top200_sd.csv")
-
-  
-  school_districts_all %>%   write.csv("output/all_schooldistricts_2020_2023.csv")
+school_districts_all %>%   write.csv("output/all_schooldistricts_2020_2023.csv")
 
 
 ####Entity ID####

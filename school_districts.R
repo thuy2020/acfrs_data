@@ -34,8 +34,8 @@ breakdown_state_pct_collected <- breakdown_state %>%
   mutate(pct_enrollment_collected = round(enrollment_collected/total_enrollment_22*100,2),
          pct_sd_collected = round(sd_collected/total_sd*100,2)) %>% 
 
-# Carter checked: MT, MI, CO
-  filter(!`state.name` %in% c("Michigan", "Montana", "Colorado"))
+# Carter checked: MT, MI, CO, OK
+  filter(!`state.name` %in% c("Michigan", "Montana", "Colorado", "Oklahoma"))
 
 
 ####Michigan####
@@ -101,7 +101,7 @@ compare_school_districts <- function(state_name) {
 }
 
 # Example usage
-compare_school_districts("Oklahoma")
+compare_school_districts("Illinois")
 
 anti_join(school_districts_all %>% filter(state.name == "Montana" & year == 2022),
           school_districts_all %>% filter(state.name == "Montana" & year == 2023), by = "id") %>% View()
