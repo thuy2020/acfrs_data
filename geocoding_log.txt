@@ -1,0 +1,5 @@
+[2025-05-20 13:48:23] Geocoding process started
+[2025-05-20 13:48:23] Starting main geocoding process
+[2025-05-20 13:48:23] Reading municipality data
+[2025-05-20 13:48:23] Using data from year: -Inf
+[2025-05-20 13:48:43] Using data from year: -Inf

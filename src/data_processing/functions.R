@@ -111,3 +111,142 @@ bind_2df_different_size <- function(df1, df2) {
   return(result)
 }
 
+
+
+compare_excel_files <- function(file1, file2, id_col = "id", output_csv = NULL) {
+  # Load and clean
+  df1 <- read_xlsx(file1) %>% clean_names()
+  df2 <- read_xlsx(file2) %>% clean_names()
+  
+  # Print shapes
+  cat("📄 File 1:", basename(file1), "\n  ➤ Rows:", nrow(df1), "Cols:", ncol(df1), "\n")
+  cat("📄 File 2:", basename(file2), "\n  ➤ Rows:", nrow(df2), "Cols:", ncol(df2), "\n\n")
+  
+  # Compare IDs
+  added_ids <- setdiff(df2[[id_col]], df1[[id_col]])
+  removed_ids <- setdiff(df1[[id_col]], df2[[id_col]])
+  
+  cat("➕ Added IDs:", length(added_ids), "\n")
+  cat("➖ Removed IDs:", length(removed_ids), "\n\n")
+  
+  # Inner join for value comparison
+  joined <- inner_join(df1, df2, by = id_col, suffix = c("_old", "_new"))
+  
+  # Compare each column except ID
+  common_cols <- intersect(names(df1), names(df2))
+  common_cols <- setdiff(common_cols, id_col)
+  
+  changed_values <- map_dfr(common_cols, function(col) {
+    old_col <- paste0(col, "_old")
+    new_col <- paste0(col, "_new")
+    
+    joined %>%
+      filter(!is.na(.data[[old_col]]) & !is.na(.data[[new_col]]) & .data[[old_col]] != .data[[new_col]]) %>%
+      select(!!id_col, all_of(old_col), all_of(new_col)) %>%
+      mutate(column = col)
+  })
+  
+  # Output
+  if (nrow(changed_values) == 0) {
+    cat("✅ No value changes found for matching IDs.\n")
+  } else {
+    cat("🔄 Value changes found for", nrow(changed_values), "cells.\n")
+    
+    if (!is.null(output_csv)) {
+      write.csv(changed_values, output_csv, row.names = FALSE)
+      cat("📁 Changes written to:", output_csv, "\n")
+    }
+  }
+  
+  return(list(
+    shape_diff = list(
+      file1_rows = nrow(df1), file2_rows = nrow(df2),
+      file1_cols = ncol(df1), file2_cols = ncol(df2)
+    ),
+    added_ids = added_ids,
+    removed_ids = removed_ids,
+    changed_values = changed_values
+  ))
+}
+
+
+compare_latest_csv_versions <- function(folder = "output", 
+                                        prefix = NULL, 
+                                        id_col = "id", 
+                                        output_excel = NULL) {
+  # List matching CSV files
+  files <- list.files(folder, pattern = paste0("^", prefix, "_\\d{8}_\\d{4}\\.csv$"), full.names = TRUE)
+  
+  # Sort files by timestamp
+  files_sorted <- files[order(files, decreasing = TRUE)]
+  
+  if (length(files_sorted) < 2) {
+    stop("❌ Not enough versions found to compare (need at least 2).")
+  }
+  
+  file_new <- files_sorted[1]
+  file_old <- files_sorted[2]
+  
+  cat("🔍 Comparing:\n")
+  cat("  🆕 New file: ", file_new, "\n")
+  cat("  🪧 Old file: ", file_old, "\n\n")
+  
+  df_new <- read_csv(file_new, show_col_types = FALSE) %>% janitor::clean_names()
+  df_old <- read_csv(file_old, show_col_types = FALSE) %>% janitor::clean_names()
+  
+  # Compare shapes
+  cat("📐 Rows & columns:\n")
+  cat("  ➤ Old: ", nrow(df_old), "rows,", ncol(df_old), "columns\n")
+  cat("  ➤ New: ", nrow(df_new), "rows,", ncol(df_new), "columns\n\n")
+  
+  # Compare ID presence
+  added_ids <- setdiff(df_new[[id_col]], df_old[[id_col]])
+  removed_ids <- setdiff(df_old[[id_col]], df_new[[id_col]])
+  
+  cat("➕ Added IDs: ", length(added_ids), "\n")
+  cat("➖ Removed IDs: ", length(removed_ids), "\n\n")
+  
+  # Join on ID
+  joined <- inner_join(df_old, df_new, by = id_col, suffix = c("_old", "_new"))
+  common_cols <- intersect(names(df_old), names(df_new)) |> setdiff(id_col)
+  
+  # Track value-level changes
+  changed_values <- purrr::map_dfr(common_cols, function(col) {
+    old_col <- paste0(col, "_old")
+    new_col <- paste0(col, "_new")
+    joined %>%
+      filter(!is.na(.data[[old_col]]) & !is.na(.data[[new_col]]) & .data[[old_col]] != .data[[new_col]]) %>%
+      select(!!id_col, all_of(old_col), all_of(new_col)) %>%
+      mutate(column = col)
+  })
+  
+  # Prepare Excel output
+  # Always create Excel report
+  df_added <- tibble(!!id_col := added_ids)
+  df_removed <- tibble(!!id_col := removed_ids)
+  
+  write_xlsx(
+    list(
+      "Changed Values" = changed_values,
+      "Added IDs" = df_added,
+      "Removed IDs" = df_removed
+    ),
+    path = output_excel
+  )
+  
+  if (nrow(changed_values) > 0 || length(added_ids) > 0 || length(removed_ids) > 0) {
+    cat("🔄 Found", nrow(changed_values), "changed values across columns.\n")
+    cat("📁 Report written to:", output_excel, "\n")
+  } else {
+    cat("✅ No changes found between files.\n")
+    cat("📁 Empty report written to:", output_excel, "\n")
+  }
+  
+  return(list(
+    file_old = file_old,
+    file_new = file_new,
+    added_ids = added_ids,
+    removed_ids = removed_ids,
+    changed_values = changed_values
+  ))
+}

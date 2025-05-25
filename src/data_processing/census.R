@@ -79,6 +79,12 @@ census_state <- census_all %>% filter(sumlev == 40) %>%
   left_join(state_urb)
 
 ######## Census county#########
+
+# more on consolidated city, county & county equivalent: https://www.census.gov/programs-surveys/geography/about/glossary.html#par_textimage_12
+
+consolitated_county <- census_county %>% 
+  filter(funcstat == "C")
+
 # Getting urbanicity data 
 
 #CT has 9 planning region which are not counties

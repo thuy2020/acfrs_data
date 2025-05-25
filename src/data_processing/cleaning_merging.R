@@ -7,6 +7,7 @@ source("src/data_processing/nces.R")
 source("src/data_processing/exceptions.R")
 options(scipen = 999)
 
+
 ####NOTE##########
 #Entity names in the original Acfrs database are not obvious, i.e., 
 # They do not always contain a certain word to indicate its government type (i.e., city, town, county, etc). 
@@ -110,34 +111,71 @@ state_all %>%
 
 state_all %>% write.csv("output/all_states_2020_2023.csv")
 
+state_all %>% 
+  filter(year == 2023) %>% 
+  write.csv(file = paste0("output/all_states_2023_", format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
+
+compare_latest_csv_versions(
+  folder = "output",
+  prefix = "all_states_2023",
+  output_excel = "output/states_changes_report.xlsx"
+)
+
 ####### Counties########
 acfrs_county <- acfrs_general_purpose %>% 
   filter(!str_detect(name, "\\(")) %>%   # not county. Eg: waverly township (van buren county)
   #In Louisiana, counties are called Parishes.
   # In Alaska, borough)|municipality
   filter(grepl("county|municipality|parish|borough", name))
-  
 
 # join acfrs with census population 
 county_gov <- acfrs_county %>% 
   # most acfrs_county do not have geo_id --> must join by state.abb and name
   select(-geo_id) %>% 
-  left_join(census_county, by = c("state.abb", "state.name","name" = "name_census")) %>% 
-  arrange(desc(population)) 
+  left_join(census_county, by = c("state.abb", "state.name","name" = "name_census"))
 
-##Consolidated county-city##
-#census identify theses as consolidated county-city:
+
+#####Consolidated government#####
+#census identify theses as consolidated -city:
 #   170 = Consolidated city
 #   172 = Consolidated city -- place within consolidated city
-# census_all %>% 
-#   filter(sumlev %in% c(170))
+#Consolidated City—A consolidated government is a unit of local government for which 
+#the functions of an incorporated place and its county or minor civil division (MCD) have merged.
+#https://www.census.gov/programs-surveys/geography/about/glossary.html#par_textimage_12
+
+consolidated_city_census <- census_all %>%
+  filter(sumlev %in% c(170))  
+  #filter(!str_detect(name_census, "(balance)"))
+
+consolidated_city_census$name_census
+# [1] "milford city"                                    "athens-clarke county unified government"        
+# [3] "augusta-richmond county consolidated government" "indianapolis city"                              
+# [5] "greeley county unified government"               "louisville/jefferson county metro government"   
+# [7] "butte-silver bow"                                "nashville-davidson metropolitan government"  
+
+consolidated_city_acfr <- acfrs_general_purpose %>% 
+filter(id %in% c("32107", "1266998", "148608", "33244", 
+                 "1267157", "115965", "81613", "1267141"))
+
+consolidated_city_acfr %>% filter(year == 2023) %>% select(1:4, 6)
+# there are 33 consolidated counties
+consolidated_county_census <- census_all %>% 
+  filter(sumlev == 50) %>% # sumlev == 50 county level
+  filter(funcstat == "C") # funcstat == "C" = consolidated county
+
+nrow(consolidated_county_census)
+
+consolidated_county_acfr <- 
+  acfrs_general_purpose %>% 
+  filter(id %in% c())
 
 #These counties are consolidated --> have some other name in acfrs list:  
 consolidated_city_county <- acfrs_general_purpose %>% 
   filter((name == "city and county of san francisco" & state.abb == "CA") |
            (name == "philadelphia" & state.abb == "PA") |
            (name == "jacksonville" & state.abb == "FL") |
-           (name == "the metropolitan government of nashville and davidson county" & state.abb == "TN")  |
+           (name == "the metropolitan government of nashville and davidson county" & 
+              state.abb == "TN")  |
            name == "city and county of honolulu") %>% 
   left_join(df_state) %>% 
   
@@ -152,16 +190,19 @@ consolidated_city_county <- acfrs_general_purpose %>%
                             name == "the metropolitan government of nashville and davidson county" ~ "47037",
                             TRUE ~ as.character(geo_id))) 
 
+
 # get population
 consolidated_city_county_population <- census_all %>% 
   filter(geo_id %in% consolidated_city_county$geo_id) %>% 
   select(geo_id, population) 
 
 # get urbanicity
-consolidated_city_county_urbanicity <- county_urb %>% filter(geo_id %in% consolidated_city_county$geo_id)
+consolidated_city_county_urbanicity <- county_urb %>% 
+  filter(geo_id %in% consolidated_city_county$geo_id)
 
 # get income
-consolidated_city_county_income <- income %>% filter(geo_id %in% consolidated_city_county$geo_id)
+consolidated_city_county_income <- income %>% 
+  filter(geo_id %in% consolidated_city_county$geo_id)
 
 # all
 consolidated_city_county_all <- consolidated_city_county %>% 
@@ -170,24 +211,7 @@ consolidated_city_county_all <- consolidated_city_county %>%
   left_join(consolidated_city_county_income) %>% 
   select(all_of(fields_to_select))
 
-##All counties###
-county_gov_all <- county_gov %>% 
-
-  left_join(income) %>% 
-  select(all_of(fields_to_select)) %>% 
-  # bind with consolidated
-  rbind(consolidated_city_county_all) %>% 
-  
-  #removing some duplicate
-  #TODO: trace this back to initial join to remove dup from there
-  filter(!(name %in% c("city and county of honolulu", 
-                       "city and county of san francisco") & (is.na(geo_id))))  
-
-  
-#append URL
-county_all <- append_url(county_gov_all) %>% 
-  select(-identifier)
-
+#####TN Nashville #####
 #NOTE: The Nashville Metropolitan Statistical Area encompasses the Middle Tennessee counties of 
 #Cannon, Cheatham, Davidson, Dickson, Hickman, Macon, Robertson, Rutherford, 
 #Smith, Sumner, Trousdale, Williamson, and Wilson.
@@ -206,66 +230,97 @@ metropolitan_TN_13counties_urb <- county_urb %>%
 metropolitan_TN_13counties_income <- income %>% 
   filter(geo_id %in% c(metropolitan_TN_13counties$geo_id)) %>%
   summarise(median_hh_income_21 = round(mean(median_hh_income_21)))
+
+##All counties###
+county_gov_all <- county_gov %>% 
+
+  left_join(income) %>% 
+  select(all_of(fields_to_select)) %>% 
   
-#TODO: check thoese with No geo
+  # bind with consolidated
+  rbind(consolidated_city_county_all) %>% 
+  
+  #change population of Davidson metropolitan 
+  mutate(name = ifelse(state.abb == "TN" & name == "davidson county", 
+                       "The Metropolitan Government of Nashville and Davidson County",
+                       name)) %>% 
+  #change population of metropolitan 
+  mutate(population = ifelse(name == "The Metropolitan Government of Nashville and Davidson County", 
+                             sum(metropolitan_TN_13counties$population),
+                             population)) %>% 
+  
+  #change urbanicity of metropolitan 
+  mutate(urban_pop = ifelse(name == "The Metropolitan Government of Nashville and Davidson County", 
+                            metropolitan_TN_13counties_urb$urban_pop,
+                            urban_pop)) %>% 
+  #change percent_urbanicity of metropolitan 
+  mutate(pct_urban_pop = ifelse(name == "The Metropolitan Government of Nashville and Davidson County", 
+                                metropolitan_TN_13counties_urb$pct_urban_pop,
+                                pct_urban_pop
+  )) %>% 
+  
+  # income of metropolitan
+  mutate(median_hh_income_21 = ifelse(name == "The Metropolitan Government of Nashville and Davidson County", 
+                                      metropolitan_TN_13counties_income,
+                                      median_hh_income_21
+  ),
+  median_hh_income_21 = as.numeric(median_hh_income_21)) %>% 
+  
+  #removing some duplicate
+  #TODO: trace this back to initial join to remove dup from there
+  filter(!(name %in% c("city and county of honolulu", 
+                       "city and county of san francisco") & (is.na(geo_id))))  
+
+  
+#append URL
+county_all <- append_url(county_gov_all) %>% 
+  select(-identifier)
+  
+#TODO: check those with No geo
 # no_GEO <- county_all %>% filter(is.na(geo_id)) %>%
 #   select(name, state.abb, geo_id, total_liabilities, year) %>%
 #   filter(year != 2023)
 
 # Find acfrs entities from the list of Top 100 county census 
 top100_counties <- county_all %>% 
-  filter(geo_id %in% census_county_top100$geo_id) %>% 
+  filter(geo_id %in% census_county_top100$geo_id)
   
-  #change population of Davidson metropolitan 
-  mutate(name = ifelse(state.abb == "TN" & name == "davidson county", 
-                       "The Metropolitan Government of Nashville and Davidson County",
-                       name)) %>% 
-  
-  #change population of metropolitan 
-  mutate(population = ifelse(name == "The Metropolitan Government of Nashville and Davidson County", 
-         sum(metropolitan_TN_13counties$population),
-         population
-         )) %>% 
-  
-  #change urbanicity of metropolitan 
-  mutate(urban_pop = ifelse(name == "The Metropolitan Government of Nashville and Davidson County", 
-                             metropolitan_TN_13counties_urb$urban_pop,
-                             urban_pop)) %>% 
-  #change percent_urbanicity of metropolitan 
-  mutate(pct_urban_pop = ifelse(name == "The Metropolitan Government of Nashville and Davidson County", 
-                            metropolitan_TN_13counties_urb$pct_urban_pop,
-                            pct_urban_pop
-  )) %>% 
-  
-  # income of metropolitan
-  mutate(median_hh_income_21 = ifelse(name == "The Metropolitan Government of Nashville and Davidson County", 
-                                metropolitan_TN_13counties_income,
-                                median_hh_income_21
-  ),
-  median_hh_income_21 = as.numeric(median_hh_income_21)) 
-  
-#write.csv(top100_counties, "output/top100_counties.csv")
+write.csv(top100_counties, "output/top100_counties.csv")
 
 # Find acfrs entities from the list of Top 200 county census
-top200_county_4years <- county_all %>% 
+top200_county <- county_all %>% 
   filter(geo_id %in% census_county_top200$geo_id) 
 
-top200_county_4years %>% write.csv("output/top200_counties.csv")
+#missing in top 200
+top200_county %>% 
+  group_by(year) %>% 
+  summarise(count = n())
+
+top200_county %>% write.csv("output/top200_counties.csv")
 
 # Find acfrs entities from the list of Top 300 county census
 top300_county <- county_all %>% 
   filter(geo_id %in% census_county_top300$geo_id) %>% 
   select(state.abb, id, geo_id, name, population, year) %>% distinct()
+
 top300_county %>% write.csv("tmp/list_top300_counties.csv")
 
 #these 2 are consolidated city-county
 anti_join(census_county_top300, top300_county, by = ("geo_id"))
 
-
 write.csv(county_all, "output/all_counties_2020_2023.csv")
 
+county_all %>% 
+  filter(year == 2023) %>% 
+  write.csv(file = paste0("output/all_counties_2023_", format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
 
-##########Municipalities#########
+compare_latest_csv_versions(
+  folder = "output",
+  prefix = "all_counties_2023",
+  output_excel = "output/counties_changes_report.xlsx"
+)
+
+####Municipalities####
 # Census calls Incorporated Place & Minor Civil Division
 municipality_ <- acfrs_general_purpose %>% 
   # exclude state and county
@@ -279,11 +334,9 @@ municipality_ <- acfrs_general_purpose %>%
   distinct()
 
 #append ULR
-municipality_all <- append_url(municipality_) %>% select(-identifier)
+municipality_all_ <- append_url(municipality_) %>% select(-identifier) %>% 
 
-
-#City&DC
-acfrs_city <- municipality_all %>% 
+#fixing some geo_id
   mutate(geo_id = case_when(id == "138430" ~ "0827425",
                             id == "39880" ~ "5531000", # green bay
                             id == "1265296" ~ "0660620", #CA richmond
@@ -296,9 +349,7 @@ special_cities <- acfrs_general_purpose %>%
   mutate(geo_id = case_when(id == "101868" ~ "0668000", # san jose CA
                             id == "1266697" ~ "2255000", # new orleans LA
                             id == "1266289" ~ "0820000",# CO denver county, also denver city
-                            id == "149470" ~ "3611000")# NY buffalo
-                            
-         ) %>%  
+                            id == "149470" ~ "3611000")) %>%  # NY buffalo
   
   left_join(city_income) %>% 
   left_join(df_state) %>% 
@@ -306,36 +357,30 @@ special_cities <- acfrs_general_purpose %>%
   mutate(url = NA) %>% 
   select(-identifier)
 
-city_gov <- acfrs_city %>% rbind(special_cities) %>% 
+municipality_all <- municipality_all_ %>% rbind(special_cities) %>% 
   #avoid double count - these entities are counted in county_gov
   filter(name != "denver county") %>% 
-  select(any_of(fields_to_select), url) 
+  select(any_of(fields_to_select), url) %>% 
+  
+  # create a dummy urban_pop to match the df size with state and counties
+  mutate(urban_pop = NA, 
+         pct_urban_pop = NA)
 
 #Top 100
-top100_cities <- city_gov %>% 
+top100_cities <- municipality_all %>% 
   filter((geo_id %in% census_city_top100$geo_id) | 
            name == "district of columbia") %>% distinct() %>% 
   mutate(population = ifelse(name == "district of columbia", 689546, population)) #%>% 
 
-#TODO: change Spokane WA to before the Hgarb update on 2024-12-11 - 
-#TODO: check if the changes made by Hgarb is correct
-  # mutate(
-  #   current_liabilities = if_else(name == "spokane" & state.name == "Washington" & year == 2022, 36792571, current_liabilities),
-  #   net_pension_liability = if_else(name == "spokane" & state.name == "Washington" & year == 2022, 0, net_pension_liability),
-  #   net_opeb_liability = if_else(name == "spokane" & state.name == "Washington" & year == 2022, 0, net_opeb_liability),
-  #   net_opeb_assets = if_else(name == "spokane" & state.name == "Washington" & year == 2022, 93475431, net_opeb_assets),
-  #   current_assets = if_else(name == "spokane" & state.name == "Washington" & year == 2022, 150943988, current_assets)
-  # )
-  # 
 
 #Top 200 cities
-top200_cities <- city_gov %>% 
+top200_cities <- municipality_all %>% 
   filter((geo_id %in% census_city_top200$geo_id) | 
            name == "district of columbia") %>% distinct() %>% 
   mutate(population = ifelse(name == "district of columbia", 689546, population))  
 
 #Top 300 cities
-top300_cities <- city_gov %>% 
+top300_cities <- municipality_all %>% 
   filter((geo_id %in% census_city_top300$geo_id) | 
            name == "district of columbia") %>% distinct() %>% 
   mutate(population = ifelse(name == "district of columbia", 689546, population))  
@@ -345,7 +390,9 @@ top300_cities_namelist <- top300_cities %>% select(state.abb, id, geo_id, name) 
 #those in top 300 cencus but not collected in acfr: 
 #Columbus consolidated in Muscogee county
 # KS kansas city consolidated in Wyandotte County 
+
 anti_join(census_city_top300, top300_cities_namelist, by="geo_id")
+
 top300_cities_namelist %>% write.csv("tmp/list_top300_municipalities.csv")
 
 
@@ -354,46 +401,73 @@ top300_cities_namelist %>% write.csv("tmp/list_top300_municipalities.csv")
 #city_gov %>% write.csv("output/all_cities_2020_2023.csv")
 municipality_all %>% write.csv("output/all_municipalities_2020_2023.csv")
 
+
+municipality_all %>% 
+  filter(year == 2023) %>% 
+  write.csv(file = paste0("output/all_municipalities_2023_", format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
+
+compare_latest_csv_versions(
+  folder = "output",
+  prefix = "all_municipalities_2023",
+  output_excel = "output/municipalities_changes_report.xlsx"
+)
+
 ####School districts####
 dictionary <- readRDS("data/dictionary.RDS") %>% 
 select(-name) %>% distinct()
 
-# dictionary %>% 
-#   count(id) %>% filter(n>1)
-# 
-# dictionary %>% 
-#   count(ncesID) %>% filter(n>1) %>% View() 
-#   distinct(ncesID) %>% View()
-#   
-#   # acfr sd do not have ncesID in dictionary
-# anti_join(school_districts_all, dictionary, by = "id") %>% View()
 
 # filter only top 100
-dict_top100_ELSI <- dictionary %>% 
-  filter(ncesID %in% top_schools_by_year$ncesID)
-
-
+# dict_top100_ELSI <- dictionary %>% 
+#   filter(ncesID %in% top100_schools$ncesID)
 
 school_districts_ <- readRDS("data/acfrs_data.RDS") %>% 
   filter(category == "School District") %>% 
   mutate(id = as.character(id)) %>% 
   select(any_of(fields_to_select)) %>% 
+  
+  #joint with dictionary to get ncesID
   left_join(dictionary) %>% 
-  #join with nces to get county, city info
+  
+  #join with nces to get county, city, long, lat
   left_join(nces, by = c("ncesID", "state.abb", "state.name")) %>% 
  
    #append URLs
   append_url() %>% select(-identifier) 
 
-#bind with other special cases:
-
-
-# Now bind them
+# Now bind with special cases
 school_districts_all <- 
-bind_2df_different_size(school_districts_, exceptions) 
+bind_2df_different_size(school_districts_, exceptions) %>% 
+  # create a dummy urban_pop to match the df size with state and counties
+  mutate(urban_pop = NA, 
+         pct_urban_pop = NA, 
+         median_hh_income_21 = NA) %>% 
+  rename(
+    student_enrollment = enrollment_22)
 
-####
-school_districts_all %>%   write.csv("output/all_schooldistricts_2020_2023.csv")
+# Save with time stamp 
+school_districts_all %>% write.csv("output/school_districts_all_2020_2023.csv")
+school_districts_all %>%
+  filter(year == 2023) %>% 
+  write.csv(file = paste0("output/all_schooldistricts_2023_", format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
+
+
+# TODO: some MT acfr report include more than 1 school districts. Need to treat MT separately 
+school_districts_all %>% 
+  filter(year == 2023) %>% filter(state.abb == "MT") %>% View()
+  count(id) %>%
+  filter(n > 1)
+  
+
+####Tracking changes####
+  
+ 
+
+compare_latest_csv_versions(
+  folder = "output",
+  prefix = "all_schooldistricts_2023",
+  output_excel = "output/schooldistrict_changes_report.xlsx"
+)
 
 
 ####Entity ID####

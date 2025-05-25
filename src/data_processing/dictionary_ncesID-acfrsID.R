@@ -1,7 +1,9 @@
 library(tidyverse)
+library(readr)
 library(stringr)
 library(tidyr)
 library(dplyr)
+library(stringdist)
 source("src/data_processing/nces.R")
 
 # # HSD = High School District
@@ -1132,16 +1134,6 @@ source("src/data_processing/nces.R")
 
 #TODO: Update anything after this. DO NOT run the above code again. 
 
-dict_13 <- readxl::read_xls("data/_dictionary_13.xls") %>% 
-  select(id, ncesID, state.abb, name) %>% 
-  mutate(across(everything(), as.character))
-
-# In Montana, some separate school districts are reported in one acfrs
-# need to combine students from these sd to reflect true number of students that these acfrs cover
-dict_montana <- readxl::read_xlsx("data/_dictionary_montana_school_districts.xlsx") %>% 
-  select(id, ncesID, state.abb, name) %>% 
-  mutate(across(everything(), as.character))
-
 
 dictionary_tmp <- readRDS("data/dictionary_tmp.RDS") %>% 
   #removed entity no longer exist in acfr database
@@ -1152,27 +1144,145 @@ dictionary_tmp <- readRDS("data/dictionary_tmp.RDS") %>%
                     "82195", "36553", "147069", "37500", "38854", "200059",
                     "197654", "197659", "197665", "88825", "197671", "32051")) %>% 
   
-  
+
   mutate(id = case_when(ncesID == "4700148" ~ "87787",
                         ncesID == "3622050" ~ "36342",
                         ncesID == "0805370" ~ "1266165",
-                        TRUE ~ id)) %>% 
-  rbind(dict_13) %>% 
+                        TRUE ~ id)) 
+ 
+####Fuzzy match####
+# Normalize function ---
+normalize_name <- function(name) {
+  name %>%
+    tolower() %>%
+    gsub("school district", "", .) %>%
+    gsub("elem", "elementary", .) %>%
+    gsub("no\\.?|districts?|schools?|public|and", "", .) %>%
+    gsub("[^a-z0-9 ]", "", .) %>%
+    trimws()
+}
+
+ acfr_as_missing_ncesID <- school_districts_all %>% 
+    select(state.abb, state.name, name, id, ncesID) %>% 
+    filter(is.na(ncesID)) %>% distinct() 
   
-  rbind(dict_montana)
-
-
-# id in dictionary but no longer exist in acfr database
-id_nolonger_exist <- anti_join(dictionary_tmp, school_districts_all, by = "id") 
-
-dictionary <- dictionary_tmp %>% 
-  filter(!id %in% id_nolonger_exist$id) %>% 
-  add_count(id) %>% filter(n == 1) %>% select(-n) %>% 
-  add_count(ncesID) %>% filter(n == 1) %>% select(-n)
-
-dictionary %>% 
-  write.csv("tmp/school_districts_id_ncesID_dictionary.csv")
+acfr_as_missing_ncesID_normalized <- acfr_as_missing_ncesID %>%
+    mutate(name_clean = normalize_name(name))
   
-# update changes here
-saveRDS(dictionary, "data/dictionary.RDS")
+  nces_normalized <- nces %>%
+    #padding a leading 0, ncesID should have 7 digit
+    mutate(ncesID = sprintf("%07s", as.character(ncesID))) %>% 
+    
+    mutate(name_clean = normalize_name(name_nces))
+  
+  # Match within state to improve accuracy ---
+  match_within_state <- function(state_df, nces_df) {
+    dist_matrix <- stringdistmatrix(state_df$name_clean, nces_df$name_clean, method = "jw")
+    best_match_index <- apply(dist_matrix, 1, which.min)
+    
+    matched_nces <- nces_df[best_match_index, ]
+    
+    state_df %>%
+      mutate(
+        filled_ncesID = nces_df$ncesID[best_match_index],
+        matched_name_nces = nces_df$name_nces[best_match_index],
+        state_agency_id = matched_nces$state_agency_id,
+        county_nces = matched_nces$county_nces,
+        match_score = mapply(function(i, j) dist_matrix[i, j], 
+                             seq_along(best_match_index), best_match_index)
+      )
+  }
+  
+  # --- 5. Apply fuzzy match by state ---
+  matched_all_states <- acfr_as_missing_ncesID_normalized %>%
+    group_split(state.abb) %>%
+    purrr::map_dfr(function(state_group) {
+      state_abbr <- unique(state_group$state.abb)
+      
+      nces_state <- filter(nces_normalized, state.abb == state_abbr)
+      match_within_state(state_group, nces_state)
+    })
+  
+  
+  # keep only new matches and strong ones ---
+  strong_matches <- matched_all_states %>%
+    filter(is.na(ncesID) & match_score < 0.15) %>% 
+    
+    #need to treat Montana separately
+    filter(state.abb != "MT") %>% 
 
+    # fix some error
+    filter(name != "oakes public schools") %>% 
+    mutate(filled_ncesID = case_when(name == "fremont county school district no. 25"
+                                     ~ "5605220",
+                      
+           TRUE ~ as.character(filled_ncesID))) %>% 
+    select(-ncesID) %>% 
+    
+    rename(ncesID = filled_ncesID) %>% 
+    select(id, ncesID, state.abb, name)
+  
+  # view some beyond 0.15, < 0.2
+  
+  #TODO: review and weed out by hand this set
+  matched_all_states %>% 
+    filter(is.na(ncesID) &  0.15 < match_score & match_score < 0.2) %>% View()
+  
+#TODO: need to find a way to match these week_matches
+  # weak_matches
+  weak_matches <- matched_all_states %>%
+    filter(is.na(ncesID) & match_score >= 0.15) %>% 
+    
+    #need to treat Montana separately
+    filter(state.abb != "MT") 
+    
+  # --- 7. Save result ---
+  write_csv(weak_matches, "tmp/us_missing_ncesID_weak_matches.csv")
+  
+
+  
+####Final merge####
+ 
+ dict_13 <- readxl::read_xls("data/_dictionary_13.xls") %>% 
+   select(id, ncesID, state.abb, name) %>% 
+   mutate(across(everything(), as.character))
+ 
+ # In Montana, some separate school districts are reported in one acfrs
+ # need to combine students from these sd to reflect true number of students that these acfrs cover
+ dict_montana <- readxl::read_xlsx("data/_dictionary_montana_school_districts.xlsx") %>% 
+   select(id, ncesID, state.abb, name) %>% 
+   mutate(across(everything(), as.character))
+ 
+  
+  # id in dictionary but no longer exist in acfr database
+  id_nolonger_exist <- anti_join(dictionary_tmp, school_districts_all, by = "id") 
+  
+  dictionary <- dictionary_tmp %>% 
+    filter(!id %in% id_nolonger_exist$id) %>% 
+    add_count(id) %>% filter(n == 1) %>% select(-n) %>% 
+    add_count(ncesID) %>% filter(n == 1) %>% select(-n) %>% 
+    
+  
+    # add fuzzy match result - strong match
+    rbind(strong_matches) %>% 
+    rbind(dict_13) %>% 
+    rbind(dict_montana) %>% distinct() %>% 
+    
+    
+    #final correction: 
+    mutate(ncesID = case_when(id == "161618" ~ "2622320",
+                              TRUE ~ ncesID
+                              ))
+    
+  
+  # update changes here
+  saveRDS(dictionary, "data/dictionary.RDS")
+  
+  
+####Final summary###
+  nces_not_matched <- nces_normalized %>% filter(!ncesID %in% dictionary$ncesID) %>% 
+    select(state.abb, name_nces, ncesID, county_nces, state_agency_id, agency_type, enrollment_23) 
+  
+  sum(nces_not_matched$enrollment_23, na.rm = TRUE)/
+    sum(nces$enrollment_23, na.rm = TRUE)
+  

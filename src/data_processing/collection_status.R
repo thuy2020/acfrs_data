@@ -8,8 +8,7 @@ state_gov %>% select(state.abb, year, name) %>%
   summarise(count = n())
 
 # State 2023
-state_gov %>% 
-  filter(year == 2023) %>% 
+state_gov %>%
   summarise(collected_pop = sum(population, na.rm = TRUE))
 
 # state missing 2023
@@ -29,12 +28,20 @@ county_gov_all %>% select(state.abb, year, name, population) %>%
   summarise(count = n(), 
             tot = sum(population, na.rm = TRUE))
 
-consolitated_county <- census_county %>% 
-  filter(funcstat == "C")
 
-counted_as_city <- c("juneau city and borough", "wrangell city and borough", "san francisco county",
+counted_as_city <- c("juneau city and borough", "wrangell city and borough", 
+                     "san francisco county",
                      "philadelphia county")
   
+
+top200_county %>% group_by(name) %>% 
+  add_count() %>% 
+  filter(n <4) %>% View()
+
+#Missing in top 300
+top300_county %>% group_by(name) %>% 
+  add_count() %>% 
+  filter(n <4) %>% View()
 
 missing_county <- anti_join(census_county, county_gov, by = "geo_id") %>% 
   arrange(desc(population)) %>% 
@@ -57,8 +64,8 @@ anti_join(county_gov %>% filter(year == 2021) %>% select(state.abb, name, id, po
 
 # those missing 2023
 anti_join(county_gov %>% filter(year == 2022) %>% select(state.abb, name, id, population), 
-          county_gov %>% filter(year == 2023) %>% select(state.abb, name, id)) %>% View()
-#write.csv("tmp/missing_counties_fy23_Dec2024.csv")
+          county_gov %>% filter(year == 2023) %>% select(state.abb, name, id)) %>% 
+write.csv("tmp/missing_counties_fy23_May2025.csv")
 
 #NOTE: some have good source here: 
 #MS: https://www.osa.ms.gov/reports/audit-reports
@@ -70,18 +77,20 @@ anti_join(county_gov %>% filter(year == 2022) %>% select(state.abb, name, id, po
 #AR: https://www.arklegaudit.gov/reports?keyword=lonoke+county
 #AL: https://alison.legislature.state.al.us/epa-audit-reports
 #MO: https://auditor.mo.gov/AuditReport/Reports?SearchLocalState=4
+#GA: https://ted.cviog.uga.edu/financial-documents/financial-reports?og_group_ref_target_id%5B%5D=204&field_fiscal_year_value%5Bmin%5D%5Byear%5D=&field_fiscal_year_value%5Bmax%5D%5Byear%5D=&=Apply
+#KS: https://admin.ks.gov/offices/accounts-reports/local-government/municipal-services/municipal-audits/categories/f3d8faddac2a48c08823b55d8209245d
+#KY: https://www.kaco.org/county-information/county-financials/
+#ME: https://www.maine.gov/audit/county/annual-audit-reports.html
+#MN: https://www.auditor.state.mn.us/audit-resources/reports/audit-reports/
+#ND: https://www.nd.gov/auditor/audit-reports
+#NE: https://www.nebraska.gov/auditor/FileSearch/entityresults.cgi?id=Platte%20Township%20Dodge%20County
 
-#TODO: missing county top100 year 2023
 
-# PA montgomery county https://www.montgomerycountypa.gov/331/Annual-Financial-Statements-Reports
-# OK oklahoma county https://www.sai.ok.gov/audit-reports/?counties=55&years=%2C2023&orgs=
-# MA 	norfolk county
-#NJ bergen county
+# OK oklahoma county https://www.sai.ok.gov/audit-reports/?type=3&rpp=50&years=,2023&sort=&counties=55&searchtext=
 
 top200_county_4years %>% select(state.abb, name, year, id, population) %>% 
   add_count(id) %>% select(-year) %>% 
   distinct()%>% filter(n<4) %>%
-  
   View()
 
 #%>% write.csv("tmp/top200_counties_missing_2023.csv")
@@ -93,27 +102,32 @@ top300_county %>% select(state.abb, name, year, id, population) %>%
   View()
 
 ####Cities####
-city_gov %>% filter(year == 2022) %>% 
+municipality_all %>% filter(year == 2022) %>% 
   summarise(collected_pop = sum(population, na.rm = TRUE))
 
+#Missing in top 100
+top100_cities %>% 
+  group_by(id) %>% 
+  add_count() %>% 
+  filter(n<4)
+
 # Why so few cities?
-anti_join(city_gov %>% filter(year == 2022) %>% select(state.abb, name, id, population), 
-          city_gov %>% filter(year == 2023) %>% select(state.abb, name, id, population)) %>%
+anti_join(municipality_all %>% filter(year == 2022) %>% select(state.abb, name, id, population), 
+          municipality_all %>% filter(year == 2023) %>% select(state.abb, name, id, population)) %>%
   arrange(desc(population)) %>% View()
   #writexl::write_xlsx("tmp/missing_cities_Dec2024.xlsx")
 
-city_gov %>% select(state.abb, year, name) %>% 
+municipality_all %>% select(state.abb, year, name) %>% 
   group_by(year) %>% 
   summarise(count = n())
 
-city_gov %>% select(state.abb, name, population, year) %>% 
+municipality_all %>% select(state.abb, name, population, year) %>% 
   group_by(year) %>% 
   summarise(collected_pop = sum(population, na.rm = TRUE),
             count =n())
 
 #MA Norfolk 2022: not released yet
 # MA Bristol: have 2022, 2023 but not 2020, 2021
-# Uploaded: Union county 2020, PA montgomery county
 # AL Mobile: should be non-standard 
 
 #Lake County’s Chronically Poor Audit Results Continue

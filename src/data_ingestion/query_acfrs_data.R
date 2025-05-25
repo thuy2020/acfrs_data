@@ -88,16 +88,17 @@ fetch_data <- function(years, con){
   
 }
 #Call function
+
 fetch_data(c(2020, 2021, 2022, 2023), con)
 
 # make sure to close all connections 
-all_cons <- dbListConnections(drv)
-for (con in all_cons) {
-  dbDisconnect(con)
-}
+dbDisconnect(con)
 
-# Ensure all connections are closed
-all_cons <- dbListConnections(drv)
-print(all_cons)  
+nrow(readRDS("data/acfrs_data.RDS"))
 
+#May 18:  check if portal is up to date
+readRDS("data/acfrs_data.RDS") %>% 
+  select(total_liabilities, id, name) %>% 
+
+  filter(id %in% c("100177", "1268572", "120618", "123513"))
 

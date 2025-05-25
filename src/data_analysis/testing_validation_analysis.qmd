@@ -1,0 +1,110 @@
+---
+title: "testing_validation_analysis"
+format: html
+editor: visual
+---
+
+
+```{r}
+source("data_processing/testing_validation.R")
+```
+# Test 1
+## Counties
+
+Hgarb did not determine total liabilities for JEFFERSON COUNTY 2023:  p11/61
+report on cash basis, does not follow GAAP, no accrued liabilities
+```{r}
+test1_county %>% filter(year == 2023)
+
+```
+
+View all those failed test 1 in previous year
+```{r}
+test1_county %>% 
+  arrange(desc(population)) 
+  View()
+```
+
+## Municipalities
+
+City of Lawrenceburg, Tennessee: 
+Net Opeb, Net pension, total liabilites are all correct. Bonds = 69,370,682 taken from Changes in long term liabilities, summing up from pages 53,54,55.
+
+Should only sum up these 2. Electric and water are already included. 
+26,972,749 + 18,733,918 
+
+```{r}
+test1_municipality
+```
+
+AR jonesboro 2021, net pension on page 25= 19631568
+total liabilities = current liability = 2,021,274 (sum of general, street, other funds) --> acceptable to calculate this way. 
+Not follow GAAP. 
+
+
+## School
+```{r}
+test1_school_districts %>% filter(total_liabilities != 0)
+```
+clover park school district no. 400
+p62: should be 127,906,640.77 + current lia
+Long term liabilities reported separately from balance. 
+
+
+AR Pulsaki 2023
+Calculation of total liabilities = 154977316 on pa20 + current 22642907
+
+
+# Test 2
+
+```{r}
+View(test2_state_all)
+```
+
+```{r}
+View(test2_county_all)
+```
+
+CRANE COUNTY, TEXAS: total_liabilities/total_assets > 200
+p 70/93: The County’s net pension liability / (asset) of $114,769 --> wrong. Where to find total assets?
+
+--> Don't report any assets
+
+```{r}
+test2_municipality_all %>% filter(total_assets != 0) %>% 
+  arrange(desc(pct)) %>% View()
+
+```
+
+City of Dysart: Not following GAAP, 3929 is only assets we know about. 
+Do not provide a balance sheet. 
+```{r}
+test2_school_districts %>% arrange(desc(pct)) %>% View()
+```
+
+# Test 3
+## State
+```{r}
+test3_state_all
+```
+
+```{r}
+View(test3_county_all)
+
+
+```
+
+
+```{r}
+
+View(test3_municipality_all)
+
+
+```
+
+
+```{r}
+
+View(test3_school_districts_all)
+```
+
