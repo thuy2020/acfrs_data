@@ -63,7 +63,7 @@ export default {
     {
       "entity_type": "School District",
       "count": 10487,
-      "total_population": 30094729,
+      "total_population": 31913898,
       "total_assets": 1390674230259,
       "total_current_assets": 543744417937,
       "total_liabilities": 1264837176140,

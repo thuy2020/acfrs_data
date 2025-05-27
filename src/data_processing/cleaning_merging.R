@@ -1,6 +1,7 @@
 library(tidyverse)
 library(dplyr)
 library(janitor)
+library(writexl)
 source("src/data_processing/census.R")
 source("src/data_processing/functions.R")
 source("src/data_processing/nces.R")
@@ -447,6 +448,14 @@ bind_2df_different_size(school_districts_, exceptions) %>%
 
 # Save with time stamp 
 school_districts_all %>% write.csv("output/school_districts_all_2020_2023.csv")
+# 
+school_districts_all %>% filter(year == 2023) %>%
+  summarise(tot = sum(enrollment_23, na.rm = TRUE))
+
+nces %>%
+  summarise(tot = sum(enrollment_23, na.rm = TRUE))
+
+
 school_districts_all %>%
   filter(year == 2023) %>% 
   write.csv(file = paste0("output/all_schooldistricts_2023_", format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
@@ -454,14 +463,13 @@ school_districts_all %>%
 
 # TODO: some MT acfr report include more than 1 school districts. Need to treat MT separately 
 school_districts_all %>% 
-  filter(year == 2023) %>% filter(state.abb == "MT") %>% View()
+  filter(year == 2023)  %>% View()
   count(id) %>%
   filter(n > 1)
   
 
 ####Tracking changes####
   
- 
 
 compare_latest_csv_versions(
   folder = "output",
