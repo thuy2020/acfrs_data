@@ -98,10 +98,10 @@ nrow(nces %>% filter(enrollment_23 < 1))
 
 
 ####Top 100 schools in 2022 enrollment ####
-# top100_schools <- nces %>% 
-#   select(name_nces, ncesID, enrollment_22) %>% 
-#   arrange(desc(enrollment_22)) %>% 
-#  slice(1:100)
+top100_schools <- nces %>%
+  select(name_nces, ncesID, enrollment_23) %>%
+  arrange(desc(enrollment_23)) %>%
+ slice(1:100)
 # 
 # # pop break down by state 
 # nces_pop_bystate <- nces %>%
@@ -109,9 +109,18 @@ nrow(nces %>% filter(enrollment_23 < 1))
 #   summarise(population = sum(enrollment_22,na.rm = TRUE)) %>%
 #   mutate(category = "School Districts")
 # 
-# sd_top300_nces <- nces %>% select(state.abb, name_nces, ncesID, enrollment_22) %>% 
-#   arrange(desc(enrollment_22)) %>% 
-#   slice(1:300)
+
+sd_top100_nces <- nces %>% select(state.abb, name_nces, ncesID, enrollment_23) %>%
+  arrange(desc(enrollment_23)) %>%
+  slice(1:100)
+
+sd_top200_nces <- nces %>% select(state.abb, name_nces, ncesID, enrollment_23) %>%
+  arrange(desc(enrollment_23)) %>%
+  slice(1:200)
+
+sd_top300_nces <- nces %>% select(state.abb, name_nces, ncesID, enrollment_23) %>%
+  arrange(desc(enrollment_23)) %>%
+  slice(1:300)
 
 cat("End of script")
 

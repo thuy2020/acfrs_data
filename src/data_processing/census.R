@@ -82,9 +82,6 @@ census_state <- census_all %>% filter(sumlev == 40) %>%
 
 # more on consolidated city, county & county equivalent: https://www.census.gov/programs-surveys/geography/about/glossary.html#par_textimage_12
 
-consolitated_county <- census_county %>% 
-  filter(funcstat == "C")
-
 # Getting urbanicity data 
 
 #CT has 9 planning region which are not counties
@@ -107,10 +104,11 @@ county_urb <- rio::import(here::here("data/census", "2020_UA_COUNTY.xlsx")) %>%
 # join with urb data
 census_county <- census_all %>% 
   filter(sumlev == 050) %>% 
-  filter(funcstat %in% c("A", "C")) %>%  #79 counties funstat not A or C
+ 
+  # filter(funcstat %in% c("A", "C")) %>%  #79 counties funstat not A or C
 
-#  does not count 5 counties in NY
-   filter(!name_census %in% c("kings county", "queens county", "new york county", "bronx county")) %>% 
+#  5 counties in NY
+ #  filter(!name_census %in% c("kings county", "queens county", "new york county", "bronx county")) %>% 
   left_join(county_urb) 
 
   
@@ -156,10 +154,11 @@ census_county_top300 <- census_county %>%
 #   filter(funcstat %in% c("A", "C")) %>% 
 #   distinct()
 
-census_incorporated <- census_all %>% filter(sumlev == 162 | sumlev == 170) %>% 
-  filter(funcstat %in% c("A", "C"))
+census_municipalities <- census_all %>% 
+  filter(sumlev %in% c(160, 162, 170, 172)) 
 
-sum(census_incorporated$population)
+sum(census_municipalities$population)
+
 
 #####Top100 cities####
 #find all cities within incorporated place

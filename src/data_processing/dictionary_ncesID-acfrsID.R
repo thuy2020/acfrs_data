@@ -1277,7 +1277,7 @@ acfr_as_missing_ncesID_normalized <- acfr_as_missing_ncesID %>%
   
   # update changes here
   saveRDS(dictionary, "data/dictionary.RDS")
-  
+  dictionary %>% write.csv("tmp/ncesID_acfrsID_dictionary.csv")
   
 ####Final summary###
   nces_not_matched <- nces_normalized %>% filter(!ncesID %in% dictionary$ncesID) %>% 

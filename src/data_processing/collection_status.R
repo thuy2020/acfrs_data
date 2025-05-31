@@ -1,6 +1,7 @@
 library(tidyverse)
 library(dplyr)
 library(janitor)
+source("src/data_processing/nces.R")
 
 # count of state by year
 state_gov %>% select(state.abb, year, name) %>% 
@@ -29,6 +30,7 @@ county_gov_all %>% select(state.abb, year, name, population) %>%
             tot = sum(population, na.rm = TRUE))
 
 
+
 counted_as_city <- c("juneau city and borough", "wrangell city and borough", 
                      "san francisco county",
                      "philadelphia county")
@@ -40,8 +42,9 @@ top200_county %>% group_by(name) %>%
 
 #Missing in top 300
 top300_county %>% group_by(name) %>% 
+  
   add_count() %>% 
-  filter(n <4) %>% View()
+  filter(n <4)  %>% View()
 
 missing_county <- anti_join(census_county, county_gov, by = "geo_id") %>% 
   arrange(desc(population)) %>% 
@@ -52,6 +55,15 @@ missing_county <- anti_join(census_county, county_gov, by = "geo_id") %>%
   select(state.abb, state.name, name_census, population) 
 
 missing_county %>% summarise(tot = sum(population, na.rm = TRUE))
+
+county_23 <- county_gov_all %>% filter(year == 2023)
+
+missing_county_May25 <- read.csv("tmp/missing_counties_fy23_May2025.csv") %>% filter(X.1 != "y")
+
+missing_county_23 <- anti_join(census_county, county_23, by = "geo_id") %>% 
+anti_join(missing_county_May25, by = c("state.abb",  "name_census"= "name")) %>% 
+  
+write.csv(paste0("tmp/missing_county_fy2023_", format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
 
 # population by year
 county_gov_all %>% #select(state, name, population, year) %>% 
@@ -106,10 +118,10 @@ municipality_all %>% filter(year == 2022) %>%
   summarise(collected_pop = sum(population, na.rm = TRUE))
 
 #Missing in top 100
-top100_cities %>% 
+top200_cities %>% 
   group_by(id) %>% 
   add_count() %>% 
-  filter(n<4)
+  filter(n<4) %>% View()
 
 # Why so few cities?
 anti_join(municipality_all %>% filter(year == 2022) %>% select(state.abb, name, id, population), 
@@ -177,19 +189,19 @@ municipality_all %>% select(state.abb, name, population, year) %>%
 ####SD####
 
 # collected sd
-school_districts_all %>% select(state.abb, name, enrollment_22, year) %>% 
+school_districts_all %>% select(state.abb, name, enrollment_23, year) %>% 
   group_by(year) %>% 
   summarise(count = n())
 
-school_districts_all %>% select(state.abb,enrollment_22, year) %>% 
+school_districts_all %>% select(state.abb,enrollment_23, year) %>% 
   group_by(year) %>% 
-  summarise(collected_pop = sum(enrollment_22, na.rm = TRUE))
+  summarise(collected_pop = sum(enrollment_23, na.rm = TRUE))
 
 #TODO: check back missing: 
 #GA Clayton County Board of education.
 #https://www.clayton.k12.ga.us/departments/business-services/financial-reports
 # Uploaded: williamson county schools, reported in county acfrs. Uploaded county's acfrs to replace
-
+sd_top200_nces
 missing_sd <- top200_school_districts %>% 
   add_count(ncesID) %>% filter(n < 4) %>% 
   select(state.abb, ncesID, year, name, n, id) 
@@ -199,12 +211,14 @@ missing_sd_top300 <- top300_school_districts %>%
   select(state.abb, ncesID, year, name, n, id) 
 
 
-anti_join(school_districts_all %>% filter(year == 2022) %>% select(state.abb, name, id, enrollment_22), 
-          school_districts_all %>% filter(year == 2023) %>% select(state.abb, name, id, enrollment_22)) %>%
-  arrange(desc(enrollment_22)) %>% 
+anti_join(school_districts_all %>% filter(year == 2022) %>% select(state.abb, name, id, enrollment_23), 
+          school_districts_all %>% filter(year == 2023) %>% select(state.abb, name, id, enrollment_23)) %>%
+  arrange(desc(enrollment_23)) %>% 
+  filter(state.abb != "NY") %>% write.csv("tmp/THUY_school_districts_reported_in_county_city.csv")
+  View()
   
   
-  View() #%>% write.csv("tmp/sd_missing2023.csv")
+ 
   
 #type of school district
 ## NOTE: 
