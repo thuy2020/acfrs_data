@@ -171,48 +171,15 @@ census_incorporated_city <- census_all %>% filter(sumlev == 162) %>%
 #get top 100 census, excluding Denver city, Philadelphia city
 census_city_top100 <- census_incorporated_city %>% 
   arrange(desc(population)) %>% 
-  
-  #although Denver city is in top100 cities, it's already counted in counties, 
-  #so take a list of top100 excluding Denver city 
-  filter(name_census != "denver city") %>%
-  
-  #take philadelphia city out, already counted in philadelphia county
-  filter(!(name_census == "philadelphia city" & state.name == "Pennsylvania")) %>% 
-  
-  # take jacksonville out, already counted in jacksonville-duval county
-  filter(!(name_census == "jacksonville city" & state.abb == "FL")) %>% 
-  
-  # take out GA columbus, consolidated with Muscogee County
-  filter(!(name_census == "columbus city" & state.abb == "GA")) %>% 
-  
-  
-  slice(1:100) %>% 
   mutate(name_census = str_trim(name_census)) %>% 
-  select(state.abb, name_census, population, geo_id)
-
-census_city_top200 <- census_incorporated_city %>% 
-  arrange(desc(population)) %>% 
-  #filter(name_census != "denver city") %>%
-  
-  #take philadelphia city out, already counted in philadelphia county
-  filter(!(name_census == "philadelphia city" & state.name == "Pennsylvania")) %>% 
-  slice(1:200) %>% 
-  mutate(name_census = str_trim(name_census)) %>% 
-  select(state.abb, name_census, population, geo_id)
+  select(state.abb, name_census, population, geo_id) %>% 
+  slice(1:100) 
 
 census_city_top300 <- census_incorporated_city %>% 
   arrange(desc(population)) %>% 
-  #filter(name_census != "denver city") %>%
-  
-  #take philadelphia city out, already counted in philadelphia county
-  filter(!(name_census == "philadelphia city" & state.name == "Pennsylvania")) %>% 
-  filter(!(name_census == "denver city" & state.name == "Colorado")) %>% 
-  filter(!(name_census == "san francisco city" & state.name == "California")) %>% 
-  
-  
-  slice(1:300) %>% 
   mutate(name_census = str_trim(name_census)) %>% 
-  select(state.abb, name_census, population, geo_id)
+  select(state.abb, name_census, population, geo_id) %>% 
+  slice(1:300) 
 
 ##### Middle file - Use this file to bridge geo_id from census data to into acfrs_general_purpose
 
