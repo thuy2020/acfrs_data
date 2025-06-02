@@ -96,9 +96,5 @@ dbDisconnect(con)
 
 nrow(readRDS("data/acfrs_data.RDS"))
 
-#May 18:  check if portal is up to date
-readRDS("data/acfrs_data.RDS") %>% 
-  select(total_liabilities, id, name) %>% 
 
-  filter(id %in% c("100177", "1268572", "120618", "123513"))
 

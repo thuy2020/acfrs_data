@@ -225,7 +225,7 @@ main <- function() {
   
   # Read the municipality data
   log_message("Reading municipality data")
-  municipal_data_temp <- read_csv("input/all_municipalities_2020_2023.csv")
+  municipal_data_temp <- read_csv("output/all_municipalities_2020_2023.csv")
   municipal_data <- municipal_data_temp [, -1]
   
   # Filter for the most recent year to reduce geocoding load

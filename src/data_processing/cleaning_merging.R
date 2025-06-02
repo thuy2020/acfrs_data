@@ -28,7 +28,6 @@ options(scipen = 9999)
 # step 1: get all general purpose entities in acfrs, most contains governmentID
 acfrs_general_purpose <- readRDS("data/acfrs_data.RDS") %>% 
   filter(category == "General Purpose") %>% 
-  
   rename(government_id = census_id) %>%  # census_id in Acfrs database is actually government_id
   # some government_id in ACFRs has 13 characters-> need to add 0
   mutate(government_id = ifelse(str_length(government_id) < 14, paste0("0", government_id), government_id)) %>% 
@@ -44,17 +43,8 @@ acfrs_general_purpose <- readRDS("data/acfrs_data.RDS") %>%
          name = str_remove_all(name, " fiscal court"),
          name = str_trim(name)) %>% 
   
-  mutate(name = case_when(id == "115965" ~ "jefferson county",
-                          name == "dona ana county" & state.abb == "NM" ~ "doña ana county", 
-                          name == "st marys county" & state.abb == "MD" ~ "st mary's county",
-                          name == "athens-clarke county" & state.abb == "GA" ~ "st mary's county",
-                          name == "greeneville-greene county" & state.abb == "TN" ~ "greene county",
-                          name == "sevierville-sevier county" & state.abb == "TN" ~ "sevier county",
-                          name == "lynchburg_moore county" & state.abb == "TN" ~ "moore county",
-                          name == "hartsville-trousdale county" & state.abb == "TN" ~ "trousdale county",
-                          name == "nashville and davidson county" & state.abb == "TN" ~ "davidson county",
-                          name == "lafayette city-parish consolidated government" & state.abb == "LA" ~ "lafayette parish",
-                          TRUE ~ name)) %>% 
+  mutate(name = case_when(name == "dona ana county" & state.abb == "NM" ~ "doña ana county", 
+                       TRUE ~ name)) %>% 
   
   # Step 3: extract geo_id part to map with census
   mutate(geo_id = str_extract(geo_id, "US(.*)"),
@@ -72,7 +62,6 @@ fields_to_select <- c("state.abb", "state.name", "id", "geo_id", "year", "name",
                       "bonds_outstanding", "loans_outstanding", "notes_outstanding", 
                       "compensated_absences", 
                       "population", "urban_pop", "pct_urban_pop", "median_hh_income_21")
-
 
 
 #######States########
@@ -105,8 +94,6 @@ state_all <- append_url(state_gov_4years) %>%
 
 #double check missing:
 state_all %>% 
-  #group_by(year) %>% 
-  #summarise(n = n())
   add_count(state.name) %>% filter(n<4) %>% 
   select(state.name, n) %>% distinct()
 
@@ -143,6 +130,12 @@ county_gov <- acfrs_county %>%
                                 name == "city and county of broomfield" ~ "broomfield county",
                                 name == "city and county of honolulu" ~ "honolulu county",
                                 name == "city and county of san francisco" ~ "san francisco county",
+                                name == "st marys county" ~ "st mary's county",
+                                name == "lafayette city-parish consolidated government" ~ "lafayette parish",
+                                name == "cusseta-chattahoochee county" ~ "cusseta-chattahoochee county unified government",
+                                name == "consolidated government of columbus-muscogee county" ~ "muscogee county",
+                                name == "georgetown-quitman county" ~ "georgetown-quitman county unified government",
+                                name == "unified government of webster county" ~ "webster county unified government",
                                 TRUE ~ name_clean)) %>%
   
   # most acfrs_county do not have geo_id --> must join by state.abb and name
@@ -150,7 +143,6 @@ county_gov <- acfrs_county %>%
   
   #join urbanicity
   left_join(county_urb, by = "geo_id") %>% 
-  
   distinct()
 
 
@@ -159,39 +151,12 @@ county_gov %>% filter(is.na(population)) %>%
   select(state.abb, name, name_clean) %>% distinct() %>% 
   View()
 
+nrow(county_gov %>% filter(year == 2023))
 
 #####Consolidated government#####
-#census identify theses as consolidated -city:
-#   170 = Consolidated city
-#   172 = Consolidated city -- place within consolidated city
-#Consolidated City—A consolidated government is a unit of local government for which 
-#the functions of an incorporated place and its county or minor civil division (MCD) have merged.
-#https://www.census.gov/programs-surveys/geography/about/glossary.html#par_textimage_12
-
 # more on consolidated city, county & county equivalent: https://www.census.gov/programs-surveys/geography/about/glossary.html#par_textimage_12
 
-consolitated_county <- census_county %>% 
-  filter(funcstat == "C")
-
-consolidated_city_census <- census_all %>%
-  filter(sumlev %in% c(170))  
-  #filter(!str_detect(name_census, "(balance)"))
-
-consolidated_city_census$name_census
-# [1] "milford city"                                    "athens-clarke county unified government"        
-# [3] "augusta-richmond county consolidated government" "indianapolis city"                              
-# [5] "greeley county unified government"               "louisville/jefferson county metro government"   
-# [7] "butte-silver bow"                                "nashville-davidson metropolitan government"  
-
-
-# Avoid double counting as : 
-#san francisco
-
-consolidated_city_acfr <- acfrs_general_purpose %>% 
-filter(id %in% c("32107", "1266998", "148608", "33244", 
-                 "1267157", "115965", "81613", "1267141"))
-
-consolidated_city_acfr %>% filter(year == 2023) %>% select(1:4, 6)
+# Step 1: identify consolidated / unified counties in census
 # there are 33 consolidated counties
 consolidated_county_census <- census_all %>% 
   filter(sumlev == 50) %>% # sumlev == 50 county level
@@ -199,71 +164,73 @@ consolidated_county_census <- census_all %>%
 
 nrow(consolidated_county_census)
 
-consolidated_county_acfr <- 
-  acfrs_general_purpose %>% 
-  filter(id %in% c())
+# Step 2: Identify acfrs that report both city and county. 
+#NO special treatment needed if: 
+# city and county has their own reports and both exist in census, 
+# either city or county does not exist independently in census
 
-#These counties are consolidated --> have some other name in acfrs list:  
-consolidated_city_county <- acfrs_general_purpose %>% 
-  filter((name == "city and county of san francisco" & state.abb == "CA") |
-           (name == "philadelphia" & state.abb == "PA") |
-           (name == "jacksonville" & state.abb == "FL") |
-           (name == "the metropolitan government of nashville and davidson county" & 
-              state.abb == "TN")  |
-           name == "city and county of honolulu") %>% 
-  left_join(df_state) %>% 
-  
+#NOTE: 
+#1. IN marion county and Indianapolis are component units of 
+#the Consolidated City of Indianapolis—Marion County. But they have separate financial reports
+#2. KY Lexington-Fayette Urban County - Lexington city does not exist independently in census
+#3. KY louisville/jefferson county metro government
+#4. KY orleans parish does not have a report
+#5. NY 5 counties are reported in NYC - these 5 counties are listed in census
+# 6. #MT city & county of butte silver bow, Census does not have Butte city separate
+#TN lynchburg, moore county metropolitan government, Census does not have lynchburg 
+
+consolidated_county_city_acfr <- acfrs_general_purpose %>% 
+#  county_gov %>% 
+filter(id %in% c("1266824", "91930", "95986", "31609", # AK
+                 "54175", #City and County of San Francisco
+                 "1266589", # City and County of Broomfield
+                  "1266289", # City and County of denver 
+                 "32292", # the city of Jacksonville and Duval county
+                 "99786", #GA macon-bibb county
+                 "1266999", #GA cusseta-chattahoochee county
+                 "1266998",# GA athens-clarke county unified government
+                 "111293", # GA echols county
+                 "111473", # GA consolidated government of columbus-muscogee county
+                 "96522", #GA georgetown-quitman county
+                 "148608",# GAaugusta-richmond county consolidated government
+                 "96555", #GA webster county unified government
+                 "1267157", #KS greeley county unified government - Tribune city
+                 "40839", #KS wyandotte county, KS kansas city consolidated in Wyandotte County 
+                 "1267156", #KY Lexington-Fayette Urban County , Lexington city 
+                 "115965", #louisville/jefferson county metro government
+                 "40777", #anaconda-deer lodge county, deer lodge city 
+                 #"81613", #MT city & county of butte silver bow, Census does not have Butte city separate
+                 "42714", #PA philadelphia city, also a county
+                 "1267141", #TN nashville-davidson metropolitan government
+                 #"1268468", #TN lynchburg, moore county metropolitan government, Census does not have lynchburg 
+                 "1268161", #TN hartsville/trousdale county
+                  "32107", "1266998", "148608", "33244", 
+                 "1267157", "115965", "81613", "1267141"
+                 )) %>% 
+ left_join(df_state) %>% distinct() %>% select(-geo_id) %>% 
+
+  left_join(census_all, by = c("state.abb", "state.name", "name" = "name_census")) 
+
+#TODO:
   #Same population, but when it's identified as county, it has different geo_id. 
   #The geo_id as a metro is different and does not contain income & urbanicity info. 
   #Use these geo_id to get income and urbanicity. 
   # get this county geo_id from census_county
-  mutate(geo_id = case_when(name == "city and county of san francisco"~ "06075", 
-                            name == "philadelphia" ~ "42101",
-                            name == "city and county of honolulu" ~ "15003", 
-                            name == "jacksonville" ~ "12031", # Duval county geo_id
-                            name == "the metropolitan government of nashville and davidson county" ~ "47037",
-                            TRUE ~ as.character(geo_id))) 
+  # mutate(geo_id = case_when(name == "city and county of san francisco"~ "06075", 
+  #                           name == "philadelphia" ~ "42101",
+  #                           name == "city and county of honolulu" ~ "15003", 
+  #                           name == "jacksonville" ~ "12031", # Duval county geo_id
+  #                           name == "the metropolitan government of nashville and davidson county" ~ "47037",
+  #                           TRUE ~ as.character(geo_id))) 
 
-
-# get population
-consolidated_city_county_population <- census_all %>% 
-  filter(geo_id %in% consolidated_city_county$geo_id) %>% 
-  select(geo_id, population) 
 
 # get urbanicity
-consolidated_city_county_urbanicity <- county_urb %>% 
-  filter(geo_id %in% consolidated_city_county$geo_id)
-
+consolidated_city_county_all <- consolidated_county_city_acfr %>% 
+  # get urbanicity
+  left_join(county_urb, by = "geo_id") %>% 
 # get income
-consolidated_city_county_income <- income %>% 
-  filter(geo_id %in% consolidated_city_county$geo_id)
-
-# all
-consolidated_city_county_all <- consolidated_city_county %>% 
-  left_join(consolidated_city_county_population) %>% 
-  left_join(consolidated_city_county_urbanicity) %>% 
-  left_join(consolidated_city_county_income) %>% 
+ left_join(income, by = "geo_id") %>% 
   select(all_of(fields_to_select))
-
-#####TN Nashville #####
-#NOTE: The Nashville Metropolitan Statistical Area encompasses the Middle Tennessee counties of 
-#Cannon, Cheatham, Davidson, Dickson, Hickman, Macon, Robertson, Rutherford, 
-#Smith, Sumner, Trousdale, Williamson, and Wilson.
-metropolitan_TN_13counties <- census_all %>% 
-  filter(state.abb == "TN" & sumlev == 50) %>% 
-  filter(str_detect(name_census,"(?i)Cannon|Cheatham|Davidson|Dickson|Hickman|Macon|Robertson|Rutherford|Smith|Sumner|Trousdale|Williamson|Wilson")) %>% 
-  filter(!str_detect(name_census,"(?i)balance of")) 
-
-#write.csv(metropolitan_TN_13counties, "tmp/geo_id_metropolitan_TN_13counties.csv")
-
-metropolitan_TN_13counties_urb <- county_urb %>% 
-  filter(geo_id %in% c(metropolitan_TN_13counties$geo_id)) %>% 
-  summarise(urban_pop = mean(urban_pop),
-            pct_urban_pop = mean(pct_urban_pop))
-
-metropolitan_TN_13counties_income <- income %>% 
-  filter(geo_id %in% c(metropolitan_TN_13counties$geo_id)) %>%
-  summarise(median_hh_income_21 = round(mean(median_hh_income_21)))
 
 ##All counties###
 county_gov_all <- county_gov %>% 
@@ -483,6 +450,10 @@ municipality_all %>% filter(year == 2023) %>%
   filter(is.na(population)) %>% 
   View()
 
+# check geo_id
+
+municipality_all %>% select(state.abb, id, lat)
+
 
 #Top 100
 top100_cities <- municipality_all %>% 
@@ -507,7 +478,7 @@ top300_cities_namelist <- top300_cities %>% select(state.abb, id, geo_id, name) 
 
 #those in top 300 cencus but not collected in acfr: 
 #Columbus consolidated in Muscogee county
-# KS kansas city consolidated in Wyandotte County 
+
 
 anti_join(census_city_top300, top300_cities_namelist, by="geo_id")
 

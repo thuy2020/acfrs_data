@@ -3,6 +3,13 @@ library(dplyr)
 library(janitor)
 source("src/data_processing/nces.R")
 
+nrow(acfrs_general_purpose)
+
+acfrs_general_purpose %>% 
+  group_by(year) %>%
+  summarise(n_entities = n(), .groups = "drop")
+
+
 # count of state by year
 state_gov %>% select(state.abb, year, name) %>% 
   group_by(year) %>% 

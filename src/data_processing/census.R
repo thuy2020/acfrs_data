@@ -115,7 +115,8 @@ census_county <- census_all %>%
 # Check special cases in Census county: 
 # cities & district of columbia categorized as county
 census_county %>% 
-  filter(!str_detect(name_census, "(borough)|(county)|(parish)|(planning regio)|(census area)|(municipality)")) 
+  filter(!str_detect(name_census, "(borough)|(county)|(parish)|
+                     (planning regio)|(census area)|(municipality)")) 
 # Note: Planning Regio, lacking "n" at last, to include all Planning Region in CT
 # Louisiana has 64 entities "Parish"
 # Alaska has 30 entities " 17 Borough", "Census Area", "Municipality"
@@ -158,6 +159,7 @@ census_municipalities <- census_all %>%
   filter(sumlev %in% c(160, 162, 170, 172)) 
 
 sum(census_municipalities$population)
+
 
 
 #####Top100 cities####
