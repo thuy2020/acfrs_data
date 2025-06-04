@@ -17,6 +17,8 @@ library(stringr)
 #   170 = Consolidated city
 #   172 = Consolidated city -- place within consolidated city
 
+#funstat: https://www.census.gov/library/reference/code-lists/functional-status-codes.html
+
 df_state <- data.frame(state.abb, state.name) %>% 
   add_row(state.abb = "DC", state.name = "District of Columbia")
 
@@ -82,6 +84,8 @@ census_state <- census_all %>% filter(sumlev == 40) %>%
 
 # more on consolidated city, county & county equivalent: https://www.census.gov/programs-surveys/geography/about/glossary.html#par_textimage_12
 
+
+
 # Getting urbanicity data 
 
 #CT has 9 planning region which are not counties
@@ -102,8 +106,6 @@ county_urb <- rio::import(here::here("data/census", "2020_UA_COUNTY.xlsx")) %>%
          pct_urban_pop = poppct_urb)
 
 # join with urb data
-census_county <- census_all %>% 
-  filter(sumlev == 050) %>% 
  
   # filter(funcstat %in% c("A", "C")) %>%  #79 counties funstat not A or C
 
