@@ -84,11 +84,7 @@ census_state <- census_all %>% filter(sumlev == 40) %>%
 
 # more on consolidated city, county & county equivalent: https://www.census.gov/programs-surveys/geography/about/glossary.html#par_textimage_12
 
-
-
-# Getting urbanicity data 
-
-#CT has 9 planning region which are not counties
+# get urbanicity for 9 planning region CT - Census lists as counties, but do not have acfrs 
 county_CT_urb <- rio::import(here::here("data/census", "2020_UA_COUNTY.xlsx"), sheet = 2) %>% 
   clean_names() %>% 
   mutate(geo_id = paste0(state,county)) %>% 
@@ -98,6 +94,7 @@ county_urb <- rio::import(here::here("data/census", "2020_UA_COUNTY.xlsx")) %>%
   clean_names() %>% 
   mutate(geo_id = paste0(state,county)) %>% 
   select(geo_id, pop_urb, poppct_urb) %>% 
+  
   #bind with CT
   rbind(county_CT_urb) %>% 
   
@@ -105,39 +102,30 @@ county_urb <- rio::import(here::here("data/census", "2020_UA_COUNTY.xlsx")) %>%
   rename(urban_pop = pop_urb,
          pct_urban_pop = poppct_urb)
 
-# join with urb data
- 
-  # filter(funcstat %in% c("A", "C")) %>%  #79 counties funstat not A or C
-
-#  5 counties in NY
- #  filter(!name_census %in% c("kings county", "queens county", "new york county", "bronx county")) %>% 
-  left_join(county_urb) 
-
-  
 # Check special cases in Census county: 
 # cities & district of columbia categorized as county
-census_county %>% 
+census_all %>% 
+  filter(sumlev == 50) %>% 
   filter(!str_detect(name_census, "(borough)|(county)|(parish)|
-                     (planning regio)|(census area)|(municipality)")) 
+                     (planning regio)|(census area)|(municipality)")) %>% View()
 # Note: Planning Regio, lacking "n" at last, to include all Planning Region in CT
 # Louisiana has 64 entities "Parish"
 # Alaska has 30 entities " 17 Borough", "Census Area", "Municipality"
 # Connecticut has 9 entities "Planning Region"
 
 #Find Alaska counties in census
-alaska_county_census <- census_county %>% filter(state.abb == "AK")
+alaska_county_census <- census_all %>% 
+  filter(sumlev == 50) %>% filter(state.abb == "AK")
 
 ###### Top 100 county Census 2021: 
-census_county_top100 <- census_county %>% 
+census_county_top100 <- census_all %>% 
+  filter(sumlev == 50) %>% 
   arrange(desc(population)) %>% 
   slice(1:100)  
 
-##### Top county 200
-census_county_top200 <- census_county %>% 
-  arrange(desc(population)) %>% 
-  slice(1:200) 
 ##### Top county 300
-census_county_top300 <- census_county %>% 
+census_county_top300 <- census_all %>% 
+  filter(sumlev == 50) %>% 
   arrange(desc(population)) %>% 
   slice(1:300) 
 
@@ -161,8 +149,6 @@ census_municipalities <- census_all %>%
   filter(sumlev %in% c(160, 162, 170, 172)) 
 
 sum(census_municipalities$population)
-
-
 
 #####Top100 cities####
 #find all cities within incorporated place

@@ -103,8 +103,7 @@ write.csv("tmp/missing_counties_fy23_May2025.csv")
 #MN: https://www.auditor.state.mn.us/audit-resources/reports/audit-reports/
 #ND: https://www.nd.gov/auditor/audit-reports
 #NE: https://www.nebraska.gov/auditor/FileSearch/entityresults.cgi?id=Platte%20Township%20Dodge%20County
-
-
+#South Dakota: https://legislativeaudit.sd.gov/reports/reports.aspx
 # OK oklahoma county https://www.sai.ok.gov/audit-reports/?type=3&rpp=50&years=,2023&sort=&counties=55&searchtext=
 
 top200_county_4years %>% select(state.abb, name, year, id, population) %>% 

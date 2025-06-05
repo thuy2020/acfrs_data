@@ -152,7 +152,7 @@ county_acfrs <- acfrs_general_purpose %>%
                                 name == "georgetown-quitman county" ~ "georgetown-quitman county unified government",
                 
                                 name == "macon-bibb county"~ "bibb county", # GA; Not macon county
-                                name == "nashville-davidson county" ~ "nashville-davidson metropolitan government"
+                                name == "nashville-davidson county" ~ "nashville-davidson metropolitan government",
                                 TRUE ~ name_clean)) 
 
 #count by year
@@ -162,17 +162,18 @@ county_acfrs %>%
 
 county_acfrs_2023 <- county_acfrs %>% filter(year == 2023)
 
-
-#Round 1:  join Census sumlev = 50, some pf sumlev = 170 with acfr
+#Round 1:  join Census sumlev = 50, some of sumlev = 170 with acfr
 county_census_acfr_2023_round1 <- (census_all %>% 
   filter(sumlev %in% c(50, 170)) %>% 
   filter(!name_census %in% c("milford city", "indianapolis city")) # these are 170, but not a county
 )  %>% 
+  
+  #join with counties in acfr
   left_join(county_acfrs_2023, 
                             by = c("state.abb", "state.name", "name_census" = "name_clean")) 
 
 #some counties exist in ACFR but do not get matched to census counties
-# because Census identifies these as incorporated places (sumlev= 162)
+# because Census identifies these as incorporated places (sumlev= 162), not counties
 county_acfrs_2023 %>% 
   filter(!id %in% county_census_acfr_2023_round1$id) %>% View()
 
@@ -191,22 +192,9 @@ county_census_acfr_2023_round2 <- incorporated_place_census %>%
 
 
 # Join result: binding 2 rounds
-county_census_acfr_2023 <- rbind(county_census_acfr_2023_round1, 
+county_census_acfr_2023_ <- rbind(county_census_acfr_2023_round1, 
                                        county_census_acfr_2023_round2) %>% 
-  # adding flag:
-  mutate(flg_acfr = ifelse(!is.na(id), 1, 0),
-         flg_county = ifelse(sumlev == 50, 1, 0),
-         
-         # identify some counties also as city:
-         # but not all sumleve == 50 & funcstat == "C" need to be flagged as city in the tool, 
-         #because the cities have their own acfr report
-         
-         flg_muni = case_when(
-           name %in% c("marion county") ~ 0,  # override specific cases first
-           sumlev %in% c(170, 162) ~ 1,
-           sumlev == 50 & funcstat == "C" ~ 1,
-           TRUE ~ 0
-         )) %>%  
+
   #join urbanicity
   left_join(county_urb, by = "geo_id") %>% 
   
@@ -219,7 +207,7 @@ county_census_acfr_2023 <- rbind(county_census_acfr_2023_round1,
 
 
 #Total: 
-nrow(county_census_acfr_2023) #3155 entities in county file
+nrow(county_census_acfr_2023_) #3155 entities in county file
 nrow(census_all %>% filter(sumlev == 50)) #3144 counties
 nrow(census_all %>% filter(sumlev == 170) %>% 
        filter(!name_census %in% c("milford city", "indianapolis city"))) # 6 Consolidated city except 2
@@ -227,7 +215,7 @@ nrow(incorporated_place_census) # 5 additional incoporated places into county AC
 
 
 # counties do not have acfr:
-county_census_acfr_2023 %>% 
+county_census_acfr_2023_ %>% 
   filter(is.na(id)) %>% 
     View()
 
@@ -235,12 +223,49 @@ county_census_acfr_2023 %>%
 # more on consolidated city, county & county equivalent: https://www.census.gov/programs-surveys/geography/about/glossary.html#par_textimage_12
 
 # Step 1: identify consolidated / unified counties in census
-# there are 33 consolidated counties
-consolidated_county_census <- census_all %>% 
-  filter(sumlev == 50) %>% # sumlev == 50 county level
-  filter(funcstat == "C") # funcstat == "C" = consolidated county
+# there are 33 consolidated counties, all of which are already in county_census_acfr_2023
 
-nrow(consolidated_county_census)
+county_census_acfr_2023 %>% filter(funcstat == "C") %>% 
+  select(state.abb, name_census, flg_county, flg_muni, funcstat, population) %>% 
+  View()
+
+# Are they all county and municipalities ? No.
+# Counties are
+
+# marion county, echols county, city & county of butte silver bow,
+# lynchburg, moore county metropolitan government
+
+
+county_census_acfr_2023 <- county_census_acfr_2023_ %>% 
+# adding flag:
+mutate(flg_acfr = ifelse(!is.na(id), 1, 0),
+       
+       #some listed in Census as muni, but should also counted as county to display in acfr tool
+       flg_county = case_when(
+         name %in% c("city & county of butte silver bow") ~ 1, #acfr: 
+         sumlev == 50 ~ 1,
+         TRUE ~ 0
+       ),
+         
+       # identify some counties also as city:
+       # but not all sumleve == 50 & funcstat == "C" need to be flagged as city in the tool, 
+       #because the cities have their own acfr report
+       
+       # Census counts as county, but NOT as Municipalities are --> flg_muni = 0 
+       flg_muni = case_when(
+         name %in% c("marion county", "echols county", "city & county of butte silver bow", 
+                     "lynchburg, moore county metropolitan government",
+                     "louisville/jefferson county metro government") ~ 0,  # override specific cases first
+         sumlev %in% c(170, 162) ~ 1,
+         sumlev == 50 & funcstat == "C" ~ 1,
+        
+         TRUE ~ 0
+       )) 
+  
+
+county_census_acfr_2023 %>% filter(flg_muni == 1) %>% View()
+
+county_census_acfr_2023 %>% select(state.abb, name, flg_acfr, flg_county, flg_muni, population) %>% View()
 
 # Step 2: Identify acfrs that report both city and county. 
 #NO special treatment needed if: 
@@ -250,12 +275,12 @@ nrow(consolidated_county_census)
 #NOTE: 
 #1. IN marion county and Indianapolis are component units of 
 #the Consolidated City of Indianapolis—Marion County. But they have separate financial reports
-#2. KY Lexington-Fayette Urban County - Lexington city does not exist independently in census
-#3. KY louisville/jefferson county metro government
+#2. KY Lexington-Fayette Urban County - Technically is not a county (sumlev = 162). Lexington city does not exist independently in census
+#3. KY louisville/jefferson county metro government.- Technically is not a county (sumlev = 170).  Census does not have louisville city 
 #4. KY orleans parish does not have a report
 #5. NY 5 counties are listed in census as counties, but are incorporated NYC ACFR
-#6. #MT city & county of butte silver bow, Census does not have Butte city separate
-#7. TN lynchburg, moore county metropolitan government, Census does not have lynchburg 
+#6. #MT city & county of butte silver bow, Technically is not a county (sumlev = 170). Census does not have Butte city separate
+#7. TN lynchburg, moore county metropolitan government, - Technically is not a county (sumlev = 162). Census does not have lynchburg 
 
 consolidated_county_city_acfr <- acfrs_general_purpose %>% 
 filter(id %in% c("1266824", "91930", "95986", "31609", # AK
@@ -317,7 +342,7 @@ county_census_acfr_2023 %>% arrange(desc(population)) %>%
   slice(1:100) %>% 
   filter(is.na(id)) %>% 
   View()
-  #doesn't count as county: CT, RI
+  #Although listed in Census, these are not functional counties: CT, RI
   # already in NY city : "kings county", "queens county", "bronx county",
    #"richmond county", "new york county"
 #MA, not functional: "hampden county"
@@ -330,6 +355,14 @@ county_census_acfr_2023 %>% arrange(desc(population)) %>%
 #                            "orleans parish" #LA new orleans city
 
 
+acfrs_general_purpose %>% 
+  filter(name %in% c("230476", #"virginia beach",
+                     "norfolk city", 
+                     "chesapeake city", "st louis city",
+                     "baltimore city", 
+                     "east baton rouge parish", #baton rouge", #LA
+                     "orleans parish")) %>% View()
+
 #missing top 300:
 county_census_acfr_2023 %>% arrange(desc(population)) %>% 
   slice(1:300) %>% 
@@ -339,9 +372,7 @@ county_census_acfr_2023 %>% arrange(desc(population)) %>%
 # TODO: need to copy other city to county list
 
 #write.csv(top100_counties, "output/top100_counties.csv")
-
 # save file
-
 #write.csv(county_all, "output/all_counties_2020_2023.csv")
 
 county_census_acfr_2023 %>% 
