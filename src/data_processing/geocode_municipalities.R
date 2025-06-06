@@ -360,3 +360,21 @@ generate_outputs <- function(municipal_data_with_coords, recent_year = NULL) {
 
 # Run the main function
 main()
+
+
+#check result
+
+df_municipalities_with_coordinates <- readRDS("output/municipalities_with_coordinates.rds")
+
+df_municipalities_with_coordinates %>% 
+  filter(year == 2023) %>% 
+  select(state.abb, id, name, latitude, longitude, population, geo_id) %>% 
+  arrange(desc(population)) %>% 
+  drop_na(latitude) %>% 
+  drop_na(longitude) %>% 
+  distinct() %>%  
+ # filter(is.na(latitude)) %>% 
+  
+  filter(geo_id %in% census_city_top300$geo_id) %>% 
+  
+  View()

@@ -354,6 +354,7 @@ county_census_acfr_2023 %>% arrange(desc(population)) %>%
 #                            "east baton rouge parish", #baton rouge", #LA
 #                            "orleans parish" #LA new orleans city
 
+county_all <- county_census_acfr_2023
 
 acfrs_general_purpose %>% 
   filter(name %in% c("230476", #"virginia beach",
@@ -389,7 +390,7 @@ compare_latest_csv_versions(
 municipality_acfrs_ <- acfrs_general_purpose %>% 
   # exclude state and county
   filter(!id %in% state_all$id) %>% 
-  filter(!id %in% county_all$id) %>% 
+  filter(!id %in% county_acfrs$id) %>% 
   
   # get income, only 634 entities has income info
   left_join(city_income) 
@@ -563,7 +564,7 @@ top300_cities_2023 %>%
   write.csv("output/top300_cities_2023.csv")
 
 municipality_all %>% 
-  filter(year == 2023) %>% View()
+  filter(year == 2023) %>% 
   write.csv(file = paste0("output/all_municipalities_2023_", format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
 
 compare_latest_csv_versions(

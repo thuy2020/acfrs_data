@@ -1,5 +1,729 @@
-[2025-05-20 13:48:23] Geocoding process started
-[2025-05-20 13:48:23] Starting main geocoding process
-[2025-05-20 13:48:23] Reading municipality data
-[2025-05-20 13:48:23] Using data from year: -Inf
-[2025-05-20 13:48:43] Using data from year: -Inf
+[2025-06-05 15:06:35] Geocoding process started
+[2025-06-05 15:06:35] Starting main geocoding process
+[2025-06-05 15:06:35] Reading municipality data
+[2025-06-05 15:06:35] Using data from year: 2023
+[2025-06-05 15:06:35] Total unique municipalities to geocode: 8631
+[2025-06-05 15:06:35] Loading checkpoint: geocoding_checkpoints/geocoded_batch_20250605_121432.rds
+[2025-06-05 15:06:35] Resuming from checkpoint with 900 already processed locations
+[2025-06-05 15:06:35] 7731 locations remaining to be processed
+[2025-06-05 15:06:35] Processing batch 1 of 310 - Records 1 to 25
+[2025-06-05 15:07:01] Successfully geocoded batch 1
+[2025-06-05 15:07:02] Processing batch 2 of 310 - Records 26 to 50
+[2025-06-05 15:07:32] Successfully geocoded batch 2
+[2025-06-05 15:07:33] Processing batch 3 of 310 - Records 51 to 75
+[2025-06-05 15:07:59] Successfully geocoded batch 3
+[2025-06-05 15:08:00] Processing batch 4 of 310 - Records 76 to 100
+[2025-06-05 15:08:26] Successfully geocoded batch 4
+[2025-06-05 15:08:26] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_150826.rds
+[2025-06-05 15:08:27] Processing batch 5 of 310 - Records 101 to 125
+[2025-06-05 15:08:53] Successfully geocoded batch 5
+[2025-06-05 15:08:54] Processing batch 6 of 310 - Records 126 to 150
+[2025-06-05 15:09:21] Successfully geocoded batch 6
+[2025-06-05 15:09:22] Processing batch 7 of 310 - Records 151 to 175
+[2025-06-05 15:09:49] Successfully geocoded batch 7
+[2025-06-05 15:09:50] Processing batch 8 of 310 - Records 176 to 200
+[2025-06-05 15:10:16] Successfully geocoded batch 8
+[2025-06-05 15:10:16] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_151016.rds
+[2025-06-05 15:10:17] Processing batch 9 of 310 - Records 201 to 225
+[2025-06-05 15:10:43] Successfully geocoded batch 9
+[2025-06-05 15:10:44] Processing batch 10 of 310 - Records 226 to 250
+[2025-06-05 15:11:12] Successfully geocoded batch 10
+[2025-06-05 15:11:13] Processing batch 11 of 310 - Records 251 to 275
+[2025-06-05 15:11:38] Successfully geocoded batch 11
+[2025-06-05 15:11:39] Processing batch 12 of 310 - Records 276 to 300
+[2025-06-05 15:12:06] Successfully geocoded batch 12
+[2025-06-05 15:12:06] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_151206.rds
+[2025-06-05 15:12:07] Processing batch 13 of 310 - Records 301 to 325
+[2025-06-05 15:12:32] Successfully geocoded batch 13
+[2025-06-05 15:12:33] Processing batch 14 of 310 - Records 326 to 350
+[2025-06-05 15:12:59] Successfully geocoded batch 14
+[2025-06-05 15:13:00] Processing batch 15 of 310 - Records 351 to 375
+[2025-06-05 15:13:26] Successfully geocoded batch 15
+[2025-06-05 15:13:27] Processing batch 16 of 310 - Records 376 to 400
+[2025-06-05 15:13:53] Successfully geocoded batch 16
+[2025-06-05 15:13:53] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_151353.rds
+[2025-06-05 15:13:54] Processing batch 17 of 310 - Records 401 to 425
+[2025-06-05 15:14:22] Successfully geocoded batch 17
+[2025-06-05 15:14:23] Processing batch 18 of 310 - Records 426 to 450
+[2025-06-05 15:14:48] Successfully geocoded batch 18
+[2025-06-05 15:14:49] Processing batch 19 of 310 - Records 451 to 475
+[2025-06-05 15:15:14] Successfully geocoded batch 19
+[2025-06-05 15:15:15] Processing batch 20 of 310 - Records 476 to 500
+[2025-06-05 15:15:41] Successfully geocoded batch 20
+[2025-06-05 15:15:41] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_151541.rds
+[2025-06-05 15:15:42] Processing batch 21 of 310 - Records 501 to 525
+[2025-06-05 15:16:09] Successfully geocoded batch 21
+[2025-06-05 15:16:10] Processing batch 22 of 310 - Records 526 to 550
+[2025-06-05 15:16:36] Successfully geocoded batch 22
+[2025-06-05 15:16:37] Processing batch 23 of 310 - Records 551 to 575
+[2025-06-05 15:17:02] Successfully geocoded batch 23
+[2025-06-05 15:17:03] Processing batch 24 of 310 - Records 576 to 600
+[2025-06-05 15:17:32] Successfully geocoded batch 24
+[2025-06-05 15:17:32] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_151732.rds
+[2025-06-05 15:17:33] Processing batch 25 of 310 - Records 601 to 625
+[2025-06-05 15:17:58] Successfully geocoded batch 25
+[2025-06-05 15:17:59] Processing batch 26 of 310 - Records 626 to 650
+[2025-06-05 15:18:26] Successfully geocoded batch 26
+[2025-06-05 15:18:27] Processing batch 27 of 310 - Records 651 to 675
+[2025-06-05 15:18:53] Successfully geocoded batch 27
+[2025-06-05 15:18:54] Processing batch 28 of 310 - Records 676 to 700
+[2025-06-05 15:19:20] Successfully geocoded batch 28
+[2025-06-05 15:19:20] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_151920.rds
+[2025-06-05 15:19:21] Processing batch 29 of 310 - Records 701 to 725
+[2025-06-05 15:19:46] Successfully geocoded batch 29
+[2025-06-05 15:19:47] Processing batch 30 of 310 - Records 726 to 750
+[2025-06-05 15:20:13] Successfully geocoded batch 30
+[2025-06-05 15:20:14] Processing batch 31 of 310 - Records 751 to 775
+[2025-06-05 15:20:40] Successfully geocoded batch 31
+[2025-06-05 15:20:41] Processing batch 32 of 310 - Records 776 to 800
+[2025-06-05 15:21:07] Successfully geocoded batch 32
+[2025-06-05 15:21:07] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_152107.rds
+[2025-06-05 15:21:08] Processing batch 33 of 310 - Records 801 to 825
+[2025-06-05 15:21:33] Successfully geocoded batch 33
+[2025-06-05 15:21:34] Processing batch 34 of 310 - Records 826 to 850
+[2025-06-05 15:21:59] Successfully geocoded batch 34
+[2025-06-05 15:22:00] Processing batch 35 of 310 - Records 851 to 875
+[2025-06-05 15:22:29] Successfully geocoded batch 35
+[2025-06-05 15:22:30] Processing batch 36 of 310 - Records 876 to 900
+[2025-06-05 15:22:55] Successfully geocoded batch 36
+[2025-06-05 15:22:55] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_152255.rds
+[2025-06-05 15:22:56] Processing batch 37 of 310 - Records 901 to 925
+[2025-06-05 15:23:24] Successfully geocoded batch 37
+[2025-06-05 15:23:25] Processing batch 38 of 310 - Records 926 to 950
+[2025-06-05 15:23:52] Successfully geocoded batch 38
+[2025-06-05 15:23:53] Processing batch 39 of 310 - Records 951 to 975
+[2025-06-05 15:24:19] Successfully geocoded batch 39
+[2025-06-05 15:24:20] Processing batch 40 of 310 - Records 976 to 1000
+[2025-06-05 15:24:47] Successfully geocoded batch 40
+[2025-06-05 15:24:47] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_152447.rds
+[2025-06-05 15:24:48] Processing batch 41 of 310 - Records 1001 to 1025
+[2025-06-05 15:25:17] Successfully geocoded batch 41
+[2025-06-05 15:25:18] Processing batch 42 of 310 - Records 1026 to 1050
+[2025-06-05 15:25:43] Successfully geocoded batch 42
+[2025-06-05 15:25:44] Processing batch 43 of 310 - Records 1051 to 1075
+[2025-06-05 15:26:09] Successfully geocoded batch 43
+[2025-06-05 15:26:10] Processing batch 44 of 310 - Records 1076 to 1100
+[2025-06-05 15:26:35] Successfully geocoded batch 44
+[2025-06-05 15:26:35] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_152635.rds
+[2025-06-05 15:26:36] Processing batch 45 of 310 - Records 1101 to 1125
+[2025-06-05 15:27:03] Successfully geocoded batch 45
+[2025-06-05 15:27:04] Processing batch 46 of 310 - Records 1126 to 1150
+[2025-06-05 15:27:29] Successfully geocoded batch 46
+[2025-06-05 15:27:30] Processing batch 47 of 310 - Records 1151 to 1175
+[2025-06-05 15:27:55] Successfully geocoded batch 47
+[2025-06-05 15:27:56] Processing batch 48 of 310 - Records 1176 to 1200
+[2025-06-05 15:28:22] Successfully geocoded batch 48
+[2025-06-05 15:28:22] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_152822.rds
+[2025-06-05 15:28:23] Processing batch 49 of 310 - Records 1201 to 1225
+[2025-06-05 15:28:49] Successfully geocoded batch 49
+[2025-06-05 15:28:50] Processing batch 50 of 310 - Records 1226 to 1250
+[2025-06-05 15:29:15] Successfully geocoded batch 50
+[2025-06-05 15:29:16] Processing batch 51 of 310 - Records 1251 to 1275
+[2025-06-05 15:29:42] Successfully geocoded batch 51
+[2025-06-05 15:29:43] Processing batch 52 of 310 - Records 1276 to 1300
+[2025-06-05 15:30:09] Successfully geocoded batch 52
+[2025-06-05 15:30:09] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_153009.rds
+[2025-06-05 15:30:10] Processing batch 53 of 310 - Records 1301 to 1325
+[2025-06-05 15:30:35] Successfully geocoded batch 53
+[2025-06-05 15:30:36] Processing batch 54 of 310 - Records 1326 to 1350
+[2025-06-05 15:31:02] Successfully geocoded batch 54
+[2025-06-05 15:31:03] Processing batch 55 of 310 - Records 1351 to 1375
+[2025-06-05 15:31:29] Successfully geocoded batch 55
+[2025-06-05 15:31:30] Processing batch 56 of 310 - Records 1376 to 1400
+[2025-06-05 15:31:56] Successfully geocoded batch 56
+[2025-06-05 15:31:56] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_153156.rds
+[2025-06-05 15:31:57] Processing batch 57 of 310 - Records 1401 to 1425
+[2025-06-05 15:32:23] Successfully geocoded batch 57
+[2025-06-05 15:32:24] Processing batch 58 of 310 - Records 1426 to 1450
+[2025-06-05 15:32:49] Successfully geocoded batch 58
+[2025-06-05 15:32:50] Processing batch 59 of 310 - Records 1451 to 1475
+[2025-06-05 15:33:18] Successfully geocoded batch 59
+[2025-06-05 15:33:19] Processing batch 60 of 310 - Records 1476 to 1500
+[2025-06-05 15:33:45] Successfully geocoded batch 60
+[2025-06-05 15:33:45] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_153345.rds
+[2025-06-05 15:33:46] Processing batch 61 of 310 - Records 1501 to 1525
+[2025-06-05 15:34:12] Successfully geocoded batch 61
+[2025-06-05 15:34:13] Processing batch 62 of 310 - Records 1526 to 1550
+[2025-06-05 15:34:40] Successfully geocoded batch 62
+[2025-06-05 15:34:41] Processing batch 63 of 310 - Records 1551 to 1575
+[2025-06-05 15:35:06] Successfully geocoded batch 63
+[2025-06-05 15:35:07] Processing batch 64 of 310 - Records 1576 to 1600
+[2025-06-05 15:35:32] Successfully geocoded batch 64
+[2025-06-05 15:35:32] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_153532.rds
+[2025-06-05 15:35:33] Processing batch 65 of 310 - Records 1601 to 1625
+[2025-06-05 15:35:59] Successfully geocoded batch 65
+[2025-06-05 15:36:00] Processing batch 66 of 310 - Records 1626 to 1650
+[2025-06-05 15:36:26] Successfully geocoded batch 66
+[2025-06-05 15:36:27] Processing batch 67 of 310 - Records 1651 to 1675
+[2025-06-05 15:36:53] Successfully geocoded batch 67
+[2025-06-05 15:36:54] Processing batch 68 of 310 - Records 1676 to 1700
+[2025-06-05 15:37:19] Successfully geocoded batch 68
+[2025-06-05 15:37:19] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_153719.rds
+[2025-06-05 15:37:20] Processing batch 69 of 310 - Records 1701 to 1725
+[2025-06-05 15:37:45] Successfully geocoded batch 69
+[2025-06-05 15:37:46] Processing batch 70 of 310 - Records 1726 to 1750
+[2025-06-05 15:38:12] Successfully geocoded batch 70
+[2025-06-05 15:38:13] Processing batch 71 of 310 - Records 1751 to 1775
+[2025-06-05 15:38:38] Successfully geocoded batch 71
+[2025-06-05 15:38:39] Processing batch 72 of 310 - Records 1776 to 1800
+[2025-06-05 15:39:04] Successfully geocoded batch 72
+[2025-06-05 15:39:04] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_153904.rds
+[2025-06-05 15:39:05] Processing batch 73 of 310 - Records 1801 to 1825
+[2025-06-05 15:39:32] Successfully geocoded batch 73
+[2025-06-05 15:39:33] Processing batch 74 of 310 - Records 1826 to 1850
+[2025-06-05 15:39:59] Successfully geocoded batch 74
+[2025-06-05 15:40:00] Processing batch 75 of 310 - Records 1851 to 1875
+[2025-06-05 15:40:29] Successfully geocoded batch 75
+[2025-06-05 15:40:30] Processing batch 76 of 310 - Records 1876 to 1900
+[2025-06-05 15:40:55] Successfully geocoded batch 76
+[2025-06-05 15:40:55] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_154055.rds
+[2025-06-05 15:40:56] Processing batch 77 of 310 - Records 1901 to 1925
+[2025-06-05 15:41:22] Successfully geocoded batch 77
+[2025-06-05 15:41:23] Processing batch 78 of 310 - Records 1926 to 1950
+[2025-06-05 15:41:50] Successfully geocoded batch 78
+[2025-06-05 15:41:51] Processing batch 79 of 310 - Records 1951 to 1975
+[2025-06-05 15:42:17] Successfully geocoded batch 79
+[2025-06-05 15:42:18] Processing batch 80 of 310 - Records 1976 to 2000
+[2025-06-05 15:42:43] Successfully geocoded batch 80
+[2025-06-05 15:42:43] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_154243.rds
+[2025-06-05 15:42:44] Processing batch 81 of 310 - Records 2001 to 2025
+[2025-06-05 15:43:11] Successfully geocoded batch 81
+[2025-06-05 15:43:12] Processing batch 82 of 310 - Records 2026 to 2050
+[2025-06-05 15:43:37] Successfully geocoded batch 82
+[2025-06-05 15:43:38] Processing batch 83 of 310 - Records 2051 to 2075
+[2025-06-05 15:44:03] Successfully geocoded batch 83
+[2025-06-05 15:44:04] Processing batch 84 of 310 - Records 2076 to 2100
+[2025-06-05 15:44:32] Successfully geocoded batch 84
+[2025-06-05 15:44:32] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_154432.rds
+[2025-06-05 15:44:33] Processing batch 85 of 310 - Records 2101 to 2125
+[2025-06-05 15:44:58] Successfully geocoded batch 85
+[2025-06-05 15:44:59] Processing batch 86 of 310 - Records 2126 to 2150
+[2025-06-05 15:45:26] Successfully geocoded batch 86
+[2025-06-05 15:45:27] Processing batch 87 of 310 - Records 2151 to 2175
+[2025-06-05 15:45:52] Successfully geocoded batch 87
+[2025-06-05 15:45:53] Processing batch 88 of 310 - Records 2176 to 2200
+[2025-06-05 15:46:18] Successfully geocoded batch 88
+[2025-06-05 15:46:19] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_154618.rds
+[2025-06-05 15:46:20] Processing batch 89 of 310 - Records 2201 to 2225
+[2025-06-05 15:46:45] Successfully geocoded batch 89
+[2025-06-05 15:46:46] Processing batch 90 of 310 - Records 2226 to 2250
+[2025-06-05 15:47:12] Successfully geocoded batch 90
+[2025-06-05 15:47:13] Processing batch 91 of 310 - Records 2251 to 2275
+[2025-06-05 15:47:38] Successfully geocoded batch 91
+[2025-06-05 15:47:39] Processing batch 92 of 310 - Records 2276 to 2300
+[2025-06-05 15:48:04] Successfully geocoded batch 92
+[2025-06-05 15:48:04] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_154804.rds
+[2025-06-05 15:48:05] Processing batch 93 of 310 - Records 2301 to 2325
+[2025-06-05 15:48:31] Successfully geocoded batch 93
+[2025-06-05 15:48:32] Processing batch 94 of 310 - Records 2326 to 2350
+[2025-06-05 15:48:58] Successfully geocoded batch 94
+[2025-06-05 15:48:59] Processing batch 95 of 310 - Records 2351 to 2375
+[2025-06-05 15:49:26] Successfully geocoded batch 95
+[2025-06-05 15:49:27] Processing batch 96 of 310 - Records 2376 to 2400
+[2025-06-05 15:49:53] Successfully geocoded batch 96
+[2025-06-05 15:49:53] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_154953.rds
+[2025-06-05 15:49:54] Processing batch 97 of 310 - Records 2401 to 2425
+[2025-06-05 15:50:21] Successfully geocoded batch 97
+[2025-06-05 15:50:22] Processing batch 98 of 310 - Records 2426 to 2450
+[2025-06-05 15:50:47] Successfully geocoded batch 98
+[2025-06-05 15:50:48] Processing batch 99 of 310 - Records 2451 to 2475
+[2025-06-05 15:51:14] Successfully geocoded batch 99
+[2025-06-05 15:51:15] Processing batch 100 of 310 - Records 2476 to 2500
+[2025-06-05 15:51:40] Successfully geocoded batch 100
+[2025-06-05 15:51:40] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_155140.rds
+[2025-06-05 15:51:41] Processing batch 101 of 310 - Records 2501 to 2525
+[2025-06-05 15:52:07] Successfully geocoded batch 101
+[2025-06-05 15:52:08] Processing batch 102 of 310 - Records 2526 to 2550
+[2025-06-05 15:52:35] Successfully geocoded batch 102
+[2025-06-05 15:52:36] Processing batch 103 of 310 - Records 2551 to 2575
+[2025-06-05 15:53:01] Successfully geocoded batch 103
+[2025-06-05 15:53:02] Processing batch 104 of 310 - Records 2576 to 2600
+[2025-06-05 15:53:28] Successfully geocoded batch 104
+[2025-06-05 15:53:28] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_155328.rds
+[2025-06-05 15:53:29] Processing batch 105 of 310 - Records 2601 to 2625
+[2025-06-05 15:53:54] Successfully geocoded batch 105
+[2025-06-05 15:53:55] Processing batch 106 of 310 - Records 2626 to 2650
+[2025-06-05 15:54:20] Successfully geocoded batch 106
+[2025-06-05 15:54:21] Processing batch 107 of 310 - Records 2651 to 2675
+[2025-06-05 15:54:47] Successfully geocoded batch 107
+[2025-06-05 15:54:48] Processing batch 108 of 310 - Records 2676 to 2700
+[2025-06-05 15:55:13] Successfully geocoded batch 108
+[2025-06-05 15:55:13] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_155513.rds
+[2025-06-05 15:55:14] Processing batch 109 of 310 - Records 2701 to 2725
+[2025-06-05 15:55:39] Successfully geocoded batch 109
+[2025-06-05 15:55:40] Processing batch 110 of 310 - Records 2726 to 2750
+[2025-06-05 15:56:06] Successfully geocoded batch 110
+[2025-06-05 15:56:07] Processing batch 111 of 310 - Records 2751 to 2775
+[2025-06-05 15:56:32] Successfully geocoded batch 111
+[2025-06-05 15:56:33] Processing batch 112 of 310 - Records 2776 to 2800
+[2025-06-05 15:56:58] Successfully geocoded batch 112
+[2025-06-05 15:56:58] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_155658.rds
+[2025-06-05 15:56:59] Processing batch 113 of 310 - Records 2801 to 2825
+[2025-06-05 15:57:24] Successfully geocoded batch 113
+[2025-06-05 15:57:25] Processing batch 114 of 310 - Records 2826 to 2850
+[2025-06-05 15:57:51] Successfully geocoded batch 114
+[2025-06-05 15:57:52] Processing batch 115 of 310 - Records 2851 to 2875
+[2025-06-05 15:58:17] Successfully geocoded batch 115
+[2025-06-05 15:58:18] Processing batch 116 of 310 - Records 2876 to 2900
+[2025-06-05 15:58:43] Successfully geocoded batch 116
+[2025-06-05 15:58:43] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_155843.rds
+[2025-06-05 15:58:44] Processing batch 117 of 310 - Records 2901 to 2925
+[2025-06-05 15:59:09] Successfully geocoded batch 117
+[2025-06-05 15:59:10] Processing batch 118 of 310 - Records 2926 to 2950
+[2025-06-05 15:59:36] Successfully geocoded batch 118
+[2025-06-05 15:59:37] Processing batch 119 of 310 - Records 2951 to 2975
+[2025-06-05 16:00:03] Successfully geocoded batch 119
+[2025-06-05 16:00:04] Processing batch 120 of 310 - Records 2976 to 3000
+[2025-06-05 16:00:33] Successfully geocoded batch 120
+[2025-06-05 16:00:33] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_160033.rds
+[2025-06-05 16:00:34] Processing batch 121 of 310 - Records 3001 to 3025
+[2025-06-05 16:01:03] Successfully geocoded batch 121
+[2025-06-05 16:01:04] Processing batch 122 of 310 - Records 3026 to 3050
+[2025-06-05 16:01:29] Successfully geocoded batch 122
+[2025-06-05 16:01:30] Processing batch 123 of 310 - Records 3051 to 3075
+[2025-06-05 16:01:56] Successfully geocoded batch 123
+[2025-06-05 16:01:57] Processing batch 124 of 310 - Records 3076 to 3100
+[2025-06-05 16:02:23] Successfully geocoded batch 124
+[2025-06-05 16:02:23] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_160223.rds
+[2025-06-05 16:02:24] Processing batch 125 of 310 - Records 3101 to 3125
+[2025-06-05 16:02:53] Successfully geocoded batch 125
+[2025-06-05 16:02:54] Processing batch 126 of 310 - Records 3126 to 3150
+[2025-06-05 16:03:22] Successfully geocoded batch 126
+[2025-06-05 16:03:23] Processing batch 127 of 310 - Records 3151 to 3175
+[2025-06-05 16:03:51] Successfully geocoded batch 127
+[2025-06-05 16:03:52] Processing batch 128 of 310 - Records 3176 to 3200
+[2025-06-05 16:04:18] Successfully geocoded batch 128
+[2025-06-05 16:04:18] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_160418.rds
+[2025-06-05 16:04:19] Processing batch 129 of 310 - Records 3201 to 3225
+[2025-06-05 16:04:45] Successfully geocoded batch 129
+[2025-06-05 16:04:46] Processing batch 130 of 310 - Records 3226 to 3250
+[2025-06-05 16:05:11] Successfully geocoded batch 130
+[2025-06-05 16:05:12] Processing batch 131 of 310 - Records 3251 to 3275
+[2025-06-05 16:05:39] Successfully geocoded batch 131
+[2025-06-05 16:05:40] Processing batch 132 of 310 - Records 3276 to 3300
+[2025-06-05 16:06:05] Successfully geocoded batch 132
+[2025-06-05 16:06:05] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_160605.rds
+[2025-06-05 16:06:06] Processing batch 133 of 310 - Records 3301 to 3325
+[2025-06-05 16:06:31] Successfully geocoded batch 133
+[2025-06-05 16:06:32] Processing batch 134 of 310 - Records 3326 to 3350
+[2025-06-05 16:06:58] Successfully geocoded batch 134
+[2025-06-05 16:06:59] Processing batch 135 of 310 - Records 3351 to 3375
+[2025-06-05 16:07:26] Successfully geocoded batch 135
+[2025-06-05 16:07:27] Processing batch 136 of 310 - Records 3376 to 3400
+[2025-06-05 16:07:52] Successfully geocoded batch 136
+[2025-06-05 16:07:52] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_160752.rds
+[2025-06-05 16:07:53] Processing batch 137 of 310 - Records 3401 to 3425
+[2025-06-05 16:08:27] Successfully geocoded batch 137
+[2025-06-05 16:08:28] Processing batch 138 of 310 - Records 3426 to 3450
+[2025-06-05 16:09:07] Successfully geocoded batch 138
+[2025-06-05 16:09:08] Processing batch 139 of 310 - Records 3451 to 3475
+[2025-06-05 16:09:36] Successfully geocoded batch 139
+[2025-06-05 16:09:37] Processing batch 140 of 310 - Records 3476 to 3500
+[2025-06-05 16:10:03] Successfully geocoded batch 140
+[2025-06-05 16:10:03] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_161003.rds
+[2025-06-05 16:10:04] Processing batch 141 of 310 - Records 3501 to 3525
+[2025-06-05 16:10:31] Successfully geocoded batch 141
+[2025-06-05 16:10:32] Processing batch 142 of 310 - Records 3526 to 3550
+[2025-06-05 16:10:57] Successfully geocoded batch 142
+[2025-06-05 16:10:58] Processing batch 143 of 310 - Records 3551 to 3575
+[2025-06-05 16:11:23] Successfully geocoded batch 143
+[2025-06-05 16:11:24] Processing batch 144 of 310 - Records 3576 to 3600
+[2025-06-05 16:11:49] Successfully geocoded batch 144
+[2025-06-05 16:11:49] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_161149.rds
+[2025-06-05 16:11:50] Processing batch 145 of 310 - Records 3601 to 3625
+[2025-06-05 16:12:17] Successfully geocoded batch 145
+[2025-06-05 16:12:18] Processing batch 146 of 310 - Records 3626 to 3650
+[2025-06-05 16:12:43] Successfully geocoded batch 146
+[2025-06-05 16:12:44] Processing batch 147 of 310 - Records 3651 to 3675
+[2025-06-05 16:13:10] Successfully geocoded batch 147
+[2025-06-05 16:13:11] Processing batch 148 of 310 - Records 3676 to 3700
+[2025-06-05 16:13:37] Successfully geocoded batch 148
+[2025-06-05 16:13:37] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_161337.rds
+[2025-06-05 16:13:38] Processing batch 149 of 310 - Records 3701 to 3725
+[2025-06-05 16:14:03] Successfully geocoded batch 149
+[2025-06-05 16:14:04] Processing batch 150 of 310 - Records 3726 to 3750
+[2025-06-05 16:14:31] Successfully geocoded batch 150
+[2025-06-05 16:14:32] Processing batch 151 of 310 - Records 3751 to 3775
+[2025-06-05 16:14:57] Successfully geocoded batch 151
+[2025-06-05 16:14:58] Processing batch 152 of 310 - Records 3776 to 3800
+[2025-06-05 16:15:23] Successfully geocoded batch 152
+[2025-06-05 16:15:23] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_161523.rds
+[2025-06-05 16:15:24] Processing batch 153 of 310 - Records 3801 to 3825
+[2025-06-05 16:15:50] Successfully geocoded batch 153
+[2025-06-05 16:15:51] Processing batch 154 of 310 - Records 3826 to 3850
+[2025-06-05 16:16:16] Successfully geocoded batch 154
+[2025-06-05 16:16:17] Processing batch 155 of 310 - Records 3851 to 3875
+[2025-06-05 16:16:43] Successfully geocoded batch 155
+[2025-06-05 16:16:44] Processing batch 156 of 310 - Records 3876 to 3900
+[2025-06-05 16:17:10] Successfully geocoded batch 156
+[2025-06-05 16:17:10] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_161710.rds
+[2025-06-05 16:17:11] Processing batch 157 of 310 - Records 3901 to 3925
+[2025-06-05 16:17:37] Successfully geocoded batch 157
+[2025-06-05 16:17:38] Processing batch 158 of 310 - Records 3926 to 3950
+[2025-06-05 16:18:04] Successfully geocoded batch 158
+[2025-06-05 16:18:05] Processing batch 159 of 310 - Records 3951 to 3975
+[2025-06-05 16:18:31] Successfully geocoded batch 159
+[2025-06-05 16:18:32] Processing batch 160 of 310 - Records 3976 to 4000
+[2025-06-05 16:18:57] Successfully geocoded batch 160
+[2025-06-05 16:18:57] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_161857.rds
+[2025-06-05 16:18:58] Processing batch 161 of 310 - Records 4001 to 4025
+[2025-06-05 16:19:25] Successfully geocoded batch 161
+[2025-06-05 16:19:26] Processing batch 162 of 310 - Records 4026 to 4050
+[2025-06-05 16:19:51] Successfully geocoded batch 162
+[2025-06-05 16:19:52] Processing batch 163 of 310 - Records 4051 to 4075
+[2025-06-05 16:20:17] Successfully geocoded batch 163
+[2025-06-05 16:20:18] Processing batch 164 of 310 - Records 4076 to 4100
+[2025-06-05 16:20:44] Successfully geocoded batch 164
+[2025-06-05 16:20:44] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_162044.rds
+[2025-06-05 16:20:45] Processing batch 165 of 310 - Records 4101 to 4125
+[2025-06-05 16:21:10] Successfully geocoded batch 165
+[2025-06-05 16:21:11] Processing batch 166 of 310 - Records 4126 to 4150
+[2025-06-05 16:21:37] Successfully geocoded batch 166
+[2025-06-05 16:21:38] Processing batch 167 of 310 - Records 4151 to 4175
+[2025-06-05 16:22:03] Successfully geocoded batch 167
+[2025-06-05 16:22:04] Processing batch 168 of 310 - Records 4176 to 4200
+[2025-06-05 16:22:30] Successfully geocoded batch 168
+[2025-06-05 16:22:30] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_162230.rds
+[2025-06-05 16:22:31] Processing batch 169 of 310 - Records 4201 to 4225
+[2025-06-05 16:22:56] Successfully geocoded batch 169
+[2025-06-05 16:22:57] Processing batch 170 of 310 - Records 4226 to 4250
+[2025-06-05 16:23:23] Successfully geocoded batch 170
+[2025-06-05 16:23:24] Processing batch 171 of 310 - Records 4251 to 4275
+[2025-06-05 16:23:49] Successfully geocoded batch 171
+[2025-06-05 16:23:50] Processing batch 172 of 310 - Records 4276 to 4300
+[2025-06-05 16:24:15] Successfully geocoded batch 172
+[2025-06-05 16:24:15] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_162415.rds
+[2025-06-05 16:24:16] Processing batch 173 of 310 - Records 4301 to 4325
+[2025-06-05 16:24:42] Successfully geocoded batch 173
+[2025-06-05 16:24:43] Processing batch 174 of 310 - Records 4326 to 4350
+[2025-06-05 16:25:09] Successfully geocoded batch 174
+[2025-06-05 16:25:10] Processing batch 175 of 310 - Records 4351 to 4375
+[2025-06-05 16:25:36] Successfully geocoded batch 175
+[2025-06-05 16:25:37] Processing batch 176 of 310 - Records 4376 to 4400
+[2025-06-05 16:26:02] Successfully geocoded batch 176
+[2025-06-05 16:26:02] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_162602.rds
+[2025-06-05 16:26:03] Processing batch 177 of 310 - Records 4401 to 4425
+[2025-06-05 16:26:29] Successfully geocoded batch 177
+[2025-06-05 16:26:30] Processing batch 178 of 310 - Records 4426 to 4450
+[2025-06-05 16:26:55] Successfully geocoded batch 178
+[2025-06-05 16:26:56] Processing batch 179 of 310 - Records 4451 to 4475
+[2025-06-05 16:27:23] Successfully geocoded batch 179
+[2025-06-05 16:27:24] Processing batch 180 of 310 - Records 4476 to 4500
+[2025-06-05 16:27:50] Successfully geocoded batch 180
+[2025-06-05 16:27:50] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_162750.rds
+[2025-06-05 16:27:51] Processing batch 181 of 310 - Records 4501 to 4525
+[2025-06-05 16:28:16] Successfully geocoded batch 181
+[2025-06-05 16:28:17] Processing batch 182 of 310 - Records 4526 to 4550
+[2025-06-05 16:28:43] Successfully geocoded batch 182
+[2025-06-05 16:28:44] Processing batch 183 of 310 - Records 4551 to 4575
+[2025-06-05 16:29:09] Successfully geocoded batch 183
+[2025-06-05 16:29:10] Processing batch 184 of 310 - Records 4576 to 4600
+[2025-06-05 16:29:35] Successfully geocoded batch 184
+[2025-06-05 16:29:35] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_162935.rds
+[2025-06-05 16:29:36] Processing batch 185 of 310 - Records 4601 to 4625
+[2025-06-05 16:30:02] Successfully geocoded batch 185
+[2025-06-05 16:30:03] Processing batch 186 of 310 - Records 4626 to 4650
+[2025-06-05 16:30:30] Successfully geocoded batch 186
+[2025-06-05 16:30:31] Processing batch 187 of 310 - Records 4651 to 4675
+[2025-06-05 16:30:57] Successfully geocoded batch 187
+[2025-06-05 16:30:58] Processing batch 188 of 310 - Records 4676 to 4700
+[2025-06-05 16:31:24] Successfully geocoded batch 188
+[2025-06-05 16:31:24] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_163124.rds
+[2025-06-05 16:31:25] Processing batch 189 of 310 - Records 4701 to 4725
+[2025-06-05 16:31:51] Successfully geocoded batch 189
+[2025-06-05 16:31:52] Processing batch 190 of 310 - Records 4726 to 4750
+[2025-06-05 16:32:18] Successfully geocoded batch 190
+[2025-06-05 16:32:19] Processing batch 191 of 310 - Records 4751 to 4775
+[2025-06-05 16:32:45] Successfully geocoded batch 191
+[2025-06-05 16:32:46] Processing batch 192 of 310 - Records 4776 to 4800
+[2025-06-05 16:33:12] Successfully geocoded batch 192
+[2025-06-05 16:33:12] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_163312.rds
+[2025-06-05 16:33:13] Processing batch 193 of 310 - Records 4801 to 4825
+[2025-06-05 16:33:38] Successfully geocoded batch 193
+[2025-06-05 16:33:39] Processing batch 194 of 310 - Records 4826 to 4850
+[2025-06-05 16:34:05] Successfully geocoded batch 194
+[2025-06-05 16:34:06] Processing batch 195 of 310 - Records 4851 to 4875
+[2025-06-05 16:34:32] Successfully geocoded batch 195
+[2025-06-05 16:34:33] Processing batch 196 of 310 - Records 4876 to 4900
+[2025-06-05 16:35:00] Successfully geocoded batch 196
+[2025-06-05 16:35:00] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_163500.rds
+[2025-06-05 16:35:01] Processing batch 197 of 310 - Records 4901 to 4925
+[2025-06-05 16:35:27] Successfully geocoded batch 197
+[2025-06-05 16:35:28] Processing batch 198 of 310 - Records 4926 to 4950
+[2025-06-05 16:35:54] Successfully geocoded batch 198
+[2025-06-05 16:35:55] Processing batch 199 of 310 - Records 4951 to 4975
+[2025-06-05 16:36:20] Successfully geocoded batch 199
+[2025-06-05 16:36:21] Processing batch 200 of 310 - Records 4976 to 5000
+[2025-06-05 16:36:46] Successfully geocoded batch 200
+[2025-06-05 16:36:46] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_163646.rds
+[2025-06-05 16:36:47] Processing batch 201 of 310 - Records 5001 to 5025
+[2025-06-05 16:37:13] Successfully geocoded batch 201
+[2025-06-05 16:37:14] Processing batch 202 of 310 - Records 5026 to 5050
+[2025-06-05 16:37:39] Successfully geocoded batch 202
+[2025-06-05 16:37:40] Processing batch 203 of 310 - Records 5051 to 5075
+[2025-06-05 16:38:06] Successfully geocoded batch 203
+[2025-06-05 16:38:07] Processing batch 204 of 310 - Records 5076 to 5100
+[2025-06-05 16:38:33] Successfully geocoded batch 204
+[2025-06-05 16:38:33] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_163833.rds
+[2025-06-05 16:38:34] Processing batch 205 of 310 - Records 5101 to 5125
+[2025-06-05 16:39:01] Successfully geocoded batch 205
+[2025-06-05 16:39:02] Processing batch 206 of 310 - Records 5126 to 5150
+[2025-06-05 16:39:27] Successfully geocoded batch 206
+[2025-06-05 16:39:28] Processing batch 207 of 310 - Records 5151 to 5175
+[2025-06-05 16:39:54] Successfully geocoded batch 207
+[2025-06-05 16:39:55] Processing batch 208 of 310 - Records 5176 to 5200
+[2025-06-05 16:40:20] Successfully geocoded batch 208
+[2025-06-05 16:40:20] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_164020.rds
+[2025-06-05 16:40:21] Processing batch 209 of 310 - Records 5201 to 5225
+[2025-06-05 16:40:46] Successfully geocoded batch 209
+[2025-06-05 16:40:47] Processing batch 210 of 310 - Records 5226 to 5250
+[2025-06-05 16:41:12] Successfully geocoded batch 210
+[2025-06-05 16:41:13] Processing batch 211 of 310 - Records 5251 to 5275
+[2025-06-05 16:41:39] Successfully geocoded batch 211
+[2025-06-05 16:41:40] Processing batch 212 of 310 - Records 5276 to 5300
+[2025-06-05 16:42:05] Successfully geocoded batch 212
+[2025-06-05 16:42:05] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_164205.rds
+[2025-06-05 16:42:06] Processing batch 213 of 310 - Records 5301 to 5325
+[2025-06-05 16:42:31] Successfully geocoded batch 213
+[2025-06-05 16:42:32] Processing batch 214 of 310 - Records 5326 to 5350
+[2025-06-05 16:42:58] Successfully geocoded batch 214
+[2025-06-05 16:42:59] Processing batch 215 of 310 - Records 5351 to 5375
+[2025-06-05 16:43:25] Successfully geocoded batch 215
+[2025-06-05 16:43:26] Processing batch 216 of 310 - Records 5376 to 5400
+[2025-06-05 16:43:51] Successfully geocoded batch 216
+[2025-06-05 16:43:51] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_164351.rds
+[2025-06-05 16:43:52] Processing batch 217 of 310 - Records 5401 to 5425
+[2025-06-05 16:44:17] Successfully geocoded batch 217
+[2025-06-05 16:44:18] Processing batch 218 of 310 - Records 5426 to 5450
+[2025-06-05 16:44:44] Successfully geocoded batch 218
+[2025-06-05 16:44:45] Processing batch 219 of 310 - Records 5451 to 5475
+[2025-06-05 16:45:10] Successfully geocoded batch 219
+[2025-06-05 16:45:11] Processing batch 220 of 310 - Records 5476 to 5500
+[2025-06-05 16:45:37] Successfully geocoded batch 220
+[2025-06-05 16:45:37] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_164537.rds
+[2025-06-05 16:45:38] Processing batch 221 of 310 - Records 5501 to 5525
+[2025-06-05 16:46:04] Successfully geocoded batch 221
+[2025-06-05 16:46:05] Processing batch 222 of 310 - Records 5526 to 5550
+[2025-06-05 16:46:31] Successfully geocoded batch 222
+[2025-06-05 16:46:32] Processing batch 223 of 310 - Records 5551 to 5575
+[2025-06-05 16:46:57] Successfully geocoded batch 223
+[2025-06-05 16:46:58] Processing batch 224 of 310 - Records 5576 to 5600
+[2025-06-05 16:47:24] Successfully geocoded batch 224
+[2025-06-05 16:47:24] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_164724.rds
+[2025-06-05 16:47:25] Processing batch 225 of 310 - Records 5601 to 5625
+[2025-06-05 16:47:51] Successfully geocoded batch 225
+[2025-06-05 16:47:52] Processing batch 226 of 310 - Records 5626 to 5650
+[2025-06-05 16:48:18] Successfully geocoded batch 226
+[2025-06-05 16:48:19] Processing batch 227 of 310 - Records 5651 to 5675
+[2025-06-05 16:48:44] Successfully geocoded batch 227
+[2025-06-05 16:48:45] Processing batch 228 of 310 - Records 5676 to 5700
+[2025-06-05 16:49:11] Successfully geocoded batch 228
+[2025-06-05 16:49:11] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_164911.rds
+[2025-06-05 16:49:12] Processing batch 229 of 310 - Records 5701 to 5725
+[2025-06-05 16:49:37] Successfully geocoded batch 229
+[2025-06-05 16:49:38] Processing batch 230 of 310 - Records 5726 to 5750
+[2025-06-05 16:50:03] Successfully geocoded batch 230
+[2025-06-05 16:50:04] Processing batch 231 of 310 - Records 5751 to 5775
+[2025-06-05 16:50:30] Successfully geocoded batch 231
+[2025-06-05 16:50:31] Processing batch 232 of 310 - Records 5776 to 5800
+[2025-06-05 16:50:57] Successfully geocoded batch 232
+[2025-06-05 16:50:57] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_165057.rds
+[2025-06-05 16:50:58] Processing batch 233 of 310 - Records 5801 to 5825
+[2025-06-05 16:51:25] Successfully geocoded batch 233
+[2025-06-05 16:51:26] Processing batch 234 of 310 - Records 5826 to 5850
+[2025-06-05 16:51:53] Successfully geocoded batch 234
+[2025-06-05 16:51:54] Processing batch 235 of 310 - Records 5851 to 5875
+[2025-06-05 16:52:19] Successfully geocoded batch 235
+[2025-06-05 16:52:20] Processing batch 236 of 310 - Records 5876 to 5900
+[2025-06-05 16:52:46] Successfully geocoded batch 236
+[2025-06-05 16:52:46] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_165246.rds
+[2025-06-05 16:52:47] Processing batch 237 of 310 - Records 5901 to 5925
+[2025-06-05 16:53:12] Successfully geocoded batch 237
+[2025-06-05 16:53:13] Processing batch 238 of 310 - Records 5926 to 5950
+[2025-06-05 16:53:39] Successfully geocoded batch 238
+[2025-06-05 16:53:40] Processing batch 239 of 310 - Records 5951 to 5975
+[2025-06-05 16:54:06] Successfully geocoded batch 239
+[2025-06-05 16:54:07] Processing batch 240 of 310 - Records 5976 to 6000
+[2025-06-05 16:54:34] Successfully geocoded batch 240
+[2025-06-05 16:54:34] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_165434.rds
+[2025-06-05 16:54:35] Processing batch 241 of 310 - Records 6001 to 6025
+[2025-06-05 16:55:00] Successfully geocoded batch 241
+[2025-06-05 16:55:01] Processing batch 242 of 310 - Records 6026 to 6050
+[2025-06-05 16:55:26] Successfully geocoded batch 242
+[2025-06-05 16:55:27] Processing batch 243 of 310 - Records 6051 to 6075
+[2025-06-05 16:55:53] Successfully geocoded batch 243
+[2025-06-05 16:55:54] Processing batch 244 of 310 - Records 6076 to 6100
+[2025-06-05 16:56:19] Successfully geocoded batch 244
+[2025-06-05 16:56:20] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_165619.rds
+[2025-06-05 16:56:21] Processing batch 245 of 310 - Records 6101 to 6125
+[2025-06-05 16:56:46] Successfully geocoded batch 245
+[2025-06-05 16:56:47] Processing batch 246 of 310 - Records 6126 to 6150
+[2025-06-05 16:57:12] Successfully geocoded batch 246
+[2025-06-05 16:57:13] Processing batch 247 of 310 - Records 6151 to 6175
+[2025-06-05 16:57:38] Successfully geocoded batch 247
+[2025-06-05 16:57:39] Processing batch 248 of 310 - Records 6176 to 6200
+[2025-06-05 16:58:04] Successfully geocoded batch 248
+[2025-06-05 16:58:04] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_165804.rds
+[2025-06-05 16:58:05] Processing batch 249 of 310 - Records 6201 to 6225
+[2025-06-05 16:58:32] Successfully geocoded batch 249
+[2025-06-05 16:58:33] Processing batch 250 of 310 - Records 6226 to 6250
+[2025-06-05 16:58:58] Successfully geocoded batch 250
+[2025-06-05 16:58:59] Processing batch 251 of 310 - Records 6251 to 6275
+[2025-06-05 16:59:24] Successfully geocoded batch 251
+[2025-06-05 16:59:25] Processing batch 252 of 310 - Records 6276 to 6300
+[2025-06-05 16:59:50] Successfully geocoded batch 252
+[2025-06-05 16:59:50] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_165950.rds
+[2025-06-05 16:59:51] Processing batch 253 of 310 - Records 6301 to 6325
+[2025-06-05 17:00:17] Successfully geocoded batch 253
+[2025-06-05 17:00:18] Processing batch 254 of 310 - Records 6326 to 6350
+[2025-06-05 17:00:45] Successfully geocoded batch 254
+[2025-06-05 17:00:46] Processing batch 255 of 310 - Records 6351 to 6375
+[2025-06-05 17:01:12] Successfully geocoded batch 255
+[2025-06-05 17:01:13] Processing batch 256 of 310 - Records 6376 to 6400
+[2025-06-05 17:01:38] Successfully geocoded batch 256
+[2025-06-05 17:01:38] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_170138.rds
+[2025-06-05 17:01:39] Processing batch 257 of 310 - Records 6401 to 6425
+[2025-06-05 17:02:07] Successfully geocoded batch 257
+[2025-06-05 17:02:08] Processing batch 258 of 310 - Records 6426 to 6450
+[2025-06-05 17:02:34] Successfully geocoded batch 258
+[2025-06-05 17:02:35] Processing batch 259 of 310 - Records 6451 to 6475
+[2025-06-05 17:03:00] Successfully geocoded batch 259
+[2025-06-05 17:03:01] Processing batch 260 of 310 - Records 6476 to 6500
+[2025-06-05 17:03:28] Successfully geocoded batch 260
+[2025-06-05 17:03:28] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_170328.rds
+[2025-06-05 17:03:29] Processing batch 261 of 310 - Records 6501 to 6525
+[2025-06-05 17:03:54] Successfully geocoded batch 261
+[2025-06-05 17:03:55] Processing batch 262 of 310 - Records 6526 to 6550
+[2025-06-05 17:04:21] Successfully geocoded batch 262
+[2025-06-05 17:04:22] Processing batch 263 of 310 - Records 6551 to 6575
+[2025-06-05 17:04:47] Successfully geocoded batch 263
+[2025-06-05 17:04:48] Processing batch 264 of 310 - Records 6576 to 6600
+[2025-06-05 17:05:14] Successfully geocoded batch 264
+[2025-06-05 17:05:14] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_170514.rds
+[2025-06-05 17:05:15] Processing batch 265 of 310 - Records 6601 to 6625
+[2025-06-05 17:05:41] Successfully geocoded batch 265
+[2025-06-05 17:05:42] Processing batch 266 of 310 - Records 6626 to 6650
+[2025-06-05 17:06:08] Successfully geocoded batch 266
+[2025-06-05 17:06:09] Processing batch 267 of 310 - Records 6651 to 6675
+[2025-06-05 17:06:34] Successfully geocoded batch 267
+[2025-06-05 17:06:35] Processing batch 268 of 310 - Records 6676 to 6700
+[2025-06-05 17:07:02] Successfully geocoded batch 268
+[2025-06-05 17:07:02] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_170702.rds
+[2025-06-05 17:07:03] Processing batch 269 of 310 - Records 6701 to 6725
+[2025-06-05 17:07:28] Successfully geocoded batch 269
+[2025-06-05 17:07:29] Processing batch 270 of 310 - Records 6726 to 6750
+[2025-06-05 17:07:55] Successfully geocoded batch 270
+[2025-06-05 17:07:56] Processing batch 271 of 310 - Records 6751 to 6775
+[2025-06-05 17:08:21] Successfully geocoded batch 271
+[2025-06-05 17:08:22] Processing batch 272 of 310 - Records 6776 to 6800
+[2025-06-05 17:08:48] Successfully geocoded batch 272
+[2025-06-05 17:08:48] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_170848.rds
+[2025-06-05 17:08:49] Processing batch 273 of 310 - Records 6801 to 6825
+[2025-06-05 17:09:14] Successfully geocoded batch 273
+[2025-06-05 17:09:15] Processing batch 274 of 310 - Records 6826 to 6850
+[2025-06-05 17:09:40] Successfully geocoded batch 274
+[2025-06-05 17:09:41] Processing batch 275 of 310 - Records 6851 to 6875
+[2025-06-05 17:10:06] Successfully geocoded batch 275
+[2025-06-05 17:10:07] Processing batch 276 of 310 - Records 6876 to 6900
+[2025-06-05 17:10:33] Successfully geocoded batch 276
+[2025-06-05 17:10:33] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_171033.rds
+[2025-06-05 17:10:34] Processing batch 277 of 310 - Records 6901 to 6925
+[2025-06-05 17:11:00] Successfully geocoded batch 277
+[2025-06-05 17:11:01] Processing batch 278 of 310 - Records 6926 to 6950
+[2025-06-05 17:11:26] Successfully geocoded batch 278
+[2025-06-05 17:11:27] Processing batch 279 of 310 - Records 6951 to 6975
+[2025-06-05 17:11:53] Successfully geocoded batch 279
+[2025-06-05 17:11:54] Processing batch 280 of 310 - Records 6976 to 7000
+[2025-06-05 17:12:20] Successfully geocoded batch 280
+[2025-06-05 17:12:20] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_171220.rds
+[2025-06-05 17:12:21] Processing batch 281 of 310 - Records 7001 to 7025
+[2025-06-05 17:12:46] Successfully geocoded batch 281
+[2025-06-05 17:12:47] Processing batch 282 of 310 - Records 7026 to 7050
+[2025-06-05 17:13:12] Successfully geocoded batch 282
+[2025-06-05 17:13:13] Processing batch 283 of 310 - Records 7051 to 7075
+[2025-06-05 17:13:39] Successfully geocoded batch 283
+[2025-06-05 17:13:40] Processing batch 284 of 310 - Records 7076 to 7100
+[2025-06-05 17:14:05] Successfully geocoded batch 284
+[2025-06-05 17:14:05] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_171405.rds
+[2025-06-05 17:14:06] Processing batch 285 of 310 - Records 7101 to 7125
+[2025-06-05 17:14:32] Successfully geocoded batch 285
+[2025-06-05 17:14:33] Processing batch 286 of 310 - Records 7126 to 7150
+[2025-06-05 17:14:58] Successfully geocoded batch 286
+[2025-06-05 17:14:59] Processing batch 287 of 310 - Records 7151 to 7175
+[2025-06-05 17:15:24] Successfully geocoded batch 287
+[2025-06-05 17:15:25] Processing batch 288 of 310 - Records 7176 to 7200
+[2025-06-05 17:15:51] Successfully geocoded batch 288
+[2025-06-05 17:15:51] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_171551.rds
+[2025-06-05 17:15:52] Processing batch 289 of 310 - Records 7201 to 7225
+[2025-06-05 17:16:18] Successfully geocoded batch 289
+[2025-06-05 17:16:19] Processing batch 290 of 310 - Records 7226 to 7250
+[2025-06-05 17:16:44] Successfully geocoded batch 290
+[2025-06-05 17:16:45] Processing batch 291 of 310 - Records 7251 to 7275
+[2025-06-05 17:17:10] Successfully geocoded batch 291
+[2025-06-05 17:17:12] Processing batch 292 of 310 - Records 7276 to 7300
+[2025-06-05 17:17:38] Successfully geocoded batch 292
+[2025-06-05 17:17:38] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_171738.rds
+[2025-06-05 17:17:39] Processing batch 293 of 310 - Records 7301 to 7325
+[2025-06-05 17:18:04] Successfully geocoded batch 293
+[2025-06-05 17:18:05] Processing batch 294 of 310 - Records 7326 to 7350
+[2025-06-05 17:18:31] Successfully geocoded batch 294
+[2025-06-05 17:18:32] Processing batch 295 of 310 - Records 7351 to 7375
+[2025-06-05 17:18:57] Successfully geocoded batch 295
+[2025-06-05 17:18:58] Processing batch 296 of 310 - Records 7376 to 7400
+[2025-06-05 17:19:23] Successfully geocoded batch 296
+[2025-06-05 17:19:23] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_171923.rds
+[2025-06-05 17:19:24] Processing batch 297 of 310 - Records 7401 to 7425
+[2025-06-05 17:19:51] Successfully geocoded batch 297
+[2025-06-05 17:19:52] Processing batch 298 of 310 - Records 7426 to 7450
+[2025-06-05 17:20:17] Successfully geocoded batch 298
+[2025-06-05 17:20:18] Processing batch 299 of 310 - Records 7451 to 7475
+[2025-06-05 17:20:44] Successfully geocoded batch 299
+[2025-06-05 17:20:45] Processing batch 300 of 310 - Records 7476 to 7500
+[2025-06-05 17:21:11] Successfully geocoded batch 300
+[2025-06-05 17:21:11] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_172111.rds
+[2025-06-05 17:21:12] Processing batch 301 of 310 - Records 7501 to 7525
+[2025-06-05 17:21:37] Successfully geocoded batch 301
+[2025-06-05 17:21:38] Processing batch 302 of 310 - Records 7526 to 7550
+[2025-06-05 17:22:04] Successfully geocoded batch 302
+[2025-06-05 17:22:05] Processing batch 303 of 310 - Records 7551 to 7575
+[2025-06-05 17:22:31] Successfully geocoded batch 303
+[2025-06-05 17:22:32] Processing batch 304 of 310 - Records 7576 to 7600
+[2025-06-05 17:22:58] Successfully geocoded batch 304
+[2025-06-05 17:22:58] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_172258.rds
+[2025-06-05 17:22:59] Processing batch 305 of 310 - Records 7601 to 7625
+[2025-06-05 17:23:25] Successfully geocoded batch 305
+[2025-06-05 17:23:26] Processing batch 306 of 310 - Records 7626 to 7650
+[2025-06-05 17:23:52] Successfully geocoded batch 306
+[2025-06-05 17:23:53] Processing batch 307 of 310 - Records 7651 to 7675
+[2025-06-05 17:24:18] Successfully geocoded batch 307
+[2025-06-05 17:24:19] Processing batch 308 of 310 - Records 7676 to 7700
+[2025-06-05 17:24:45] Successfully geocoded batch 308
+[2025-06-05 17:24:45] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_172445.rds
+[2025-06-05 17:24:46] Processing batch 309 of 310 - Records 7701 to 7725
+[2025-06-05 17:25:12] Successfully geocoded batch 309
+[2025-06-05 17:25:13] Processing batch 310 of 310 - Records 7726 to 7731
+[2025-06-05 17:25:19] Successfully geocoded batch 310
+[2025-06-05 17:25:19] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_172519.rds
+[2025-06-05 17:25:20] Checkpoint saved: geocoding_checkpoints/geocoded_final_20250605_172520.rds
+[2025-06-05 17:25:20] Failed to geocode 112 municipalities
+[2025-06-05 17:25:20] Attempting alternative geocoding for 112 failed municipalities
+[2025-06-05 17:25:20] No checkpoints found for prefix: alt_geocoded
+[2025-06-05 17:25:20] Starting to process 112 locations
+[2025-06-05 17:25:20] Processing batch 1 of 5 - Records 1 to 25
+[2025-06-05 17:25:46] Successfully geocoded batch 1
+[2025-06-05 17:25:47] Processing batch 2 of 5 - Records 26 to 50
+[2025-06-05 17:26:12] Successfully geocoded batch 2
+[2025-06-05 17:26:13] Processing batch 3 of 5 - Records 51 to 75
+[2025-06-05 17:26:38] Successfully geocoded batch 3
+[2025-06-05 17:26:39] Processing batch 4 of 5 - Records 76 to 100
+[2025-06-05 17:27:05] Successfully geocoded batch 4
+[2025-06-05 17:27:05] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_172705.rds
+[2025-06-05 17:27:06] Processing batch 5 of 5 - Records 101 to 112
+[2025-06-05 17:27:20] Successfully geocoded batch 5
+[2025-06-05 17:27:20] Checkpoint saved: geocoding_checkpoints/geocoded_batch_20250605_172720.rds
+[2025-06-05 17:27:21] Checkpoint saved: geocoding_checkpoints/alt_geocoded_final_20250605_172721.rds
+[2025-06-05 17:27:21] Checkpoint saved: geocoding_checkpoints/geocoded_final_with_alternatives_20250605_172721.rds
+[2025-06-05 17:27:21] Joining geocoded data with original dataset
+[2025-06-05 17:27:22] Complete dataset saved to: output/municipalities_with_coordinates.rds
+[2025-06-05 17:27:22] Generating output files
+[2025-06-05 17:27:22] Enhanced dataset saved to: output/municipalities_with_coordinates.csv
