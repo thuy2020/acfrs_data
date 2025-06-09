@@ -574,13 +574,7 @@ compare_latest_csv_versions(
 )
 
 ####School districts####
-dictionary <- readRDS("data/dictionary.RDS") %>% 
-select(-name) %>% distinct()
-
-
-# filter only top 100
-# dict_top100_ELSI <- dictionary %>% 
-#   filter(ncesID %in% top100_schools$ncesID)
+dictionary <- readRDS("data/dictionary.RDS") 
 
 school_districts_ <- readRDS("data/acfrs_data.RDS") %>% 
   filter(category == "School District") %>% 
@@ -603,63 +597,46 @@ bind_2df_different_size(school_districts_, exceptions) %>%
   mutate(urban_pop = NA, 
          pct_urban_pop = NA, 
          median_hh_income_21 = NA) %>% 
-  rename(
-    student_enrollment = enrollment_22)
+  mutate(
+    enrollment_23 = as.numeric(enrollment_23)) %>% 
+  select(-c(enrollment_20, enrollment_21, enrollment_22))
 
 # Save with time stamp 
 school_districts_all %>% write.csv("output/school_districts_all_2020_2023.csv")
+
 # 
 school_districts_2023 <- school_districts_all %>% filter(year == 2023) 
-#%>% 
- # mutate(ncesID = ifelse(length(ncesID) <7, paste0("0", ncesID), ncesID))
-  
 nrow(school_districts_2023)
 
+
+#########
 school_districts_2023 %>% 
-  filter(is.na(ncesID)) %>% View()
-
-missing_in_top200school <- sd_top200_nces %>% 
-  left_join(school_districts_2023) %>% 
-  filter(is.na(id))
-
-missing_in_top200school %>% 
-  slice(14:nrow(.)) %>% 
-  filter(!name_nces %in% c("San Francisco Unified", "San Bernardino City Unified", 
-                           "Fremont Unified", 
-                           "Anchorage School District", 
-                           "Chandler Unified District #80 (4242)", 
-                           "Wichita")) %>% 
-  View()
-
-anti_join(missing_in_top200school, dictionary, by = "ncesID") %>% View()
-
-school_districts_all %>% 
-  filter(year == 2023)%>%
   summarise(tot = sum(enrollment_23, na.rm = TRUE))
 
 nces %>% 
   summarise(tot = sum(enrollment_23, na.rm = TRUE))
 
-
-school_districts_all %>%
-  filter(year == 2023) %>% 
+school_districts_2023 %>% 
   write.csv(file = paste0("output/all_schooldistricts_2023_", format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
 
-school_districts_all %>% 
-  filter(year == 2023) %>% 
-  filter(ncesID %in% sd_top200_nces$ncesID) %>% View()
+school_districts_2023 %>% 
+  filter(ncesID %in% sd_top300_nces$ncesID) %>% View()
 
 sd_top300_nces %>% 
+  filter(!ncesID %in% school_districts_2023$ncesID) %>% View()
 
 # TODO: some MT acfr report include more than 1 school districts. Need to treat MT separately 
-school_districts_all %>% 
- # filter(year == 2023)  %>% View()
-  count(id) %>%
-  filter(n > 1)
-  
 
 ####Tracking changes####
-  
+##########
+# missing_ncesID <- school_districts_2023 %>% 
+#   filter(is.na(ncesID)) 
+# 
+# missing_ncesID %>% write.csv("tmp/acfr_schools_missing_ncesID.csv")
+# 
+# unmatched_ncesID <- nces %>% filter(!ncesID %in% school_districts_2023$ncesID)
+# 
+# unmatched_ncesID %>% write.csv("tmp/nces_schools_unmatched_with_acfr.csv")
 
 compare_latest_csv_versions(
   folder = "output",

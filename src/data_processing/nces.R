@@ -65,8 +65,13 @@ nces <- import(here::here("data/ELSI_csv_export_6388370796396691352320.csv")) %>
   mutate(ncesID = as.character(ncesID),
          ncesID = str_squish(ncesID),
          
+         
+         
          state.name = str_to_title(state.name),
          state.name = str_squish(state.name)) %>% 
+  
+  mutate(name_nces = str_to_lower(name_nces), 
+         name_nces = str_squish(name_nces)) %>% 
   
   mutate(across(enrollment_20:enrollment_23, as.numeric))
 
