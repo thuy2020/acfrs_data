@@ -23,7 +23,7 @@ options(scipen = 9999)
 # * Two main ways to solve the problems: 
 # - Use a "middle file" to link geo_id and government_ID
 # - Joining by names and states 
-
+acfrs_data <- readRDS("data/acfrs_data.RDS")
 ####General Purpose####
 # step 1: get all general purpose entities in acfrs, most contains governmentID
 acfrs_general_purpose <- readRDS("data/acfrs_data.RDS") %>% 
@@ -76,7 +76,7 @@ fields_to_select <- c("state.abb", "state.name", "id", "geo_id", "year", "name",
                       "unrestricted",
                       "bonds_outstanding", "loans_outstanding", "notes_outstanding", 
                       "compensated_absences", 
-                      "population", "urban_pop", "pct_urban_pop", "median_hh_income_21")
+                      "population", "urban_pop", "pct_urban_pop", "median_hh_income")
 
 
 #######States########
@@ -100,7 +100,7 @@ state_gov <- acfrs_state %>% select(-geo_id) %>%
                             TRUE ~ as.character(geo_id)))
 
 state_gov_4years <- state_gov %>% 
-  left_join(income) %>% 
+  left_join(state_county_income) %>% 
   select(all_of(fields_to_select)) 
 
 #append url
@@ -267,7 +267,7 @@ county_census_acfr_2023_ <- rbind(county_census_acfr_2023_round1,
   left_join(county_urb, by = "geo_id") %>% 
   
   #
-  left_join(income, by = "geo_id") %>% 
+  left_join(state_county_income, by = "geo_id") %>% 
   #select(all_of(fields_to_select))
 
   #append URL
@@ -313,7 +313,6 @@ census_all %>%
 
 consolidated_county_city_acfr <- acfrs_general_purpose %>% 
 filter(id %in% c("1266824", #AK
-                 
                  "91930", "95986", "31609", # AK
                  "54175", #City and County of San Francisco
                  "1266589", # City and County of Broomfield
@@ -328,7 +327,7 @@ filter(id %in% c("1266824", #AK
                  "148608",# GAaugusta-richmond county consolidated government
                  "96555", #GA webster county unified government
                  "1267157", #KS greeley county unified government - Tribune city
-                 "40839", #KS wyandotte county, KS kansas city consolidated in Wyandotte County 
+                 "40839", #KS wyandotte county, KS kansas city consolidated in Wyandotte County,  
                  "1267156", #KY Lexington-Fayette Urban County , Lexington city 
                  "115965", #louisville/jefferson county metro government
                  "40777", #anaconda-deer lodge county, deer lodge city 
@@ -419,8 +418,8 @@ missing_top300_county <- county_census_acfr_2023 %>% arrange(desc(population)) %
   select(state.abb, name_census, population, funcstat) %>%
   mutate(category = "county",
          year = 2023)
-# 9 counties TRUE missing as of June 13, 2025
 
+# 9 counties TRUE missing as of June 13, 2025
 missing_top300_county %>% View()
 
 #count by year
@@ -434,6 +433,7 @@ county_census_acfr_2023 %>%
 # all counties that do not have acfr:
 county_census_acfr_2023_ %>% 
   filter(is.na(id)) %>% 
+  #writexl::write_xlsx(paste0("tmp/missing_county_2023_", format(Sys.time(), "%Y%m%d_%H%M"), ".xlsx"))
   View()
 
 #write.csv(top100_counties, "output/top100_counties.csv")
@@ -454,17 +454,23 @@ compare_latest_csv_versions(
 # Census calls Incorporated Place & Minor Civil Division
 
 #####Joining ACFRs muni & census#####
-#Step 1: get ACFRs municipalities
 
+#Step 1: get ACFRs municipalities
 municipality_acfrs_ <- acfrs_general_purpose %>% 
-  # exclude state and county
+  
+  # exclude state 
   filter(!id %in% state_all$id) %>% 
-  filter(!id %in% county_acfrs$id) %>% 
   
-  # get income, only 634 entities has income info
+  # exclude counties already accounted for in county section above, but DO NOT exclude those are also muni
+  filter(!id %in% county_acfrs$id | id == "54175") %>%  # CA city and county of san francisco
+  
+  # get income, only about 500 entities has income info
   left_join(city_income) 
-  
-#TODO: check for more more updated income
+
+
+#Check those do NOTE have income data
+#TODO: 
+city_income %>% filter(!geo_id %in% municipality_acfrs_$geo_id) %>% View()
 
 nrow(municipality_acfrs_ %>% filter(year == 2023))
 
@@ -566,14 +572,14 @@ special_cities <- acfrs_general_purpose %>%
 
 municipality_all <- muni_population %>% rbind(special_cities) %>% 
   #avoid double count - these entities are counted in county_gov
-  filter(name != "denver county") %>% 
+  #filter(name = "denver county") %>% 
   select(any_of(fields_to_select), url) %>% 
   
   # create a dummy urban_pop to match the df size with state and counties
   mutate(urban_pop = NA, 
          pct_urban_pop = NA)
 
-#TODO: population in all of municipalities
+#TODO: population in all municipalities
 municipality_all %>% filter(year == 2023) %>% 
   filter(is.na(population)) %>% 
   View()
@@ -617,40 +623,33 @@ top300_cities_2023 <- census_city_top300 %>%
   mutate(flg_muni = 1) %>% 
   
   #mark those are also county
-  mutate(flg_county = case_when(id %in% c("1266289", "42714", "54175", "32292") ~ 1,
+  mutate(flg_county = case_when(id %in% c("1266289", #CO denver county
+                                          "42714", # PA philadelphia
+                                          "32292", #FL jacksonville
+                                          "54175" # CA city and county of san francisco
+                                          ) ~ 1,
                                  TRUE ~ 0)) %>% 
   
   #
   mutate(name = ifelse(is.na(name), name_census, name),
          name = str_remove(name, "city$"))
 
-#check those county-muni
-top300_cities_2023 %>% 
-  select(state.abb, name, name_census, flg_acfr, flg_county, flg_muni) %>% 
-  View()
 
-
-#missing cities in top 300  
+#missing cities in top 300  - missing 6 as of June 13, 2025
 missing_top300_cities_2023 <- top300_cities_2023 %>% 
   filter(is.na(id)) 
 
-
+#KS kansas city consolidated in Wyandotte County 
 anti_join(census_city_top300, municipality_all_2023, by = "geo_id") %>% 
-  #consolidated with county, just need to copy to city list
-  filter(!name_census %in% c("san francisco city", "philadelphia city", 
-                             "jacksonville city", "denver city", 
-                             "columbus city", #Consolidated Government of Columbus-muscogee county
-                             "kansas city city") #KS wyandotte county, KS kansas city consolidated in Wyandotte County 
-         
-  ) %>% View()
+ View()
   
   # this part to display in progress report app:
+  # missing_top300_cities_2023 %>% 
   # mutate(year = 2023,
   #        category = "municipality") %>% 
   # select(-c(geo_id)) -> missing_top300_muni
 
 #####Final result muni#####
-
 top300_cities_2023 %>% 
   write.csv("output/top300_cities_2023.csv")
 
@@ -667,7 +666,7 @@ compare_latest_csv_versions(
 
 ####School districts####
 dictionary <- readRDS("data/dictionary.RDS") 
-
+acfrs_data
 school_districts_ <- readRDS("data/acfrs_data.RDS") %>% 
   filter(category == "School District") %>% 
   mutate(id = as.character(id)) %>% 
@@ -688,12 +687,12 @@ bind_2df_different_size(school_districts_, exceptions) %>%
   # create a dummy urban_pop to match the df size with state and counties
   mutate(urban_pop = NA, 
          pct_urban_pop = NA, 
-         median_hh_income_21 = NA) %>% 
+         median_hh_income = NA) %>% 
   mutate(
     enrollment_23 = as.numeric(enrollment_23)) %>% 
   select(-c(enrollment_20, enrollment_21, enrollment_22))
 
-# Save with time stamp 
+# Save 
 school_districts_all %>% write.csv("output/school_districts_all_2020_2023.csv")
 
 school_districts_all %>% 
@@ -707,8 +706,7 @@ school_districts_all %>%
 # 
 school_districts_2023 <- school_districts_all %>% filter(year == 2023) 
 
-
-#########
+#####TOp300 sd #####
 school_districts_2023 %>% 
   summarise(tot = sum(enrollment_23, na.rm = TRUE))
 
@@ -716,16 +714,26 @@ nces %>%
   summarise(tot = sum(enrollment_23, na.rm = TRUE))
 
 school_districts_2023 %>% 
+  filter(ncesID %in% sd_top300_nces$ncesID) %>% View()
+
+school_districts_2023 %>% 
   write.csv(file = paste0("output/all_schooldistricts_2023_", 
                           format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
 
-school_districts_2023 %>% 
-  filter(ncesID %in% sd_top300_nces$ncesID) %>% View()
+top300_sd_2023 <- sd_top300_nces %>% 
+  filter(ncesID %in% school_districts_2023$ncesID) 
+
+#where are these 3?
+sd_top300_nces %>% 
+  filter(!ncesID %in% school_districts_2023$ncesID) %>% View()
+
+write.csv(file = paste0("output/top300_sd_2023_", 
+                        format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
 
 # all of these are uploaded. Hgarb are checking. June 9
 sd_top300_nces %>% 
   filter(!ncesID %in% school_districts_2023$ncesID) %>%
-  filter(name_nces != "detroit public schools community district") %>% 
+  #filter(name_nces != "detroit public schools community district") %>% 
   View()
 
 # TODO: some MT acfr report include more than 1 school districts. Need to treat MT separately 

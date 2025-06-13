@@ -38,7 +38,7 @@ states <- read_csv("output/all_states_4years_2020_2023.csv") |>
     debt_ratio = total_liabilities / total_assets,
     free_cash_flow = (revenues - (expenses + current_liabilities)) / population
   ) %>% 
-  select(state.name, year, debt_ratio, free_cash_flow, median_hh_income_21, pct_urban_pop, current_liabilities, revenues, population) %>% 
+  select(state.name, year, debt_ratio, free_cash_flow, median_hh_income, pct_urban_pop, current_liabilities, revenues, population) %>% 
   mutate(year = as.character(year))
 
 cor_data <- states %>% 
@@ -74,7 +74,7 @@ print(monotonicity_free_cash_flow)
 #no monotonic relationship between partisan_lean and free_cash_flow. 
 
 # List of variables to analyze
-variables <- c("partisan_lean", "debt_ratio", "free_cash_flow", "median_hh_income_21", "pct_urban_pop")
+variables <- c("partisan_lean", "debt_ratio", "free_cash_flow", "median_hh_income", "pct_urban_pop")
 
 # Calculate Spearman correlations for all years combined
 data_combined <- cor_data %>%
@@ -91,8 +91,8 @@ create_summary_combined <- function(correlations, method) {
   pairs <- list(
     c("partisan_lean", "debt_ratio"),
     c("partisan_lean", "free_cash_flow"),
-    c("median_hh_income_21", "debt_ratio"),
-    c("median_hh_income_21", "free_cash_flow"),
+    c("median_hh_income", "debt_ratio"),
+    c("median_hh_income", "free_cash_flow"),
     c("pct_urban_pop", "debt_ratio"),
     c("pct_urban_pop", "free_cash_flow")
   )
@@ -152,8 +152,8 @@ create_summary <- function(correlations, method) {
   pairs <- list(
     c("partisan_lean", "debt_ratio"),
     c("partisan_lean", "free_cash_flow"),
-    c("median_hh_income_21", "debt_ratio"),
-    c("median_hh_income_21", "free_cash_flow"),
+    c("median_hh_income", "debt_ratio"),
+    c("median_hh_income", "free_cash_flow"),
     c("pct_urban_pop", "debt_ratio"),
     c("pct_urban_pop", "free_cash_flow")
   )

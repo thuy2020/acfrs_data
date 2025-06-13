@@ -28,7 +28,7 @@ state_data <- state_data |>
     total_expenses = expenses,
     urban_population = urban_pop,
     pct_urban_population = pct_urban_pop,
-    median_household_income = median_hh_income_21
+    median_household_income = median_hh_income
   ) |>
   # create net net pension and opeb liabilities
   mutate(
@@ -68,7 +68,7 @@ county_data <- county_data |>
     total_expenses = expenses,
     urban_population = urban_pop,
     pct_urban_population = pct_urban_pop,
-    median_household_income = median_hh_income_21
+    median_household_income = median_hh_income
   ) |>
   # create net net pension and opeb liabilities
   mutate(
@@ -106,7 +106,7 @@ municipal_data <- municipal_data |>
     entity_type = category,
     total_revenues = revenues,
     total_expenses = expenses,
-    median_household_income = median_hh_income_21
+    median_household_income = median_hh_income
   ) |>
   # create net net pension and opeb liabilities
   mutate(

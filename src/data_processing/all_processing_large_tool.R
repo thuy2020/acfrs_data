@@ -18,7 +18,7 @@ entity_type_data <- function(data, year = 2023) {
       total_expenses = expenses,
       urban_population = urban_pop,
       pct_urban_population = pct_urban_pop,
-      median_household_income = median_hh_income_21
+      median_household_income = median_hh_income
     ) %>% 
     mutate(across(
       c(total_assets, total_liabilities, current_assets, current_liabilities,
