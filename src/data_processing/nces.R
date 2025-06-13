@@ -19,6 +19,7 @@ df_state <- data.frame(state.abb, state.name)
 #   filter(!all(c_across(state_name_district_2022_23:state_name_district_2019_20) == first(c_across(state_name_district_2022_23:state_name_district_2019_20)))) %>%
 #   ungroup()
 
+
 nces <- import(here::here("data/ELSI_csv_export_6388370796396691352320.csv")) %>% 
   clean_names() %>% 
   select(agency_name, 

@@ -51,7 +51,6 @@ acfrs_general_purpose <- readRDS("data/acfrs_data.RDS") %>%
          geo_id = str_remove_all(geo_id, "US")) %>% 
 
 # step 4: manuall add & fix geo_id for some important cities 
-
   mutate(geo_id = case_when(id == "101868" ~ "0668000", #CA san jose city
                             id == "1266697" ~ "2255000", #LA 	new orleans city
                             id == "35652" ~ "3451000", #NJ newark city
@@ -159,14 +158,11 @@ county_acfrs <- acfrs_general_purpose %>%
                                 name == "nashville-davidson county" ~ "nashville-davidson metropolitan government",
                                 TRUE ~ name_clean)) 
 
-#count by year
-county_acfrs %>% 
-  group_by(year) %>% 
-  summarise(n = n())
 
 county_acfrs_2023 <- county_acfrs %>% filter(year == 2023)
 
-#Round 1:  join Census sumlev = 50, some of sumlev = 170 with acfr
+#####Round 1#####
+#join Census sumlev = 50, some of sumlev = 170 with acfr
 county_census_acfr_2023_round1 <- 
   
   #  3150 Census counties + few consolidated cities 
@@ -179,14 +175,13 @@ county_census_acfr_2023_round1 <-
   left_join(county_acfrs_2023, 
                             by = c("state.abb", "state.name", "name_census" = "name_clean")) 
 
-# Round 2 : 
+#####Round 2##### 
 #some counties exist in ACFR but do not get matched to census counties
 # because Census identifies these as incorporated places (sumlev= 162), not counties
 county_acfrs_2023 %>% 
   filter(!id %in% county_census_acfr_2023_round1$id) %>% View()
 
 # What are the corresponding counties of these entities? --> need to copy them to county:
-
 #--->  Solution: get these from Census to add back
 incorporated_place_census <- census_all %>% 
   filter(name_census %in% c("hartsville/trousdale county", 
@@ -200,10 +195,73 @@ county_census_acfr_2023_round2 <- incorporated_place_census %>%
   left_join(county_acfrs_2023, 
             by = c("state.abb", "state.name", "name_census" = "name_clean")) 
 
+#####Round 3#####
+# the following counties are reported in municipalities ACFR. 
+#--> mark these municipalities in ACFRs as counties too: 
+county_acfr_reported_as_muni <- acfrs_general_purpose %>% 
+  filter(id %in% c("230476",#"virginia beach", #"230476" VA county in census as "virginia beach"
+                   "230389", #norfolk", #VA county in census as: "norfolk city"
+                   "230275",#"chesapeake", #VA county in census as "chesapeake city"
+                   
+                   # MO st louis city whose geo_id is 29510 is independent city, also a county, population 300k. 
+                   #This is different from other St Louis county whose geo_id is 29189, population > 1M
+                   "44598" ,#"st louis city", #Missouri county by the same name, geo_id = 29510
+                   
+                   "33980" ,#"baltimore", #MD  baltimore county
+                   "1266545" ,#"baton rouge",# this is LA "east baton rouge parish"
+                   "1266697", #"new orleans") # this is orleans parish LA
+  
+                   "32292", #FL jacksonville = FL duval county
+                   "42714", #PA philadelphia = PA philadelphia county
+                   "33980", #MD baltimore 
+                   "115965", #KY louisville/jefferson county metro government
+                   "1267141", #TN nashville-davidson county
+                   "47298", #DC columbia
+                   "1267156" # KY "#lexington-fayette urban county  = KY fayette county geo 21067
+                   )) %>% 
+  
+  #When identify as cities, they have different geo_id --> need to get geo_id as counties to join back to county_census_acfr_2023_
+  #get these geo_id for county in census
+  
+  mutate(geo_id = case_when(id == "230476" ~ "51810", 
+                            
+                            id =="230389" ~ "51710", #norfolk", #VA county in census as: "norfolk city"
+                            id =="230275" ~ "51550",#"chesapeake", #VA county in census as "chesapeake city"
+                            
+                            # MO st louis city whose geo_id is 29510 is independent city, also a county, population 300k. 
+                            #This is different from other St Louis county whose geo_id is 29189, population > 1M
+                            id =="44598" ~ "29510",#"st louis city", #Missouri county by the same name, geo_id = 29510
+                            
+                        
+                            id =="1266545" ~ "22033",#"baton rouge",# this is LA "east baton rouge parish"
+                            id =="1266697" ~ "22071", #"new orleans") # this is orleans parish LA
+                            
+                            id == "32292" ~ "12031", #geo_id of FL duval county, equivalent to FL jacksonville
+                            id == "42714" ~ "42101", #PA philadelphia
+                            id == "33980" ~ "24510", #MD baltimore = Census lists as county by name #MD "baltimore city"
+                            id == "115965" ~ "21111", #KY louisville/jefferson county metro government = KY jefferson county
+                            id == "1267141"~ "47037", #TN nashville-davidson county = TN davidson county
+                            id == "47298" ~ "11001", #DC district of columbia
+                            
+                            id == "1267156" ~ "21067",# KY "#lexington-fayette urban county  = KY fayette county geo 21067
+                            TRUE ~ geo_id
+                            )) %>% 
+  filter(year == 2023) 
 
-# Step 3: Join result: binding 2 rounds
+county_census_acfr_2023_round3 <- census_all %>% 
+  filter(geo_id %in% county_acfr_reported_as_muni$geo_id) %>% 
+  left_join(county_acfr_reported_as_muni) %>% 
+  drop_na(id)
+
+#####Bind 3 rounds#### 
 county_census_acfr_2023_ <- rbind(county_census_acfr_2023_round1, 
                                        county_census_acfr_2023_round2) %>% 
+  
+  #remove some before binding to the counties as muni to avoid double listing
+  filter(!geo_id %in% county_acfr_reported_as_muni$geo_id) %>% 
+  
+  # bind back to round 3
+  rbind(county_census_acfr_2023_round3) %>% 
 
   #join urbanicity
   left_join(county_urb, by = "geo_id") %>% 
@@ -213,7 +271,7 @@ county_census_acfr_2023_ <- rbind(county_census_acfr_2023_round1,
   #select(all_of(fields_to_select))
 
   #append URL
-  append_url() %>% select(-identifier)
+  append_url() %>% select(-identifier) %>% distinct()
 
 
 #Total: 
@@ -223,7 +281,92 @@ nrow(incorporated_place_census) # 5 additional incoporated places into county AC
 nrow(census_all %>% filter(sumlev == 170) %>% 
        filter(!name_census %in% c("milford city", "indianapolis city"))) # 6 Consolidated city except 2
 
-# adding flag:
+#####Consolidated counties#####
+# more on consolidated city, county & county equivalent: https://www.census.gov/programs-surveys/geography/about/glossary.html#par_textimage_12
+
+# Step 1: identify consolidated / unified counties in census
+# there are 33 consolidated counties, all of which are already in county_census_acfr_2023
+census_all %>% 
+  filter(sumlev == 50) %>% 
+  filter(funcstat == "C") %>% 
+  select(state.abb, name_census, funcstat, population) %>% 
+  View()
+
+# Are they all county and municipalities ? No.
+# Counties are: marion county, echols county, city & county of butte silver bow,
+# lynchburg, moore county metropolitan government
+
+# Step 2: Identify acfrs that report both city and county. 
+#NO special treatment needed if: 
+# city and county has their own reports and both exist in census, 
+# either city or county does not exist independently in census
+
+#NOTE: 
+#1. IN marion county and Indianapolis are component units of 
+#the Consolidated City of Indianapolis—Marion County. But they have separate financial reports
+#2. KY Lexington-Fayette Urban County - Technically is not a county (sumlev = 162). Lexington city does not exist independently in census
+#3. KY louisville/jefferson county metro government.  Census does not have louisville city. #jefferson county, geo_id for county 21111
+#4. KY orleans parish does not have a report
+#5. NY 5 counties are listed in census as counties, but are incorporated NYC ACFR
+#6. #MT city & county of butte silver bow, Technically is not a county (sumlev = 170). Census does not have Butte city separate
+#7. TN lynchburg, moore county metropolitan government, - Technically is not a county (sumlev = 162). Census does not have lynchburg 
+
+consolidated_county_city_acfr <- acfrs_general_purpose %>% 
+filter(id %in% c("1266824", #AK
+                 
+                 "91930", "95986", "31609", # AK
+                 "54175", #City and County of San Francisco
+                 "1266589", # City and County of Broomfield
+                 "1266289", # City and County of denver 
+                 "32292", # the city of Jacksonville and Duval county
+                 "99786", #GA macon-bibb county
+                 "1266999", #GA cusseta-chattahoochee county
+                 "1266998",# GA athens-clarke county unified government
+                 "111293", # GA echols county
+                 "111473", # GA consolidated government of columbus-muscogee county
+                 "96522", #GA georgetown-quitman county
+                 "148608",# GAaugusta-richmond county consolidated government
+                 "96555", #GA webster county unified government
+                 "1267157", #KS greeley county unified government - Tribune city
+                 "40839", #KS wyandotte county, KS kansas city consolidated in Wyandotte County 
+                 "1267156", #KY Lexington-Fayette Urban County , Lexington city 
+                 "115965", #louisville/jefferson county metro government
+                 "40777", #anaconda-deer lodge county, deer lodge city 
+                 #"81613", #MT city & county of butte silver bow, Census does not have Butte city separate
+                 "42714", #PA philadelphia city, also a county
+                 "1267141", #TN nashville-davidson metropolitan government
+                 #"1268468", #TN lynchburg, moore county metropolitan government, Census does not have lynchburg 
+                 "1268161", #TN hartsville/trousdale county
+                  "1266998", "148608", "33244", 
+                 "1267157", "115965", "81613", "1267141"
+                 )) %>% 
+ left_join(df_state) %>% distinct() %>% select(-geo_id) 
+
+# these consolidated counties already in county_census_acfrs_2023_
+consolidated_county_city_acfr %>% filter(year == 2023) %>% 
+  filter(id %in% county_census_acfr_2023_$id) %>% 
+  View()
+
+# consolidated counties NOT in county_census_acfrs_2023_: 
+#1. IN marion county and Indianapolis are component units of 
+#the Consolidated City of Indianapolis—Marion County. But they have separate financial reports
+consolidated_county_city_acfr %>% filter(year == 2023) %>% 
+  filter(!id %in% county_census_acfr_2023_$id) %>% 
+  View()
+
+#NOTE: 
+#1. The Capitol Planning Region in Connecticut 
+#encompasses the city of Hartford, the state capital, and the city of New Britain
+#2. Massachusetts has 14 counties. While 8 of these once had active county governments, only 5 counties 
+#(Barnstable, Bristol, Dukes, Norfolk, and Plymouth) currently have functional county-level local governments
+#3. The Western Connecticut Planning Region in Connecticut includes the cities of Danbury, Norwalk, and Stamford
+#.The South Central Connecticut Planning Region includes the cities of Meriden, Milford, New Haven, and West Haven, as well as the towns of Bethany, 
+#Branford, East Haven, Guilford, Hamden, Madison, North Branford, North Haven, Orange, Wallingford, and Woodbridge. 
+# The Naugatuck Valley Planning Region in Connecticut includes the cities of Ansonia, Derby, Naugatuck, Shelton, 
+#and Waterbury, along with several other towns
+
+
+#####Adding flags####
 county_census_acfr_2023 <- county_census_acfr_2023_ %>% 
   mutate(flg_acfr = ifelse(!is.na(id), 1, 0),
          
@@ -248,99 +391,11 @@ county_census_acfr_2023 <- county_census_acfr_2023_ %>%
            TRUE ~ 0
          )) 
 
-
+#county-city-metro government: 
 county_census_acfr_2023 %>% filter(flg_muni == 1) %>% View()
-county_census_acfr_2023 %>% 
-  select(state.abb, name, flg_acfr, flg_county, flg_muni, population) %>% View()
-
-#####Consolidated counties#####
-# more on consolidated city, county & county equivalent: https://www.census.gov/programs-surveys/geography/about/glossary.html#par_textimage_12
-
-# Step 1: identify consolidated / unified counties in census
-# there are 33 consolidated counties, all of which are already in county_census_acfr_2023
-
-census_all %>% 
-  filter(sumlev == 50) %>% 
-  filter(funcstat == "C") %>% 
-  select(state.abb, name_census, funcstat, population) %>% 
-  View()
-
-# Are they all county and municipalities ? No.
-# Counties are: marion county, echols county, city & county of butte silver bow,
-# lynchburg, moore county metropolitan government
 
 
-# Step 2: Identify acfrs that report both city and county. 
-#NO special treatment needed if: 
-# city and county has their own reports and both exist in census, 
-# either city or county does not exist independently in census
-
-#NOTE: 
-#1. IN marion county and Indianapolis are component units of 
-#the Consolidated City of Indianapolis—Marion County. But they have separate financial reports
-#2. KY Lexington-Fayette Urban County - Technically is not a county (sumlev = 162). Lexington city does not exist independently in census
-#3. KY louisville/jefferson county metro government.- Technically is not a county (sumlev = 170).  Census does not have louisville city 
-#4. KY orleans parish does not have a report
-#5. NY 5 counties are listed in census as counties, but are incorporated NYC ACFR
-#6. #MT city & county of butte silver bow, Technically is not a county (sumlev = 170). Census does not have Butte city separate
-#7. TN lynchburg, moore county metropolitan government, - Technically is not a county (sumlev = 162). Census does not have lynchburg 
-
-consolidated_county_city_acfr <- acfrs_general_purpose %>% 
-filter(id %in% c("1266824", "91930", "95986", "31609", # AK
-                 "54175", #City and County of San Francisco
-                 "1266589", # City and County of Broomfield
-                  "1266289", # City and County of denver 
-                 "32292", # the city of Jacksonville and Duval county
-                 "99786", #GA macon-bibb county
-                 "1266999", #GA cusseta-chattahoochee county
-                 "1266998",# GA athens-clarke county unified government
-                 "111293", # GA echols county
-                 "111473", # GA consolidated government of columbus-muscogee county
-                 "96522", #GA georgetown-quitman county
-                 "148608",# GAaugusta-richmond county consolidated government
-                 "96555", #GA webster county unified government
-                 "1267157", #KS greeley county unified government - Tribune city
-                 "40839", #KS wyandotte county, KS kansas city consolidated in Wyandotte County 
-                 "1267156", #KY Lexington-Fayette Urban County , Lexington city 
-                 "115965", #louisville/jefferson county metro government
-                 "40777", #anaconda-deer lodge county, deer lodge city 
-                 #"81613", #MT city & county of butte silver bow, Census does not have Butte city separate
-                 "42714", #PA philadelphia city, also a county
-                 "1267141", #TN nashville-davidson metropolitan government
-                 #"1268468", #TN lynchburg, moore county metropolitan government, Census does not have lynchburg 
-                 "1268161", #TN hartsville/trousdale county
-                  "32107", "1266998", "148608", "33244", 
-                 "1267157", "115965", "81613", "1267141"
-                 )) %>% 
- left_join(df_state) %>% distinct() %>% select(-geo_id) 
-
-#TODO:
-  #Same population, but when it's identified as county, it has different geo_id. 
-  #The geo_id as a metro is different and does not contain income & urbanicity info. 
-  #Use these geo_id to get income and urbanicity. 
-  # get this county geo_id from census_county
-  # mutate(geo_id = case_when(name == "city and county of san francisco"~ "06075", 
-  #                           name == "philadelphia" ~ "42101",
-  #                           name == "city and county of honolulu" ~ "15003", 
-  #                           name == "jacksonville" ~ "12031", # Duval county geo_id
-  #                           name == "the metropolitan government of nashville and davidson county" ~ "47037",
-  #                           TRUE ~ as.character(geo_id))) 
-
-#NOTE: 
-#1. The Capitol Planning Region in Connecticut 
-#encompasses the city of Hartford, the state capital, and the city of New Britain
-#2. Massachusetts has 14 counties. While 8 of these once had active county governments, only 5 counties 
-#(Barnstable, Bristol, Dukes, Norfolk, and Plymouth) currently have functional county-level local governments
-#3. The Western Connecticut Planning Region in Connecticut includes the cities of Danbury, Norwalk, and Stamford
-#.The South Central Connecticut Planning Region includes the cities of Meriden, Milford, New Haven, and West Haven, as well as the towns of Bethany, 
-#Branford, East Haven, Guilford, Hamden, Madison, North Branford, North Haven, Orange, Wallingford, and Woodbridge. 
-# The Naugatuck Valley Planning Region in Connecticut includes the cities of Ansonia, Derby, Naugatuck, Shelton, 
-#and Waterbury, along with several other towns
-
-# MO st louis city whose geo_id is 29510 is independent city, also a county, population 300k. 
-#This is different from other St Louis county whose geo_id is 29189, population > 1M
-
-#####Missing counties#####
+#####Top100, Top300, Missing counties#####
 #missing top 100 county - none of these are real missing
 county_census_acfr_2023 %>% arrange(desc(population)) %>% 
   slice(1:100) %>% 
@@ -348,52 +403,32 @@ county_census_acfr_2023 %>% arrange(desc(population)) %>%
   View()
 
 #missing top 300:
-county_census_acfr_2023 %>% arrange(desc(population)) %>% 
+missing_top300_county <- county_census_acfr_2023 %>% arrange(desc(population)) %>% 
   slice(1:300) %>% 
-  filter(is.na(id)) %>% 
-  
-  # already in NY city : "kings county", "queens county", "bronx county",
-  #"richmond county", "new york county"
-  filter(!name_census %in% c("kings county", "queens county", "bronx county",
-                      "richmond county", "new york county")) %>% 
-  
-  #Although listed in Census, these are not functional counties: CT, RI
-  filter(!state.abb %in% c("CT", "RI")) %>% 
-  
-  # #Census count these as counties, but entities already in acfr city list, just need to copy to county
-  # "virginia beach city", "norfolk city", 
-  #                            "chesapeake city", "st louis city",
-  #                            "baltimore city", 
-  #                            "east baton rouge parish", #baton rouge", #LA
-  #                            "orleans parish" #LA new orleans city
-  
-  filter(!name_census %in% c("virginia beach city", "norfolk city", 
-                                                         "chesapeake city", "st louis city",
-                                                         "baltimore city", 
-                                                         "east baton rouge parish", #baton rouge", #LA
-                                                         "orleans parish")) %>% 
-  
-  #not functional: eg. MA"hampden county"
-  filter(funcstat != "N") %>% 
-  
-  
-  # already have in data in other name
-  
-  filter(!name_census %in% c("davidson county", "duval county", "philadelphia county",
-                             "district of columbia",
-                             "jefferson county",
-                             "fayette county"#lexington-fayette urban county
-                             )) %>% 
-  select(state.abb, name_census, population) %>% 
-  mutate(category = "county", 
-         year = 2023) -> missing_top300_county
+  filter(is.na(id)) %>%  ## These 26 counties are NOT real missing. See explanation below
 
-county_all %>% 
+  filter(!name_census %in% c("kings county", "queens county", "bronx county", ## 5 NY counties already accounted for in NY city
+                             "richmond county", "new york county")) %>%
+
+  #Although listed in Census, these are not functional counties: CT, RI
+  filter(!state.abb %in% c("CT", "RI")) %>%
+
+  #not functional: eg. MA"hampden county"
+  filter(funcstat != "N") %>%
+
+  select(state.abb, name_census, population, funcstat) %>%
+  mutate(category = "county",
+         year = 2023)
+# 9 counties TRUE missing as of June 13, 2025
+
+missing_top300_county %>% View()
+
+#count by year
+county_acfrs %>% 
   group_by(year) %>% 
   summarise(n = n())
 
-county_all %>% 
-  group_by(year) %>% 
+county_census_acfr_2023 %>% 
   summarise(tot = sum(population, na.rm = TRUE))
 
 # all counties that do not have acfr:
@@ -401,20 +436,11 @@ county_census_acfr_2023_ %>%
   filter(is.na(id)) %>% 
   View()
 
-acfrs_general_purpose %>% 
-  filter(name %in% c("230476", #"virginia beach",
-                     "norfolk city", 
-                     "chesapeake city", "st louis city",
-                     "baltimore city", 
-                     "east baton rouge parish", #baton rouge", #LA
-                     "orleans parish")) %>% View()
-
 #write.csv(top100_counties, "output/top100_counties.csv")
 # save file
 #write.csv(county_all, "output/all_counties_2020_2023.csv")
 
 #####Final result counties####
-
 county_census_acfr_2023 %>% 
   write.csv(file = paste0("output/all_counties_2023_", format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
 
@@ -526,7 +552,7 @@ muni_population %>%
 
 special_cities <- acfrs_general_purpose %>% 
   # get geo id in these cities --> from there get income & census data
-  filter(id %in% c("101868", "1266697", "1266289", "149470")) %>% View()
+  filter(id %in% c("101868", "1266697", "1266289", "149470")) %>% 
   mutate(geo_id = case_when(id == "101868" ~ "0668000", # san jose CA
                             id == "1266697" ~ "2255000", # new orleans LA
                             id == "1266289" ~ "0820000",# CO denver county, also denver city
@@ -559,7 +585,6 @@ municipality_all_2023 <- municipality_all %>% filter(year == 2023)
 municipality_all_2023 %>% filter(is.na(geo_id)) %>% View()
 
 #population coverage of municipalities acfr/ census
-
 (municipality_all_2023 %>% select(state.abb, name, population) %>% distinct() %>% 
     summarise(tot= sum(population, na.rm = TRUE))) /
   
@@ -582,10 +607,10 @@ anti_join(census_city_top100, municipality_all_2023, by = "geo_id") %>%
   filter(!name_census %in% c("san francisco city", "philadelphia city", 
                              "jacksonville city", "denver city")) %>% 
   View()
-######Top300 cities & flag#####
 
+######Top300 cities & flag#####
 top300_cities_2023 <- census_city_top300 %>% 
-  left_join(acfrs_general_purpose_2023, by = c("geo_id", "state.abb")) %>% 
+  left_join(acfrs_general_purpose %>% filter(year == 2023), by = c("geo_id", "state.abb")) %>% 
               distinct() %>% 
   
   mutate(flg_acfr = if_else(is.na(id), 0, 1)) %>% 
@@ -593,7 +618,17 @@ top300_cities_2023 <- census_city_top300 %>%
   
   #mark those are also county
   mutate(flg_county = case_when(id %in% c("1266289", "42714", "54175", "32292") ~ 1,
-                                 TRUE ~ 0)) 
+                                 TRUE ~ 0)) %>% 
+  
+  #
+  mutate(name = ifelse(is.na(name), name_census, name),
+         name = str_remove(name, "city$"))
+
+#check those county-muni
+top300_cities_2023 %>% 
+  select(state.abb, name, name_census, flg_acfr, flg_county, flg_muni) %>% 
+  View()
+
 
 #missing cities in top 300  
 missing_top300_cities_2023 <- top300_cities_2023 %>% 

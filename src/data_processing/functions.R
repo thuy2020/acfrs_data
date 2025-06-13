@@ -253,56 +253,56 @@ compare_latest_csv_versions <- function(folder = "output",
 
 
 ####Fuzzy match dictionary####
-normalize_name <- function(name) {
-  name %>%
-    tolower() %>%
-    gsub("school district", "", .) %>%
-    gsub("elem", "elementary", .) %>%
-    gsub("no\\.?|districts?|schools?|public|and", "", .) %>%
-    gsub("[^a-z0-9 ]", "", .) %>%
-    trimws()
-}
-
-acfr_as_missing_ncesID <- school_districts_all %>% 
-  select(state.abb, state.name, name, id, ncesID) %>% 
-  filter(is.na(ncesID)) %>% distinct() 
-
-acfr_as_missing_ncesID_normalized <- acfr_as_missing_ncesID %>%
-  mutate(name_clean = normalize_name(name))
-
-nces_normalized <- nces %>%
-  #padding a leading 0, ncesID should have 7 digit
-  mutate(ncesID = sprintf("%07s", as.character(ncesID))) %>% 
-  
-  mutate(name_clean = normalize_name(name_nces))
-
-# Match within state to improve accuracy ---
-match_within_state <- function(state_df, nces_df) {
-  dist_matrix <- stringdistmatrix(state_df$name_clean, nces_df$name_clean, method = "jw")
-  best_match_index <- apply(dist_matrix, 1, which.min)
-  
-  matched_nces <- nces_df[best_match_index, ]
-  
-  state_df %>%
-    mutate(
-      filled_ncesID = nces_df$ncesID[best_match_index],
-      matched_name_nces = nces_df$name_nces[best_match_index],
-      state_agency_id = matched_nces$state_agency_id,
-      county_nces = matched_nces$county_nces,
-      match_score = mapply(function(i, j) dist_matrix[i, j], 
-                           seq_along(best_match_index), best_match_index)
-    )
-}
-
-# --- 5. Apply fuzzy match by state ---
-matched_all_states <- acfr_as_missing_ncesID_normalized %>%
-  group_split(state.abb) %>%
-  purrr::map_dfr(function(state_group) {
-    state_abbr <- unique(state_group$state.abb)
-    
-    nces_state <- filter(nces_normalized, state.abb == state_abbr)
-    match_within_state(state_group, nces_state)
-  })
+# normalize_name <- function(name) {
+#   name %>%
+#     tolower() %>%
+#     gsub("school district", "", .) %>%
+#     gsub("elem", "elementary", .) %>%
+#     gsub("no\\.?|districts?|schools?|public|and", "", .) %>%
+#     gsub("[^a-z0-9 ]", "", .) %>%
+#     trimws()
+# }
+# 
+# acfr_as_missing_ncesID <- school_districts_all %>% 
+#   select(state.abb, state.name, name, id, ncesID) %>% 
+#   filter(is.na(ncesID)) %>% distinct() 
+# 
+# acfr_as_missing_ncesID_normalized <- acfr_as_missing_ncesID %>%
+#   mutate(name_clean = normalize_name(name))
+# 
+# nces_normalized <- nces %>%
+#   #padding a leading 0, ncesID should have 7 digit
+#   mutate(ncesID = sprintf("%07s", as.character(ncesID))) %>% 
+#   
+#   mutate(name_clean = normalize_name(name_nces))
+# 
+# # Match within state to improve accuracy ---
+# match_within_state <- function(state_df, nces_df) {
+#   dist_matrix <- stringdistmatrix(state_df$name_clean, nces_df$name_clean, method = "jw")
+#   best_match_index <- apply(dist_matrix, 1, which.min)
+#   
+#   matched_nces <- nces_df[best_match_index, ]
+#   
+#   state_df %>%
+#     mutate(
+#       filled_ncesID = nces_df$ncesID[best_match_index],
+#       matched_name_nces = nces_df$name_nces[best_match_index],
+#       state_agency_id = matched_nces$state_agency_id,
+#       county_nces = matched_nces$county_nces,
+#       match_score = mapply(function(i, j) dist_matrix[i, j], 
+#                            seq_along(best_match_index), best_match_index)
+#     )
+# }
+# 
+# # --- 5. Apply fuzzy match by state ---
+# matched_all_states <- acfr_as_missing_ncesID_normalized %>%
+#   group_split(state.abb) %>%
+#   purrr::map_dfr(function(state_group) {
+#     state_abbr <- unique(state_group$state.abb)
+#     
+#     nces_state <- filter(nces_normalized, state.abb == state_abbr)
+#     match_within_state(state_group, nces_state)
+#   })
 
 
 # matched_all_states %>% 
@@ -318,20 +318,4 @@ matched_all_states <- acfr_as_missing_ncesID_normalized %>%
   
   # write.csv("tmp/dictionary_fuzzy_match1.csv")
   
-  
-  # keep only new matches and strong ones ---
-#   strong_matches <- matched_all_states %>%
-#   filter(match_score < 0.15) 
-# !is.na(ncesID) & 
-#   #need to treat Montana separately
-#   filter(state.abb != "MT") %>% 
-#   
-#   # fix some error
-#   filter(name != "oakes public schools") %>% 
-#   mutate(filled_ncesID = case_when(name == "fremont county school district no. 25"
-#                                    ~ "5605220",
-#                                    
-#                                    TRUE ~ as.character(filled_ncesID))) %>% 
-#   select(-ncesID) %>% 
-#   rename(ncesID = filled_ncesID) %>% 
-#   select(id, ncesID, state.abb, name)
+
