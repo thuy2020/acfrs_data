@@ -116,6 +116,10 @@ state_all %>%
 state_all %>% write.csv("output/all_states_2020_2023.csv")
 
 state_all %>% 
+  group_by(year) %>% 
+  summarise(tot = sum(population))
+
+state_all %>% 
   filter(year == 2023) %>% 
   write.csv(file = paste0("output/all_states_2023_", format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
 
@@ -163,7 +167,10 @@ county_acfrs %>%
 county_acfrs_2023 <- county_acfrs %>% filter(year == 2023)
 
 #Round 1:  join Census sumlev = 50, some of sumlev = 170 with acfr
-county_census_acfr_2023_round1 <- (census_all %>% 
+county_census_acfr_2023_round1 <- 
+  
+  #  3150 Census counties + few consolidated cities 
+  (census_all %>%  
   filter(sumlev %in% c(50, 170)) %>% 
   filter(!name_census %in% c("milford city", "indianapolis city")) # these are 170, but not a county
 )  %>% 
@@ -172,12 +179,15 @@ county_census_acfr_2023_round1 <- (census_all %>%
   left_join(county_acfrs_2023, 
                             by = c("state.abb", "state.name", "name_census" = "name_clean")) 
 
+# Round 2 : 
 #some counties exist in ACFR but do not get matched to census counties
 # because Census identifies these as incorporated places (sumlev= 162), not counties
 county_acfrs_2023 %>% 
   filter(!id %in% county_census_acfr_2023_round1$id) %>% View()
 
-# Round 2 - Solution: get these from Census to add back
+# What are the corresponding counties of these entities? --> need to copy them to county:
+
+#--->  Solution: get these from Census to add back
 incorporated_place_census <- census_all %>% 
   filter(name_census %in% c("hartsville/trousdale county", 
                             "lexington-fayette urban county", 
@@ -191,7 +201,7 @@ county_census_acfr_2023_round2 <- incorporated_place_census %>%
             by = c("state.abb", "state.name", "name_census" = "name_clean")) 
 
 
-# Join result: binding 2 rounds
+# Step 3: Join result: binding 2 rounds
 county_census_acfr_2023_ <- rbind(county_census_acfr_2023_round1, 
                                        county_census_acfr_2023_round2) %>% 
 
@@ -207,65 +217,58 @@ county_census_acfr_2023_ <- rbind(county_census_acfr_2023_round1,
 
 
 #Total: 
-nrow(county_census_acfr_2023_) #3155 entities in county file
-nrow(census_all %>% filter(sumlev == 50)) #3144 counties
+nrow(county_census_acfr_2023_) #3155 entities in county file, including:
+nrow(census_all %>% filter(sumlev == 50)) #3144 counties in original census
+nrow(incorporated_place_census) # 5 additional incoporated places into county ACFR, sumlev == 162
 nrow(census_all %>% filter(sumlev == 170) %>% 
        filter(!name_census %in% c("milford city", "indianapolis city"))) # 6 Consolidated city except 2
-nrow(incorporated_place_census) # 5 additional incoporated places into county ACFR, sumlev == 162
+
+# adding flag:
+county_census_acfr_2023 <- county_census_acfr_2023_ %>% 
+  mutate(flg_acfr = ifelse(!is.na(id), 1, 0),
+         
+         #some listed in Census as muni, but should also counted as county to display in acfr tool
+         flg_county = case_when(
+           name %in% c("city & county of butte silver bow") ~ 1, #acfr: 
+           sumlev == 50 ~ 1,
+           TRUE ~ 0
+         ),
+         
+         # identify some counties also as city:
+         # but not all sumleve == 50 & funcstat == "C" need to be flagged as city in the tool, 
+         #because the cities have their own acfr report
+         
+         # Census counts as county, but NOT as Municipalities are --> flg_muni = 0 
+         flg_muni = case_when(
+           name %in% c("marion county", "echols county", "city & county of butte silver bow", 
+                       "lynchburg, moore county metropolitan government",
+                       "louisville/jefferson county metro government") ~ 0,  # override specific cases first
+           sumlev %in% c(170, 162) ~ 1,
+           sumlev == 50 & funcstat == "C" ~ 1,
+           TRUE ~ 0
+         )) 
 
 
-# counties do not have acfr:
-county_census_acfr_2023_ %>% 
-  filter(is.na(id)) %>% 
-    View()
+county_census_acfr_2023 %>% filter(flg_muni == 1) %>% View()
+county_census_acfr_2023 %>% 
+  select(state.abb, name, flg_acfr, flg_county, flg_muni, population) %>% View()
 
-#####Consolidated government#####
+#####Consolidated counties#####
 # more on consolidated city, county & county equivalent: https://www.census.gov/programs-surveys/geography/about/glossary.html#par_textimage_12
 
 # Step 1: identify consolidated / unified counties in census
 # there are 33 consolidated counties, all of which are already in county_census_acfr_2023
 
-county_census_acfr_2023 %>% filter(funcstat == "C") %>% 
-  select(state.abb, name_census, flg_county, flg_muni, funcstat, population) %>% 
+census_all %>% 
+  filter(sumlev == 50) %>% 
+  filter(funcstat == "C") %>% 
+  select(state.abb, name_census, funcstat, population) %>% 
   View()
 
 # Are they all county and municipalities ? No.
-# Counties are
-
-# marion county, echols county, city & county of butte silver bow,
+# Counties are: marion county, echols county, city & county of butte silver bow,
 # lynchburg, moore county metropolitan government
 
-
-county_census_acfr_2023 <- county_census_acfr_2023_ %>% 
-# adding flag:
-mutate(flg_acfr = ifelse(!is.na(id), 1, 0),
-       
-       #some listed in Census as muni, but should also counted as county to display in acfr tool
-       flg_county = case_when(
-         name %in% c("city & county of butte silver bow") ~ 1, #acfr: 
-         sumlev == 50 ~ 1,
-         TRUE ~ 0
-       ),
-         
-       # identify some counties also as city:
-       # but not all sumleve == 50 & funcstat == "C" need to be flagged as city in the tool, 
-       #because the cities have their own acfr report
-       
-       # Census counts as county, but NOT as Municipalities are --> flg_muni = 0 
-       flg_muni = case_when(
-         name %in% c("marion county", "echols county", "city & county of butte silver bow", 
-                     "lynchburg, moore county metropolitan government",
-                     "louisville/jefferson county metro government") ~ 0,  # override specific cases first
-         sumlev %in% c(170, 162) ~ 1,
-         sumlev == 50 & funcstat == "C" ~ 1,
-        
-         TRUE ~ 0
-       )) 
-  
-
-county_census_acfr_2023 %>% filter(flg_muni == 1) %>% View()
-
-county_census_acfr_2023 %>% select(state.abb, name, flg_acfr, flg_county, flg_muni, population) %>% View()
 
 # Step 2: Identify acfrs that report both city and county. 
 #NO special treatment needed if: 
@@ -337,24 +340,66 @@ filter(id %in% c("1266824", "91930", "95986", "31609", # AK
 # MO st louis city whose geo_id is 29510 is independent city, also a county, population 300k. 
 #This is different from other St Louis county whose geo_id is 29189, population > 1M
 
-# missing top 100 county - none of these are real missing
+#####Missing counties#####
+#missing top 100 county - none of these are real missing
 county_census_acfr_2023 %>% arrange(desc(population)) %>% 
   slice(1:100) %>% 
   filter(is.na(id)) %>% 
   View()
-  #Although listed in Census, these are not functional counties: CT, RI
+
+#missing top 300:
+county_census_acfr_2023 %>% arrange(desc(population)) %>% 
+  slice(1:300) %>% 
+  filter(is.na(id)) %>% 
+  
   # already in NY city : "kings county", "queens county", "bronx county",
-   #"richmond county", "new york county"
-#MA, not functional: "hampden county"
+  #"richmond county", "new york county"
+  filter(!name_census %in% c("kings county", "queens county", "bronx county",
+                      "richmond county", "new york county")) %>% 
+  
+  #Although listed in Census, these are not functional counties: CT, RI
+  filter(!state.abb %in% c("CT", "RI")) %>% 
+  
+  # #Census count these as counties, but entities already in acfr city list, just need to copy to county
+  # "virginia beach city", "norfolk city", 
+  #                            "chesapeake city", "st louis city",
+  #                            "baltimore city", 
+  #                            "east baton rouge parish", #baton rouge", #LA
+  #                            "orleans parish" #LA new orleans city
+  
+  filter(!name_census %in% c("virginia beach city", "norfolk city", 
+                                                         "chesapeake city", "st louis city",
+                                                         "baltimore city", 
+                                                         "east baton rouge parish", #baton rouge", #LA
+                                                         "orleans parish")) %>% 
+  
+  #not functional: eg. MA"hampden county"
+  filter(funcstat != "N") %>% 
+  
+  
+  # already have in data in other name
+  
+  filter(!name_census %in% c("davidson county", "duval county", "philadelphia county",
+                             "district of columbia",
+                             "jefferson county",
+                             "fayette county"#lexington-fayette urban county
+                             )) %>% 
+  select(state.abb, name_census, population) %>% 
+  mutate(category = "county", 
+         year = 2023) -> missing_top300_county
 
-# #Census count these as counties, but entities already in acfr city list, just need to copy to county
-# "virginia beach city", "norfolk city", 
-#                            "chesapeake city", "st louis city",
-#                            "baltimore city", 
-#                            "east baton rouge parish", #baton rouge", #LA
-#                            "orleans parish" #LA new orleans city
+county_all %>% 
+  group_by(year) %>% 
+  summarise(n = n())
 
-county_all <- county_census_acfr_2023
+county_all %>% 
+  group_by(year) %>% 
+  summarise(tot = sum(population, na.rm = TRUE))
+
+# all counties that do not have acfr:
+county_census_acfr_2023_ %>% 
+  filter(is.na(id)) %>% 
+  View()
 
 acfrs_general_purpose %>% 
   filter(name %in% c("230476", #"virginia beach",
@@ -364,17 +409,11 @@ acfrs_general_purpose %>%
                      "east baton rouge parish", #baton rouge", #LA
                      "orleans parish")) %>% View()
 
-#missing top 300:
-county_census_acfr_2023 %>% arrange(desc(population)) %>% 
-  slice(1:300) %>% 
-  filter(is.na(id)) %>% 
-  View()
-
-# TODO: need to copy other city to county list
-
 #write.csv(top100_counties, "output/top100_counties.csv")
 # save file
 #write.csv(county_all, "output/all_counties_2020_2023.csv")
+
+#####Final result counties####
 
 county_census_acfr_2023 %>% 
   write.csv(file = paste0("output/all_counties_2023_", format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
@@ -387,6 +426,10 @@ compare_latest_csv_versions(
 
 ####Municipalities####
 # Census calls Incorporated Place & Minor Civil Division
+
+#####Joining ACFRs muni & census#####
+#Step 1: get ACFRs municipalities
+
 municipality_acfrs_ <- acfrs_general_purpose %>% 
   # exclude state and county
   filter(!id %in% state_all$id) %>% 
@@ -395,17 +438,23 @@ municipality_acfrs_ <- acfrs_general_purpose %>%
   # get income, only 634 entities has income info
   left_join(city_income) 
   
+#TODO: check for more more updated income
+
 nrow(municipality_acfrs_ %>% filter(year == 2023))
 
-# Join with census_municipalities using geo_id
+#Step 2: Join with census_municipalities using geo_id
+
 municipality_all_ <- municipality_acfrs_ %>% 
   #select(state.abb, state.name, name, id, geo_id, year) %>% 
   left_join(census_all %>% filter(!is.na(geo_id)), by= c("geo_id", "state.abb", "state.name"))  
 
-nrow(municipality_all_ %>% filter(year == 2023))
+
+#####Get population in those missing#####
+#check missing population
+nrow(municipality_all_ %>% filter(is.na(population)))
 nrow(municipality_all_ %>% filter(year == 2023) %>% filter(is.na(population)))
 
-#phase 1: join by geo_id
+#phase 1: already got population after using join by geo_id above
 muni_phase1 <- municipality_all_ %>% 
   filter(!is.na(population))
 
@@ -473,13 +522,11 @@ muni_population %>%
   group_by(year) %>% 
   summarise(tot = sum(population, na.rm = TRUE))
 
-sum(muni_population$population, na.rm = TRUE)
+#phase 4: 
 
-
-##Special cities##
 special_cities <- acfrs_general_purpose %>% 
   # get geo id in these cities --> from there get income & census data
-  filter(id %in% c("101868", "1266697", "1266289", "149470")) %>% 
+  filter(id %in% c("101868", "1266697", "1266289", "149470")) %>% View()
   mutate(geo_id = case_when(id == "101868" ~ "0668000", # san jose CA
                             id == "1266697" ~ "2255000", # new orleans LA
                             id == "1266289" ~ "0820000",# CO denver county, also denver city
@@ -505,24 +552,29 @@ municipality_all %>% filter(year == 2023) %>%
   filter(is.na(population)) %>% 
   View()
 
-
+#####Result muni#####
 municipality_all_2023 <- municipality_all %>% filter(year == 2023)
-acfrs_general_purpose_2023 <- acfrs_general_purpose %>% filter(year == 2023)
 
+#still some muni without geo_id
 municipality_all_2023 %>% filter(is.na(geo_id)) %>% View()
 
+#population coverage of municipalities acfr/ census
 
-census_municipalities %>% 
-  summarise(tot = sum(population, na.rm = TRUE))
-
-municipality_all_2023 %>% select(state.abb, name, population) %>% distinct() %>% 
-  summarise(tot= sum(population, na.rm = TRUE))
-  nrow()
+(municipality_all_2023 %>% select(state.abb, name, population) %>% distinct() %>% 
+    summarise(tot= sum(population, na.rm = TRUE))) /
   
+(census_municipalities %>% 
+  summarise(tot = sum(population, na.rm = TRUE)))
+
 municipality_all %>% 
   group_by(year) %>% 
   summarise(n = n())
 
+municipality_all %>% 
+  group_by(year) %>% 
+  summarise(tot = sum(population, na.rm = TRUE))
+
+######Top and missing#####
 #Top 100 cities
 anti_join(census_city_top100, municipality_all_2023, by = "geo_id") %>% 
   
@@ -530,21 +582,8 @@ anti_join(census_city_top100, municipality_all_2023, by = "geo_id") %>%
   filter(!name_census %in% c("san francisco city", "philadelphia city", 
                              "jacksonville city", "denver city")) %>% 
   View()
+######Top300 cities & flag#####
 
-
-#Top 300 cities
-anti_join(census_city_top300, municipality_all_2023, by = "geo_id") %>% 
-  
-  #consolidated with county, just need to copy to city list
-  filter(!name_census %in% c("san francisco city", "philadelphia city", 
-                             "jacksonville city", "denver city", 
-                             "columbus city", #Consolidated Government of Columbus-muscogee county
-                            "kansas city city") #KS wyandotte county, KS kansas city consolidated in Wyandotte County 
-
-        ) %>% 
-  View()
-
-#make a list of top300 cities
 top300_cities_2023 <- census_city_top300 %>% 
   left_join(acfrs_general_purpose_2023, by = c("geo_id", "state.abb")) %>% 
               distinct() %>% 
@@ -560,6 +599,23 @@ top300_cities_2023 <- census_city_top300 %>%
 missing_top300_cities_2023 <- top300_cities_2023 %>% 
   filter(is.na(id)) 
 
+
+anti_join(census_city_top300, municipality_all_2023, by = "geo_id") %>% 
+  #consolidated with county, just need to copy to city list
+  filter(!name_census %in% c("san francisco city", "philadelphia city", 
+                             "jacksonville city", "denver city", 
+                             "columbus city", #Consolidated Government of Columbus-muscogee county
+                             "kansas city city") #KS wyandotte county, KS kansas city consolidated in Wyandotte County 
+         
+  ) %>% View()
+  
+  # this part to display in progress report app:
+  # mutate(year = 2023,
+  #        category = "municipality") %>% 
+  # select(-c(geo_id)) -> missing_top300_muni
+
+#####Final result muni#####
+
 top300_cities_2023 %>% 
   write.csv("output/top300_cities_2023.csv")
 
@@ -572,6 +628,7 @@ compare_latest_csv_versions(
   prefix = "all_municipalities_2023",
   output_excel = "output/municipalities_changes_report.xlsx"
 )
+
 
 ####School districts####
 dictionary <- readRDS("data/dictionary.RDS") 
@@ -604,9 +661,16 @@ bind_2df_different_size(school_districts_, exceptions) %>%
 # Save with time stamp 
 school_districts_all %>% write.csv("output/school_districts_all_2020_2023.csv")
 
+school_districts_all %>% 
+  group_by(year) %>% 
+  summarise(n = n())
+
+school_districts_all %>% 
+  group_by(year) %>% 
+  summarise(tot = sum(enrollment_23, na.rm = TRUE))
+  
 # 
 school_districts_2023 <- school_districts_all %>% filter(year == 2023) 
-nrow(school_districts_2023)
 
 
 #########
@@ -617,13 +681,17 @@ nces %>%
   summarise(tot = sum(enrollment_23, na.rm = TRUE))
 
 school_districts_2023 %>% 
-  write.csv(file = paste0("output/all_schooldistricts_2023_", format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
+  write.csv(file = paste0("output/all_schooldistricts_2023_", 
+                          format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
 
 school_districts_2023 %>% 
   filter(ncesID %in% sd_top300_nces$ncesID) %>% View()
 
+# all of these are uploaded. Hgarb are checking. June 9
 sd_top300_nces %>% 
-  filter(!ncesID %in% school_districts_2023$ncesID) %>% View()
+  filter(!ncesID %in% school_districts_2023$ncesID) %>%
+  filter(name_nces != "detroit public schools community district") %>% 
+  View()
 
 # TODO: some MT acfr report include more than 1 school districts. Need to treat MT separately 
 
@@ -644,6 +712,23 @@ compare_latest_csv_versions(
   output_excel = "output/schooldistrict_changes_report.xlsx"
 )
 
+####Missing top300####
+# this file is for displaying status on progress app
+#missing state
+state_2023 <- state_all %>% filter(year == 2023)
+census_all %>% filter(sumlev == 40) %>% 
+  select(state.abb, population, name_census) %>% 
+  mutate(category = "state", 
+         year = 2023) %>% 
+  filter(!state.abb %in% state_2023$state.abb) %>% 
+  filter(state.abb != "DC") -> missing_top300_state
+
+#bind all
+rbind(missing_top300_state,
+      missing_top300_muni,
+      missing_top300_county) %>% 
+  rename(state_abbreviation = state.abb,
+         name = name_census) #%>% write.csv("tmp/missing_top300.csv")
 
 ####Entity ID####
 state_gov %>% select(state.name, state.abb, name, id) %>% distinct() %>% 

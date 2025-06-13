@@ -2,6 +2,7 @@ library(dplyr)
 library(stringr)
 library(rio)
 library(tidyr)
+library(purrr)
 source("src/data_processing/census.R")
 source("src/data_processing/nces.R")
 source("src/data_processing/functions.R")
@@ -82,10 +83,46 @@ boston_public_schools <- import("data/_apportion values.xlsx", sheet = 2, skip =
   mutate(id = "boston")
 
 
-exceptions <-  bind_2df_different_size(nyc_sd, boston_public_schools) %>% 
+NYC_Boston <-  bind_2df_different_size(nyc_sd, boston_public_schools) %>% 
   
   #join all exceptions with ncesID
   left_join(nces, by = c("ncesID", "state.name", "state.abb"),
                          suffix = c("", "")) %>% 
   mutate(name = ifelse(state.abb == "NY", name_nces, name))
   
+#####Delaware#####
+#p.53-54
+#State of Delaware are financially responsible for Delaware Charter schools
+
+delaware_schools <- readxl::read_xlsx("data/_delaware_schooldistricts.xlsx")
+
+# Compute percent enrollment and apply it to all relevant columns
+nces_de <- nces %>%
+  filter(state.abb == "DE") %>%
+  filter(!ncesID %in% c("1000022", "1000020", "1000021")) %>%
+  mutate(percent_enrollment = enrollment_23 / sum(enrollment_23)) 
+
+# Get the relevant columns to be distributed (columns 2 to 10)
+columns_to_distribute <- names(delaware_schools)[5:17]
+
+# Multiply each column by percent_enrollment
+weighted_data <- map_dfc(columns_to_distribute, function(col) {
+  weighted_col <- delaware_schools[[col]] * nces_de$percent_enrollment
+  tibble(!!col := weighted_col)
+})
+
+# Combine the result
+final_data_DE <- bind_cols(nces_de, weighted_data) %>% 
+  mutate(across(10:27, as.numeric)) %>% 
+  rowwise() %>% 
+  mutate(
+    revenues = sum(charge_services + grant_capital + general_revenues)) %>% 
+  select(-c(charge_services, grant_capital, general_revenues)) %>% 
+  # create dummy id
+  mutate(id = state_agency_id) %>% 
+  
+  mutate(year = 2023,
+         name = name_nces) %>% 
+  ungroup()
+
+exceptions <- bind_2df_different_size(NYC_Boston, final_data_DE) 

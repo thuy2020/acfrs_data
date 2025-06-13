@@ -305,34 +305,33 @@ matched_all_states <- acfr_as_missing_ncesID_normalized %>%
   })
 
 
-matched_all_states %>% 
-  mutate(ncesID = filled_ncesID) %>% 
-  select(state.abb, state.name, id, ncesID, name, name_clean, matched_name_nces, county_nces, match_score, state_agency_id) %>% 
-  #exclusing Montatna - need to treat separately because school district acfr  include mutiple school districts as define in NCES. 
-  # example: whitehall public schools id = 296174 includes both whitehall elem (ncesID 3027810) + whitehall h s (ncesID 3027840)
-  
-  filter(state.abb == "MT") %>% 
-  
-  arrange(match_score) %>% 
+# matched_all_states %>% 
+#   mutate(ncesID = filled_ncesID) %>% 
+#   select(state.abb, state.name, id, ncesID, name, name_clean, matched_name_nces, county_nces, match_score, state_agency_id) %>% 
+#   #exclusing Montatna - need to treat separately because school district acfr  include mutiple school districts as define in NCES. 
+#   # example: whitehall public schools id = 296174 includes both whitehall elem (ncesID 3027810) + whitehall h s (ncesID 3027840)
+#   
+#   filter(state.abb == "MT") %>% 
+#   
+#   arrange(match_score)
   #write_xlsx("tmp/sd_montana.xlsx")
   
   # write.csv("tmp/dictionary_fuzzy_match1.csv")
   
   
   # keep only new matches and strong ones ---
-  strong_matches <- matched_all_states %>%
-  filter(match_score < 0.15) 
-!is.na(ncesID) & 
-  #need to treat Montana separately
-  filter(state.abb != "MT") %>% 
-  
-  # fix some error
-  filter(name != "oakes public schools") %>% 
-  mutate(filled_ncesID = case_when(name == "fremont county school district no. 25"
-                                   ~ "5605220",
-                                   
-                                   TRUE ~ as.character(filled_ncesID))) %>% 
-  select(-ncesID) %>% 
-  
-  rename(ncesID = filled_ncesID) %>% 
-  select(id, ncesID, state.abb, name)
+#   strong_matches <- matched_all_states %>%
+#   filter(match_score < 0.15) 
+# !is.na(ncesID) & 
+#   #need to treat Montana separately
+#   filter(state.abb != "MT") %>% 
+#   
+#   # fix some error
+#   filter(name != "oakes public schools") %>% 
+#   mutate(filled_ncesID = case_when(name == "fremont county school district no. 25"
+#                                    ~ "5605220",
+#                                    
+#                                    TRUE ~ as.character(filled_ncesID))) %>% 
+#   select(-ncesID) %>% 
+#   rename(ncesID = filled_ncesID) %>% 
+#   select(id, ncesID, state.abb, name)

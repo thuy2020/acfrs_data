@@ -67,6 +67,7 @@ test1_result_allyears %>% write.csv("tmp/test1_result_allyears.csv")
 test1_2023 <- test1_result_allyears %>% filter(year == 2023) 
 View(test1_2023)
 
+test1_2023 %>% write.csv("tmp/test1.csv")
 ####Test 2####
 # total_liabilities GREATER THAN total_assets
 # total liabilities can sometimes be greater than total assets, but those cases are generally anomalies, 
@@ -113,7 +114,7 @@ test2_2023 <- rbind(test2_state_all,
                     test2_school_districts_all) %>% filter(year == 2023)
 
 View(test2_2023)
-#test2 %>% write.csv("tmp/test2.csv")
+#test2_2023 %>% write.csv("tmp/test2.csv")
 
 ####Test 3####
 # Are revenues +/- 20% of expenditures? Generally, a government will spend up to their revenues but they can't 
@@ -167,7 +168,7 @@ test3_2023 %>% View()
 # )
 
 
-#test3 %>% write.csv("tmp/test3.csv")
+#test3_2023 %>% write.csv("tmp/test3.csv")
 
 ####Test4####
 #Calculate percentage changes between years in all data fields and flag out big values. 
