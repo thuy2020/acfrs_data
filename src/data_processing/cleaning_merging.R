@@ -90,14 +90,14 @@ acfrs_state <- acfrs_general_purpose %>%
 # Joining acfrs states & census states: state_gov_2020
 state_gov <- acfrs_state %>% select(-geo_id) %>% 
   left_join(census_state, by = c("state.abb")) %>% 
-  select(-government_id) %>% 
-  
-  #fix geo_id to join with other data later
-  mutate(geo_id = case_when((nchar(geo_id) == 1) ~ paste0("0", geo_id, "000"),
-                            (nchar(geo_id) == 2) ~ paste0(geo_id, "000"),
-                            (nchar(geo_id) == 3) ~ paste0(geo_id, "00"),
-                            (nchar(geo_id) == 4) ~ paste0(geo_id, "0"),
-                            TRUE ~ as.character(geo_id)))
+  select(-government_id) 
+  # 
+  # #fix geo_id to join with other data later
+  # mutate(geo_id = case_when((nchar(geo_id) == 1) ~ paste0("0", geo_id, "000"),
+  #                           (nchar(geo_id) == 2) ~ paste0(geo_id, "000"),
+  #                           (nchar(geo_id) == 3) ~ paste0(geo_id, "00"),
+  #                           (nchar(geo_id) == 4) ~ paste0(geo_id, "0"),
+  #                           TRUE ~ as.character(geo_id)))
 
 state_gov_4years <- state_gov %>% 
   left_join(state_county_income) %>% 
@@ -189,7 +189,7 @@ incorporated_place_census <- census_all %>%
                      "lynchburg, moore county metropolitan government", 
                      "georgetown-quitman county unified government", 
                      "anaconda-deer lodge county")) %>% drop_na(geo_id)
-
+                    #quitman county already in county_census_acfr_2023_round1
 
 county_census_acfr_2023_round2 <- incorporated_place_census %>% 
   left_join(county_acfrs_2023, 
@@ -433,6 +433,18 @@ county_census_acfr_2023 %>%
 # all counties that do not have acfr:
 county_census_acfr_2023_ %>% 
   filter(is.na(id)) %>% 
+  
+  #does not count these non-functional counties
+  
+  filter(!name_census %in% c("kings county", "queens county", "bronx county", ## 5 NY counties already accounted for in NY city
+                             "richmond county", "new york county")) %>%
+  
+  #Although listed in Census, these are not functional counties: CT, RI
+  filter(!state.abb %in% c("CT", "RI")) %>% 
+  
+  #not functional: eg. MA"hampden county"
+  filter(funcstat != "N") %>%
+  
   #writexl::write_xlsx(paste0("tmp/missing_county_2023_", format(Sys.time(), "%Y%m%d_%H%M"), ".xlsx"))
   View()
 
@@ -467,10 +479,6 @@ municipality_acfrs_ <- acfrs_general_purpose %>%
   # get income, only about 500 entities has income info
   left_join(city_income) 
 
-
-#Check those do NOTE have income data
-#TODO: 
-city_income %>% filter(!geo_id %in% municipality_acfrs_$geo_id) %>% View()
 
 nrow(municipality_acfrs_ %>% filter(year == 2023))
 
@@ -555,7 +563,6 @@ muni_population %>%
   summarise(tot = sum(population, na.rm = TRUE))
 
 #phase 4: 
-
 special_cities <- acfrs_general_purpose %>% 
   # get geo id in these cities --> from there get income & census data
   filter(id %in% c("101868", "1266697", "1266289", "149470")) %>% 
@@ -639,10 +646,11 @@ top300_cities_2023 <- census_city_top300 %>%
 missing_top300_cities_2023 <- top300_cities_2023 %>% 
   filter(is.na(id)) 
 
-#KS kansas city consolidated in Wyandotte County 
+
 anti_join(census_city_top300, municipality_all_2023, by = "geo_id") %>% 
  View()
-  
+#Note: KS kansas city consolidated in Wyandotte County   
+
   # this part to display in progress report app:
   # missing_top300_cities_2023 %>% 
   # mutate(year = 2023,
@@ -666,7 +674,7 @@ compare_latest_csv_versions(
 
 ####School districts####
 dictionary <- readRDS("data/dictionary.RDS") 
-acfrs_data
+
 school_districts_ <- readRDS("data/acfrs_data.RDS") %>% 
   filter(category == "School District") %>% 
   mutate(id = as.character(id)) %>% 

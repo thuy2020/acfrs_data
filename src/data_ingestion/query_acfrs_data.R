@@ -6,17 +6,7 @@ source("src/data_ingestion/db_connection.R")
 
 ##########NOTE######
 # the file "db_connection.R" - database connection is not tracked by git. 
-# To run this script, use your own personal credential to connect to database below:
-
-# Insert your credentials to connect with the database
-# con <- dbConnect(dbDriver("PostgreSQL"), 
-#                  host = "",
-#                  port=5432, 
-#                  dbname = "",
-#                  user = "",
-#                  password = ""
-#                  )
-
+# To run this script, use your own personal credential to connect to database
 
 #######Function to fetch data from database############
 fetch_data <- function(years, con){
