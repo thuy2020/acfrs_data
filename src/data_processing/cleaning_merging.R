@@ -2,8 +2,8 @@ library(tidyverse)
 library(dplyr)
 library(janitor)
 library(writexl)
-source("src/data_processing/census.R")
 source("src/data_processing/functions.R")
+source("src/data_processing/census.R")
 source("src/data_processing/nces.R")
 source("src/data_processing/exceptions.R")
 options(scipen = 9999)
@@ -65,18 +65,7 @@ acfrs_general_purpose <- readRDS("data/acfrs_data.RDS") %>%
                             TRUE ~ geo_id
                             )) 
 
-# only select some fields to display on datatool
-fields_to_select <- c("state.abb", "state.name", "id", "geo_id", "year", "name", 
-                      "identifier", "category",
-                      "total_liabilities", "current_liabilities",
-                      "net_pension_liability", "net_pension_assets",
-                      "net_opeb_liability", "net_opeb_assets", 
-                      "total_assets", "current_assets", "compensated_absences",
-                      "expenses", "revenues",
-                      "unrestricted",
-                      "bonds_outstanding", "loans_outstanding", "notes_outstanding", 
-                      "compensated_absences", 
-                      "population", "urban_pop", "pct_urban_pop", "median_hh_income")
+
 
 
 #######States########
@@ -382,7 +371,8 @@ county_census_acfr_2023 <- county_census_acfr_2023_ %>%
          
          # Census counts as county, but NOT as Municipalities are --> flg_muni = 0 
          flg_muni = case_when(
-           name %in% c("marion county", "echols county", "city & county of butte silver bow", 
+           name %in% c("marion county", "echols county", 
+                       "city & county of butte silver bow", 
                        "lynchburg, moore county metropolitan government",
                        "louisville/jefferson county metro government") ~ 0,  # override specific cases first
            sumlev %in% c(170, 162) ~ 1,
@@ -680,6 +670,9 @@ school_districts_ <- readRDS("data/acfrs_data.RDS") %>%
   mutate(id = as.character(id)) %>% 
   select(any_of(fields_to_select)) %>% 
   
+  #Exclude some sd in Montana to avoid double count as they will be join later as pairs exceptions
+  filter(!id %in% MT_sd_pairs$id) %>% 
+
   #joint with dictionary to get ncesID
   left_join(dictionary) %>% 
   
@@ -688,19 +681,20 @@ school_districts_ <- readRDS("data/acfrs_data.RDS") %>%
  
    #append URLs
   append_url() %>% select(-identifier) 
+  
 
 # Now bind with special cases
-school_districts_all <- 
-bind_2df_different_size(school_districts_, exceptions) %>% 
+school_districts_all <- bind_2df_different_size(school_districts_, exceptions) %>% 
   # create a dummy urban_pop to match the df size with state and counties
   mutate(urban_pop = NA, 
          pct_urban_pop = NA, 
          median_hh_income = NA) %>% 
-  mutate(
-    enrollment_23 = as.numeric(enrollment_23)) %>% 
-  select(-c(enrollment_20, enrollment_21, enrollment_22))
+  mutate(enrollment_23 = as.numeric(enrollment_23)) %>% 
+  
+  select(-c(enrollment_20, enrollment_21, enrollment_22)) 
+  
 
-# Save 
+ # Save 
 school_districts_all %>% write.csv("output/school_districts_all_2020_2023.csv")
 
 school_districts_all %>% 
@@ -714,7 +708,7 @@ school_districts_all %>%
 # 
 school_districts_2023 <- school_districts_all %>% filter(year == 2023) 
 
-#####TOp300 sd #####
+#####Top300 sd #####
 school_districts_2023 %>% 
   summarise(tot = sum(enrollment_23, na.rm = TRUE))
 
@@ -735,6 +729,7 @@ top300_sd_2023 <- sd_top300_nces %>%
 sd_top300_nces %>% 
   filter(!ncesID %in% school_districts_2023$ncesID) %>% View()
 
+top300_sd_2023 %>% 
 write.csv(file = paste0("output/top300_sd_2023_", 
                         format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
 
@@ -744,7 +739,6 @@ sd_top300_nces %>%
   #filter(name_nces != "detroit public schools community district") %>% 
   View()
 
-# TODO: some MT acfr report include more than 1 school districts. Need to treat MT separately 
 
 ####Tracking changes####
 ##########

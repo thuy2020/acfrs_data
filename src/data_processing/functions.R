@@ -1,6 +1,22 @@
 # Load necessary library
 library(dplyr)
 
+
+# only select some fields to display on datatool
+fields_to_select <- c("state.abb", "state.name", "id", "geo_id", "year", "name", 
+                      "identifier", "category",
+                      "total_liabilities", "current_liabilities",
+                      "net_pension_liability", "net_pension_assets",
+                      "net_opeb_liability", "net_opeb_assets", 
+                      "total_assets", "current_assets", "compensated_absences",
+                      "expenses", "revenues",
+                      "unrestricted",
+                      "bonds_outstanding", "loans_outstanding", "notes_outstanding", 
+                      "compensated_absences", 
+                      "population", "urban_pop", "pct_urban_pop", "median_hh_income")
+
+
+
 # Function to process the data frame and add URLs
 append_url <- function(data) {
   # Function to create URL from input string and category

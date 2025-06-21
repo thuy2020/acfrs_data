@@ -13,20 +13,22 @@ dictionary_tmp <- readRDS("data/_dictionary_tmp.RDS") %>%
 dictionary_fuzzy_manual <- readxl::read_xls("data/_dictionary_fuzzy_match1.xls") %>% 
   drop_na(state.abb) %>% 
   select(id, ncesID, state.abb)
- 
+
+#####Manual adding#####
 dict_13 <- readxl::read_xls("data/_dictionary_13.xls") %>% 
    select(id, ncesID, state.abb) %>% 
    mutate(across(everything(), as.character))
  
- # In Montana, some separate school districts are reported in one acfrs
- # need to combine students from these sd to reflect true number of students that these acfrs cover
- dict_montana <- readxl::read_xlsx("data/_dictionary_montana_school_districts.xlsx") %>% 
-   select(id, ncesID, state.abb) %>% 
-   mutate(across(everything(), as.character))
- 
-# id in dictionary but no longer exist in acfr database
+# id in dictionary but no longer exist in acfr database due to deleted, merged acfrs 
   id_nolonger_exist <- anti_join(dictionary_tmp, school_districts_all, by = "id") 
   
+  
+#####Montana#####
+#In Montana, some separate school districts are reported in one acfrs
+# so one acfr id get to map to 2 nces school districts
+  #--> resolve this in exceptions.R
+  
+mt_sd <- readxl::read_xlsx("data/_dictionary_montana_school_districts.xlsx")
   
 ####Final merge####
   dictionary <- dictionary_tmp %>% 
@@ -39,9 +41,6 @@ dict_13 <- readxl::read_xls("data/_dictionary_13.xls") %>%
     
     #add some trailing ones got fixed manually
     rbind(dict_13) %>% 
-    
-    #add montana
-    rbind(dict_montana) %>% 
     
     mutate(ncesID = as.character(ncesID),
            ncesID = str_squish(ncesID)) %>% 
@@ -68,9 +67,9 @@ dict_13 <- readxl::read_xls("data/_dictionary_13.xls") %>%
   nces_not_matched <- nces %>% 
     filter(!ncesID %in% dictionary$ncesID) %>% 
     select(state.abb, name_nces, ncesID, county_nces, state_agency_id, agency_type, enrollment_23) 
-
-      filter(enrollment_23 > 1000)
+      #filter(enrollment_23 > 1000)
   
+  # This rate does not account for NYC, Boston and few other
   sum(nces_not_matched$enrollment_23, na.rm = TRUE)/
     sum(nces$enrollment_23, na.rm = TRUE)
   

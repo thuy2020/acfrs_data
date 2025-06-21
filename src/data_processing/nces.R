@@ -103,7 +103,7 @@ nrow(nces %>% filter(enrollment_23 < 1))
   #                                  ))
 
 
-####Top 100 schools in 2022 enrollment ####
+####Top 100 schools in 2023 enrollment ####
 top100_schools <- nces %>%
   select(name_nces, ncesID, enrollment_23) %>%
   arrange(desc(enrollment_23)) %>%

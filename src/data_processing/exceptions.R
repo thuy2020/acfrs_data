@@ -3,9 +3,11 @@ library(stringr)
 library(rio)
 library(tidyr)
 library(purrr)
+
+source("src/data_processing/functions.R")
 source("src/data_processing/census.R")
 source("src/data_processing/nces.R")
-source("src/data_processing/functions.R")
+
 
 ####Counties####
 
@@ -125,4 +127,65 @@ final_data_DE <- bind_cols(nces_de, weighted_data) %>%
          name = name_nces) %>% 
   ungroup()
 
-exceptions <- bind_2df_different_size(NYC_Boston, final_data_DE) 
+
+#####Montana####
+#Problem: NCES lists some schools in MT as school districts, while ACFR report includes 
+#several ones.  
+#--> sum up enrollment of these NCES school districts to correspond to ACFR report
+MT_sd_pairs <- nces %>% filter(state.abb == "MT") %>% 
+  #Pair of school districts in NCES but every 2 of them are covered in one ACFR
+filter(str_detect(name_nces, "billings|missoula|(great falls)|(flathead)|
+                  (butte)|bozeman|helena|whitefish|browning|polson|belgrade")) %>% 
+ 
+   #these are not in any pair
+filter(!name_nces %in% c("helena flats elem", "east helena k-12", 
+                         "flathead h s")) %>% #this already in Kalispell Public Schools
+drop_na(enrollment_23) %>% 
+
+#sum up enrollment for each pair, only keep one NCESID, long and lat
+
+  # Assign a group id to each pair
+  mutate(pair_id = (row_number() + 1) %/% 2) %>%     #integer division by 2: divides by 2 and discards the remainder
+  group_by(pair_id) %>%
+  mutate(
+    enrollment_20 = sum(enrollment_20),
+    enrollment_21 = sum(enrollment_21),
+    enrollment_22 = sum(enrollment_22),
+    enrollment_23 = sum(enrollment_23)) %>%       # Sum enrollment per pair
+  slice(1) %>%                                       # Keep only the first row in each pair
+  ungroup() %>%
+  select(-pair_id) %>% 
+  
+  
+  #create id column --> map these pairs to their acfr entities 
+  #--> use this id to join back to get acfr data
+  mutate(id = case_when(ncesID == "3003290" ~ "43827", 
+                        ncesID == "3003870" ~ "35425",
+                        ncesID == "3004560" ~ "35403",
+                        ncesID == "3005140" ~ "42164",
+                        ncesID == "3013040" ~ "81617",
+                        ncesID == "3000005" ~ "35411",
+                        ncesID == "3018570" ~ "1266224",
+                        ncesID == "3021060" ~ "43285",
+                        ncesID == "3027740" ~ "35402"
+                        ))
+
+
+MT_sd_acfr <- readRDS("data/acfrs_data.RDS") %>% 
+  filter(category == "School District") %>% 
+  mutate(id = as.character(id)) %>% 
+  select(any_of(fields_to_select)) %>% 
+  filter(state.abb == "MT")
+
+
+montana_sd <- MT_sd_pairs %>% 
+  left_join(MT_sd_acfr, by = c("state.abb", "state.name", "id")) %>% 
+  select(-c(identifier, category))
+
+#####Final result exceptions#####
+
+nyc_boston_de <- bind_2df_different_size(NYC_Boston, final_data_DE) 
+
+exceptions <- bind_2df_different_size(montana_sd, nyc_boston_de) %>% 
+  mutate(category == "School District")
+
