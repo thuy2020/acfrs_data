@@ -187,5 +187,5 @@ montana_sd <- MT_sd_pairs %>%
 nyc_boston_de <- bind_2df_different_size(NYC_Boston, final_data_DE) 
 
 exceptions <- bind_2df_different_size(montana_sd, nyc_boston_de) %>% 
-  mutate(category == "School District")
+  mutate(category = "School District")
 
