@@ -248,12 +248,14 @@ nrow(county_census_acfr_2023_) #3144 entities in county file, including:
 #####Adding flags####
 county_census_acfr_2023 <- county_census_acfr_2023_ %>% 
   mutate(name_census = str_squish(name_census)) %>% 
+  
+  #flg_acfr
   mutate(flg_acfr = ifelse(!is.na(id), 1, 0)) %>%  
   
+  #flg_muni
   mutate(flg_muni = case_when(id %in% county_acfr_reported_as_muni$id & !is.na(id) ~ 1, 
                               id %in% consolidated_county_2023$id & !is.na(id) ~ 1, 
                            TRUE ~ 0)) %>% 
-  
   mutate(flg_muni = case_when(name == "marion county" ~ 0, 
                               TRUE ~ flg_muni)) %>%  #consolidated, but report separately from muni)))
 #Final cleaning
@@ -261,13 +263,7 @@ county_census_acfr_2023 <- county_census_acfr_2023_ %>%
   select(-c(cousub, concit, place, source_year, name_midfile, government_id, nces_district_id)) 
 
 
-#####Top100, Top300, Missing counties#####
-#missing top 100 county - none of these are real missing
-county_census_acfr_2023 %>% arrange(desc(population)) %>% 
-  slice(1:100) %>% 
-  filter(is.na(id)) %>% 
-  View()
-
+#####Top300, Missing counties#####
 #missing top 300:
 missing_top300_county <- county_census_acfr_2023 %>% 
   arrange(desc(population)) %>% 
@@ -290,6 +286,28 @@ missing_top300_county <- county_census_acfr_2023 %>%
 # 9 counties TRUE missing as of June 13, 2025
 missing_top300_county %>% View()
 
+
+# all counties that do not have acfr:
+county_census_acfr_2023 %>% 
+  filter(flg_acfr == 0) %>% View() #840 missing, 812 true missing
+
+#not true missing. Just not produced
+county_census_acfr_2023_ %>% 
+  filter(is.na(id)) %>% 
+  
+  #does not count these non-functional counties
+  filter(!name_census %in% c("kings county", "queens county", "bronx county", ## 5 NY counties already accounted for in NY city
+                             "richmond county", "new york county")) %>%
+
+  #Although listed in Census, these are not functional counties: CT, RI
+  filter(!state.abb %in% c("CT", "RI")) %>%
+
+  #not functional: eg. MA"hampden county"
+  filter(funcstat != "N") %>%
+
+  #writexl::write_xlsx(paste0("tmp/missing_county_2023_", format(Sys.time(), "%Y%m%d_%H%M"), ".xlsx"))
+  View()
+
 #count by year
 county_acfrs %>% 
   group_by(year) %>% 
@@ -298,25 +316,8 @@ county_acfrs %>%
 county_census_acfr_2023 %>% 
   summarise(tot = sum(population, na.rm = TRUE))
 
-# all counties that do not have acfr:
-county_census_acfr_2023_ %>% 
-  filter(is.na(id)) %>% 
-  
-  #does not count these non-functional counties
-  filter(!name_census %in% c("kings county", "queens county", "bronx county", ## 5 NY counties already accounted for in NY city
-                             "richmond county", "new york county")) %>%
-  
-  #Although listed in Census, these are not functional counties: CT, RI
-  filter(!state.abb %in% c("CT", "RI")) %>% 
-  
-  #not functional: eg. MA"hampden county"
-  filter(funcstat != "N") %>%
-  
-  #writexl::write_xlsx(paste0("tmp/missing_county_2023_", format(Sys.time(), "%Y%m%d_%H%M"), ".xlsx"))
-  View()
-
-
 #####Final result counties####
+
 county_census_acfr_2023 %>% 
   write.csv(file = paste0("output/all_counties_2023_", format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
 
@@ -536,7 +537,7 @@ compare_latest_csv_versions(
   output_excel = "output/municipalities_changes_report.xlsx"
 )
 
-municipality_final_2023 %>% filter(flg_county == 1) %>% View()
+municipality_final_2023 %>% filter(flg_acfr == 0) %>% View()
 
 ####School districts####
 dictionary <- readRDS("data/dictionary.RDS") 
@@ -546,7 +547,7 @@ school_districts_ <- readRDS("data/acfrs_data.RDS") %>%
   mutate(id = as.character(id)) %>% 
   select(any_of(fields_to_select)) %>% 
   
-  #Exclude some sd in Montana to avoid double count as they will be join later as pairs exceptions
+  #Exclude some sd in Montana to avoid double count - they will be join later as pairs exceptions
   filter(!id %in% MT_sd_pairs$id) %>% 
 
   #joint with dictionary to get ncesID
@@ -570,9 +571,6 @@ school_districts_all <- bind_2df_different_size(school_districts_, exceptions) %
   select(-c(enrollment_20, enrollment_21, enrollment_22)) 
   
 
- # Save 
-school_districts_all %>% write.csv("output/school_districts_all_2020_2023.csv")
-
 school_districts_all %>% 
   group_by(year) %>% 
   summarise(n = n())
@@ -580,40 +578,48 @@ school_districts_all %>%
 school_districts_all %>% 
   group_by(year) %>% 
   summarise(tot = sum(enrollment_23, na.rm = TRUE))
-  
-# 
+   
 school_districts_2023 <- school_districts_all %>% filter(year == 2023) 
 
+#coverage
+(school_districts_2023 %>% 
+  summarise(tot = sum(enrollment_23, na.rm = TRUE))) /
+(nces %>% 
+  summarise(tot = sum(enrollment_23, na.rm = TRUE)))
+
+
 #####Top300 sd #####
-school_districts_2023 %>% 
-  summarise(tot = sum(enrollment_23, na.rm = TRUE))
 
-nces %>% 
-  summarise(tot = sum(enrollment_23, na.rm = TRUE))
-
+#missing only DC
 school_districts_2023 %>% 
   filter(ncesID %in% sd_top300_nces$ncesID) %>% View()
 
-school_districts_2023 %>% 
-  write.csv(file = paste0("output/all_schooldistricts_2023_", 
-                          format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
-
-top300_sd_2023 <- sd_top300_nces %>% 
-  filter(ncesID %in% school_districts_2023$ncesID) 
-
-#where are these 3?
 sd_top300_nces %>% 
   filter(!ncesID %in% school_districts_2023$ncesID) %>% View()
 
-top300_sd_2023 %>% 
-write.csv(file = paste0("output/top300_sd_2023_", 
-                        format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
+#####Flag#####
+school_districts_final_2023 <- school_districts_2023 %>% 
+  
+  #add sd in top 300 but not available in ACFR
+  bind_rows(
+    tibble(state.abb = "DC", state.name = "District of Columbia", ncesID = "1100030",
+           name = "district of columbia public schools", 
+           category = "School District",
+           year = 2023)) %>% 
+  
+  mutate(flg_acfr = case_when(ncesID == "1100030" ~ 0, #district of columbia public schools blended in DC
+                              ncesID %in% sd_top300_nces$ncesID ~ 1, 
+                              
+                              TRUE ~ NA_real_)) %>% 
+  mutate(flg_note = case_when(ncesID %in% c("1100030") ~ 1,
+                              TRUE ~ NA_real_)) %>% 
+  mutate(note = case_when(ncesID %in% c("1100030") ~ "blended component units",
+                          TRUE ~ NA)) 
 
-# all of these are uploaded. Hgarb are checking. June 9
-sd_top300_nces %>% 
-  filter(!ncesID %in% school_districts_2023$ncesID) %>%
-  #filter(name_nces != "detroit public schools community district") %>% 
-  View()
+#####Final#####
+school_districts_final_2023 %>% 
+  write.csv(file = paste0("output/all_schooldistricts_2023_", 
+                          format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
 
 
 ####Tracking changes####

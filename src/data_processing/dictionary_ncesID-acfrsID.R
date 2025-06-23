@@ -20,8 +20,9 @@ dict_13 <- readxl::read_xls("data/_dictionary_13.xls") %>%
    mutate(across(everything(), as.character))
  
 # id in dictionary but no longer exist in acfr database due to deleted, merged acfrs 
-  id_nolonger_exist <- anti_join(dictionary_tmp, school_districts_all, by = "id") 
+  id_nolonger_exist <- (anti_join(dictionary_tmp, school_districts_all, by = "id"))
   
+  id_delted <- c("1238328")
   
 #####Montana#####
 #In Montana, some separate school districts are reported in one acfrs
@@ -52,9 +53,10 @@ mt_sd <- readxl::read_xlsx("data/_dictionary_montana_school_districts.xlsx")
     distinct() %>% 
     #final correction: 
     mutate(ncesID = case_when(id == "161618" ~ "2622320",
+                              id == "224518" ~ "3100022", # TODO: already changed name in portal, check back if matched
+                              
                               TRUE ~ ncesID))
     
-
   saveRDS(dictionary, "data/dictionary.RDS")
  
   
