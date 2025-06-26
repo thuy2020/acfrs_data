@@ -6,18 +6,25 @@ library(dplyr)
 library(stringdist)
 source("src/data_processing/nces.R")
 
+#####Dic_13 Manual adding#####
+
+#This should over write all other code generated dictionary
+dict_13 <- readxl::read_xlsx("data/_dictionary_13.xlsx") %>% 
+  select(id, ncesID, state.abb) %>% 
+  mutate(across(everything(), as.character))
+
 dictionary_tmp <- readRDS("data/_dictionary_tmp.RDS") %>% 
   select(-name) %>% 
-  distinct()
+  distinct() %>% 
+  filter(!id %in% dict_13$id) %>% 
+  filter(!ncesID %in% dict_13$ncesID)
 
 dictionary_fuzzy_manual <- readxl::read_xls("data/_dictionary_fuzzy_match1.xls") %>% 
   drop_na(state.abb) %>% 
-  select(id, ncesID, state.abb)
+  select(id, ncesID, state.abb) %>% 
+  filter(!id %in% dict_13$id) %>% 
+  filter(!ncesID %in% dict_13$ncesID)
 
-#####Manual adding#####
-dict_13 <- readxl::read_xls("data/_dictionary_13.xls") %>% 
-   select(id, ncesID, state.abb) %>% 
-   mutate(across(everything(), as.character))
  
 # id in dictionary but no longer exist in acfr database due to deleted, merged acfrs 
   id_nolonger_exist <- (anti_join(dictionary_tmp, school_districts_all, by = "id"))
@@ -34,13 +41,12 @@ mt_sd <- readxl::read_xlsx("data/_dictionary_montana_school_districts.xlsx")
 ####Final merge####
   dictionary <- dictionary_tmp %>% 
     filter(!id %in% id_nolonger_exist$id) %>% 
-    add_count(id) %>% filter(n == 1) %>% select(-n) %>% 
     add_count(ncesID) %>% filter(n == 1) %>% select(-n) %>% 
   
     # add fuzzy match result - strong match
     rbind(dictionary_fuzzy_manual) %>% 
     
-    #add some trailing ones got fixed manually
+    #add the ones got fixed manually
     rbind(dict_13) %>% 
     
     mutate(ncesID = as.character(ncesID),
@@ -50,13 +56,23 @@ mt_sd <- readxl::read_xlsx("data/_dictionary_montana_school_districts.xlsx")
                            str_remove(ncesID, "^0"), 
                            ncesID)) %>% 
     
-    distinct() %>% 
-    #final correction: 
-    mutate(ncesID = case_when(id == "161618" ~ "2622320",
-                              id == "224518" ~ "3100022", # TODO: already changed name in portal, check back if matched
-                              
-                              TRUE ~ ncesID))
+    distinct() 
+  
+  
+  dup_ncesid <- dictionary %>% 
+    filter(duplicated(ncesID) | duplicated(ncesID, fromLast = TRUE)) %>%
+    select(ncesID, id)
     
+  # there are duplicated ncesID, but this does not cause harm. Some ncesID mapped to 2 acfr id. But 1 of 
+  #the acfr id no longer exist. 
+  
+  school_districts_final_2023 %>% 
+    filter(id %in% dup_ncesid$id) %>% View()
+  
+  dup_ncesid %>% 
+    filter(!id %in% school_districts_$id)
+  
+  
   saveRDS(dictionary, "data/dictionary.RDS")
  
   

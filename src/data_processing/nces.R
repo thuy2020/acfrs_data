@@ -108,6 +108,7 @@ top100_schools <- nces %>%
   select(name_nces, ncesID, enrollment_23) %>%
   arrange(desc(enrollment_23)) %>%
  slice(1:100)
+
 # 
 # # pop break down by state 
 # nces_pop_bystate <- nces %>%

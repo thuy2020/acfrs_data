@@ -182,6 +182,7 @@ montana_sd <- MT_sd_pairs %>%
   left_join(MT_sd_acfr, by = c("state.abb", "state.name", "id")) %>% 
   select(-c(identifier, category))
 
+
 #####Final result exceptions#####
 
 nyc_boston_de <- bind_2df_different_size(NYC_Boston, final_data_DE) 
