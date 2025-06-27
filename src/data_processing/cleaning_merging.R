@@ -63,6 +63,7 @@ acfrs_general_purpose <- readRDS("data/acfrs_data.RDS") %>%
                             id == "105189" ~ "1372122",#??
                             id == "39880" ~ "5531025",
                             id == "68810" ~ "1257425", #FL Plantation
+                            id == "149880" ~ "1257550",
                             TRUE ~ geo_id
                             )) 
 
@@ -354,7 +355,7 @@ nrow(municipality_acfrs_ %>% filter(year == 2023))
 
 #Step 2: Join with census_municipalities to get population using geo_id
 
-municipality_all_ <- municipality_acfrs_ %>% 
+municipality_all_ <- municipality_acfrs_ %>%  
 
   # join with Census, exclude some
   left_join(
@@ -557,14 +558,14 @@ municipality_all %>%
   summarise(n = n())
 
 
-######Flag and missing#####
+######Flags#####
 # need to add these in municipality_all_2023
 muni_top300_missing <- census_city_top300 %>% 
   filter(!geo_id %in% municipality_all_2023$geo_id) %>% 
   rename(name = name_census) %>% 
   left_join(df_state)
 
-municipality_final_2023 <- municipality_all_2023 %>% 
+municipality_all_2023_flag <- municipality_all_2023 %>% 
   bind_2df_different_size(muni_top300_missing) %>% 
   
   #flg_acfr
@@ -580,21 +581,40 @@ mutate(flg_county = case_when(id %in% consolidated_county_2023$id | id == "11156
                               TRUE ~ 0)) %>% 
   mutate(year = 2023,
          category = "General Purpose") %>% 
-  filter(!(name == "lexington-fayette urban county" & is.na(geo_id)))
-  
+  filter(!(name == "lexington-fayette urban county" & is.na(geo_id))) 
 
-  # this part to display in progress report app:
-  # missing_top300_cities_2023 %>% 
-  # mutate(year = 2023,
-  #        category = "municipality") %>% 
-  # select(-c(geo_id)) -> missing_top300_muni
+######Coordinates######
+
+coordinates_muni <- readRDS("output/municipalities_with_coordinates.rds") %>% 
+  select(state.abb, id, latitude, longitude, geo_id) %>% 
+  drop_na(latitude) %>% 
+  drop_na(longitude) %>% 
+  distinct() 
+
+
+  municipality_final_2023 <- municipality_all_2023_flag %>% 
+    
+  left_join(coordinates_muni, by = c("state.abb", "id", "geo_id")) %>% 
+  # fixing some coordinate 
+  mutate(latitude = case_when(geo_id == "3651000" ~ 40.7555, #NYC
+                              TRUE ~ latitude)) %>% 
+  
+  mutate(longitude = case_when(geo_id == "3651000" ~ -73.9739, 
+                               TRUE ~ longitude)) 
+  
+# check missing coordinates:
+  
+  municipality_final_2023 %>% select(state.abb, name, latitude, longitude, geo_id) %>% 
+    filter(is.na(latitude) | is.na(latitude)) %>% 
+   View()
 
 ######Check duplicates####
 municipality_final_2023 %>% select(state.abb, name, id, total_liabilities) %>% 
-  filter(duplicated(.) | duplicated(., fromLast = TRUE)) %>% View()
+  filter(duplicated(.) | duplicated(., fromLast = TRUE)) 
 
 municipality_final_2023 %>% 
   select(geo_id) %>% 
+  filter(!is.na(geo_id)) %>% 
   filter(duplicated(.) | duplicated(., fromLast = TRUE)) 
 
 #####Final result muni#####
@@ -608,6 +628,12 @@ compare_latest_csv_versions(
 )
 
 municipality_final_2023 %>% filter(flg_acfr == 0) %>% View()
+
+# this part to display in progress report app:
+# missing_top300_cities_2023 %>% 
+# mutate(year = 2023,
+#        category = "municipality") %>% 
+# select(-c(geo_id)) -> missing_top300_muni
 
 ####School districts####
 dictionary <- readRDS("data/dictionary.RDS") 
@@ -700,7 +726,7 @@ school_districts_final_2023 %>%
   filter(duplicated(.) | duplicated(., fromLast = TRUE)) %>% View()
 
 #TODO: 
-school_districts_final_2023 %>% filter(is.na(ncesID)) %>% View()
+school_districts_final_2023 %>% filter(is.na(ncesID)) 
 
 #####Final#####
 school_districts_final_2023 %>% 
