@@ -160,7 +160,16 @@ county_acfrs <- acfrs_general_purpose %>%
          name_clean = str_squish(name_clean),
          name = str_squish(name)) 
 
-county_acfrs_2023 <- county_acfrs %>% filter(year == 2023)
+county_acfrs_2023 <- county_acfrs %>%
+  filter(
+    # Keep 2023 for all states
+    year == 2023 |
+      # OR: keep 2022 if SD or OK and entity has no 2023 data
+      (
+        year == 2022 &
+          state.abb %in% c("SD", "OK") & # if no matching 2023 for that id
+          !id %in% (county_acfrs %>% filter(year == 2023) %>% pull(id))
+      )) 
 
 #####Round 1#####
 #join 3144 Census counties Census sumlev = 50
@@ -251,6 +260,9 @@ nrow(county_census_acfr_2023_) #3144 entities in county file, including:
 county_census_acfr_2023 <- county_census_acfr_2023_ %>% 
   mutate(name_census = str_squish(name_census)) %>% 
   
+  #flg_backfilled: 13 in OK, 20 in SD
+  mutate(flg_backfilled = ifelse(year == 2022, 1, 0)) %>% 
+  
   #flg_acfr
   mutate(flg_acfr = ifelse(!is.na(id), 1, 0)) %>%  
   
@@ -260,10 +272,11 @@ county_census_acfr_2023 <- county_census_acfr_2023_ %>%
                            TRUE ~ 0)) %>% 
   mutate(flg_muni = case_when(name == "marion county" ~ 0, 
                               TRUE ~ flg_muni)) %>%  #consolidated, but report separately from muni)))
+
+  
 #Final cleaning
   mutate(name = ifelse(is.na(name), name_census, name)) %>% 
   select(-c(cousub, concit, place, source_year, name_midfile, government_id, nces_district_id)) 
-
 
 #####Top300, Missing counties#####
 #missing top 300:
