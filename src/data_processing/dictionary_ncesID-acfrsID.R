@@ -8,17 +8,23 @@ source("src/data_processing/nces.R")
 
 #####Dic_13 Manual adding#####
 
-#This should over write all other code generated dictionary
+#This should over write all other code that generates dictionary
 dict_13 <- readxl::read_xlsx("data/_dictionary_13.xlsx") %>% 
   select(id, ncesID, state.abb) %>% 
   mutate(across(everything(), as.character))
 
+dict_14 <- readxl::read_xlsx("data/_dictionary_14.xlsx") %>% 
+  select(id, ncesID, state.abb)
+
+
 dictionary_tmp <- readRDS("data/_dictionary_tmp.RDS") %>% 
   select(-name) %>% 
   distinct() %>% 
-  filter(!id %in% dict_13$id) %>% 
-  filter(!ncesID %in% dict_13$ncesID)
+  filter(!id %in% c(dict_13$id, dict_14$id)) %>% 
+  filter(!ncesID %in% c(dict_13$ncesID, dict_14$ncesID)) 
 
+
+#####Fuzzy match#####
 dictionary_fuzzy_manual <- readxl::read_xls("data/_dictionary_fuzzy_match1.xls") %>% 
   drop_na(state.abb) %>% 
   select(id, ncesID, state.abb) %>% 
@@ -35,8 +41,7 @@ dictionary_fuzzy_manual <- readxl::read_xls("data/_dictionary_fuzzy_match1.xls")
 #In Montana, some separate school districts are reported in one acfrs
 # so one acfr id get to map to 2 nces school districts
   #--> resolve this in exceptions.R
-  
-mt_sd <- readxl::read_xlsx("data/_dictionary_montana_school_districts.xlsx")
+
   
 ####Final merge####
   dictionary <- dictionary_tmp %>% 
@@ -48,6 +53,7 @@ mt_sd <- readxl::read_xlsx("data/_dictionary_montana_school_districts.xlsx")
     
     #add the ones got fixed manually
     rbind(dict_13) %>% 
+    rbind(dict_14) %>% 
     
     mutate(ncesID = as.character(ncesID),
            ncesID = str_squish(ncesID)) %>% 
@@ -59,18 +65,15 @@ mt_sd <- readxl::read_xlsx("data/_dictionary_montana_school_districts.xlsx")
     distinct() 
   
   
+  # there are duplicated ncesID, but this does not cause harm. Some ncesID mapped to 2 acfr id. But 1 of 
+  #the acfr id no longer exist.   
   dup_ncesid <- dictionary %>% 
     filter(duplicated(ncesID) | duplicated(ncesID, fromLast = TRUE)) %>%
     select(ncesID, id)
-    
-  # there are duplicated ncesID, but this does not cause harm. Some ncesID mapped to 2 acfr id. But 1 of 
-  #the acfr id no longer exist. 
   
-  school_districts_final_2023 %>% 
-    filter(id %in% dup_ncesid$id) %>% View()
-  
-  dup_ncesid %>% 
-    filter(!id %in% school_districts_$id)
+  dictionary %>% 
+    filter(duplicated(id) | duplicated(id, fromLast = TRUE)) %>%
+    select(ncesID, id) %>% View()
   
   
   saveRDS(dictionary, "data/dictionary.RDS")
@@ -82,6 +85,7 @@ mt_sd <- readxl::read_xlsx("data/_dictionary_montana_school_districts.xlsx")
     filter(ncesID %in% dictionary$ncesID) %>% 
     select(state.abb, name_nces, ncesID, county_nces, enrollment_23) 
   
+  #remaining NCES entities NOT matched with acfrs
   nces_not_matched <- nces %>% 
     filter(!ncesID %in% dictionary$ncesID) %>% 
     select(state.abb, name_nces, ncesID, county_nces, state_agency_id, agency_type, enrollment_23) 

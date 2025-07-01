@@ -8,7 +8,6 @@ source("src/data_processing/nces.R")
 source("src/data_processing/exceptions.R")
 options(scipen = 9999)
 
-
 ####NOTE##########
 #Entity names in the original Acfrs database are not obvious, i.e., 
 # They do not always contain a certain word to indicate its government type (i.e., city, town, county, etc). 
@@ -25,6 +24,7 @@ options(scipen = 9999)
 # - Joining by names and states 
 acfrs_data <- readRDS("data/acfrs_data.RDS")
 ####General Purpose####
+
 # step 1: get all general purpose entities in acfrs, most contains governmentID
 acfrs_general_purpose <- readRDS("data/acfrs_data.RDS") %>% 
   filter(category == "General Purpose") %>% 
@@ -544,6 +544,9 @@ municipality_all <- muni_population %>%
          pct_urban_pop = NA) 
 
 #####Result muni#####
+# municipality_all %>% 
+#   write.csv("output/all_municipalities_2020_2023.csv")
+ 
 municipality_all_2023 <- municipality_all %>% filter(year == 2023)
 
 #population coverage of municipalities acfr/ census
@@ -570,9 +573,9 @@ municipality_all_2023_flag <- municipality_all_2023 %>%
   
   #flg_acfr
   mutate(flg_acfr = case_when(
-    geo_id %in% census_city_top300$geo_id & !(geo_id %in% muni_top300_missing$geo_id) ~ 1,  # 295 in top 300 have ACFR
     geo_id %in% muni_top300_missing$geo_id ~ 0,                                              # 5 in top 300 missing ACFR
-    TRUE ~ NA_real_
+    
+    TRUE ~ 1
   )) %>% 
   
 #flg_county
@@ -604,8 +607,9 @@ coordinates_muni <- readRDS("output/municipalities_with_coordinates.rds") %>%
   
 # check missing coordinates:
   
-  municipality_final_2023 %>% select(state.abb, name, latitude, longitude, geo_id) %>% 
+  municipality_final_2023 %>% select(state.abb, name, latitude, longitude, geo_id, population) %>% 
     filter(is.na(latitude) | is.na(latitude)) %>% 
+    #summarise(tot = sum(population, na.rm = TRUE)) %>% 
    View()
 
 ######Check duplicates####
@@ -706,9 +710,8 @@ school_districts_final_2023 <- school_districts_2023 %>%
            year = 2023)) %>% 
   
   mutate(flg_acfr = case_when(ncesID == "1100030" ~ 0, #district of columbia public schools blended in DC
-                              ncesID %in% sd_top300_nces$ncesID ~ 1, 
-                              
-                              TRUE ~ NA_real_)) %>% 
+              
+                              TRUE ~ 1)) %>% 
   mutate(flg_note = case_when(ncesID %in% c("1100030") ~ 1,
                               TRUE ~ NA_real_)) %>% 
   mutate(note = case_when(ncesID %in% c("1100030") ~ "blended component units",
@@ -716,20 +719,41 @@ school_districts_final_2023 <- school_districts_2023 %>%
 
 
 ######Check duplicates####
+
+#no id duplicates
 school_districts_final_2023 %>%
   select(id) %>% 
   filter(duplicated(.) | duplicated(., fromLast = TRUE)) %>% View()
 
-school_districts_final_2023 %>%
+#some ncesID duplicates because the parsers record an entity twice under different names 
+dup_ncesid <- school_districts_final_2023 %>%
   filter(!is.na(ncesID)) %>% 
+  select(ncesID) %>% 
+  filter(duplicated(.) | duplicated(., fromLast = TRUE)) 
+
+
+dup_fixed <- school_districts_final_2023 %>%
+  filter(ncesID %in% dup_ncesid$ncesID) %>%
+  arrange(ncesID) %>%
+  group_by(ncesID) %>%
+  slice(1) %>%
+  ungroup() 
+
+school_districts_final_2023_ <- school_districts_final_2023 %>% 
+  filter(!id %in% dup_fixed$id) 
+
+#check dup again after fixing:
+school_districts_final_2023_ %>% 
+filter(!is.na(ncesID)) %>% 
   select(ncesID) %>% 
   filter(duplicated(.) | duplicated(., fromLast = TRUE)) %>% View()
 
-#TODO: 
-school_districts_final_2023 %>% filter(is.na(ncesID)) 
+#TODO: fill ncesID in these entities
+school_districts_final_2023_ %>% filter(is.na(ncesID)) %>% 
+  select(state.abb, id, name)
 
 #####Final#####
-school_districts_final_2023 %>% 
+school_districts_final_2023_ %>% 
   write.csv(file = paste0("output/all_schooldistricts_2023_", 
                           format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
 

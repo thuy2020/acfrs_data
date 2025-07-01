@@ -365,14 +365,27 @@ main()
 
 #check result
 
-#df_municipalities_with_coordinates <- readRDS("output/municipalities_with_coordinates.rds")
+df_municipalities_with_coordinates <- readRDS("output/municipalities_with_coordinates.rds")
 
-df_municipalities_with_coordinates %>% 
-  select(state.abb, id, name, latitude, longitude, population, geo_id) %>% 
-  arrange(desc(population)) %>% 
-  drop_na(latitude) %>% 
-  drop_na(longitude) %>% 
-  distinct() %>%  View()
+df_municipalities_with_coordinates %>% filter(name == "new york") %>% View()
+  # select(state.abb, id, name, latitude, longitude, population, geo_id) %>% 
+  # arrange(desc(population)) %>% 
+  # drop_na(latitude) %>% 
+  # drop_na(longitude) %>% 
+  # distinct() %>%  View()
  # filter(is.na(latitude)) %>% 
   
   
+library(tidygeocoder)
+
+# Try NYC example with `full_results`
+result <- geo(address = "New York, New York, USA",
+              method = "osm",
+              full_results = TRUE)
+
+result %>% View()
+
+municipalities_to_geocode %>%
+  filter(str_detect(clean_name, "new york")) %>%
+  select(name, clean_name, address) %>%
+  View()

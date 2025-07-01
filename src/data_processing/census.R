@@ -69,6 +69,8 @@ census_all <- rio::import(here::here("data/census", "sub-est2022.csv")) %>%
   )) 
 ###### Census state #########
 
+
+
 state_urb <- rio::import(here::here("data/census", "State_Urban_Rural_Pop_2020_2010.xlsx")) %>% 
   clean_names() %>% 
   rename(state.abb = state_abbrev) %>% 
@@ -149,6 +151,7 @@ census_municipalities <- census_all %>%
   filter(sumlev %in% c(160, 162, 170, 172)) 
 
 sum(census_municipalities$population)
+
 
 #####Top100 cities####
 #find all cities within incorporated place

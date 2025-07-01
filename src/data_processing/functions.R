@@ -1,5 +1,6 @@
 # Load necessary library
 library(dplyr)
+library(stringdist)
 
 
 # only select some fields to display on datatool
@@ -269,69 +270,48 @@ compare_latest_csv_versions <- function(folder = "output",
 
 
 ####Fuzzy match dictionary####
-# normalize_name <- function(name) {
-#   name %>%
-#     tolower() %>%
-#     gsub("school district", "", .) %>%
-#     gsub("elem", "elementary", .) %>%
-#     gsub("no\\.?|districts?|schools?|public|and", "", .) %>%
-#     gsub("[^a-z0-9 ]", "", .) %>%
-#     trimws()
-# }
-# 
-# acfr_as_missing_ncesID <- school_districts_all %>% 
-#   select(state.abb, state.name, name, id, ncesID) %>% 
-#   filter(is.na(ncesID)) %>% distinct() 
-# 
-# acfr_as_missing_ncesID_normalized <- acfr_as_missing_ncesID %>%
-#   mutate(name_clean = normalize_name(name))
-# 
-# nces_normalized <- nces %>%
-#   #padding a leading 0, ncesID should have 7 digit
-#   mutate(ncesID = sprintf("%07s", as.character(ncesID))) %>% 
-#   
-#   mutate(name_clean = normalize_name(name_nces))
-# 
-# # Match within state to improve accuracy ---
-# match_within_state <- function(state_df, nces_df) {
-#   dist_matrix <- stringdistmatrix(state_df$name_clean, nces_df$name_clean, method = "jw")
-#   best_match_index <- apply(dist_matrix, 1, which.min)
-#   
-#   matched_nces <- nces_df[best_match_index, ]
-#   
-#   state_df %>%
-#     mutate(
-#       filled_ncesID = nces_df$ncesID[best_match_index],
-#       matched_name_nces = nces_df$name_nces[best_match_index],
-#       state_agency_id = matched_nces$state_agency_id,
-#       county_nces = matched_nces$county_nces,
-#       match_score = mapply(function(i, j) dist_matrix[i, j], 
-#                            seq_along(best_match_index), best_match_index)
-#     )
-# }
-# 
-# # --- 5. Apply fuzzy match by state ---
-# matched_all_states <- acfr_as_missing_ncesID_normalized %>%
+normalize_name <- function(name) {
+  name %>%
+    tolower() %>%
+    gsub("school district", "", .) %>%
+    gsub("elem", "elementary", .) %>%
+    gsub("no\\.?|districts?|schools?|public|and", "", .) %>%
+    gsub("[^a-z0-9 ]", "", .) %>%
+    trimws()
+}
+
+
+#####Fuzzy match#####
+
+# Match within state to improve accuracy ---
+match_within_state <- function(df_missing, df_reference) {
+  # Compute pairwise Jaro-Winkler distances
+  dist_matrix <- stringdistmatrix(df_missing$name_clean, df_reference$name_clean, 
+                                  method = "jw")
+  
+  # For each missing, find best match index
+  min_index <- apply(dist_matrix, 1, which.min)
+  min_distance <- apply(dist_matrix, 1, min)
+  
+  # Combine result
+  matched <- df_missing %>%
+    mutate(
+      acfr_name_clean = name_clean,
+      matched_name_nces = df_reference$name_clean[min_index],
+      matched_ncesID = df_reference$ncesID[min_index],
+      distance = min_distance
+    )
+  
+  return(matched)
+}
+
+#apply fuzzy match by state ---
+# matched_all_states <-  missing_ncesID %>%
 #   group_split(state.abb) %>%
 #   purrr::map_dfr(function(state_group) {
 #     state_abbr <- unique(state_group$state.abb)
-#     
 #     nces_state <- filter(nces_normalized, state.abb == state_abbr)
 #     match_within_state(state_group, nces_state)
 #   })
 
-
-# matched_all_states %>% 
-#   mutate(ncesID = filled_ncesID) %>% 
-#   select(state.abb, state.name, id, ncesID, name, name_clean, matched_name_nces, county_nces, match_score, state_agency_id) %>% 
-#   #exclusing Montatna - need to treat separately because school district acfr  include mutiple school districts as define in NCES. 
-#   # example: whitehall public schools id = 296174 includes both whitehall elem (ncesID 3027810) + whitehall h s (ncesID 3027840)
-#   
-#   filter(state.abb == "MT") %>% 
-#   
-#   arrange(match_score)
-  #write_xlsx("tmp/sd_montana.xlsx")
-  
-  # write.csv("tmp/dictionary_fuzzy_match1.csv")
-  
 

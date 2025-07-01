@@ -133,12 +133,12 @@ final_data_DE <- bind_cols(nces_de, weighted_data) %>%
 #several ones.  
 #--> sum up enrollment of these NCES school districts to correspond to ACFR report
 MT_sd_pairs <- nces %>% filter(state.abb == "MT") %>% 
-  #Pair of school districts in NCES but every 2 of them are covered in one ACFR
-filter(str_detect(name_nces, "billings|missoula|(great falls)|(flathead)|
-                  (butte)|bozeman|helena|whitefish|browning|polson|belgrade")) %>% 
+  #Pair of school districts in NCES but every 2 of them are covered in one ACFR ""|""
+filter(str_detect(name_nces, "billings|missoula|(great falls)|(flathead)|laurel|chester|butte|lodge|sidney|roundup|
+                  butte|bozeman|helena|whitefish|browning|polson|belgrade|thompson|bigfork|(box elder)")) %>% 
  
    #these are not in any pair
-filter(!name_nces %in% c("helena flats elem", "east helena k-12", 
+filter(!name_nces %in% c("helena flats elem", "east helena k-12", "heart butte k-12 schools",
                          "flathead h s")) %>% #this already in Kalispell Public Schools
 drop_na(enrollment_23) %>% 
 
@@ -167,8 +167,18 @@ drop_na(enrollment_23) %>%
                         ncesID == "3000005" ~ "35411",
                         ncesID == "3018570" ~ "1266224",
                         ncesID == "3021060" ~ "43285",
-                        ncesID == "3027740" ~ "35402"
-                        ))
+                        ncesID == "3027740" ~ "35402",
+                        ncesID == "3026070" ~ "398577",
+                        ncesID == "3003820" ~ "398570",
+                        ncesID == "3016200" ~ "1268576",
+                        ncesID == "3000098" ~ "399705",
+                        ncesID == "3005280" ~ "46750", #butte
+                        ncesID == "3017010" ~ "35388", #log grass
+                        ncesID == "3008670" ~ "326275", # deer lodge
+                        ncesID == "3004440" ~ "1268082", #box elder
+                        ncesID == "3024200" ~ "64954",
+                        ncesID == "3023040" ~  "400503"
+                          )) 
 
 
 MT_sd_acfr <- readRDS("data/acfrs_data.RDS") %>% 
