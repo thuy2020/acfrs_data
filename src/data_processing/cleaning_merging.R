@@ -261,7 +261,10 @@ county_census_acfr_2023 <- county_census_acfr_2023_ %>%
   mutate(name_census = str_squish(name_census)) %>% 
   
   #flg_backfilled: 13 in OK, 20 in SD
-  mutate(flg_backfilled = ifelse(year == 2022, 1, 0)) %>% 
+  mutate(flg_backfilled = case_when(
+         is.na(id) ~ 0,
+         year == 2022 ~ 1,
+         TRUE ~ 0)) %>% 
   
   #flg_acfr
   mutate(flg_acfr = ifelse(!is.na(id), 1, 0)) %>%  
@@ -601,7 +604,7 @@ mutate(flg_county = case_when(id %in% consolidated_county_2023$id | id == "11156
 
 ######Coordinates######
 
-coordinates_muni <- readRDS("output/municipalities_with_coordinates.rds") %>% 
+coordinates_muni <- readRDS("output/archive/municipalities_with_coordinates.rds") %>% 
   select(state.abb, id, latitude, longitude, geo_id) %>% 
   drop_na(latitude) %>% 
   drop_na(longitude) %>% 
@@ -618,9 +621,28 @@ coordinates_muni <- readRDS("output/municipalities_with_coordinates.rds") %>%
   mutate(longitude = case_when(geo_id == "3651000" ~ -73.9739, 
                                TRUE ~ longitude)) 
   
+  
+  
+  # get some extra coordinates manually
+  extra_entities <- readxl::read_xlsx("data/coordinates_extra_entities.xlsx") %>% 
+    mutate(longitude_extra = longitude,
+           latitude_extra = latitude) %>% 
+    select(state.abb, name, latitude_extra, longitude_extra)
+  
+  #########
+  
+  municipality_final_2023__ <- municipality_final_2023 %>% 
+    left_join(extra_entities, by = c("state.abb", "name")) %>% 
+    mutate(
+      latitude = ifelse(is.na(latitude), latitude_extra, latitude),
+      longitude = ifelse(is.na(longitude), longitude_extra, longitude)
+    ) %>%
+    select(-latitude_extra, -longitude_extra)
+  
 # check missing coordinates:
   
-  municipality_final_2023 %>% select(state.abb, name, latitude, longitude, geo_id, population) %>% 
+  municipality_final_2023__ %>% 
+    select(state.abb, name, latitude, longitude, geo_id, population) %>% 
     filter(is.na(latitude) | is.na(latitude)) %>% 
     #summarise(tot = sum(population, na.rm = TRUE)) %>% 
    View()
@@ -635,7 +657,7 @@ municipality_final_2023 %>%
   filter(duplicated(.) | duplicated(., fromLast = TRUE)) 
 
 #####Final result muni#####
-municipality_final_2023 %>% 
+municipality_final_2023__ %>% 
   write.csv(file = paste0("output/all_municipalities_2023_", format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
 
 compare_latest_csv_versions(

@@ -8,12 +8,11 @@
 # - Robust error handling
 # - Multiple geocoding methods
 
-# Load required libraries
 library(tidyverse)
-library(tidygeocoder)  # For geocoding
-library(stringr)       # For string manipulation
-library(readr)         # For reading/writing CSV
-library(dplyr)         # For data manipulation
+library(tidygeocoder)  
+library(stringr)       
+library(readr)        
+library(dplyr)     
 
 # Configuration
 CONFIG <- list(
@@ -389,3 +388,39 @@ municipalities_to_geocode %>%
   filter(str_detect(clean_name, "new york")) %>%
   select(name, clean_name, address) %>%
   View()
+########
+
+# Install if needed
+# install.packages("tidygeocoder")
+
+library(tidygeocoder)
+library(dplyr)
+
+
+# Load your CSV
+nocoordinate <- read.csv("tmp/nocoordinate.csv")
+
+# 1️⃣ Create the query column
+nocoordinate <- nocoordinate %>%
+  mutate(query = paste(name, state.abb, "USA", sep = ", "))
+
+# ✅ Check that 'query' exists
+head(nocoordinate$query)
+
+# 2️⃣ Now geocode
+result <- nocoordinate %>%
+  geocode(address = query, method = 'osm', lat = latitude, long = longitude)
+
+result %>% 
+  rename(latitude = latitude...9,
+         longitule = longitude...10) %>% 
+  select(-c(1, 4, 5, 8)) %>% 
+  arrange(desc(population))
+  
+ # write.csv("data/coordinates_extra_entities_test.csv")
+# View result
+result %>% View()
+
+# Write to file if you want
+# write.csv(result, "nocoordinate_with_coords.csv", row.names = FALSE)
+
