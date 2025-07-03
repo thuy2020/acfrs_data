@@ -364,63 +364,8 @@ main()
 
 #check result
 
-df_municipalities_with_coordinates <- readRDS("output/municipalities_with_coordinates.rds")
-
-df_municipalities_with_coordinates %>% filter(name == "new york") %>% View()
-  # select(state.abb, id, name, latitude, longitude, population, geo_id) %>% 
-  # arrange(desc(population)) %>% 
-  # drop_na(latitude) %>% 
-  # drop_na(longitude) %>% 
-  # distinct() %>%  View()
- # filter(is.na(latitude)) %>% 
-  
-  
-library(tidygeocoder)
-
-# Try NYC example with `full_results`
-result <- geo(address = "New York, New York, USA",
-              method = "osm",
-              full_results = TRUE)
-
-result %>% View()
-
-municipalities_to_geocode %>%
-  filter(str_detect(clean_name, "new york")) %>%
-  select(name, clean_name, address) %>%
-  View()
-########
-
-# Install if needed
-# install.packages("tidygeocoder")
-
-library(tidygeocoder)
-library(dplyr)
+#df_municipalities_with_coordinates <- readRDS("output/municipalities_with_coordinates.rds")
 
 
-# Load your CSV
-nocoordinate <- read.csv("tmp/nocoordinate.csv")
 
-# 1️⃣ Create the query column
-nocoordinate <- nocoordinate %>%
-  mutate(query = paste(name, state.abb, "USA", sep = ", "))
-
-# ✅ Check that 'query' exists
-head(nocoordinate$query)
-
-# 2️⃣ Now geocode
-result <- nocoordinate %>%
-  geocode(address = query, method = 'osm', lat = latitude, long = longitude)
-
-result %>% 
-  rename(latitude = latitude...9,
-         longitule = longitude...10) %>% 
-  select(-c(1, 4, 5, 8)) %>% 
-  arrange(desc(population))
-  
- # write.csv("data/coordinates_extra_entities_test.csv")
-# View result
-result %>% View()
-
-# Write to file if you want
-# write.csv(result, "nocoordinate_with_coords.csv", row.names = FALSE)
 

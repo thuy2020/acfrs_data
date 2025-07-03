@@ -610,41 +610,41 @@ coordinates_muni <- readRDS("output/archive/municipalities_with_coordinates.rds"
   drop_na(longitude) %>% 
   distinct() 
 
+# get some extra coordinates manually
+extra_entities <- readxl::read_xlsx("data/coordinates_extra_entities.xlsx") %>% 
+  mutate(name = str_squish(name)) %>% 
+  #filter(name == "louisville/jefferson county metro government")
+  mutate(longitude_extra = longitude,
+         latitude_extra = latitude) %>% 
+  select(state.abb, name, latitude_extra, longitude_extra)
+
 
   municipality_final_2023 <- municipality_all_2023_flag %>% 
     
-  left_join(coordinates_muni, by = c("state.abb", "id", "geo_id")) %>% 
-  # fixing some coordinate 
+  # join coordinate result 
+    left_join(coordinates_muni, by = c("state.abb", "id", "geo_id")) %>% 
+  
+    # fixing some coordinate 
   mutate(latitude = case_when(geo_id == "3651000" ~ 40.7555, #NYC
                               TRUE ~ latitude)) %>% 
   
   mutate(longitude = case_when(geo_id == "3651000" ~ -73.9739, 
-                               TRUE ~ longitude)) 
+                               TRUE ~ longitude)) %>% 
   
-  
-  
-  # get some extra coordinates manually
-  extra_entities <- readxl::read_xlsx("data/coordinates_extra_entities.xlsx") %>% 
-    mutate(longitude_extra = longitude,
-           latitude_extra = latitude) %>% 
-    select(state.abb, name, latitude_extra, longitude_extra)
-  
-  #########
-  
-  municipality_final_2023__ <- municipality_final_2023 %>% 
+  # add extra coordinate collected manually
     left_join(extra_entities, by = c("state.abb", "name")) %>% 
+  
     mutate(
       latitude = ifelse(is.na(latitude), latitude_extra, latitude),
       longitude = ifelse(is.na(longitude), longitude_extra, longitude)
     ) %>%
     select(-latitude_extra, -longitude_extra)
+   
   
 # check missing coordinates:
-  
-  municipality_final_2023__ %>% 
+  municipality_final_2023 %>% 
     select(state.abb, name, latitude, longitude, geo_id, population) %>% 
     filter(is.na(latitude) | is.na(latitude)) %>% 
-    #summarise(tot = sum(population, na.rm = TRUE)) %>% 
    View()
 
 ######Check duplicates####
@@ -657,7 +657,7 @@ municipality_final_2023 %>%
   filter(duplicated(.) | duplicated(., fromLast = TRUE)) 
 
 #####Final result muni#####
-municipality_final_2023__ %>% 
+municipality_final_2023 %>% 
   write.csv(file = paste0("output/all_municipalities_2023_", format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
 
 compare_latest_csv_versions(
@@ -665,8 +665,6 @@ compare_latest_csv_versions(
   prefix = "all_municipalities_2023",
   output_excel = "output/municipalities_changes_report.xlsx"
 )
-
-municipality_final_2023 %>% filter(flg_acfr == 0) %>% View()
 
 # this part to display in progress report app:
 # missing_top300_cities_2023 %>% 
