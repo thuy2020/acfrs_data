@@ -417,10 +417,8 @@ nrow(municipality_all_ %>% filter(is.na(population)))
 
 ######phase 1:got population after using join by geo_id above#####
 muni_phase1 <- municipality_all_ %>% 
-  filter(!is.na(population)) %>% 
-  
-  #TODO: temporary fixed. Already deleted 1 dup on portal 
-  filter(!id %in% c("1270328","68389"))
+  filter(!is.na(population)) 
+
 
 #identify duplicated - NONE in this phase1
 muni_phase1 %>% 
@@ -689,11 +687,11 @@ municipality_final_2023 %>%
 municipality_final_2023 %>% 
   write.csv(file = paste0("output/all_municipalities_2023_", format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
 
-# compare_latest_csv_versions(
-#   folder = "output",
-#   prefix = "all_municipalities_2023",
-#   output_excel = "output/municipalities_changes_report.xlsx"
-# )
+compare_latest_csv_versions(
+  folder = "output",
+  prefix = "all_municipalities_2023",
+  output_excel = "output/municipalities_changes_report.xlsx"
+)
 
 # this part to display in progress report app:
 # missing_top300_cities_2023 %>% 
