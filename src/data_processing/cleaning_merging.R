@@ -255,6 +255,10 @@ county_census_acfr_2023_ <- county_census_acfr_2023_round1_2 %>%
 #Total: 
 nrow(county_census_acfr_2023_) #3144 entities in county file, including:
 
+county_census_acfr_2023_ %>%
+  add_count(id, name = "n") %>%   # count by `id`, name the count column `n`
+  filter(n > 1) %>%               # show rows where id occurs more than once
+  distinct(id, .keep_all = TRUE) # optional: keep only one row per duplicate id
 
 #####Adding flags####
 county_census_acfr_2023 <- county_census_acfr_2023_ %>% 
@@ -350,6 +354,7 @@ compare_latest_csv_versions(
 
 #####Joining ACFRs muni & census#####
 
+
 #Step 1: get ACFRs municipalities
 
 # IDs to exclude: those in county_acfrs_2023 but NOT in consolidated
@@ -371,8 +376,25 @@ nrow(municipality_acfrs_ %>% filter(year == 2023))
 
 #Step 2: Join with census_municipalities to get population using geo_id
 
-municipality_all_ <- municipality_acfrs_ %>%  
+######dictionary######
+dictionary_acfrID_censusGEOID <- readxl::read_xlsx("data/_dictionary_acfrID_censusGEOID.xlsx") %>% 
+  drop_na() %>%  select(state.abb, id, geo_id) %>% 
+  mutate(geo_id = as.character(geo_id), 
+         geo_id = str_squish(geo_id), 
+         id = str_squish(id)) %>% 
+  rename(correct_geoID = geo_id) 
 
+
+######fixing some geo_id#####
+municipality_all_0 <- municipality_acfrs_ %>% 
+  mutate(id = as.character(id)) %>% 
+  left_join(dictionary_acfrID_censusGEOID, by = c("id", "state.abb")) %>%
+  mutate(geo_id = coalesce(correct_geoID, geo_id)) %>%
+  select(-correct_geoID)
+
+
+municipality_all_ <- municipality_all_0 %>%  
+  
   # join with Census, exclude some
   left_join(
     (census_all %>%
@@ -386,14 +408,19 @@ municipality_all_ <- municipality_acfrs_ %>%
      ), 
             by= c("geo_id", "state.abb", "state.name"))  
 
+
 #####Get population in those missing#####
 
 #check missing population
 nrow(municipality_all_ %>% filter(is.na(population)))
 
+
 ######phase 1:got population after using join by geo_id above#####
 muni_phase1 <- municipality_all_ %>% 
-  filter(!is.na(population))
+  filter(!is.na(population)) %>% 
+  
+  #TODO: temporary fixed. Already deleted 1 dup on portal 
+  filter(!id %in% c("1270328","68389"))
 
 #identify duplicated - NONE in this phase1
 muni_phase1 %>% 
@@ -476,22 +503,16 @@ muni_phase3 %>%
   filter((duplicated(.) | duplicated(., fromLast = TRUE)))
 
 ######phase 4: manually solve the remaining dup######
-dictionary_acfrID_censusGEOID <- readxl::read_xlsx("data/_dictionary_acfrID_censusGEOID.xlsx") %>% 
-  drop_na() %>% 
-  mutate(geo_id = as.character(geo_id), 
-         geo_id = str_squish(geo_id), 
-         id = str_squish(id))
 
 muni_phase4 <- municipality_all_ %>% 
   mutate(id = as.character(id)) %>% 
+  
   filter(!id %in% c(muni_phase1$id, muni_phase2$id, muni_phase3$id)) %>%    # remaining part after muni_phase2
   select(-c(geo_id, population)) %>% 
-  #filter(id %in% c("68388", "1270205")) %>% 
+ 
   select(state.abb, state.name, id) %>% 
-  left_join(dictionary_acfrID_censusGEOID) %>% 
-  #filter(geo_id == "4558030") %>% 
-  #select(state.abb, state.name, id, geo_id) %>% 
-  
+  left_join(dictionary_acfrID_censusGEOID %>% rename(geo_id = correct_geoID)) %>% 
+
 #select(-name_census) %>% 
   
   left_join(census_muni, by = c("state.abb", "state.name", "geo_id")) %>% 
@@ -520,11 +541,17 @@ muni_population <- rbind(
       muni_phase4_no_pop) %>% 
 
   append_url() %>% select(-identifier) %>% 
+  
 #fixing some geo_id
   mutate(geo_id = case_when(id == "138430" ~ "0827425",
                             id == "39880" ~ "5531000", # green bay
                             id == "1265296" ~ "0660620", #CA richmond
-                            TRUE ~ geo_id)) 
+                            id == "71110" ~ "1983145", #webster city city / diff from webster city 1983055
+                            id == "1266152" ~ "4254688", # northampton township in Bucks county PA
+                            id == "131132" ~ "5508225", #bloomer city WI
+                            TRUE ~ geo_id))  
+
+
 muni_population %>% 
   group_by(year) %>% 
   summarise(tot = sum(population, na.rm = TRUE))
@@ -608,7 +635,8 @@ coordinates_muni <- readRDS("output/archive/municipalities_with_coordinates.rds"
   select(state.abb, id, latitude, longitude, geo_id) %>% 
   drop_na(latitude) %>% 
   drop_na(longitude) %>% 
-  distinct() 
+  distinct() %>% 
+  mutate(id = as.character(id))
 
 # get some extra coordinates manually
 extra_entities <- readxl::read_xlsx("data/coordinates_extra_entities.xlsx") %>% 
@@ -619,6 +647,7 @@ extra_entities <- readxl::read_xlsx("data/coordinates_extra_entities.xlsx") %>%
   select(state.abb, name, latitude_extra, longitude_extra)
 
 
+#### final
   municipality_final_2023 <- municipality_all_2023_flag %>% 
     
   # join coordinate result 
@@ -644,7 +673,7 @@ extra_entities <- readxl::read_xlsx("data/coordinates_extra_entities.xlsx") %>%
 # check missing coordinates:
   municipality_final_2023 %>% 
     select(state.abb, name, latitude, longitude, geo_id, population) %>% 
-    filter(is.na(latitude) | is.na(latitude)) %>% 
+    filter(is.na(latitude) | is.na(latitude)) %>% #write.csv("tmp/missing_coordinates.csv")
    View()
 
 ######Check duplicates####
@@ -660,11 +689,11 @@ municipality_final_2023 %>%
 municipality_final_2023 %>% 
   write.csv(file = paste0("output/all_municipalities_2023_", format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
 
-compare_latest_csv_versions(
-  folder = "output",
-  prefix = "all_municipalities_2023",
-  output_excel = "output/municipalities_changes_report.xlsx"
-)
+# compare_latest_csv_versions(
+#   folder = "output",
+#   prefix = "all_municipalities_2023",
+#   output_excel = "output/municipalities_changes_report.xlsx"
+# )
 
 # this part to display in progress report app:
 # missing_top300_cities_2023 %>% 
@@ -783,13 +812,14 @@ filter(!is.na(ncesID)) %>%
 
 #TODO: fill ncesID in these entities
 school_districts_final_2023_ %>% filter(is.na(ncesID)) %>% 
-  select(state.abb, id, name)
+  select(state.abb, id, name) %>% View()
 
 #####Final#####
 school_districts_final_2023_ %>% 
   write.csv(file = paste0("output/all_schooldistricts_2023_", 
                           format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
 
+typeof(school_districts_final_2023_$pop)
 
 ####Tracking changes####
 ##########

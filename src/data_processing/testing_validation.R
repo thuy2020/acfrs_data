@@ -44,16 +44,16 @@ state <- do.call(rbind, lapply(2020:2023, function(year) test1(state_all, year))
 
 
 # county
-test1_county <- do.call(rbind, lapply(2020:2023, function(year) test1(county_all, year))) %>% 
+test1_county <- do.call(rbind, lapply(2020:2023, function(year) test1(county_census_acfr_2023, year))) %>% 
   arrange(desc(total_liabilities))%>% 
   filter(state.abb != "NJ")
 
 # municipality
-test1_municipality <- do.call(rbind, lapply(2020:2023, function(year) test1(municipality_all, year))) %>% 
+test1_municipality <- do.call(rbind, lapply(2020:2023, function(year) test1(municipality_final_2023, year))) %>% 
   arrange(desc(total_liabilities))
 
 # school 
-school_districts <- school_districts_all %>% rename(population = enrollment_23)
+school_districts <- school_districts_final_2023_ %>% rename(population = enrollment_23)
 
 test1_school_districts <- do.call(rbind, lapply(2020:2023, function(year) test1(school_districts, year))) %>% 
   arrange(desc(total_liabilities)) 
@@ -68,6 +68,7 @@ test1_2023 <- test1_result_allyears %>% filter(year == 2023)
 View(test1_2023)
 
 test1_2023 %>% write.csv("tmp/test1.csv")
+
 ####Test 2####
 # total_liabilities GREATER THAN total_assets
 # total liabilities can sometimes be greater than total assets, but those cases are generally anomalies, 
@@ -94,12 +95,12 @@ test2_state_all <- do.call(rbind, lapply(2020:2023, function(year) test2(state_a
 
 
 ## Counties
-test2_county_all <- do.call(rbind, lapply(2023, function(year) test2(county_all, year))) %>% 
+test2_county_all <- do.call(rbind, lapply(2023, function(year) test2(county_census_acfr_2023, year))) %>% 
   arrange(desc(total_liabilities))
 
 
 ## Municipalities
-test2_municipality_all <- do.call(rbind, lapply(2023, function(year) test2(municipality_all, year))) %>% 
+test2_municipality_all <- do.call(rbind, lapply(2023, function(year) test2(municipality_final_2023, year))) %>% 
   arrange(desc(total_liabilities))
 
 
@@ -142,7 +143,7 @@ test3 <- function(df,year){
 test3_state_all <- do.call(rbind, lapply(2020:2023, function(year) test3(state_all, year))) 
 View(test3_state_all)
 
-test3_county_all <- do.call(rbind, lapply(2020:2023, function(year) test3(county_all, year))) 
+test3_county_all <- do.call(rbind, lapply(2020:2023, function(year) test3(county_census_acfr_2023, year))) 
 
 
 test3_municipality_all <- do.call(rbind, lapply(2020:2023, function(year) test3(municipality_all, year))) 
@@ -218,12 +219,18 @@ columns_to_test <- c(
   "bonds_outstanding", 
   "loans_outstanding", 
   "notes_outstanding",
-  "net_pension_liability", 
+  
+  "net_pension_liability",
+  "net_pension_assets",
   "net_opeb_liability",
+  "net_opeb_assets",
+  
   "total_liabilities",
   "current_liabilities",
   
   "total_assets",
+  "current_assets",
+  "compensated_absenses",
   
   "revenues",
   "expenses"
@@ -278,4 +285,148 @@ writexl::write_xlsx(results_list_school, path = "tmp/YOY_changes_10_school.xlsx"
 
 compare_excel_files("tmp/YOY_changes_10_states.xlsx", newfile_path)
 
+####Test 5 - per capital####
 
+per_capita_columns <- c(
+  "net_pension_liability_per_capita",
+  "net_pension_assets_per_capita",
+  "net_opeb_liability_per_capita",
+  "net_opeb_assets_per_capita",
+  "total_liabilities_per_capita",
+  "current_liabilities_per_capita",
+  "total_assets_per_capita",
+  "current_assets_per_capita",
+  "revenues_per_capita",
+  "expenses_per_capita",
+  "bonds_notes_loans_per_capita"
+)
+
+######state######
+state_23_percapita <- state_all %>% 
+  filter(year == 2023) %>% 
+  select(state.abb, name, id, population,
+         any_of(columns_to_test)) %>% 
+  rowwise() %>% 
+  mutate(bonds_notes_loans = sum(c_across(c(bonds_outstanding,
+                                            notes_outstanding, 
+                                            loans_outstanding)), na.rm = TRUE)) %>% 
+  ungroup() %>% 
+  mutate(across(any_of(columns_to_test), ~ .x /population, .names = "{.col}_per_capita")) %>% 
+  mutate(bonds_notes_loans_per_capita = bonds_notes_loans / population) %>% 
+  select(state.abb, name, id, contains("_per_capita")) %>% 
+  select(-c(4:6)) 
+#%>% write_xlsx("tmp/state_percapita_validation.xlsx")
+ # View()
+  
+  
+  # Create a named list of dataframes for each sheet
+  state_sheets_list <- lapply(per_capita_columns, function(col) {
+    state_23_percapita %>%
+      select(state.abb, name, id, all_of(col))
+  })
+  
+  # Set sheet names
+  names(state_sheets_list) <- per_capita_columns
+  
+  write_xlsx(state_sheets_list, path = "tmp/state_per_capita_metrics.xlsx")
+
+  
+#####municipalities#####
+  
+  muni_23_percapita <- municipality_all_2023 %>% 
+    select(state.abb, name, id, population,
+           any_of(columns_to_test)) %>% 
+    rowwise() %>% 
+    mutate(bonds_notes_loans = sum(c_across(c(bonds_outstanding,
+                                              notes_outstanding, 
+                                              loans_outstanding)), na.rm = TRUE)) %>% 
+    ungroup() %>% 
+    mutate(across(any_of(columns_to_test), ~ .x /population, .names = "{.col}_per_capita")) %>% 
+    mutate(bonds_notes_loans_per_capita = bonds_notes_loans / population) %>% 
+    select(state.abb, name, id, population, contains("_per_capita")) %>% 
+    select(-c(5:7)) 
+  #%>% write_xlsx("tmp/state_percapita_validation.xlsx")
+  # View()
+  
+  per_capita_columns <- c(
+    "net_pension_liability_per_capita",
+    "net_pension_assets_per_capita",
+    "net_opeb_liability_per_capita",
+    "net_opeb_assets_per_capita",
+    "total_liabilities_per_capita",
+    "current_liabilities_per_capita",
+    "total_assets_per_capita",
+    "current_assets_per_capita",
+    "revenues_per_capita",
+    "expenses_per_capita",
+    "bonds_notes_loans_per_capita"
+  )
+  
+ # Filter for outliers and create a list of dataframes
+  muni_sheets_list <- lapply(per_capita_columns, function(col) {
+    x <- muni_23_percapita[[col]]
+    q1 <- quantile(x, 0.25, na.rm = TRUE)
+    q3 <- quantile(x, 0.75, na.rm = TRUE)
+    iqr <- q3 - q1
+    threshold <- q3 + 1.5 * iqr
+    
+    muni_23_percapita %>%
+      filter(.data[[col]] >= threshold) %>%
+      select(state.abb, name, id, population, all_of(col))
+  })
+  
+  # Step 4: Set sheet names and export
+  names(muni_sheets_list) <- per_capita_columns
+  
+  write_xlsx(muni_sheets_list, path = "tmp/muni_per_capita_outliers_with_population.xlsx")
+  
+  
+  
+  #####counties#####
+  
+  county_23_percapita <- county_census_acfr_2023 %>% 
+    select(state.abb, name, id, population,
+           any_of(columns_to_test)) %>% 
+    rowwise() %>% 
+    mutate(bonds_notes_loans = sum(c_across(c(bonds_outstanding,
+                                              notes_outstanding, 
+                                              loans_outstanding)), na.rm = TRUE)) %>% 
+    ungroup() %>% 
+    mutate(across(any_of(columns_to_test), ~ .x /population, .names = "{.col}_per_capita")) %>% 
+    mutate(bonds_notes_loans_per_capita = bonds_notes_loans / population) %>% 
+    select(state.abb, name, id, population, contains("_per_capita")) %>% 
+    select(-c(5:7)) 
+
+  
+  per_capita_columns <- c(
+    "net_pension_liability_per_capita",
+    "net_pension_assets_per_capita",
+    "net_opeb_liability_per_capita",
+    "net_opeb_assets_per_capita",
+    "total_liabilities_per_capita",
+    "current_liabilities_per_capita",
+    "total_assets_per_capita",
+    "current_assets_per_capita",
+    "revenues_per_capita",
+    "expenses_per_capita",
+    "bonds_notes_loans_per_capita"
+  )
+  
+  # Filter for outliers and create a list of dataframes
+  county_sheets_list <- lapply(per_capita_columns, function(col) {
+    x <- county_23_percapita[[col]]
+    q1 <- quantile(x, 0.25, na.rm = TRUE)
+    q3 <- quantile(x, 0.75, na.rm = TRUE)
+    iqr <- q3 - q1
+    threshold <- q3 + 1.5 * iqr
+    
+    county_23_percapita %>%
+      filter(.data[[col]] >= threshold) %>%
+      select(state.abb, name, id, population, all_of(col))
+  })
+  
+  # Step 4: Set sheet names and export
+  names(county_sheets_list) <- per_capita_columns
+  
+  write_xlsx(county_sheets_list, path = "tmp/county_per_capita_outliers.xlsx")
+  
