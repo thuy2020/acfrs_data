@@ -700,7 +700,12 @@ compare_latest_csv_versions(
 # select(-c(geo_id)) -> missing_top300_muni
 
 ####School districts####
-dictionary <- readRDS("data/dictionary.RDS") 
+dictionary <- readRDS("data/dictionary.RDS") %>% 
+  #TODO: fix this in dictionary processing file
+  mutate(ncesID = case_when(id == "1269433" ~ "618870",
+                            id == "54044" ~ "2314794",
+                            TRUE ~ as.character(ncesID))) %>% 
+  distinct()
 
 school_districts_ <- readRDS("data/acfrs_data.RDS") %>% 
   filter(category == "School District") %>% 
@@ -817,7 +822,6 @@ school_districts_final_2023_ %>%
   write.csv(file = paste0("output/all_schooldistricts_2023_", 
                           format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
 
-typeof(school_districts_final_2023_$pop)
 
 ####Tracking changes####
 ##########

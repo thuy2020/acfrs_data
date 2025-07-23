@@ -333,7 +333,8 @@ state_23_percapita <- state_all %>%
   
 #####municipalities#####
   
-  muni_23_percapita <- municipality_all_2023 %>% 
+  #muni_23_percapita <- municipality_all_2023 
+  muni_23_percapita <- municipality_final_2023 %>% 
     select(state.abb, name, id, population,
            any_of(columns_to_test)) %>% 
     rowwise() %>% 
@@ -378,7 +379,7 @@ state_23_percapita <- state_all %>%
   # Step 4: Set sheet names and export
   names(muni_sheets_list) <- per_capita_columns
   
-  write_xlsx(muni_sheets_list, path = "tmp/muni_per_capita_outliers_with_population.xlsx")
+  write_xlsx(muni_sheets_list, path = "tmp/muni_per_capita_outliers_with_population_Jul21.xlsx")
   
   
   
@@ -429,4 +430,60 @@ state_23_percapita <- state_all %>%
   names(county_sheets_list) <- per_capita_columns
   
   write_xlsx(county_sheets_list, path = "tmp/county_per_capita_outliers.xlsx")
+  
+  
+  
+  
+######schools#####
+  
+  school_23_percapita <- school_districts_final_2023_ %>% 
+    rename(population = enrollment_23) %>% 
+    select(state.abb, name, id, ncesID, population,
+           any_of(columns_to_test)) %>% 
+    rowwise() %>% 
+    mutate(bonds_notes_loans = sum(c_across(c(bonds_outstanding,
+                                              notes_outstanding, 
+                                              loans_outstanding)), na.rm = TRUE)) %>% 
+    ungroup() %>% 
+    mutate(across(any_of(columns_to_test), ~ .x /population, .names = "{.col}_per_capita")) %>% 
+    mutate(bonds_notes_loans_per_capita = bonds_notes_loans / population) %>% 
+    select(state.abb, name, id, ncesID, population, contains("_per_capita")) %>% 
+    select(-c(bonds_outstanding_per_capita, 
+              loans_outstanding_per_capita,
+              notes_outstanding_per_capita )) 
+  
+  
+  per_capita_columns <- c(
+    "net_pension_liability_per_capita",
+    "net_pension_assets_per_capita",
+    "net_opeb_liability_per_capita",
+    "net_opeb_assets_per_capita",
+    "total_liabilities_per_capita",
+    "current_liabilities_per_capita",
+    "total_assets_per_capita",
+    "current_assets_per_capita",
+    "revenues_per_capita",
+    "expenses_per_capita",
+    "bonds_notes_loans_per_capita"
+  )
+  
+  # Filter for outliers and create a list of dataframes
+  school_sheets_list <- lapply(per_capita_columns, function(col) {
+    x <- school_23_percapita[[col]]
+    q1 <- quantile(x, 0.25, na.rm = TRUE)
+    q3 <- quantile(x, 0.75, na.rm = TRUE)
+    iqr <- q3 - q1
+    threshold <- q3 + 1.5 * iqr
+    
+    school_23_percapita %>%
+      filter(.data[[col]] >= threshold) %>%
+      select(state.abb, name, id, ncesID, population, all_of(col))
+  })
+  
+  # Step 4: Set sheet names and export
+  names(school_sheets_list) <- per_capita_columns
+  
+  write_xlsx(school_sheets_list, path = "tmp/school_per_capita_outliers_ncesID_July22.xlsx")
+  
+  
   

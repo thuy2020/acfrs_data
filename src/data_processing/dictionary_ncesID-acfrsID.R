@@ -33,9 +33,12 @@ dictionary_fuzzy_manual <- readxl::read_xls("data/_dictionary_fuzzy_match1.xls")
 
  
 # id in dictionary but no longer exist in acfr database due to deleted, merged acfrs 
-  id_nolonger_exist <- (anti_join(dictionary_tmp, school_districts_all, by = "id"))
+  id_nolonger_exist <- c("1238328")
+    
+    #TODO: write this to a csv 
+  #(anti_join(dictionary_tmp, school_districts_all, by = "id"))
   
-  id_delted <- c("1238328")
+
   
 #####Montana#####
 #In Montana, some separate school districts are reported in one acfrs
@@ -45,7 +48,7 @@ dictionary_fuzzy_manual <- readxl::read_xls("data/_dictionary_fuzzy_match1.xls")
   
 ####Final merge####
   dictionary <- dictionary_tmp %>% 
-    filter(!id %in% id_nolonger_exist$id) %>% 
+    #filter(!id %in% id_nolonger_exist$id) %>% 
     add_count(ncesID) %>% filter(n == 1) %>% select(-n) %>% 
   
     # add fuzzy match result - strong match
