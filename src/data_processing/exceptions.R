@@ -11,7 +11,6 @@ source("src/data_processing/nces.R")
 
 ####Counties####
 
-
 ####Schools####
 #####New York City#######
 
@@ -134,8 +133,8 @@ final_data_DE <- bind_cols(nces_de, weighted_data) %>%
 #--> sum up enrollment of these NCES school districts to correspond to ACFR report
 MT_sd_pairs <- nces %>% filter(state.abb == "MT") %>% 
   #Pair of school districts in NCES but every 2 of them are covered in one ACFR ""|""
-filter(str_detect(name_nces, "billings|missoula|(great falls)|(flathead)|laurel|chester|butte|lodge|sidney|roundup|
-                  butte|bozeman|helena|whitefish|browning|polson|belgrade|thompson|bigfork|(box elder)")) %>% 
+filter(str_detect(name_nces, "billings|missoula|(great falls)|(flathead)|laurel|chester|butte|lodge|sidney|roundup|ronan|
+                  butte|bozeman|helena|whitefish|browning|polson|belgrade|thompson|bigfork|(box elder)|whitehall")) %>% 
  
    #these are not in any pair
 filter(!name_nces %in% c("helena flats elem", "east helena k-12", "heart butte k-12 schools",
@@ -159,6 +158,7 @@ drop_na(enrollment_23) %>%
   
   #create id column --> map these pairs to their acfr entities 
   #--> use this id to join back to get acfr data
+  #use ncesID of the elem school. 
   mutate(id = case_when(ncesID == "3003290" ~ "43827", 
                         ncesID == "3003870" ~ "35425",
                         ncesID == "3004560" ~ "35403",
@@ -177,11 +177,13 @@ drop_na(enrollment_23) %>%
                         ncesID == "3008670" ~ "326275", # deer lodge
                         ncesID == "3004440" ~ "1268082", #box elder
                         ncesID == "3024200" ~ "64954",
-                        ncesID == "3023040" ~  "400503"
+                        ncesID == "3023040" ~  "400503",
+                        ncesID == "3027810"~ "296174" #"whitehall"
+                        #ncesID ==
                           )) 
 
 
-MT_sd_acfr <- readRDS("data/acfrs_data.RDS") %>% 
+MT_sd_acfr <- readRDS("data/acfrs_data_Sep82025.RDS") %>% 
   filter(category == "School District") %>% 
   mutate(id = as.character(id)) %>% 
   select(any_of(fields_to_select)) %>% 

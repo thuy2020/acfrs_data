@@ -74,7 +74,7 @@ fetch_data <- function(years, con){
     select(-c(sum1, sum2, unable_to_review)) %>% 
     filter(!state.abb %in% c("MP", "GU", "PR", "FM"))
     
-  saveRDS(acfrs_data, "data/acfrs_data.RDS")
+  saveRDS(acfrs_data, "data/acfrs_data_Sep82025.RDS")
   
 }
 #Call function
@@ -84,7 +84,7 @@ fetch_data(c(2020, 2021, 2022, 2023), con)
 # make sure to close all connections 
 dbDisconnect(con)
 
-nrow(readRDS("data/acfrs_data.RDS"))
+nrow(readRDS("data/acfrs_data_Sep82025.RDS"))
 
 
 

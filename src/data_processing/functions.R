@@ -1,6 +1,11 @@
 # Load necessary library
 library(dplyr)
 library(stringdist)
+library(dplyr)
+library(readr)
+library(janitor)
+library(purrr)
+library(fs)
 
 
 # only select some fields to display on datatool
@@ -186,15 +191,12 @@ compare_excel_files <- function(file1, file2, id_col = "id", output_csv = NULL) 
   ))
 }
 
-
 compare_latest_csv_versions <- function(folder = "output", 
                                         prefix = NULL, 
-                                        id_col = "id", 
-                                        output_excel = NULL) {
+                                        id_col = "id") {
+  
   # List matching CSV files
   files <- list.files(folder, pattern = paste0("^", prefix, "_\\d{8}_\\d{4}\\.csv$"), full.names = TRUE)
-  
-  # Sort files by timestamp
   files_sorted <- files[order(files, decreasing = TRUE)]
   
   if (length(files_sorted) < 2) {
@@ -208,65 +210,84 @@ compare_latest_csv_versions <- function(folder = "output",
   cat("  🆕 New file: ", file_new, "\n")
   cat("  🪧 Old file: ", file_old, "\n\n")
   
-  df_new <- read_csv(file_new, show_col_types = FALSE) %>% janitor::clean_names()
-  df_old <- read_csv(file_old, show_col_types = FALSE) %>% janitor::clean_names()
+  df_new <- read_csv(file_new, show_col_types = FALSE) %>% clean_names()
+  df_old <- read_csv(file_old, show_col_types = FALSE) %>% clean_names()
   
-  # Compare shapes
   cat("📐 Rows & columns:\n")
   cat("  ➤ Old: ", nrow(df_old), "rows,", ncol(df_old), "columns\n")
   cat("  ➤ New: ", nrow(df_new), "rows,", ncol(df_new), "columns\n\n")
   
-  # Compare ID presence
+  # Compare IDs
   added_ids <- setdiff(df_new[[id_col]], df_old[[id_col]])
   removed_ids <- setdiff(df_old[[id_col]], df_new[[id_col]])
   
   cat("➕ Added IDs: ", length(added_ids), "\n")
   cat("➖ Removed IDs: ", length(removed_ids), "\n\n")
   
-  # Join on ID
-  joined <- inner_join(df_old, df_new, by = id_col, suffix = c("_old", "_new"))
-  common_cols <- intersect(names(df_old), names(df_new)) |> setdiff(id_col)
+  # De-duplicate if needed
+  df_old_dedup <- df_old %>% distinct(.data[[id_col]], .keep_all = TRUE)
+  df_new_dedup <- df_new %>% distinct(.data[[id_col]], .keep_all = TRUE)
   
-  # Track value-level changes
+  # Join old and new for shared IDs
+  joined <- inner_join(df_old_dedup, df_new_dedup, by = id_col, suffix = c("_old", "_new"))
+  
+  common_cols <- intersect(names(df_old), names(df_new)) |> setdiff(c(id_col, "x1"))
+  
+  # Helper columns (for clarity)
+  helper_cols <- c("state.abb", "name")
+  existing_helpers <- helper_cols[helper_cols %in% names(df_old)]
+  
+  # Find real changes
   changed_values <- purrr::map_dfr(common_cols, function(col) {
     old_col <- paste0(col, "_old")
     new_col <- paste0(col, "_new")
     joined %>%
       filter(!is.na(.data[[old_col]]) & !is.na(.data[[new_col]]) & .data[[old_col]] != .data[[new_col]]) %>%
-      select(!!id_col, all_of(old_col), all_of(new_col)) %>%
+      select(!!id_col,
+             any_of(paste0(existing_helpers, "_old")),
+             any_of(paste0(existing_helpers, "_new")),
+             all_of(old_col),
+             all_of(new_col)) %>%
       mutate(column = col)
   })
   
-  # Prepare Excel output
-  # Always create Excel report
-  df_added <- tibble(!!id_col := added_ids)
-  df_removed <- tibble(!!id_col := removed_ids)
+  df_added <- df_new %>% filter(.data[[id_col]] %in% added_ids) %>% 
+    select(all_of(c(id_col, existing_helpers)))
   
-  write_xlsx(
-    list(
-      "Changed Values" = changed_values,
-      "Added IDs" = df_added,
-      "Removed IDs" = df_removed
-    ),
-    path = output_excel
+  df_removed <- df_old %>% filter(.data[[id_col]] %in% removed_ids) %>% 
+    select(all_of(c(id_col, existing_helpers)))
+  
+  # Create summary log
+  summary_log <- tibble::tibble(
+    sheet = c("Changed_Values", "Added_IDs", "Removed_IDs"),
+    rows = c(nrow(changed_values), nrow(df_added), nrow(df_removed))
   )
   
-  if (nrow(changed_values) > 0 || length(added_ids) > 0 || length(removed_ids) > 0) {
-    cat("🔄 Found", nrow(changed_values), "changed values across columns.\n")
-    cat("📁 Report written to:", output_excel, "\n")
-  } else {
-    cat("✅ No changes found between files.\n")
-    cat("📁 Empty report written to:", output_excel, "\n")
-  }
+  # Create final Excel path in same folder
+  timestamp <- format(Sys.time(), "%Y%m%d_%H%M%S")
+  path_excel <- file.path(folder, paste0("comparison_", prefix, "_", timestamp, ".xlsx"))
+  
+  # Write to Excel (1 file, multiple sheets)
+  write_xlsx(
+    list(
+      Changed_Values = changed_values,
+      Added_IDs = df_added,
+      Removed_IDs = df_removed,
+      Summary = summary_log
+    ),
+    path = path_excel
+  )
+  
+  cat("✅ Excel report saved to:\n", path_excel, "\n")
   
   return(list(
     file_old = file_old,
     file_new = file_new,
-    added_ids = added_ids,
-    removed_ids = removed_ids,
-    changed_values = changed_values
+    changed_values = changed_values,
+    path_excel = path_excel
   ))
 }
+
 
 
 ####Fuzzy match dictionary####

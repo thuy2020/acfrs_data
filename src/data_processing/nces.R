@@ -77,7 +77,7 @@ nces <- import(here::here("data/ELSI_csv_export_6388370796396691352320.csv")) %>
   mutate(across(enrollment_20:enrollment_23, as.numeric))
 
 nrow(nces)
-
+nces %>% filter(state.abb == "MN") %>% View()
 #note: 1372 districts do not have enrollment
 nrow(nces %>% filter(enrollment_23 < 1))
 

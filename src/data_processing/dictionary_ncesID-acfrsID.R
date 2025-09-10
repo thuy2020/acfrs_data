@@ -6,83 +6,122 @@ library(dplyr)
 library(stringdist)
 source("src/data_processing/nces.R")
 
-#####Dic_13 Manual adding#####
+#####Dict_13 Manual adding#####
+id_nolonger_exist <- read.csv("tmp/id_nolonger_exist.csv")
 
-#This should over write all other code that generates dictionary
+#This should overwrite all other code that generates dictionary
 dict_13 <- readxl::read_xlsx("data/_dictionary_13.xlsx") %>% 
   select(id, ncesID, state.abb) %>% 
-  mutate(across(everything(), as.character))
+  mutate(across(everything(), as.character)) %>% distinct() 
 
+#####Dict_14 Manual adding#####
 dict_14 <- readxl::read_xlsx("data/_dictionary_14.xlsx") %>% 
-  select(id, ncesID, state.abb)
+  select(id, ncesID, state.abb) %>% 
+  drop_na(id) %>% 
+  #remove id no longer exist
+  filter(!id %in% id_nolonger_exist$id) %>% distinct() %>% 
+  mutate(ncesID = ifelse(nchar(ncesID) == 7 & str_detect(ncesID, "^0"), 
+                         str_remove(ncesID, "^0"), 
+                         ncesID)) %>% distinct()
 
-
-dictionary_tmp <- readRDS("data/_dictionary_tmp.RDS") %>% 
-  select(-name) %>% 
-  distinct() %>% 
-  filter(!id %in% c(dict_13$id, dict_14$id)) %>% 
-  filter(!ncesID %in% c(dict_13$ncesID, dict_14$ncesID)) 
-
-
-#####Fuzzy match#####
+#####Fuzzy match 1 #####
 dictionary_fuzzy_manual <- readxl::read_xls("data/_dictionary_fuzzy_match1.xls") %>% 
   drop_na(state.abb) %>% 
   select(id, ncesID, state.abb) %>% 
+  
+  #exclude those already in dict_13, dict_14
   filter(!id %in% dict_13$id) %>% 
-  filter(!ncesID %in% dict_13$ncesID)
+  filter(!id %in% dict_14$id) %>% 
+  filter(!ncesID %in% dict_13$ncesID) %>%
+  filter(!ncesID %in% dict_14$ncesID) 
 
- 
-# id in dictionary but no longer exist in acfr database due to deleted, merged acfrs 
-  id_nolonger_exist <- c("1238328")
-    
-    #TODO: write this to a csv 
-  #(anti_join(dictionary_tmp, school_districts_all, by = "id"))
+#####Fuzzy match 2 #####
+dictionary_fuzzy_manual_2 <- readxl::read_xlsx("data/_dictionary_fuzzy_match_sep082025.xlsx") %>% 
+  drop_na(state.abb) %>% 
+  select(id, ncesID, state.abb) %>% 
+  
+  #exclude those already in dict_13, dict_14, dictionary_fuzzy_manual
+  filter(!id %in% dict_13$id) %>% 
+  filter(!id %in% dict_14$id) %>% 
+  filter(!ncesID %in% dict_13$ncesID) %>%
+  filter(!ncesID %in% dict_14$ncesID)  %>% 
+  filter(!id %in% dictionary_fuzzy_manual$id)  %>% 
+  filter(!ncesID %in% dictionary_fuzzy_manual$ncesID)  
   
 
+#####Fuzzy match 3 #####
+dictionary_fuzzy_manual_3 <- read_csv("data/_dictionary_fuzzy_manual_3.csv") %>% 
+  drop_na(state.abb) %>% 
+  select(id, ncesID, state.abb) %>% 
   
-#####Montana#####
-#In Montana, some separate school districts are reported in one acfrs
-# so one acfr id get to map to 2 nces school districts
-  #--> resolve this in exceptions.R
+  #exclude those already in dict_13, dict_14, dictionary_fuzzy_manual, dictionary_fuzzy_manual_2
+  filter(!id %in% dict_13$id) %>% 
+  filter(!id %in% dict_14$id) %>% 
+  filter(!ncesID %in% dict_13$ncesID) %>%
+  filter(!ncesID %in% dict_14$ncesID)  %>% 
+  
+  filter(!id %in% dictionary_fuzzy_manual$id)  %>% 
+  filter(!ncesID %in% dictionary_fuzzy_manual$ncesID)  %>% 
+  
+  filter(!id %in% dictionary_fuzzy_manual_2$id)  %>% 
+  filter(!ncesID %in% dictionary_fuzzy_manual_2$ncesID)  
 
+#####Dict tmp (first batch) #####
+
+dictionary_tmp <- readRDS("data/_dictionary_tmp.RDS") %>% 
+  select(-name) %>% 
+  drop_na(id) %>% 
+  filter(ncesID != "099999") %>% 
+  filter(!id %in% id_nolonger_exist$id) %>% 
   
+  #exclude those already in dict_13, dict_14, dictionary_fuzzy_manual, dictionary_fuzzy_manual_2
+  filter(!id %in% dict_13$id) %>% 
+  filter(!id %in% dict_14$id) %>% 
+  filter(!ncesID %in% dict_13$ncesID) %>%
+  filter(!ncesID %in% dict_14$ncesID)  %>% 
+  
+  filter(!id %in% dictionary_fuzzy_manual$id)  %>% 
+  filter(!ncesID %in% dictionary_fuzzy_manual$ncesID)  %>% 
+  
+  filter(!id %in% dictionary_fuzzy_manual_2$id)  %>% 
+  filter(!ncesID %in% dictionary_fuzzy_manual_2$ncesID)  %>% 
+
+  filter(!id %in% dictionary_fuzzy_manual_3$id)  %>% 
+  filter(!ncesID %in% dictionary_fuzzy_manual_3$ncesID)  %>% distinct()
+
 ####Final merge####
-  dictionary <- dictionary_tmp %>% 
-    #filter(!id %in% id_nolonger_exist$id) %>% 
-    add_count(ncesID) %>% filter(n == 1) %>% select(-n) %>% 
-  
-    # add fuzzy match result - strong match
-    rbind(dictionary_fuzzy_manual) %>% 
-    
-    #add the ones got fixed manually
-    rbind(dict_13) %>% 
-    rbind(dict_14) %>% 
-    
-    mutate(ncesID = as.character(ncesID),
-           ncesID = str_squish(ncesID)) %>% 
-    
-    mutate(ncesID = ifelse(nchar(ncesID) == 7 & str_detect(ncesID, "^0"), 
-                           str_remove(ncesID, "^0"), 
-                           ncesID)) %>% 
-    
-    distinct() 
+dictionary <- rbind(dict_13, 
+      dict_14, 
+      dictionary_fuzzy_manual, 
+      dictionary_fuzzy_manual_2, 
+      dictionary_fuzzy_manual_3,
+      dictionary_tmp
+      ) %>% distinct() %>% 
+  drop_na(id, ncesID) %>%  
+  mutate(ncesID = case_when(id == "1269433" ~ "618870",#CA Jefferson Elementary School District (San Mateo)
+                            id == "67707" ~ "630520", #CA pioneer union school district (butte county)
+                            TRUE ~ as.character(ncesID))) %>%  
+
+  mutate(id = case_when(ncesID == "1802040" ~ "93917", #IN Northwestern School Corporation
+                         ncesID == "3173230" ~ "190314", #NE Madison Public Schools District No. 1
+                         ncesID == "3800406" ~ "1239333", #ND grafton public school district no. 18
+                        ncesID == "630520" ~ "67707",
+                         TRUE ~ as.character(id))) %>% distinct()
   
   
-  # there are duplicated ncesID, but this does not cause harm. Some ncesID mapped to 2 acfr id. But 1 of 
-  #the acfr id no longer exist.   
-  dup_ncesid <- dictionary %>% 
+  # check duplicates   
+  dictionary %>% 
     filter(duplicated(ncesID) | duplicated(ncesID, fromLast = TRUE)) %>%
-    select(ncesID, id)
+    select(ncesID, id) 
   
   dictionary %>% 
     filter(duplicated(id) | duplicated(id, fromLast = TRUE)) %>%
-    select(ncesID, id) %>% View()
-  
+    select(ncesID, id) 
   
   saveRDS(dictionary, "data/dictionary.RDS")
  
   
-  ####Final summary###
+####Summary####
   
   nces_matched <- nces %>% 
     filter(ncesID %in% dictionary$ncesID) %>% 

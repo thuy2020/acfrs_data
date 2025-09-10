@@ -22,11 +22,14 @@ options(scipen = 9999)
 # * Two main ways to solve the problems: 
 # - Use a "middle file" to link geo_id and government_ID
 # - Joining by names and states 
-acfrs_data <- readRDS("data/acfrs_data.RDS")
+
+acfrs_data <- readRDS("data/acfrs_data_Sep82025.RDS") %>% 
+  filter(category %in% c("General Purpose","School District"))
+
 ####General Purpose####
 
 # step 1: get all general purpose entities in acfrs, most contains governmentID
-acfrs_general_purpose <- readRDS("data/acfrs_data.RDS") %>% 
+acfrs_general_purpose <- readRDS("data/acfrs_data_Sep82025.RDS") %>% 
   filter(category == "General Purpose") %>% 
   rename(government_id = census_id) %>%  # census_id in Acfrs database is actually government_id
   # some government_id in ACFRs has 13 characters-> need to add 0
@@ -96,7 +99,7 @@ tibble(state.abb = "NV", state.name = "Nevada", id = 35504, geo_id = "32",
   # add flag
 mutate(flg_acfr = ifelse((state.abb == "NV" & year == 2023), 0, 1))  
   
-state_all %>% write.csv("output/all_states_2020_2023.csv")
+#state_all %>% write.csv("output/all_states_2020_2023.csv")
 
 state_all %>% 
   group_by(year) %>% 
@@ -109,12 +112,11 @@ state_all %>%
 compare_latest_csv_versions(
   folder = "output",
   prefix = "all_states_2023",
-  output_excel = "output/states_changes_report.xlsx"
+  id_col = "id"
 )
 
 ####### Counties########
 
-####NOTE####
 # more on consolidated city, county & county equivalent: 
 #https://www.census.gov/programs-surveys/geography/about/glossary.html#par_textimage_12
 
@@ -196,8 +198,11 @@ consolidated_county_2023 <- consolidated_county_dictionary %>%
 county_census_acfr_2023_round1_2 <- rbind(county_census_acfr_2023_round1,
         consolidated_county_2023)
 
+census_all %>% 
+  filter(sumlev == 50) %>% 
+  filter(funcstat == "F") 
 
-#####Round 3 - counties eported in municipalities#####
+#####Round 3 - counties reported in municipalities#####
 # the following counties are reported in municipalities ACFR because government funcstat = F -> not functional
 #--> mark these municipalities in ACFRs as counties too: 
 county_acfr_reported_as_muni <- acfrs_general_purpose %>% 
@@ -252,19 +257,11 @@ county_census_acfr_2023_ <- county_census_acfr_2023_round1_2 %>%
   #append URL
   append_url() %>% select(-identifier) %>% distinct()
 
-#Total: 
-nrow(county_census_acfr_2023_) #3144 entities in county file, including:
-
-county_census_acfr_2023_ %>%
-  add_count(id, name = "n") %>%   # count by `id`, name the count column `n`
-  filter(n > 1) %>%               # show rows where id occurs more than once
-  distinct(id, .keep_all = TRUE) # optional: keep only one row per duplicate id
-
 #####Adding flags####
 county_census_acfr_2023 <- county_census_acfr_2023_ %>% 
   mutate(name_census = str_squish(name_census)) %>% 
   
-  #flg_backfilled: 13 in OK, 20 in SD
+  #flg_backfilled: 12 in OK, 20 in SD
   mutate(flg_backfilled = case_when(
          is.na(id) ~ 0,
          year == 2022 ~ 1,
@@ -285,7 +282,7 @@ county_census_acfr_2023 <- county_census_acfr_2023_ %>%
   mutate(name = ifelse(is.na(name), name_census, name)) %>% 
   select(-c(cousub, concit, place, source_year, name_midfile, government_id, nces_district_id)) 
 
-#####Top300, Missing counties#####
+#####Missing counties#####
 #missing top 300:
 missing_top300_county <- county_census_acfr_2023 %>% 
   arrange(desc(population)) %>% 
@@ -305,15 +302,15 @@ missing_top300_county <- county_census_acfr_2023 %>%
   mutate(category = "county",
          year = 2023)
 
-# 9 counties TRUE missing as of June 13, 2025
-missing_top300_county %>% View()
+# 8 counties TRUE missing as of Sep 08, 2025
+missing_top300_county 
 
 
 # all counties that do not have acfr:
 county_census_acfr_2023 %>% 
-  filter(flg_acfr == 0) %>% View() #839 missing, 811 true missing
+  filter(flg_acfr == 0) %>% View() #750 missing
 
-#not true missing. Just not produced
+#Some are not true missing. Just not produced
 county_census_acfr_2023_ %>% 
   filter(is.na(id)) %>% 
   
@@ -325,10 +322,18 @@ county_census_acfr_2023_ %>%
   filter(!state.abb %in% c("CT", "RI")) %>%
 
   #not functional: eg. MA"hampden county"
-  filter(funcstat != "N") %>%
+  filter(funcstat != "N") %>% View()
 
-  #writexl::write_xlsx(paste0("tmp/missing_county_2023_", format(Sys.time(), "%Y%m%d_%H%M"), ".xlsx"))
-  View()
+#####Check dup####
+#Total: 
+nrow(county_census_acfr_2023_) #3144 entities in county file, including:
+
+#dup
+county_census_acfr_2023_ %>%
+  drop_na(id) %>% 
+  add_count(id, name = "n") %>%   # count by `id`, name the count column `n`
+  filter(n > 1) %>%               # show rows where id occurs more than once
+  distinct(id, .keep_all = TRUE) # optional: keep only one row per duplicate id
 
 #count by year
 county_acfrs %>% 
@@ -338,27 +343,23 @@ county_acfrs %>%
 county_census_acfr_2023 %>% 
   summarise(tot = sum(population, na.rm = TRUE))
 
-#####Final result counties####
-
+#####Final counties####
 county_census_acfr_2023 %>% 
   write.csv(file = paste0("output/all_counties_2023_", format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
 
 compare_latest_csv_versions(
   folder = "output",
   prefix = "all_counties_2023",
-  output_excel = "output/counties_changes_report.xlsx"
+  id_col = "id"
 )
 
 ####Municipalities####
 # Census calls Incorporated Place & Minor Civil Division
-
 #####Joining ACFRs muni & census#####
-
-
-#Step 1: get ACFRs municipalities
-
 # IDs to exclude: those in county_acfrs_2023 but NOT in consolidated
-ids_to_exclude <- setdiff(county_acfrs_2023$id, consolidated_county_2023$id)
+ids_to_exclude <- setdiff(county_acfrs_2023$id, consolidated_county_2023$id) %>% 
+  setdiff(111562) # HI Honolulu is in acfrs county, not in consolidated, but it IS also a muni
+
 
 municipality_acfrs_ <- acfrs_general_purpose %>% 
   filter(year == 2023) %>% 
@@ -384,13 +385,21 @@ dictionary_acfrID_censusGEOID <- readxl::read_xlsx("data/_dictionary_acfrID_cens
          id = str_squish(id)) %>% 
   rename(correct_geoID = geo_id) 
 
-
 ######fixing some geo_id#####
 municipality_all_0 <- municipality_acfrs_ %>% 
   mutate(id = as.character(id)) %>% 
   left_join(dictionary_acfrID_censusGEOID, by = c("id", "state.abb")) %>%
   mutate(geo_id = coalesce(correct_geoID, geo_id)) %>%
-  select(-correct_geoID)
+  select(-correct_geoID) %>% 
+  
+  #fix geo_id - some muni are pointed to geo_id of F or balance 
+  mutate(geo_id = case_when(id == "96441" ~ "134200", #GA augusta
+                            id == "62543" ~ "3106015", #NE boys town
+                            id == "68300" ~ "0952980", #CT newtown town
+                            id == "1036136" ~ "5526350", #WI fontana-on-geneva lake
+                            id == "1270511" ~ "3921238", #OH deerfield (warren ) county township
+                            id == "67688" ~ "0659514", #CA rancho palos verdes
+                            TRUE ~ geo_id))
 
 
 municipality_all_ <- municipality_all_0 %>%  
@@ -404,8 +413,7 @@ municipality_all_ <- municipality_all_0 %>%
        filter(!is.na(geo_id)) %>% 
        filter(!sumlev %in% c(071, 40, 50, 172)) %>% #071 = Minor Civil Division place part
        select(sumlev, state.abb, state.name, name_census, geo_id, population) %>% 
-       distinct() 
-     ), 
+       distinct()), 
             by= c("geo_id", "state.abb", "state.name"))  
 
 
@@ -414,21 +422,23 @@ municipality_all_ <- municipality_all_0 %>%
 #check missing population
 nrow(municipality_all_ %>% filter(is.na(population)))
 
+#View list of missing muni
+municipality_all_ %>% filter(is.na(population)) %>% 
+  select(state.abb, name, id, total_liabilities, net_pension_liability) %>% 
+  View()
 
 ######phase 1:got population after using join by geo_id above#####
 muni_phase1 <- municipality_all_ %>% 
   filter(!is.na(population)) 
 
-
 #identify duplicated - NONE in this phase1
 muni_phase1 %>% 
-  select(geo_id) %>% 
-  #select(state.abb, name, id, total_liabilities) %>% 
+  #select(geo_id) %>% 
+  select(state.abb, name, id, total_liabilities, geo_id) %>% 
   filter((duplicated(.) | duplicated(., fromLast = TRUE)))
 
 ######phase 2: matches those without geo_id using name#####
-
-#get a subset of census 
+#get a subset of census to later map with acfr muni
 census_muni <- census_all %>% 
   filter(!is.na(geo_id)) %>% # some entities in census duplicated: 1 has geo_id, 1 does not
   filter(funcstat != "F") %>% 
@@ -436,33 +446,26 @@ census_muni <- census_all %>%
   select(state.abb, state.name, name_census, population, geo_id) 
 
 # join this subset with the remainder of acfr muni after phase 1
-muni_phase2_ <- municipality_all_ %>% 
+muni_phase2 <- municipality_all_ %>% 
   filter(!id %in% c(muni_phase1$id)) %>%  # subtract muni_phase1
   select(-c(population, geo_id)) %>% 
   
+  #join with census muni via name
   left_join(census_muni, 
             by = c("state.abb", "state.name", "name" = "name_census")) %>% 
-  
-  filter(!is.na(population)) 
-  
-#check duplicated caused by some entities have same name & state, but different counties
-
-muni_phase2_duplicated <- muni_phase2_ %>% 
-  select(state.abb, name, id, total_liabilities) %>% 
-  filter((duplicated(.) | duplicated(., fromLast = TRUE)))
-
-#filter out those duplicated
-muni_phase2 <- muni_phase2_ %>% 
-  filter(!id %in% muni_phase2_duplicated$id) 
+  filter(!is.na(population)) %>% 
+ 
+  #remove dups - some MI entities have same name & state, but different counties
+  add_count(id) %>% filter(n ==1) %>% select(-n) 
 
 #check dup again:
 muni_phase2 %>% 
-  #select(geo_id) %>% 
-  select(state.abb, name, id, total_liabilities) %>% 
+  select(geo_id) %>% 
+  #select(state.abb, name, id) %>% 
   filter((duplicated(.) | duplicated(., fromLast = TRUE)))
 
 ######phase 3: clean up names to further match with census.######  
-muni_phase3_ <- municipality_all_ %>% 
+muni_phase3 <- municipality_all_ %>% 
   filter(!id %in% c(muni_phase1$id, muni_phase2$id))  %>% # remaining part after muni_phase2
 
   select(-c(population, geo_id)) %>% 
@@ -478,69 +481,27 @@ muni_phase3_ <- municipality_all_ %>%
               mutate(name_census = case_when(state.abb == "NJ" ~ str_remove(name_census, "borough"),
                                              TRUE ~ name_census)) %>% 
               mutate(name_census = str_remove(name_census, "city$"),
-                     name_census = str_squish(name_census)
-                     ),
+                     name_census = str_squish(name_census)),
           by = c("state.abb", "state.name", "name" = "name_census")) %>% 
   
-   filter(!is.na(population)) %>% 
-  distinct() 
+   filter(!is.na(population)) %>% distinct() %>% 
 
-#identify duplicated
-muni_phase3_duplicated <- muni_phase3_ %>% 
-  select(state.abb, name, id, total_liabilities) %>% 
-  filter((duplicated(.) | duplicated(., fromLast = TRUE)))
+#remove duplicated
+  add_count(id) %>% filter(n == 1) %>% select(-n) 
 
-#filter out those duplicated
-muni_phase3 <- muni_phase3_ %>% 
-  filter(!id %in% muni_phase3_duplicated$id) 
-
-#check dup again
-muni_phase3 %>% 
-  #select(geo_id) %>% 
-  select(id) %>% 
-  filter((duplicated(.) | duplicated(., fromLast = TRUE)))
-
-######phase 4: manually solve the remaining dup######
-
+######phase 4: no geo_id , no population ######
 muni_phase4 <- municipality_all_ %>% 
-  mutate(id = as.character(id)) %>% 
-  
-  filter(!id %in% c(muni_phase1$id, muni_phase2$id, muni_phase3$id)) %>%    # remaining part after muni_phase2
-  select(-c(geo_id, population)) %>% 
- 
-  select(state.abb, state.name, id) %>% 
-  left_join(dictionary_acfrID_censusGEOID %>% rename(geo_id = correct_geoID)) %>% 
-
-#select(-name_census) %>% 
-  
-  left_join(census_muni, by = c("state.abb", "state.name", "geo_id")) %>% 
-  filter(!is.na(population)) 
-
-#check dup again
-muni_phase4 %>% 
-  select(geo_id) %>% 
-  #select(id) %>% 
-  filter((duplicated(.) | duplicated(., fromLast = TRUE)))
-
-muni_phase4_no_pop <- municipality_all_ %>% 
-  filter(!id %in% muni_phase1$id) %>% 
-  filter(!id %in% muni_phase2$id) %>% 
-  filter(!id %in% muni_phase3$id) %>% 
-  filter(!id %in% muni_phase4$id)
-  
-#check if there's a big entity
-muni_phase4_no_pop %>% 
-  select(state.abb, name, id, total_liabilities, 
-                              total_assets) %>% View()
-muni_population <- rbind(
+  filter(!id %in% c(muni_phase1$id, muni_phase2$id, muni_phase3$id)) %>%     # remaining part after muni_phase2
+  mutate(population = case_when(id == "111562" ~ 1016506, #HI Honolulu is counted as county in census, got lost when join with census muni above
+                                TRUE ~ population))
+municipality_all_2023 <- rbind(
       muni_phase1, 
       muni_phase2, 
       muni_phase3, 
-      muni_phase4_no_pop) %>% 
-
+      muni_phase4) %>% 
   append_url() %>% select(-identifier) %>% 
   
-#fixing some geo_id
+#fixing some geo_id - WHY?
   mutate(geo_id = case_when(id == "138430" ~ "0827425",
                             id == "39880" ~ "5531000", # green bay
                             id == "1265296" ~ "0660620", #CA richmond
@@ -550,45 +511,9 @@ muni_population <- rbind(
                             TRUE ~ geo_id))  
 
 
-muni_population %>% 
+municipality_all_2023 %>% 
   group_by(year) %>% 
   summarise(tot = sum(population, na.rm = TRUE))
-
-######phase 5: Special cites#####
-#need to get some counties that are also cities. But got excluded from above
-special_cities <- acfrs_general_purpose %>% 
-  filter(year == 2023) %>% 
-  # get geo id in these cities --> from there get income & census data
-  filter(id %in% c(
-                   "111562")) %>% #HI city and county of honolulu
-  
-  mutate(geo_id = case_when(id == "111562" ~ "15003",
-                            TRUE ~ geo_id)) %>% 
-  left_join(city_income) %>% 
-  left_join(df_state) %>% 
-  left_join(census_all) %>% 
-  
-  mutate(median_hh_income = ifelse(name == "city and county of honolulu", 104300, median_hh_income)) %>% 
-  mutate(url = NA) %>% 
-  select(-identifier)
-
-municipality_all <- muni_population %>%  
-  
-  rbind(special_cities %>% 
-          select(-c(state, county, place, cousub, concit, funcstat))) %>% 
-  #avoid double count - these entities are counted in county_gov
-  #filter(name = "denver county") %>% 
-  select(any_of(fields_to_select), url) %>% 
-  
-  # create a dummy urban_pop to match the df size with state and counties
-  mutate(urban_pop = NA, 
-         pct_urban_pop = NA) 
-
-#####Result muni#####
-# municipality_all %>% 
-#   write.csv("output/all_municipalities_2020_2023.csv")
- 
-municipality_all_2023 <- municipality_all %>% filter(year == 2023)
 
 #population coverage of municipalities acfr/ census
 (municipality_all_2023 %>% select(state.abb, name, population) %>% distinct() %>% 
@@ -601,8 +526,7 @@ municipality_all %>%
   group_by(year) %>% 
   summarise(n = n())
 
-
-######Flags#####
+#####Flags####
 # need to add these in municipality_all_2023
 muni_top300_missing <- census_city_top300 %>% 
   filter(!geo_id %in% municipality_all_2023$geo_id) %>% 
@@ -628,7 +552,6 @@ mutate(flg_county = case_when(id %in% consolidated_county_2023$id | id == "11156
   filter(!(name == "lexington-fayette urban county" & is.na(geo_id))) 
 
 ######Coordinates######
-
 coordinates_muni <- readRDS("output/archive/municipalities_with_coordinates.rds") %>% 
   select(state.abb, id, latitude, longitude, geo_id) %>% 
   drop_na(latitude) %>% 
@@ -636,7 +559,41 @@ coordinates_muni <- readRDS("output/archive/municipalities_with_coordinates.rds"
   distinct() %>% 
   mutate(id = as.character(id))
 
-# get some extra coordinates manually
+#Census coordinate here: https://www.census.gov/geographies/reference-files/time-series/geo/gazetteer-files.html
+gazetteer <- read_delim("data/2024_Gaz_place_national.txt", delim = "\t")
+
+# extra coordinates manually 1
+muni_missing_coordinates <- read_csv("tmp/missing_coordinates.csv")
+
+# Join on state + name
+muni_filled_coordinates <- muni_missing_coordinates %>% 
+  left_join(
+    gazetteer %>% clean_names() %>% 
+      mutate(
+        name = str_to_lower(name),
+        name = str_remove(name, "\\s+(city|town|cdp|village)$"),
+        name = str_trim(name)
+      ) %>% 
+      select(usps, geoid, name, intptlat, intptlong),
+    by = c("state.abb" = "usps", "name" = "name") 
+  ) %>%  
+  mutate(
+    latitude = ifelse(is.na(latitude), intptlat, latitude),
+    longitude = ifelse(is.na(longitude), intptlong, longitude)
+  ) %>% 
+  rename(
+    latitude_extra = latitude,
+    longitude_extra = longitude
+  ) %>% 
+  mutate(latitude_extra = round(as.numeric(latitude_extra), 5),
+         longitude_extra = round(as.numeric(longitude_extra), 5)) %>% 
+  
+  select(-c(1, intptlat, intptlong, geoid)) %>% 
+  
+  #remove dup
+  filter(!(name == "salem" & near(latitude_extra, 36.37042)))
+
+# extra coordinates manually 2
 extra_entities <- readxl::read_xlsx("data/coordinates_extra_entities.xlsx") %>% 
   mutate(name = str_squish(name)) %>% 
   #filter(name == "louisville/jefferson county metro government")
@@ -652,12 +609,23 @@ extra_entities <- readxl::read_xlsx("data/coordinates_extra_entities.xlsx") %>%
     left_join(coordinates_muni, by = c("state.abb", "id", "geo_id")) %>% 
   
     # fixing some coordinate 
-  mutate(latitude = case_when(geo_id == "3651000" ~ 40.7555, #NYC
+  mutate(latitude = case_when(geo_id == "3651000" ~ 40.66271, #NYC
+                              geo_id == "134200" ~ 33.36553, #GA augusta
                               TRUE ~ latitude)) %>% 
   
-  mutate(longitude = case_when(geo_id == "3651000" ~ -73.9739, 
+  mutate(longitude = case_when(geo_id == "3651000" ~ -73.9739, #NYC
+                               geo_id == "134200" ~ -73.938677,#GA augusta
                                TRUE ~ longitude)) %>% 
   
+     # filter(is.na(latitude)) %>% View() 
+    left_join(muni_filled_coordinates) %>% 
+    mutate(
+      latitude = ifelse(is.na(latitude), latitude_extra, latitude),
+      longitude = ifelse(is.na(longitude), longitude_extra, longitude)
+    ) %>%
+    select(-latitude_extra, -longitude_extra) %>% distinct() %>% 
+    
+
   # add extra coordinate collected manually
     left_join(extra_entities, by = c("state.abb", "name")) %>% 
   
@@ -665,14 +633,17 @@ extra_entities <- readxl::read_xlsx("data/coordinates_extra_entities.xlsx") %>%
       latitude = ifelse(is.na(latitude), latitude_extra, latitude),
       longitude = ifelse(is.na(longitude), longitude_extra, longitude)
     ) %>%
-    select(-latitude_extra, -longitude_extra)
+    select(-latitude_extra, -longitude_extra) %>% 
+    
+    #TODO: remove acfr entries with no data
+    filter(!id %in% c("102130", "1035906", "1035875")) 
    
-  
 # check missing coordinates:
   municipality_final_2023 %>% 
     select(state.abb, name, latitude, longitude, geo_id, population) %>% 
     filter(is.na(latitude) | is.na(latitude)) %>% #write.csv("tmp/missing_coordinates.csv")
    View()
+  
 
 ######Check duplicates####
 municipality_final_2023 %>% select(state.abb, name, id, total_liabilities) %>% 
@@ -690,24 +661,28 @@ municipality_final_2023 %>%
 compare_latest_csv_versions(
   folder = "output",
   prefix = "all_municipalities_2023",
-  output_excel = "output/municipalities_changes_report.xlsx"
+  id_col = "id"
 )
 
-# this part to display in progress report app:
-# missing_top300_cities_2023 %>% 
-# mutate(year = 2023,
-#        category = "municipality") %>% 
-# select(-c(geo_id)) -> missing_top300_muni
 
 ####School districts####
 dictionary <- readRDS("data/dictionary.RDS") %>% 
   #TODO: fix this in dictionary processing file
   mutate(ncesID = case_when(id == "1269433" ~ "618870",
                             id == "54044" ~ "2314794",
+                            id == "44348" ~ "3904375", #cincinati OH
+                            id == "54006" ~ "4900142", 
+                            id == "190824" ~ "4022770",
+                            id == "32051" ~ "801920", #academy district 20
+                            
                             TRUE ~ as.character(ncesID))) %>% 
+  
+  #fixing: some id were deleted or consolidated
+  mutate(id = case_when(ncesID == "2732390" ~ "34829",
+                        TRUE ~ as.character(id))) %>% 
   distinct()
 
-school_districts_ <- readRDS("data/acfrs_data.RDS") %>% 
+school_districts_ <- readRDS("data/acfrs_data_Sep82025.RDS") %>% 
   filter(category == "School District") %>% 
   mutate(id = as.character(id)) %>% 
   select(any_of(fields_to_select)) %>% 
@@ -735,7 +710,10 @@ school_districts_all <- bind_2df_different_size(school_districts_, exceptions) %
   select(-c(enrollment_20, enrollment_21, enrollment_22)) %>% 
   
   # SC: 2023, Barnwell County School District 45, 80 =  #Barnwell County Consolidated School District
- mutate(enrollment_23 = ifelse(id == "38322", sum(1974 + 1194), enrollment_23))
+ mutate(enrollment_23 = ifelse(id == "38322", sum(1974 + 1194), enrollment_23)) %>% 
+  
+  #TODO: remove some cases - need to trace back why
+  filter(!is.na(year))
 
 
 school_districts_all %>% 
@@ -758,6 +736,7 @@ school_districts_2023 <- school_districts_all %>% filter(year == 2023)
 #####Top300 sd #####
 
 #missing only DC
+# TN Metropolitan Nashville Public Schools (MNPS) is a blended component unit, cannot discern their values
 school_districts_2023 %>% 
   filter(ncesID %in% sd_top300_nces$ncesID) %>% View()
 
@@ -785,38 +764,21 @@ school_districts_final_2023 <- school_districts_2023 %>%
 
 ######Check duplicates####
 
-#no id duplicates
+#no duplicates
 school_districts_final_2023 %>%
   select(id) %>% 
-  filter(duplicated(.) | duplicated(., fromLast = TRUE)) %>% View()
+  filter(duplicated(.) | duplicated(., fromLast = TRUE)) 
 
-#some ncesID duplicates because the parsers record an entity twice under different names 
-dup_ncesid <- school_districts_final_2023 %>%
+school_districts_final_2023 %>%
   filter(!is.na(ncesID)) %>% 
   select(ncesID) %>% 
   filter(duplicated(.) | duplicated(., fromLast = TRUE)) 
 
-
-dup_fixed <- school_districts_final_2023 %>%
-  filter(ncesID %in% dup_ncesid$ncesID) %>%
-  arrange(ncesID) %>%
-  group_by(ncesID) %>%
-  slice(1) %>%
-  ungroup() 
-
-school_districts_final_2023_ <- school_districts_final_2023 %>% 
-  filter(!id %in% dup_fixed$id) 
-
-#check dup again after fixing:
-school_districts_final_2023_ %>% 
-filter(!is.na(ncesID)) %>% 
-  select(ncesID) %>% 
-  filter(duplicated(.) | duplicated(., fromLast = TRUE)) %>% View()
-
 #TODO: fill ncesID in these entities
-school_districts_final_2023_ %>% filter(is.na(ncesID)) %>% 
-  select(state.abb, id, name) %>% View()
-
+school_districts_final_2023 %>% filter(is.na(ncesID)) %>% 
+  select(state.abb, id, name) %>% 
+ write.csv("tmp/sd_NO_nces_3.csv")
+  
 #####Final#####
 school_districts_final_2023_ %>% 
   write.csv(file = paste0("output/all_schooldistricts_2023_", 
@@ -836,8 +798,7 @@ school_districts_final_2023_ %>%
 
 compare_latest_csv_versions(
   folder = "output",
-  prefix = "all_schooldistricts_2023",
-  output_excel = "output/schooldistrict_changes_report.xlsx"
+  prefix = "all_schooldistricts_2023"
 )
 
 ####Missing top300####
