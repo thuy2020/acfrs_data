@@ -672,6 +672,7 @@ dictionary <- readRDS("data/dictionary.RDS") %>%
                         TRUE ~ as.character(id))) %>% 
   distinct()
 
+
 school_districts_ <- readRDS("data/acfrs_data_Sep82025.RDS") %>% filter(year == 2023) %>% 
   filter(category == "School District") %>% 
   mutate(id = as.character(id)) %>% 
@@ -743,23 +744,24 @@ school_districts_final_2023 <- school_districts_2023 %>%
     tibble(state.abb = "DC", state.name = "District of Columbia", ncesID = "1100030",
            name = "district of columbia public schools", 
            category = "School District",
-           year = 2023)) %>% 
+           year = 2023)) %>%
+   bind_rows(tibble(state.abb = "TN", state.name = "Tennessee", ncesID = "4703180",
+         name = "Metro Nashville Public Schools", 
+         category = "School District",
+         year = 2023)) %>%
   
-  mutate(flg_acfr = case_when(ncesID == "1100030" ~ 0, #district of columbia public schools blended in DC
+  mutate(flg_acfr = case_when(ncesID %in% c("1100030", "4703180") ~ 0, #these 2 blended in city/county
               
                               TRUE ~ 1)) %>% 
   mutate(flg_note = case_when(ncesID %in% c("1100030") ~ 1,
                               TRUE ~ NA_real_)) %>% 
-  mutate(note = case_when(ncesID %in% c("1100030") ~ "blended component units",
+  mutate(note = case_when(ncesID %in% c("1100030") ~ "Blended component units",
                           TRUE ~ NA)) 
-
 
 ######Check duplicates####
 
 #no duplicates
-school_districts_final_2023 %>%
-  select(id) %>% 
-  filter(duplicated(.) | duplicated(., fromLast = TRUE)) 
+school_districts_final_2023 %>% filter(is.na(id))
 
 school_districts_final_2023 %>%
   filter(!is.na(ncesID)) %>% 
@@ -769,11 +771,7 @@ school_districts_final_2023 %>%
 #TODO: fill ncesID in these entities
 school_districts_final_2023 %>% filter(is.na(ncesID)) %>% 
   select(state.abb, name, id, total_liabilities) 
- #write.csv("tmp/sd_NO_nces_SEP10.csv")
-  
-
-school_districts_final_2023 %>% 
-  select(state.abb, state.name, id, ncesID, name, enrollment_23) %>% View()
+ 
 #####Final#####
 school_districts_final_2023 %>% 
   write.csv(file = paste0("output/all_schooldistricts_2023_", 
