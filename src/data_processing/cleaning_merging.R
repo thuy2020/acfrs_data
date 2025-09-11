@@ -690,7 +690,6 @@ school_districts_ <- readRDS("data/acfrs_data_Sep82025.RDS") %>% filter(year == 
    #append URLs
   append_url() %>% select(-identifier) 
   
-
 # Now bind with special cases
 school_districts_all <- bind_2df_different_size(school_districts_, exceptions) %>% 
   # create a dummy urban_pop to match the df size with state and counties
@@ -727,9 +726,9 @@ nrow(school_districts_2023)
 
 
 #####Top300 sd #####
-
 #missing 2:  DC
-# TN Metropolitan Nashville Public Schools (MNPS) is a blended component unit, cannot discern their values
+# TN Metropolitan Nashville Public Schools (MNPS) 
+#is a blended component unit, cannot discern their values
 school_districts_2023 %>% 
   filter(ncesID %in% sd_top300_nces$ncesID) 
 
@@ -760,7 +759,7 @@ school_districts_final_2023 <- school_districts_2023 %>%
 
 ######Check duplicates####
 
-#no duplicates
+#no duplicates, except DC and Nashville
 school_districts_final_2023 %>% filter(is.na(id))
 
 school_districts_final_2023 %>%

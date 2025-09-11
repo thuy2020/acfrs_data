@@ -106,6 +106,13 @@ dictionary_tmp <- readRDS("data/_dictionary_tmp.RDS") %>%
   drop_na(id) %>% 
   filter(ncesID != "099999") %>% 
   filter(!id %in% id_nolonger_exist$id) %>% 
+  
+  #exclude 17 entries with mistake - too long ncesID
+  mutate(ncesID = ifelse(nchar(ncesID) >7, 
+         substr(ncesID, 1, 7),
+         ncesID)) %>% 
+  #take out some wrong pair
+  filter(!id %in% c("68544","68709")) %>% 
 
   #exclude those already in dict_13, dict_14, dictionary_fuzzy_manual, dictionary_fuzzy_manual_2
   filter(!id %in% dict_13$id) %>% 
@@ -123,7 +130,7 @@ dictionary_tmp <- readRDS("data/_dictionary_tmp.RDS") %>%
   filter(!ncesID %in% dictionary_fuzzy_manual_2$ncesID)  %>% 
   filter(!ncesID %in% dictionary_fuzzy_manual_3$ncesID)  %>% distinct()
 
-  dictionary_tmp %>% add_count(id) %>% filter(n>1)
+dictionary_tmp %>% add_count(id) %>% filter(n>1)
 
 ####Final merge####
 dictionary <- rbind(dict_13, 
