@@ -667,22 +667,12 @@ compare_latest_csv_versions(
 
 ####School districts####
 dictionary <- readRDS("data/dictionary.RDS") %>% 
-  #TODO: fix this in dictionary processing file
-  mutate(ncesID = case_when(id == "1269433" ~ "618870",
-                            id == "54044" ~ "2314794",
-                            id == "44348" ~ "3904375", #cincinati OH
-                            id == "54006" ~ "4900142", 
-                            id == "190824" ~ "4022770",
-                            id == "32051" ~ "801920", #academy district 20
-                            
-                            TRUE ~ as.character(ncesID))) %>% 
-  
-  #fixing: some id were deleted or consolidated
+  #TODO: fix in dictionary file: some id were deleted or consolidated
   mutate(id = case_when(ncesID == "2732390" ~ "34829",
                         TRUE ~ as.character(id))) %>% 
   distinct()
 
-school_districts_ <- readRDS("data/acfrs_data_Sep82025.RDS") %>% 
+school_districts_ <- readRDS("data/acfrs_data_Sep82025.RDS") %>% filter(year == 2023) %>% 
   filter(category == "School District") %>% 
   mutate(id = as.character(id)) %>% 
   select(any_of(fields_to_select)) %>% 
@@ -726,6 +716,8 @@ school_districts_all %>%
    
 school_districts_2023 <- school_districts_all %>% filter(year == 2023) 
 
+nrow(school_districts_2023)
+
 #coverage
 (school_districts_2023 %>% 
   summarise(tot = sum(enrollment_23, na.rm = TRUE))) /
@@ -735,13 +727,13 @@ school_districts_2023 <- school_districts_all %>% filter(year == 2023)
 
 #####Top300 sd #####
 
-#missing only DC
+#missing 2:  DC
 # TN Metropolitan Nashville Public Schools (MNPS) is a blended component unit, cannot discern their values
 school_districts_2023 %>% 
-  filter(ncesID %in% sd_top300_nces$ncesID) %>% View()
+  filter(ncesID %in% sd_top300_nces$ncesID) 
 
 sd_top300_nces %>% 
-  filter(!ncesID %in% school_districts_2023$ncesID) %>% View()
+  filter(!ncesID %in% school_districts_2023$ncesID) 
 
 #####Flag#####
 school_districts_final_2023 <- school_districts_2023 %>% 
@@ -776,29 +768,22 @@ school_districts_final_2023 %>%
 
 #TODO: fill ncesID in these entities
 school_districts_final_2023 %>% filter(is.na(ncesID)) %>% 
-  select(state.abb, id, name) %>% 
- write.csv("tmp/sd_NO_nces_3.csv")
+  select(state.abb, name, id, total_liabilities) 
+ #write.csv("tmp/sd_NO_nces_SEP10.csv")
   
+
+school_districts_final_2023 %>% 
+  select(state.abb, state.name, id, ncesID, name, enrollment_23) %>% View()
 #####Final#####
-school_districts_final_2023_ %>% 
+school_districts_final_2023 %>% 
   write.csv(file = paste0("output/all_schooldistricts_2023_", 
                           format(Sys.time(), "%Y%m%d_%H%M"), ".csv"))
 
 
-####Tracking changes####
-##########
-# missing_ncesID <- school_districts_2023 %>% 
-#   filter(is.na(ncesID)) 
-# 
-# missing_ncesID %>% write.csv("tmp/acfr_schools_missing_ncesID.csv")
-# 
-# unmatched_ncesID <- nces %>% filter(!ncesID %in% school_districts_2023$ncesID)
-# 
-# unmatched_ncesID %>% write.csv("tmp/nces_schools_unmatched_with_acfr.csv")
-
 compare_latest_csv_versions(
   folder = "output",
-  prefix = "all_schooldistricts_2023"
+  prefix = "all_schooldistricts_2023",
+  id_col = "id"
 )
 
 ####Missing top300####
