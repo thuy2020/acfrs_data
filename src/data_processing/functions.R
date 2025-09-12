@@ -242,7 +242,11 @@ compare_latest_csv_versions <- function(folder = "output",
     old_col <- paste0(col, "_old")
     new_col <- paste0(col, "_new")
     joined %>%
-      filter(!is.na(.data[[old_col]]) & !is.na(.data[[new_col]]) & .data[[old_col]] != .data[[new_col]]) %>%
+      filter(
+        (is.na(.data[[old_col]]) & !is.na(.data[[new_col]])) |
+          (!is.na(.data[[old_col]]) & is.na(.data[[new_col]])) |
+          (.data[[old_col]] != .data[[new_col]])
+      ) %>%
       select(!!id_col,
              any_of(paste0(existing_helpers, "_old")),
              any_of(paste0(existing_helpers, "_new")),

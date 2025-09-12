@@ -80,26 +80,30 @@ acfrs_state <- acfrs_general_purpose %>%
          name = str_trim(name))
 
 # Joining acfrs states & census states: state_gov_2020
-state_all <- acfrs_state %>% select(-geo_id) %>% 
+state_no_NV2023 <- acfrs_state %>% select(-geo_id) %>% 
   left_join(census_state, by = c("state.abb")) %>% 
   select(-government_id) %>% 
   left_join(state_county_income) %>% 
   select(all_of(fields_to_select)) %>% 
-
 #append url
   append_url() %>% 
   select(-identifier) %>% 
+  mutate(flg_acfr = 1) 
 
-# TODO: check if Nevada is available
-bind_rows(
-tibble(state.abb = "NV", state.name = "Nevada", id = 35504, geo_id = "32",
-       name = "nevada", category = "General Purpose", population = 3104624,
-       year = 2023)) %>% 
+# TODO: check if Nevada 2023 is available
+# Temp: use NV 2022
+state_nevada <- state_no_NV2023 %>% filter(state.abb == "NV" & year == 2022) %>% 
+  mutate(year = 2023, 
+         flg_acfr = 0)
 
-  # add flag
-mutate(flg_acfr = ifelse((state.abb == "NV" & year == 2023), 0, 1))  
-  
-#state_all %>% write.csv("output/all_states_2020_2023.csv")
+state_all <- rbind(state_no_NV2023, 
+                    state_nevada) 
+
+# other approach: leave NV na for year 2023:
+#bind_rows(
+# tibble(state.abb = "NV", state.name = "Nevada", id = 35504, geo_id = "32",
+#        name = "nevada", category = "General Purpose", population = 3104624,
+#        year = 2023)) %>% 
 
 state_all %>% 
   group_by(year) %>% 
@@ -771,6 +775,9 @@ school_districts_final_2023 %>%
 school_districts_final_2023 %>% filter(is.na(ncesID)) %>% 
   select(state.abb, name, id, total_liabilities) 
  
+#TODO: check cases where ncesID available but not longitude
+school_district_data %>% filter(!is.na(ncesID) & is.na(longitude)) %>% View()
+
 #####Final#####
 school_districts_final_2023 %>% 
   write.csv(file = paste0("output/all_schooldistricts_2023_", 
@@ -782,6 +789,7 @@ compare_latest_csv_versions(
   prefix = "all_schooldistricts_2023",
   id_col = "id"
 )
+
 
 ####Missing top300####
 # this file is for displaying status on progress app
