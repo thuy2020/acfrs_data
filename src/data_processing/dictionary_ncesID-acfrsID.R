@@ -9,7 +9,8 @@ source("src/data_processing/nces.R")
 #####Dict_13 Manual adding#####
 id_nolonger_exist <- read.csv("tmp/id_nolonger_exist.csv")
 id_nolonger_exist_2 <- c("30577", "145929", "399390", "146511", "1269705", "1268252", 
-                         "93770", "82096", "81333")
+                         "93770", "82096", "81333", "1268783", "1268144", "1270501",
+                         "1240267")
 
 #This should overwrite all other code that generates dictionary
 dict_13 <- readxl::read_xlsx("data/_dictionary_13.xlsx") %>% 
@@ -157,6 +158,8 @@ dictionary <- rbind(dict_13,
     filter(!id %in% id_nolonger_exist$id) %>% 
     filter(duplicated(ncesID) | duplicated(ncesID, fromLast = TRUE)) %>%
     select(ncesID, id, state.abb) 
+  #TODO: only 1 case of ND grafton 3 - grafton 18? which one exists?
+  
   
   dictionary %>% 
     filter(duplicated(id) | duplicated(id, fromLast = TRUE)) %>%
