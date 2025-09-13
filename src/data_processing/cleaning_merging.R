@@ -672,7 +672,7 @@ compare_latest_csv_versions(
 ####School districts####
 id_nolonger_exist_2 <- c("30577", "145929", "399390", "146511", "1269705", "1268252", 
                          "93770", "82096", "81333", "1268783", "1268144", "1270501",
-                         "1240267")
+                         "1240267") 
 
 dictionary <- readRDS("data/dictionary.RDS") %>% 
   #TODO: fix in dictionary file: some id were deleted or consolidated
@@ -683,7 +683,7 @@ dictionary <- readRDS("data/dictionary.RDS") %>%
 
 school_districts_ <- readRDS("data/acfrs_data_Sep82025.RDS") %>% filter(year == 2023) %>% 
   filter(category == "School District") %>% 
-  filter(!id %in% id_nolonger_exist$id) %>% 
+  filter(!id %in% id_nolonger_exist_2) %>% 
   mutate(id = as.character(id)) %>% 
   select(any_of(fields_to_select)) %>% 
 
@@ -782,7 +782,7 @@ school_districts_final_2023 %>% filter(is.na(ncesID)) %>%
   select(state.abb, name, id, total_liabilities) 
  
 #TODO: check cases where ncesID available but not longitude
-school_district_data %>% filter(!is.na(ncesID) & is.na(longitude)) %>% View()
+school_districts_final_2023 %>% filter(!is.na(ncesID) & is.na(longitude)) 
 
 #####Final#####
 school_districts_final_2023 %>% 
