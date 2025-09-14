@@ -23,13 +23,16 @@ options(scipen = 9999)
 # - Use a "middle file" to link geo_id and government_ID
 # - Joining by names and states 
 
-acfrs_data <- readRDS("data/acfrs_data_Sep82025.RDS") %>% 
+latest_file <- list.files("data", pattern = "^acfrs_data_\\d{8}_\\d{4}\\.RDS$", full.names = TRUE) %>%
+  sort(decreasing = TRUE) %>%
+  .[1]
+acfrs_data <- readRDS(latest_file) %>% 
   filter(category %in% c("General Purpose","School District"))
 
 ####General Purpose####
 
 # step 1: get all general purpose entities in acfrs, most contains governmentID
-acfrs_general_purpose <- readRDS("data/acfrs_data_Sep82025.RDS") %>% 
+acfrs_general_purpose <- readRDS(latest_file) %>% 
   filter(category == "General Purpose") %>% 
   rename(government_id = census_id) %>%  # census_id in Acfrs database is actually government_id
   # some government_id in ACFRs has 13 characters-> need to add 0
@@ -364,7 +367,6 @@ compare_latest_csv_versions(
 ids_to_exclude <- setdiff(county_acfrs_2023$id, consolidated_county_2023$id) %>% 
   setdiff(111562) # HI Honolulu is in acfrs county, not in consolidated, but it IS also a muni
 
-
 municipality_acfrs_ <- acfrs_general_purpose %>% 
   filter(year == 2023) %>% 
   
@@ -526,9 +528,6 @@ municipality_all_2023 %>%
 (census_municipalities %>% 
   summarise(tot = sum(population, na.rm = TRUE)))
 
-municipality_all %>% 
-  group_by(year) %>% 
-  summarise(n = n())
 
 #####Flags####
 # need to add these in municipality_all_2023

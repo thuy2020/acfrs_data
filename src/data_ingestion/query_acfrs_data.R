@@ -73,18 +73,30 @@ fetch_data <- function(years, con){
            revenues = max(sum1, sum2)) %>% ungroup() %>% 
     select(-c(sum1, sum2, unable_to_review)) %>% 
     filter(!state.abb %in% c("MP", "GU", "PR", "FM"))
-    
-  saveRDS(acfrs_data, "data/acfrs_data_Sep82025.RDS")
+  
+  
+  timestamp <- format(Sys.time(), "%Y%m%d_%H%M")
+  filename <- paste0("data/acfrs_data_", timestamp, ".RDS")
+  saveRDS(acfrs_data, filename)
+  
+  message("Saved file: ", filename)
+  
+  return(acfrs_data)
   
 }
 #Call function
 
 fetch_data(c(2020, 2021, 2022, 2023), con)
 
-# make sure to close all connections 
+# close all connections 
 dbDisconnect(con)
 
-nrow(readRDS("data/acfrs_data_Sep82025.RDS"))
+#check latest acfr file
+latest_file <- list.files("data", pattern = "^acfrs_data_\\d{8}_\\d{4}\\.RDS$", full.names = TRUE) %>%
+  sort(decreasing = TRUE) %>%
+  .[1]
+acfrs_data <- readRDS(latest_file)
+nrow(acfrs_data)
 
 
 
