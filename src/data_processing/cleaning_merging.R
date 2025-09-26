@@ -685,8 +685,11 @@ school_districts_ <- readRDS("data/acfrs_data_Sep82025.RDS") %>% filter(year == 
   filter(!id %in% id_nolonger_exist_2) %>% 
   mutate(id = as.character(id)) %>% 
   select(any_of(fields_to_select)) %>% 
-
   
+  #change id of some entities that already changed in portal but NOT queried again yet
+  
+  mutate(id = ifelse(id == 1206881, "107774", id)) %>% 
+
   #Exclude some sd in Montana to avoid double count - they will be join later as pairs exceptions
   filter(!id %in% MT_sd_pairs$id) %>% 
 
@@ -726,6 +729,7 @@ school_districts_all %>%
 school_districts_2023 <- school_districts_all %>% filter(year == 2023) 
 
 nrow(school_districts_2023)
+
 
 #coverage
 (school_districts_2023 %>% 

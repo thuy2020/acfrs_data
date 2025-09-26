@@ -10,7 +10,7 @@ source("src/data_processing/nces.R")
 id_nolonger_exist <- read.csv("tmp/id_nolonger_exist.csv")
 id_nolonger_exist_2 <- c("30577", "145929", "399390", "146511", "1269705", "1268252", 
                          "93770", "82096", "81333", "1268783", "1268144", "1270501",
-                         "1240267")
+                         "1240267", "1268500", "1206881")
 
 #This should overwrite all other code that generates dictionary
 dict_13 <- readxl::read_xlsx("data/_dictionary_13.xlsx") %>% 
